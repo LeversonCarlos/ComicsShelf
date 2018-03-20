@@ -4,13 +4,19 @@ namespace ComicsShelf
 {
    public partial class App : Application
 	{
-		public App ()
-		{
-			InitializeComponent();
-         MainPage = new NavigationPage(new ComicsShelf.StartupPage());
-		}
+      public App()
+      {
+         InitializeComponent();
+         var initialPage = new ContentPage();
+         initialPage.Appearing +=
+            (object sender, System.EventArgs e) =>
+            {
+               this.MainPage.Navigation.PushAsync(new Startup.StartupPage());
+            };
+         MainPage = new NavigationPage(initialPage);
+      }
 
-		protected override void OnStart ()
+      protected override void OnStart ()
 		{ /* Handle when your app starts */ }
 
 		protected override void OnSleep ()
