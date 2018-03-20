@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
+<controls:Page 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:local="clr-namespace:ComicsShelf"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Startup.StartupPage">
 
-	<Label Text="Loading..." 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+   <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="100" BindingContext="{Binding Data}" >
+      <Label Text="{Binding Text}" 
+             HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large">
+      </Label>
+      <ProgressBar Progress="{Binding Progress}" HorizontalOptions="FillAndExpand"></ProgressBar>
+   </StackLayout>
 
-</ContentPage>
+</controls:Page>

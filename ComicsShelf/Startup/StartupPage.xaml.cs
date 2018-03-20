@@ -2,7 +2,7 @@
 
 namespace ComicsShelf.Startup
 {
-   public partial class StartupPage : ContentPage
+   public partial class StartupPage : Helpers.Controls.Page
    {
       public StartupPage()
       {

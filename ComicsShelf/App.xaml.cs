@@ -9,9 +9,9 @@ namespace ComicsShelf
          InitializeComponent();
          var initialPage = new ContentPage();
          initialPage.Appearing +=
-            (object sender, System.EventArgs e) =>
+            async (object sender, System.EventArgs e) =>
             {
-               this.MainPage.Navigation.PushAsync(new Startup.StartupPage());
+               await Helpers.ViewModels.NavVM.PushAsync<Startup.StartupVM>(true);
             };
          MainPage = new NavigationPage(initialPage);
       }
