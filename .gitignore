@@ -5,5 +5,9 @@
 /.vs
 /ComicsShelf/bin
 /ComicsShelf/obj
+/ComicsShelf.Android/bin
 /ComicsShelf.Android/obj
+/ComicsShelf.UWP/bin
 /ComicsShelf.UWP/obj
+/ComicsShelf.iOS/bin
+/ComicsShelf.iOS/obj
