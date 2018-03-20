@@ -2,4 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/ComicsShelf/v15
+/.vs
+/ComicsShelf/bin
+/ComicsShelf/obj
+/ComicsShelf.Android/obj
+/ComicsShelf.UWP/obj
