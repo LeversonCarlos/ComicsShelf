@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Helpers.ViewModels
 {
@@ -21,6 +22,14 @@ namespace ComicsShelf.Helpers.ViewModels
          get { return this._IsBusy; }
          set { this.SetProperty(ref this._IsBusy, value); }
       }
+      #endregion
+
+      #region Events
+      public delegate void NotifyHandler();
+      protected event NotifyHandler Initialize;
+      protected event NotifyHandler Finalize;
+      public async Task InitializeAsync() { await Task.Run(() => this.Initialize?.Invoke()); }
+      public async Task FinalizeAsync() { await Task.Run(() => this.Finalize?.Invoke()); }
       #endregion
 
       #region Dispose
