@@ -12,8 +12,8 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
-      <DependentUpon>*.xaml</DependentUpon>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="StartupPage.xaml.cs">
+      <DependentUpon>StartupPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
