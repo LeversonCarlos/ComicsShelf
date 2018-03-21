@@ -21,22 +21,23 @@ namespace ComicsShelf.Startup
       {
          try
          {
-            this.Data.Progress = 25;
             this.Data.Text = "Loading Settings";
-            await System.Threading.Tasks.Task.Delay(5000);
+            await System.Threading.Tasks.Task.Delay(1500);
+            this.Data.Progress = 0.25;
 
-            this.Data.Progress = 50;
             this.Data.Text = "Loading comics folder";
-            await System.Threading.Tasks.Task.Delay(5000);
+            await System.Threading.Tasks.Task.Delay(1500);
+            this.Data.Progress = 0.50;
 
-            this.Data.Progress = 75;
             this.Data.Text = "Searching comics on device";
-            await System.Threading.Tasks.Task.Delay(5000);
+            await System.Threading.Tasks.Task.Delay(1500);
+            this.Data.Progress = 0.75;
 
-            this.Data.Progress = 95;
             this.Data.Text = "Showing initial folder";
-            await System.Threading.Tasks.Task.Delay(5000);
+            await System.Threading.Tasks.Task.Delay(1500);
+            this.Data.Progress = 1.00;
 
+            this.Data.Text = "Done";
          }
          catch (Exception ex) { throw; }
       }

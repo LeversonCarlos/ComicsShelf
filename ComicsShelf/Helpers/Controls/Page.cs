@@ -15,6 +15,7 @@ namespace ComicsShelf.Helpers.Controls
       {
          base.OnAppearing();
          if (this.BindingContext == null) { return; }
+         this.SetBinding(Page.TitleProperty, "Title");
          await (this.BindingContext as ViewModels.BaseVM).InitializeAsync();
       }
 
