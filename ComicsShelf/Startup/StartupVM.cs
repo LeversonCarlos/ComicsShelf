@@ -8,7 +8,7 @@ namespace ComicsShelf.Startup
       #region New
       public StartupVM()
       {
-         this.Title = "Startup Screen";
+         this.Title = R.Strings.AppTitle;
          this.ViewType = typeof(StartupPage);
 
          this.Data = new StartupData();
@@ -21,23 +21,19 @@ namespace ComicsShelf.Startup
       {
          try
          {
-            this.Data.Text = "Loading Settings";
-            await System.Threading.Tasks.Task.Delay(1500);
-            this.Data.Progress = 0.25;
+            this.Data.Text = R.Strings.STARTUP_LOADING_SETTINGS_MESSAGE;
+            await System.Threading.Tasks.Task.Delay(2000);
+            this.Data.Progress = 0.30;
 
-            this.Data.Text = "Loading comics folder";
-            await System.Threading.Tasks.Task.Delay(1500);
+            this.Data.Text = R.Strings.STARTUP_DEFINING_COMICS_PATH_MESSAGE;
+            await System.Threading.Tasks.Task.Delay(2000);
             this.Data.Progress = 0.50;
 
-            this.Data.Text = "Searching comics on device";
-            await System.Threading.Tasks.Task.Delay(1500);
-            this.Data.Progress = 0.75;
-
-            this.Data.Text = "Showing initial folder";
-            await System.Threading.Tasks.Task.Delay(1500);
+            this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
+            await System.Threading.Tasks.Task.Delay(2000);
             this.Data.Progress = 1.00;
 
-            this.Data.Text = "Done";
+            this.Data.Text = "";
          }
          catch (Exception ex) { throw; }
       }
