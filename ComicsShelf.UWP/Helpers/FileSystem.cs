@@ -15,12 +15,11 @@ namespace ComicsShelf.UWP
       { get { return System.IO.Path.DirectorySeparatorChar.ToString(); } }
       #endregion
 
-      #region GetDataPath
-      public async Task<string> GetDataPath()
+      #region GetLocalPath
+      public async Task<string> GetLocalPath()
       {
-         var dataPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-         // dataPath = System.IO.Path.Combine(dataPath, "ComicsShelfTemp");
-         return dataPath;
+         var localPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+         return localPath;
       }
       #endregion
 

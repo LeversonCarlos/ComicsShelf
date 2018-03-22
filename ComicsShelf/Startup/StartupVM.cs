@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Startup
 {
@@ -22,7 +23,7 @@ namespace ComicsShelf.Startup
          try
          {
             this.Data.Text = R.Strings.STARTUP_LOADING_SETTINGS_MESSAGE;
-            await System.Threading.Tasks.Task.Delay(2000);
+            await this.OnInitialize_Settings();
             this.Data.Progress = 0.30;
 
             this.Data.Text = R.Strings.STARTUP_DEFINING_COMICS_PATH_MESSAGE;
@@ -34,6 +35,17 @@ namespace ComicsShelf.Startup
             this.Data.Progress = 1.00;
 
             this.Data.Text = "";
+         }
+         catch (Exception ex) { throw; /* await this.DisplayAlert(ex.ToString()); */}
+      }
+      #endregion
+
+      #region OnInitialize_Settings
+      private async Task OnInitialize_Settings()
+      {
+         try
+         {
+            await App.Settings.Initialize();
          }
          catch (Exception ex) { throw; }
       }

@@ -12,12 +12,11 @@ namespace ComicsShelf.Droid
       { get { return System.IO.Path.DirectorySeparatorChar.ToString(); } }
       #endregion
 
-      #region GetDataPath
-      public async Task<string> GetDataPath()
+      #region GetLocalPath
+      public async Task<string> GetLocalPath()
       {
-         var dataPath = Android.OS.Environment.ExternalStorageDirectory.Path;
-         // dataPath = System.IO.Path.Combine(dataPath, "ComicsShelfTemp");
-         return dataPath;
+         var localPath = Android.OS.Environment.ExternalStorageDirectory.Path;
+         return localPath;
       }
       #endregion
 
