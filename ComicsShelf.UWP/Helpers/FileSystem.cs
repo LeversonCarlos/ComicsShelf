@@ -1,8 +1,8 @@
-﻿using Xamarin.Forms;
+﻿using System;
 using System.Threading.Tasks;
-using System;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ComicsShelf.UWP.FileSystem))]
 namespace ComicsShelf.UWP
@@ -13,6 +13,15 @@ namespace ComicsShelf.UWP
       #region PathSeparator
       public string PathSeparator
       { get { return System.IO.Path.DirectorySeparatorChar.ToString(); } }
+      #endregion
+
+      #region GetDataPath
+      public async Task<string> GetDataPath()
+      {
+         var dataPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+         // dataPath = System.IO.Path.Combine(dataPath, "ComicsShelfTemp");
+         return dataPath;
+      }
       #endregion
 
       #region GetComicsPath
@@ -36,6 +45,7 @@ namespace ComicsShelf.UWP
          catch (Exception ex) { throw; }
       }
       #endregion
+
 
       #region PathExists
       private async Task<bool> PathExists(string path)

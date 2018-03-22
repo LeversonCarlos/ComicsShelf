@@ -1,5 +1,5 @@
-﻿using Xamarin.Forms;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ComicsShelf.Droid.FileSystem))]
 namespace ComicsShelf.Droid
@@ -10,6 +10,15 @@ namespace ComicsShelf.Droid
       #region PathSeparator
       public string PathSeparator
       { get { return System.IO.Path.DirectorySeparatorChar.ToString(); } }
+      #endregion
+
+      #region GetDataPath
+      public async Task<string> GetDataPath()
+      {
+         var dataPath = Android.OS.Environment.ExternalStorageDirectory.Path;
+         // dataPath = System.IO.Path.Combine(dataPath, "ComicsShelfTemp");
+         return dataPath;
+      }
       #endregion
 
       #region GetComicsPath
