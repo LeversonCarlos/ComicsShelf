@@ -70,6 +70,24 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string COMMAND_CANCEL {
+            get {
+                return ResourceManager.GetString("COMMAND_CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string COMMAND_OK {
+            get {
+                return ResourceManager.GetString("COMMAND_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Defining Comics Path.
         /// </summary>
         internal static string STARTUP_DEFINING_COMICS_PATH_MESSAGE {

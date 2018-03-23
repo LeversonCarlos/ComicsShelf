@@ -35,8 +35,10 @@ namespace ComicsShelf.Startup
 
             this.Data.Progress = 1.00;
             this.Data.Text = "";
+            if (await App.Message.Confirm("Inicializacao concluída.\nDeseja fechar a aplicação"))
+            { System.Environment.Exit(0); }
          }
-         catch (Exception ex) { throw; /* await this.DisplayAlert(ex.ToString()); */}
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
       #endregion
 

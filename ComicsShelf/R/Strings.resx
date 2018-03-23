@@ -120,6 +120,12 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Comics Shelf</value>
   </data>
+  <data name="COMMAND_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="COMMAND_OK" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
     <value>Defining Comics Path</value>
   </data>

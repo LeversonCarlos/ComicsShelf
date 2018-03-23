@@ -4,6 +4,8 @@ namespace ComicsShelf
 {
    public partial class App : Application
 	{
+
+      #region New
       public App()
       {
          InitializeComponent();
@@ -15,7 +17,9 @@ namespace ComicsShelf
             };
          MainPage = new NavigationPage(initialPage);
       }
+      #endregion
 
+      #region Settings
       private static Helpers.Settings.Settings _Settings = null;
       internal static Helpers.Settings.Settings Settings
       {
@@ -25,6 +29,19 @@ namespace ComicsShelf
             return _Settings;
          }
       }
+      #endregion
+
+      #region Message
+      private static Helpers.Controls.Messages _Message = null;
+      public static Helpers.Controls.Messages Message
+      {
+         get
+         {
+            if (_Message == null) { _Message = new Helpers.Controls.Messages(); }
+            return _Message;
+         }
+      }
+      #endregion
 
       protected override void OnStart ()
 		{ /* Handle when your app starts */ }
