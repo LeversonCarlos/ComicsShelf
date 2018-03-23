@@ -28,8 +28,8 @@ namespace ComicsShelf.Helpers.ViewModels
       public delegate void NotifyHandler();
       protected event NotifyHandler Initialize;
       protected event NotifyHandler Finalize;
-      public async Task InitializeAsync() { await Task.Run(() => this.Initialize?.Invoke()); }
-      public async Task FinalizeAsync() { await Task.Run(() => this.Finalize?.Invoke()); }
+      public async Task InitializeAsync() { this.Initialize?.Invoke(); }
+      public async Task FinalizeAsync() { this.Finalize?.Invoke(); }
       #endregion
 
       #region Dispose
