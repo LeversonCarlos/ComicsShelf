@@ -31,10 +31,11 @@ namespace ComicsShelf.Startup
             await this.OnInitialize_ComicsPath();
 
             this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
-            await System.Threading.Tasks.Task.Delay(2000);
+            await this.OnInitialize_Search();
 
             this.Data.Progress = 1.00;
             this.Data.Text = "";
+            this.Data.Details = "";
             if (await App.Message.Confirm("Inicializacao concluída.\nDeseja fechar a aplicação"))
             { System.Environment.Exit(0); }
          }
@@ -75,6 +76,37 @@ namespace ComicsShelf.Startup
             /* STORE DATA */
             App.Settings.Database.Update(configs);
             App.Settings.Paths.ComicsPath = configs.ComicsPath;
+
+         }
+         catch (Exception ex) { throw; }
+      }
+      #endregion
+
+      #region OnInitialize_Search
+      private async Task OnInitialize_Search()
+      {
+         try
+         {
+
+            // INITIALIZE
+            this.Data.Progress = 0;
+            var fileSystem = Helpers.FileSystem.Get();
+
+            // LOCATE COMICS LIST
+            var fileList = await fileSystem.GetFiles(App.Settings.Paths.ComicsPath);
+            var fileQuantity = fileList.Length;
+
+            // LOOP THROUGH FILE LIST
+            for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
+            {
+               var filePath = fileList[fileIndex];
+               this.Data.Progress = ((double)fileIndex / (double)fileQuantity);
+               this.Data.Details = filePath;
+
+               /* DO THE MAGIC */
+               await Task.Delay(500);
+
+            }
 
          }
          catch (Exception ex) { throw; }

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ComicsShelf.Droid.FileSystem))]
@@ -26,6 +28,30 @@ namespace ComicsShelf.Droid
          if (string.IsNullOrEmpty(comicsPath) || !System.IO.Directory.Exists(comicsPath))
          { return Android.OS.Environment.ExternalStorageDirectory.Path; }
          else { return comicsPath; }
+      }
+      #endregion
+
+      #region GetFiles
+      public async Task<string[]> GetFiles(string path)
+      {
+         try
+         {
+            var fileList = System.IO.Directory
+               .EnumerateFiles(path, "*.*", System.IO.SearchOption.AllDirectories)
+               .Where(x =>
+                  x.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase) ||
+                  x.EndsWith(".cbr", StringComparison.OrdinalIgnoreCase))
+               .ToList();
+
+            var folderPath = $"{path}{this.PathSeparator}";
+            var fileListRenamed = fileList
+               .Select(x => x.Replace(folderPath, ""))
+               .ToList();
+
+            var fileArray = fileListRenamed.ToArray();
+            return fileArray;
+         }
+         catch (Exception ex) { throw; }
       }
       #endregion
 

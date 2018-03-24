@@ -12,6 +12,15 @@
       }
       #endregion
 
+      #region Details
+      string _Details;
+      public string Details
+      {
+         get { return this._Details; }
+         set { this.SetProperty(ref this._Details, value); }
+      }
+      #endregion
+
       #region Progress
       double _Progress = 0;
       public double Progress

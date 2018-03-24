@@ -6,10 +6,9 @@
    x:Class="ComicsShelf.Startup.StartupPage">
 
    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="100" BindingContext="{Binding Data}" >
-      <Label Text="{Binding Text}" 
-             HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large">
-      </Label>
+      <Label Text="{Binding Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"></Label>
       <ProgressBar Progress="{Binding Progress}" HorizontalOptions="FillAndExpand"></ProgressBar>
+      <Label Text="{Binding Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
    </StackLayout>
 
 </controls:Page>

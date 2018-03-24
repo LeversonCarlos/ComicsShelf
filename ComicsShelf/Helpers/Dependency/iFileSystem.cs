@@ -8,6 +8,7 @@ namespace ComicsShelf.Helpers
       string PathSeparator { get; }
       Task<string> GetLocalPath();
       Task<string> GetComicsPath(string comicsPath);
+      Task<string[]> GetFiles(string path);
    }
    public class FileSystem
    {
