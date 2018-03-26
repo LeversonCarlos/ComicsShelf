@@ -5,23 +5,25 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Folder.FolderPage">
    <controls:Page.Content>
-      <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+      <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="Inicio"></Label>
 
-         <controls:ListView
-            IsVisible="{Binding HasFolders}"
-            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-            SeparatorVisibility="None" HasUnevenRows="True"
-            ItemTappedCommand="{Binding FolderTappedCommand}"
-            ItemsSource="{Binding Data.Folders}">
-            <controls:ListView.ItemTemplate>
-               <DataTemplate>
-                  <ViewCell>
+            <controls:ListView
+               IsVisible="{Binding HasFolders}"
+               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               Columns="3" ItemHeight="180"
+               ItemTappedCommand="{Binding FolderTappedCommand}"
+               ItemsSource="{Binding Data.Folders}">
+               <controls:ListView.ItemTemplate>
+                  <DataTemplate>
                      <Label Text="{Binding Text}" HorizontalOptions="Center" ></Label>
-                  </ViewCell>
-               </DataTemplate>
-            </controls:ListView.ItemTemplate>
-         </controls:ListView>
-         
-      </StackLayout>
+                  </DataTemplate>
+               </controls:ListView.ItemTemplate>
+            </controls:ListView>
+
+            <Label Text="Fim"></Label>
+         </StackLayout>
+      </ScrollView>
    </controls:Page.Content>
 </controls:Page>
