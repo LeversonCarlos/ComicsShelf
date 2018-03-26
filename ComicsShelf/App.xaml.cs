@@ -9,13 +9,18 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
-         var initialPage = new ContentPage();
-         initialPage.Appearing +=
-            async (object sender, System.EventArgs e) =>
+         MainPage = new NavigationPage(new InitialPage());
+         /*
+         ((NavigationPage)MainPage).Popped += (object sender, NavigationEventArgs e) => {
+
+            if (e.Page.BindingContext != null && e.Page.BindingContext.GetType() == typeof(Helpers.ViewModels.BaseVM))
             {
-               await Helpers.ViewModels.NavVM.PushAsync<Startup.StartupVM>(true);
-            };
-         MainPage = new NavigationPage(initialPage);
+               ((Helpers.ViewModels.BaseVM)e.Page.BindingContext).Dispose();
+               e.Page.BindingContext = null;
+            }
+            GC.Collect();
+         };
+         */
       }
       #endregion
 
@@ -44,9 +49,9 @@ namespace ComicsShelf
       #endregion
 
       protected override void OnStart ()
-		{ /* Handle when your app starts */ }
+      { /* Handle when your app starts */ }
 
-		protected override void OnSleep ()
+      protected override void OnSleep ()
 		{ /* Handle when your app sleeps */ }
 
 		protected override void OnResume ()

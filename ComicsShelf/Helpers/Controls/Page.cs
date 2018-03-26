@@ -11,19 +11,19 @@ namespace ComicsShelf.Helpers.Controls
          { this.Padding = new Thickness(0, 20, 0, 0); }
       }
 
-      protected async override void OnAppearing()
+      protected override void OnAppearing()
       {
          base.OnAppearing();
          if (this.BindingContext == null) { return; }
          this.SetBinding(Page.TitleProperty, "Title");
-         await (this.BindingContext as ViewModels.BaseVM).InitializeAsync();
+         (this.BindingContext as ViewModels.BaseVM).InitializeAsync();
       }
 
-      protected async override void OnDisappearing()
+      protected override void OnDisappearing()
       {
          base.OnDisappearing();
          if (this.BindingContext == null) { return; }
-         await (this.BindingContext as ViewModels.BaseVM).FinalizeAsync();
+         (this.BindingContext as ViewModels.BaseVM).FinalizeAsync();
       }
 
    }

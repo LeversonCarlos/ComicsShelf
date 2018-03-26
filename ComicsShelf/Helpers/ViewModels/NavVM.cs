@@ -44,7 +44,7 @@ namespace ComicsShelf.Helpers.ViewModels
             if (view == null) { throw new Exception("Cannot create view instance."); }
             view.BindingContext = viewModel;
 
-            // Navigation
+            // NAVIGATION
             var mainPage = Application.Current.MainPage as Page;
             var navigation = mainPage.Navigation;
             if (popAll && navigation.NavigationStack.Count > 0)

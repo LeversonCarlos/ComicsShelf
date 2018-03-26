@@ -95,6 +95,7 @@ namespace ComicsShelf.Startup
             // LOCATE COMICS LIST
             var fileList = await fileSystem.GetFiles(App.Settings.Paths.ComicsPath);
             var fileQuantity = fileList.Length;
+            var eachDelay = 15000 / fileQuantity;
 
             // LOOP THROUGH FILE LIST
             for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
@@ -104,7 +105,7 @@ namespace ComicsShelf.Startup
                this.Data.Details = filePath;
 
                /* DO THE MAGIC */
-               await Task.Delay(500);
+               await Task.Delay(eachDelay);
 
             }
 
