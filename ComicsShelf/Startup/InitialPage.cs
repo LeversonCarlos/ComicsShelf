@@ -31,7 +31,8 @@ namespace ComicsShelf
             // NAVIGATION
             var mainPage = Application.Current.MainPage as Page;
             var navigation = mainPage.Navigation;
-            navigation.PushAsync(view);
+            navigation.PushModalAsync(view);
+           
          }
          catch (Exception ex) { throw; }
       }

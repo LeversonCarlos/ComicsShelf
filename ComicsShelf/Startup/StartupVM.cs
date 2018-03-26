@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Startup
@@ -81,6 +82,7 @@ namespace ComicsShelf.Startup
       #endregion
 
       #region OnInitialize_Search
+
       private async Task OnInitialize_Search()
       {
          try
@@ -88,12 +90,13 @@ namespace ComicsShelf.Startup
 
             // INITIALIZE
             this.Data.Progress = 0;
+            this.Data.RootFolder = new Folder.FolderData { Text = "Root" };
             var fileSystem = Helpers.FileSystem.Get();
 
             // LOCATE COMICS LIST
             var fileList = await fileSystem.GetFiles(App.Settings.Paths.ComicsPath);
             var fileQuantity = fileList.Length;
-            var eachDelay = 15000 / fileQuantity;
+            var eachDelay = 5000 / fileQuantity;
 
             // LOOP THROUGH FILE LIST
             for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
@@ -102,7 +105,19 @@ namespace ComicsShelf.Startup
                this.Data.Progress = ((double)fileIndex / (double)fileQuantity);
                this.Data.Details = filePath;
 
-               /* DO THE MAGIC */
+               /* LOAD COMIC */
+               var comicFolder = this.OnInitialize_Search_GetFolder(filePath);
+               var comicFile = this.OnInitialize_Search_GetFile(filePath);
+               comicFolder.Files.Add(comicFile);
+
+               // LOAD COVER
+               /*
+               await pathService.LoadCover(App.Settings, comicFile);
+               // comicFile.CoverPath = $"file://{comicFile.CoverPath}";
+               if (string.IsNullOrEmpty(comicFolder.CoverPath) && string.IsNullOrEmpty(comicFile.Exception))
+               { comicFolder.CoverPath = comicFile.CoverPath; }
+               */
+
                await Task.Delay(eachDelay);
 
             }
@@ -110,6 +125,100 @@ namespace ComicsShelf.Startup
          }
          catch (Exception ex) { throw; }
       }
+
+      private Folder.FolderData OnInitialize_Search_GetFolder(string filePath)
+      {
+         try
+         {
+
+            // STARTS WITH THE ROOT FOLDER
+            Folder.FolderData fileFolder = this.Data.RootFolder;
+
+            // SPLIT PATH
+            var splitedPath = filePath
+               .Split(new string[] { App.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
+
+            // LOOP THROUGH SPLITED PATH PARTS [except last one, that is the file itself]
+            for (int splitIndex = 0; splitIndex < (splitedPath.Length - 1); splitIndex++)
+            {
+               var folderText = splitedPath[splitIndex];
+
+               // TRY TO LOCATE A CHILD FOLDER 
+               var folder = fileFolder.Folders
+                  .Where(x => x.Text == folderText)
+                  .FirstOrDefault();
+
+               //IF HADNT FOUND, ADD A NEW ONE
+               if (folder == null)
+               {
+                  folder = new Folder.FolderData { Text = folderText };
+                  fileFolder.Folders.Add(folder);
+               }
+
+               fileFolder = folder;
+            }
+
+            // RESULT
+            return fileFolder;
+
+         }
+         catch (Exception ex) { throw; }
+      }
+
+      private File.FileData OnInitialize_Search_GetFile(string filePath)
+      {
+         try
+         {
+
+            // SPLIT PATH
+            var splitedPath = filePath
+               .Split(new string[] { App.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
+
+            // INITIALIZE
+            var comicFile = new File.FileData { FullPath = filePath };
+            var folderName = splitedPath[splitedPath.Length - 2];
+            var fileName = splitedPath[splitedPath.Length - 1];
+
+            // TEXT
+            comicFile.Text = fileName
+               .Replace(folderName, "")
+               .Replace(".cbz", "")
+               .Replace(".cbr", "")
+               .Trim();
+
+            // COVER PATH            
+            var coverPath = comicFile.FullPath
+               .Replace(App.Settings.Paths.ComicsPath, "");
+            coverPath = coverPath
+               .Replace(".cbz", ".jpg")
+               .Replace(".cbr", ".jpg");
+            coverPath = coverPath
+               .Replace(App.Settings.Paths.Separator, "_")
+               .Replace(" ", "_")
+               .Replace("#", "_");
+            comicFile.CoverPath = $"{App.Settings.Paths.CoversPath}{coverPath}";
+
+            // DATA
+            /*
+            var comicData = App.Settings.Database
+               .Table<Helpers.Settings.Comics>()
+               .Where(x => x.Key == comicFile.Path)
+               .FirstOrDefault();
+            if (comicData == null)
+            {
+               comicData = new Helpers.Settings.Comics { Key = comicFile.Path };
+               App.Settings.Database.Insert(comicData);
+            }
+            comicFile.Data = comicData;
+            */
+
+            // RESULT
+            return comicFile;
+
+         }
+         catch (Exception ex) { throw; }
+      }
+
       #endregion
 
       #region OnInitialize_HomeScreen

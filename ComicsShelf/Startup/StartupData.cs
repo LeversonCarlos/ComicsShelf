@@ -30,5 +30,15 @@
       }
       #endregion
 
+
+      #region RootFolder
+      Folder.FolderData _RootFolder;
+      public Folder.FolderData RootFolder
+      {
+         get { return this._RootFolder; }
+         set { this.SetProperty(ref this._RootFolder, value); }
+      }
+      #endregion
+
    }
 }
