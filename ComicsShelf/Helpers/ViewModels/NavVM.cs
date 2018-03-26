@@ -20,6 +20,9 @@ namespace ComicsShelf.Helpers.ViewModels
 
       #region PushAsync
 
+      public static async Task PushAsync<T>(params object[] args) where T : NavVM
+      { await PushAsync<T>(false, args); }
+
       public static async Task PushAsync<T>(bool popAll, params object[] args) where T : NavVM
       {
          try

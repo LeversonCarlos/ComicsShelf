@@ -6,20 +6,21 @@
    x:Class="ComicsShelf.Folder.FolderPage">
    <controls:Page.Content>
       <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-         
-         <ListView
+
+         <controls:ListView
             IsVisible="{Binding HasFolders}"
             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
             SeparatorVisibility="None" HasUnevenRows="True"
+            ItemTappedCommand="{Binding FolderTappedCommand}"
             ItemsSource="{Binding Data.Folders}">
-            <ListView.ItemTemplate>
+            <controls:ListView.ItemTemplate>
                <DataTemplate>
                   <ViewCell>
                      <Label Text="{Binding Text}" HorizontalOptions="Center" ></Label>
                   </ViewCell>
                </DataTemplate>
-            </ListView.ItemTemplate>
-         </ListView>
+            </controls:ListView.ItemTemplate>
+         </controls:ListView>
          
       </StackLayout>
    </controls:Page.Content>

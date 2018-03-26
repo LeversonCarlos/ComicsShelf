@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Folder
 {
@@ -14,9 +16,7 @@ namespace ComicsShelf.Folder
          this.Data = args;
          this.HasFolders = this.Data.Folders.Count != 0;
          // this.HasFiles = this.Data.Files.Count != 0;
-         this.Initialize += this.OnInitialize;
-         // this.Finalize += this.OnFinalize;
-         // this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
+         this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          // this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
       }
       #endregion
@@ -25,29 +25,18 @@ namespace ComicsShelf.Folder
       public bool HasFolders { get; set; }
       #endregion
 
-      #region OnInitialize
-      private async void OnInitialize()
+      #region FolderTapped
+      public Command FolderTappedCommand { get; set; }
+      private async Task FolderTapped(object item)
       {
          try
          {
-            if (this.IsBusy) { return; }
-            this.IsBusy = true;
-
-            /*
-            foreach (var folderData in this.Data.Folders)
-            { this.OnInitialize_Folders(folderData); }
-            this.OnInitialize_Folders(this.Data);
-            // await this.OnInitialize_Files();
-            */
-
-            if (await App.Message.Confirm("Inicializacao concluída.\nDeseja fechar a aplicação"))
-            { System.Environment.Exit(0); }
-
+            var folderItem = (FolderData)item;
+            await PushAsync<FolderVM>(folderItem);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
-         finally { this.IsBusy = false; }
       }
-      #endregion      
+      #endregion
 
    }
 }
