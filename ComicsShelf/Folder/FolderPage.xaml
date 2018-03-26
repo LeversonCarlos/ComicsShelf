@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:Page 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Class="ComicsShelf.Folder.FolderPage">
+   <controls:Page.Content>
+      <Label Text="{Binding Title}"
+             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+      </Label>
+   </controls:Page.Content>
+</controls:Page>

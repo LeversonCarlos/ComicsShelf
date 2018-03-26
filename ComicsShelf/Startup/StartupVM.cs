@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Startup
 {
@@ -96,7 +97,7 @@ namespace ComicsShelf.Startup
             // LOCATE COMICS LIST
             var fileList = await fileSystem.GetFiles(App.Settings.Paths.ComicsPath);
             var fileQuantity = fileList.Length;
-            var eachDelay = 5000 / fileQuantity;
+            var eachDelay = 2000 / fileQuantity;
 
             // LOOP THROUGH FILE LIST
             for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
@@ -121,6 +122,8 @@ namespace ComicsShelf.Startup
                await Task.Delay(eachDelay);
 
             }
+            this.Data.Progress = 1;
+            this.Data.Details = "";
 
          }
          catch (Exception ex) { throw; }
@@ -226,11 +229,24 @@ namespace ComicsShelf.Startup
       {
          try
          {
-            this.Data.Progress = 0.00;
-            this.Data.Text = "";
-            this.Data.Details = "";
-            if (await App.Message.Confirm("Inicializacao concluída.\nDeseja fechar a aplicação"))
-            { System.Environment.Exit(0); }
+
+            // LOCATE FOLDER WITH CONTENT
+            var initialFolder = this.Data.RootFolder;
+            while (true)
+            {
+               if (initialFolder.Folders.Count == 0) { break; }
+               else if (initialFolder.Folders.Count > 1) { break; }
+               else { initialFolder = initialFolder.Folders.FirstOrDefault(); }
+            }
+
+            // CLOSE STARTUP PAGE
+            var mainPage = Application.Current.MainPage as Page;
+            var navigation = mainPage.Navigation;
+            await navigation.PopModalAsync();
+
+            // OPEN INITIAL FOLDER
+            await Helpers.ViewModels.NavVM.PushAsync<Folder.FolderVM>(true, initialFolder);
+
          }
          catch (Exception ex) { throw; }
       }
