@@ -129,6 +129,9 @@
   <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
     <value>Defining Comics Path</value>
   </data>
+  <data name="STARTUP_LOADING_HOME_SCREEN_MESSAGE" xml:space="preserve">
+    <value>Loading the Home Screen</value>
+  </data>
   <data name="STARTUP_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
     <value>Loading Settings</value>
   </data>

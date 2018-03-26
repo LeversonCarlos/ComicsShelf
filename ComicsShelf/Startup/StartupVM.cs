@@ -33,11 +33,9 @@ namespace ComicsShelf.Startup
             this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
             await this.OnInitialize_Search();
 
-            this.Data.Progress = 1.00;
-            this.Data.Text = "";
-            this.Data.Details = "";
-            if (await App.Message.Confirm("Inicializacao concluída.\nDeseja fechar a aplicação"))
-            { System.Environment.Exit(0); }
+            this.Data.Text = R.Strings.STARTUP_LOADING_HOME_SCREEN_MESSAGE;
+            await this.OnInitialize_HomeScreen();
+
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
@@ -109,6 +107,21 @@ namespace ComicsShelf.Startup
 
             }
 
+         }
+         catch (Exception ex) { throw; }
+      }
+      #endregion
+
+      #region OnInitialize_HomeScreen
+      private async Task OnInitialize_HomeScreen()
+      {
+         try
+         {
+            this.Data.Progress = 0.00;
+            this.Data.Text = "";
+            this.Data.Details = "";
+            if (await App.Message.Confirm("Inicializacao concluída.\nDeseja fechar a aplicação"))
+            { System.Environment.Exit(0); }
          }
          catch (Exception ex) { throw; }
       }
