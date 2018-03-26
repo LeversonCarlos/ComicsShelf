@@ -5,8 +5,22 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Folder.FolderPage">
    <controls:Page.Content>
-      <Label Text="{Binding Title}"
-             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-      </Label>
+      <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+         
+         <ListView
+            IsVisible="{Binding HasFolders}"
+            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+            SeparatorVisibility="None" HasUnevenRows="True"
+            ItemsSource="{Binding Data.Folders}">
+            <ListView.ItemTemplate>
+               <DataTemplate>
+                  <ViewCell>
+                     <Label Text="{Binding Text}" HorizontalOptions="Center" ></Label>
+                  </ViewCell>
+               </DataTemplate>
+            </ListView.ItemTemplate>
+         </ListView>
+         
+      </StackLayout>
    </controls:Page.Content>
 </controls:Page>

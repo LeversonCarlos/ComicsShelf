@@ -12,13 +12,17 @@ namespace ComicsShelf.Folder
          this.ViewType = typeof(FolderPage);
 
          this.Data = args;
-         // this.HasFolders = this.Data.Folders.Count != 0;
+         this.HasFolders = this.Data.Folders.Count != 0;
          // this.HasFiles = this.Data.Files.Count != 0;
          this.Initialize += this.OnInitialize;
          // this.Finalize += this.OnFinalize;
          // this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          // this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
       }
+      #endregion
+
+      #region Properties
+      public bool HasFolders { get; set; }
       #endregion
 
       #region OnInitialize
