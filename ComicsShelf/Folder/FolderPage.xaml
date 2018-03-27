@@ -23,7 +23,7 @@
                         Margin="6" Padding="4">
                         <Image Source="{Binding CoverPath}"
                             HorizontalOptions="FillAndExpand" VerticalOptions="Start"
-                            HeightRequest="150" 
+                            HeightRequest="150"
                             Aspect="AspectFill" />
                         <Label Text="{Binding Text}" HorizontalOptions="Center" LineBreakMode="TailTruncation" />
                      </StackLayout>
@@ -46,6 +46,7 @@
                         Margin="6" Padding="4">
                         <Image Source="{Binding CoverPath}"
                             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                            HeightRequest="200"
                             Aspect="AspectFit" />
                         <Label Text="{Binding Text}" HorizontalOptions="Center" LineBreakMode="TailTruncation" />
                      </StackLayout>
