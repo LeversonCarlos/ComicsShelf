@@ -17,7 +17,16 @@
                ItemsSource="{Binding Data.Folders}">
                <controls:ListView.ItemTemplate>
                   <DataTemplate>
-                     <Label Text="{Binding Text}" HorizontalOptions="Center" ></Label>
+                     <StackLayout
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Fill"
+                        HeightRequest="180" Margin="8">
+                        <Image Source="{Binding CoverPath}"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Start"
+                            HeightRequest="150" 
+                            Aspect="AspectFill" />
+                        <Label Text="{Binding Text}" HorizontalOptions="Center" />
+                     </StackLayout>
+
                   </DataTemplate>
                </controls:ListView.ItemTemplate>
             </controls:ListView>
