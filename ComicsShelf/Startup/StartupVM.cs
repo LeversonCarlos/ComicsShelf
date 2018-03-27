@@ -287,6 +287,7 @@ namespace ComicsShelf.Startup
                else if (this.Data.InitialFolder.Folders.Count > 1) { break; }
                else { this.Data.InitialFolder = this.Data.InitialFolder.Folders.FirstOrDefault(); }
             }
+            this.Data.InitialFolder.Text = R.Strings.AppTitle;
 
             // LOOP THROUGH FOLDERS
             var folderQuantity = this.Data.InitialFolder.Folders.Count;

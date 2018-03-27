@@ -10,7 +10,7 @@ namespace ComicsShelf.Folder
       #region New
       public FolderVM(FolderData args)
       {
-         this.Title = R.Strings.AppTitle + ": " + args.Text;
+         this.Title = args.Text;
          this.ViewType = typeof(FolderPage);
 
          this.Data = args;
