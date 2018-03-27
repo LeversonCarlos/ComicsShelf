@@ -114,7 +114,7 @@ namespace ComicsShelf.Startup
                   filePath = fileList[fileIndex];
                   this.Data.Progress = ((double)fileIndex / (double)fileQuantity);
                   this.Data.Details = filePath;
-                  if (Math.Round((Math.Round(this.Data.Progress, 2) % 0.01), 2) == 0)
+                  if (Math.Round((Math.Round(this.Data.Progress, 2) % 0.05), 2) == 0)
                   { await Task.Delay(1); }
 
                   /* LOAD COMIC */

@@ -7,31 +7,53 @@
    <controls:Page.Content>
       <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
          <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <Label Text="Inicio"></Label>
 
             <controls:ListView
                IsVisible="{Binding HasFolders}"
                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-               Columns="3" ItemHeight="180"
+               Columns="3" ItemHeight="200"
                ItemTappedCommand="{Binding FolderTappedCommand}"
                ItemsSource="{Binding Data.Folders}">
                <controls:ListView.ItemTemplate>
                   <DataTemplate>
+                     
                      <StackLayout
                         HorizontalOptions="FillAndExpand" VerticalOptions="Fill"
-                        HeightRequest="180" Margin="8">
+                        BackgroundColor="Silver"
+                        Margin="6" Padding="4">
                         <Image Source="{Binding CoverPath}"
                             HorizontalOptions="FillAndExpand" VerticalOptions="Start"
                             HeightRequest="150" 
                             Aspect="AspectFill" />
-                        <Label Text="{Binding Text}" HorizontalOptions="Center" />
+                        <Label Text="{Binding Text}" HorizontalOptions="Center" LineBreakMode="TailTruncation" />
                      </StackLayout>
 
                   </DataTemplate>
                </controls:ListView.ItemTemplate>
             </controls:ListView>
 
-            <Label Text="Fim"></Label>
+            <controls:ListView
+               IsVisible="{Binding HasFiles}"
+               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               Columns="5" ItemHeight="250"
+               ItemsSource="{Binding Data.Files}">
+               <controls:ListView.ItemTemplate>
+                  <DataTemplate>
+
+                     <StackLayout
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Fill"
+                        BackgroundColor="Silver"
+                        Margin="6" Padding="4">
+                        <Image Source="{Binding CoverPath}"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                            Aspect="AspectFit" />
+                        <Label Text="{Binding Text}" HorizontalOptions="Center" LineBreakMode="TailTruncation" />
+                     </StackLayout>
+
+                  </DataTemplate>
+               </controls:ListView.ItemTemplate>
+            </controls:ListView>
+
          </StackLayout>
       </ScrollView>
    </controls:Page.Content>

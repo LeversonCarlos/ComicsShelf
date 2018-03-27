@@ -15,7 +15,7 @@ namespace ComicsShelf.Folder
 
          this.Data = args;
          this.HasFolders = this.Data.Folders.Count != 0;
-         // this.HasFiles = this.Data.Files.Count != 0;
+         this.HasFiles = this.Data.Files.Count != 0;
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          // this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
       }
@@ -23,6 +23,7 @@ namespace ComicsShelf.Folder
 
       #region Properties
       public bool HasFolders { get; set; }
+      public bool HasFiles { get; set; }
       #endregion
 
       #region FolderTapped
