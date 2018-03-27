@@ -20,6 +20,15 @@
       }
       #endregion
 
+      #region CoverPath
+      string _CoverPath;
+      public string CoverPath
+      {
+         get { return this._CoverPath; }
+         set { this.SetProperty(ref this._CoverPath, value); }
+      }
+      #endregion
+
       #region Children
       public Helpers.Observables.ObservableList<Folder.FolderData> Folders { get; set; }
       public Helpers.Observables.ObservableList<File.FileData> Files { get; set; }

@@ -19,15 +19,6 @@
       }
       #endregion
 
-      #region FullPath
-      string _FullPath;
-      public string FullPath
-      {
-         get { return this._FullPath; }
-         set { this.SetProperty(ref this._FullPath, value); }
-      }
-      #endregion
-
       #region CoverPath
       string _CoverPath;
       public string CoverPath
@@ -36,6 +27,15 @@
          set { this.SetProperty(ref this._CoverPath, value); }
       }
       #endregion
+
+      #region FullPath
+      string _FullPath;
+      public string FullPath
+      {
+         get { return this._FullPath; }
+         set { this.SetProperty(ref this._FullPath, value); }
+      }
+      #endregion     
 
    }
 }

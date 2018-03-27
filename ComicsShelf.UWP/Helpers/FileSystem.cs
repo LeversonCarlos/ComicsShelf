@@ -8,7 +8,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(ComicsShelf.UWP.FileSystem))]
 namespace ComicsShelf.UWP
 {
-   public class FileSystem : ComicsShelf.Helpers.iFileSystem
+   public partial class FileSystem : ComicsShelf.Helpers.iFileSystem
    {
 
       #region PathSeparator
@@ -87,7 +87,7 @@ namespace ComicsShelf.UWP
          Windows.Storage.StorageFolder folder = null;
          try
          { folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(path); }
-         catch { StorageApplicationPermissions.FutureAccessList.Remove(path); }
+         catch { try { StorageApplicationPermissions.FutureAccessList.Remove(path); } catch { } }
          return (folder != null);
       }
       #endregion

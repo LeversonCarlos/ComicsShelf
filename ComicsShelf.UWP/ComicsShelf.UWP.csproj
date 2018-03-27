@@ -93,6 +93,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FileSystem.cs" />
+    <Compile Include="Helpers\FileSystem_Image.cs" />
+    <Compile Include="Helpers\FileSystem_Zip.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -157,7 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj">
-      <Project>{40C0F648-FBFE-48D1-A498-B33B517B4D1A}</Project>
+      <Project>{158eff52-5099-4cad-af53-5fba5d0ad3f3}</Project>
       <Name>ComicsShelf</Name>
     </ProjectReference>
   </ItemGroup>

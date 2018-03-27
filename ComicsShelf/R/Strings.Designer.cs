@@ -97,6 +97,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading comics&apos;s meta data.
+        /// </summary>
+        internal static string STARTUP_LOADING_COMICS_META_DATA_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_LOADING_COMICS_META_DATA_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading the Home Screen.
         /// </summary>
         internal static string STARTUP_LOADING_HOME_SCREEN_MESSAGE {

@@ -9,6 +9,8 @@ namespace ComicsShelf.Helpers
       Task<string> GetLocalPath();
       Task<string> GetComicsPath(string comicsPath);
       Task<string[]> GetFiles(string path);
+      Task<System.IO.Compression.ZipArchive> GetZipArchive(Settings.Settings settings, File.FileData comicFile);
+      Task Thumbnail(System.IO.Stream imageStream, string imagePath);
    }
    public class FileSystem
    {

@@ -31,13 +31,9 @@
       #endregion
 
 
-      #region RootFolder
-      Folder.FolderData _RootFolder;
-      public Folder.FolderData RootFolder
-      {
-         get { return this._RootFolder; }
-         set { this.SetProperty(ref this._RootFolder, value); }
-      }
+      #region Folders
+      internal Folder.FolderData RootFolder { get; set; }
+      internal Folder.FolderData InitialFolder { get; set; }
       #endregion
 
    }

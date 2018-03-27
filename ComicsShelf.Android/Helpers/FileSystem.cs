@@ -6,7 +6,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(ComicsShelf.Droid.FileSystem))]
 namespace ComicsShelf.Droid
 {
-   public class FileSystem : ComicsShelf.Helpers.iFileSystem
+   public partial class FileSystem : ComicsShelf.Helpers.iFileSystem
    {
 
       #region PathSeparator

@@ -47,6 +47,8 @@
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -63,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\FileSystem.cs" />
+    <Compile Include="Helpers\FileSystem_Zip.cs" />
+    <Compile Include="Helpers\FileSystem_Image.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
