@@ -19,6 +19,10 @@
       }
       #endregion
 
+      #region Data
+      public Helpers.Settings.Comics Data { get; set; }
+      #endregion
+
       #region CoverPath
       string _CoverPath;
       public string CoverPath

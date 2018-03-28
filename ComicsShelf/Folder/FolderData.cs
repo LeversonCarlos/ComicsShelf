@@ -32,6 +32,7 @@
       #region Children
       public Helpers.Observables.ObservableList<Folder.FolderData> Folders { get; set; }
       public Helpers.Observables.ObservableList<File.FileData> Files { get; set; }
+      public Helpers.Observables.ObservableList<File.FileData> RecentFiles { get; set; }
       #endregion
 
    }

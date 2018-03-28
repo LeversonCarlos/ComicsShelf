@@ -49,7 +49,7 @@ namespace ComicsShelf.Helpers.Settings
          {
             this.Database = new SQLiteConnection(this.Paths.DatabasePath);
             this.Database.CreateTable<Configs>();
-            // this.Database.CreateTable<Comics>();
+            this.Database.CreateTable<Comics>();
          }
          catch (Exception ex) { throw; }
       }

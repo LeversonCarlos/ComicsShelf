@@ -55,6 +55,29 @@
                </controls:ListView.ItemTemplate>
             </controls:ListView>
 
+            <controls:ListView
+               IsVisible="{Binding HasRecentFiles}"
+               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               Columns="5" ItemHeight="250"
+               ItemsSource="{Binding Data.RecentFiles}">
+               <controls:ListView.ItemTemplate>
+                  <DataTemplate>
+
+                     <StackLayout
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Fill"
+                        BackgroundColor="Silver"
+                        Margin="6" Padding="4">
+                        <Image Source="{Binding CoverPath}"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                            HeightRequest="200"
+                            Aspect="AspectFit" />
+                        <Label Text="{Binding Text}" HorizontalOptions="Center" LineBreakMode="TailTruncation" />
+                     </StackLayout>
+
+                  </DataTemplate>
+               </controls:ListView.ItemTemplate>
+            </controls:ListView>
+
          </StackLayout>
       </ScrollView>
    </controls:Page.Content>

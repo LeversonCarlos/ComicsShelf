@@ -99,7 +99,7 @@ namespace ComicsShelf.Startup
 
             // INITIALIZE
             this.Data.Progress = 0;
-            this.Data.RootFolder = new Folder.FolderData { Text = "Root" };
+            this.Data.RootFolder = new Folder.FolderData { Text = "Root", RecentFiles = new Helpers.Observables.ObservableList<File.FileData>() };
             var fileSystem = Helpers.FileSystem.Get();
             var settings = App.Settings;
 
@@ -122,14 +122,11 @@ namespace ComicsShelf.Startup
                   var comicFile = this.OnInitialize_Search_GetFile(filePath);
                   comicFolder.Files.Add(comicFile);
 
-                  // LOAD COVER
+                  // DATA
+                  await Task.Run(() => OnInitialize_Search_LoadData(settings, fileSystem, comicFile));
                   await Task.Run(() => OnInitialize_Search_LoadCover(settings, fileSystem, comicFile));
-                  /*
-                  await pathService.LoadCover(App.Settings, comicFile);
-                  // comicFile.CoverPath = $"file://{comicFile.CoverPath}";
-                  if (string.IsNullOrEmpty(comicFolder.CoverPath) && string.IsNullOrEmpty(comicFile.Exception))
-                  { comicFolder.CoverPath = comicFile.CoverPath; }
-                  */
+                  this.Data.RootFolder.RecentFiles.Add(comicFile);
+
                }
                catch (Exception fileException)
                { if (!await App.Message.Confirm($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
@@ -203,7 +200,6 @@ namespace ComicsShelf.Startup
 
             // COVER PATH            
             var coverPath = comicFile.FullPath;
-            /* .Replace(App.Settings.Paths.ComicsPath, "") */
             coverPath = coverPath
                .Replace(".cbz", ".jpg")
                .Replace(".cbr", ".jpg");
@@ -213,22 +209,29 @@ namespace ComicsShelf.Startup
                .Replace("#", "_");
             comicFile.CoverPath = $"{App.Settings.Paths.CoversPath}{App.Settings.Paths.Separator}{coverPath}";
 
+            // RESULT
+            return comicFile;
+
+         }
+         catch (Exception ex) { throw; }
+      }
+
+      private void OnInitialize_Search_LoadData(Helpers.Settings.Settings settings, Helpers.iFileSystem fileSystem, File.FileData file)
+      {
+         try
+         {
+
             // DATA
-            /*
-            var comicData = App.Settings.Database
+            var comicData = settings.Database
                .Table<Helpers.Settings.Comics>()
-               .Where(x => x.Key == comicFile.Path)
+               .Where(x => x.FullPath == file.FullPath)
                .FirstOrDefault();
             if (comicData == null)
             {
-               comicData = new Helpers.Settings.Comics { Key = comicFile.Path };
-               App.Settings.Database.Insert(comicData);
+               comicData = new Helpers.Settings.Comics { FullPath = file.FullPath };
+               settings.Database.Insert(comicData);
             }
-            comicFile.Data = comicData;
-            */
-
-            // RESULT
-            return comicFile;
+            file.Data = comicData;
 
          }
          catch (Exception ex) { throw; }
@@ -255,7 +258,11 @@ namespace ComicsShelf.Startup
                var zipEntry = zipEntries.FirstOrDefault();
                using (System.IO.Stream zipStream = zipEntry.Open())
                {
-                  // comicFile.Data.Date = zipEntry.LastWriteTime.DateTime;
+                  if (file.Data != null && string.IsNullOrEmpty(file.Data.ReleaseDate))
+                  {
+                     file.Data.ReleaseDate = zipEntry.LastWriteTime.DateTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                     settings.Database.Update(file.Data);
+                  }
                   await fileSystem.Thumbnail(zipStream, file.CoverPath);
                }
             }
@@ -288,6 +295,13 @@ namespace ComicsShelf.Startup
             }
             this.Data.InitialFolder.Text = R.Strings.AppTitle;
 
+            // RECENT FILES
+            var recentFiles = this.Data.RootFolder.RecentFiles
+               .OrderByDescending(x => x.Data.ReleaseDate)
+               .Take(5)
+               .ToList();
+            this.Data.InitialFolder.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>(recentFiles);
+
             // LOOP THROUGH FOLDERS
             var folderQuantity = this.Data.InitialFolder.Folders.Count;
             for (int folderIndex = 0; folderIndex < folderQuantity; folderIndex++)
@@ -317,10 +331,11 @@ namespace ComicsShelf.Startup
                foreach (var file in folder.Files)
                { await this.OnInitialize_MetaData(settings, fileSystem, file); }
 
-               /* SELF COVER */
+               /* FOLDER COVER */
                folder.CoverPath = folder.Files
                   .Where(x => !string.IsNullOrEmpty(x.CoverPath))
                   .Select(x => x.CoverPath)
+                  .OrderBy(x => x)
                   .FirstOrDefault();
 
             }
