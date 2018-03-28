@@ -27,18 +27,23 @@ namespace ComicsShelf.Startup
             this.Data.Progress = 0;
 
             this.Data.Text = R.Strings.STARTUP_LOADING_SETTINGS_MESSAGE;
+            await Task.Delay(1);
             await this.OnInitialize_Settings();
 
             this.Data.Text = R.Strings.STARTUP_DEFINING_COMICS_PATH_MESSAGE;
+            await Task.Delay(1);
             await this.OnInitialize_ComicsPath();
 
             this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
+            await Task.Delay(1);
             await this.OnInitialize_Search();
 
             this.Data.Text = R.Strings.STARTUP_LOADING_COMICS_META_DATA_MESSAGE;
+            await Task.Delay(1);
             await this.OnInitialize_MetaData();
 
             this.Data.Text = R.Strings.STARTUP_LOADING_HOME_SCREEN_MESSAGE;
+            await Task.Delay(1);
             await this.OnInitialize_HomeScreen();
 
          }
@@ -51,7 +56,6 @@ namespace ComicsShelf.Startup
       {
          try
          {
-            await Task.Delay(1);
             await App.Settings.Initialize();
          }
          catch (Exception ex) { throw; }
@@ -63,7 +67,6 @@ namespace ComicsShelf.Startup
       {
          try
          {
-            await Task.Delay(1);
 
             /* LOAD CONFIGS DATA */
             var configsTable = App.Settings.Database.Table<Helpers.Settings.Configs>();
@@ -99,7 +102,6 @@ namespace ComicsShelf.Startup
             this.Data.RootFolder = new Folder.FolderData { Text = "Root" };
             var fileSystem = Helpers.FileSystem.Get();
             var settings = App.Settings;
-            await Task.Delay(1);
 
             // LOCATE COMICS LIST
             var fileList = await fileSystem.GetFiles(App.Settings.Paths.ComicsPath);
@@ -114,8 +116,6 @@ namespace ComicsShelf.Startup
                   filePath = fileList[fileIndex];
                   this.Data.Progress = ((double)fileIndex / (double)fileQuantity);
                   this.Data.Details = filePath;
-                  if (Math.Round((Math.Round(this.Data.Progress, 2) % 0.05), 2) == 0)
-                  { await Task.Delay(1); }
 
                   /* LOAD COMIC */
                   var comicFolder = this.OnInitialize_Search_GetFolder(filePath);
@@ -123,7 +123,7 @@ namespace ComicsShelf.Startup
                   comicFolder.Files.Add(comicFile);
 
                   // LOAD COVER
-                  await OnInitialize_Search_LoadCover(settings, fileSystem, comicFile);
+                  await Task.Run(() => OnInitialize_Search_LoadCover(settings, fileSystem, comicFile));
                   /*
                   await pathService.LoadCover(App.Settings, comicFile);
                   // comicFile.CoverPath = $"file://{comicFile.CoverPath}";
@@ -277,7 +277,6 @@ namespace ComicsShelf.Startup
             this.Data.Progress = 0;
             var fileSystem = Helpers.FileSystem.Get();
             var settings = App.Settings;
-            await Task.Delay(1);
 
             // LOCATE FOLDER WITH CONTENT
             this.Data.InitialFolder = this.Data.RootFolder;
@@ -295,7 +294,7 @@ namespace ComicsShelf.Startup
             {
                var folder = this.Data.InitialFolder.Folders[folderIndex];
                this.Data.Progress = ((double)folderIndex / (double)folderQuantity);
-               // this.Data.Details = filePath;
+               this.Data.Details = folder.Text;
                await this.OnInitialize_MetaData(settings, fileSystem, folder);
             }
             this.Data.Progress = 1;
