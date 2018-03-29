@@ -129,14 +129,11 @@
   <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
     <value>Defining Comics Path</value>
   </data>
-  <data name="STARTUP_LOADING_COMICS_META_DATA_MESSAGE" xml:space="preserve">
-    <value>Loading comics's meta data</value>
-  </data>
-  <data name="STARTUP_LOADING_HOME_SCREEN_MESSAGE" xml:space="preserve">
-    <value>Loading the Home Screen</value>
-  </data>
   <data name="STARTUP_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
     <value>Loading Settings</value>
+  </data>
+  <data name="STARTUP_REVIEWING_FOLDERS_DATA_MESSAGE" xml:space="preserve">
+    <value>Reviewing Folders Data</value>
   </data>
   <data name="STARTUP_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Searching Comic Files on the Device</value>

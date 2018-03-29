@@ -30,11 +30,5 @@
       }
       #endregion
 
-
-      #region Folders
-      internal Folder.FolderData RootFolder { get; set; }
-      internal Folder.FolderData InitialFolder { get; set; }
-      #endregion
-
    }
 }

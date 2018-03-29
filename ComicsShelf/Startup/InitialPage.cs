@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf
 {
@@ -17,6 +16,7 @@ namespace ComicsShelf
          };
       }
 
+      /*
       protected override void OnAppearing()
       {
          try
@@ -32,10 +32,11 @@ namespace ComicsShelf
             var mainPage = Application.Current.MainPage as Page;
             var navigation = mainPage.Navigation;
             navigation.PushModalAsync(view);
-           
+
          }
          catch (Exception ex) { throw; }
       }
+      */
 
    }
 }
