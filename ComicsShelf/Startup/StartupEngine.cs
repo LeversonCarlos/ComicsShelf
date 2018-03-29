@@ -287,7 +287,7 @@ namespace ComicsShelf.Startup
 
             // RECENT FILES
             var recentFiles = this.RootFolder.RecentFiles
-               .Where(x => !string.IsNullOrEmpty(x.Data.ReadingDate))
+               .Where(x => !string.IsNullOrEmpty(x.Data.ReleaseDate))
                .OrderByDescending(x => x.Data.ReleaseDate)
                .Take(5)
                .ToList();
