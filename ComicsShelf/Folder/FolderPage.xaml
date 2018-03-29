@@ -48,6 +48,7 @@
             <controls:ListView 
                IsVisible="{Binding HasRecentFiles}"
                Columns="5" ItemHeight="250"
+               ItemTappedCommand="{Binding FileTappedCommand}"
                ItemsSource="{Binding Data.RecentFiles}">
                <controls:ListView.ItemTemplate>
                   <DataTemplate>
@@ -85,6 +86,7 @@
             <controls:ListView
                IsVisible="{Binding HasFiles}"
                Columns="5" ItemHeight="250"
+               ItemTappedCommand="{Binding FileTappedCommand}"
                ItemsSource="{Binding Data.Files}">
                <controls:ListView.ItemTemplate>
                   <DataTemplate>

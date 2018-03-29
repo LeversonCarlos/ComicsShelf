@@ -18,7 +18,7 @@ namespace ComicsShelf.Folder
          this.HasFiles = this.Data.Files.Count != 0;
          this.HasRecentFiles = this.Data.RecentFiles != null && this.Data.RecentFiles.Count != 0;
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
-         // this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
+         this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
       }
       #endregion
 
@@ -36,6 +36,19 @@ namespace ComicsShelf.Folder
          {
             var folderItem = (FolderData)item;
             await PushAsync<FolderVM>(folderItem);
+         }
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+      }
+      #endregion
+
+      #region FileTapped
+      public Command FileTappedCommand { get; set; }
+      private async Task FileTapped(object item)
+      {
+         try
+         {
+            var fileItem = (File.FileData)item;
+            await PushAsync<File.FileVM>(fileItem);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
