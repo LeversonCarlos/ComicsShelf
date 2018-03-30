@@ -6,7 +6,7 @@
    x:Class="ComicsShelf.File.FilePage">
    <controls:Page.Content>
       <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Fill" Padding="20" Spacing="20">
-         <Grid Margin="0, 20">
+         <Grid Margin="0,20">
             <Image Source="{Binding Data.CoverPath}" Aspect="AspectFit" Opacity="0.5"/>
          </Grid>
          <StackLayout Orientation="Horizontal" Spacing="20" >
