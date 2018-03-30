@@ -6,7 +6,7 @@
    x:Class="ComicsShelf.Folder.FolderPage">
    <controls:Page.Content>
       <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
-         <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
+         <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="0" Padding="0" Spacing="0">
 
             <StackLayout.Resources>
                <ResourceDictionary>
