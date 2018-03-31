@@ -88,6 +88,69 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 5 Star.
+        /// </summary>
+        internal static string ENUM_ENUMFILERATE_FIVE {
+            get {
+                return ResourceManager.GetString("ENUM_ENUMFILERATE_FIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4 Star.
+        /// </summary>
+        internal static string ENUM_ENUMFILERATE_FOUR {
+            get {
+                return ResourceManager.GetString("ENUM_ENUMFILERATE_FOUR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;Rate this Comic&gt;.
+        /// </summary>
+        internal static string ENUM_ENUMFILERATE_NONE {
+            get {
+                return ResourceManager.GetString("ENUM_ENUMFILERATE_NONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Star.
+        /// </summary>
+        internal static string ENUM_ENUMFILERATE_ONE {
+            get {
+                return ResourceManager.GetString("ENUM_ENUMFILERATE_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 Star.
+        /// </summary>
+        internal static string ENUM_ENUMFILERATE_THREE {
+            get {
+                return ResourceManager.GetString("ENUM_ENUMFILERATE_THREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 Star.
+        /// </summary>
+        internal static string ENUM_ENUMFILERATE_TWO {
+            get {
+                return ResourceManager.GetString("ENUM_ENUMFILERATE_TWO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0 Star.
+        /// </summary>
+        internal static string ENUM_ENUMFILERATE_ZERO {
+            get {
+                return ResourceManager.GetString("ENUM_ENUMFILERATE_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comic Already Readed.
         /// </summary>
         internal static string FILE_COMIC_ALREADY_READED_LABEL {

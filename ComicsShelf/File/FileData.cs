@@ -1,7 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace ComicsShelf.File
+﻿namespace ComicsShelf.File
 {
+   public enum enumFileRate : short { None = -1, Zero = 0, One = 1, Two = 2, Three = 3, Four = 4, Five = 5 }
+
    public class FileData : Helpers.Observables.ObservableObject, iFileData
    {
 
@@ -50,6 +50,12 @@ namespace ComicsShelf.File
             this._PersistentData = value;
             this.PersistentDataLoading = true;
             this.Readed = value.Readed;
+            this.ReadingDate = value.ReadingDate;
+            this.ReadingPercent = value.ReadingPercent;
+            this.ReadingPage = value.ReadingPage;
+            this.Rate = enumFileRate.None;
+            if (value.Rate.HasValue)
+            { this.Rate = (enumFileRate)value.Rate; }
             this.PersistentDataLoading = false;
          }
       }
@@ -117,6 +123,22 @@ namespace ComicsShelf.File
             this.SetProperty(ref this._ReadingPage, value);
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.ReadingPage = value;
+            App.Settings.Database.Update(this.PersistentData);
+         }
+      }
+      #endregion
+
+      #region Rate
+      enumFileRate _Rate;
+      public enumFileRate Rate
+      {
+         get { return this._Rate; }
+         set
+         {
+            this.SetProperty(ref this._Rate, value);
+            if (this.PersistentDataLoading) { return; }
+            this.PersistentData.Rate = null;
+            if (value != enumFileRate.None) { this.PersistentData.Rate = (short)value; }
             App.Settings.Database.Update(this.PersistentData);
          }
       }

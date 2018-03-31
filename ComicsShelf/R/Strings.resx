@@ -126,6 +126,27 @@
   <data name="COMMAND_OK" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="ENUM_ENUMFILERATE_FIVE" xml:space="preserve">
+    <value>5 Star</value>
+  </data>
+  <data name="ENUM_ENUMFILERATE_FOUR" xml:space="preserve">
+    <value>4 Star</value>
+  </data>
+  <data name="ENUM_ENUMFILERATE_NONE" xml:space="preserve">
+    <value>&lt;Rate this Comic&gt;</value>
+  </data>
+  <data name="ENUM_ENUMFILERATE_ONE" xml:space="preserve">
+    <value>1 Star</value>
+  </data>
+  <data name="ENUM_ENUMFILERATE_THREE" xml:space="preserve">
+    <value>3 Star</value>
+  </data>
+  <data name="ENUM_ENUMFILERATE_TWO" xml:space="preserve">
+    <value>2 Star</value>
+  </data>
+  <data name="ENUM_ENUMFILERATE_ZERO" xml:space="preserve">
+    <value>0 Star</value>
+  </data>
   <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
     <value>Comic Already Readed</value>
   </data>
