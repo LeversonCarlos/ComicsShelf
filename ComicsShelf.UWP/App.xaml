@@ -5,4 +5,15 @@
     xmlns:local="using:ComicsShelf.UWP"
     RequestedTheme="Light">
 
+   <Application.Resources>
+      <ResourceDictionary>
+
+         <Style TargetType="ToggleSwitch">
+            <Setter Property="OffContent" Value=" " />
+            <Setter Property="OnContent" Value=" " />
+         </Style>
+         
+      </ResourceDictionary>
+   </Application.Resources>
+
 </Application>

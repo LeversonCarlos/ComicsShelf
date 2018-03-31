@@ -230,7 +230,7 @@ namespace ComicsShelf.Startup
                comicData = new Helpers.Settings.Comics { FullPath = file.FullPath };
                this.Settings.Database.Insert(comicData);
             }
-            file.Data = comicData;
+            file.PersistentData = comicData;
 
          }
          catch (Exception ex) { throw; }
@@ -257,10 +257,10 @@ namespace ComicsShelf.Startup
                var zipEntry = zipEntries.FirstOrDefault();
                using (System.IO.Stream zipStream = zipEntry.Open())
                {
-                  if (file.Data != null && string.IsNullOrEmpty(file.Data.ReleaseDate))
+                  if (file.PersistentData != null && string.IsNullOrEmpty(file.PersistentData.ReleaseDate))
                   {
-                     file.Data.ReleaseDate = zipEntry.LastWriteTime.DateTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
-                     this.Settings.Database.Update(file.Data);
+                     file.PersistentData.ReleaseDate = this.Settings.GetDatabaseDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
+                     this.Settings.Database.Update(file.PersistentData);
                   }
                   await this.FileSystem.Thumbnail(zipStream, file.CoverPath);
                }
@@ -287,8 +287,8 @@ namespace ComicsShelf.Startup
 
             // RECENT FILES
             var recentFiles = this.RootFolder.RecentFiles
-               .Where(x => !string.IsNullOrEmpty(x.Data.ReleaseDate))
-               .OrderByDescending(x => x.Data.ReleaseDate)
+               .Where(x => !string.IsNullOrEmpty(x.PersistentData.ReleaseDate))
+               .OrderByDescending(x => x.PersistentData.ReleaseDate)
                .Take(5)
                .ToList();
 

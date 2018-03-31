@@ -55,6 +55,18 @@ namespace ComicsShelf.Helpers.Settings
       }
       #endregion
 
+      #region GetDatabaseDate
+
+      internal string GetDatabaseDate()
+      { return this.GetDatabaseDate(DateTime.Now); }
+
+      internal string GetDatabaseDate(DateTime dateTime)
+      {
+         return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+      }
+
+      #endregion
+
       #region Dispose
       public void Dispose()
       {

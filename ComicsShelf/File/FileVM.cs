@@ -1,4 +1,6 @@
-﻿namespace ComicsShelf.File
+﻿using System;
+
+namespace ComicsShelf.File
 {
    public class FileVM : Helpers.ViewModels.DataVM<FileData>
    {
@@ -13,16 +15,25 @@
       }
       #endregion
 
+      #region OnInitialize
       private void OnInitialize()
       {
          try
          {
-            this.Data.Data.ReadingDate = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            App.Settings.Database.Update(this.Data.Data);
+            // App.Settings.Database.Update(this.Data.PersistentData);
          }
          catch { }
       }
+      #endregion
 
+      #region Details
+      string _Details;
+      public string Details
+      {
+         get { return this._Details; }
+         set { this.SetProperty(ref this._Details, value); }
+      }
+      #endregion
 
    }
 }

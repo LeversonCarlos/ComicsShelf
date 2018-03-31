@@ -3,7 +3,7 @@
 namespace ComicsShelf.Helpers.Settings
 {
    [Table("Comics")]
-   public class Comics
+   public class Comics : File.iFileData
    {
 
       [PrimaryKey]
@@ -11,6 +11,7 @@ namespace ComicsShelf.Helpers.Settings
 
       public string ReleaseDate { get; set; }
 
+      public bool Readed { get; set; }
       public short ReadingPercent { get; set; }
       public short ReadingPage { get; set; }
       public string ReadingDate { get; set; }

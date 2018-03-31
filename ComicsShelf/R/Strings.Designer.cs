@@ -88,6 +88,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comic Already Readed.
+        /// </summary>
+        internal static string FILE_COMIC_ALREADY_READED_LABEL {
+            get {
+                return ResourceManager.GetString("FILE_COMIC_ALREADY_READED_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Defining Comics Path.
         /// </summary>
         internal static string STARTUP_DEFINING_COMICS_PATH_MESSAGE {

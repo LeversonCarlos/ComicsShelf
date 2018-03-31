@@ -5,12 +5,16 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.File.FilePage">
    <controls:Page.Content>
-      <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Fill" Padding="20" Spacing="20">
-         <Grid Margin="0,20">
+      <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Fill" Padding="20" >
+         <Grid Margin="0,20,0,0">
             <Image Source="{Binding Data.CoverPath}" Aspect="AspectFit" Opacity="0.5"/>
          </Grid>
-         <StackLayout Orientation="Horizontal" Spacing="20" >
-            <Label Text="{Binding Data.Text}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" BackgroundColor="Red" />
+         <ProgressBar Progress="{Binding Data.ReadingPercent}" HorizontalOptions="FillAndExpand"></ProgressBar>
+         <StackLayout Orientation="Horizontal" Margin="0,20,0,0" Spacing="20" >
+            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" >
+               <Label Text="{Binding Data.ReadedText}" VerticalOptions="Center" ></Label>
+               <Switch IsToggled="{Binding Data.Readed}" VerticalOptions="Center" ></Switch>
+            </StackLayout>
             <Label Text="{Binding Data.Text}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" BackgroundColor="Blue" />
             <Label Text="{Binding Data.Text}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" BackgroundColor="Red" />
          </StackLayout>
