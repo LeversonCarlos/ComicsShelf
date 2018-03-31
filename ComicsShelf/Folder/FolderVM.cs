@@ -48,7 +48,7 @@ namespace ComicsShelf.Folder
          try
          {
             var fileItem = (File.FileData)item;
-            await PushAsync<File.FileVM>(fileItem);
+            await PushAsync<File.FileSplashVM>(fileItem);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }

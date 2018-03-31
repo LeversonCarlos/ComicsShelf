@@ -3,9 +3,9 @@
 namespace ComicsShelf.File
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class FilePage : Helpers.Controls.Page
+   public partial class FileSplash : Helpers.Controls.Page
    {
-      public FilePage()
+      public FileSplash()
       {
          InitializeComponent();
       }

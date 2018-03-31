@@ -2,14 +2,14 @@
 
 namespace ComicsShelf.File
 {
-   public class FileVM : Helpers.ViewModels.DataVM<FileData>
+   public class FileSplashVM : Helpers.ViewModels.DataVM<FileData>
    {
 
       #region New
-      public FileVM(FileData args)
+      public FileSplashVM(FileData args)
       {
          this.Title = args.Text;
-         this.ViewType = typeof(FilePage);
+         this.ViewType = typeof(FileSplash);
          this.Data = args;
          this.Initialize += this.OnInitialize;
       }
