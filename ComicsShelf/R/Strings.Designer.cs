@@ -160,6 +160,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Comic.
+        /// </summary>
+        internal static string FILE_OPEN_COMIC_LABEL {
+            get {
+                return ResourceManager.GetString("FILE_OPEN_COMIC_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Defining Comics Path.
         /// </summary>
         internal static string STARTUP_DEFINING_COMICS_PATH_MESSAGE {

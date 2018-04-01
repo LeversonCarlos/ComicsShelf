@@ -17,8 +17,8 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Update="File\FileSplash.xaml.cs">
-      <DependentUpon>FileSplash.xaml</DependentUpon>
+    <Compile Update="File\FileSplashPage.xaml.cs">
+      <DependentUpon>FileSplashPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="R\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -31,7 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="File\FileSplash.xaml">
+    <EmbeddedResource Update="File\FileReadPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="File\FileSplashPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Folder\FolderPage.xaml">

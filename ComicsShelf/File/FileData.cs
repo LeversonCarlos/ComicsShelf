@@ -39,6 +39,7 @@
       }
       #endregion
 
+
       #region PersistentData
       bool PersistentDataLoading;
       Helpers.Settings.Comics _PersistentData;
@@ -62,9 +63,6 @@
       #endregion     
 
       #region Readed
-
-      public string ReadedText { get { return R.Strings.FILE_COMIC_ALREADY_READED_LABEL; } }
-
       bool _Readed;
       public bool Readed
       {
@@ -80,7 +78,6 @@
             App.Settings.Database.Update(this.PersistentData);
          }
       }
-
       #endregion
 
       #region ReadingDate
@@ -143,6 +140,10 @@
          }
       }
       #endregion
+
+
+      public string ReadedText { get { return R.Strings.FILE_COMIC_ALREADY_READED_LABEL; } }
+      public string OpenTappedText { get { return R.Strings.FILE_OPEN_COMIC_LABEL; } }
 
    }
 }

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:Page 
+   xmlns="http://xamarin.com/schemas/2014/forms"             
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Class="ComicsShelf.File.FileReadPage">
+   <controls:Page.Content>
+      <StackLayout>
+         <Label Text="{Binding Data.Text}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+      </StackLayout>
+   </controls:Page.Content>
+</controls:Page>

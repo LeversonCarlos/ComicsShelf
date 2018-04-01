@@ -150,6 +150,9 @@
   <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
     <value>Comic Already Readed</value>
   </data>
+  <data name="FILE_OPEN_COMIC_LABEL" xml:space="preserve">
+    <value>Open Comic</value>
+  </data>
   <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
     <value>Defining Comics Path</value>
   </data>

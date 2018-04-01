@@ -4,7 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    xmlns:models="clr-namespace:ComicsShelf.File"
-   x:Class="ComicsShelf.File.FileSplash">
+   x:Class="ComicsShelf.File.FileSplashPage">
    <controls:Page.Content>
       <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Fill" Padding="20" >
          <Grid Margin="0,20,0,0">
@@ -16,9 +16,8 @@
                <Label Text="{Binding Data.ReadedText}" VerticalOptions="Center" ></Label>
                <Switch IsToggled="{Binding Data.Readed}" VerticalOptions="Center" ></Switch>
             </StackLayout>
-            <controls:EnumPicker SelectedItem="{Binding Data.Rate}" x:TypeArguments="models:enumFileRate" ></controls:EnumPicker>
-            <Label Text="{Binding Data.Text}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" BackgroundColor="Blue" />
-            <Label Text="{Binding Data.Text}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" BackgroundColor="Red" />
+            <controls:EnumPicker SelectedItem="{Binding Data.Rate}" x:TypeArguments="models:enumFileRate" HorizontalOptions="FillAndExpand" ></controls:EnumPicker>
+            <Button Text="{Binding Data.OpenTappedText}" Command="{Binding OpenTappedCommand}" HorizontalOptions="FillAndExpand" ></Button>
          </StackLayout>
       </StackLayout>
    </controls:Page.Content>

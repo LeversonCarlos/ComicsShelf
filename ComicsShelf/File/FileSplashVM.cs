@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.File
 {
@@ -9,29 +11,21 @@ namespace ComicsShelf.File
       public FileSplashVM(FileData args)
       {
          this.Title = args.Text;
-         this.ViewType = typeof(FileSplash);
+         this.ViewType = typeof(FileSplashPage);
          this.Data = args;
-         this.Initialize += this.OnInitialize;
+         this.OpenTappedCommand = new Command(async (item) => await this.OpenTapped(item));
       }
       #endregion
 
-      #region OnInitialize
-      private void OnInitialize()
+      #region OpenTapped
+      public Command OpenTappedCommand { get; set; }
+      private async Task OpenTapped(object item)
       {
          try
          {
-            // App.Settings.Database.Update(this.Data.PersistentData);
+            await PushAsync<FileReadVM>(this.Data);
          }
-         catch { }
-      }
-      #endregion
-
-      #region Details
-      string _Details;
-      public string Details
-      {
-         get { return this._Details; }
-         set { this.SetProperty(ref this._Details, value); }
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
       #endregion
 
