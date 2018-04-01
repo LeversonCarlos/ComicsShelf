@@ -3,6 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"             
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   NavigationPage.HasNavigationBar="False" 
    x:Class="ComicsShelf.File.FileReadPage">
    <controls:Page.Content>
       <StackLayout>

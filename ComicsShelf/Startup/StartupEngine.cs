@@ -105,6 +105,7 @@ namespace ComicsShelf.Startup
 
             // LOCATE COMICS LIST
             var fileList = await this.FileSystem.GetFiles(this.Settings.Paths.ComicsPath);
+            // fileList = fileList.Take(10).ToArray();
             var fileQuantity = fileList.Length;
 
             // LOOP THROUGH FILE LIST
@@ -192,10 +193,13 @@ namespace ComicsShelf.Startup
 
             // TEXT
             comicFile.Text = fileName
-               .Replace(folderName, "")
                .Replace(".cbz", "")
                .Replace(".cbr", "")
                .Trim();
+            comicFile.SmallText = comicFile.Text
+               .Replace(folderName, "");
+            if (string.IsNullOrEmpty(comicFile.SmallText))
+            { comicFile.SmallText = comicFile.Text; }
 
             // COVER PATH            
             var coverPath = comicFile.FullPath;

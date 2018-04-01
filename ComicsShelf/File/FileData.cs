@@ -21,6 +21,15 @@
       }
       #endregion
 
+      #region SmallText
+      string _SmallText;
+      public string SmallText
+      {
+         get { return this._SmallText; }
+         set { this.SetProperty(ref this._SmallText, value); }
+      }
+      #endregion
+
       #region CoverPath
       string _CoverPath;
       public string CoverPath

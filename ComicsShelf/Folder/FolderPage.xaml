@@ -57,7 +57,7 @@
                         <Image Source="{Binding CoverPath}"
                                Style="{StaticResource ImageFile}" 
                                HeightRequest="200" />
-                        <Label Text="{Binding Text}" Style="{StaticResource ItemTitle}" />
+                        <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
                      </StackLayout>
 
                   </DataTemplate>
@@ -95,7 +95,7 @@
                         <Image Source="{Binding CoverPath}"
                                Style="{StaticResource ImageFile}" 
                                HeightRequest="200" />
-                        <Label Text="{Binding Text}" Style="{StaticResource ItemTitle}" />
+                        <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
                      </StackLayout>
 
                   </DataTemplate>
