@@ -7,7 +7,7 @@
    x:Class="ComicsShelf.File.FileSplashPage">
    <controls:Page.Content>
       <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Fill" Padding="20" >
-         <Grid Margin="0,20,0,0">
+         <Grid Margin="0,20,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
             <Image Source="{Binding Data.CoverPath}" Aspect="AspectFit" Opacity="0.5"/>
          </Grid>
          <ProgressBar Progress="{Binding Data.ReadingPercent}" HorizontalOptions="FillAndExpand"></ProgressBar>
