@@ -14,15 +14,15 @@
                   <Style TargetType="controls:ListView">
                      <Setter Property="Margin" Value="0" />
                      <Setter Property="Padding" Value="4,4,4,0" />
-                     <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                     <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                     <Setter Property="HorizontalOptions" Value="Fill" />
+                     <Setter Property="VerticalOptions" Value="Fill" />
                   </Style>
 
                   <Style TargetType="StackLayout" >
                      <Setter Property="Margin" Value="6" />
                      <Setter Property="Padding" Value="4" />
                      <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                     <Setter Property="VerticalOptions" Value="Fill" />
+                     <Setter Property="VerticalOptions" Value="Start" />
                   </Style>
 
                   <Style TargetType="Image" x:Key="ImageFolder" >
@@ -32,8 +32,8 @@
                   </Style>
 
                   <Style TargetType="Image" x:Key="ImageFile" >
-                     <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                     <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                     <Setter Property="HorizontalOptions" Value="Center" />
+                     <Setter Property="VerticalOptions" Value="Start" />
                      <Setter Property="Aspect" Value="AspectFit" />
                   </Style>
 
@@ -46,17 +46,17 @@
             </StackLayout.Resources>
 
             <controls:ListView 
-               IsVisible="{Binding HasRecentFiles}"
-               Columns="5" ItemHeight="250"
+               IsVisible="{Binding HasRecentFiles}" Columns="5" 
                ItemTappedCommand="{Binding FileTappedCommand}"
                ItemsSource="{Binding Data.RecentFiles}">
                <controls:ListView.ItemTemplate>
                   <DataTemplate>
 
                      <StackLayout BackgroundColor="#9FA8DA">
-                        <Image Source="{Binding CoverPath}"
+                        <Image Source="{Binding CoverPath}" 
                                Style="{StaticResource ImageFile}" 
                                HeightRequest="200" />
+                        <ProgressBar Progress="{Binding ReadingPercent}" HorizontalOptions="Fill" />
                         <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
                      </StackLayout>
 
@@ -65,8 +65,7 @@
             </controls:ListView>
 
             <controls:ListView
-               IsVisible="{Binding HasFolders}"
-               Columns="3" ItemHeight="200"
+               IsVisible="{Binding HasFolders}" Columns="3" 
                ItemTappedCommand="{Binding FolderTappedCommand}"
                ItemsSource="{Binding Data.Folders}">
                <controls:ListView.ItemTemplate>
@@ -84,8 +83,7 @@
             </controls:ListView>
 
             <controls:ListView
-               IsVisible="{Binding HasFiles}"
-               Columns="5" ItemHeight="250"
+               IsVisible="{Binding HasFiles}" Columns="5" 
                ItemTappedCommand="{Binding FileTappedCommand}"
                ItemsSource="{Binding Data.Files}">
                <controls:ListView.ItemTemplate>
@@ -93,15 +91,16 @@
 
                      <StackLayout BackgroundColor="#9FA8DA">
                         <Image Source="{Binding CoverPath}"
-                               Style="{StaticResource ImageFile}" 
-                               HeightRequest="200" />
+                                        Style="{StaticResource ImageFile}" 
+                                        HeightRequest="200" />
+                        <ProgressBar Progress="{Binding ReadingPercent}" HorizontalOptions="Fill" />
                         <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
                      </StackLayout>
 
                   </DataTemplate>
                </controls:ListView.ItemTemplate>
             </controls:ListView>
-
+            
          </StackLayout>
       </ScrollView>
    </controls:Page.Content>

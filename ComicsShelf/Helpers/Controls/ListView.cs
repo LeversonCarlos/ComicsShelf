@@ -15,7 +15,6 @@ namespace ComicsShelf.Helpers.Controls
       {
          this.RowSpacing = 0;
          this.ColumnSpacing = 0;
-         if (this.ItemHeight <= 0) { this.ItemHeight = 60; }
 
          if (this.Columns <= 0) { this.Columns = 3; }
          for (var i = 0; i < this.Columns; i++)
@@ -25,7 +24,6 @@ namespace ComicsShelf.Helpers.Controls
 
       #region Properties
       public DataTemplate ItemTemplate { get; set; }
-      public float ItemHeight { get; set; }
       public int Columns { get; set; }
       #endregion
 
@@ -81,14 +79,14 @@ namespace ComicsShelf.Helpers.Controls
             var ROWS = Math.Ceiling(ITEMS.Count / (float)this.Columns);
             this.RowDefinitions.Clear();
             for (var i = 0; i < ROWS; i++)
-            { this.RowDefinitions?.Add(new RowDefinition { Height = this.ItemHeight }); }
+            { this.RowDefinitions?.Add(new RowDefinition { }); }
 
             // ITEM
             for (var index = 0; index < ITEMS.Count; index++)
             {
                var columnIndex = index % this.Columns;
                var rowIndex = (int)Math.Floor(index / (float)this.Columns);
-               var itemTile = this.RefreshTiles_GetItemTile(ITEMS[index]);
+               var itemTile = this.RefreshTiles_GetItemTile(ITEMS[index]);              
                this.Children?.Add(itemTile, columnIndex, rowIndex);
             }
 
