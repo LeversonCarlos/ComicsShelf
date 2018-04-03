@@ -30,7 +30,7 @@ namespace ComicsShelf.Startup
                await startupEngine.DefineComicsPath();
                await startupEngine.SearchComicFiles();
                await startupEngine.ReviewFoldersData();
-               await Helpers.ViewModels.NavVM.PushAsync<Folder.FolderVM>(true, startupEngine.RootFolder);
+               await Helpers.ViewModels.NavVM.PushAsync<Folder.FolderVM>(true, App.RootFolder);
             }
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
@@ -40,7 +40,6 @@ namespace ComicsShelf.Startup
       #region Properties
       private Helpers.Settings.Settings Settings { get; set; }
       private Helpers.iFileSystem FileSystem { get; set; }
-      private Folder.FolderData RootFolder { get; set; }
       private StartupData Data { get; set; }
       #endregion
 
@@ -96,7 +95,7 @@ namespace ComicsShelf.Startup
          {
 
             // INITIALIZE
-            this.RootFolder = new Folder.FolderData { Text = "Root", RecentFiles = new Helpers.Observables.ObservableList<File.FileData>() };
+            App.RootFolder = new Folder.FolderData { Text = "Root", RecentFiles = new Helpers.Observables.ObservableList<File.FileData>() };
             this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
             this.Data.Details = string.Empty;
             this.Data.Progress = 0;
@@ -127,7 +126,7 @@ namespace ComicsShelf.Startup
                   // DATA
                   await Task.Run(() => this.SearchComicFiles_LoadData(comicFile));
                   await Task.Run(() => this.SearchComicFiles_LoadCover(comicFile));
-                  this.RootFolder.RecentFiles.Add(comicFile);
+                  App.RootFolder.RecentFiles.Add(comicFile);
 
                }
                catch (Exception fileException)
@@ -144,7 +143,7 @@ namespace ComicsShelf.Startup
          {
 
             // STARTS WITH THE ROOT FOLDER
-            Folder.FolderData fileFolder = this.RootFolder;
+            Folder.FolderData fileFolder = App.RootFolder;
 
             // SPLIT PATH
             var splitedPath = filePath
@@ -290,14 +289,14 @@ namespace ComicsShelf.Startup
             this.Notify();
 
             // RECENT FILES
-            var recentFiles = this.RootFolder.RecentFiles
+            var recentFiles = App.RootFolder.RecentFiles
                .Where(x => !string.IsNullOrEmpty(x.PersistentData.ReleaseDate))
                .OrderByDescending(x => x.PersistentData.ReleaseDate)
                .Take(5)
                .ToList();
 
             // LOCATE FIRST FOLDER WITH CONTENT
-            var initialFolder = this.RootFolder;
+            var initialFolder = App.RootFolder;
             while (true)
             {
                if (initialFolder.Folders.Count == 0) { break; }
@@ -305,27 +304,19 @@ namespace ComicsShelf.Startup
                else { initialFolder = initialFolder.Folders.FirstOrDefault(); }
             }
             initialFolder.Text = R.Strings.AppTitle;
-            this.RootFolder = initialFolder;
-            this.RootFolder.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>(recentFiles);
+            App.RootFolder = initialFolder;
+            App.RootFolder.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>(recentFiles);
 
             // COVERS FOR CHILDREN FOLDER 
-            var folderQuantity = this.RootFolder.Folders.Count;
+            var folderQuantity = App.RootFolder.Folders.Count;
             for (int folderIndex = 0; folderIndex < folderQuantity; folderIndex++)
             {
-               var folder = this.RootFolder.Folders[folderIndex];
+               var folder = App.RootFolder.Folders[folderIndex];
                this.Data.Progress = ((double)folderIndex / (double)folderQuantity);
                this.Data.Details = folder.Text;
                this.Notify();
                await this.ReviewFoldersData_Cover(folder);
             }
-
-            // CLOSE STARTUP PAGE
-            //var mainPage = Application.Current.MainPage as Page;
-            //var navigation = mainPage.Navigation;
-            //await navigation.PopModalAsync();
-
-            // OPEN INITIAL FOLDER
-            // await Helpers.ViewModels.NavVM.PushAsync<Folder.FolderVM>(true, this.RootFolder);
 
          }
          catch (Exception ex) { throw; }
@@ -380,7 +371,6 @@ namespace ComicsShelf.Startup
       #region Dispose
       public void Dispose()
       {
-         this.RootFolder = null;
          this.Data = null;
          this.FileSystem = null;
       }

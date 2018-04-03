@@ -48,6 +48,15 @@ namespace ComicsShelf
       }
       #endregion
 
+      #region RootFolder
+      private Folder.FolderData _RootFolder = null;
+      public static Folder.FolderData RootFolder
+      {
+         get { return ((App)Application.Current)._RootFolder; }
+         set { ((App)Application.Current)._RootFolder = value; }
+      }
+      #endregion
+
       protected override void OnStart ()
       { Startup.StartupEngine.Start(); }
 
