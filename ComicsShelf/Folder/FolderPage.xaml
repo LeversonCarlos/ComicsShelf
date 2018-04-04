@@ -18,17 +18,23 @@
                      <Setter Property="VerticalOptions" Value="Fill" />
                   </Style>
 
-                  <Style TargetType="StackLayout" >
+                  <Style TargetType="AbsoluteLayout">
                      <Setter Property="Margin" Value="6" />
+                  </Style>
+                  
+                  <Style TargetType="Grid">
+                     <Setter Property="BackgroundColor" Value="#9FA8DA" />
                      <Setter Property="Padding" Value="4" />
-                     <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                     <Setter Property="VerticalOptions" Value="Start" />
+                     <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
+                     <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
                   </Style>
 
-                  <Style TargetType="Image" x:Key="ImageFolder" >
-                     <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                     <Setter Property="VerticalOptions" Value="Start" />
-                     <Setter Property="Aspect" Value="AspectFill" />
+                  <Style TargetType="StackLayout" >
+                     <Setter Property="Margin" Value="0" />
+                     <Setter Property="Padding" Value="0" />
+                     <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                     <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
+                     <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
                   </Style>
 
                   <Style TargetType="Image" x:Key="ImageFile" >
@@ -37,9 +43,31 @@
                      <Setter Property="Aspect" Value="AspectFit" />
                   </Style>
 
-                  <Style TargetType="Label" x:Key="ItemTitle" >
+                  <Style TargetType="Image" x:Key="ImageFolder" >
+                     <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                     <Setter Property="VerticalOptions" Value="Start" />
+                     <Setter Property="Aspect" Value="AspectFill" />
+                  </Style>
+
+                  <Style TargetType="ProgressBar">
+                     <Setter Property="HorizontalOptions" Value="Fill" />
+                     <Setter Property="VerticalOptions" Value="Start" />
+                     <Setter Property="Opacity" Value="0.75" />
+                  </Style>
+
+                  <Style TargetType="ContentView">
+                     <Setter Property="Padding" Value="2" />
+                     <Setter Property="BackgroundColor" Value="#9FA8DA" />
+                     <Setter Property="Opacity" Value="0.85" />
+                     <Setter Property="HorizontalOptions" Value="Fill" />
+                     <Setter Property="VerticalOptions" Value="EndAndExpand" />
+                  </Style>
+
+                  <Style TargetType="Label" x:Key="ItemTitle">
+                     <Setter Property="TextColor" Value="#FFFFFF" />
                      <Setter Property="HorizontalOptions" Value="Center" />
                      <Setter Property="LineBreakMode" Value="TailTruncation" />
+                     <Setter Property="FontAttributes" Value="Bold" />
                   </Style>
 
                </ResourceDictionary>
@@ -52,13 +80,18 @@
                <controls:ListView.ItemTemplate>
                   <DataTemplate>
 
-                     <StackLayout BackgroundColor="#9FA8DA">
-                        <Image Source="{Binding CoverPath}" 
-                               Style="{StaticResource ImageFile}" 
-                               HeightRequest="200" />
-                        <ProgressBar Progress="{Binding ReadingPercent}" HorizontalOptions="Fill" />
-                        <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
-                     </StackLayout>
+                     <!-- <controls:CoverFile DataSource="{Binding .}" /> -->
+                     <AbsoluteLayout>
+                        <Grid HeightRequest="200">
+                           <Image Source="{Binding CoverPath}" Style="{StaticResource ImageFile}" />
+                        </Grid>
+                        <StackLayout>
+                           <ProgressBar Progress="{Binding ReadingPercent}" />
+                           <ContentView>
+                              <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
+                           </ContentView>
+                        </StackLayout>
+                     </AbsoluteLayout>
 
                   </DataTemplate>
                </controls:ListView.ItemTemplate>
@@ -70,13 +103,19 @@
                ItemsSource="{Binding Data.Folders}">
                <controls:ListView.ItemTemplate>
                   <DataTemplate>
-                     
-                     <StackLayout BackgroundColor="#E8EAF6">
-                        <Image Source="{Binding CoverPath}" 
-                               Style="{StaticResource ImageFolder}" 
-                               HeightRequest="150" />
-                        <Label Text="{Binding Text}" Style="{StaticResource ItemTitle}" />
-                     </StackLayout>
+
+                     <!-- <controls:CoverFolder DataSource="{Binding .}" />-->
+                     <AbsoluteLayout>
+                        <Grid HeightRequest="150">
+                           <Image Source="{Binding CoverPath}" Style="{StaticResource ImageFolder}" />
+                        </Grid>
+                        <StackLayout>
+                           <ProgressBar Progress="{Binding ReadingPercent}" />
+                           <ContentView>
+                              <Label Text="{Binding Text}" Style="{StaticResource ItemTitle}" />
+                           </ContentView>
+                        </StackLayout>
+                     </AbsoluteLayout>
 
                   </DataTemplate>
                </controls:ListView.ItemTemplate>
@@ -89,14 +128,18 @@
                <controls:ListView.ItemTemplate>
                   <DataTemplate>
 
-                     <StackLayout BackgroundColor="#9FA8DA">
-                        <Image Source="{Binding CoverPath}"
-                                        Style="{StaticResource ImageFile}" 
-                                        HeightRequest="200" />
-                        <ProgressBar Progress="{Binding ReadingPercent}" HorizontalOptions="Fill" />
-                        <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
-                     </StackLayout>
-
+                     <AbsoluteLayout>
+                        <Grid HeightRequest="200">
+                           <Image Source="{Binding CoverPath}" Style="{StaticResource ImageFile}" />
+                        </Grid>
+                        <StackLayout>
+                           <ProgressBar Progress="{Binding ReadingPercent}" />
+                           <ContentView>
+                              <Label Text="{Binding SmallText}" Style="{StaticResource ItemTitle}" />
+                           </ContentView>
+                        </StackLayout>
+                     </AbsoluteLayout>
+                     
                   </DataTemplate>
                </controls:ListView.ItemTemplate>
             </controls:ListView>
