@@ -1,9 +1,9 @@
 ﻿using SQLite;
 
-namespace ComicsShelf.Helpers.Settings
+namespace ComicsShelf.Database
 {
-   [Table("Comics")]
-   public class Comics : File.iFileData
+   [Table("ComicFiles")]
+   public class ComicFiles : File.iFileData
    {
 
       [PrimaryKey]

@@ -25,14 +25,20 @@ namespace ComicsShelf
       #endregion
 
       #region Settings
-      private static Helpers.Settings.Settings _Settings = null;
+      private Helpers.Settings.Settings _Settings = null;
       internal static Helpers.Settings.Settings Settings
       {
-         get
-         {
-            if (_Settings == null) { _Settings = new Helpers.Settings.Settings(); }
-            return _Settings;
-         }
+         get { return ((App)Application.Current)._Settings; }
+         set { ((App)Application.Current)._Settings = value; }
+      }
+      #endregion
+
+      #region Database
+      private Database.Connector _Database = null;
+      internal static Database.Connector Database
+      {
+         get { return ((App)Application.Current)._Database; }
+         set { ((App)Application.Current)._Database = value; }
       }
       #endregion
 

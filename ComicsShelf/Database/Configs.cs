@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace ComicsShelf.Helpers.Settings
+namespace ComicsShelf.Database
 {
    public class Configs
     {

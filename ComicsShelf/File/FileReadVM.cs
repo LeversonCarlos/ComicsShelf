@@ -18,8 +18,8 @@
       {
          try
          {
-            this.Data.ReadingDate = App.Settings.GetDatabaseDate();
-            App.Settings.Database.Update(this.Data.PersistentData);
+            this.Data.ReadingDate = App.Database.GetDate();
+            App.Database.Update(this.Data.PersistentData);
          }
          catch { }
       }

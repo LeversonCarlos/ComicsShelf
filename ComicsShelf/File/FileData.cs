@@ -51,8 +51,8 @@
 
       #region PersistentData
       bool PersistentDataLoading;
-      Helpers.Settings.Comics _PersistentData;
-      public Helpers.Settings.Comics PersistentData
+      Database.ComicFiles _PersistentData;
+      public Database.ComicFiles PersistentData
       {
          get { return this._PersistentData; }
          set
@@ -81,10 +81,10 @@
             this.SetProperty(ref this._Readed, value);
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.Readed = value;
-            this.ReadingDate = (value ? App.Settings.GetDatabaseDate() : null);
+            this.ReadingDate = (value ? App.Database.GetDate() : null);
             this.ReadingPercent = (short)(value ? 100 : 0);
             this.ReadingPage = (short)0;
-            App.Settings.Database.Update(this.PersistentData);
+            App.Database.Update(this.PersistentData);
          }
       }
       #endregion
@@ -99,7 +99,7 @@
             this.SetProperty(ref this._ReadingDate, value);
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.ReadingDate = value;
-            App.Settings.Database.Update(this.PersistentData);
+            App.Database.Update(this.PersistentData);
          }
       }
       #endregion
@@ -114,7 +114,7 @@
             this.SetProperty(ref this._ReadingPercent, value);
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.ReadingPercent = value;
-            App.Settings.Database.Update(this.PersistentData);
+            App.Database.Update(this.PersistentData);
          }
       }
       #endregion
@@ -129,7 +129,7 @@
             this.SetProperty(ref this._ReadingPage, value);
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.ReadingPage = value;
-            App.Settings.Database.Update(this.PersistentData);
+            App.Database.Update(this.PersistentData);
          }
       }
       #endregion
@@ -145,7 +145,7 @@
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.Rate = null;
             if (value != enumFileRate.None) { this.PersistentData.Rate = (short)value; }
-            App.Settings.Database.Update(this.PersistentData);
+            App.Database.Update(this.PersistentData);
          }
       }
       #endregion

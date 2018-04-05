@@ -52,7 +52,6 @@ namespace ComicsShelf.Startup
          {
             using (var startupEngine = new StartupEngine())
             {
-               startupEngine.Settings = App.Settings;
                await startupEngine.SearchComicFiles();
                await startupEngine.ReviewComicsData();
                await startupEngine.AnalyseStatistics();
@@ -69,7 +68,6 @@ namespace ComicsShelf.Startup
          {
             using (var startupEngine = new StartupEngine())
             {
-               startupEngine.Settings = App.Settings;
                await startupEngine.AnalyseStatistics();
             }
          }
@@ -78,7 +76,6 @@ namespace ComicsShelf.Startup
       #endregion
 
       #region Properties
-      private Helpers.Settings.Settings Settings { get; set; }
       private Helpers.iFileSystem FileSystem { get; set; }
       private StartupData Data { get; set; }
       #endregion
@@ -92,8 +89,11 @@ namespace ComicsShelf.Startup
             this.Data.Text = R.Strings.STARTUP_LOADING_SETTINGS_MESSAGE;
             this.Notify();
 
-            await App.Settings.Initialize();
-            this.Settings = App.Settings;
+            App.Settings = new Helpers.Settings.Settings();
+            await App.Settings.InitializePath();
+
+            App.Database = new Database.Connector();
+            App.Database.InitializeConnector(App.Settings.Paths.DatabasePath);
          }
          catch (Exception ex) { throw; }
       }
@@ -108,20 +108,20 @@ namespace ComicsShelf.Startup
             this.Notify();
 
             /* LOAD CONFIGS DATA */
-            var configsTable = this.Settings.Database.Table<Helpers.Settings.Configs>();
+            var configsTable = App.Database.Table<Database.Configs>();
             var configs = configsTable.FirstOrDefault();
             if (configs == null)
             {
-               configs = new Helpers.Settings.Configs();
-               this.Settings.Database.Insert(configs);
+               configs = new Database.Configs();
+               App.Database.Insert(configs);
             }
 
             /* VALIDATE COMICS PATH */
             configs.ComicsPath = await this.FileSystem.GetComicsPath(configs.ComicsPath);
 
             /* STORE DATA */
-            this.Settings.Database.Update(configs);
-            this.Settings.Paths.ComicsPath = configs.ComicsPath;
+            App.Database.Update(configs);
+            App.Settings.Paths.ComicsPath = configs.ComicsPath;
 
          }
          catch (Exception ex) { throw; }
@@ -143,7 +143,7 @@ namespace ComicsShelf.Startup
 
 
             // LOCATE COMICS LIST
-            var fileList = await this.FileSystem.GetFiles(this.Settings.Paths.ComicsPath);
+            var fileList = await this.FileSystem.GetFiles(App.Settings.Paths.ComicsPath);
             // fileList = fileList.Take(10).ToArray();
 
             // REMOVE FILES ALREADY LOADED
@@ -205,7 +205,7 @@ namespace ComicsShelf.Startup
 
             // SPLIT PATH
             var splitedPath = filePath
-               .Split(new string[] { this.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
+               .Split(new string[] { App.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
             // LOOP THROUGH SPLITED PATH PARTS [except last one, that is the file itself]
             for (int splitIndex = 0; splitIndex < (splitedPath.Length - 1); splitIndex++)
@@ -242,7 +242,7 @@ namespace ComicsShelf.Startup
 
             // SPLIT PATH
             var splitedPath = filePath
-               .Split(new string[] { this.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
+               .Split(new string[] { App.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
             // INITIALIZE
             var comicFile = new File.FileData { FullPath = filePath };
@@ -265,10 +265,10 @@ namespace ComicsShelf.Startup
                .Replace(".cbz", ".jpg")
                .Replace(".cbr", ".jpg");
             coverPath = coverPath
-               .Replace(this.Settings.Paths.Separator, "_")
+               .Replace(App.Settings.Paths.Separator, "_")
                .Replace(" ", "_")
                .Replace("#", "_");
-            comicFile.CoverPath = $"{this.Settings.Paths.CoversPath}{this.Settings.Paths.Separator}{coverPath}";
+            comicFile.CoverPath = $"{App.Settings.Paths.CoversPath}{App.Settings.Paths.Separator}{coverPath}";
 
             // RESULT
             return comicFile;
@@ -283,14 +283,14 @@ namespace ComicsShelf.Startup
          {
 
             // DATA
-            var comicData = this.Settings.Database
-               .Table<Helpers.Settings.Comics>()
+            var comicData = App.Database
+               .Table<Database.ComicFiles>()
                .Where(x => x.FullPath == file.FullPath)
                .FirstOrDefault();
             if (comicData == null)
             {
-               comicData = new Helpers.Settings.Comics { FullPath = file.FullPath };
-               this.Settings.Database.Insert(comicData);
+               comicData = new Database.ComicFiles { FullPath = file.FullPath };
+               App.Database.Insert(comicData);
             }
             file.PersistentData = comicData;
 
@@ -308,7 +308,7 @@ namespace ComicsShelf.Startup
             if (file.FullPath.ToLower().EndsWith(".cbr")) { return; }
 
             // OPEN ZIP ARCHIVE
-            using (var zipArchive = await this.FileSystem.GetZipArchive(this.Settings, file))
+            using (var zipArchive = await this.FileSystem.GetZipArchive(App.Settings, file))
             {
 
                // LOOP THROUGH ENTIES LOOKING FOR THE FIRST IMAGE
@@ -321,8 +321,8 @@ namespace ComicsShelf.Startup
                {
                   if (file.PersistentData != null && string.IsNullOrEmpty(file.PersistentData.ReleaseDate))
                   {
-                     file.PersistentData.ReleaseDate = this.Settings.GetDatabaseDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
-                     this.Settings.Database.Update(file.PersistentData);
+                     file.PersistentData.ReleaseDate = App.Database.GetDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
+                     App.Database.Update(file.PersistentData);
                   }
                   await this.FileSystem.Thumbnail(zipStream, file.CoverPath);
                }
