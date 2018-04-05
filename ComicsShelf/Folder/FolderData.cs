@@ -29,6 +29,16 @@
       }
       #endregion
 
+      #region PersistentData
+      Database.ComicFolders _PersistentData;
+      public Database.ComicFolders PersistentData
+      {
+         get { return this._PersistentData; }
+         set
+         { this.SetProperty(ref this._PersistentData, value); }
+      }
+      #endregion     
+
 
       #region Folders
 
