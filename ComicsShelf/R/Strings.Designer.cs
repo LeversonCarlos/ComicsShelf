@@ -187,11 +187,11 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reviewing Folders Data.
+        ///   Looks up a localized string similar to Reviewing Comics Data.
         /// </summary>
-        internal static string STARTUP_REVIEWING_FOLDERS_DATA_MESSAGE {
+        internal static string STARTUP_REVIEWING_COMICS_DATA_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_REVIEWING_FOLDERS_DATA_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("STARTUP_REVIEWING_COMICS_DATA_MESSAGE", resourceCulture);
             }
         }
         

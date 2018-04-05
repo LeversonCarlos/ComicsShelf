@@ -108,6 +108,12 @@
                </controls:ListView.ItemTemplate>
             </controls:ListView>
 
+            <StackLayout HorizontalOptions="FillAndExpand" IsVisible="{Binding RefreshData.IsRunning}" >
+               <Label Text="{Binding RefreshData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"></Label>
+               <ProgressBar Progress="{Binding RefreshData.Progress}" HorizontalOptions="FillAndExpand"></ProgressBar>
+               <Label Text="{Binding RefreshData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
+            </StackLayout>
+
          </StackLayout>
       </ScrollView>
    </controls:Page.Content>

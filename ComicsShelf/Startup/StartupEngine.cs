@@ -11,8 +11,12 @@ namespace ComicsShelf.Startup
       #region New
       public StartupEngine()
       {
-         this.Data = new StartupData();
          this.FileSystem = Helpers.FileSystem.Get();
+         this.Data = new StartupData();
+         this.Data.Step = StartupData.enumStartupStep.Running;
+         this.Data.Text = string.Empty;
+         this.Data.Details = string.Empty;
+         this.Notify();
       }
       #endregion
 
@@ -25,23 +29,60 @@ namespace ComicsShelf.Startup
          {
             using (var startupEngine = new StartupEngine())
             {
+               App.RootFolder = new Home.HomeData { Text = "Root" };
+
                await Helpers.ViewModels.NavVM.PushAsync<StartupVM>(true);
                await startupEngine.LoadSettings();
                await startupEngine.DefineComicsPath();
                await startupEngine.SearchComicFiles();
-               await startupEngine.ReviewFoldersData();
+
                await Helpers.ViewModels.NavVM.PushAsync<Home.HomeVM>(true, App.RootFolder);
+               await startupEngine.ReviewComicsData();
+               await startupEngine.AnalyseStatistics();
             }
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
-      #endregion     
+      #endregion
+
+      #region Search
+      public static async void Search()
+      {
+         try
+         {
+            using (var startupEngine = new StartupEngine())
+            {
+               startupEngine.Settings = App.Settings;
+               await startupEngine.SearchComicFiles();
+               await startupEngine.ReviewComicsData();
+               await startupEngine.AnalyseStatistics();
+            }
+         }
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+      }
+      #endregion
+
+      #region Refresh
+      public static async void Refresh()
+      {
+         try
+         {
+            using (var startupEngine = new StartupEngine())
+            {
+               startupEngine.Settings = App.Settings;
+               await startupEngine.AnalyseStatistics();
+            }
+         }
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+      }
+      #endregion
 
       #region Properties
       private Helpers.Settings.Settings Settings { get; set; }
       private Helpers.iFileSystem FileSystem { get; set; }
       private StartupData Data { get; set; }
       #endregion
+
 
       #region LoadSettings
       private async Task LoadSettings()
@@ -95,7 +136,6 @@ namespace ComicsShelf.Startup
          {
 
             // INITIALIZE
-            App.RootFolder = new Home.HomeData { Text = "Root" };
             this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
             this.Data.Details = string.Empty;
             this.Data.Progress = 0;
@@ -105,9 +145,15 @@ namespace ComicsShelf.Startup
             // LOCATE COMICS LIST
             var fileList = await this.FileSystem.GetFiles(this.Settings.Paths.ComicsPath);
             // fileList = fileList.Take(10).ToArray();
-            var fileQuantity = fileList.Length;
+
+            // REMOVE FILES ALREADY LOADED
+            var fileCurrentList = App.RootFolder.Files.Select(x => x.FullPath).ToList();
+            if (fileCurrentList != null && fileCurrentList.Count != 0) {
+               fileList = fileList.Where(x => !fileCurrentList.Contains(x)).ToArray();
+            }
 
             // LOOP THROUGH FILE LIST
+            var fileQuantity = fileList.Length;
             for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
             {
                string filePath = "";
@@ -125,14 +171,25 @@ namespace ComicsShelf.Startup
                   comicFolder.HasFiles = true;
 
                   // DATA
-                  await Task.Run(() => this.SearchComicFiles_LoadData(comicFile));
-                  await Task.Run(() => this.SearchComicFiles_LoadCover(comicFile));
-                  App.RootFolder.RecentFiles.Add(comicFile);
+                  // await Task.Run(() => this.SearchComicFiles_LoadData(comicFile));
+                  // await Task.Run(() => this.SearchComicFiles_LoadCover(comicFile));
+                  App.RootFolder.Files.Add(comicFile);
 
                }
                catch (Exception fileException)
                { if (!await App.Message.Confirm($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
             }
+
+            // LOCATE FIRST FOLDER WITH CONTENT
+            var initialFolders = App.RootFolder.Folders;
+            while (true)
+            {
+               if (initialFolders.Count == 0) { break; }
+               else if (initialFolders.Count > 1) { break; }
+               else { initialFolders = initialFolders.FirstOrDefault().Folders; }
+            }
+            App.RootFolder.Folders = initialFolders;
+            App.RootFolder.Text = R.Strings.AppTitle;
 
          }
          catch (Exception ex) { throw; }
@@ -277,54 +334,30 @@ namespace ComicsShelf.Startup
 
       #endregion
 
-      #region ReviewFoldersData
+      #region ReviewComicsData
 
-      private async Task ReviewFoldersData()
+      private async Task ReviewComicsData()
       {
          try
          {
 
             // INITIALIZE
-            this.Data.Text = R.Strings.STARTUP_REVIEWING_FOLDERS_DATA_MESSAGE;
+            this.Data.Text = R.Strings.STARTUP_REVIEWING_COMICS_DATA_MESSAGE;
             this.Data.Details = string.Empty;
             this.Data.Progress = 0;
             this.Notify();
 
-            // RECENT FILES
-            var recentFiles = App.RootFolder.RecentFiles
-               .Where(x => !string.IsNullOrEmpty(x.PersistentData.ReleaseDate))
-               .OrderByDescending(x => x.PersistentData.ReleaseDate)
-               .Take(5)
-               .ToList();
-
-            // READING FILES
-            var readingFiles = App.RootFolder.RecentFiles
-               .Where(x => x.PersistentData.ReadingPercent > 0 && x.PersistentData.ReadingPercent < 100)
-               .OrderByDescending(x => x.PersistentData.ReadingDate)
-               .Take(5)
-               .ToList();
-
-            // READING FILES
-            var topRatedFiles = App.RootFolder.RecentFiles
-               .Where(x => x.PersistentData.Rate.HasValue)
-               .OrderByDescending(x => x.PersistentData.Rate.Value)
-               .ThenByDescending(x => x.PersistentData.ReleaseDate)
-               .Take(5)
-               .ToList();
-
-            // LOCATE FIRST FOLDER WITH CONTENT
-            var initialFolders = App.RootFolder.Folders;
-            while (true)
+            // LOOP THROUGH FILES
+            var filesQuantity = App.RootFolder.Files.Count;
+            for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
             {
-               if (initialFolders.Count == 0) { break; }
-               else if (initialFolders.Count > 1) { break; }
-               else { initialFolders = initialFolders.FirstOrDefault().Folders; }
+               var file = App.RootFolder.Files[fileIndex];
+               this.Data.Progress = ((double)fileIndex / (double)filesQuantity);
+               this.Data.Details = file.Text;
+               this.Notify();
+               await Task.Run(() => this.SearchComicFiles_LoadData(file));
+               await Task.Run(() => this.SearchComicFiles_LoadCover(file));
             }
-            App.RootFolder.Folders = initialFolders;
-            App.RootFolder.Text = R.Strings.AppTitle;
-            App.RootFolder.RecentFiles.ReplaceRange(recentFiles);
-            readingFiles.ForEach(x => App.RootFolder.ReadingFiles.Add(x));
-            topRatedFiles.ForEach(x => App.RootFolder.TopRatedFiles.Add(x));
 
             // COVERS FOR CHILDREN FOLDER 
             var folderQuantity = App.RootFolder.Folders.Count;
@@ -334,14 +367,14 @@ namespace ComicsShelf.Startup
                this.Data.Progress = ((double)folderIndex / (double)folderQuantity);
                this.Data.Details = folder.Text;
                this.Notify();
-               await this.ReviewFoldersData_Cover(folder);
+               await this.ReviewComicsData_Cover(folder);
             }
 
          }
          catch (Exception ex) { throw; }
       }
 
-      private async Task ReviewFoldersData_Cover(Folder.FolderData folder)
+      private async Task ReviewComicsData_Cover(Folder.FolderData folder)
       {
          try
          {
@@ -365,7 +398,7 @@ namespace ComicsShelf.Startup
 
                /* ANALYSE CHILD FOLDERS META DATA */
                foreach (var childFolder in folder.Folders)
-               { await this.ReviewFoldersData_Cover(childFolder); }
+               { await this.ReviewComicsData_Cover(childFolder); }
 
                /* SELF COVER */
                folder.CoverPath = folder.Folders
@@ -379,7 +412,43 @@ namespace ComicsShelf.Startup
          catch (Exception ex) { throw; }
       }
 
-      #endregion      
+      #endregion
+
+      #region AnalyseStatistics
+      private async Task AnalyseStatistics()
+      {
+         try
+         {
+
+            // RECENT FILES
+            var recentFiles = App.RootFolder.Files
+               .Where(x => !string.IsNullOrEmpty(x.PersistentData.ReleaseDate))
+               .OrderByDescending(x => x.PersistentData.ReleaseDate)
+               .Take(5)
+               .ToList();
+            App.RootFolder.RecentFiles.ReplaceRange(recentFiles);
+
+            // READING FILES
+            var readingFiles = App.RootFolder.Files
+               .Where(x => x.PersistentData.ReadingPercent > 0 && x.PersistentData.ReadingPercent < 100)
+               .OrderByDescending(x => x.PersistentData.ReadingDate)
+               .Take(5)
+               .ToList();
+            App.RootFolder.ReadingFiles.ReplaceRange(readingFiles);
+
+            // TOP RATED FILES
+            var topRatedFiles = App.RootFolder.Files
+               .Where(x => x.PersistentData.Rate.HasValue)
+               .OrderByDescending(x => x.PersistentData.Rate.Value)
+               .ThenByDescending(x => x.PersistentData.ReleaseDate)
+               .Take(5)
+               .ToList();
+            App.RootFolder.TopRatedFiles.ReplaceRange(topRatedFiles);
+
+         }
+         catch (Exception ex) { throw; }
+      }
+      #endregion
 
       #region Notify
       private void Notify()
@@ -390,6 +459,11 @@ namespace ComicsShelf.Startup
       #region Dispose
       public void Dispose()
       {
+         this.Data.Step = StartupData.enumStartupStep.Finished;
+         this.Data.Text = string.Empty;
+         this.Data.Details = string.Empty;
+         this.Notify();
+
          this.Data = null;
          this.FileSystem = null;
       }

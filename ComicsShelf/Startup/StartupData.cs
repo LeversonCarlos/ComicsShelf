@@ -30,5 +30,25 @@
       }
       #endregion
 
+
+      #region Step
+      enumStartupStep _Step = enumStartupStep.None;
+      public enumStartupStep Step
+      {
+         get { return this._Step; }
+         set { this.SetProperty(ref this._Step, value); this.IsRunning = (value == enumStartupStep.Running); }
+      }
+      public enum enumStartupStep : short { None, Running, Finished }
+      #endregion
+
+      #region IsRunning
+      bool _IsRunning = false;
+      public bool IsRunning
+      {
+         get { return this._IsRunning; }
+         set { this.SetProperty(ref this._IsRunning, value); }
+      }
+      #endregion
+
    }
 }
