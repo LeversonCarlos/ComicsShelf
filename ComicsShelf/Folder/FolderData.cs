@@ -29,10 +29,41 @@
       }
       #endregion
 
-      #region Children
+
+      #region Folders
+
       public Helpers.Observables.ObservableList<Folder.FolderData> Folders { get; set; }
+
+      bool _HasFolders;
+      public bool HasFolders
+      {
+         get { return this._HasFolders; }
+         set { this.SetProperty(ref this._HasFolders, value); }
+      }
+
+      private void Folders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+      {
+         this.HasFolders = this.Folders.Count != 0;
+      }
+
+      #endregion
+
+      #region Files
+
       public Helpers.Observables.ObservableList<File.FileData> Files { get; set; }
-      public Helpers.Observables.ObservableList<File.FileData> RecentFiles { get; set; }
+
+      bool _HasFiles;
+      public bool HasFiles
+      {
+         get { return this._HasFiles; }
+         set { this.SetProperty(ref this._HasFiles, value); }
+      }
+
+      private void Files_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+      {
+         this.HasFiles = this.Files.Count != 0;
+      }
+
       #endregion
 
    }

@@ -49,8 +49,8 @@ namespace ComicsShelf
       #endregion
 
       #region RootFolder
-      private Folder.FolderData _RootFolder = null;
-      public static Folder.FolderData RootFolder
+      private Home.HomeData _RootFolder = null;
+      public static Home.HomeData RootFolder
       {
          get { return ((App)Application.Current)._RootFolder; }
          set { ((App)Application.Current)._RootFolder = value; }

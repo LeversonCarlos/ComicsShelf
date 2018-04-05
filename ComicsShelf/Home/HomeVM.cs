@@ -2,16 +2,16 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Folder
+namespace ComicsShelf.Home
 {
-   public class FolderVM : Helpers.ViewModels.DataVM<FolderData>
+   public class HomeVM : Helpers.ViewModels.DataVM<HomeData>
    {
 
       #region New
-      public FolderVM(FolderData args)
+      public HomeVM(HomeData args)
       {
          this.Title = args.Text;
-         this.ViewType = typeof(FolderPage);
+         this.ViewType = typeof(HomePage);
 
          this.Data = args;
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
@@ -25,8 +25,8 @@ namespace ComicsShelf.Folder
       {
          try
          {
-            var folderItem = (FolderData)item;
-            await PushAsync<FolderVM>(folderItem);
+            var folderItem = (Folder.FolderData)item;
+            await PushAsync<Folder.FolderVM>(folderItem);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }

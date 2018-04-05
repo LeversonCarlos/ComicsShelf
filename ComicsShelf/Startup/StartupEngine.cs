@@ -30,7 +30,7 @@ namespace ComicsShelf.Startup
                await startupEngine.DefineComicsPath();
                await startupEngine.SearchComicFiles();
                await startupEngine.ReviewFoldersData();
-               await Helpers.ViewModels.NavVM.PushAsync<Folder.FolderVM>(true, App.RootFolder);
+               await Helpers.ViewModels.NavVM.PushAsync<Home.HomeVM>(true, App.RootFolder);
             }
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
@@ -95,7 +95,7 @@ namespace ComicsShelf.Startup
          {
 
             // INITIALIZE
-            App.RootFolder = new Folder.FolderData { Text = "Root", RecentFiles = new Helpers.Observables.ObservableList<File.FileData>() };
+            App.RootFolder = new Home.HomeData { Text = "Root" };
             this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
             this.Data.Details = string.Empty;
             this.Data.Progress = 0;
@@ -122,6 +122,7 @@ namespace ComicsShelf.Startup
                   var comicFolder = this.SearchComicFiles_GetFolder(filePath);
                   var comicFile = this.SearchComicFiles_GetFile(filePath);
                   comicFolder.Files.Add(comicFile);
+                  comicFolder.HasFiles = true;
 
                   // DATA
                   await Task.Run(() => this.SearchComicFiles_LoadData(comicFile));
@@ -164,6 +165,7 @@ namespace ComicsShelf.Startup
                {
                   folder = new Folder.FolderData { Text = folderText };
                   fileFolder.Folders.Add(folder);
+                  fileFolder.HasFolders = true;
                }
 
                fileFolder = folder;
@@ -295,17 +297,34 @@ namespace ComicsShelf.Startup
                .Take(5)
                .ToList();
 
+            // READING FILES
+            var readingFiles = App.RootFolder.RecentFiles
+               .Where(x => x.PersistentData.ReadingPercent > 0 && x.PersistentData.ReadingPercent < 100)
+               .OrderByDescending(x => x.PersistentData.ReadingDate)
+               .Take(5)
+               .ToList();
+
+            // READING FILES
+            var topRatedFiles = App.RootFolder.RecentFiles
+               .Where(x => x.PersistentData.Rate.HasValue)
+               .OrderByDescending(x => x.PersistentData.Rate.Value)
+               .ThenByDescending(x => x.PersistentData.ReleaseDate)
+               .Take(5)
+               .ToList();
+
             // LOCATE FIRST FOLDER WITH CONTENT
-            var initialFolder = App.RootFolder;
+            var initialFolders = App.RootFolder.Folders;
             while (true)
             {
-               if (initialFolder.Folders.Count == 0) { break; }
-               else if (initialFolder.Folders.Count > 1) { break; }
-               else { initialFolder = initialFolder.Folders.FirstOrDefault(); }
+               if (initialFolders.Count == 0) { break; }
+               else if (initialFolders.Count > 1) { break; }
+               else { initialFolders = initialFolders.FirstOrDefault().Folders; }
             }
-            initialFolder.Text = R.Strings.AppTitle;
-            App.RootFolder = initialFolder;
-            App.RootFolder.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>(recentFiles);
+            App.RootFolder.Folders = initialFolders;
+            App.RootFolder.Text = R.Strings.AppTitle;
+            App.RootFolder.RecentFiles.ReplaceRange(recentFiles);
+            readingFiles.ForEach(x => App.RootFolder.ReadingFiles.Add(x));
+            topRatedFiles.ForEach(x => App.RootFolder.TopRatedFiles.Add(x));
 
             // COVERS FOR CHILDREN FOLDER 
             var folderQuantity = App.RootFolder.Folders.Count;
