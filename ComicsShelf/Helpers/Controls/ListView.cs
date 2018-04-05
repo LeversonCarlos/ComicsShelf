@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -42,13 +43,20 @@ namespace ComicsShelf.Helpers.Controls
       {
          try
          {
-            var VIEW = (ListView)bindable;
-            var ITEMS = ((IEnumerable<object>)newValue).ToList();
-            VIEW.RefreshTiles(ITEMS);
+            var VIEW = bindable as ListView;
+            var VALUES = newValue as INotifyCollectionChanged;
+            if (VALUES != null)
+            {
+               VIEW.RefreshTiles();
+               VALUES.CollectionChanged += 
+                  (object sender, NotifyCollectionChangedEventArgs e) => 
+                  { VIEW.RefreshTiles(); };
+            }
+            
          }
          catch { }
       }
-      #endregion     
+      #endregion
 
       #region ItemTappedCommand
 
@@ -66,13 +74,14 @@ namespace ComicsShelf.Helpers.Controls
 
       #region RefreshTiles
 
-      private void RefreshTiles(List<object> ITEMS)
+      private void RefreshTiles()
       {
          try
          {
 
             // INITIALIZE
-            if (ITEMS == null || ITEMS.Count == 0) { this.Children?.Clear(); }
+            var ITEMS = ((IEnumerable<object>)this.ItemsSource).ToList();
+            if (ITEMS == null || ITEMS.Count == 0) { this.Children?.Clear(); return; }
             this.RowDefinitions?.Clear();
 
             // ROWS
