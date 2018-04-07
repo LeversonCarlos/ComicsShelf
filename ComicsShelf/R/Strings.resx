@@ -159,6 +159,12 @@
   <data name="STARTUP_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
     <value>Loading Settings</value>
   </data>
+  <data name="STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
+    <value>Preparing the files structure</value>
+  </data>
+  <data name="STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
+    <value>Preparing the folders structure</value>
+  </data>
   <data name="STARTUP_REVIEWING_COMICS_DATA_MESSAGE" xml:space="preserve">
     <value>Reviewing Comics Data</value>
   </data>

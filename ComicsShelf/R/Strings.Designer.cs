@@ -187,6 +187,24 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preparing the files structure.
+        /// </summary>
+        internal static string STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing the folders structure.
+        /// </summary>
+        internal static string STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reviewing Comics Data.
         /// </summary>
         internal static string STARTUP_REVIEWING_COMICS_DATA_MESSAGE {

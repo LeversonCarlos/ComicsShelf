@@ -80,6 +80,7 @@ namespace ComicsShelf.Startup
       private Helpers.iFileSystem FileSystem { get; set; }
       private List<Database.ComicFiles> ComicFiles { get; set; }
       private List<Database.ComicFolders> ComicFolders { get; set; }
+      private Dictionary<string, Folder.FolderData> ComicFoldersDictionary { get; set; }
       private StartupData Data { get; set; }
       #endregion
 
@@ -144,52 +145,25 @@ namespace ComicsShelf.Startup
             this.Data.Progress = 0;
             this.Notify();
 
-
-            // LOCATE COMICS LIST
-            var fileList = await this.FileSystem.GetFiles(App.Settings.Paths.ComicsPath);
-            // fileList = fileList.Take(10).ToArray();
-
             // LOAD DATABASE DATA
-            this.ComicFolders = App.Database.Table<Database.ComicFolders>().ToList();
             this.ComicFiles = App.Database.Table<Database.ComicFiles>().ToList();
+            this.ComicFolders = App.Database.Table<Database.ComicFolders>().ToList();
+            this.ComicFoldersDictionary = new Dictionary<string, Folder.FolderData>();
 
-            // REMOVE FILES ALREADY LOADED
-            /*
-            var comicFilesCurrentList = this.ComicFiles.Select(x => x.FullPath).ToList();
-            if (comicFilesCurrentList != null && comicFilesCurrentList.Count != 0) {
-               fileList = fileList.Where(x => !comicFilesCurrentList.Contains(x)).ToArray();
-            }
-            */
+            // SEARCH NEW COMIC FILES
+            await this.SearchComicFiles_SearchNewComicFiles();
+            this.ComicFiles = this.ComicFiles
+               .OrderBy(x => x.FullPath)
+               .ToList();
+            this.ComicFolders = this.ComicFolders
+               .OrderBy(x => x.FullPath)
+               .ToList();
 
-            // LOOP THROUGH FILE LIST
-            var fileQuantity = fileList.Length;
-            for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
-            {
-               string filePath = "";
-               try
-               {
-                  filePath = fileList[fileIndex];
-                  this.Data.Progress = ((double)fileIndex / (double)fileQuantity);
-                  this.Data.Details = filePath;
-                  this.Notify();
+            // PREPARE FOLDER STRUCTURE
+            await this.SearchComicFiles_PrepareFoldersStructure();
 
-                  /* LOAD COMIC */
-                  File.FileData comicFile = null;
-                  Folder.FolderData comicFolder = null;
-                  await Task.Run(() => comicFile = this.SearchComicFiles_GetFile(filePath));
-                  await Task.Run(() => comicFolder = this.SearchComicFiles_GetFolder(comicFile));
-                  comicFolder.Files.Add(comicFile);
-                  comicFolder.HasFiles = true;
-
-                  // DATA
-                  // await Task.Run(() => this.SearchComicFiles_LoadData(comicFile));
-                  // await Task.Run(() => this.SearchComicFiles_LoadCover(comicFile));
-                  App.RootFolder.Files.Add(comicFile);
-
-               }
-               catch (Exception fileException)
-               { if (!await App.Message.Confirm($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
-            }
+            // PREPARE FILE STRUCTURE
+            await this.SearchComicFiles_PrepareFilesStructure();
 
             // LOCATE FIRST FOLDER WITH CONTENT
             if (App.RootFolder.Folders.Count == 1) {
@@ -208,162 +182,249 @@ namespace ComicsShelf.Startup
          catch (Exception ex) { throw; }
       }
 
-      private Folder.FolderData SearchComicFiles_GetFolder(File.FileData comicFile)
-      {
-         try
-         {
-
-            // STARTS WITH THE ROOT FOLDER
-            Folder.FolderData fileFolder = App.RootFolder;
-            var splitedPath = comicFile.FullPath
-               .Split(new string[] { App.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
-
-            // LOOP THROUGH SPLITED PATH PARTS [except last one, that is the file itself]
-            var parentPath = "";
-            for (int splitIndex = 0; splitIndex < (splitedPath.Length - 1); splitIndex++)
-            {
-               var folderText = splitedPath[splitIndex];
-               var folderPath = $"{parentPath}{(string.IsNullOrEmpty(parentPath) ?  "": App.Settings.Paths.Separator)}{folderText}";
-
-               // TRY TO LOCATE A CHILD FOLDER 
-               var folder = fileFolder.Folders
-                  .Where(x => x.Text == folderText)
-                  .FirstOrDefault();
-
-               //IF HADNT FOUND, ADD A NEW ONE
-               if (folder == null)
-               {
-                  folder = new Folder.FolderData { Text = folderText };
-                  fileFolder.Folders.Add(folder);
-                  fileFolder.HasFolders = true;
-               }
-               fileFolder = folder;
-
-               // FOLDER DATA
-               if (fileFolder.PersistentData == null)
-               {
-                  try
-                  {
-                     fileFolder.PersistentData = this.ComicFolders
-                        .Where(x => x.FullPath == folderPath)
-                        .ToList()
-                        .FirstOrDefault();
-                  }
-                  catch { }
-                  if (fileFolder.PersistentData == null)
-                  {
-                     fileFolder.PersistentData = new Database.ComicFolders
-                     {
-                        FullPath = folderPath,
-                        ParentPath = parentPath,
-                        CoverPath = comicFile.CoverPath
-                     };
-                     App.Database.Insert(fileFolder.PersistentData);
-                  }
-                  fileFolder.CoverPath = fileFolder.PersistentData.CoverPath;
-               }
-               if (!string.IsNullOrEmpty(parentPath))
-               { parentPath += App.Settings.Paths.Separator; }
-               parentPath += folderText;
-
-            }
-
-            // RESULT
-            return fileFolder;
-
-         }
-         catch (Exception ex) { throw; }
-      }
-
-      private File.FileData SearchComicFiles_GetFile(string filePath)
+      private async Task SearchComicFiles_SearchNewComicFiles()
       {
          try
          {
 
             // INITIALIZE
-            var comicFile = new File.FileData { FullPath = filePath };
-            var splitedPath = filePath
-               .Split(new string[] { App.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
+            this.Data.Text = R.Strings.STARTUP_SEARCHING_COMIC_FILES_MESSAGE;
+            this.Data.Details = string.Empty;
+            this.Data.Progress = 0;
+            this.Notify();
 
-            // COMIC DATA
-            try
+            // LOCATE COMICS LIST
+            var fileList = await this.FileSystem.GetFiles(App.Settings.Paths.ComicsPath);
+            // fileList = fileList.Take(10).ToArray();
+
+            // REMOVE FILES ALREADY LOADED
+            var comicFilesCurrentList = this.ComicFiles.Select(x => x.FullPath).ToList();
+            if (comicFilesCurrentList != null && comicFilesCurrentList.Count != 0)
             {
-               comicFile.PersistentData = this.ComicFiles
-                  .Where(x => x.FullPath == filePath)
-                  .ToList()
-                  .FirstOrDefault();
+               fileList = fileList.Where(x => !comicFilesCurrentList.Contains(x)).ToArray();
             }
-            catch { }
-            if (comicFile.PersistentData == null)
+
+            // LOOP THROUGH FILE LIST
+            var fileQuantity = fileList.Length;
+            for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
             {
-               comicFile.PersistentData = new Database.ComicFiles { FullPath = comicFile.FullPath };
-               App.Database.Insert(comicFile.PersistentData);
+               string filePath = "";
+               try
+               {
+                  filePath = fileList[fileIndex];
+                  this.Data.Progress = ((double)fileIndex / (double)fileQuantity);
+                  this.Data.Details = filePath;
+                  this.Notify();
+
+                  var comicFile = await Task.Run(() => this.SearchComicFiles_SearchNewComicFiles_GetFile(filePath));
+                  await Task.Run(() => this.SearchComicFiles_SearchNewComicFiles_GetFolder(comicFile));
+
+               }
+               catch (Exception fileException)
+               { if (!await App.Message.Confirm($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
             }
-
-            // PARENT PATH
-            var fileName = splitedPath[splitedPath.Length - 1];
-            var parentPath = filePath.Replace($"{App.Settings.Paths.Separator}{fileName}", "");
-            var parentName = splitedPath[splitedPath.Length - 2];
-            if (string.IsNullOrEmpty(comicFile.PersistentData.ParentPath)) {
-               comicFile.PersistentData.ParentPath = parentPath;
-               App.Database.Update(comicFile.PersistentData);
-            }
-
-            // TEXT
-            comicFile.Text = fileName
-               .Replace(".cbz", "")
-               .Replace(".cbr", "")
-               .Trim();
-            comicFile.SmallText = comicFile.Text
-               .Replace(parentName, "");
-            if (string.IsNullOrEmpty(comicFile.SmallText))
-            { comicFile.SmallText = comicFile.Text; }
-
-            // COVER PATH   
-            if (string.IsNullOrEmpty(comicFile.PersistentData.CoverPath))
-            {
-               var coverPath = comicFile.FullPath;
-               coverPath = coverPath
-                  .Replace(".cbz", ".jpg")
-                  .Replace(".cbr", ".jpg");
-               coverPath = coverPath
-                  .Replace(App.Settings.Paths.Separator, "_")
-                  .Replace(" ", "_")
-                  .Replace("#", "_");
-               comicFile.PersistentData.CoverPath = $"{App.Settings.Paths.CoversPath}{App.Settings.Paths.Separator}{coverPath}";
-               App.Database.Update(comicFile.PersistentData);
-            }
-            comicFile.CoverPath = comicFile.PersistentData.CoverPath;
-
-            // RESULT
-            return comicFile;
 
          }
          catch (Exception ex) { throw; }
       }
 
-      /*
-      private void SearchComicFiles_LoadData(File.FileData file)
+      private Database.ComicFiles SearchComicFiles_SearchNewComicFiles_GetFile(string filePath)
       {
          try
          {
 
-            // DATA
-            var comicData = App.Database
-               .Table<Database.ComicFiles>()
-               .Where(x => x.FullPath == file.FullPath)
-               .FirstOrDefault();
-            if (comicData == null)
+            // INITIALIZE
+            var comicFile = new Database.ComicFiles { FullPath = filePath };
+
+            // PARENT PATH
+            var fileName = System.IO.Path.GetFileName(filePath);
+            var folderPath = System.IO.Path.GetDirectoryName(filePath);
+            var folderText = System.IO.Path.GetFileNameWithoutExtension(folderPath);
+            comicFile.ParentPath = folderPath;
+
+            // TEXT
+            comicFile.Text = System.IO.Path.GetFileNameWithoutExtension(filePath)
+               .Trim();
+            comicFile.SmallText = comicFile.Text
+               .Replace(folderText, "");
+            if (string.IsNullOrEmpty(comicFile.SmallText))
+            { comicFile.SmallText = comicFile.Text; }
+
+            // COVER PATH   
+            var coverPath = $"{filePath}.jpg";
+            coverPath = coverPath
+               .Replace(App.Settings.Paths.Separator, "_")
+               .Replace("#", "")
+               .Replace(" ", "_")
+               .Replace("___", "_")
+               .Replace("__", "_");
+            comicFile.CoverPath = $"{App.Settings.Paths.CoversPath}{App.Settings.Paths.Separator}{coverPath}";
+
+            // INSERT COMIC FILE
+            this.ComicFiles.Add(comicFile);
+            App.Database.Insert(comicFile);
+
+            return comicFile;
+         }
+         catch (Exception ex) { throw; }
+      }
+
+      private void SearchComicFiles_SearchNewComicFiles_GetFolder(Database.ComicFiles comicFile)
+      {
+         try
+         {
+
+            // INITIALIZE
+            var folderPath = comicFile.ParentPath;
+
+            // ADD FOLDER STRUCTURE
+            while (!string.IsNullOrEmpty(folderPath) && folderPath != App.Settings.Paths.ComicsPath)
             {
-               comicData = new Database.ComicFiles { FullPath = file.FullPath };
-               App.Database.Insert(comicData);
+
+               // CHECK IF FOLDER ALREADY EXISTS
+               var comicFolder = this.ComicFolders
+                  .Where(x => x.FullPath == folderPath)
+                  .FirstOrDefault();
+               if (comicFolder != null) { break; }
+
+               // PROPERTIES
+               var folderText = System.IO.Path.GetFileNameWithoutExtension(folderPath);
+               var folderParent = System.IO.Path.GetDirectoryName(folderPath);
+
+               // ADD FOLDER
+               comicFolder = new Database.ComicFolders
+               {
+                  FullPath = folderPath,
+                  Text = folderText,
+                  ParentPath = folderParent,
+                  CoverPath = comicFile.CoverPath
+               };
+               this.ComicFolders.Add(comicFolder);
+               App.Database.Insert(comicFolder);
+
+               folderPath = folderParent;
             }
-            file.PersistentData = comicData;
 
          }
          catch (Exception ex) { throw; }
       }
-      */
+
+      private async Task SearchComicFiles_PrepareFoldersStructure()
+      {
+         try
+         {
+
+            // INITIALIZE
+            this.Data.Text = R.Strings.STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE;
+            this.Data.Details = string.Empty;
+            this.Data.Progress = 0;
+            this.Notify();
+
+            // LOOP THROUGH FOLDER LIST
+            var loopQuantity = this.ComicFolders.Count;
+            for (int loopIndex = 0; loopIndex < loopQuantity; loopIndex++)
+            {
+               var DATA = this.ComicFolders[loopIndex];
+               try
+               {
+                  this.Data.Details = DATA.FullPath;
+                  this.Data.Progress = ((double)loopIndex / (double)loopQuantity);
+                  this.Notify();
+
+                  // PARENT FOLDER
+                  Folder.FolderData parentFolder = App.RootFolder;
+                  if (!string.IsNullOrEmpty(DATA.ParentPath))
+                  {
+                     parentFolder = this.ComicFoldersDictionary[DATA.ParentPath];
+                  }
+                  if (parentFolder == null) { throw new Exception($"Could not find Parent:[{DATA.ParentPath}] for Folder:[{DATA.FullPath}]."); }
+
+                  // ADD FOLDER
+                  var folder = new Folder.FolderData
+                  {
+                     Text = DATA.Text,
+                     CoverPath = DATA.CoverPath,
+                     PersistentData = DATA
+                  };
+                  parentFolder.Folders.Add(folder);
+                  parentFolder.HasFolders = true;
+                  this.ComicFoldersDictionary.Add(DATA.FullPath, folder);
+               }
+               catch (Exception loopException)
+               { if (!await App.Message.Confirm($"->Path:{DATA.FullPath}\n->File:{loopIndex}/{loopQuantity}\n->Exception:{loopException}")) { Environment.Exit(0); } }
+            }
+
+            // LOCATE FIRST FOLDER WITH CONTENT
+            /*
+            if (App.RootFolder.Folders.Count == 1)
+            {
+               var initialFolders = App.RootFolder.Folders;
+               while (true)
+               {
+                  if (initialFolders.Count == 0) { break; }
+                  else if (initialFolders.Count > 1) { break; }
+                  else { initialFolders = initialFolders.FirstOrDefault().Folders; }
+               }
+               App.RootFolder.Folders.ReplaceRange(initialFolders);
+            }
+            */
+            App.RootFolder.Text = R.Strings.AppTitle;
+
+         }
+         catch (Exception ex) { throw; }
+      }
+
+      private async Task SearchComicFiles_PrepareFilesStructure()
+      {
+         try
+         {
+
+            // INITIALIZE
+            this.Data.Text = R.Strings.STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE;
+            this.Data.Details = string.Empty;
+            this.Data.Progress = 0;
+            this.Notify();
+
+            // LOOP THROUGH FILE LIST
+            var loopQuantity = this.ComicFiles.Count;
+            for (int loopIndex = 0; loopIndex < loopQuantity; loopIndex++)
+            {
+               var DATA = this.ComicFiles[loopIndex];
+               try
+               {
+                  this.Data.Details = DATA.FullPath;
+                  this.Data.Progress = ((double)loopIndex / (double)loopQuantity);
+                  this.Notify();
+
+                  // PARENT FOLDER
+                  Folder.FolderData parentFolder = App.RootFolder;
+                  if (!string.IsNullOrEmpty(DATA.ParentPath))
+                  {
+                     parentFolder = this.ComicFoldersDictionary[DATA.ParentPath];
+                  }
+                  if (parentFolder == null) { throw new Exception($"Could not find Parent:[{DATA.ParentPath}] for Folder:[{DATA.FullPath}]."); }
+
+                  // COMIC FILE
+                  var comicFile = new File.FileData
+                  {
+                     FullPath = DATA.FullPath, 
+                     Text = DATA.Text,
+                     SmallText = DATA.SmallText,
+                     CoverPath = DATA.CoverPath, 
+                     PersistentData = DATA
+                  };
+                  parentFolder.Files.Add(comicFile);
+                  parentFolder.HasFiles = true;
+                  App.RootFolder.Files.Add(comicFile);
+
+               }
+               catch (Exception loopException)
+               { if (!await App.Message.Confirm($"->Path:{DATA.FullPath}\n->File:{loopIndex}/{loopQuantity}\n->Exception:{loopException}")) { Environment.Exit(0); } }
+            }
+
+         }
+         catch (Exception ex) { throw; }
+      }
 
       private async Task SearchComicFiles_LoadCover(File.FileData file)
       {
@@ -532,6 +593,7 @@ namespace ComicsShelf.Startup
          this.Data.Details = string.Empty;
          this.Notify();
 
+         this.ComicFoldersDictionary = null;
          this.Data = null;
          this.FileSystem = null;
       }
