@@ -156,6 +156,9 @@
   <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
     <value>Defining Comics Path</value>
   </data>
+  <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
+    <value>Extracting comics cover</value>
+  </data>
   <data name="STARTUP_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
     <value>Loading Settings</value>
   </data>
@@ -164,9 +167,6 @@
   </data>
   <data name="STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
     <value>Preparing the folders structure</value>
-  </data>
-  <data name="STARTUP_REVIEWING_COMICS_DATA_MESSAGE" xml:space="preserve">
-    <value>Reviewing Comics Data</value>
   </data>
   <data name="STARTUP_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Searching Comic Files on the Device</value>

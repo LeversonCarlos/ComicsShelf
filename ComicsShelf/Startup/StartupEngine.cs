@@ -38,8 +38,8 @@ namespace ComicsShelf.Startup
                await startupEngine.SearchComicFiles();
 
                await Helpers.ViewModels.NavVM.PushAsync<Home.HomeVM>(true, App.RootFolder);
-               await startupEngine.ReviewComicsData();
                await startupEngine.AnalyseStatistics();
+               await startupEngine.ExtractComicCover();
             }
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
@@ -54,8 +54,8 @@ namespace ComicsShelf.Startup
             using (var startupEngine = new StartupEngine())
             {
                await startupEngine.SearchComicFiles();
-               await startupEngine.ReviewComicsData();
                await startupEngine.AnalyseStatistics();
+               await startupEngine.ExtractComicCover();
             }
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
@@ -296,8 +296,7 @@ namespace ComicsShelf.Startup
                {
                   FullPath = folderPath,
                   Text = folderText,
-                  ParentPath = folderParent,
-                  CoverPath = comicFile.CoverPath
+                  ParentPath = folderParent
                };
                this.ComicFolders.Add(comicFolder);
                App.Database.Insert(comicFolder);
@@ -426,14 +425,53 @@ namespace ComicsShelf.Startup
          catch (Exception ex) { throw; }
       }
 
-      private async Task SearchComicFiles_LoadCover(File.FileData file)
+      #endregion
+
+      #region ExtractComicCover
+
+      private async Task ExtractComicCover()
       {
          try
          {
 
-            // CHECK IF COVER ALREADY EXISTS
-            if (System.IO.File.Exists(file.CoverPath)) { return; }
-            if (file.FullPath.ToLower().EndsWith(".cbr")) { return; }
+            // INITIALIZE
+            this.Data.Text = R.Strings.STARTUP_EXTRACTING_COMICS_COVER_MESSAGE;
+            this.Data.Details = string.Empty;
+            this.Notify();
+
+            // LOOP THROUGH FILES
+            this.Data.Progress = 0;
+            var filesQuantity = App.RootFolder.Files.Count;
+            for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
+            {
+               var file = App.RootFolder.Files[fileIndex];
+               this.Data.Progress = ((double)fileIndex / (double)filesQuantity);
+               this.Data.Details = file.Text;
+               this.Notify();
+
+               var mustExtract = await Task.Run(() => this.ExtractComicCover_MustExtract(file));
+               if (mustExtract)
+               {
+                  await Task.Run(() => this.ExtractComicCover_File(file));
+                  await Task.Run(() => this.ExtractComicCover_Folder(file));
+               }
+            }
+
+         }
+         catch (Exception ex) { throw; }
+      }
+
+      private bool ExtractComicCover_MustExtract(File.FileData file)
+      {
+         if (System.IO.File.Exists(file.CoverPath)) { return false; }
+         if (file.FullPath.ToLower().EndsWith(".cbr")) { return false; }
+         return true;
+      }
+
+      private async Task ExtractComicCover_File(File.FileData file)
+      {
+         try
+         {
 
             // OPEN ZIP ARCHIVE
             using (var zipArchive = await this.FileSystem.GetZipArchive(App.Settings, file))
@@ -455,86 +493,29 @@ namespace ComicsShelf.Startup
                   await this.FileSystem.Thumbnail(zipStream, file.CoverPath);
                }
             }
+
          }
          catch (Exception ex) { throw; }
          finally { GC.Collect(); }
       }
 
-      #endregion
-
-      #region ReviewComicsData
-
-      private async Task ReviewComicsData()
+      private async Task ExtractComicCover_Folder(File.FileData file)
       {
          try
          {
 
-            // INITIALIZE
-            this.Data.Text = R.Strings.STARTUP_REVIEWING_COMICS_DATA_MESSAGE;
-            this.Data.Details = string.Empty;
-            this.Notify();
-
-            // LOOP THROUGH FILES
-            this.Data.Progress = 0;
-            var filesQuantity = App.RootFolder.Files.Count;
-            for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
+            // APPLY COVER PATH TO THE FOLDER STRUCTURE
+            var parentFolder = this.ComicFoldersDictionary[file.PersistentData.ParentPath];
+            while (parentFolder != null)
             {
-               var file = App.RootFolder.Files[fileIndex];
-               this.Data.Progress = ((double)fileIndex / (double)filesQuantity);
-               this.Data.Details = file.Text;
-               this.Notify();
-               // await Task.Run(() => this.SearchComicFiles_LoadData(file));
-               await Task.Run(() => this.SearchComicFiles_LoadCover(file));
-            }
+               if (!string.IsNullOrEmpty(parentFolder.PersistentData.CoverPath)) { break; }
 
-            // COVERS FOR CHILDREN FOLDER 
-            this.Data.Progress = 0;
-            var folderQuantity = App.RootFolder.Folders.Count;
-            for (int folderIndex = 0; folderIndex < folderQuantity; folderIndex++)
-            {
-               var folder = App.RootFolder.Folders[folderIndex];
-               this.Data.Progress = ((double)folderIndex / (double)folderQuantity);
-               this.Data.Details = folder.Text;
-               this.Notify();
-               await this.ReviewComicsData_Cover(folder);
-            }
+               parentFolder.CoverPath = file.CoverPath;
+               parentFolder.PersistentData.CoverPath = file.CoverPath;
+               App.Database.Update(parentFolder.PersistentData);
 
-         }
-         catch (Exception ex) { throw; }
-      }
-
-      private async Task ReviewComicsData_Cover(Folder.FolderData folder)
-      {
-         try
-         {
-
-            /* FILES */
-            if (folder.Files != null && folder.Files.Count > 0)
-            {
-
-               /* FOLDER COVER */
-               folder.CoverPath = folder.Files
-                  .Where(x => !string.IsNullOrEmpty(x.CoverPath))
-                  .Select(x => x.CoverPath)
-                  .OrderBy(x => x)
-                  .FirstOrDefault();
-
-            }
-
-            /* CHILD FOLDERS */
-            if (folder.Folders != null && folder.Folders.Count > 0)
-            {
-
-               /* ANALYSE CHILD FOLDERS META DATA */
-               foreach (var childFolder in folder.Folders)
-               { await this.ReviewComicsData_Cover(childFolder); }
-
-               /* SELF COVER */
-               folder.CoverPath = folder.Folders
-                  .Where(x => !string.IsNullOrEmpty(x.CoverPath))
-                  .Select(x => x.CoverPath)
-                  .FirstOrDefault();
-
+               if (string.IsNullOrEmpty(parentFolder.PersistentData.ParentPath)) { break; }
+               parentFolder = this.ComicFoldersDictionary[parentFolder.PersistentData.ParentPath];
             }
 
          }

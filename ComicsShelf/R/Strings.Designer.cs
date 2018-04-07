@@ -178,6 +178,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extracting comics cover.
+        /// </summary>
+        internal static string STARTUP_EXTRACTING_COMICS_COVER_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_EXTRACTING_COMICS_COVER_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading Settings.
         /// </summary>
         internal static string STARTUP_LOADING_SETTINGS_MESSAGE {
@@ -201,15 +210,6 @@ namespace ComicsShelf.R {
         internal static string STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE {
             get {
                 return ResourceManager.GetString("STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reviewing Comics Data.
-        /// </summary>
-        internal static string STARTUP_REVIEWING_COMICS_DATA_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_REVIEWING_COMICS_DATA_MESSAGE", resourceCulture);
             }
         }
         
