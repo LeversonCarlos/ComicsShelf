@@ -40,6 +40,7 @@ namespace ComicsShelf.Startup
                await Helpers.ViewModels.NavVM.PushAsync<Home.HomeVM>(true, App.RootFolder);
                await startupEngine.AnalyseStatistics();
                await startupEngine.ExtractComicCover();
+               await startupEngine.AnalyseStatistics();
             }
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }

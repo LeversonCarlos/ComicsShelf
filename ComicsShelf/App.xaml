@@ -7,6 +7,16 @@
    <Application.Resources>
       <ResourceDictionary>
 
+         <!-- PRIMARY: INDIGO -->
+         <Color x:Key="colorPrimary">#3F51B5</Color>
+         <Color x:Key="colorPrimaryLighter">#9FA8DA</Color>
+         <Color x:Key="colorPrimaryDarker">#303F9F</Color>
+
+         <!-- ACCENT: DEEP ORANGE -->
+         <Color x:Key="colorAccent">#FF6E40</Color>
+         <Color x:Key="colorAccentLighter">#FFAB91</Color>
+         <Color x:Key="colorAccentDarker">#E64A19</Color>
+
          <Style TargetType="ScrollView" x:Key="CoverListMainView">
             <Setter Property="Orientation" Value="Vertical" />
             <Setter Property="VerticalOptions" Value="FillAndExpand" />
@@ -20,19 +30,34 @@
             <Setter Property="Spacing" Value="0" />
          </Style>
 
+         <Style TargetType="StackLayout" x:Key="CoverListSectionLayout">
+            <Setter Property="Margin" Value="4,4,4,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Spacing" Value="0" />
+         </Style>
+
+         <Style TargetType="Label" x:Key="CoverListMainTitle">
+            <Setter Property="Margin" Value="4,0" />
+            <Setter Property="TextColor" Value="{StaticResource colorPrimaryLighter}" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="FontAttributes" Value="Bold" />
+         </Style>
+
          <Style TargetType="controls:ListView" x:Key="CoverList">
             <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="4,4,4,0" />
+            <Setter Property="Padding" Value="0" />
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Fill" />
          </Style>
 
          <Style TargetType="AbsoluteLayout" x:Key="CoverListItem">
-            <Setter Property="Margin" Value="6" />
+            <Setter Property="Margin" Value="4,0,4,8" />
          </Style>
 
          <Style TargetType="Grid" x:Key="CoverListItemImageGrid">
-            <Setter Property="BackgroundColor" Value="#9FA8DA" />
+            <Setter Property="BackgroundColor" Value="{StaticResource colorPrimaryLighter}" />
             <Setter Property="Padding" Value="4" />
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
@@ -66,7 +91,7 @@
 
          <Style TargetType="ContentView" x:Key="CoverListItemTitleBox" >
             <Setter Property="Padding" Value="2" />
-            <Setter Property="BackgroundColor" Value="#9FA8DA" />
+            <Setter Property="BackgroundColor" Value="{StaticResource colorPrimaryLighter}" />
             <Setter Property="Opacity" Value="0.85" />
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="EndAndExpand" />
@@ -78,7 +103,6 @@
             <Setter Property="LineBreakMode" Value="TailTruncation" />
             <Setter Property="FontAttributes" Value="Bold" />
          </Style>
-
 
       </ResourceDictionary>
    </Application.Resources>

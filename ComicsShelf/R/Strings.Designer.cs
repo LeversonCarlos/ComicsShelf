@@ -169,6 +169,42 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Main Comics List.
+        /// </summary>
+        internal static string HOME_FOLDER_LIST_SECTION_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_FOLDER_LIST_SECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Reading Comics.
+        /// </summary>
+        internal static string HOME_READING_FILES_SECTION_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_READING_FILES_SECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recently Added Comics.
+        /// </summary>
+        internal static string HOME_RECENT_FILES_SECTION_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_RECENT_FILES_SECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top Rated Comics.
+        /// </summary>
+        internal static string HOME_TOP_RATED_SECTION_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_TOP_RATED_SECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Defining Comics Path.
         /// </summary>
         internal static string STARTUP_DEFINING_COMICS_PATH_MESSAGE {

@@ -153,6 +153,18 @@
   <data name="FILE_OPEN_COMIC_LABEL" xml:space="preserve">
     <value>Open Comic</value>
   </data>
+  <data name="HOME_FOLDER_LIST_SECTION_TITLE" xml:space="preserve">
+    <value>Main Comics List</value>
+  </data>
+  <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
+    <value>Current Reading Comics</value>
+  </data>
+  <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
+    <value>Recently Added Comics</value>
+  </data>
+  <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
+    <value>Top Rated Comics</value>
+  </data>
   <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
     <value>Defining Comics Path</value>
   </data>

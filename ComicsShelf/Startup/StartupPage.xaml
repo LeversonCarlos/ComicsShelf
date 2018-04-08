@@ -5,10 +5,10 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Startup.StartupPage">
 
-   <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="100" BindingContext="{Binding Data}" >
-      <Label Text="{Binding Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"></Label>
-      <ProgressBar Progress="{Binding Progress}" HorizontalOptions="FillAndExpand"></ProgressBar>
-      <Label Text="{Binding Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
+   <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="100" IsVisible="{Binding Data.IsRunning}" >
+      <Label Text="{Binding Data.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"></Label>
+      <ProgressBar Progress="{Binding Data.Progress}" HorizontalOptions="FillAndExpand"></ProgressBar>
+      <Label Text="{Binding Data.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
    </StackLayout>
 
 </controls:Page>
