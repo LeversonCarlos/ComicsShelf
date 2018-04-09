@@ -6,10 +6,15 @@
    NavigationPage.HasNavigationBar="False" 
    x:Class="ComicsShelf.File.FileReadPage">
    <controls:Page.Content>
-      <StackLayout>
-         <Label Text="{Binding Data.Text}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-      </StackLayout>
+      <controls:PageReader ItemsSource="{Binding Data.Pages}">
+         <controls:PageReader.ItemTemplate>
+            <DataTemplate>
+               <Image Source="{Binding Path}"
+                      Aspect="AspectFit"
+                      VerticalOptions="FillAndExpand" 
+                      HorizontalOptions="FillAndExpand" />
+            </DataTemplate>
+         </controls:PageReader.ItemTemplate>
+      </controls:PageReader>
    </controls:Page.Content>
 </controls:Page>
