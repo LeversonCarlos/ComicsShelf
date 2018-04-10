@@ -72,6 +72,7 @@ namespace ComicsShelf.File
                   var pagePath = $"{cachePath}{App.Settings.Paths.Separator}P{pageIndexText}.jpg";
                   var pageData = new FilePageData { Page = pageIndex, Path = pagePath };
                   this.Data.Pages.Add(pageData);
+                  pageIndex++;
 
                   // EXTRACT PAGE IMAGE
                   if (System.IO.File.Exists(pagePath)) { continue; }
@@ -88,11 +89,10 @@ namespace ComicsShelf.File
                   }
                   catch { }
 
-                  pageIndex++;
                }
-
             }
 
+            this.Data.Pages.Add(new FilePageData { });
          }
          catch (Exception ex) { throw; }
          finally { GC.Collect(); }

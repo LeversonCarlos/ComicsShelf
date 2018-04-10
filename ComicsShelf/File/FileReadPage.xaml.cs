@@ -3,11 +3,11 @@
 namespace ComicsShelf.File
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FileReadPage : Helpers.Controls.Page
+   public partial class FileReadPage : Helpers.Controls.Page
    {
-		public FileReadPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+      public FileReadPage()
+      {
+         InitializeComponent();
+      }
+   }
 }

@@ -89,11 +89,13 @@
          {
             this.SetProperty(ref this._Readed, value);
             if (this.PersistentDataLoading) { return; }
+            if (this.PersistentData.Readed == value) { return; }
             this.PersistentData.Readed = value;
+            App.Database.Update(this.PersistentData);
+
             this.ReadingDate = (value ? App.Database.GetDate() : null);
             this.ReadingPercent = (short)(value ? 100 : 0);
-            this.ReadingPage = (short)0;
-            App.Database.Update(this.PersistentData);
+            if (value) { this.ReadingPage = (short)0; }
          }
       }
       #endregion
@@ -137,8 +139,15 @@
          {
             this.SetProperty(ref this._ReadingPage, value);
             if (this.PersistentDataLoading) { return; }
+            if (this.PersistentData.ReadingPage == value) { return; }
             this.PersistentData.ReadingPage = value;
             App.Database.Update(this.PersistentData);
+
+            if (this.Pages != null && this.Pages.Count != 0) {
+               this.Readed = (value == (this.Pages.Count - 1));
+               this.ReadingPercent = (short)((double)value / (double)this.Pages.Count * (double)100);
+               this.ReadingDate = App.Database.GetDate();
+            }
          }
       }
       #endregion

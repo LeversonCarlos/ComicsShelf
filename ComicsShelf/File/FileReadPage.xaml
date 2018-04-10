@@ -6,7 +6,7 @@
    NavigationPage.HasNavigationBar="False" 
    x:Class="ComicsShelf.File.FileReadPage">
    <controls:Page.Content>
-      <controls:PageReader ItemsSource="{Binding Data.Pages}">
+      <controls:PageReader ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}">
          <controls:PageReader.ItemTemplate>
             <DataTemplate>
                <Image Source="{Binding Path}"
