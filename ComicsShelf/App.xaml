@@ -53,7 +53,7 @@
          </Style>
 
          <Style TargetType="AbsoluteLayout" x:Key="CoverListItem">
-            <Setter Property="Margin" Value="4,0,4,8" />
+            <Setter Property="Margin" Value="4" />
          </Style>
 
          <Style TargetType="Grid" x:Key="CoverListItemImageGrid">
@@ -66,7 +66,7 @@
          <Style TargetType="StackLayout" x:Key="CoverListItemDetails">
             <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Fill" />
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
          </Style>
@@ -87,6 +87,7 @@
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Start" />
             <Setter Property="Opacity" Value="0.75" />
+            <Setter Property="HeightRequest" Value="5" />
          </Style>
 
          <Style TargetType="ContentView" x:Key="CoverListItemTitleBox" >

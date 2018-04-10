@@ -8,13 +8,11 @@
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}">
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" >
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasReadingFiles}">
                <Label Style="{StaticResource CoverListMainTitle}"
-                      Text="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" 
-                      IsVisible="{Binding Data.HasReadingFiles}" />
+                      Text="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" />
                <controls:ListView  
-                  Style="{StaticResource CoverList}"
-                  IsVisible="{Binding Data.HasReadingFiles}" Columns="5" 
+                  Style="{StaticResource CoverList}" Columns="5" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.ReadingFiles}">
                   <controls:ListView.ItemTemplate>
@@ -37,13 +35,11 @@
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" >
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasFolders}" >
                <Label Style="{StaticResource CoverListMainTitle}" 
-                      Text="{controls:Translate Text=HOME_FOLDER_LIST_SECTION_TITLE}" 
-                      IsVisible="{Binding Data.HasFolders}" />
+                      Text="{controls:Translate Text=HOME_FOLDER_LIST_SECTION_TITLE}" />
                <controls:ListView
-                  Style="{StaticResource CoverList}"
-                  IsVisible="{Binding Data.HasFolders}" Columns="3" 
+                  Style="{StaticResource CoverList}" Columns="3" 
                   ItemTappedCommand="{Binding FolderTappedCommand}"
                   ItemsSource="{Binding Data.Folders}">
                   <controls:ListView.ItemTemplate>
@@ -66,13 +62,11 @@
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" >
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasRecentFiles}" >
                <Label Style="{StaticResource CoverListMainTitle}"
-                      Text="{controls:Translate Text=HOME_RECENT_FILES_SECTION_TITLE}" 
-                      IsVisible="{Binding Data.HasRecentFiles}" />
+                      Text="{controls:Translate Text=HOME_RECENT_FILES_SECTION_TITLE}" />
                <controls:ListView 
-                  Style="{StaticResource CoverList}"
-                  IsVisible="{Binding Data.HasRecentFiles}" Columns="5" 
+                  Style="{StaticResource CoverList}" Columns="5" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.RecentFiles}">
                   <controls:ListView.ItemTemplate>
@@ -95,13 +89,11 @@
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" >
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasTopRatedFiles}" >
                <Label Style="{StaticResource CoverListMainTitle}"
-                      Text="{controls:Translate Text=HOME_TOP_RATED_SECTION_TITLE}" 
-                      IsVisible="{Binding Data.HasTopRatedFiles}" />
+                      Text="{controls:Translate Text=HOME_TOP_RATED_SECTION_TITLE}" />
                <controls:ListView 
-                  Style="{StaticResource CoverList}"
-                  IsVisible="{Binding Data.HasTopRatedFiles}" Columns="5" 
+                  Style="{StaticResource CoverList}" Columns="5" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.TopRatedFiles}">
                   <controls:ListView.ItemTemplate>
