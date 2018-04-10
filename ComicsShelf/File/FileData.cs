@@ -91,11 +91,11 @@
             if (this.PersistentDataLoading) { return; }
             if (this.PersistentData.Readed == value) { return; }
             this.PersistentData.Readed = value;
-            App.Database.Update(this.PersistentData);
 
             this.ReadingDate = (value ? App.Database.GetDate() : null);
-            this.ReadingPercent = (short)(value ? 100 : 0);
+            this.ReadingPercent = (double)(value ? 1 : 0);
             if (value) { this.ReadingPage = (short)0; }
+            App.Database.Update(this.PersistentData);
          }
       }
       #endregion
@@ -110,14 +110,13 @@
             this.SetProperty(ref this._ReadingDate, value);
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.ReadingDate = value;
-            App.Database.Update(this.PersistentData);
          }
       }
       #endregion
 
       #region ReadingPercent
-      short _ReadingPercent;
-      public short ReadingPercent
+      double _ReadingPercent;
+      public double ReadingPercent
       {
          get { return this._ReadingPercent; }
          set
@@ -125,7 +124,6 @@
             this.SetProperty(ref this._ReadingPercent, value);
             if (this.PersistentDataLoading) { return; }
             this.PersistentData.ReadingPercent = value;
-            App.Database.Update(this.PersistentData);
          }
       }
       #endregion
@@ -141,13 +139,13 @@
             if (this.PersistentDataLoading) { return; }
             if (this.PersistentData.ReadingPage == value) { return; }
             this.PersistentData.ReadingPage = value;
-            App.Database.Update(this.PersistentData);
 
             if (this.Pages != null && this.Pages.Count != 0) {
-               this.Readed = (value == (this.Pages.Count - 1));
-               this.ReadingPercent = (short)((double)value / (double)this.Pages.Count * (double)100);
+               this.ReadingPercent = ((double)value / (double)this.Pages.Count);
                this.ReadingDate = App.Database.GetDate();
+               this.Readed = (value == (this.Pages.Count - 1));
             }
+            App.Database.Update(this.PersistentData);
          }
       }
       #endregion

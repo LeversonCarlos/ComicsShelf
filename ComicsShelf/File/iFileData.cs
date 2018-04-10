@@ -4,7 +4,7 @@
    {
 
       bool Readed { get; set; }
-      short ReadingPercent { get; set; }
+      double ReadingPercent { get; set; }
       short ReadingPage { get; set; }
       string ReadingDate { get; set; }
 

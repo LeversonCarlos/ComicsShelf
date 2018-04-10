@@ -19,7 +19,7 @@ namespace ComicsShelf.Database
       public short? Rate { get; set; }
 
       public bool Readed { get; set; }
-      public short ReadingPercent { get; set; }
+      public double ReadingPercent { get; set; }
       public short ReadingPage { get; set; }
       public string ReadingDate { get; set; }
 
