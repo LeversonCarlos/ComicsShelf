@@ -124,6 +124,11 @@
                </StackLayout>
             </StackLayout>
 
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="80" IsVisible="{Binding Data.NoComics}" >
+               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" TextColor="{StaticResource colorAccent}"></Label>
+               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small"></Label>
+            </StackLayout>
+
          </StackLayout>
       </ScrollView>
    </controls:Page.Content>

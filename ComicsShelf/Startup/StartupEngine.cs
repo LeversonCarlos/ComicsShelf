@@ -159,6 +159,7 @@ namespace ComicsShelf.Startup
             this.ComicFolders = this.ComicFolders
                .OrderBy(x => x.FullPath)
                .ToList();
+            App.RootFolder.NoComics = (this.ComicFiles == null || this.ComicFiles.Count == 0);
 
             // PREPARE FOLDER STRUCTURE
             await this.SearchComicFiles_PrepareFoldersStructure();

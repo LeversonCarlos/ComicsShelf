@@ -73,5 +73,14 @@
 
       #endregion
 
+      #region NoComics
+      bool _NoComics;
+      public bool NoComics
+      {
+         get { return this._NoComics; }
+         set { this.SetProperty(ref this._NoComics, value); }
+      }
+      #endregion
+
    }
 }
