@@ -11,5 +11,7 @@
 /ComicsShelf.UWP/bin
 /ComicsShelf.UWP/obj
 /ComicsShelf.UWP/ComicsShelf.UWP.csproj.user
+/ComicsShelf.UWP/AppPackages
+/ComicsShelf.UWP/BundleArtifacts
 /ComicsShelf.iOS/bin
 /ComicsShelf.iOS/obj
