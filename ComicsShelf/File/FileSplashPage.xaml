@@ -13,9 +13,9 @@
          </Grid>
          <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
          <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0">
-            <ProgressBar Style="{StaticResource CoverListItemProgress}" VerticalOptions="EndAndExpand" Progress="{Binding Data.ReadingPercent}" />
-            <ContentView Style="{StaticResource CoverListItemTitleBox}" VerticalOptions="End" >
-               <Grid Margin="5" ColumnSpacing="10">
+            <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding Data.ReadingPercent}" />
+            <ContentView Style="{StaticResource CoverListItemTitleBox}" >
+               <Grid Margin="10" ColumnSpacing="10">
 
                   <Grid.ColumnDefinitions>
                      <ColumnDefinition Width="*" />
@@ -36,17 +36,5 @@
 
       </AbsoluteLayout>
 
-      <!-- 
-      <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Fill" Padding="20" >
-         <Grid Margin="0,20,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
-            <Image Source="{Binding Data.CoverPath}" Aspect="AspectFit" Opacity="0.5"/>
-         </Grid>
-         <ProgressBar Progress="{Binding Data.ReadingPercent}" HorizontalOptions="FillAndExpand"></ProgressBar>
-         <StackLayout Orientation="Horizontal" Margin="0,20,0,0" Spacing="20" >
-            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" >
-            </StackLayout>
-         </StackLayout>
-      </StackLayout>
-      -->
    </controls:Page.Content>
 </controls:Page>
