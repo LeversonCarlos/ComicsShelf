@@ -1,0 +1,8 @@
+https://icons8.com/icon/48364/book-shelf
+	Original icon
+
+https://romannurik.github.io/AndroidAssetStudio
+	Generate icons for android
+
+http://appiconmaker.co
+	Generate icons for all ios sizes
