@@ -26,10 +26,12 @@ namespace ComicsShelf.File
       {
          try
          {
+            this.IsBusy = true;
             await this.OpenFile();
             await PushAsync<FileReadVM>(this.Data);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+         finally { this.IsBusy = false; }
       }
       #endregion
 

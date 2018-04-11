@@ -6,6 +6,37 @@
    xmlns:models="clr-namespace:ComicsShelf.File"
    x:Class="ComicsShelf.File.FileSplashPage">
    <controls:Page.Content>
+
+      <AbsoluteLayout VerticalOptions="FillAndExpand">
+         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+            <Image Source="{Binding Data.CoverPath}" Aspect="AspectFill" Opacity="0.4" />
+         </Grid>
+         <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0">
+            <ProgressBar Style="{StaticResource CoverListItemProgress}" VerticalOptions="EndAndExpand" Progress="{Binding Data.ReadingPercent}" />
+            <ContentView Style="{StaticResource CoverListItemTitleBox}" VerticalOptions="End" >
+               <Grid Margin="5" ColumnSpacing="10">
+
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="*" />
+                     <ColumnDefinition Width="*" />
+                     <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+
+                  <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Column="0" >
+                     <Switch VerticalOptions="Center" IsToggled="{Binding Data.Readed}" />
+                     <Label VerticalOptions="Center" Text="{controls:Translate Text=FILE_COMIC_ALREADY_READED_LABEL}" />
+                  </StackLayout>
+                  <controls:EnumPicker SelectedItem="{Binding Data.Rate}" x:TypeArguments="models:enumFileRate" HorizontalOptions="FillAndExpand" Grid.Column="1"  />
+                  <Button Text="{controls:Translate Text=FILE_OPEN_COMIC_LABEL}" Command="{Binding OpenTappedCommand}" HorizontalOptions="FillAndExpand" Grid.Column="2" />
+                  
+               </Grid>
+            </ContentView>
+         </StackLayout>
+
+      </AbsoluteLayout>
+
+      <!-- 
       <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Fill" Padding="20" >
          <Grid Margin="0,20,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
             <Image Source="{Binding Data.CoverPath}" Aspect="AspectFit" Opacity="0.5"/>
@@ -13,12 +44,9 @@
          <ProgressBar Progress="{Binding Data.ReadingPercent}" HorizontalOptions="FillAndExpand"></ProgressBar>
          <StackLayout Orientation="Horizontal" Margin="0,20,0,0" Spacing="20" >
             <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" >
-               <Label Text="{Binding Data.ReadedText}" VerticalOptions="Center" ></Label>
-               <Switch IsToggled="{Binding Data.Readed}" VerticalOptions="Center" ></Switch>
             </StackLayout>
-            <controls:EnumPicker SelectedItem="{Binding Data.Rate}" x:TypeArguments="models:enumFileRate" HorizontalOptions="FillAndExpand" ></controls:EnumPicker>
-            <Button Text="{Binding Data.OpenTappedText}" Command="{Binding OpenTappedCommand}" HorizontalOptions="FillAndExpand" ></Button>
          </StackLayout>
       </StackLayout>
+      -->
    </controls:Page.Content>
 </controls:Page>

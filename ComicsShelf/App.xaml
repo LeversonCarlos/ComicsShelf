@@ -66,6 +66,7 @@
          <Style TargetType="StackLayout" x:Key="CoverListItemDetails">
             <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="0" />
+            <Setter Property="Spacing" Value="0" />
             <Setter Property="VerticalOptions" Value="Fill" />
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
@@ -85,17 +86,17 @@
 
          <Style TargetType="ProgressBar" x:Key="CoverListItemProgress" >
             <Setter Property="HorizontalOptions" Value="Fill" />
-            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="EndAndExpand" />
             <Setter Property="Opacity" Value="0.75" />
             <Setter Property="HeightRequest" Value="5" />
          </Style>
 
          <Style TargetType="ContentView" x:Key="CoverListItemTitleBox" >
-            <Setter Property="Padding" Value="2" />
             <Setter Property="BackgroundColor" Value="{StaticResource colorLighter}" />
+            <Setter Property="Padding" Value="2" />
             <Setter Property="Opacity" Value="0.85" />
             <Setter Property="HorizontalOptions" Value="Fill" />
-            <Setter Property="VerticalOptions" Value="EndAndExpand" />
+            <Setter Property="VerticalOptions" Value="End" />
          </Style>
 
          <Style TargetType="Label" x:Key="CoverListItemTitle">
@@ -103,6 +104,11 @@
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="LineBreakMode" Value="TailTruncation" />
             <Setter Property="FontAttributes" Value="Bold" />
+         </Style>
+
+         <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="TextColor" Value="#ffffff" />
          </Style>
 
       </ResourceDictionary>

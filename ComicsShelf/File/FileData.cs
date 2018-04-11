@@ -166,10 +166,6 @@
       }
       #endregion
 
-
-      public string ReadedText { get { return R.Strings.FILE_COMIC_ALREADY_READED_LABEL; } }
-      public string OpenTappedText { get { return R.Strings.FILE_OPEN_COMIC_LABEL; } }
-
    }
 
    public class FilePageData : Helpers.Observables.ObservableObject
