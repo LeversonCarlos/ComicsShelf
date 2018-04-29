@@ -11,9 +11,7 @@
             <DataTemplate>
                <AbsoluteLayout>
                   <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Orientation="Horizontal" >
-                     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                        <Image Source="{Binding Path}" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-                     </Grid>
+                     <Image Source="{Binding Path}" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
                   </ScrollView>
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" Opacity="0.85" Padding="2" BackgroundColor="{StaticResource colorLighter}">
                      <Label Text="{Binding Page}" HorizontalTextAlignment="Center" />
