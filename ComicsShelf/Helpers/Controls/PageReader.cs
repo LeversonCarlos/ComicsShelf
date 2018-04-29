@@ -2,7 +2,7 @@
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class PageReader : CarouselView
-   {
-   }
+    public class PageReader : CarouselView
+    {
+    }
 }
