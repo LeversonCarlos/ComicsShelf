@@ -9,6 +9,7 @@
          this.Title = args.Text;
          this.ViewType = typeof(FileReadPage);
          this.Data = args;
+         this.Data.StatsOpacity = 1;
          this.Initialize += this.OnInitialize;
       }
       #endregion

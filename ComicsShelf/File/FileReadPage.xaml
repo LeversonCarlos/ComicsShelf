@@ -4,7 +4,8 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    NavigationPage.HasNavigationBar="False" 
-   x:Class="ComicsShelf.File.FileReadPage">
+   x:Class="ComicsShelf.File.FileReadPage"
+   x:Name="MyPage">
    <controls:Page.Content>
       <controls:PageReader ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}">
          <controls:PageReader.ItemTemplate>
@@ -13,8 +14,13 @@
                   <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Orientation="Horizontal" >
                      <Image Source="{Binding Path}" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
                   </ScrollView>
-                  <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" Opacity="0.5" Padding="2" BackgroundColor="{StaticResource colorLighter}" >
-                     <Label Text="{Binding Page}" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+                  <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
+                     <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding Data.StatsOpacity}">
+                        <ProgressBar HorizontalOptions="Fill" HeightRequest="5" Progress="{Binding Data.ReadingPercent}" />
+                        <ContentView HorizontalOptions="Fill" VerticalOptions="End" Padding="2" BackgroundColor="{StaticResource colorLighter}" >
+                           <Label Text="{Binding Data.ReadingPage}" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+                        </ContentView>
+                     </StackLayout>
                   </ContentView>
                </AbsoluteLayout>
             </DataTemplate>
