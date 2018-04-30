@@ -15,9 +15,11 @@
             <Setter Property="MinWidth" Value="Auto" />
          </Style>
 
+         <!-- 
          <DataTemplate x:Key="ItemTemplate">
             <uwp:ItemControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
          </DataTemplate>
+         -->
 
       </ResourceDictionary>
    </Application.Resources>
