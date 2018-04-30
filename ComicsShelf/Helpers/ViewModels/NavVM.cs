@@ -69,7 +69,7 @@ namespace ComicsShelf.Helpers.ViewModels
       {
          var mainPage = Application.Current.MainPage as Page;
          var navigation = mainPage.Navigation;
-         await navigation.PopToRootAsync();
+         await navigation.PopAsync(true);
       }
       #endregion
 
