@@ -527,6 +527,7 @@ namespace ComicsShelf.Startup
       #endregion
 
       #region AnalyseStatistics
+
       private async Task AnalyseStatistics()
       {
          try
@@ -540,14 +541,6 @@ namespace ComicsShelf.Startup
                .ToList();
             App.RootFolder.RecentFiles.ReplaceRange(recentFiles);
 
-            // READING FILES
-            var readingFiles = App.RootFolder.Files
-               .Where(x => x.PersistentData.ReadingPercent > 0 && x.PersistentData.ReadingPercent < 100)
-               .OrderByDescending(x => x.PersistentData.ReadingDate)
-               .Take(5)
-               .ToList();
-            App.RootFolder.ReadingFiles.ReplaceRange(readingFiles);
-
             // TOP RATED FILES
             var topRatedFiles = App.RootFolder.Files
                .Where(x => x.PersistentData.Rate.HasValue)
@@ -557,9 +550,69 @@ namespace ComicsShelf.Startup
                .ToList();
             App.RootFolder.TopRatedFiles.ReplaceRange(topRatedFiles);
 
+            // READING FILES
+            var readingFiles = this.AnalyseStatistics_ReadingFiles();
+            App.RootFolder.ReadingFiles.ReplaceRange(readingFiles);
+
          }
          catch (Exception ex) { throw; }
       }
+
+      private List<File.FileData> AnalyseStatistics_ReadingFiles()
+      {         
+
+         // GET LAST 5 OPENED FILES
+         var openedFiles = App.RootFolder.Files
+            .Where(x => x.PersistentData.ReadingPercent > 0.0 && x.PersistentData.ReadingPercent < 1.0)
+            .OrderByDescending(x => x.PersistentData.ReadingDate)
+            .Take(5)
+            .ToList();
+
+         // GET ALL READED FILES
+         var readedFiles = App.RootFolder.Files
+            .Where(x => x.PersistentData.ReadingPercent == 1.0)
+            .ToList();
+
+         // REMOVE GROUPS THAT ALREADY HAS SOME OPENED FILES
+         readedFiles
+            .RemoveAll(x => openedFiles
+               .Select(g => g.PersistentData.ParentPath)
+               .Contains(x.PersistentData.ParentPath));
+
+         // GROUP FILES AND MANTAIN ONLY THE MOST RECENT OPENED FILE FOR EACH GROUP
+         readedFiles = readedFiles
+            .GroupBy(x => x.PersistentData.ParentPath)
+            .Select(x => readedFiles
+               .Where(g => g.PersistentData.ParentPath == x.Key)
+               .OrderByDescending(g => g.PersistentData.ReadingDate)
+               .FirstOrDefault())
+            .ToList();
+
+         // FROM THAT, TAKE THE NEXT FILE FOR EACH GROUP
+         var readedNextFiles = readedFiles
+            .Select(x => App.RootFolder.Files
+               .Where(f => f.PersistentData.ParentPath == x.PersistentData.ParentPath)
+               .Where(f => String.Compare(f.PersistentData.FullPath, x.PersistentData.FullPath) > 0)
+               .OrderBy(f => f.PersistentData.FullPath)
+               .Take(1)
+               .Select(f => new { f, x.PersistentData.ReadingDate })
+               .FirstOrDefault())
+            .Where(x => x != null)
+            .ToList();
+
+         // UNION OPEN AND READED FILES
+         var unionFiles = readedNextFiles;
+         unionFiles.AddRange(openedFiles.Select(f => new { f, f.PersistentData.ReadingDate }).AsEnumerable());
+
+         // TAKE THE LAST 5
+         var readingFiles = unionFiles
+            .OrderByDescending(x => x.ReadingDate)
+            .Select(x => x.f)
+            .Take(5)
+            .ToList();
+         return readingFiles;
+      }
+
       #endregion
 
       #region Notify

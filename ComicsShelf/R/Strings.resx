@@ -163,7 +163,7 @@
     <value>No comic file found on device</value>
   </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
-    <value>Current Reading Comics</value>
+    <value>Continue Reading</value>
   </data>
   <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Recently Added Comics</value>

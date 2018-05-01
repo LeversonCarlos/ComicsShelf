@@ -196,7 +196,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Reading Comics.
+        ///   Looks up a localized string similar to Continue Reading.
         /// </summary>
         internal static string HOME_READING_FILES_SECTION_TITLE {
             get {
