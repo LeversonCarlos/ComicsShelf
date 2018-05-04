@@ -199,12 +199,14 @@ namespace ComicsShelf.Startup
             var fileList = await this.FileSystem.GetFiles(App.Settings.Paths.ComicsPath);
             // fileList = fileList.Take(10).ToArray();
 
+            // MARK AVAILABLE FILES
+            this.ComicFiles.Where(x => fileList.Contains(x.FullPath)).ToList().ForEach(x => x.Available = true);
+            this.ComicFiles.Where(x => !fileList.Contains(x.FullPath)).ToList().ForEach(x => x.Available = false);
+
             // REMOVE FILES ALREADY LOADED
             var comicFilesCurrentList = this.ComicFiles.Select(x => x.FullPath).ToList();
             if (comicFilesCurrentList != null && comicFilesCurrentList.Count != 0)
-            {
-               fileList = fileList.Where(x => !comicFilesCurrentList.Contains(x)).ToArray();
-            }
+            { fileList = fileList.Where(x => !comicFilesCurrentList.Contains(x)).ToArray(); }
 
             // LOOP THROUGH FILE LIST
             var fileQuantity = fileList.Length;
@@ -236,7 +238,7 @@ namespace ComicsShelf.Startup
          {
 
             // INITIALIZE
-            var comicFile = new Database.ComicFiles { FullPath = filePath };
+            var comicFile = new Database.ComicFiles { FullPath = filePath, Available = true };
 
             // PARENT PATH
             var fileName = System.IO.Path.GetFileName(filePath);
@@ -396,6 +398,7 @@ namespace ComicsShelf.Startup
                   this.Data.Details = DATA.FullPath;
                   this.Data.Progress = ((double)loopIndex / (double)loopQuantity);
                   this.Notify();
+                  if (!DATA.Available) { continue; }
 
                   // PARENT FOLDER
                   Folder.FolderData parentFolder = App.RootFolder;

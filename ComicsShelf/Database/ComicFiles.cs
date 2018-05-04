@@ -8,6 +8,7 @@ namespace ComicsShelf.Database
 
       [PrimaryKey]
       public string FullPath { get; set; }
+      public bool Available { get; set; }
 
       public string Text { get; set; }
       public string SmallText { get; set; }
