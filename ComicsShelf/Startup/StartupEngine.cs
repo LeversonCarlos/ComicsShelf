@@ -161,11 +161,10 @@ namespace ComicsShelf.Startup
                .ToList();
             App.RootFolder.NoComics = (this.ComicFiles == null || this.ComicFiles.Count == 0);
 
-            // PREPARE FOLDER STRUCTURE
+            // PREPARE STRUCTURE
             await this.SearchComicFiles_PrepareFoldersStructure();
-
-            // PREPARE FILE STRUCTURE
             await this.SearchComicFiles_PrepareFilesStructure();
+            this.SearchComicFiles_AnalyseFoldersAvailability(App.RootFolder);
 
             // LOCATE FIRST FOLDER WITH CONTENT
             if (App.RootFolder.Folders.Count == 1) {
@@ -426,6 +425,21 @@ namespace ComicsShelf.Startup
                { if (!await App.Message.Confirm($"->Path:{DATA.FullPath}\n->File:{loopIndex}/{loopQuantity}\n->Exception:{loopException}")) { Environment.Exit(0); } }
             }
 
+         }
+         catch (Exception ex) { throw; }
+      }
+
+      private void SearchComicFiles_AnalyseFoldersAvailability(Folder.FolderData folder)
+      {
+         try
+         {
+            folder.Available = folder.HasFiles || folder.HasFolders;
+            for (int childrenIndex = (folder.Folders.Count-1); childrenIndex >= 0; childrenIndex--)
+            {
+               var childrenFolder = folder.Folders[childrenIndex];
+               this.SearchComicFiles_AnalyseFoldersAvailability(childrenFolder);
+               if (!childrenFolder.Available) { folder.Folders.RemoveAt(childrenIndex); }
+            }
          }
          catch (Exception ex) { throw; }
       }

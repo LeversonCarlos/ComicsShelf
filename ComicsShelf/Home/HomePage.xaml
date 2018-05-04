@@ -42,7 +42,7 @@
                   ItemsSource="{Binding Data.Folders}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
+                        <AbsoluteLayout Style="{StaticResource CoverListItem}" IsVisible="{Binding Data.Available}">
                            <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="150" >
                               <Image Style="{StaticResource CoverListItemImageFolder}" Source="{Binding CoverPath}" />
                            </Grid>

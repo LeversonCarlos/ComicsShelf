@@ -76,5 +76,14 @@
 
       #endregion
 
+      #region Available
+      bool _Available;
+      public bool Available
+      {
+         get { return this._Available; }
+         set { this.SetProperty(ref this._Available, value); }
+      }
+      #endregion
+
    }
 }
