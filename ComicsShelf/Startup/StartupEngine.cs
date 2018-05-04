@@ -542,12 +542,7 @@ namespace ComicsShelf.Startup
             App.RootFolder.RecentFiles.ReplaceRange(recentFiles);
 
             // TOP RATED FILES
-            var topRatedFiles = App.RootFolder.Files
-               .Where(x => x.PersistentData.Rate.HasValue)
-               .OrderByDescending(x => x.PersistentData.Rate.Value)
-               .ThenByDescending(x => x.PersistentData.ReleaseDate)
-               .Take(5)
-               .ToList();
+            var topRatedFiles = this.AnalyseStatistics_TopRatedFiles();
             App.RootFolder.TopRatedFiles.ReplaceRange(topRatedFiles);
 
             // READING FILES
@@ -611,6 +606,42 @@ namespace ComicsShelf.Startup
             .Take(5)
             .ToList();
          return readingFiles;
+      }
+
+      private List<File.FileData> AnalyseStatistics_TopRatedFiles()
+      {
+
+         // GET ALL RATED FILES
+         var allRatedFiles = App.RootFolder.Files
+            .Where(x => x.PersistentData.Rate.HasValue)
+            .ToList();
+
+         // GROUP FILES WITH ITS AVERAGE RATE
+         var groupFiles = allRatedFiles
+            .GroupBy(x => x.PersistentData.ParentPath)
+            .Select(x => new {
+               ParentPath = x.Key,
+               Rate = x.Average(g=> (double)g.PersistentData.Rate.Value)
+            })
+            .ToList();
+
+         // TOP RATED FILES
+         var topRatedFiles = allRatedFiles
+            .Select(x=> new {
+               File = x, 
+               GroupRate = groupFiles
+                  .Where(g=> g.ParentPath == x.PersistentData.ParentPath)
+                  .Select(g=> g.Rate)
+                  .FirstOrDefault()
+            })
+            .OrderByDescending(x => x.GroupRate)
+            .ThenByDescending(x => x.File.PersistentData.Rate.Value)
+            .ThenByDescending(x => x.File.PersistentData.ReadingDate)
+            .Select(x => x.File)
+            .Take(5)
+            .ToList();
+         return topRatedFiles;
+
       }
 
       #endregion
