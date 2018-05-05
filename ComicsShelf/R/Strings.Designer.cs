@@ -169,11 +169,20 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Main Comics List.
+        ///   Looks up a localized string similar to Featured Comics.
         /// </summary>
-        internal static string HOME_FOLDER_LIST_SECTION_TITLE {
+        internal static string HOME_FEATURED_PAGE_TITLE {
             get {
-                return ResourceManager.GetString("HOME_FOLDER_LIST_SECTION_TITLE", resourceCulture);
+                return ResourceManager.GetString("HOME_FEATURED_PAGE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Comics List.
+        /// </summary>
+        internal static string HOME_FOLDERS_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_FOLDERS_PAGE_TITLE", resourceCulture);
             }
         }
         
@@ -210,6 +219,15 @@ namespace ComicsShelf.R {
         internal static string HOME_RECENT_FILES_SECTION_TITLE {
             get {
                 return ResourceManager.GetString("HOME_RECENT_FILES_SECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        internal static string HOME_TOOLS_PAGE_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_TOOLS_PAGE_TITLE", resourceCulture);
             }
         }
         
