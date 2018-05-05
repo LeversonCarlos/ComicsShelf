@@ -20,6 +20,8 @@
          <Style TargetType="ScrollView" x:Key="CoverListMainView">
             <Setter Property="Orientation" Value="Vertical" />
             <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="8" />
          </Style>
 
          <Style TargetType="StackLayout" x:Key="CoverListMainLayout">
@@ -27,11 +29,11 @@
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="Spacing" Value="0" />
+            <Setter Property="Spacing" Value="16" />
          </Style>
 
          <Style TargetType="StackLayout" x:Key="CoverListSectionLayout">
-            <Setter Property="Margin" Value="4,4,4,0" />
+            <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="Spacing" Value="0" />
          </Style>

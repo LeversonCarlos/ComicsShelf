@@ -18,9 +18,6 @@ namespace ComicsShelf.Home
       {
          base.OnAppearing();
          if (this.BindingContext == null) { return; }
-         // this.Children[0].BindingContext = this.BindingContext;
-         // this.Children[1].BindingContext = this.BindingContext;
-         // this.Children[2].BindingContext = this.BindingContext;
          this.SetBinding(Page.TitleProperty, "Title");
          (this.BindingContext as Helpers.ViewModels.BaseVM).InitializeAsync();
       }

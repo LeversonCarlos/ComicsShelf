@@ -573,11 +573,11 @@ namespace ComicsShelf.Startup
       private List<File.FileData> AnalyseStatistics_ReadingFiles()
       {         
 
-         // GET LAST 5 OPENED FILES
+         // GET LAST 10 OPENED FILES
          var openedFiles = App.RootFolder.Files
             .Where(x => x.PersistentData.ReadingPercent > 0.0 && x.PersistentData.ReadingPercent < 1.0)
             .OrderByDescending(x => x.PersistentData.ReadingDate)
-            .Take(5)
+            .Take(10)
             .ToList();
 
          // GET ALL READED FILES
@@ -616,11 +616,11 @@ namespace ComicsShelf.Startup
          var unionFiles = readedNextFiles;
          unionFiles.AddRange(openedFiles.Select(f => new { f, f.PersistentData.ReadingDate }).AsEnumerable());
 
-         // TAKE THE LAST 5
+         // TAKE THE LAST 10
          var readingFiles = unionFiles
             .OrderByDescending(x => x.ReadingDate)
             .Select(x => x.f)
-            .Take(5)
+            .Take(10)
             .ToList();
          return readingFiles;
       }
@@ -655,7 +655,7 @@ namespace ComicsShelf.Startup
             .ThenByDescending(x => x.File.PersistentData.Rate.Value)
             .ThenByDescending(x => x.File.PersistentData.ReadingDate)
             .Select(x => x.File)
-            .Take(5)
+            .Take(10)
             .ToList();
          return topRatedFiles;
 
