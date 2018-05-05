@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Class="ComicsShelf.Home.FoldersPage">
+   <ContentPage.Content>
+      <ScrollView Style="{StaticResource CoverListMainView}" >
+         <StackLayout Style="{StaticResource CoverListMainLayout}" >
+
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasFolders}" >
+               <controls:ListView
+                  Style="{StaticResource CoverList}" Columns="3" 
+                  ItemTappedCommand="{Binding FolderTappedCommand}"
+                  ItemsSource="{Binding Data.Folders}">
+                  <controls:ListView.ItemTemplate>
+                     <DataTemplate>
+                        <AbsoluteLayout Style="{StaticResource CoverListItem}" IsVisible="{Binding Data.Available}">
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="150" >
+                              <Image Style="{StaticResource CoverListItemImageFolder}" Source="{Binding CoverPath}" />
+                           </Grid>
+                           <StackLayout Style="{StaticResource CoverListItemDetails}">
+                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
+                              </ContentView>
+                           </StackLayout>
+                        </AbsoluteLayout>
+                     </DataTemplate>
+                  </controls:ListView.ItemTemplate>
+               </controls:ListView>
+            </StackLayout>
+
+         </StackLayout>
+      </ScrollView>
+   </ContentPage.Content>
+</ContentPage>

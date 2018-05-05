@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Class="ComicsShelf.Home.FeaturedPage">
+   <ContentPage.Content>
+      <ScrollView Style="{StaticResource CoverListMainView}" >
+         <StackLayout Style="{StaticResource CoverListMainLayout}" >
+
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasReadingFiles}">
+               <Label Style="{StaticResource CoverListMainTitle}"
+                      Text="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" />
+               <controls:ListView  
+                  Style="{StaticResource CoverList}" Columns="5" 
+                  ItemTappedCommand="{Binding FileTappedCommand}"
+                  ItemsSource="{Binding Data.ReadingFiles}">
+                  <controls:ListView.ItemTemplate>
+                     <DataTemplate>
+                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="200" >
+                              <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
+                           </Grid>
+                           <StackLayout Style="{StaticResource CoverListItemDetails}">
+                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                              </ContentView>
+                           </StackLayout>
+                        </AbsoluteLayout>
+                     </DataTemplate>
+                  </controls:ListView.ItemTemplate>
+               </controls:ListView>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasRecentFiles}" >
+               <Label Style="{StaticResource CoverListMainTitle}"
+                      Text="{controls:Translate Text=HOME_RECENT_FILES_SECTION_TITLE}" />
+               <controls:ListView 
+                  Style="{StaticResource CoverList}" Columns="5" 
+                  ItemTappedCommand="{Binding FileTappedCommand}"
+                  ItemsSource="{Binding Data.RecentFiles}">
+                  <controls:ListView.ItemTemplate>
+                     <DataTemplate>
+                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="200" >
+                              <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
+                           </Grid>
+                           <StackLayout Style="{StaticResource CoverListItemDetails}">
+                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                              </ContentView>
+                           </StackLayout>
+                        </AbsoluteLayout>
+                     </DataTemplate>
+                  </controls:ListView.ItemTemplate>
+               </controls:ListView>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasTopRatedFiles}" >
+               <Label Style="{StaticResource CoverListMainTitle}"
+                      Text="{controls:Translate Text=HOME_TOP_RATED_SECTION_TITLE}" />
+               <controls:ListView 
+                  Style="{StaticResource CoverList}" Columns="5" 
+                  ItemTappedCommand="{Binding FileTappedCommand}"
+                  ItemsSource="{Binding Data.TopRatedFiles}">
+                  <controls:ListView.ItemTemplate>
+                     <DataTemplate>
+                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="200" >
+                              <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
+                           </Grid>
+                           <StackLayout Style="{StaticResource CoverListItemDetails}">
+                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                              </ContentView>
+                           </StackLayout>
+                        </AbsoluteLayout>
+                     </DataTemplate>
+                  </controls:ListView.ItemTemplate>
+               </controls:ListView>
+            </StackLayout>
+
+            <!-- 
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="80" IsVisible="{Binding Data.NoComics}" >
+               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" TextColor="{StaticResource colorAccent}"></Label>
+               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small"></Label>
+            </StackLayout>
+            -->
+
+         </StackLayout>
+      </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
