@@ -16,6 +16,7 @@ namespace ComicsShelf.Home
          this.Data = args;
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
+         this.SizeChanged += this.OnSizeChanged;
 
          this.RefreshData = new Startup.StartupData();
          MessagingCenter.Subscribe<Startup.StartupData>(this, "Startup", this.Refreshing);
@@ -60,6 +61,23 @@ namespace ComicsShelf.Home
          this.RefreshData.Text = data.Text;
          this.RefreshData.Details = data.Details;
          this.RefreshData.Progress = data.Progress;
+      }
+      #endregion
+
+      #region OnSizeChanged
+      private enum ScrennOrientationEnum : short { Portrait, Landscape };
+      private void OnSizeChanged(object sender, EventArgs e) {
+         var screenOrientation = (this.ScreenSize.Width > this.ScreenSize.Height ? ScrennOrientationEnum.Landscape : ScrennOrientationEnum.Portrait);
+
+         if (Device.Idiom == TargetIdiom.Phone)
+         { this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 3 : 5); }
+         else if (Device.Idiom == TargetIdiom.Tablet)
+         { this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 5 : 7); }
+         else if (Device.Idiom == TargetIdiom.Desktop)
+         { this.Data.FileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)100); }
+         else { this.Data.FileColumns = 5; }
+
+         this.Data.FileHeightRequest = this.ScreenSize.Width / (double)this.Data.FileColumns * (double)1.30;
       }
       #endregion
 

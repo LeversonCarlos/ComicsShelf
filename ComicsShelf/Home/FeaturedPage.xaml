@@ -3,6 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Name="MyPage"
    x:Class="ComicsShelf.Home.FeaturedPage">
    <ContentPage.Content>
       <ScrollView Style="{StaticResource CoverListMainView}" >
@@ -12,13 +13,13 @@
                <Label Style="{StaticResource CoverListMainTitle}"
                       Text="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" />
                <controls:ListView  
-                  Style="{StaticResource CoverList}" Columns="5" 
+                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.ReadingFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="200" >
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                               <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
                            </Grid>
                            <StackLayout Style="{StaticResource CoverListItemDetails}">
@@ -37,13 +38,13 @@
                <Label Style="{StaticResource CoverListMainTitle}"
                       Text="{controls:Translate Text=HOME_RECENT_FILES_SECTION_TITLE}" />
                <controls:ListView 
-                  Style="{StaticResource CoverList}" Columns="5" 
+                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.RecentFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="200" >
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                               <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
                            </Grid>
                            <StackLayout Style="{StaticResource CoverListItemDetails}">
@@ -62,13 +63,13 @@
                <Label Style="{StaticResource CoverListMainTitle}"
                       Text="{controls:Translate Text=HOME_TOP_RATED_SECTION_TITLE}" />
                <controls:ListView 
-                  Style="{StaticResource CoverList}" Columns="5" 
+                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.TopRatedFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="200" >
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                               <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
                            </Grid>
                            <StackLayout Style="{StaticResource CoverListItemDetails}">

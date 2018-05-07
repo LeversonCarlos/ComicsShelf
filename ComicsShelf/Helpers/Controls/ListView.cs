@@ -15,17 +15,40 @@ namespace ComicsShelf.Helpers.Controls
       public ListView()
       {
          this.RowSpacing = 0;
-         this.ColumnSpacing = 0;
-
-         if (this.Columns <= 0) { this.Columns = 3; }
-         for (var i = 0; i < this.Columns; i++)
-         { this.ColumnDefinitions.Add(new ColumnDefinition()); }
+         this.ColumnSpacing = 0;         
       }
       #endregion
 
       #region Properties
       public DataTemplate ItemTemplate { get; set; }
-      public int Columns { get; set; }
+      #endregion
+
+      #region Columns
+      public static readonly BindableProperty ColumnsProperty =
+         BindableProperty.Create("Columns", typeof(int), typeof(ListView), 3, propertyChanged: OnColumnsChanged);
+      public int Columns
+      {
+         get { return (int)GetValue(ColumnsProperty); }
+         set { SetValue(ColumnsProperty, value); }
+      }
+      private static void OnColumnsChanged(BindableObject bindable, object oldValue, object newValue)
+      {
+         try
+         {
+            var VIEW = bindable as ListView;
+            var COLUMNS = (int)newValue;
+            if (VIEW.ColumnDefinitions.Count == COLUMNS) { return; }
+
+            VIEW.ColumnDefinitions.Clear();
+            for (var i = 0; i < COLUMNS; i++)
+            { VIEW.ColumnDefinitions.Add(new ColumnDefinition()); }
+
+            VIEW.Children?.Clear();
+            VIEW.RefreshTiles();         
+
+         }
+         catch { }
+      }
       #endregion
 
       #region ItemsSource

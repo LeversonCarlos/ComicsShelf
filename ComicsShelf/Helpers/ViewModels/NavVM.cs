@@ -17,6 +17,16 @@ namespace ComicsShelf.Helpers.ViewModels
       }
       #endregion
 
+      #region ScreenSize
+      protected EventHandler SizeChanged;
+      Size _ScreenSize = Size.Zero;
+      public Size ScreenSize
+      {
+         get { return this._ScreenSize; }
+         set { this.SetProperty(ref this._ScreenSize, value); }
+      }
+      #endregion
+
 
       #region PushAsync
 
@@ -46,6 +56,17 @@ namespace ComicsShelf.Helpers.ViewModels
             var view = Activator.CreateInstance(viewType) as Page;
             if (view == null) { throw new Exception("Cannot create view instance."); }
             view.BindingContext = viewModel;
+
+            // VIEW SIZE
+            view.SizeChanged += (object sender, EventArgs e) =>
+            {
+               if (viewModel.ScreenSize != Size.Zero && 
+                   viewModel.ScreenSize.Width == view.Width && 
+                   viewModel.ScreenSize.Height == view.Height)
+               { return; };
+               viewModel.ScreenSize = new Size(view.Width, view.Height);
+               viewModel.SizeChanged?.Invoke(null, EventArgs.Empty); 
+            };
 
             // NAVIGATION
             var mainPage = Application.Current.MainPage as Page;

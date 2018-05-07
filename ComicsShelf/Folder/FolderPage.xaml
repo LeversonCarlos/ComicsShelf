@@ -3,6 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Name="MyPage"
    x:Class="ComicsShelf.Folder.FolderPage">
    <controls:Page.Content>
       <ScrollView Style="{StaticResource CoverListMainView}">
@@ -33,13 +34,13 @@
 
             <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasFiles}">
                <controls:ListView
-                  Style="{StaticResource CoverList}" Columns="5" 
+                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.Files}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="200" >
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                               <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
                            </Grid>
                            <StackLayout Style="{StaticResource CoverListItemDetails}" >

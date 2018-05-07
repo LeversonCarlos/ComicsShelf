@@ -69,6 +69,20 @@
          set { this.SetProperty(ref this._HasFiles, value); }
       }
 
+      int _FileColumns = 1;
+      public int FileColumns
+      {
+         get { return this._FileColumns; }
+         set { this.SetProperty(ref this._FileColumns, value); }
+      }
+
+      double _FileHeightRequest;
+      public double FileHeightRequest
+      {
+         get { return this._FileHeightRequest; }
+         set { this.SetProperty(ref this._FileHeightRequest, value); }
+      }
+
       private void Files_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
          this.HasFiles = this.Files.Count != 0;
