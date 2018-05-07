@@ -53,14 +53,28 @@ namespace ComicsShelf.Folder
          var screenOrientation = (this.ScreenSize.Width > this.ScreenSize.Height ? ScrennOrientationEnum.Landscape : ScrennOrientationEnum.Portrait);
 
          if (Device.Idiom == TargetIdiom.Phone)
-         { this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 3 : 5); }
+         {
+            this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 3 : 5);
+            this.Data.FolderColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 2 : 3);
+         }
          else if (Device.Idiom == TargetIdiom.Tablet)
-         { this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 5 : 7); }
+         {
+            this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 5 : 7);
+            this.Data.FolderColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 3 : 4);
+         }
          else if (Device.Idiom == TargetIdiom.Desktop)
-         { this.Data.FileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)100); }
-         else { this.Data.FileColumns = 5; }
+         {
+            this.Data.FileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)100);
+            this.Data.FolderColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)240);
+         }
+         else
+         {
+            this.Data.FileColumns = 10;
+            this.Data.FolderColumns = 6;
+         }
 
          this.Data.FileHeightRequest = this.ScreenSize.Width / (double)this.Data.FileColumns * (double)1.30;
+         this.Data.FolderHeightRequest = this.ScreenSize.Width / (double)this.Data.FolderColumns * (double)0.60;
       }
       #endregion
 

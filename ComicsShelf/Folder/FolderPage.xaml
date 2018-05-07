@@ -11,13 +11,13 @@
 
             <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasFolders}">
                <controls:ListView
-                  Style="{StaticResource CoverList}" Columns="3" 
+                  Style="{StaticResource CoverList}" Columns="{Binding Data.FolderColumns}" 
                   ItemTappedCommand="{Binding FolderTappedCommand}"
                   ItemsSource="{Binding Data.Folders}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="150" >
+                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
                               <Image Style="{StaticResource CoverListItemImageFolder}" Source="{Binding CoverPath}" />
                            </Grid>
                            <StackLayout Style="{StaticResource CoverListItemDetails}">

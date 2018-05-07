@@ -51,6 +51,20 @@
          set { this.SetProperty(ref this._HasFolders, value); }
       }
 
+      int _FolderColumns = 1;
+      public int FolderColumns
+      {
+         get { return this._FolderColumns; }
+         set { this.SetProperty(ref this._FolderColumns, value); }
+      }
+
+      double _FolderHeightRequest;
+      public double FolderHeightRequest
+      {
+         get { return this._FolderHeightRequest; }
+         set { this.SetProperty(ref this._FolderHeightRequest, value); }
+      }
+
       private void Folders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
          this.HasFolders = this.Folders.Count != 0;
