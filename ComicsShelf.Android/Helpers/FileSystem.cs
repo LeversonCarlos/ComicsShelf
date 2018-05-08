@@ -14,11 +14,20 @@ namespace ComicsShelf.Droid
       { get { return System.IO.Path.DirectorySeparatorChar.ToString(); } }
       #endregion
 
-      #region GetLocalPath
-      public async Task<string> GetLocalPath()
+      #region GetDataPath
+      public async Task<string> GetDataPath()
       {
-         var localPath = Android.OS.Environment.ExternalStorageDirectory.Path;
-         return localPath;
+         var filesPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+         return filesPath;
+      }
+      #endregion
+
+      #region GetCachePath
+      public async Task<string> GetCachePath()
+      {
+         var filesPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+         var cachePath = filesPath.Replace("/files", "/cache");
+         return cachePath;
       }
       #endregion
 

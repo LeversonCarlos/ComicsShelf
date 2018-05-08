@@ -15,14 +15,15 @@ namespace ComicsShelf.Helpers.Settings
             this.Paths = new Paths
             {
                Separator = fileSystem.PathSeparator,
-               LocalPath = await fileSystem.GetLocalPath()
+               MainCachePath = await fileSystem.GetCachePath(),
+               DataPath = await fileSystem.GetDataPath()
             };
 
-            if (!System.IO.Directory.Exists(this.Paths.CoversPath))
-            { System.IO.Directory.CreateDirectory(this.Paths.CoversPath); }
+            if (!System.IO.Directory.Exists(this.Paths.CoversCachePath))
+            { System.IO.Directory.CreateDirectory(this.Paths.CoversCachePath); }
 
-            if (!System.IO.Directory.Exists(this.Paths.CachePath))
-            { System.IO.Directory.CreateDirectory(this.Paths.CachePath); }
+            if (!System.IO.Directory.Exists(this.Paths.FilesCachePath))
+            { System.IO.Directory.CreateDirectory(this.Paths.FilesCachePath); }
          }
          catch (Exception ex) { throw; }
       }

@@ -53,7 +53,7 @@ namespace ComicsShelf.File
                .Replace(" ", "_")
                .Replace("___", "_")
                .Replace("__", "_");
-            cachePath = $"{App.Settings.Paths.CachePath}{App.Settings.Paths.Separator}{cachePath}";
+            cachePath = $"{App.Settings.Paths.FilesCachePath}{App.Settings.Paths.Separator}{cachePath}";
             if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
 
             // OPEN ZIP ARCHIVE

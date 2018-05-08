@@ -6,7 +6,8 @@ namespace ComicsShelf.Helpers
    public interface iFileSystem
    {
       string PathSeparator { get; }
-      Task<string> GetLocalPath();
+      Task<string> GetCachePath();
+      Task<string> GetDataPath();
       Task<string> GetComicsPath(string comicsPath);
       Task<string[]> GetFiles(string path);
       Task<System.IO.Compression.ZipArchive> GetZipArchive(Settings.Settings settings, File.FileData comicFile);

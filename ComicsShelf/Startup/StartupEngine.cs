@@ -261,7 +261,7 @@ namespace ComicsShelf.Startup
                .Replace(" ", "_")
                .Replace("___", "_")
                .Replace("__", "_");
-            comicFile.CoverPath = $"{App.Settings.Paths.CoversPath}{App.Settings.Paths.Separator}{coverPath}";
+            comicFile.CoverPath = $"{App.Settings.Paths.CoversCachePath}{App.Settings.Paths.Separator}{coverPath}";
 
             // INSERT COMIC FILE
             this.ComicFiles.Add(comicFile);
