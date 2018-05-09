@@ -32,12 +32,12 @@ namespace ComicsShelf.UWP
       }
       #endregion
 
-      #region GetComicsPath
-      public async Task<string> GetComicsPath(string comicsPath)
+      #region GetLibraryPath
+      public async Task<string> GetLibraryPath(string libraryPath)
       {
          try
          {
-            if (await this.PathExists(comicsPath)) { return comicsPath; }
+            if (await this.PathExists(libraryPath)) { return libraryPath; }
 
             var folderPicker = new FolderPicker();
             folderPicker.SuggestedStartLocation = PickerLocationId.Desktop;

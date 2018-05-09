@@ -14,7 +14,7 @@ namespace ComicsShelf.Droid
          {
 
             // COMPOSE FILE PATH
-            var comicFilePath = $"{settings.Paths.ComicsPath}{settings.Paths.Separator}{comicFile.FullPath}";
+            var comicFilePath = $"{settings.Paths.LibraryPath}{settings.Paths.Separator}{comicFile.FullPath}";
 
             // OPEN ZIP ARCHIVE
             ZipArchive zipArchive = null;

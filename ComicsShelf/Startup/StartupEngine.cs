@@ -122,11 +122,11 @@ namespace ComicsShelf.Startup
             }
 
             /* VALIDATE COMICS PATH */
-            configs.ComicsPath = await this.FileSystem.GetComicsPath(configs.ComicsPath);
+            configs.LibraryPath = await this.FileSystem.GetLibraryPath(configs.LibraryPath);
 
             /* STORE DATA */
             App.Database.Update(configs);
-            App.Settings.Paths.ComicsPath = configs.ComicsPath;
+            App.Settings.Paths.LibraryPath = configs.LibraryPath;
 
          }
          catch (Exception ex) { throw; }
@@ -147,8 +147,8 @@ namespace ComicsShelf.Startup
             this.Notify();
 
             // LOAD DATABASE DATA
-            this.ComicFiles = App.Database.Table<Database.ComicFiles>().Where(x => x.LibraryPath == App.Settings.Paths.ComicsPath).ToList();
-            this.ComicFolders = App.Database.Table<Database.ComicFolders>().Where(x => x.LibraryPath == App.Settings.Paths.ComicsPath).ToList();
+            this.ComicFiles = App.Database.Table<Database.ComicFiles>().Where(x => x.LibraryPath == App.Settings.Paths.LibraryPath).ToList();
+            this.ComicFolders = App.Database.Table<Database.ComicFolders>().Where(x => x.LibraryPath == App.Settings.Paths.LibraryPath).ToList();
             this.ComicFoldersDictionary = new Dictionary<string, Folder.FolderData>();
 
             // SEARCH NEW COMIC FILES
@@ -195,7 +195,7 @@ namespace ComicsShelf.Startup
             this.Notify();
 
             // LOCATE COMICS LIST
-            var fileList = await this.FileSystem.GetFiles(App.Settings.Paths.ComicsPath);
+            var fileList = await this.FileSystem.GetFiles(App.Settings.Paths.LibraryPath);
             // fileList = fileList.Take(10).ToArray();
 
             // MARK AVAILABLE FILES
@@ -239,7 +239,7 @@ namespace ComicsShelf.Startup
             // INITIALIZE
             var comicFile = new Database.ComicFiles
             {
-               LibraryPath = App.Settings.Paths.ComicsPath,
+               LibraryPath = App.Settings.Paths.LibraryPath,
                FullPath = filePath,
                Available = true
             };
@@ -289,7 +289,7 @@ namespace ComicsShelf.Startup
             var folderPath = comicFile.ParentPath;
 
             // ADD FOLDER STRUCTURE
-            while (!string.IsNullOrEmpty(folderPath) && folderPath != App.Settings.Paths.ComicsPath)
+            while (!string.IsNullOrEmpty(folderPath) && folderPath != App.Settings.Paths.LibraryPath)
             {
 
                // CHECK IF FOLDER ALREADY EXISTS
@@ -305,7 +305,7 @@ namespace ComicsShelf.Startup
                // ADD FOLDER
                comicFolder = new Database.ComicFolders
                {
-                  LibraryPath = App.Settings.Paths.ComicsPath,
+                  LibraryPath = App.Settings.Paths.LibraryPath,
                   FullPath = folderPath,
                   ParentPath = folderParent,
                   Text = folderText

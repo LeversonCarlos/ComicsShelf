@@ -4,7 +4,7 @@
    {
       public string Separator { get; set; }
 
-      public string ComicsPath { get; set; }
+      public string LibraryPath { get; set; }
 
       internal string DataPath { get; set; }
 

@@ -8,7 +8,7 @@ namespace ComicsShelf.Database
       [PrimaryKey, AutoIncrement]
       public int ConfigID { get; set; }
 
-      public string ComicsPath { get; set; }
+      public string LibraryPath { get; set; }
 
    }
 }

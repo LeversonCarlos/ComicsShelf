@@ -8,7 +8,7 @@ namespace ComicsShelf.Helpers
       string PathSeparator { get; }
       Task<string> GetCachePath();
       Task<string> GetDataPath();
-      Task<string> GetComicsPath(string comicsPath);
+      Task<string> GetLibraryPath(string libraryPath);
       Task<string[]> GetFiles(string path);
       Task<System.IO.Compression.ZipArchive> GetZipArchive(Settings.Settings settings, File.FileData comicFile);
       Task Thumbnail(System.IO.Stream imageStream, string imagePath);
