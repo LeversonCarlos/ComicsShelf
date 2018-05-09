@@ -147,8 +147,8 @@ namespace ComicsShelf.Startup
             this.Notify();
 
             // LOAD DATABASE DATA
-            this.ComicFiles = App.Database.Table<Database.ComicFiles>().ToList();
-            this.ComicFolders = App.Database.Table<Database.ComicFolders>().ToList();
+            this.ComicFiles = App.Database.Table<Database.ComicFiles>().Where(x => x.LibraryPath == App.Settings.Paths.ComicsPath).ToList();
+            this.ComicFolders = App.Database.Table<Database.ComicFolders>().Where(x => x.LibraryPath == App.Settings.Paths.ComicsPath).ToList();
             this.ComicFoldersDictionary = new Dictionary<string, Folder.FolderData>();
 
             // SEARCH NEW COMIC FILES
@@ -237,7 +237,13 @@ namespace ComicsShelf.Startup
          {
 
             // INITIALIZE
-            var comicFile = new Database.ComicFiles { FullPath = filePath, Available = true };
+            var comicFile = new Database.ComicFiles
+            {
+               LibraryPath = App.Settings.Paths.ComicsPath,
+               FullPath = filePath,
+               Available = true
+            };
+            comicFile.Key = $"{comicFile.LibraryPath}|{comicFile.FullPath}";
 
             // PARENT PATH
             var fileName = System.IO.Path.GetFileName(filePath);
@@ -248,8 +254,10 @@ namespace ComicsShelf.Startup
             // TEXT
             comicFile.Text = System.IO.Path.GetFileNameWithoutExtension(filePath)
                .Trim();
-            comicFile.SmallText = comicFile.Text
-               .Replace(folderText, "");
+            if (!string.IsNullOrEmpty(folderText)) {
+               comicFile.SmallText = comicFile.Text
+                  .Replace(folderText, "");
+            }
             if (string.IsNullOrEmpty(comicFile.SmallText))
             { comicFile.SmallText = comicFile.Text; }
 
@@ -297,10 +305,12 @@ namespace ComicsShelf.Startup
                // ADD FOLDER
                comicFolder = new Database.ComicFolders
                {
+                  LibraryPath = App.Settings.Paths.ComicsPath,
                   FullPath = folderPath,
-                  Text = folderText,
-                  ParentPath = folderParent
+                  ParentPath = folderParent,
+                  Text = folderText
                };
+               comicFolder.Key = $"{comicFolder.LibraryPath}|{comicFolder.FullPath}";
                this.ComicFolders.Add(comicFolder);
                App.Database.Insert(comicFolder);
 

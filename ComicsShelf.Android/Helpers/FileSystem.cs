@@ -34,9 +34,13 @@ namespace ComicsShelf.Droid
       #region GetComicsPath
       public async Task<string> GetComicsPath(string comicsPath)
       {
-         if (string.IsNullOrEmpty(comicsPath) || !System.IO.Directory.Exists(comicsPath))
-         { return Android.OS.Environment.ExternalStorageDirectory.Path; }
-         else { return comicsPath; }
+
+         if (!string.IsNullOrEmpty(comicsPath) && System.IO.Directory.Exists(comicsPath))
+         { return comicsPath; }
+
+         var fileDialog = new FileDialog(Forms.Context, FileDialog.FileSelectionMode.FolderChooseRoot);
+         comicsPath = await fileDialog.GetFileOrDirectoryAsync(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
+         return comicsPath;
       }
       #endregion
 
