@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:Page 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Class="ComicsShelf.Tools.ToolsPage">
+   <controls:Page.Content>
+      <StackLayout Padding="10" Spacing="10">
+
+         <StackLayout Spacing="5">
+            <Label Text="{controls:Translate Text=TOOLS_LIBRARY_LABEL}" HorizontalOptions="Center" FontSize="Large" />
+            <Label Text="{Binding Data.LibraryPath}" HorizontalOptions="Center" FontAttributes="Bold" />
+            <Button Text="{controls:Translate Text=TOOLS_LIBRARY_COMMAND}" Command="{Binding LibraryTappedCommand}" HorizontalOptions="Center" />
+         </StackLayout>
+
+         <StackLayout IsVisible="{Binding Data.IsRunning}" >
+            <Label Text="{controls:Translate Text=TOOLS_REFRESH_LABEL}" HorizontalOptions="Center" FontSize="Large" />
+            <Label Text="{Binding Data.Text}" HorizontalOptions="Center" FontAttributes="Bold" />
+            <ProgressBar Progress="{Binding Data.Progress}" />
+            <Label Text="{Binding Data.Details}" HorizontalOptions="Center" FontSize="Micro" />
+         </StackLayout>
+
+      </StackLayout>
+   </controls:Page.Content>
+</controls:Page>

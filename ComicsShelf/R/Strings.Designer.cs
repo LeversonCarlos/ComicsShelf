@@ -241,6 +241,42 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading current database data.
+        /// </summary>
+        internal static string SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE {
+            get {
+                return ResourceManager.GetString("SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing the files structure.
+        /// </summary>
+        internal static string SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE {
+            get {
+                return ResourceManager.GetString("SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing the folders structure.
+        /// </summary>
+        internal static string SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE {
+            get {
+                return ResourceManager.GetString("SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching for comic files on the device.
+        /// </summary>
+        internal static string SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE {
+            get {
+                return ResourceManager.GetString("SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Defining Comics Path.
         /// </summary>
         internal static string STARTUP_DEFINING_COMICS_PATH_MESSAGE {
@@ -268,29 +304,11 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preparing the files structure.
+        ///   Looks up a localized string similar to Tools.
         /// </summary>
-        internal static string STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE {
+        internal static string TOOLS_PAGE_TITLE {
             get {
-                return ResourceManager.GetString("STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preparing the folders structure.
-        /// </summary>
-        internal static string STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Searching Comic Files on the Device.
-        /// </summary>
-        internal static string STARTUP_SEARCHING_COMIC_FILES_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_SEARCHING_COMIC_FILES_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("TOOLS_PAGE_TITLE", resourceCulture);
             }
         }
     }

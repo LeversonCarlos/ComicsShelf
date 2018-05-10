@@ -177,6 +177,18 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Top Rated Comics</value>
   </data>
+  <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
+    <value>Loading current database data</value>
+  </data>
+  <data name="SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
+    <value>Preparing the files structure</value>
+  </data>
+  <data name="SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
+    <value>Preparing the folders structure</value>
+  </data>
+  <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
+    <value>Searching for comic files on the device</value>
+  </data>
   <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
     <value>Defining Comics Path</value>
   </data>
@@ -186,13 +198,7 @@
   <data name="STARTUP_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
     <value>Loading Settings</value>
   </data>
-  <data name="STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparing the files structure</value>
-  </data>
-  <data name="STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparing the folders structure</value>
-  </data>
-  <data name="STARTUP_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
-    <value>Searching Comic Files on the Device</value>
+  <data name="TOOLS_PAGE_TITLE" xml:space="preserve">
+    <value>Tools</value>
   </data>
 </root>

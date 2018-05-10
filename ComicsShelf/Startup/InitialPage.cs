@@ -16,27 +16,5 @@ namespace ComicsShelf
          };
       }
 
-      /*
-      protected override void OnAppearing()
-      {
-         try
-         {
-            base.OnAppearing();
-
-            // INSTANCE 
-            var vm = new Startup.StartupVM();
-            var view = Activator.CreateInstance(vm.ViewType) as Page;
-            view.BindingContext = vm;
-
-            // NAVIGATION
-            var mainPage = Application.Current.MainPage as Page;
-            var navigation = mainPage.Navigation;
-            navigation.PushModalAsync(view);
-
-         }
-         catch (Exception ex) { throw; }
-      }
-      */
-
    }
 }
