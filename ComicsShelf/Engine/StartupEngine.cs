@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
 {
-   internal class StartupEngine : BaseEngine, IDisposable
+   internal class Startup : BaseEngine, IDisposable
    {
 
       #region Execute
@@ -11,8 +11,8 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            Console.WriteLine("StartupEngine: Start");
-            using (var engine = new StartupEngine())
+            Console.WriteLine("Startup Engine Start");
+            using (var engine = new Startup())
             {
                App.RootFolder = new Home.HomeData { Text = "Root" };
                await engine.LoadSettings();
@@ -22,10 +22,10 @@ namespace ComicsShelf.Engine
                if (!validateLibraryPath)
                { await Helpers.ViewModels.NavVM.PushAsync<Tools.ToolsVM>(false); }
                else
-               { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => SearchEngine.Execute()); }
+               { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); }
 
             }
-            Console.WriteLine("StartupEngine: Finish");
+            Console.WriteLine("Startup Engine Finish");
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }

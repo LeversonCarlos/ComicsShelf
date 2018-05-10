@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
 {
-   internal class LibraryEngine : BaseEngine
+   internal class Library : BaseEngine
    {
 
       #region Execute
@@ -12,14 +12,14 @@ namespace ComicsShelf.Engine
          try
          {
             var result = false;
-            Console.WriteLine("LibraryEngine: Start");
-            using (var engine = new LibraryEngine())
+            Console.WriteLine("Library Engine Start");
+            using (var engine = new Library())
             {
                result = await engine.DefineLibraryPath();
                if (result)
-               { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => SearchEngine.Execute()); }
+               { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); }
             }
-            Console.WriteLine("LibraryEngine: Finish");
+            Console.WriteLine("Library Engine Finish");
             return result;
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); return false; }

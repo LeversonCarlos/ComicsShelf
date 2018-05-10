@@ -53,7 +53,7 @@ namespace ComicsShelf
       #endregion
 
       protected override void OnStart ()
-      { Engine.StartupEngine.Execute(); }
+      { Engine.Startup.Execute(); }
 
       protected override void OnSleep ()
 		{ /* Handle when your app sleeps */ }

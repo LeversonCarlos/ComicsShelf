@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
 {
-   internal class SearchEngine : BaseEngine, IDisposable
+   internal class Search : BaseEngine, IDisposable
    {
 
       #region Execute
@@ -13,8 +13,8 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            Console.WriteLine("SearchEngine: Start");
-            using (var engine = new SearchEngine())
+            Console.WriteLine("Search Engine Start");
+            using (var engine = new Search())
             {
                await engine.LoadDatabaseData();
                await engine.SearchComicFiles();
@@ -24,7 +24,7 @@ namespace ComicsShelf.Engine
                await engine.DefineFirstFolder();
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
             }
-            Console.WriteLine("SearchEngine: Finish");
+            Console.WriteLine("Search Engine Finish");
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
