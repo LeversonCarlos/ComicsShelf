@@ -12,14 +12,14 @@ namespace ComicsShelf.Engine
          try
          {
             var result = false;
-            Console.WriteLine("Library Engine Start");
+            System.Diagnostics.Debug.WriteLine("Library Engine Start");
             using (var engine = new Library())
             {
                result = await engine.DefineLibraryPath();
                if (result)
                { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); }
             }
-            Console.WriteLine("Library Engine Finish");
+            System.Diagnostics.Debug.WriteLine("Library Engine Finish");
             return result;
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); return false; }

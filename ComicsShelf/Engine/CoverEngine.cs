@@ -8,19 +8,21 @@ namespace ComicsShelf.Engine
 {
    internal class Cover : BaseEngine
    {
+      private Dictionary<string, Folder.FolderData> ComicFoldersDictionary { get; set; }
 
       #region Execute
-      public static async void Execute()
+      public static async void Execute(Dictionary<string, Folder.FolderData> comicFoldersDictionary)
       {
          try
          {
-            Console.WriteLine("Cover Engine Start");
+            System.Diagnostics.Debug.WriteLine("Cover Engine Start");
             using (var engine = new Cover())
             {
+               engine.ComicFoldersDictionary = comicFoldersDictionary;
                await engine.ExtractComicData();
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
             }
-            Console.WriteLine("Cover Engine Finish");
+            System.Diagnostics.Debug.WriteLine("Cover Engine Finish");
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
@@ -41,7 +43,8 @@ namespace ComicsShelf.Engine
                var progress = ((double)fileIndex / (double)filesQuantity);
                this.Notify(file.Text, progress);
 
-               if ((progress % (double)10) == 0)
+               var progressPercent = Math.Round((Math.Round(progress, 2) % (double)0.10), 2);
+               if (progressPercent == (double)0)
                { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute()); }
 
                if (!await this.DataAlreadyExists(file))
@@ -59,9 +62,9 @@ namespace ComicsShelf.Engine
       #region DataAlreadyExists
       private async Task< bool> DataAlreadyExists(File.FileData file)
       {
+         if (file.FullPath.ToLower().EndsWith(".cbr")) { return true; }
          if (file.PersistentData != null && string.IsNullOrEmpty(file.PersistentData.ReleaseDate)) { return false; }
          if (await Task.Run(() => System.IO.File.Exists(file.CoverPath))) { return true; }
-         if (file.FullPath.ToLower().EndsWith(".cbr")) { return true; }
          return false;
       }
       #endregion
@@ -104,7 +107,6 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            /*
 
             // APPLY COVER PATH TO THE FOLDER STRUCTURE
             var parentFolder = this.ComicFoldersDictionary[file.PersistentData.ParentPath];
@@ -120,7 +122,6 @@ namespace ComicsShelf.Engine
                parentFolder = this.ComicFoldersDictionary[parentFolder.PersistentData.ParentPath];
             }
 
-            */
          }
          catch (Exception ex) { throw; }
       }

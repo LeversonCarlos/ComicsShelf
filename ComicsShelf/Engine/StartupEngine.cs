@@ -11,7 +11,7 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            Console.WriteLine("Startup Engine Start");
+            System.Diagnostics.Debug.WriteLine("Startup Engine Start");
             using (var engine = new Startup())
             {
                App.RootFolder = new Home.HomeData { Text = "Root" };
@@ -25,7 +25,7 @@ namespace ComicsShelf.Engine
                { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); }
 
             }
-            Console.WriteLine("Startup Engine Finish");
+            System.Diagnostics.Debug.WriteLine("Startup Engine Finish");
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }

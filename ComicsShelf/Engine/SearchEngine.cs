@@ -13,7 +13,7 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            Console.WriteLine("Search Engine Start");
+            System.Diagnostics.Debug.WriteLine("Search Engine Start");
             using (var engine = new Search())
             {
                await engine.LoadDatabaseData();
@@ -23,9 +23,9 @@ namespace ComicsShelf.Engine
                await engine.AnalyseFoldersAvailability();
                await engine.DefineFirstFolder();
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
-               Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Cover.Execute());
+               Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Cover.Execute(engine.ComicFoldersDictionary/*.ToDictionary(x=> x.Key, x=> x.Value)*/));
             }
-            Console.WriteLine("Search Engine Finish");
+            System.Diagnostics.Debug.WriteLine("Search Engine Finish");
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
@@ -348,7 +348,7 @@ namespace ComicsShelf.Engine
          base.Dispose();
          this.ComicFiles = null;
          this.ComicFolders = null;
-         this.ComicFoldersDictionary = null;
+         // this.ComicFoldersDictionary = null;
       }
       #endregion
 

@@ -9,12 +9,6 @@
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
 
-            <StackLayout IsVisible="{Binding Data.StepData.IsRunning}" Padding="50,10" >
-               <Label Text="{Binding Data.StepData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Default"></Label>
-               <ProgressBar Progress="{Binding Data.StepData.Progress}" HorizontalOptions="FillAndExpand"></ProgressBar>
-               <Label Text="{Binding Data.StepData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
-            </StackLayout>
-
             <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasReadingFiles}">
                <Label Style="{StaticResource CoverListMainTitle}"
                       Text="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" />
@@ -90,7 +84,13 @@
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="80" IsVisible="{Binding Data.NoComics}" >
+            <StackLayout IsVisible="{Binding Data.StepData.IsRunning}" Padding="80,10" >
+               <Label Text="{Binding Data.StepData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Default"></Label>
+               <ProgressBar Progress="{Binding Data.StepData.Progress}" HorizontalOptions="FillAndExpand"></ProgressBar>
+               <Label Text="{Binding Data.StepData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding Data.NoComics}" Padding="80,10" >
                <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" TextColor="{StaticResource colorAccent}"></Label>
                <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small"></Label>
             </StackLayout>
