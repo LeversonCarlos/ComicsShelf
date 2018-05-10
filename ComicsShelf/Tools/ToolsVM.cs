@@ -19,6 +19,7 @@ namespace ComicsShelf.Tools
             this.Data.Text = data.Text;
             this.Data.Details = data.Details;
             this.Data.Progress = data.Progress;
+            this.Data.IsRunning = data.IsRunning;
          });
       }
       #endregion

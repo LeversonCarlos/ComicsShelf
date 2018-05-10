@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
@@ -19,7 +17,7 @@ namespace ComicsShelf.Engine
             {
                result = await engine.DefineLibraryPath();
                if (result)
-               { Task.Run(() => SearchEngine.Execute()); }               
+               { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => SearchEngine.Execute()); }
             }
             Console.WriteLine("LibraryEngine: Finish");
             return result;

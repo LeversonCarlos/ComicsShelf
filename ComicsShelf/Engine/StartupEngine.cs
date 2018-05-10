@@ -22,7 +22,7 @@ namespace ComicsShelf.Engine
                if (!validateLibraryPath)
                { await Helpers.ViewModels.NavVM.PushAsync<Tools.ToolsVM>(false); }
                else
-               { Task.Run(() => SearchEngine.Execute()); }
+               { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => SearchEngine.Execute()); }
 
             }
             Console.WriteLine("StartupEngine: Finish");

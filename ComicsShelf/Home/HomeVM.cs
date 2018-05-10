@@ -18,12 +18,20 @@ namespace ComicsShelf.Home
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
          this.SizeChanged += this.OnSizeChanged;
 
-         this.RefreshData = new Startup.StartupData();
-         MessagingCenter.Subscribe<Startup.StartupData>(this, "Startup", this.Refreshing);
+         MessagingCenter.Subscribe<Engine.StepData>(this, Engine.StepData.KEY, (data) =>
+         {
+            // this.Data.StepData.Step = data.Step;
+            this.Data.StepData.Text = data.Text;
+            this.Data.StepData.Details = data.Details;
+            this.Data.StepData.Progress = data.Progress;
+            this.Data.StepData.IsRunning = data.IsRunning;
+         });
+         /*
          this.Initialize += () => {
             if (this.RefreshData.Step == Startup.StartupData.enumStartupStep.Finished)
             { Startup.StartupEngine.Refresh(); }
          };
+         */
       }
       #endregion
 
@@ -50,17 +58,6 @@ namespace ComicsShelf.Home
             await PushAsync<File.FileSplashVM>(fileItem);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
-      }
-      #endregion
-
-      #region RefreshEngine
-      public Startup.StartupData RefreshData { get; set; }
-      private void Refreshing(Startup.StartupData data)
-      {
-         this.RefreshData.Step = data.Step;
-         this.RefreshData.Text = data.Text;
-         this.RefreshData.Details = data.Details;
-         this.RefreshData.Progress = data.Progress;
       }
       #endregion
 

@@ -16,7 +16,7 @@ namespace ComicsShelf.Engine
          {
             Text = string.Empty,
             Details = string.Empty,
-            IsRunning = true
+            IsRunning = false
          };
          this.Notify();
       }
@@ -26,6 +26,7 @@ namespace ComicsShelf.Engine
          this.Data.Text = text;
          this.Data.Details = string.Empty;
          this.Data.Progress = 0;
+         this.Data.IsRunning = true;
          this.Notify();
       }
 
@@ -43,6 +44,8 @@ namespace ComicsShelf.Engine
 
       public void Dispose()
       {
+         this.Data.IsRunning = false;
+         this.Notify();
          this.Data = null;
          this.FileSystem = null;
       }
