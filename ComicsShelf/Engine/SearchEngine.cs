@@ -22,6 +22,7 @@ namespace ComicsShelf.Engine
                await engine.PrepareFilesStructure();
                await engine.AnalyseFoldersAvailability();
                await engine.DefineFirstFolder();
+               Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
             }
             Console.WriteLine("SearchEngine: Finish");
          }
