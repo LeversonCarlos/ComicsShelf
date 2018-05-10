@@ -31,15 +31,20 @@ namespace ComicsShelf.Droid
       }
       #endregion
 
-      #region GetLibraryPath
-      public async Task<string> GetLibraryPath(string libraryPath)
+      #region ValidateLibraryPath
+      public async Task<bool> ValidateLibraryPath(string libraryPath)
       {
-
-         if (!string.IsNullOrEmpty(libraryPath) && System.IO.Directory.Exists(libraryPath))
-         { return libraryPath; }
-
+         if (string.IsNullOrEmpty(libraryPath)) { return false; }
+         if (!System.IO.Directory.Exists(libraryPath)) { return false; }
+         return true;
+      }
+      #endregion
+      
+      #region GetLibraryPath
+      public async Task<string> GetLibraryPath()
+      {
          var fileDialog = new FileDialog(Forms.Context, FileDialog.FileSelectionMode.FolderChooseRoot);
-         libraryPath = await fileDialog.GetFileOrDirectoryAsync(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
+         var libraryPath = await fileDialog.GetFileOrDirectoryAsync(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
          return libraryPath;
       }
       #endregion

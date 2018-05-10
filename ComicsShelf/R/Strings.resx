@@ -189,14 +189,20 @@
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Searching for comic files on the device</value>
   </data>
-  <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
-    <value>Defining Comics Path</value>
+  <data name="STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE" xml:space="preserve">
+    <value>Loading settings database</value>
+  </data>
+  <data name="STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE" xml:space="preserve">
+    <value>Validating the library path</value>
   </data>
   <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
     <value>Extracting comics cover</value>
   </data>
-  <data name="STARTUP_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
-    <value>Loading Settings</value>
+  <data name="TOOLS_LIBRARY_COMMAND" xml:space="preserve">
+    <value>Select the folder for the library</value>
+  </data>
+  <data name="TOOLS_LIBRARY_LABEL" xml:space="preserve">
+    <value>Comic Books Library</value>
   </data>
   <data name="TOOLS_PAGE_TITLE" xml:space="preserve">
     <value>Tools</value>

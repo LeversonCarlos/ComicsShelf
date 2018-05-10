@@ -30,7 +30,8 @@ namespace ComicsShelf.Tools
          try
          {
 
-            // TODO
+            if (await Engine.LibraryEngine.Execute())
+            { await Helpers.ViewModels.NavVM.PopAsync(); }
 
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }

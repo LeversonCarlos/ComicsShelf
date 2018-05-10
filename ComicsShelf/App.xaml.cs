@@ -10,17 +10,6 @@ namespace ComicsShelf
       {
          InitializeComponent();
          MainPage = new NavigationPage(new InitialPage());
-         /*
-         ((NavigationPage)MainPage).Popped += (object sender, NavigationEventArgs e) => {
-
-            if (e.Page.BindingContext != null && e.Page.BindingContext.GetType() == typeof(Helpers.ViewModels.BaseVM))
-            {
-               ((Helpers.ViewModels.BaseVM)e.Page.BindingContext).Dispose();
-               e.Page.BindingContext = null;
-            }
-            GC.Collect();
-         };
-         */
       }
       #endregion
 
@@ -64,7 +53,7 @@ namespace ComicsShelf
       #endregion
 
       protected override void OnStart ()
-      { Startup.StartupEngine.Start(); }
+      { Engine.StartupEngine.Execute(); }
 
       protected override void OnSleep ()
 		{ /* Handle when your app sleeps */ }

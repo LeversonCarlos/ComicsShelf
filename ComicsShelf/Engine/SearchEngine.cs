@@ -13,6 +13,7 @@ namespace ComicsShelf.Engine
       {
          try
          {
+            Console.WriteLine("SearchEngine: Start");
             using (var engine = new SearchEngine())
             {
                await engine.LoadDatabaseData();
@@ -21,9 +22,8 @@ namespace ComicsShelf.Engine
                await engine.PrepareFilesStructure();
                await engine.AnalyseFoldersAvailability();
                await engine.DefineFirstFolder();
-               // await engine.AnalyseStatistics();
-               // await engine.ExtractComicCover();
             }
+            Console.WriteLine("SearchEngine: Finish");
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }

@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using System;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Database
 {
@@ -8,14 +9,17 @@ namespace ComicsShelf.Database
 
       #region Connector
       public SQLiteConnection Connection { get; set; }
-      public void InitializeConnector(string path)
+      public async Task InitializeConnector(string path)
       {
          try
          {
-            this.Connection = new SQLiteConnection(path);
-            this.Connection.CreateTable<Configs>();
-            this.Connection.CreateTable<ComicFolders>();
-            this.Connection.CreateTable<ComicFiles>();
+            await Task.Run(() =>
+            {
+               this.Connection = new SQLiteConnection(path);
+               this.Connection.CreateTable<Configs>();
+               this.Connection.CreateTable<ComicFolders>();
+               this.Connection.CreateTable<ComicFiles>();
+            });
          }
          catch (Exception ex) { throw; }
       }

@@ -277,11 +277,20 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Defining Comics Path.
+        ///   Looks up a localized string similar to Loading settings database.
         /// </summary>
-        internal static string STARTUP_DEFINING_COMICS_PATH_MESSAGE {
+        internal static string STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_DEFINING_COMICS_PATH_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validating the library path.
+        /// </summary>
+        internal static string STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE", resourceCulture);
             }
         }
         
@@ -295,11 +304,20 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading Settings.
+        ///   Looks up a localized string similar to Select the folder for the library.
         /// </summary>
-        internal static string STARTUP_LOADING_SETTINGS_MESSAGE {
+        internal static string TOOLS_LIBRARY_COMMAND {
             get {
-                return ResourceManager.GetString("STARTUP_LOADING_SETTINGS_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("TOOLS_LIBRARY_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comic Books Library.
+        /// </summary>
+        internal static string TOOLS_LIBRARY_LABEL {
+            get {
+                return ResourceManager.GetString("TOOLS_LIBRARY_LABEL", resourceCulture);
             }
         }
         

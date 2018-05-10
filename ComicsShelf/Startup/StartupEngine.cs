@@ -22,7 +22,7 @@ namespace ComicsShelf.Startup
       #endregion
 
 
-
+      /*
       #region Start
       public static async void Start()
       {
@@ -46,7 +46,9 @@ namespace ComicsShelf.Startup
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
       #endregion
+      */
 
+      /*
       #region Search
       public static async void Search()
       {
@@ -62,6 +64,7 @@ namespace ComicsShelf.Startup
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
       #endregion
+      */
 
       #region Refresh
       public static async void Refresh()
@@ -85,53 +88,6 @@ namespace ComicsShelf.Startup
       private StartupData Data { get; set; }
       #endregion
 
-
-      #region LoadSettings
-      private async Task LoadSettings()
-      {
-         try
-         {
-            this.Data.Text = R.Strings.STARTUP_LOADING_SETTINGS_MESSAGE;
-            this.Notify();
-
-            App.Settings = new Helpers.Settings.Settings();
-            await App.Settings.InitializePath();
-
-            App.Database = new Database.Connector();
-            App.Database.InitializeConnector(App.Settings.Paths.DatabasePath);
-         }
-         catch (Exception ex) { throw; }
-      }
-      #endregion
-
-      #region DefineComicsPath
-      private async Task DefineComicsPath()
-      {
-         try
-         {
-            this.Data.Text = R.Strings.STARTUP_DEFINING_COMICS_PATH_MESSAGE;
-            this.Notify();
-
-            /* LOAD CONFIGS DATA */
-            var configsTable = App.Database.Table<Database.Configs>();
-            var configs = configsTable.FirstOrDefault();
-            if (configs == null)
-            {
-               configs = new Database.Configs();
-               App.Database.Insert(configs);
-            }
-
-            /* VALIDATE COMICS PATH */
-            configs.LibraryPath = await this.FileSystem.GetLibraryPath(configs.LibraryPath);
-
-            /* STORE DATA */
-            App.Database.Update(configs);
-            App.Settings.Paths.LibraryPath = configs.LibraryPath;
-
-         }
-         catch (Exception ex) { throw; }
-      }
-      #endregion
 
       #region ExtractComicCover
 
