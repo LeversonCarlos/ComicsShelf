@@ -112,6 +112,11 @@
     <None Include="ComicsShelf.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon_Library.scale-100.png" />
+    <Content Include="icon_Library.scale-125.png" />
+    <Content Include="icon_Library.scale-150.png" />
+    <Content Include="icon_Library.scale-200.png" />
+    <Content Include="icon_Library.scale-400.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />

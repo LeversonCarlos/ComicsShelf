@@ -9,18 +9,16 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
-         MainPage = new NavigationPage(new InitialPage());
-         /*
-         ((NavigationPage)MainPage).Popped += (object sender, NavigationEventArgs e) => {
-
-            if (e.Page.BindingContext != null && e.Page.BindingContext.GetType() == typeof(Helpers.ViewModels.BaseVM))
+         MainPage = new NavigationPage(new ContentPage
+         {
+            Title = R.Strings.AppTitle,
+            Content = new Label
             {
-               ((Helpers.ViewModels.BaseVM)e.Page.BindingContext).Dispose();
-               e.Page.BindingContext = null;
+               Text = R.Strings.BASE_WAIT_MESSAGE,
+               HorizontalOptions = LayoutOptions.CenterAndExpand,
+               VerticalOptions = LayoutOptions.CenterAndExpand
             }
-            GC.Collect();
-         };
-         */
+         });
       }
       #endregion
 
@@ -64,7 +62,7 @@ namespace ComicsShelf
       #endregion
 
       protected override void OnStart ()
-      { Startup.StartupEngine.Start(); }
+      { Engine.Startup.Execute(); }
 
       protected override void OnSleep ()
 		{ /* Handle when your app sleeps */ }

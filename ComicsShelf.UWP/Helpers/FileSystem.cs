@@ -32,12 +32,23 @@ namespace ComicsShelf.UWP
       }
       #endregion
 
+      #region ValidateLibraryPath
+      public async Task<bool> ValidateLibraryPath(string libraryPath)
+      {
+         if (string.IsNullOrEmpty(libraryPath)) { return false; }
+         Windows.Storage.StorageFolder folder = null;
+         try
+         { folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(libraryPath); }
+         catch { try { StorageApplicationPermissions.FutureAccessList.Remove(libraryPath); } catch { } }
+         return (folder != null);
+      }
+      #endregion
+
       #region GetLibraryPath
-      public async Task<string> GetLibraryPath(string libraryPath)
+      public async Task<string> GetLibraryPath()
       {
          try
-         {
-            if (await this.PathExists(libraryPath)) { return libraryPath; }
+         { 
 
             var folderPicker = new FolderPicker();
             folderPicker.SuggestedStartLocation = PickerLocationId.Desktop;
@@ -53,6 +64,7 @@ namespace ComicsShelf.UWP
          catch (Exception ex) { throw; }
       }
       #endregion
+
 
       #region GetFiles
       public async Task<string[]> GetFiles(string path)
@@ -84,19 +96,6 @@ namespace ComicsShelf.UWP
 
          }
          catch (Exception ex) { throw; }
-      }
-      #endregion
-
-
-      #region PathExists
-      private async Task<bool> PathExists(string path)
-      {
-         if (string.IsNullOrEmpty(path)) { return false; }
-         Windows.Storage.StorageFolder folder = null;
-         try
-         { folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(path); }
-         catch { try { StorageApplicationPermissions.FutureAccessList.Remove(path); } catch { } }
-         return (folder != null);
       }
       #endregion
 

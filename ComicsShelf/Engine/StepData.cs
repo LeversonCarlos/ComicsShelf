@@ -1,7 +1,8 @@
-﻿namespace ComicsShelf.Startup
+﻿namespace ComicsShelf.Engine
 {
-   public class StartupData : Helpers.Observables.ObservableObject
+   public class StepData : Helpers.Observables.ObservableObject
    {
+      internal const string KEY = "Engine";
 
       #region Text
       string _Text;
@@ -28,17 +29,6 @@
          get { return this._Progress; }
          set { this.SetProperty(ref this._Progress, value); }
       }
-      #endregion
-
-
-      #region Step
-      enumStartupStep _Step = enumStartupStep.None;
-      public enumStartupStep Step
-      {
-         get { return this._Step; }
-         set { this.SetProperty(ref this._Step, value); this.IsRunning = (value == enumStartupStep.Running); }
-      }
-      public enum enumStartupStep : short { None, Running, Finished }
       #endregion
 
       #region IsRunning

@@ -84,9 +84,15 @@
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="80" IsVisible="{Binding Data.NoComics}" >
-               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" TextColor="{StaticResource colorAccent}"></Label>
-               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small"></Label>
+            <StackLayout IsVisible="{Binding Data.StepData.IsRunning}" Padding="80,10" >
+               <Label Text="{Binding Data.StepData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Default" />
+               <ProgressBar Progress="{Binding Data.StepData.Progress}" HorizontalOptions="FillAndExpand" />
+               <Label Text="{Binding Data.StepData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding Data.NoComics}" Padding="80,10" >
+               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" TextColor="{StaticResource colorAccent}" />
+               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small" />
             </StackLayout>
 
          </StackLayout>

@@ -14,16 +14,35 @@ namespace ComicsShelf.Home
          this.ViewType = typeof(HomePage);
 
          this.Data = args;
+         this.OpenLibraryCommand = new Command(async (item) => await this.OpenLibrary(item));
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
          this.SizeChanged += this.OnSizeChanged;
 
-         this.RefreshData = new Startup.StartupData();
-         MessagingCenter.Subscribe<Startup.StartupData>(this, "Startup", this.Refreshing);
-         this.Initialize += () => {
-            if (this.RefreshData.Step == Startup.StartupData.enumStartupStep.Finished)
-            { Startup.StartupEngine.Refresh(); }
+         MessagingCenter.Subscribe<Engine.StepData>(this, Engine.StepData.KEY, (data) =>
+         {
+            this.Data.StepData.Text = data.Text;
+            this.Data.StepData.Details = data.Details;
+            this.Data.StepData.Progress = data.Progress;
+            this.Data.StepData.IsRunning = data.IsRunning;
+         });
+
+         this.Initialize += () =>
+         {
+            if (!this.Data.StepData.IsRunning) { Engine.Statistics.Execute(); }
          };
+      }
+      #endregion
+
+      #region OpenLibrary
+      public Command OpenLibraryCommand { get; set; }
+      private async Task OpenLibrary(object item)
+      {
+         try
+         {
+            await Helpers.ViewModels.NavVM.PushAsync<Library.LibraryVM>(false);
+         }
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
       #endregion
 
@@ -50,17 +69,6 @@ namespace ComicsShelf.Home
             await PushAsync<File.FileSplashVM>(fileItem);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
-      }
-      #endregion
-
-      #region RefreshEngine
-      public Startup.StartupData RefreshData { get; set; }
-      private void Refreshing(Startup.StartupData data)
-      {
-         this.RefreshData.Step = data.Step;
-         this.RefreshData.Text = data.Text;
-         this.RefreshData.Details = data.Details;
-         this.RefreshData.Progress = data.Progress;
       }
       #endregion
 

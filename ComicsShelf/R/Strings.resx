@@ -120,6 +120,9 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Comics Shelf</value>
   </data>
+  <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
+    <value>Wait...</value>
+  </data>
   <data name="COMMAND_CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -159,6 +162,9 @@
   <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
     <value>All Comics List</value>
   </data>
+  <data name="HOME_LIBRARY_MENU" xml:space="preserve">
+    <value>Library</value>
+  </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
     <value>Put some cbz files on your device and start over again</value>
   </data>
@@ -171,28 +177,40 @@
   <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Recently Added Comics</value>
   </data>
-  <data name="HOME_TOOLS_PAGE_TITLE" xml:space="preserve">
-    <value>Tools</value>
-  </data>
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Top Rated Comics</value>
   </data>
-  <data name="STARTUP_DEFINING_COMICS_PATH_MESSAGE" xml:space="preserve">
-    <value>Defining Comics Path</value>
+  <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
+    <value>Comic Books Library</value>
   </data>
-  <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
-    <value>Extracting comics cover</value>
+  <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
+    <value>Click here to select the folder for the library</value>
   </data>
-  <data name="STARTUP_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
-    <value>Loading Settings</value>
+  <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
+    <value>You may legally and freely download some public domain comics on the the following site</value>
   </data>
-  <data name="STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
+  <data name="LIBRARY_UNDEFINED_FOLDER_MESSAGE" xml:space="preserve">
+    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension).</value>
+  </data>
+  <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
+    <value>Loading current database data</value>
+  </data>
+  <data name="SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
     <value>Preparing the files structure</value>
   </data>
-  <data name="STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
+  <data name="SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
     <value>Preparing the folders structure</value>
   </data>
-  <data name="STARTUP_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
-    <value>Searching Comic Files on the Device</value>
+  <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
+    <value>Searching for new comic files on the device</value>
+  </data>
+  <data name="STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE" xml:space="preserve">
+    <value>Loading settings database</value>
+  </data>
+  <data name="STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE" xml:space="preserve">
+    <value>Validating the library path</value>
+  </data>
+  <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
+    <value>Extracting comics cover for each new file... This may take a moment</value>
   </data>
 </root>

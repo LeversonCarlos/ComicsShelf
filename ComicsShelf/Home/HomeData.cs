@@ -6,6 +6,8 @@
       #region New
       public HomeData()
       {
+         this.StepData = new Engine.StepData();
+
          this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
          this.RecentFiles.CollectionChanged += this.RecentFiles_CollectionChanged;
 
@@ -79,6 +81,15 @@
       {
          get { return this._NoComics; }
          set { this.SetProperty(ref this._NoComics, value); }
+      }
+      #endregion
+
+      #region StepData
+      Engine.StepData _StepData;
+      public Engine.StepData StepData
+      {
+         get { return this._StepData; }
+         set { this.SetProperty(ref this._StepData, value); }
       }
       #endregion
 

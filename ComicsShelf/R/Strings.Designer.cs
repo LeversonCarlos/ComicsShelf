@@ -70,6 +70,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wait....
+        /// </summary>
+        internal static string BASE_WAIT_MESSAGE {
+            get {
+                return ResourceManager.GetString("BASE_WAIT_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string COMMAND_CANCEL {
@@ -187,6 +196,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
+        internal static string HOME_LIBRARY_MENU {
+            get {
+                return ResourceManager.GetString("HOME_LIBRARY_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Put some cbz files on your device and start over again.
         /// </summary>
         internal static string HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS {
@@ -223,15 +241,6 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tools.
-        /// </summary>
-        internal static string HOME_TOOLS_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_TOOLS_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Top Rated Comics.
         /// </summary>
         internal static string HOME_TOP_RATED_SECTION_TITLE {
@@ -241,56 +250,101 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Defining Comics Path.
+        ///   Looks up a localized string similar to Comic Books Library.
         /// </summary>
-        internal static string STARTUP_DEFINING_COMICS_PATH_MESSAGE {
+        internal static string LIBRARY_MAIN_TITLE {
             get {
-                return ResourceManager.GetString("STARTUP_DEFINING_COMICS_PATH_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("LIBRARY_MAIN_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting comics cover.
+        ///   Looks up a localized string similar to Click here to select the folder for the library.
         /// </summary>
-        internal static string STARTUP_EXTRACTING_COMICS_COVER_MESSAGE {
+        internal static string LIBRARY_SELECT_FOLDER_COMMAND {
             get {
-                return ResourceManager.GetString("STARTUP_EXTRACTING_COMICS_COVER_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("LIBRARY_SELECT_FOLDER_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading Settings.
+        ///   Looks up a localized string similar to You may legally and freely download some public domain comics on the the following site.
         /// </summary>
-        internal static string STARTUP_LOADING_SETTINGS_MESSAGE {
+        internal static string LIBRARY_SUGGESTION_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_LOADING_SETTINGS_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("LIBRARY_SUGGESTION_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension)..
+        /// </summary>
+        internal static string LIBRARY_UNDEFINED_FOLDER_MESSAGE {
+            get {
+                return ResourceManager.GetString("LIBRARY_UNDEFINED_FOLDER_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading current database data.
+        /// </summary>
+        internal static string SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE {
+            get {
+                return ResourceManager.GetString("SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Preparing the files structure.
         /// </summary>
-        internal static string STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE {
+        internal static string SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_PREPARING_FILES_STRUCTURE_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Preparing the folders structure.
         /// </summary>
-        internal static string STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE {
+        internal static string SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_PREPARING_FOLDERS_STRUCTURE_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Searching Comic Files on the Device.
+        ///   Looks up a localized string similar to Searching for new comic files on the device.
         /// </summary>
-        internal static string STARTUP_SEARCHING_COMIC_FILES_MESSAGE {
+        internal static string SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_SEARCHING_COMIC_FILES_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading settings database.
+        /// </summary>
+        internal static string STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validating the library path.
+        /// </summary>
+        internal static string STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extracting comics cover for each new file... This may take a moment.
+        /// </summary>
+        internal static string STARTUP_EXTRACTING_COMICS_COVER_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_EXTRACTING_COMICS_COVER_MESSAGE", resourceCulture);
             }
         }
     }
