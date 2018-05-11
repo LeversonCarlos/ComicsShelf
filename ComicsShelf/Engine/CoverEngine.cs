@@ -43,9 +43,11 @@ namespace ComicsShelf.Engine
                var progress = ((double)fileIndex / (double)filesQuantity);
                this.Notify(file.Text, progress);
 
+               /*
                var progressPercent = Math.Round((Math.Round(progress, 2) % (double)0.10), 2);
                if (progressPercent == (double)0)
                { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute()); }
+               */
 
                if (!await this.DataAlreadyExists(file))
                {

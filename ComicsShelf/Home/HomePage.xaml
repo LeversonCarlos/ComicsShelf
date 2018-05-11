@@ -7,5 +7,4 @@
    x:Class="ComicsShelf.Home.HomePage" >
    <home:FeaturedPage />
    <home:FoldersPage />
-   <home:ToolsPage />
 </TabbedPage>

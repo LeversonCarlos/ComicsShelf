@@ -10,7 +10,7 @@ namespace ComicsShelf
          Title = R.Strings.AppTitle;
          Content = new Label
          {
-            Text = "Loading...",
+            Text = R.Strings.BASE_WAIT_MESSAGE,
             HorizontalOptions = LayoutOptions.CenterAndExpand,
             VerticalOptions = LayoutOptions.CenterAndExpand
          };

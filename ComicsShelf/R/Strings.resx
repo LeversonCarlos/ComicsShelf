@@ -120,6 +120,9 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Comics Shelf</value>
   </data>
+  <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
+    <value>Wait...</value>
+  </data>
   <data name="COMMAND_CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -187,7 +190,7 @@
     <value>Preparing the folders structure</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
-    <value>Searching for comic files on the device</value>
+    <value>Searching for new comic files on the device</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE" xml:space="preserve">
     <value>Loading settings database</value>
@@ -196,7 +199,7 @@
     <value>Validating the library path</value>
   </data>
   <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
-    <value>Extracting comics cover</value>
+    <value>Extracting comics cover for each new file... This may take a moment</value>
   </data>
   <data name="TOOLS_LIBRARY_COMMAND" xml:space="preserve">
     <value>Select the folder for the library</value>

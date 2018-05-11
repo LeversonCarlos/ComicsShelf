@@ -14,7 +14,7 @@ namespace ComicsShelf.Engine
             System.Diagnostics.Debug.WriteLine("Startup Engine Start");
             using (var engine = new Startup())
             {
-               App.RootFolder = new Home.HomeData { Text = "Root" };
+               App.RootFolder = new Home.HomeData { Text = R.Strings.AppTitle };
                await engine.LoadSettings();
                await Helpers.ViewModels.NavVM.PushAsync<Home.HomeVM>(true, App.RootFolder);
 

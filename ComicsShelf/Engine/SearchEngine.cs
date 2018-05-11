@@ -23,7 +23,7 @@ namespace ComicsShelf.Engine
                await engine.AnalyseFoldersAvailability();
                await engine.DefineFirstFolder();
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
-               Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Cover.Execute(engine.ComicFoldersDictionary/*.ToDictionary(x=> x.Key, x=> x.Value)*/));
+               Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Cover.Execute(engine.ComicFoldersDictionary));
             }
             System.Diagnostics.Debug.WriteLine("Search Engine Finish");
          }

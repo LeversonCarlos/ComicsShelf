@@ -70,6 +70,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wait....
+        /// </summary>
+        internal static string BASE_WAIT_MESSAGE {
+            get {
+                return ResourceManager.GetString("BASE_WAIT_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string COMMAND_CANCEL {
@@ -268,7 +277,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Searching for comic files on the device.
+        ///   Looks up a localized string similar to Searching for new comic files on the device.
         /// </summary>
         internal static string SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE {
             get {
@@ -295,7 +304,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting comics cover.
+        ///   Looks up a localized string similar to Extracting comics cover for each new file... This may take a moment.
         /// </summary>
         internal static string STARTUP_EXTRACTING_COMICS_COVER_MESSAGE {
             get {
