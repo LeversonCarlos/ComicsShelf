@@ -20,7 +20,7 @@ namespace ComicsShelf.Engine
 
                var validateLibraryPath = await engine.ValidateLibraryPath();
                if (!validateLibraryPath)
-               { await Helpers.ViewModels.NavVM.PushAsync<Tools.ToolsVM>(false); }
+               { await Helpers.ViewModels.NavVM.PushAsync<ComicsShelf.Library.LibraryVM>(false); }
                else
                { Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); }
 

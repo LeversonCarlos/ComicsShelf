@@ -1,6 +1,6 @@
-﻿namespace ComicsShelf.Tools
+﻿namespace ComicsShelf.Library
 {
-   public class ToolsData : Engine.StepData
+   public class LibraryData : Engine.StepData
    {
 
       #region LibraryPath

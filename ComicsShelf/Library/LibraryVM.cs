@@ -2,17 +2,17 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Tools
+namespace ComicsShelf.Library
 {
-   public class ToolsVM : Helpers.ViewModels.DataVM<ToolsData>
+   public class LibraryVM : Helpers.ViewModels.DataVM<LibraryData>
    {
 
       #region New
-      public ToolsVM()
+      public LibraryVM()
       {
-         this.Title = R.Strings.TOOLS_PAGE_TITLE; ;
-         this.ViewType = typeof(ToolsPage);
-         this.Data = new ToolsData { LibraryPath = App.Settings.Paths.LibraryPath };
+         this.Title = R.Strings.LIBRARY_MAIN_TITLE; ;
+         this.ViewType = typeof(LibraryPage);
+         this.Data = new LibraryData { LibraryPath = App.Settings.Paths.LibraryPath };
          this.LibraryTappedCommand = new Command(async (item) => await this.LibraryTapped(item));
          this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
          MessagingCenter.Subscribe<Engine.StepData>(this, Engine.StepData.KEY, (data) =>

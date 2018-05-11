@@ -40,7 +40,7 @@ namespace ComicsShelf.Home
       {
          try
          {
-            await Helpers.ViewModels.NavVM.PushAsync<Tools.ToolsVM>(false);
+            await Helpers.ViewModels.NavVM.PushAsync<Library.LibraryVM>(false);
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }

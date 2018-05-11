@@ -241,20 +241,47 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tools.
-        /// </summary>
-        internal static string HOME_TOOLS_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_TOOLS_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Top Rated Comics.
         /// </summary>
         internal static string HOME_TOP_RATED_SECTION_TITLE {
             get {
                 return ResourceManager.GetString("HOME_TOP_RATED_SECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comic Books Library.
+        /// </summary>
+        internal static string LIBRARY_MAIN_TITLE {
+            get {
+                return ResourceManager.GetString("LIBRARY_MAIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to select the folder for the library.
+        /// </summary>
+        internal static string LIBRARY_SELECT_FOLDER_COMMAND {
+            get {
+                return ResourceManager.GetString("LIBRARY_SELECT_FOLDER_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You may legally and freely download some public domain comics on the the following site.
+        /// </summary>
+        internal static string LIBRARY_SUGGESTION_MESSAGE {
+            get {
+                return ResourceManager.GetString("LIBRARY_SUGGESTION_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension)..
+        /// </summary>
+        internal static string LIBRARY_UNDEFINED_FOLDER_MESSAGE {
+            get {
+                return ResourceManager.GetString("LIBRARY_UNDEFINED_FOLDER_MESSAGE", resourceCulture);
             }
         }
         
@@ -318,51 +345,6 @@ namespace ComicsShelf.R {
         internal static string STARTUP_EXTRACTING_COMICS_COVER_MESSAGE {
             get {
                 return ResourceManager.GetString("STARTUP_EXTRACTING_COMICS_COVER_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click here to select the folder for the library.
-        /// </summary>
-        internal static string TOOLS_LIBRARY_COMMAND {
-            get {
-                return ResourceManager.GetString("TOOLS_LIBRARY_COMMAND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension)..
-        /// </summary>
-        internal static string TOOLS_LIBRARY_EMPTY_MESSAGE {
-            get {
-                return ResourceManager.GetString("TOOLS_LIBRARY_EMPTY_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Comic Books Library.
-        /// </summary>
-        internal static string TOOLS_LIBRARY_LABEL {
-            get {
-                return ResourceManager.GetString("TOOLS_LIBRARY_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You may legally and freely download some public domain comics on the the following site.
-        /// </summary>
-        internal static string TOOLS_LIBRARY_SUGGESTION_MESSAGE {
-            get {
-                return ResourceManager.GetString("TOOLS_LIBRARY_SUGGESTION_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tools.
-        /// </summary>
-        internal static string TOOLS_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("TOOLS_PAGE_TITLE", resourceCulture);
             }
         }
     }

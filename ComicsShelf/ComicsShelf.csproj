@@ -31,6 +31,9 @@
     <Compile Update="File\FileSplashPage.xaml.cs">
       <DependentUpon>FileSplashPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Library\LibraryPage.xaml.cs">
+      <DependentUpon>LibraryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="R\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -61,7 +64,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Tools\ToolsPage.xaml">
+    <EmbeddedResource Update="Library\LibraryPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

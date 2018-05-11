@@ -177,11 +177,20 @@
   <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Recently Added Comics</value>
   </data>
-  <data name="HOME_TOOLS_PAGE_TITLE" xml:space="preserve">
-    <value>Tools</value>
-  </data>
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Top Rated Comics</value>
+  </data>
+  <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
+    <value>Comic Books Library</value>
+  </data>
+  <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
+    <value>Click here to select the folder for the library</value>
+  </data>
+  <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
+    <value>You may legally and freely download some public domain comics on the the following site</value>
+  </data>
+  <data name="LIBRARY_UNDEFINED_FOLDER_MESSAGE" xml:space="preserve">
+    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension).</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Loading current database data</value>
@@ -203,20 +212,5 @@
   </data>
   <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
     <value>Extracting comics cover for each new file... This may take a moment</value>
-  </data>
-  <data name="TOOLS_LIBRARY_COMMAND" xml:space="preserve">
-    <value>Click here to select the folder for the library</value>
-  </data>
-  <data name="TOOLS_LIBRARY_EMPTY_MESSAGE" xml:space="preserve">
-    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension).</value>
-  </data>
-  <data name="TOOLS_LIBRARY_LABEL" xml:space="preserve">
-    <value>Comic Books Library</value>
-  </data>
-  <data name="TOOLS_LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
-    <value>You may legally and freely download some public domain comics on the the following site</value>
-  </data>
-  <data name="TOOLS_PAGE_TITLE" xml:space="preserve">
-    <value>Tools</value>
   </data>
 </root>

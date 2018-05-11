@@ -3,19 +3,18 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
-   x:Class="ComicsShelf.Tools.ToolsPage">
+   x:Class="ComicsShelf.Library.LibraryPage">
    <controls:Page.Content>
       <StackLayout VerticalOptions="CenterAndExpand" Padding="80" Spacing="100" >
 
          <StackLayout Spacing="10">
-            <Label Text="{controls:Translate Text=TOOLS_LIBRARY_LABEL}" HorizontalOptions="Center" FontSize="Large" />
             <Label Text="{Binding Data.LibraryPath}" IsVisible="{Binding Data.IsLibraryDefined}" HorizontalOptions="Center" FontAttributes="Bold" />
-            <Label Text="{controls:Translate Text=TOOLS_LIBRARY_EMPTY_MESSAGE}" IsVisible="{Binding Data.IsLibraryEmpty}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-            <Button Text="{controls:Translate Text=TOOLS_LIBRARY_COMMAND}" Command="{Binding LibraryTappedCommand}" HorizontalOptions="Center" />
+            <Label Text="{controls:Translate Text=LIBRARY_UNDEFINED_FOLDER_MESSAGE}" IsVisible="{Binding Data.IsLibraryEmpty}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+            <Button Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding LibraryTappedCommand}" HorizontalOptions="Center" />
          </StackLayout>
 
          <StackLayout Spacing="5" >
-            <Label Text="{controls:Translate Text=TOOLS_LIBRARY_SUGGESTION_MESSAGE}" HorizontalOptions="Center" FontSize="Micro" />
+            <Label Text="{controls:Translate Text=LIBRARY_SUGGESTION_MESSAGE}" HorizontalOptions="Center" FontSize="Micro" />
             <Label Text="www.comicbookplus.com" HorizontalOptions="Center" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource colorAccent}" >
                <Label.GestureRecognizers>
                   <TapGestureRecognizer Command="{Binding LinkTappedCommand}" />

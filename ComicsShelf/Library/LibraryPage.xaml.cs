@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Tools
+namespace ComicsShelf.Library
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class ToolsPage : Helpers.Controls.Page
+   public partial class LibraryPage : Helpers.Controls.Page
    {
-      public ToolsPage()
+      public LibraryPage()
       {
          InitializeComponent();
       }
