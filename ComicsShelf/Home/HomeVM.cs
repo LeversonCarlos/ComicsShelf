@@ -20,18 +20,16 @@ namespace ComicsShelf.Home
 
          MessagingCenter.Subscribe<Engine.StepData>(this, Engine.StepData.KEY, (data) =>
          {
-            // this.Data.StepData.Step = data.Step;
             this.Data.StepData.Text = data.Text;
             this.Data.StepData.Details = data.Details;
             this.Data.StepData.Progress = data.Progress;
             this.Data.StepData.IsRunning = data.IsRunning;
          });
-         /*
-         this.Initialize += () => {
-            if (this.RefreshData.Step == Startup.StartupData.enumStartupStep.Finished)
-            { Startup.StartupEngine.Refresh(); }
+
+         this.Initialize += () =>
+         {
+            if (!this.Data.StepData.IsRunning) { Engine.Statistics.Execute(); }
          };
-         */
       }
       #endregion
 

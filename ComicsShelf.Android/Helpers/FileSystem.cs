@@ -18,6 +18,7 @@ namespace ComicsShelf.Droid
       public async Task<string> GetDataPath()
       {
          var filesPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+         // var dataPath = filesPath.Replace("/files", "/databases");
          return filesPath;
       }
       #endregion

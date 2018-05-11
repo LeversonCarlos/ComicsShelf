@@ -9,7 +9,16 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
-         MainPage = new NavigationPage(new InitialPage());
+         MainPage = new NavigationPage(new ContentPage
+         {
+            Title = R.Strings.AppTitle,
+            Content = new Label
+            {
+               Text = R.Strings.BASE_WAIT_MESSAGE,
+               HorizontalOptions = LayoutOptions.CenterAndExpand,
+               VerticalOptions = LayoutOptions.CenterAndExpand
+            }
+         });
       }
       #endregion
 
