@@ -313,11 +313,20 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the folder for the library.
+        ///   Looks up a localized string similar to Click here to select the folder for the library.
         /// </summary>
         internal static string TOOLS_LIBRARY_COMMAND {
             get {
                 return ResourceManager.GetString("TOOLS_LIBRARY_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension)..
+        /// </summary>
+        internal static string TOOLS_LIBRARY_EMPTY_MESSAGE {
+            get {
+                return ResourceManager.GetString("TOOLS_LIBRARY_EMPTY_MESSAGE", resourceCulture);
             }
         }
         
@@ -327,6 +336,15 @@ namespace ComicsShelf.R {
         internal static string TOOLS_LIBRARY_LABEL {
             get {
                 return ResourceManager.GetString("TOOLS_LIBRARY_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You may legally and freely download some public domain comics on the the following site.
+        /// </summary>
+        internal static string TOOLS_LIBRARY_SUGGESTION_MESSAGE {
+            get {
+                return ResourceManager.GetString("TOOLS_LIBRARY_SUGGESTION_MESSAGE", resourceCulture);
             }
         }
         

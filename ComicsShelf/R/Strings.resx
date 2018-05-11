@@ -202,10 +202,16 @@
     <value>Extracting comics cover for each new file... This may take a moment</value>
   </data>
   <data name="TOOLS_LIBRARY_COMMAND" xml:space="preserve">
-    <value>Select the folder for the library</value>
+    <value>Click here to select the folder for the library</value>
+  </data>
+  <data name="TOOLS_LIBRARY_EMPTY_MESSAGE" xml:space="preserve">
+    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension).</value>
   </data>
   <data name="TOOLS_LIBRARY_LABEL" xml:space="preserve">
     <value>Comic Books Library</value>
+  </data>
+  <data name="TOOLS_LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
+    <value>You may legally and freely download some public domain comics on the the following site</value>
   </data>
   <data name="TOOLS_PAGE_TITLE" xml:space="preserve">
     <value>Tools</value>

@@ -14,6 +14,7 @@ namespace ComicsShelf.Tools
          this.ViewType = typeof(ToolsPage);
          this.Data = new ToolsData { LibraryPath = App.Settings.Paths.LibraryPath };
          this.LibraryTappedCommand = new Command(async (item) => await this.LibraryTapped(item));
+         this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
          MessagingCenter.Subscribe<Engine.StepData>(this, Engine.StepData.KEY, (data) =>
          {
             this.Data.Text = data.Text;
@@ -30,10 +31,20 @@ namespace ComicsShelf.Tools
       {
          try
          {
-
             if (await Engine.Library.Execute())
             { await Helpers.ViewModels.NavVM.PopAsync(); }
+         }
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+      }
+      #endregion
 
+      #region LinkTapped
+      public Command LinkTappedCommand { get; set; }
+      private async Task LinkTapped(object item)
+      {
+         try
+         {
+            Device.OpenUri(new Uri("http://www.comicbookplus.com"));
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
