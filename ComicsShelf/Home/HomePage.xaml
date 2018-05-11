@@ -5,6 +5,11 @@
    xmlns:home="clr-namespace:ComicsShelf.Home"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Home.HomePage" >
-   <home:FeaturedPage />
-   <home:FoldersPage />
+   <TabbedPage.ToolbarItems>
+      <ToolbarItem Order="Primary" Text="{controls:Translate Text=HOME_LIBRARY_MENU}" Icon="icon_Library.png" Command="{Binding OpenLibraryCommand}" />
+   </TabbedPage.ToolbarItems>
+   <TabbedPage.Children>
+      <home:FeaturedPage />
+      <home:FoldersPage />
+   </TabbedPage.Children>
 </TabbedPage>

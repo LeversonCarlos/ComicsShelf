@@ -14,6 +14,7 @@ namespace ComicsShelf.Home
          this.ViewType = typeof(HomePage);
 
          this.Data = args;
+         this.OpenLibraryCommand = new Command(async (item) => await this.OpenLibrary(item));
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
          this.SizeChanged += this.OnSizeChanged;
@@ -30,6 +31,18 @@ namespace ComicsShelf.Home
          {
             if (!this.Data.StepData.IsRunning) { Engine.Statistics.Execute(); }
          };
+      }
+      #endregion
+
+      #region OpenLibrary
+      public Command OpenLibraryCommand { get; set; }
+      private async Task OpenLibrary(object item)
+      {
+         try
+         {
+            await Helpers.ViewModels.NavVM.PushAsync<Tools.ToolsVM>(false);
+         }
+         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
       }
       #endregion
 

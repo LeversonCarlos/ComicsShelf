@@ -196,6 +196,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
+        internal static string HOME_LIBRARY_MENU {
+            get {
+                return ResourceManager.GetString("HOME_LIBRARY_MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Put some cbz files on your device and start over again.
         /// </summary>
         internal static string HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS {

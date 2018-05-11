@@ -162,6 +162,9 @@
   <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
     <value>All Comics List</value>
   </data>
+  <data name="HOME_LIBRARY_MENU" xml:space="preserve">
+    <value>Library</value>
+  </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
     <value>Put some cbz files on your device and start over again</value>
   </data>
