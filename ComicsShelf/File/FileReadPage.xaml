@@ -7,7 +7,7 @@
    x:Class="ComicsShelf.File.FileReadPage"
    x:Name="MyPage">
    <controls:Page.Content>
-      <controls:PageReader ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}">
+      <controls:PageReader ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}" ArrowsBackgroundColor="{StaticResource colorLighter}">
          <controls:PageReader.ItemTemplate>
             <DataTemplate>
                <AbsoluteLayout>
