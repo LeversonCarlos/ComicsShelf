@@ -109,6 +109,7 @@
             this.ReadingDate = value.ReadingDate;
             this.ReadingPercent = value.ReadingPercent;
             this.ReadingPage = value.ReadingPage;
+            this.ReadingOpacity = (this.Readed ? 0.5 : 1);
             this.Rate = enumFileRate.None;
             if (value.Rate.HasValue)
             { this.Rate = (enumFileRate)value.Rate; }
@@ -131,6 +132,7 @@
 
             this.ReadingDate = (value ? App.Database.GetDate() : null);
             this.ReadingPercent = (double)(value ? 1 : 0);
+            this.ReadingOpacity = (double)(value ? 0.5 : 1);
             if (value) {
                this.PersistentData.ReadingPage = (short)0;
                this.SetProperty(ref this._ReadingPage, (short)0, "ReadingPage");
@@ -190,6 +192,15 @@
             }
             App.Database.Update(this.PersistentData);
          }
+      }
+      #endregion
+
+      #region ReadingOpacity
+      double _ReadingOpacity;
+      public double ReadingOpacity
+      {
+         get { return this._ReadingOpacity; }
+         set { this.SetProperty(ref this._ReadingOpacity, value); }
       }
       #endregion
 

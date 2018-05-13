@@ -39,7 +39,7 @@
                   ItemsSource="{Binding Data.Files}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
+                        <AbsoluteLayout Style="{StaticResource CoverListItem}" Opacity="{Binding ReadingOpacity}">
                            <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                               <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
                            </Grid>

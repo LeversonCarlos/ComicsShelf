@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Xamarin.Forms;
 
 namespace ComicsShelf
 {
@@ -61,8 +64,14 @@ namespace ComicsShelf
       }
       #endregion
 
-      protected override void OnStart ()
-      { Engine.Startup.Execute(); }
+      protected override void OnStart()
+      {
+         AppCenter.Start("android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
+                           "uwp={Your UWP App secret here};" +
+                           "ios={Your iOS App secret here}",
+                           typeof(Analytics), typeof(Crashes));
+         Engine.Startup.Execute();
+      }
 
       protected override void OnSleep ()
 		{ /* Handle when your app sleeps */ }
