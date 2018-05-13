@@ -11,6 +11,7 @@
          <Color x:Key="colorPrimary">#FF5722</Color>
          <Color x:Key="colorLighter">#9FA8DA</Color>
          <Color x:Key="colorAccent">#536DFE</Color>
+         <Color x:Key="colorBackground">#EEEEEE</Color>
 
          <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor" Value="{StaticResource colorPrimary}" />
@@ -32,34 +33,41 @@
             <Setter Property="Spacing" Value="16" />
          </Style>
 
-         <Style TargetType="StackLayout" x:Key="CoverListSectionLayout">
+         <!-- SectionList -->
+         <Style TargetType="StackLayout" x:Key="SectionListLayout">
+            <Setter Property="BackgroundColor" Value="{StaticResource colorBackground}" />
             <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="Spacing" Value="0" />
          </Style>
-
-         <Style TargetType="Label" x:Key="CoverListMainTitle">
+         <Style TargetType="Label" x:Key="SectionListTitle">
             <Setter Property="Margin" Value="4,0" />
             <Setter Property="TextColor" Value="{StaticResource colorLighter}" />
-            <Setter Property="HorizontalOptions" Value="Start" />
-            <Setter Property="LineBreakMode" Value="TailTruncation" />
             <Setter Property="FontSize" Value="Medium" />
             <Setter Property="FontAttributes" Value="Bold" />
          </Style>
-
-         <Style TargetType="controls:ListView" x:Key="CoverList">
+         <Style TargetType="controls:ListView" x:Key="SectionListView">
             <Setter Property="Margin" Value="0" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Fill" />
          </Style>
-
-         <Style TargetType="AbsoluteLayout" x:Key="CoverListItem">
+         
+         <!-- CoverItem -->
+         <Style TargetType="Frame" x:Key="CoverItemFrame">
             <Setter Property="Margin" Value="4" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="OutlineColor" Value="Gray" />
          </Style>
-
+         <Style TargetType="StackLayout" x:Key="CoverItemLayout">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Spacing" Value="0" />
+         </Style>
+         
          <Style TargetType="Grid" x:Key="CoverListItemImageGrid">
-            <Setter Property="BackgroundColor" Value="{StaticResource colorLighter}" />
             <Setter Property="Padding" Value="4" />
             <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
             <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />

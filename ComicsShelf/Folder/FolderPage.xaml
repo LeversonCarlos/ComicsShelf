@@ -9,47 +9,51 @@
       <ScrollView Style="{StaticResource CoverListMainView}">
          <StackLayout Style="{StaticResource CoverListMainLayout}">
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasFolders}">
+            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasFolders}">
                <controls:ListView
-                  Style="{StaticResource CoverList}" Columns="{Binding Data.FolderColumns}" 
+                  Style="{StaticResource SectionListView}" Columns="{Binding Data.FolderColumns}" 
                   ItemTappedCommand="{Binding FolderTappedCommand}"
                   ItemsSource="{Binding Data.Folders}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
-                              <Image Style="{StaticResource CoverListItemImageFolder}" Source="{Binding CoverPath}" />
-                           </Grid>
-                           <StackLayout Style="{StaticResource CoverListItemDetails}">
-                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
-                              </ContentView>
+                        <Frame Style="{StaticResource CoverItemFrame}">
+                           <StackLayout Style="{StaticResource CoverItemLayout}">
+                              <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverListItemImageFolder}" Source="{Binding CoverPath}" />
+                              </Grid>
+                              <StackLayout Style="{StaticResource CoverListItemDetails}">
+                                 <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                                 <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                    <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
+                                 </ContentView>
+                              </StackLayout>
                            </StackLayout>
-                        </AbsoluteLayout>
+                        </Frame>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasFiles}">
+            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasFiles}">
                <controls:ListView
-                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
+                  Style="{StaticResource SectionListView}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.Files}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <AbsoluteLayout Style="{StaticResource CoverListItem}" Opacity="{Binding ReadingOpacity}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                              <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
-                           </Grid>
-                           <StackLayout Style="{StaticResource CoverListItemDetails}" >
-                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
-                              </ContentView>
+                        <Frame Style="{StaticResource CoverItemFrame}" Opacity="{Binding ReadingOpacity}">
+                           <StackLayout Style="{StaticResource CoverItemLayout}">
+                              <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
+                              </Grid>
+                              <StackLayout Style="{StaticResource CoverListItemDetails}" >
+                                 <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                                 <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                    <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                                 </ContentView>
+                              </StackLayout>
                            </StackLayout>
-                        </AbsoluteLayout>
+                        </Frame>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
