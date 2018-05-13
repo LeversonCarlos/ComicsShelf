@@ -1,4 +1,6 @@
-﻿namespace ComicsShelf.File
+﻿using System;
+
+namespace ComicsShelf.File
 {
    public class FileReadVM : Helpers.ViewModels.DataVM<FileData>
    {
@@ -11,6 +13,7 @@
          this.Data = args;
          this.Data.StatsOpacity = 1;
          this.Initialize += this.OnInitialize;
+         this.Finalize += this.OnFinalize;
       }
       #endregion
 
@@ -21,6 +24,17 @@
          {
             this.Data.ReadingDate = App.Database.GetDate();
             App.Database.Update(this.Data.PersistentData);
+         }
+         catch { }
+      }
+      #endregion
+
+      #region OnFinalize
+      private void OnFinalize()
+      {
+         try
+         {
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
          }
          catch { }
       }

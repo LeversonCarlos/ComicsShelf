@@ -97,7 +97,7 @@ namespace ComicsShelf.File
             this.Data.Pages.Add(new FilePageData { });
          }
          catch (Exception ex) { throw; }
-         finally { GC.Collect(); }
+         finally { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
       }
       #endregion
 
