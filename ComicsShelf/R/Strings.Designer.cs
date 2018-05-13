@@ -252,6 +252,15 @@ namespace ComicsShelf.R {
         /// <summary>
         ///   Looks up a localized string similar to Comic Books Library.
         /// </summary>
+        internal static string LIBRARY_MAIN_LABEL {
+            get {
+                return ResourceManager.GetString("LIBRARY_MAIN_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
         internal static string LIBRARY_MAIN_TITLE {
             get {
                 return ResourceManager.GetString("LIBRARY_MAIN_TITLE", resourceCulture);

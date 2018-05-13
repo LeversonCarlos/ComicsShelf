@@ -1,4 +1,6 @@
-﻿namespace ComicsShelf.Home
+﻿using System.Collections.Generic;
+
+namespace ComicsShelf.Home
 {
    public class HomeData : Folder.FolderData
    {
@@ -90,6 +92,30 @@
       {
          get { return this._StepData; }
          set { this.SetProperty(ref this._StepData, value); }
+      }
+      #endregion
+
+      #region ClearAll
+      internal void ClearAll() {
+         try
+         {
+            if (this.Folders.Count != 0)
+            { this.Folders.ReplaceRange(new List<Folder.FolderData>()); }
+
+            if (this.Files.Count != 0)
+            { this.Files.ReplaceRange(new List<File.FileData>()); }
+
+            if (this.ReadingFiles.Count != 0)
+            { this.ReadingFiles.Clear(); App.RootFolder.HasReadingFiles = false; }
+
+            if (this.RecentFiles.Count != 0)
+            { this.RecentFiles.Clear(); App.RootFolder.HasRecentFiles = false; }
+
+            if (this.TopRatedFiles.Count != 0)
+            { this.TopRatedFiles.Clear(); App.RootFolder.HasTopRatedFiles = false; }
+
+         }
+         catch { }
       }
       #endregion
 

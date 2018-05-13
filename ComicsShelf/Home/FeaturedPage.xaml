@@ -9,76 +9,70 @@
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasReadingFiles}">
-               <Label Style="{StaticResource CoverListMainTitle}"
+            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasReadingFiles}">
+               <Label Style="{StaticResource SectionListTitle}"
                       Text="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" />
                <controls:ListView  
-                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
+                  Style="{StaticResource SectionListView}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.ReadingFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                              <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
-                           </Grid>
-                           <StackLayout Style="{StaticResource CoverListItemDetails}">
-                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
-                              </ContentView>
+                        <Frame Style="{StaticResource CoverItemFrame}">
+                           <StackLayout Style="{StaticResource CoverItemLayout}">
+                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
+                              </Grid>
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
+                              <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
-                        </AbsoluteLayout>
+                        </Frame>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasRecentFiles}" >
-               <Label Style="{StaticResource CoverListMainTitle}"
+            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasRecentFiles}" >
+               <Label Style="{StaticResource SectionListTitle}"
                       Text="{controls:Translate Text=HOME_RECENT_FILES_SECTION_TITLE}" />
                <controls:ListView 
-                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
+                  Style="{StaticResource SectionListView}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.RecentFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                              <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
-                           </Grid>
-                           <StackLayout Style="{StaticResource CoverListItemDetails}">
-                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
-                              </ContentView>
+                        <Frame Style="{StaticResource CoverItemFrame}">
+                           <StackLayout Style="{StaticResource CoverItemLayout}">
+                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
+                              </Grid>
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
+                              <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
-                        </AbsoluteLayout>
+                        </Frame>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource CoverListSectionLayout}" IsVisible="{Binding Data.HasTopRatedFiles}" >
-               <Label Style="{StaticResource CoverListMainTitle}"
+            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasTopRatedFiles}" >
+               <Label Style="{StaticResource SectionListTitle}"
                       Text="{controls:Translate Text=HOME_TOP_RATED_SECTION_TITLE}" />
                <controls:ListView 
-                  Style="{StaticResource CoverList}" Columns="{Binding Data.FileColumns}" 
+                  Style="{StaticResource SectionListView}" Columns="{Binding Data.FileColumns}" 
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.TopRatedFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <AbsoluteLayout Style="{StaticResource CoverListItem}">
-                           <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                              <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
-                           </Grid>
-                           <StackLayout Style="{StaticResource CoverListItemDetails}">
-                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
-                              </ContentView>
+                        <Frame Style="{StaticResource CoverItemFrame}">
+                           <StackLayout Style="{StaticResource CoverItemLayout}">
+                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
+                              </Grid>
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
+                              <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
-                        </AbsoluteLayout>
+                        </Frame>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
