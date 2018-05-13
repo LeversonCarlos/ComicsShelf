@@ -8,6 +8,7 @@
       <StackLayout VerticalOptions="CenterAndExpand" Padding="80" Spacing="100" >
 
          <StackLayout Spacing="10">
+            <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" HorizontalOptions="Center" FontSize="Large" />
             <Label Text="{Binding Data.LibraryPath}" IsVisible="{Binding Data.IsLibraryDefined}" HorizontalOptions="Center" FontAttributes="Bold" />
             <Label Text="{controls:Translate Text=LIBRARY_UNDEFINED_FOLDER_MESSAGE}" IsVisible="{Binding Data.IsLibraryEmpty}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
             <Button Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding LibraryTappedCommand}" HorizontalOptions="Center" />

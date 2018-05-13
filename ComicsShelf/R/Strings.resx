@@ -180,8 +180,11 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Top Rated Comics</value>
   </data>
-  <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
+  <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
     <value>Comic Books Library</value>
+  </data>
+  <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
+    <value>Library</value>
   </data>
   <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
     <value>Click here to select the folder for the library</value>
