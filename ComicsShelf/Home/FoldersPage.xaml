@@ -22,7 +22,7 @@
                                  <Image Style="{StaticResource CoverItemImageFolder}" Source="{Binding CoverPath}" />
                               </Grid>
                               <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
-                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                              <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
                         </Frame>
                      </DataTemplate>

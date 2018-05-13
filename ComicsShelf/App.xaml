@@ -83,13 +83,6 @@
             <Setter Property="Aspect" Value="AspectFill" />
          </Style>
 
-         <Style TargetType="ProgressBar" x:Key="CoverListItemProgress" >
-            <Setter Property="HorizontalOptions" Value="Fill" />
-            <Setter Property="VerticalOptions" Value="EndAndExpand" />
-            <Setter Property="Opacity" Value="0.75" />
-            <Setter Property="HeightRequest" Value="5" />
-         </Style>
-
          <Style TargetType="Label" x:Key="CoverListItemTitle">
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="LineBreakMode" Value="TailTruncation" />
@@ -104,10 +97,16 @@
             <Setter Property="VerticalOptions" Value="End" />
          </Style>
 
+         <!-- BASE -->
          <Style TargetType="Button">
             <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
             <Setter Property="TextColor" Value="#ffffff" />
          </Style>
+         <Style TargetType="ProgressBar">
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="HeightRequest" Value="5" />
+         </Style>
+
 
       </ResourceDictionary>
    </Application.Resources>
