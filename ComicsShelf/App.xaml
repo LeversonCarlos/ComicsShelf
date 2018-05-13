@@ -67,7 +67,8 @@
             <Setter Property="Padding" Value="0" />
             <Setter Property="Spacing" Value="0" />
          </Style>
-         
+
+         <!-- CoverItemImage -->
          <Style TargetType="Grid" x:Key="CoverItemImageGrid">
             <Setter Property="Padding" Value="4" />
          </Style>
@@ -89,19 +90,18 @@
             <Setter Property="HeightRequest" Value="5" />
          </Style>
 
-         <Style TargetType="ContentView" x:Key="CoverListItemTitleBox" >
+         <Style TargetType="Label" x:Key="CoverListItemTitle">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="FontAttributes" Value="Bold" />
+         </Style>
+
+         <Style TargetType="ContentView" x:Key="SplashItemDetails" >
             <Setter Property="BackgroundColor" Value="{StaticResource colorLighter}" />
             <Setter Property="Padding" Value="2" />
             <Setter Property="Opacity" Value="0.85" />
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="End" />
-         </Style>
-
-         <Style TargetType="Label" x:Key="CoverListItemTitle">
-            <Setter Property="TextColor" Value="#FFFFFF" />
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="LineBreakMode" Value="TailTruncation" />
-            <Setter Property="FontAttributes" Value="Bold" />
          </Style>
 
          <Style TargetType="Button">

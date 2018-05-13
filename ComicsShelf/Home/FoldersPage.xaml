@@ -21,10 +21,8 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFolder}" Source="{Binding CoverPath}" />
                               </Grid>
+                              <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
                               <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
-                              </ContentView>
                            </StackLayout>
                         </Frame>
                      </DataTemplate>

@@ -14,7 +14,7 @@
          <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
          <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0">
             <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding Data.ReadingPercent}" />
-            <ContentView Style="{StaticResource CoverListItemTitleBox}" >
+            <ContentView Style="{StaticResource SplashItemDetails}" >
                <Grid Margin="10" ColumnSpacing="10">
 
                   <Grid.ColumnDefinitions>
