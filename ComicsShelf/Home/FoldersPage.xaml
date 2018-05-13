@@ -18,8 +18,8 @@
                      <DataTemplate>
                         <Frame Style="{StaticResource CoverItemFrame}" IsVisible="{Binding Data.Available}">
                            <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverListItemImageFolder}" Source="{Binding CoverPath}" />
+                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverItemImageFolder}" Source="{Binding CoverPath}" />
                               </Grid>
                               <StackLayout Style="{StaticResource CoverListItemDetails}">
                                  <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />

@@ -20,8 +20,8 @@
                      <DataTemplate>
                         <Frame Style="{StaticResource CoverItemFrame}">
                            <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
+                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
                               <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
                               <ContentView Style="{StaticResource CoverListItemTitleBox}">
@@ -45,8 +45,8 @@
                      <DataTemplate>
                         <Frame Style="{StaticResource CoverItemFrame}">
                            <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
+                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
                               <StackLayout Style="{StaticResource CoverListItemDetails}">
                                  <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
@@ -72,8 +72,8 @@
                      <DataTemplate>
                         <Frame Style="{StaticResource CoverItemFrame}">
                            <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverListItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverListItemImageFile}" Source="{Binding CoverPath}" />
+                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
                               <StackLayout Style="{StaticResource CoverListItemDetails}">
                                  <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
