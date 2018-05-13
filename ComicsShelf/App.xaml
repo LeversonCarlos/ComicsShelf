@@ -83,12 +83,15 @@
             <Setter Property="Aspect" Value="AspectFill" />
          </Style>
 
-         <Style TargetType="Label" x:Key="CoverListItemTitle">
+         <!-- CoverItemTitle -->
+         <Style TargetType="Label" x:Key="CoverItemTitle">
             <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="LineBreakMode" Value="MiddleTruncation" />
             <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="4,0"/>
          </Style>
-
+         
+         <!-- SPLASH -->
          <Style TargetType="ContentView" x:Key="SplashItemDetails" >
             <Setter Property="BackgroundColor" Value="{StaticResource colorLighter}" />
             <Setter Property="Padding" Value="2" />

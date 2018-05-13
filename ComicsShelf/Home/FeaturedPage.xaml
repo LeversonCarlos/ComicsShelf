@@ -23,7 +23,7 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
                               <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
                         </Frame>
@@ -46,7 +46,7 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
                               <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
                         </Frame>
@@ -69,7 +69,7 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
                               <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
                         </Frame>
