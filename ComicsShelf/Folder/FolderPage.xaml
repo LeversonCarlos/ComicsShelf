@@ -21,12 +21,10 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFolder}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <StackLayout Style="{StaticResource CoverListItemDetails}">
-                                 <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                                 <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                    <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
-                                 </ContentView>
-                              </StackLayout>
+                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding Text}" />
+                              </ContentView>
                            </StackLayout>
                         </Frame>
                      </DataTemplate>
@@ -46,12 +44,10 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <StackLayout Style="{StaticResource CoverListItemDetails}" >
-                                 <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
-                                 <ContentView Style="{StaticResource CoverListItemTitleBox}">
-                                    <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
-                                 </ContentView>
-                              </StackLayout>
+                              <ProgressBar Style="{StaticResource CoverListItemProgress}" Progress="{Binding ReadingPercent}" />
+                              <ContentView Style="{StaticResource CoverListItemTitleBox}">
+                                 <Label Style="{StaticResource CoverListItemTitle}" Text="{Binding SmallText}" />
+                              </ContentView>
                            </StackLayout>
                         </Frame>
                      </DataTemplate>

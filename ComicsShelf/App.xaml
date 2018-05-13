@@ -60,6 +60,7 @@
             <Setter Property="HasShadow" Value="True" />
             <Setter Property="BackgroundColor" Value="White" />
             <Setter Property="OutlineColor" Value="Gray" />
+            <Setter Property="CornerRadius" Value="0" />
          </Style>
          <Style TargetType="StackLayout" x:Key="CoverItemLayout">
             <Setter Property="Margin" Value="0" />
@@ -80,18 +81,6 @@
             <Setter Property="VerticalOptions" Value="Start" />
             <Setter Property="Aspect" Value="AspectFill" />
          </Style>
-
-
-         <Style TargetType="StackLayout" x:Key="CoverListItemDetails">
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Spacing" Value="0" />
-            <Setter Property="VerticalOptions" Value="Fill" />
-            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0,1,1" />
-            <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
-         </Style>
-
-
 
          <Style TargetType="ProgressBar" x:Key="CoverListItemProgress" >
             <Setter Property="HorizontalOptions" Value="Fill" />
