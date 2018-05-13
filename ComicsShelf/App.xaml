@@ -9,8 +9,11 @@
 
          <!-- COLORS -->
          <Color x:Key="colorPrimary">#FF5722</Color>
-         <Color x:Key="colorLighter">#9FA8DA</Color>
+         <Color x:Key="colorLighter">#ff8a50</Color>
+         <Color x:Key="colorDarker">#c41c00</Color>
          <Color x:Key="colorAccent">#536DFE</Color>
+         <Color x:Key="colorGray">#9E9E9E</Color>
+         <Color x:Key="colorLightGray">#BDBDBD</Color>
          <Color x:Key="colorBackground">#EEEEEE</Color>
 
          <Style TargetType="NavigationPage">
@@ -42,7 +45,7 @@
          </Style>
          <Style TargetType="Label" x:Key="SectionListTitle">
             <Setter Property="Margin" Value="4,0" />
-            <Setter Property="TextColor" Value="{StaticResource colorLighter}" />
+            <Setter Property="TextColor" Value="{StaticResource colorAccent}" />
             <Setter Property="FontSize" Value="Medium" />
             <Setter Property="FontAttributes" Value="Bold" />
          </Style>
@@ -59,7 +62,7 @@
             <Setter Property="Padding" Value="0" />
             <Setter Property="HasShadow" Value="True" />
             <Setter Property="BackgroundColor" Value="White" />
-            <Setter Property="OutlineColor" Value="Gray" />
+            <Setter Property="OutlineColor" Value="{StaticResource colorGray}" />
             <Setter Property="CornerRadius" Value="0" />
          </Style>
          <Style TargetType="StackLayout" x:Key="CoverItemLayout">
@@ -93,7 +96,7 @@
          
          <!-- SPLASH -->
          <Style TargetType="ContentView" x:Key="SplashItemDetails" >
-            <Setter Property="BackgroundColor" Value="{StaticResource colorLighter}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource colorLightGray}" />
             <Setter Property="Padding" Value="2" />
             <Setter Property="Opacity" Value="0.85" />
             <Setter Property="HorizontalOptions" Value="Fill" />
