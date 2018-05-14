@@ -117,103 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppTitle" xml:space="preserve">
-    <value>Comics Shelf</value>
-  </data>
   <data name="BASE_CANCEL_COMMAND" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="BASE_OK_COMMAND" xml:space="preserve">
     <value>Ok</value>
   </data>
   <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
-    <value>Wait...</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_FIVE" xml:space="preserve">
-    <value>5 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_FOUR" xml:space="preserve">
-    <value>4 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_NONE" xml:space="preserve">
-    <value>&lt;Rate&gt;</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_ONE" xml:space="preserve">
-    <value>1 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_THREE" xml:space="preserve">
-    <value>3 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_TWO" xml:space="preserve">
-    <value>2 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_ZERO" xml:space="preserve">
-    <value>0 Star</value>
-  </data>
-  <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
-    <value>Comic Already Readed</value>
-  </data>
-  <data name="FILE_OPEN_COMIC_LABEL" xml:space="preserve">
-    <value>Open Comic</value>
-  </data>
-  <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
-    <value>Featured Comics</value>
-  </data>
-  <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
-    <value>All Comics List</value>
-  </data>
-  <data name="HOME_LIBRARY_MENU" xml:space="preserve">
-    <value>Library</value>
-  </data>
-  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
-    <value>Put some cbz files on your device and start over again</value>
-  </data>
-  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE" xml:space="preserve">
-    <value>No comic file found on device</value>
-  </data>
-  <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
-    <value>Continue Reading</value>
-  </data>
-  <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
-    <value>Recently Added Comics</value>
-  </data>
-  <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
-    <value>Top Rated Comics</value>
+    <value>Aguarde...</value>
   </data>
   <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
-    <value>Comic Books Library</value>
+    <value>Biblioteca de Quadrinhos</value>
   </data>
   <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
-    <value>Library</value>
+    <value>Biblioteca</value>
   </data>
   <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
-    <value>Click here to select the folder for the library</value>
+    <value>Clique aqui para selecionar a pasta para a biblioteca</value>
   </data>
   <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
-    <value>You may legally and freely download some public domain comics on the the following site</value>
+    <value>Você pode gratuita e legalmente baixar alguns quadrinhos de domínio público no site a seguir</value>
   </data>
   <data name="LIBRARY_UNDEFINED_FOLDER_MESSAGE" xml:space="preserve">
-    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (those files with the CBZ extension).</value>
-  </data>
-  <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
-    <value>Loading current database data</value>
-  </data>
-  <data name="SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparing the files structure</value>
-  </data>
-  <data name="SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparing the folders structure</value>
-  </data>
-  <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
-    <value>Searching for new comic files on the device</value>
-  </data>
-  <data name="STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE" xml:space="preserve">
-    <value>Loading settings database</value>
-  </data>
-  <data name="STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE" xml:space="preserve">
-    <value>Validating the library path</value>
-  </data>
-  <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
-    <value>Extracting comics cover for each new file... This may take a moment</value>
+    <value>Como esta é a sua primeira vez aqui, você NÃO tem BIBLIOTECA definida ainda. Clique no botão abaixo e SELECIONE UMA PASTA no seu dispositivo que contenha seus arquivos de quadrinhos (aqueles arquivos com a extensão CBZ).</value>
   </data>
 </root>

@@ -70,29 +70,29 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wait....
-        /// </summary>
-        internal static string BASE_WAIT_MESSAGE {
-            get {
-                return ResourceManager.GetString("BASE_WAIT_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string COMMAND_CANCEL {
+        internal static string BASE_CANCEL_COMMAND {
             get {
-                return ResourceManager.GetString("COMMAND_CANCEL", resourceCulture);
+                return ResourceManager.GetString("BASE_CANCEL_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string COMMAND_OK {
+        internal static string BASE_OK_COMMAND {
             get {
-                return ResourceManager.GetString("COMMAND_OK", resourceCulture);
+                return ResourceManager.GetString("BASE_OK_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wait....
+        /// </summary>
+        internal static string BASE_WAIT_MESSAGE {
+            get {
+                return ResourceManager.GetString("BASE_WAIT_MESSAGE", resourceCulture);
             }
         }
         
@@ -115,7 +115,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;Rate this Comic&gt;.
+        ///   Looks up a localized string similar to &lt;Rate&gt;.
         /// </summary>
         internal static string ENUM_ENUMFILERATE_NONE {
             get {
@@ -286,7 +286,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (all that files with the CBZ extension)..
+        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (those files with the CBZ extension)..
         /// </summary>
         internal static string LIBRARY_UNDEFINED_FOLDER_MESSAGE {
             get {
