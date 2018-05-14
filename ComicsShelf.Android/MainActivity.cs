@@ -14,6 +14,8 @@ namespace ComicsShelf.Droid
 
          base.OnCreate(bundle);
 
+         FFImageLoading.Forms.Droid.CachedImageRenderer.Init(true);
+
          global::Xamarin.Forms.Forms.Init(this, bundle);
          LoadApplication(new App());
       }
