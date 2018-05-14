@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="180503" android:versionName="18.05.03" package="com.friendship.ComicsShelf" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="15" />
+	<uses-sdk android:minSdkVersion="19" />
 	<application android:label="Comics Shelf" android:icon="@drawable/icon"></application>
 </manifest>
