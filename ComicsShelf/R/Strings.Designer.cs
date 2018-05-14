@@ -187,7 +187,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Comics List.
+        ///   Looks up a localized string similar to All Comics.
         /// </summary>
         internal static string HOME_FOLDERS_PAGE_TITLE {
             get {

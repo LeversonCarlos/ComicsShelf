@@ -126,6 +126,24 @@
   <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
     <value>Aguarde...</value>
   </data>
+  <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
+    <value>Quadrinhos em Destaque</value>
+  </data>
+  <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
+    <value>Todos os Quadrinhos</value>
+  </data>
+  <data name="HOME_LIBRARY_MENU" xml:space="preserve">
+    <value>Biblioteca</value>
+  </data>
+  <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
+    <value>Continue lendo</value>
+  </data>
+  <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
+    <value>Adicionados recentemente</value>
+  </data>
+  <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
+    <value>Melhor qualificado</value>
+  </data>
   <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
     <value>Biblioteca de Quadrinhos</value>
   </data>
