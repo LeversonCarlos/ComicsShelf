@@ -286,7 +286,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension)..
+        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (all that files with the CBZ extension)..
         /// </summary>
         internal static string LIBRARY_UNDEFINED_FOLDER_MESSAGE {
             get {

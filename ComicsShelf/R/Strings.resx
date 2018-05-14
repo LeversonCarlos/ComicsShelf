@@ -193,7 +193,7 @@
     <value>You may legally and freely download some public domain comics on the the following site</value>
   </data>
   <data name="LIBRARY_UNDEFINED_FOLDER_MESSAGE" xml:space="preserve">
-    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension).</value>
+    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (all that files with the CBZ extension).</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Loading current database data</value>
