@@ -129,32 +129,11 @@
   <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
     <value>Wait...</value>
   </data>
-  <data name="ENUM_ENUMFILERATE_FIVE" xml:space="preserve">
-    <value>5 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_FOUR" xml:space="preserve">
-    <value>4 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_NONE" xml:space="preserve">
-    <value>&lt;Rate&gt;</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_ONE" xml:space="preserve">
-    <value>1 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_THREE" xml:space="preserve">
-    <value>3 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_TWO" xml:space="preserve">
-    <value>2 Star</value>
-  </data>
-  <data name="ENUM_ENUMFILERATE_ZERO" xml:space="preserve">
-    <value>0 Star</value>
-  </data>
   <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
-    <value>Comic Already Readed</value>
+    <value>Already Readed</value>
   </data>
   <data name="FILE_OPEN_COMIC_LABEL" xml:space="preserve">
-    <value>Open Comic</value>
+    <value>Open</value>
   </data>
   <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
     <value>Featured Comics</value>
