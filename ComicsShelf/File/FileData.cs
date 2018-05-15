@@ -110,6 +110,7 @@
             this.ReadingPercent = value.ReadingPercent;
             this.ReadingPage = value.ReadingPage;
             this.ReadingOpacity = (this.Readed ? 0.5 : 1);
+            this.Rating = value.Rating;
             this.Rate = enumFileRate.None;
             if (value.Rate.HasValue)
             { this.Rate = (enumFileRate)value.Rate; }
@@ -201,6 +202,20 @@
       {
          get { return this._ReadingOpacity; }
          set { this.SetProperty(ref this._ReadingOpacity, value); }
+      }
+      #endregion
+
+      #region Rating
+      int _Rating;
+      public int Rating
+      {
+         get { return this._Rating; }
+         set {
+            this.SetProperty(ref this._Rating, value);
+            if (this.PersistentDataLoading) { return; }
+            this.PersistentData.Rating = value; 
+            App.Database.Update(this.PersistentData);
+         }
       }
       #endregion
 

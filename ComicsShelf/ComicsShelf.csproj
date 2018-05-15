@@ -20,6 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Helpers\Controls\RatingViewEmptyStar.png" />
+    <None Remove="Helpers\Controls\RatingViewFullStar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers\Controls\RatingViewEmptyStar.png" />
+    <EmbeddedResource Include="Helpers\Controls\RatingViewFullStar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.6.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.6.0" />
