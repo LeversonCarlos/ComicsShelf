@@ -60,7 +60,12 @@ namespace ComicsShelf.Helpers.Controls
       {
          for (int stars = 1; stars <= 5; stars++)
          {
-            var ratingButton = new RatingButton { Stars = stars, RatingButtonTapped = RatingChanged };
+            var ratingButton = new RatingButton
+            {
+               Stars = stars,
+               HeightRequest=this.HeightRequest, 
+               RatingButtonTapped = RatingChanged
+            };
             this.Children.Add(ratingButton);
          }
       }     
@@ -77,14 +82,13 @@ namespace ComicsShelf.Helpers.Controls
    }
 
    public delegate void RatingButtonTappedHandler(int stars);
-   public class RatingButton : Image
+   public class RatingButton : Xamarin.Forms.Image
    {
       public int Stars { get; set; }
       public RatingButtonTappedHandler RatingButtonTapped;
       public RatingButton()
       {      
          this.Aspect = Aspect.AspectFit;
-         this.HeightRequest = 25;
          var tapGesture = new TapGestureRecognizer();
          tapGesture.Tapped += (object sender, EventArgs e) => { this.RatingButtonTapped(this.Stars); };
          this.GestureRecognizers.Add(tapGesture);
