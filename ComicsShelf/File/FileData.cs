@@ -111,9 +111,6 @@
             this.ReadingPage = value.ReadingPage;
             this.ReadingOpacity = (this.Readed ? 0.5 : 1);
             this.Rating = value.Rating;
-            this.Rate = enumFileRate.None;
-            if (value.Rate.HasValue)
-            { this.Rate = (enumFileRate)value.Rate; }
             this.PersistentDataLoading = false;
          }
       }
@@ -217,23 +214,7 @@
             App.Database.Update(this.PersistentData);
          }
       }
-      #endregion
-
-      #region Rate
-      enumFileRate _Rate;
-      public enumFileRate Rate
-      {
-         get { return this._Rate; }
-         set
-         {
-            this.SetProperty(ref this._Rate, value);
-            if (this.PersistentDataLoading) { return; }
-            this.PersistentData.Rate = null;
-            if (value != enumFileRate.None) { this.PersistentData.Rate = (short)value; }
-            App.Database.Update(this.PersistentData);
-         }
-      }
-      #endregion
+      #endregion     
 
    }
 

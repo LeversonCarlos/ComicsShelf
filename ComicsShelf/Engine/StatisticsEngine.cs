@@ -46,16 +46,16 @@ namespace ComicsShelf.Engine
 
             // GET ALL RATED FILES
             var allRatedFiles = App.RootFolder.Files
-               .Where(x => x.PersistentData.Rate.HasValue)
+               .Where(x => x.PersistentData.Rating > 0)
                .ToList();
 
-            // GROUP FILES WITH ITS AVERAGE RATE
+            // GROUP FILES WITH ITS AVERAGE RATING
             var groupFiles = allRatedFiles
                .GroupBy(x => x.PersistentData.ParentPath)
                .Select(x => new
                {
                   ParentPath = x.Key,
-                  Rate = x.Average(g => (double)g.PersistentData.Rate.Value)
+                  Rating = x.Average(g => (double)g.PersistentData.Rating)
                })
                .ToList();
 
@@ -64,13 +64,13 @@ namespace ComicsShelf.Engine
                .Select(x => new
                {
                   File = x,
-                  GroupRate = groupFiles
+                  GroupRating = groupFiles
                      .Where(g => g.ParentPath == x.PersistentData.ParentPath)
-                     .Select(g => g.Rate)
+                     .Select(g => g.Rating)
                      .FirstOrDefault()
                })
-               .OrderByDescending(x => x.GroupRate)
-               .ThenByDescending(x => x.File.PersistentData.Rate.Value)
+               .OrderByDescending(x => x.GroupRating)
+               .ThenByDescending(x => x.File.PersistentData.Rating)
                .ThenByDescending(x => x.File.PersistentData.ReadingDate)
                .Select(x => x.File)
                .Take(10)

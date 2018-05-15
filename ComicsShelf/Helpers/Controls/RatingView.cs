@@ -84,6 +84,7 @@ namespace ComicsShelf.Helpers.Controls
       public RatingButton()
       {      
          this.Aspect = Aspect.AspectFit;
+         this.HeightRequest = 25;
          var tapGesture = new TapGestureRecognizer();
          tapGesture.Tapped += (object sender, EventArgs e) => { this.RatingButtonTapped(this.Stars); };
          this.GestureRecognizers.Add(tapGesture);

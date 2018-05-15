@@ -22,19 +22,13 @@
                      <ColumnDefinition Width="*" />
                      <ColumnDefinition Width="*" />
                   </Grid.ColumnDefinitions>
-                  <Grid.RowDefinitions>
-                     <RowDefinition Height="50" />
-                     <RowDefinition Height="50" />
-                  </Grid.RowDefinitions>
 
                   <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Column="0" >
                      <Switch VerticalOptions="Center" IsToggled="{Binding Data.Readed}" />
                      <Label VerticalOptions="Center" Text="{controls:Translate Text=FILE_COMIC_ALREADY_READED_LABEL}" />
                   </StackLayout>
-                  <controls:EnumPicker SelectedItem="{Binding Data.Rate}" x:TypeArguments="models:enumFileRate" HorizontalOptions="FillAndExpand" Grid.Column="1"  />
+                  <controls:RatingView Rating="{Binding Data.Rating}" Grid.Column="1" />
                   <Button Text="{controls:Translate Text=FILE_OPEN_COMIC_LABEL}" Command="{Binding OpenTappedCommand}" HorizontalOptions="FillAndExpand" Grid.Column="2" />
-
-                  <controls:RatingView Rating="{Binding Data.Rating}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" />
 
                </Grid>
             </ContentView>
