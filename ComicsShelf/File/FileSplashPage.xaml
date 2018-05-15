@@ -12,14 +12,13 @@
             <Image Source="{Binding Data.CoverPath}" Aspect="AspectFill" Opacity="0.4" />
          </Grid>
          <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
-         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0">
-            <ProgressBar Progress="{Binding Data.ReadingPercent}" VerticalOptions="EndAndExpand" />
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0" >
+            <ProgressBar Progress="{Binding Data.ReadingPercent}" VerticalOptions="EndAndExpand" InputTransparent="True" />
             <ContentView Style="{StaticResource SplashItemDetails}" >
                <Grid Margin="10" ColumnSpacing="10">
 
                   <Grid.ColumnDefinitions>
-                     <ColumnDefinition Width="*" />
-                     <ColumnDefinition Width="*" />
+                     <ColumnDefinition Width="2*" />
                      <ColumnDefinition Width="*" />
                   </Grid.ColumnDefinitions>
 
@@ -27,12 +26,12 @@
                      <Switch VerticalOptions="Center" IsToggled="{Binding Data.Readed}" />
                      <Label VerticalOptions="Center" Text="{controls:Translate Text=FILE_COMIC_ALREADY_READED_LABEL}" />
                   </StackLayout>
-                  <controls:EnumPicker SelectedItem="{Binding Data.Rate}" x:TypeArguments="models:enumFileRate" HorizontalOptions="FillAndExpand" Grid.Column="1"  />
-                  <Button Text="{controls:Translate Text=FILE_OPEN_COMIC_LABEL}" Command="{Binding OpenTappedCommand}" HorizontalOptions="FillAndExpand" Grid.Column="2" />
-                  
+                  <Button Text="{controls:Translate Text=FILE_OPEN_COMIC_LABEL}" Command="{Binding OpenTappedCommand}" HorizontalOptions="FillAndExpand" Grid.Column="1" />
+
                </Grid>
             </ContentView>
          </StackLayout>
+         <controls:RatingView Rating="{Binding Data.Rating}" HeightRequest="75" AbsoluteLayout.LayoutBounds="0.5,0.7" AbsoluteLayout.LayoutFlags="PositionProportional" />
 
       </AbsoluteLayout>
 

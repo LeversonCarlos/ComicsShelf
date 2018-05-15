@@ -70,6 +70,24 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string BASE_CANCEL_COMMAND {
+            get {
+                return ResourceManager.GetString("BASE_CANCEL_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string BASE_OK_COMMAND {
+            get {
+                return ResourceManager.GetString("BASE_OK_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wait....
         /// </summary>
         internal static string BASE_WAIT_MESSAGE {
@@ -79,88 +97,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
-        /// </summary>
-        internal static string COMMAND_CANCEL {
-            get {
-                return ResourceManager.GetString("COMMAND_CANCEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ok.
-        /// </summary>
-        internal static string COMMAND_OK {
-            get {
-                return ResourceManager.GetString("COMMAND_OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 5 Star.
-        /// </summary>
-        internal static string ENUM_ENUMFILERATE_FIVE {
-            get {
-                return ResourceManager.GetString("ENUM_ENUMFILERATE_FIVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 4 Star.
-        /// </summary>
-        internal static string ENUM_ENUMFILERATE_FOUR {
-            get {
-                return ResourceManager.GetString("ENUM_ENUMFILERATE_FOUR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;Rate this Comic&gt;.
-        /// </summary>
-        internal static string ENUM_ENUMFILERATE_NONE {
-            get {
-                return ResourceManager.GetString("ENUM_ENUMFILERATE_NONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1 Star.
-        /// </summary>
-        internal static string ENUM_ENUMFILERATE_ONE {
-            get {
-                return ResourceManager.GetString("ENUM_ENUMFILERATE_ONE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 3 Star.
-        /// </summary>
-        internal static string ENUM_ENUMFILERATE_THREE {
-            get {
-                return ResourceManager.GetString("ENUM_ENUMFILERATE_THREE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 2 Star.
-        /// </summary>
-        internal static string ENUM_ENUMFILERATE_TWO {
-            get {
-                return ResourceManager.GetString("ENUM_ENUMFILERATE_TWO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 0 Star.
-        /// </summary>
-        internal static string ENUM_ENUMFILERATE_ZERO {
-            get {
-                return ResourceManager.GetString("ENUM_ENUMFILERATE_ZERO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Comic Already Readed.
+        ///   Looks up a localized string similar to Already Readed.
         /// </summary>
         internal static string FILE_COMIC_ALREADY_READED_LABEL {
             get {
@@ -169,7 +106,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Comic.
+        ///   Looks up a localized string similar to Open.
         /// </summary>
         internal static string FILE_OPEN_COMIC_LABEL {
             get {
@@ -187,7 +124,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Comics List.
+        ///   Looks up a localized string similar to All Comics.
         /// </summary>
         internal static string HOME_FOLDERS_PAGE_TITLE {
             get {
@@ -286,7 +223,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on you device that contains your comic book files (all that files with the CBZ extension)..
+        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (those files with the CBZ extension)..
         /// </summary>
         internal static string LIBRARY_UNDEFINED_FOLDER_MESSAGE {
             get {
