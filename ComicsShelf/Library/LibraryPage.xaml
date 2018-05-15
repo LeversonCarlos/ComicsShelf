@@ -5,7 +5,7 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Library.LibraryPage">
    <controls:Page.Content>
-      <StackLayout VerticalOptions="CenterAndExpand" Padding="80" Spacing="100" >
+      <StackLayout VerticalOptions="CenterAndExpand" Padding="10,80" Spacing="100" >
 
          <StackLayout Spacing="10">
             <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" HorizontalOptions="Center" FontSize="Large" />
@@ -15,7 +15,7 @@
          </StackLayout>
 
          <StackLayout Spacing="5" >
-            <Label Text="{controls:Translate Text=LIBRARY_SUGGESTION_MESSAGE}" HorizontalOptions="Center" FontSize="Micro" />
+            <Label Text="{controls:Translate Text=LIBRARY_SUGGESTION_MESSAGE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
             <Label Text="www.comicbookplus.com" HorizontalOptions="Center" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource colorAccent}" >
                <Label.GestureRecognizers>
                   <TapGestureRecognizer Command="{Binding LinkTappedCommand}" />
