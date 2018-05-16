@@ -86,6 +86,7 @@
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\FileSystem_Zip.cs" />
     <Compile Include="Helpers\FileSystem_Image.cs" />
+    <Compile Include="Helpers\FolderDialog.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
