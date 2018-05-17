@@ -23,25 +23,16 @@ namespace ComicsShelf.Droid
       #region New
       public FolderDialog(Context androidContext)
       {
-         this._AndroidContext = androidContext;
-
-         _SdcardDirectory = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-
-         try
-         { _SdcardDirectory = new Java.IO.File(_SdcardDirectory).CanonicalPath; }
-         catch (IOException) { }
+         this._androidContext = androidContext;
       }
       #endregion
 
       #region Properties
-      Context _AndroidContext;
+      Context _androidContext;
       AlertDialog _dialog;
-      ListView _listView;
+      TextView _currentPathView;
+      ListView _directoryListView;
       AutoResetEvent _autoResetEvent;
-      string _initialPath;
-      string _resultPath;
-      String _SdcardDirectory = "";
-      int _padding10;
       #endregion
 
       #region GetDirectoryAsync
@@ -51,108 +42,79 @@ namespace ComicsShelf.Droid
          {
             using (var folderDialog = new FolderDialog(Xamarin.Forms.Forms.Context))
             {
-               folderDialog._resultPath = string.Empty;
 
                if (string.IsNullOrEmpty(initialPath))
                { initialPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath; }
-               folderDialog._initialPath = new Java.IO.File(initialPath).CanonicalPath;
+               initialPath = new Java.IO.File(initialPath).CanonicalPath;
 
-               if (!folderDialog.CreateDialog()) { return folderDialog._resultPath; }
-               folderDialog.CurrentPath = folderDialog._initialPath;
-               if (!await folderDialog.AwaitSelection()) { return folderDialog._resultPath; }
+               if (!folderDialog.CreateDialog()) { return string.Empty; }
+               folderDialog.CurrentPath = initialPath;
+               if (!await folderDialog.AwaitSelection()) { return string.Empty; }
 
-               return folderDialog._resultPath; ;
+               return folderDialog.ResultPath;
             }
          }
-         catch { return string.Empty; }
+         catch (Exception ex) { return string.Empty; }
       }
       #endregion
 
       #region CreateDialog
-
       private bool CreateDialog()
       {
          try
          {
-            this._padding10 = this.ConvertDpToPx(10);
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this._AndroidContext);
+
+            // INITIALIZE
+            var viewPadding = this.ConvertDpToPx(10);
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(_androidContext);
             dialogBuilder.SetTitle(rSelectFolder);
 
-            var layout = new LinearLayout(_AndroidContext);
-            layout.Orientation = Orientation.Vertical;
-            layout.AddView(this.CreateDialog_GetSelectionPanel());
-            layout.AddView(this.CreateDialog_GetListView());
-            _listView.Adapter= StringsArrayAdaper.GetAdaper(_AndroidContext, this._initialPath);
-            dialogBuilder.SetView(layout);
-           
-            dialogBuilder.SetCancelable(true);
-            dialogBuilder.SetPositiveButton(rCommandOK, (sender, args) => {
-               this._resultPath = this.CurrentPath; this._autoResetEvent.Set();
-            });
-            dialogBuilder.SetNegativeButton(rCommandCancel, (sender, args) => { });
-            this._dialog = dialogBuilder.Create();
-            this._dialog.CancelEvent += (sender, args) => { this._autoResetEvent.Set(); };
-            this._dialog.DismissEvent += (sender, args) => { this._autoResetEvent.Set(); };
+            // CURRENT PATH
+            _currentPathView = new TextView(_androidContext);
+            _currentPathView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+            _currentPathView.SetPadding(viewPadding, viewPadding, viewPadding, viewPadding);
+            _currentPathView.SetTextColor(Color.Black);
+            _currentPathView.Gravity = GravityFlags.Top;
+            _currentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
+            _currentPathView.SetTypeface(null, TypefaceStyle.Bold);
 
-            return true;
-         }
-         catch (Exception ex) { throw; }
-      }
+            // DIRECTORY LIST VIEW
+            _directoryListView = new ListView(_androidContext);
+            _directoryListView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+            _directoryListView.SetPadding(viewPadding * 2, viewPadding, viewPadding, viewPadding);
+            _directoryListView.SetForegroundGravity(GravityFlags.FillVertical);
 
-      private TextView CreateDialog_GetSelectionPanel()
-      {
-         try
-         {
-            _CurrentPathView = new TextView(this._AndroidContext);
-            _CurrentPathView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-            _CurrentPathView.SetPadding(this._padding10 * 2, this._padding10 * 2, this._padding10 * 2, this._padding10 * 2);
-            _CurrentPathView.SetTextColor(Color.Black);
-            _CurrentPathView.Gravity = GravityFlags.Top;
-            _CurrentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
-            _CurrentPathView.SetTypeface(null, TypefaceStyle.Bold);
-            _CurrentPathView.Text = string.Empty;
-
-            return _CurrentPathView;
-         }
-         catch { throw; }
-      }
-
-      private ListView CreateDialog_GetListView()
-      {
-         try
-         {
-            _listView = new ListView(this._AndroidContext);
-            _listView.SetPadding(this._padding10 * 2, this._padding10 * 2, this._padding10 * 2, this._padding10 * 2);
-            _listView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-            _listView.SetForegroundGravity(GravityFlags.FillVertical);
-            _listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
-               string selectedItem = "" + _listView.Adapter.GetItem(e.Position);
-               if (selectedItem.Equals(".."))
+            // DIRECTORY SELECTION
+            _directoryListView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+               string selectedPath = "" + _directoryListView.Adapter.GetItem(e.Position);
+               if (selectedPath =="..")
                {
                   this.CurrentPath = this.CurrentPath.Substring(0, this.CurrentPath.LastIndexOf("/"));
-                  if ("".Equals(this.CurrentPath)) { this.CurrentPath = "/"; }
+                  if (this.CurrentPath == "") { this.CurrentPath = "/"; }
                }
-               else { this.CurrentPath += $"/{selectedItem}"; }
+               else { this.CurrentPath += $"/{selectedPath}"; }
             };
-            return _listView;
-         }
-         catch { throw; }
-      }
 
-      #endregion
+            // LAYOUT VIEW
+            var layoutView = new LinearLayout(_androidContext);
+            layoutView.Orientation = Orientation.Vertical;
+            layoutView.AddView(_currentPathView);
+            layoutView.AddView(_directoryListView);
+            // _listView.Adapter = StringsArrayAdaper.GetAdaper(_AndroidContext, this._initialPath);
+            dialogBuilder.SetView(layoutView);
+           
+            // DEFINE COMMANDS
+            dialogBuilder.SetCancelable(true);
+            dialogBuilder.SetPositiveButton(rCommandOK, (sender, args) => {
+               this.ResultPath = this.CurrentPath;
+               this._autoResetEvent.Set();
+            });
+            dialogBuilder.SetNegativeButton(rCommandCancel, (sender, args) => { });
 
-      #region SetInitialPath
-      private bool SetInitialPath(string initialPath)
-      {
-         try
-         {
-
-            if (string.IsNullOrEmpty(initialPath))
-            { initialPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath; }
-
-            this._initialPath = new Java.IO.File(initialPath).CanonicalPath;
-            this.CurrentPath = this._initialPath;
-            this._resultPath = string.Empty;
+            // CREATE DIALOG
+            _dialog = dialogBuilder.Create();
+            _dialog.CancelEvent += (sender, args) => { this._autoResetEvent.Set(); };
+            _dialog.DismissEvent += (sender, args) => { this._autoResetEvent.Set(); };
 
             return true;
          }
@@ -168,26 +130,24 @@ namespace ComicsShelf.Droid
             this._autoResetEvent = new AutoResetEvent(false);
             this._dialog.Show();
             await Task.Run(() => { _autoResetEvent.WaitOne(); });
-            return (!string.IsNullOrEmpty(this._resultPath));
+            return (!string.IsNullOrEmpty(this.ResultPath));
          }
          catch (Exception ex) { throw; }
       }
       #endregion
 
       #region CurrentPath
+      public string ResultPath { get; set; }
+
       string _CurrentPath;
-      TextView _CurrentPathView;
       public string CurrentPath
       {
          get { return _CurrentPath; }
          set
          {
             _CurrentPath = value;
-            this._CurrentPathView.Text = value;
-
-            // this._dialog.ListView.Adapter = null;
-            // this._dialog.ListView.Adapter = StringsArrayAdaper.GetAdaper(_AndroidContext, value);
-            _listView.Adapter = StringsArrayAdaper.GetAdaper(_AndroidContext, value);
+            _currentPathView.Text = value;
+            _directoryListView.Adapter = StringsArrayAdaper.GetAdaper(_androidContext, value);
          }
       }
       #endregion
@@ -195,7 +155,7 @@ namespace ComicsShelf.Droid
       #region ConvertDpToPx
       private int ConvertDpToPx(int dp)
       {
-         var r = this._AndroidContext.Resources;
+         var r = _androidContext.Resources;
          var metrics = r.DisplayMetrics;
          int px = (int)Android.Util.TypedValue.ApplyDimension(Android.Util.ComplexUnitType.Dip, dp, metrics);
          return px;
@@ -205,7 +165,10 @@ namespace ComicsShelf.Droid
       #region Dispose
       public void Dispose()
       {
-         throw new NotImplementedException();
+         if (_currentPathView != null) { _currentPathView.Dispose(); _currentPathView = null; }
+         if (_directoryListView != null) { _directoryListView.Dispose(); _directoryListView = null; }
+         if (_dialog != null) { _dialog.Dispose(); _dialog = null; }
+         // if (_autoResetEvent != null) { _autoResetEvent.Dispose(); _autoResetEvent = null; }
       }
       #endregion
 
