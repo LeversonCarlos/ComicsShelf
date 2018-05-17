@@ -87,23 +87,26 @@ namespace ComicsShelf.Engine
 
             // LOOP THROUGH FILE LIST
             var fileQuantity = fileList.Length;
-            for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
-            {
-               string filePath = "";
-               try
+            if (fileQuantity != 0) {
+               for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
                {
-                  filePath = fileList[fileIndex];
-                  var progress = ((double)fileIndex / (double)fileQuantity);
-                  this.Notify(filePath, progress);
+                  string filePath = "";
+                  try
+                  {
+                     filePath = fileList[fileIndex];
+                     var progress = ((double)fileIndex / (double)fileQuantity);
+                     this.Notify(filePath, progress);
 
-                  await Task.Run(()=> {
-                     var comicFile = this.SearchComicFiles_GetFile(filePath);
-                     this.SearchComicFiles_GetFolder(comicFile);
-                  });
+                     await Task.Run(() =>
+                     {
+                        var comicFile = this.SearchComicFiles_GetFile(filePath);
+                        this.SearchComicFiles_GetFolder(comicFile);
+                     });
 
+                  }
+                  catch (Exception fileException)
+                  { if (!await App.Message.Confirm($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
                }
-               catch (Exception fileException)
-               { if (!await App.Message.Confirm($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
             }
 
             // REORDER THE LISTS

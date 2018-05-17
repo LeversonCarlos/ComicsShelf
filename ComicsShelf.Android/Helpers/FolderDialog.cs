@@ -1,10 +1,8 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
-using Android.OS;
 using Android.Views;
 using Android.Widget;
-using Java.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +70,7 @@ namespace ComicsShelf.Droid
             // CURRENT PATH
             _currentPathView = new TextView(_androidContext);
             _currentPathView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-            _currentPathView.SetPadding(viewPadding, viewPadding, viewPadding, viewPadding);
+            _currentPathView.SetPadding(viewPadding * 2, viewPadding, viewPadding, viewPadding);
             _currentPathView.SetTextColor(Color.Black);
             _currentPathView.Gravity = GravityFlags.Top;
             _currentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
@@ -147,10 +145,11 @@ namespace ComicsShelf.Droid
          {
             _CurrentPath = value;
             _currentPathView.Text = value;
-            _directoryListView.Adapter = StringsArrayAdaper.GetAdaper(_androidContext, value);
+            _directoryListView.Adapter = this.GetDirectoryAdaper(value);
          }
       }
       #endregion
+
 
       #region ConvertDpToPx
       private int ConvertDpToPx(int dp)
@@ -162,40 +161,8 @@ namespace ComicsShelf.Droid
       }
       #endregion
 
-      #region Dispose
-      public void Dispose()
-      {
-         if (_currentPathView != null) { _currentPathView.Dispose(); _currentPathView = null; }
-         if (_directoryListView != null) { _directoryListView.Dispose(); _directoryListView = null; }
-         if (_dialog != null) { _dialog.Dispose(); _dialog = null; }
-         // if (_autoResetEvent != null) { _autoResetEvent.Dispose(); _autoResetEvent = null; }
-      }
-      #endregion
-
-   }
-
-   internal class StringsArrayAdaper : ArrayAdapter<String>
-   {
-
-      public StringsArrayAdaper(Context context, int resource, int textViewResourceId, IList<string> objects) : base(context, resource, textViewResourceId, objects)
-      { }      
-
-      public override View GetView(int position, View convertView, ViewGroup parent)
-      {
-        
-         View v = base.GetView(position, convertView, parent);
-         if (v is TextView)
-         {
-            TextView tv = (TextView)v;
-            // tv.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
-            // tv.SetPadding(20, 10, 20, 10);
-            tv.LayoutParameters.Height = ViewGroup.LayoutParams.WrapContent;
-            tv.Ellipsize = null;
-         }
-         return v;
-      }
-
-      public static List<String> GetDirectories(string path)
+      #region GetDirectoryList
+      private List<String> GetDirectoryList(string path)
       {
          var dirList = new List<string>();
 
@@ -208,20 +175,33 @@ namespace ComicsShelf.Droid
                .Where(x => x.IsDirectory)
                .Select(x => x.Name)
                .OrderBy(x => x)
-               .ToList();           
+               .ToList();
          }
 
          if (!"/".Equals(path)) { dirList.Insert(0, ".."); }
          return dirList;
       }
+      #endregion
 
-      public static ArrayAdapter<String> GetAdaper(Context androidContext, string path)
+      #region GetDirectoryAdaper
+      private ArrayAdapter<String> GetDirectoryAdaper(string path)
       {
-         var dirList = GetDirectories(path);
-         var adapter = new StringsArrayAdaper(androidContext, Android.Resource.Layout.SelectDialogItem, Android.Resource.Id.Text1, dirList);
+         var dirList = this.GetDirectoryList(path);
+         var adapter = new ArrayAdapter<String>(_androidContext, Android.Resource.Layout.SelectDialogItem, Android.Resource.Id.Text1, dirList);
          return adapter;
       }
+      #endregion
+
+
+      #region Dispose
+      public void Dispose()
+      {
+         if (_currentPathView != null) { _currentPathView.Dispose(); _currentPathView = null; }
+         if (_directoryListView != null) { _directoryListView.Dispose(); _directoryListView = null; }
+         if (_dialog != null) { _dialog.Dispose(); _dialog = null; }
+         // if (_autoResetEvent != null) { _autoResetEvent.Dispose(); _autoResetEvent = null; }
+      }
+      #endregion
 
    }
-
 }
