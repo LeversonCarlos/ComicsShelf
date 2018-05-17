@@ -7,6 +7,7 @@ using Android.Widget;
 using Java.IO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,7 +17,6 @@ namespace ComicsShelf.Droid
    {
 
       private const string rSelectFolder = "Select folder";
-      private const string rCurrentSelection = "Current Selection:";
       private const string rCommandOK = "OK";
       private const string rCommandCancel = "Cancel";
 
@@ -36,6 +36,7 @@ namespace ComicsShelf.Droid
       #region Properties
       Context _AndroidContext;
       AlertDialog _dialog;
+      ListView _listView;
       AutoResetEvent _autoResetEvent;
       string _initialPath;
       string _resultPath;
@@ -76,24 +77,18 @@ namespace ComicsShelf.Droid
             this._padding10 = this.ConvertDpToPx(10);
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this._AndroidContext);
             dialogBuilder.SetTitle(rSelectFolder);
-            dialogBuilder.SetView(this.CreateDialog_GetSelectionPanel());
 
-            var initialAdapter = StringsArrayAdaper.GetAdaper(_AndroidContext, this._initialPath);
-            //var initialList = StringsArrayAdaper.GetDirectories(this._initialPath);
-            EventHandler<DialogClickEventArgs> onItemSelected = (object sender, DialogClickEventArgs args) => {
-               string selectedItem = "" + this._dialog.ListView.Adapter.GetItem(args.Which);
-               if (selectedItem.Equals(".."))
-               {
-                  this.CurrentPath = this.CurrentPath.Substring(0, this.CurrentPath.LastIndexOf("/"));
-                  if ("".Equals(this.CurrentPath)) { this.CurrentPath = "/"; }
-               }
-               else { this.CurrentPath = selectedItem; }
-               
-            };
-            dialogBuilder.SetSingleChoiceItems(initialAdapter, -1, onItemSelected);
-
+            var layout = new LinearLayout(_AndroidContext);
+            layout.Orientation = Orientation.Vertical;
+            layout.AddView(this.CreateDialog_GetSelectionPanel());
+            layout.AddView(this.CreateDialog_GetListView());
+            _listView.Adapter= StringsArrayAdaper.GetAdaper(_AndroidContext, this._initialPath);
+            dialogBuilder.SetView(layout);
+           
             dialogBuilder.SetCancelable(true);
-            dialogBuilder.SetPositiveButton(rCommandOK, (sender, args) => { this._resultPath = this.CurrentPath; this._autoResetEvent.Set(); });
+            dialogBuilder.SetPositiveButton(rCommandOK, (sender, args) => {
+               this._resultPath = this.CurrentPath; this._autoResetEvent.Set();
+            });
             dialogBuilder.SetNegativeButton(rCommandCancel, (sender, args) => { });
             this._dialog = dialogBuilder.Create();
             this._dialog.CancelEvent += (sender, args) => { this._autoResetEvent.Set(); };
@@ -104,35 +99,42 @@ namespace ComicsShelf.Droid
          catch (Exception ex) { throw; }
       }
 
-      private LinearLayout CreateDialog_GetSelectionPanel()
+      private TextView CreateDialog_GetSelectionPanel()
       {
          try
          {
-            LinearLayout selectionPanel = new LinearLayout(this._AndroidContext);
-            selectionPanel.Orientation = Orientation.Vertical;
-            selectionPanel.SetGravity(GravityFlags.Top);
-
-            var label = new TextView(this._AndroidContext);
-            label.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-            label.SetPadding(this._padding10 * 2, this._padding10 / 2, this._padding10 * 2, this._padding10 / 2);
-            label.SetTextColor(Color.Black);
-            label.Gravity = GravityFlags.CenterVertical;
-            label.Text = rCurrentSelection;
-            label.SetTextSize(Android.Util.ComplexUnitType.Dip, 10);
-            label.SetTypeface(null, TypefaceStyle.Normal);
-            selectionPanel.AddView(label);
-
             _CurrentPathView = new TextView(this._AndroidContext);
             _CurrentPathView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-            _CurrentPathView.SetPadding(this._padding10 * 2, this._padding10 / 2, this._padding10 * 2, this._padding10 / 2);
+            _CurrentPathView.SetPadding(this._padding10 * 2, this._padding10 * 2, this._padding10 * 2, this._padding10 * 2);
             _CurrentPathView.SetTextColor(Color.Black);
-            _CurrentPathView.Gravity = GravityFlags.CenterVertical;
-            _CurrentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 10);
+            _CurrentPathView.Gravity = GravityFlags.Top;
+            _CurrentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
             _CurrentPathView.SetTypeface(null, TypefaceStyle.Bold);
             _CurrentPathView.Text = string.Empty;
-            selectionPanel.AddView(_CurrentPathView);
 
-            return selectionPanel;
+            return _CurrentPathView;
+         }
+         catch { throw; }
+      }
+
+      private ListView CreateDialog_GetListView()
+      {
+         try
+         {
+            _listView = new ListView(this._AndroidContext);
+            _listView.SetPadding(this._padding10 * 2, this._padding10 * 2, this._padding10 * 2, this._padding10 * 2);
+            _listView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+            _listView.SetForegroundGravity(GravityFlags.FillVertical);
+            _listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+               string selectedItem = "" + _listView.Adapter.GetItem(e.Position);
+               if (selectedItem.Equals(".."))
+               {
+                  this.CurrentPath = this.CurrentPath.Substring(0, this.CurrentPath.LastIndexOf("/"));
+                  if ("".Equals(this.CurrentPath)) { this.CurrentPath = "/"; }
+               }
+               else { this.CurrentPath += $"/{selectedItem}"; }
+            };
+            return _listView;
          }
          catch { throw; }
       }
@@ -181,10 +183,11 @@ namespace ComicsShelf.Droid
          set
          {
             _CurrentPath = value;
-            this._CurrentPathView.Text = value;        
+            this._CurrentPathView.Text = value;
 
-            this._dialog.ListView.Adapter = null;
-            this._dialog.ListView.Adapter = StringsArrayAdaper.GetAdaper(_AndroidContext, value);
+            // this._dialog.ListView.Adapter = null;
+            // this._dialog.ListView.Adapter = StringsArrayAdaper.GetAdaper(_AndroidContext, value);
+            _listView.Adapter = StringsArrayAdaper.GetAdaper(_AndroidContext, value);
          }
       }
       #endregion
@@ -231,8 +234,20 @@ namespace ComicsShelf.Droid
 
       public static List<String> GetDirectories(string path)
       {
-         var dirArray = System.IO.Directory.GetDirectories(path);
-         var dirList = new List<string>(dirArray);
+         var dirList = new List<string>();
+
+         var dirFile = new Java.IO.File(path);
+         var dirFiles = dirFile.ListFiles();
+
+         if (dirFiles != null)
+         {
+            dirList = dirFiles
+               .Where(x => x.IsDirectory)
+               .Select(x => x.Name)
+               .OrderBy(x => x)
+               .ToList();           
+         }
+
          if (!"/".Equals(path)) { dirList.Insert(0, ".."); }
          return dirList;
       }
