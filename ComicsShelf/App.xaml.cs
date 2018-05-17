@@ -66,10 +66,13 @@ namespace ComicsShelf
 
       protected override void OnStart()
       {
-         AppCenter.Start("android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
-                           "uwp={Your UWP App secret here};" +
-                           "ios={Your iOS App secret here}",
-                           typeof(Analytics), typeof(Crashes));
+         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+         {
+            AppCenter.Start("android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
+                              "uwp={Your UWP App secret here};" +
+                              "ios={Your iOS App secret here}",
+                              typeof(Analytics), typeof(Crashes));
+         });
          Engine.Startup.Execute();
       }
 

@@ -142,7 +142,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Put some cbz files on your device and start over again.
+        ///   Looks up a localized string similar to Put some CBZ files on your device and restart the app or set a different folder for your library..
         /// </summary>
         internal static string HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS {
             get {
@@ -151,7 +151,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No comic file found on device.
+        ///   Looks up a localized string similar to No comic file was found on device.
         /// </summary>
         internal static string HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE {
             get {

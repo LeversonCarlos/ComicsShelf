@@ -145,10 +145,10 @@
     <value>Library</value>
   </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
-    <value>Put some cbz files on your device and start over again</value>
+    <value>Put some CBZ files on your device and restart the app or set a different folder for your library.</value>
   </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE" xml:space="preserve">
-    <value>No comic file found on device</value>
+    <value>No comic file was found on device</value>
   </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Reading</value>

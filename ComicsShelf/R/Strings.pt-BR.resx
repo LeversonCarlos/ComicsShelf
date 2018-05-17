@@ -144,6 +144,12 @@
   <data name="HOME_LIBRARY_MENU" xml:space="preserve">
     <value>Biblioteca</value>
   </data>
+  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
+    <value>Coloque alguns arquivos CBZ no seu dispositivo e reinicie o aplicativo ou defina uma pasta diferente para a sua biblioteca.</value>
+  </data>
+  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE" xml:space="preserve">
+    <value>Nenhum arquivo de quadrinhos foi encontrado no dispositivo</value>
+  </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue lendo</value>
   </data>
