@@ -69,8 +69,8 @@ namespace ComicsShelf
          Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
          {
             AppCenter.Start("android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
-                              "uwp={Your UWP App secret here};" +
-                              "ios={Your iOS App secret here}",
+                            "uwp=21539a63-8335-46ef-8771-c9c001371f87;" +
+                            "ios={Your iOS App secret here}",
                               typeof(Analytics), typeof(Crashes));
          });
          Engine.Startup.Execute();
