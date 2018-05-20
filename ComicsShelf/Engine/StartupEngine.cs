@@ -15,6 +15,7 @@ namespace ComicsShelf.Engine
             using (var engine = new Startup())
             {
                App.RootFolder = new Home.HomeData { Text = R.Strings.AppTitle };
+               await engine.LoadAppCenter();
                await engine.LoadSettings();
                await Helpers.ViewModels.NavVM.PushAsync<Home.HomeVM>(true, App.RootFolder);
 
@@ -28,6 +29,25 @@ namespace ComicsShelf.Engine
             System.Diagnostics.Debug.WriteLine("Startup Engine Finish");
          }
          catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+      }
+      #endregion
+
+      #region LoadAppCenter
+      private async Task LoadAppCenter()
+      {
+         try
+         {
+            Task.Run(() =>
+            {
+               Microsoft.AppCenter.AppCenter.Start(
+                  "android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
+                  "uwp=21539a63-8335-46ef-8771-c9c001371f87;" +
+                  "ios={Your iOS App secret here}",
+                  typeof(Microsoft.AppCenter.Analytics.Analytics),
+                  typeof(Microsoft.AppCenter.Crashes.Crashes));
+            });
+         }
+         catch (Exception ex) { throw; }
       }
       #endregion
 
