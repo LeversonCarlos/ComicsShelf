@@ -72,6 +72,8 @@ namespace ComicsShelf.UWP
          try
          {
 
+           
+
             /* STORAGE QUERY */
             var fileTypeFilter = new System.Collections.Generic.List<string>();
             fileTypeFilter.Add(".cbz");
@@ -79,7 +81,10 @@ namespace ComicsShelf.UWP
             var queryOptions = new Windows.Storage.Search.QueryOptions(Windows.Storage.Search.CommonFileQuery.OrderByName, fileTypeFilter);
 
             /* LOCATE FILES */
-            var folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(path);
+            Windows.Storage.StorageFolder folder = null;
+            if (path.Contains(this.PathSeparator))
+            { folder = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(path); }
+            else { folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(path); }
             var query = folder.CreateFileQueryWithOptions(queryOptions);
             var fileList = await query.GetFilesAsync();
 
