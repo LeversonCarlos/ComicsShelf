@@ -19,7 +19,11 @@ namespace ComicsShelf.UWP
             // INITIALIZE
             var splitedPath = comicFile.FullPath
                .Split(new string[] { settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
-            StorageFolder storageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(settings.Paths.LibraryPath);
+
+            Windows.Storage.StorageFolder storageFolder = null;
+            if (settings.Paths.LibraryPath.Contains(this.PathSeparator))
+            { storageFolder = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(settings.Paths.LibraryPath); }
+            else { storageFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(settings.Paths.LibraryPath); }
             StorageFile storageFile = null;
 
             // LOOP THROUGH SPLITED PATH PARTS

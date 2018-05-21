@@ -20,11 +20,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Examples\Blue Beetle\Blue Beetle 01.cbz" />
+    <None Remove="Examples\Blue Beetle\Blue Beetle [1967] #01.cbz" />
+    <None Remove="Examples\Plastic Man\Plastic Man 01.cbz" />
+    <None Remove="Examples\Plastic Man\Plastic Man 02.cbz" />
+    <None Remove="Examples\Plastic Man\Plastic Man 03.cbz" />
+    <None Remove="Examples\Plastic Man\Plastic Man [1943] #01.cbz" />
+    <None Remove="Examples\Plastic Man\Plastic Man [1943] #02.cbz" />
+    <None Remove="Examples\Plastic Man\Plastic Man [1943] #03.cbz" />
+    <None Remove="Examples\The Peacemaker\The Peacemaker 01.cbz" />
+    <None Remove="Examples\The Peacemaker\The Peacemaker [1967] #01.cbz" />
     <None Remove="Helpers\Controls\RatingViewEmptyStar.png" />
     <None Remove="Helpers\Controls\RatingViewFullStar.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Examples\Blue Beetle\Blue Beetle 01.cbz" />
+    <EmbeddedResource Include="Examples\Plastic Man\Plastic Man 01.cbz" />
+    <EmbeddedResource Include="Examples\Plastic Man\Plastic Man 02.cbz" />
+    <EmbeddedResource Include="Examples\Plastic Man\Plastic Man 03.cbz" />
+    <EmbeddedResource Include="Examples\The Peacemaker\The Peacemaker 01.cbz" />
     <EmbeddedResource Include="Helpers\Controls\RatingViewEmptyStar.png" />
     <EmbeddedResource Include="Helpers\Controls\RatingViewFullStar.png" />
   </ItemGroup>
