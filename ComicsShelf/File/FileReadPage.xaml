@@ -12,7 +12,7 @@
             <DataTemplate>
                <AbsoluteLayout>
                   <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Orientation="Horizontal" >
-                     <controls:Image Source="{Binding Path}" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                     <controls:PageImage Source="{Binding Path}" ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" />
                   </ScrollView>
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
                      <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding Data.StatsOpacity}">
