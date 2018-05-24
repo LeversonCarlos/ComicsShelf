@@ -17,6 +17,15 @@ namespace ComicsShelf.File
       }
       #endregion
 
+      #region IsSwipeEnabled
+      bool _IsSwipeEnabled;
+      public bool IsSwipeEnabled
+      {
+         get { return this._IsSwipeEnabled; }
+         set { this.SetProperty(ref this._IsSwipeEnabled, value); }
+      }
+      #endregion
+
       #region OnInitialize
       private void OnInitialize()
       {

@@ -9,6 +9,7 @@ namespace ComicsShelf.Helpers.Controls
          this.Orientation = CarouselViewOrientation.Horizontal;
          this.InterPageSpacing = 10;
          this.ShowArrows = true;
+         this.IsSwipeEnabled = true;
       }          
    }
 }

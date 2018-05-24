@@ -7,13 +7,16 @@
    x:Class="ComicsShelf.File.FileReadPage"
    x:Name="MyPage">
    <controls:Page.Content>
-      <controls:PageReader ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}" ArrowsBackgroundColor="{StaticResource colorLighter}">
+      <controls:PageReader 
+         ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}" 
+         IsSwipeEnabled="{Binding IsSwipeEnabled}"
+         ArrowsBackgroundColor="{StaticResource colorLighter}">
          <controls:PageReader.ItemTemplate>
             <DataTemplate>
                <AbsoluteLayout>
-                  <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Orientation="Horizontal" >
-                     <controls:PageImage Source="{Binding Path}" ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" />
-                  </ScrollView>
+                  <!-- IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}}" -->
+                  <controls:PageImage ImageSource="{Binding Path}"                         
+                        AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
                      <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding Data.StatsOpacity}">
                         <ProgressBar HorizontalOptions="Fill" HeightRequest="5" Progress="{Binding Data.ReadingPercent}" />
