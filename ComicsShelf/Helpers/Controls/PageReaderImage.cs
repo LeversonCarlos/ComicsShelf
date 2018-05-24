@@ -4,11 +4,11 @@ using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class PageImage : ScrollView
+   public class PageReaderImage : ScrollView
    {   
 
       #region New
-      public PageImage()
+      public PageReaderImage()
       {
 
          this.Image = new FFImageLoading.Forms.CachedImage
@@ -51,7 +51,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ImageSource
       public static readonly BindableProperty ImageSourceProperty =
-         BindableProperty.Create("ImageSource", typeof(ImageSource), typeof(PageImage), null,
+         BindableProperty.Create("ImageSource", typeof(ImageSource), typeof(PageReaderImage), null,
          propertyChanged: OnImageSourceChanged, defaultBindingMode: BindingMode.TwoWay);
       public ImageSource ImageSource
       {
@@ -62,7 +62,7 @@ namespace ComicsShelf.Helpers.Controls
       {
          try
          {
-            var VIEW = bindable as PageImage;
+            var VIEW = bindable as PageReaderImage;
             var SOURCE = newValue as ImageSource;
             VIEW.Image.Source = SOURCE;
          }
@@ -73,7 +73,7 @@ namespace ComicsShelf.Helpers.Controls
       /*
       #region IsSwipeEnabled
       public static readonly BindableProperty IsSwipeEnabledProperty =
-         BindableProperty.Create("IsSwipeEnabled", typeof(bool), typeof(PageImage), null,
+         BindableProperty.Create("IsSwipeEnabled", typeof(bool), typeof(PageReaderImage), null,
          propertyChanged: OnIsSwipeEnabledChanged, defaultBindingMode: BindingMode.TwoWay);
       public bool IsSwipeEnabled
       {
