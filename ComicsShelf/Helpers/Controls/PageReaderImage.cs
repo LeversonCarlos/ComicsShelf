@@ -27,7 +27,7 @@ namespace ComicsShelf.Helpers.Controls
 
          var pinchGesture = new PinchGestureRecognizer();
          pinchGesture.PinchUpdated += this.OnPinchUpdated;
-         // this.Content.GestureRecognizers.Add(pinchGesture);
+         this.Content.GestureRecognizers.Add(pinchGesture);
         
       }
       #endregion
@@ -70,10 +70,9 @@ namespace ComicsShelf.Helpers.Controls
       }
       #endregion
 
-      /*
       #region IsSwipeEnabled
       public static readonly BindableProperty IsSwipeEnabledProperty =
-         BindableProperty.Create("IsSwipeEnabled", typeof(bool), typeof(PageReaderImage), null,
+         BindableProperty.Create("IsSwipeEnabled", typeof(bool), typeof(PageReaderImage), true,
          propertyChanged: OnIsSwipeEnabledChanged, defaultBindingMode: BindingMode.TwoWay);
       public bool IsSwipeEnabled
       {
@@ -84,13 +83,12 @@ namespace ComicsShelf.Helpers.Controls
       {
          try
          {
-            var VIEW = bindable as PageImage;
+            var VIEW = bindable as PageReaderImage;
             var IsSwipeEnabled = (bool)newValue;
          }
          catch { }
       }
       #endregion
-      */
 
       #region OnPinchUpdated
 
@@ -158,11 +156,11 @@ namespace ComicsShelf.Helpers.Controls
          yOffset = this.Content.TranslationY;
 
          if (Content.Scale == 1) {
-            //this.IsSwipeEnabled = true;
+            this.IsSwipeEnabled = true;
             this.Orientation = ScrollOrientation.Horizontal;
          }
          else {
-            //this.IsSwipeEnabled = false;
+            this.IsSwipeEnabled = false;
             this.Orientation = ScrollOrientation.Both;
          }
       }
