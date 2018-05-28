@@ -9,13 +9,13 @@
    <controls:Page.Content>
       <controls:PageReader 
          ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}" 
-         IsSwipeEnabled="{Binding IsSwipeEnabled}"
+         IsSwipeEnabled="{Binding IsSwipeEnabled, Mode=TwoWay}"
          ArrowsBackgroundColor="{StaticResource colorLighter}">
          <controls:PageReader.ItemTemplate>
             <DataTemplate>
                <AbsoluteLayout>
                   <controls:PageReaderImage ImageSource="{Binding Path}"     
-                        IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}}"
+                        IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}"
                         AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
                      <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding Data.StatsOpacity}">
