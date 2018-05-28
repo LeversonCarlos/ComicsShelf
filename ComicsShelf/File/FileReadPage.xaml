@@ -16,6 +16,7 @@
                <AbsoluteLayout>
                   <controls:PageReaderImage ImageSource="{Binding Path}"     
                         IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}"
+                        ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" 
                         AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
                      <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding Data.StatsOpacity}">

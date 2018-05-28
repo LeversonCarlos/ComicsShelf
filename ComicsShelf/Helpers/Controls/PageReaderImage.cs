@@ -40,6 +40,42 @@ namespace ComicsShelf.Helpers.Controls
       #endregion
 
 
+      #region ScreenSize
+      public static readonly BindableProperty ScreenSizeProperty =
+         BindableProperty.Create("ScreenSize", typeof(Size), typeof(PageReaderImage), Size.Zero,
+         propertyChanged: OnScreenSizeChanged, defaultBindingMode: BindingMode.TwoWay);
+      public Size ScreenSize
+      {
+         get { return (Size)GetValue(ScreenSizeProperty); }
+         set { SetValue(ScreenSizeProperty, value); }
+      }
+      private static void OnScreenSizeChanged(BindableObject bindable, object oldValue, object newValue)
+      {
+         try
+         {
+            var VIEW = bindable as PageReaderImage;
+            var SIZE = (Size)newValue;
+            VIEW.ReviewScreenOrientation();
+         }
+         catch { }
+      }
+      private void ReviewScreenOrientation()
+      {
+         return;
+         /*
+         if (this.ImageSize == Size.Zero) { return; }
+         if (this.ScreenSize.Height >= this.ScreenSize.Width)
+         { this.Orientation = ScrollOrientation.Horizontal; }
+         else
+         { this.Orientation = ScrollOrientation.Vertical; }
+         this.Image.ReloadImage();
+         this.Image.AnchorX = 0.5;
+         this.Image.AnchorY = 0.5;
+         this.ForceLayout();
+         */
+      }
+      #endregion
+
       #region Image
 
       FFImageLoading.Forms.CachedImage Image { get; set; }
@@ -153,21 +189,7 @@ namespace ComicsShelf.Helpers.Controls
          }
       }
 
-      #endregion
-
-      /*
-      #region Clamp
-      private T Clamp<T>(T value, T minimum, T maximum) where T : IComparable
-      {
-         if (value.CompareTo(minimum) < 0)
-            return minimum;
-         else if (value.CompareTo(maximum) > 0)
-            return maximum;
-         else
-            return value;
-      }
-      #endregion
-      */
+      #endregion    
 
    }
 }
