@@ -9,10 +9,13 @@ namespace ComicsShelf.Helpers.Observables
    {
 
       #region SetProperty
-      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null)
+      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null, bool AlwaysInvokePropertyChanged=false)
       {
          if (EqualityComparer<T>.Default.Equals(backingStore, value))
+         {
+            if (AlwaysInvokePropertyChanged) { OnPropertyChanged(propertyName); }
             return false;
+         }
 
          backingStore = value;
          onChanged?.Invoke();

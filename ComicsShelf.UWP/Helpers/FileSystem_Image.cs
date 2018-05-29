@@ -12,6 +12,7 @@ namespace ComicsShelf.UWP
       {
          try
          {
+            if (System.IO.File.Exists(imagePath)) { return; }
             using (MemoryStream thumbnailStream = await this.Thumbnail_GetThumbnail(imageStream))
             {
                await this.Thumbnail_SaveThumbnail(thumbnailStream, imagePath);

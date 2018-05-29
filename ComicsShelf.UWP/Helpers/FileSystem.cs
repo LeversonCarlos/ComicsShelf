@@ -16,6 +16,13 @@ namespace ComicsShelf.UWP
       { get { return System.IO.Path.DirectorySeparatorChar.ToString(); } }
       #endregion
 
+      #region CheckPermissions
+      public void CheckPermissions(System.Action grantedCallback, System.Action revokedCallback)
+      {
+         grantedCallback?.Invoke();
+      }
+      #endregion
+
       #region GetDataPath
       public async Task<string> GetDataPath()
       {

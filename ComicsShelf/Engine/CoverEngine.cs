@@ -95,6 +95,7 @@ namespace ComicsShelf.Engine
                      App.Database.Update(file.PersistentData);
                   }
                   await this.FileSystem.Thumbnail(zipStream, file.CoverPath);
+                  file.CoverPath = file.CoverPath;
                }
             }
 
@@ -114,11 +115,13 @@ namespace ComicsShelf.Engine
             var parentFolder = this.ComicFoldersDictionary[file.PersistentData.ParentPath];
             while (parentFolder != null)
             {
-               if (!string.IsNullOrEmpty(parentFolder.PersistentData.CoverPath)) { break; }
-
-               parentFolder.CoverPath = file.CoverPath;
-               parentFolder.PersistentData.CoverPath = file.CoverPath;
-               await Task.Run(() => App.Database.Update(parentFolder.PersistentData));
+               if (string.IsNullOrEmpty(parentFolder.PersistentData.CoverPath))
+               {
+                  parentFolder.CoverPath = file.CoverPath;
+                  parentFolder.PersistentData.CoverPath = file.CoverPath;
+                  await Task.Run(() => App.Database.Update(parentFolder.PersistentData));
+               }
+               else { parentFolder.CoverPath = parentFolder.CoverPath; }
 
                if (string.IsNullOrEmpty(parentFolder.PersistentData.ParentPath)) { break; }
                parentFolder = this.ComicFoldersDictionary[parentFolder.PersistentData.ParentPath];

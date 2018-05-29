@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Product>Comics Shelf</Product>
     <Company>Friendship Solutions</Company>
-    <AssemblyVersion>18.05.07.0</AssemblyVersion>
-    <Version>18.05.07</Version>
+    <AssemblyVersion>18.05.08.0</AssemblyVersion>
+    <Version>18.05.08</Version>
     <Copyright>Copyright © Friendship Solutions 2018</Copyright>
   </PropertyGroup>
 
