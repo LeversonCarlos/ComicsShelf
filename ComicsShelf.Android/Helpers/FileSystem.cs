@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,6 +13,15 @@ namespace ComicsShelf.Droid
       #region PathSeparator
       public string PathSeparator
       { get { return System.IO.Path.DirectorySeparatorChar.ToString(); } }
+      #endregion
+
+      #region CheckPermissions
+      public void CheckPermissions(System.Action grantedCallback, System.Action revokedCallback)
+      {
+         Permission.Validate(
+            new string[] { Android.Manifest.Permission.ReadExternalStorage, Android.Manifest.Permission.WriteExternalStorage },
+            grantedCallback, revokedCallback);
+      }
       #endregion
 
       #region GetDataPath

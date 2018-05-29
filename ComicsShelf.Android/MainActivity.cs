@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 
 namespace ComicsShelf.Droid
 {
@@ -19,5 +20,14 @@ namespace ComicsShelf.Droid
          global::Xamarin.Forms.Forms.Init(this, bundle);
          LoadApplication(new App());
       }
+
+      internal delegate void PermissionsResultHandler(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults);
+      internal event PermissionsResultHandler OnPermissionsResult;
+      public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+      {
+         base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+         OnPermissionsResult?.Invoke(requestCode, permissions, grantResults);
+      }
+
    }
 }
