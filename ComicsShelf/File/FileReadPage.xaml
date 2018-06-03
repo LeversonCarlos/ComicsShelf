@@ -14,7 +14,7 @@
          <controls:PageReader.ItemTemplate>
             <DataTemplate>
                <AbsoluteLayout>
-                  <controls:PageReaderImage ImageSource="{Binding Path}"     
+                  <controls:PageReaderImage ImageSource="{Binding Path}" IsVisible="{Binding IsVisible}" 
                         IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}"
                         ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" 
                         AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />

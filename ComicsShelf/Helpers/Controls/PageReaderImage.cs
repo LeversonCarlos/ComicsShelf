@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -17,14 +18,15 @@ namespace ComicsShelf.Helpers.Controls
             Aspect = Aspect.AspectFill,
             HorizontalOptions = LayoutOptions.CenterAndExpand,
             VerticalOptions = LayoutOptions.CenterAndExpand,
-            InputTransparent = false, 
+            InputTransparent = false,
             RetryCount = 10,
             RetryDelay = 250
          };
          this.Image.Error += this.Image_Error;
          this.Image.Success += this.Image_Success;
 
-         this.Orientation = ScrollOrientation.Horizontal;        
+         this.Orientation = ScrollOrientation.Horizontal;
+         this.IsVisible = false;
          this.Content = this.Image;
 
          var tapGesture = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
@@ -107,6 +109,7 @@ namespace ComicsShelf.Helpers.Controls
          {
             var VIEW = bindable as PageReaderImage;
             var SOURCE = newValue as ImageSource;
+            if (!VIEW.IsVisible) { return; }
             VIEW.Image.Source = SOURCE;
          }
          catch { }
@@ -189,7 +192,28 @@ namespace ComicsShelf.Helpers.Controls
          }
       }
 
-      #endregion    
+      #endregion
+
+      #region OnPropertyChanged
+      protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+      {
+         base.OnPropertyChanged(propertyName);
+         if (propertyName == "IsVisible") {
+
+            if (this.IsVisible && this.Image.Source == null && this.ImageSource != null)
+            {
+               this.Image.Source = this.ImageSource;
+            }
+
+            if (!this.IsVisible && this.Image.Source != null)
+            {
+               this.Image.Source = null;
+               GC.Collect();
+            }
+
+         }
+      }
+      #endregion
 
    }
 }

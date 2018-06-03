@@ -237,6 +237,15 @@
          get { return this._Path; }
          set { this.SetProperty(ref this._Path, value); }
       }
+      #endregion
+
+      #region IsVisible
+      bool _IsVisible;
+      public bool IsVisible
+      {
+         get { return this._IsVisible; }
+         set { this.SetProperty(ref this._IsVisible, value); }
+      }
       #endregion     
 
    }
