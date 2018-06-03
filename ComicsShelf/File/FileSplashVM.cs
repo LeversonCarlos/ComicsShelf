@@ -72,7 +72,7 @@ namespace ComicsShelf.File
                   // PAGE DATA
                   var pageIndexText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
                   var pagePath = $"{cachePath}{App.Settings.Paths.Separator}P{pageIndexText}.jpg";
-                  var pageData = new FilePageData { Page = pageIndex, Path = pagePath };
+                  var pageData = new FilePageData { Page = pageIndex, Path = pagePath, IsVisible=false };
                   this.Data.Pages.Add(pageData);
                   pageIndex++;
 
