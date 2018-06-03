@@ -20,21 +20,28 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             this.IsSwipeEnabled = true;
+
             if (this.LastPosition != this.Position)
             {
-
-               if (this.LastPosition != -1 )
-               {
-                  var lastPositionData = (File.FilePageData)this.ItemsSource.GetItem(this.LastPosition);
-                  lastPositionData.IsVisible = false;
-               }
                this.LastPosition = this.Position;
-
-               var currentPositionData = (File.FilePageData)this.ItemsSource.GetItem(this.Position);
-               currentPositionData.IsVisible = true;
+               this.SetPositionVisibility((this.Position - 2), false);
+               this.SetPositionVisibility((this.Position - 1), true);
+               this.SetPositionVisibility((this.Position ), true);
+               this.SetPositionVisibility((this.Position + 1), true);
+               this.SetPositionVisibility((this.Position + 2), false);
             }
          }
          catch { }
+      }
+
+      void SetPositionVisibility(int position, bool visibility)
+      {
+         if (position >= 0 && position < this.ItemsSource.GetCount())
+         {
+            var positionData = (File.FilePageData)this.ItemsSource.GetItem(position);
+            if (positionData.IsVisible != visibility)
+            { positionData.IsVisible = visibility; }
+         }
       }
 
    }
