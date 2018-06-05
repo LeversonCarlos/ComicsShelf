@@ -25,7 +25,7 @@
       public string CoverPath
       {
          get { return this._CoverPath; }
-         set { this.SetProperty(ref this._CoverPath, value, AlwaysInvokePropertyChanged: true); }
+         set { this.SetProperty(ref this._CoverPath, value); }
       }
       #endregion
 
