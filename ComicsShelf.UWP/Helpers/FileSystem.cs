@@ -111,5 +111,10 @@ namespace ComicsShelf.UWP
       }
       #endregion
 
+      #region FileExists
+      public async Task<bool> FileExists(string path)
+      { return await Task.FromResult(System.IO.File.Exists(path)); }
+      #endregion
+
    }
 }
