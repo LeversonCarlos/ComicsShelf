@@ -9,7 +9,7 @@
       <ToolbarItem Order="Primary" Text="{controls:Translate Text=HOME_LIBRARY_MENU}" Icon="icon_Library.png" Command="{Binding OpenLibraryCommand}" />
    </TabbedPage.ToolbarItems>
    <TabbedPage.Children>
-      <home:FeaturedPage
+      <home:FeaturedPage />
       <home:FoldersPage />
    </TabbedPage.Children>
 </TabbedPage>
