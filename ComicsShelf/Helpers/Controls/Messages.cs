@@ -1,19 +1,23 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.Controls
+namespace ComicsShelf
 {
-   public class Messages
+   partial class App
    {
 
-      public async Task Show(string message)
+      public static async Task ShowMessage( Exception ex)
+      { await ShowMessage(ex.ToString()); }
+
+      public static async Task ShowMessage(string message)
       {
          try
          { await Application.Current.MainPage.DisplayAlert(R.Strings.AppTitle, message, R.Strings.BASE_OK_COMMAND); }
          catch { }
       }
 
-      public async Task<bool> Confirm(string message)
+      public static async Task<bool> Confirm(string message)
       {
          try
          { return await Application.Current.MainPage.DisplayAlert(R.Strings.AppTitle, message, R.Strings.BASE_OK_COMMAND, R.Strings.BASE_CANCEL_COMMAND); }
