@@ -118,7 +118,7 @@ namespace ComicsShelf.Helpers.Controls
             {
                var columnIndex = index % this.Columns;
                var rowIndex = (int)Math.Floor(index / (float)this.Columns);
-               var itemTile = this.RefreshTiles_GetItemTile(ITEMS[index]);              
+               var itemTile = this.RefreshTiles_GetItemTile(ITEMS[index]);
                this.Children?.Add(itemTile, columnIndex, rowIndex);
             }
 
