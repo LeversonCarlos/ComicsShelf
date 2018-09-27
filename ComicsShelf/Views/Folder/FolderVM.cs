@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Views.Folder
 {
-   public class FolderVM : Helpers.DataVM<FolderData>
+   public class FolderVM<T> : Helpers.DataVM<T> where T:Folder.FolderData
    {
 
       #region New
-      public FolderVM(FolderData args)
+      public FolderVM(T args)
       {
          this.Title = args.FullText;
          this.ViewType = typeof(FolderView);
@@ -26,7 +26,7 @@ namespace ComicsShelf.Views.Folder
       private async Task FolderTapped(object item)
       {
          try
-         { await PushAsync<FolderVM>((FolderData)item); }
+         { await PushAsync<FolderVM<T>>((T)item); }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion
