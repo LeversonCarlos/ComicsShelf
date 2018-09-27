@@ -2,23 +2,34 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Database
+namespace ComicsShelf.Helpers.Database
 {
-   internal class Connector : IDisposable
+   internal class dbContext : IDisposable
    {
-
-      #region Connector
       public SQLiteConnection Connection { get; set; }
-      public async Task InitializeConnector(string path)
+
+      public TableQuery<T> Table<T>() where T : new()
+      { return this.Connection.Table<T>(); }
+
+      public int Insert(object data)
+      { return this.Connection.Insert(data); }
+
+      public int Update(object data)
+      { return this.Connection.Update(data); }
+
+      #region Initialize
+      public async Task Initialize()
       {
          try
          {
+            var databasePath = App.Settings.Paths.DatabasePath;
             await Task.Run(() =>
             {
-               this.Connection = new SQLiteConnection(path);
+
+               this.Connection = new SQLiteConnection(databasePath);
                this.Connection.CreateTable<Configs>();
-               this.Connection.CreateTable<ComicFolders>();
-               this.Connection.CreateTable<ComicFiles>();
+               this.Connection.CreateTable<ComicFolder>();
+               this.Connection.CreateTable<ComicFile>();
             });
          }
          catch (Exception ex) { throw; }
@@ -31,15 +42,6 @@ namespace ComicsShelf.Database
       public string GetDate(DateTime dateTime)
       { return dateTime.ToString("yyyy-MM-dd HH:mm:ss"); }
       #endregion
-
-      public TableQuery<T> Table<T>() where T : new()
-      { return this.Connection.Table<T>(); }
-
-      public int Insert(object data)
-      { return this.Connection.Insert(data); }
-
-      public int Update(object data)
-      { return this.Connection.Update(data); }
 
       #region Dispose
       public void Dispose()

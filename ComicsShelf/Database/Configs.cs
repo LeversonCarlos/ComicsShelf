@@ -1,9 +1,9 @@
 ﻿using SQLite;
 
-namespace ComicsShelf.Database
+namespace ComicsShelf.Helpers.Database
 {
    public class Configs
-    {
+   {
 
       [PrimaryKey, AutoIncrement]
       public int ConfigID { get; set; }
