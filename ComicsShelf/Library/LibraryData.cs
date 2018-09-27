@@ -1,6 +1,6 @@
-﻿namespace ComicsShelf.Library
+﻿namespace ComicsShelf.Views.Library
 {
-   public class LibraryData : Engine.StepData
+   public class LibraryData : Helpers.Observables.ObservableObject
    {
 
       #region LibraryPath
