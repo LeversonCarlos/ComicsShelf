@@ -1,6 +1,6 @@
 ﻿namespace ComicsShelf.Engine
 {
-   public class StepData : Helpers.Observables.ObservableObject
+   internal class BaseData : Helpers.Observables.ObservableObject
    {
       internal const string KEY = "Engine";
 

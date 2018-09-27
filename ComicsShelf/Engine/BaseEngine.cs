@@ -5,14 +5,13 @@ namespace ComicsShelf.Engine
 {
    internal abstract class BaseEngine : IDisposable
    {
-
       protected Helpers.iFileSystem FileSystem { get; set; }
-      protected StepData Data { get; set; }
+      protected BaseData Data { get; set; }
 
       public BaseEngine()
       {
          this.FileSystem = Helpers.FileSystem.Get();
-         this.Data = new StepData
+         this.Data = new BaseData
          {
             Text = string.Empty,
             Details = string.Empty,
@@ -39,7 +38,7 @@ namespace ComicsShelf.Engine
 
       protected void Notify()
       {
-         MessagingCenter.Send(this.Data, StepData.KEY);
+         MessagingCenter.Send(this.Data, BaseData.KEY);
       }
 
       public void Dispose()
