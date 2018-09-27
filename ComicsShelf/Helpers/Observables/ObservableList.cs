@@ -8,13 +8,9 @@ namespace ComicsShelf.Helpers.Observables
 {
    public class ObservableList<T> : ObservableCollection<T>
    {
-
-      #region New
       public ObservableList() : base() { }
       public ObservableList(IEnumerable<T> collection) : base(collection) { }
-      #endregion
 
-      #region AddRange
       public void AddRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
       {
 
@@ -41,9 +37,7 @@ namespace ComicsShelf.Helpers.Observables
          this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems, startIndex));
       }
-      #endregion
 
-      #region RemoveRange
       public void RemoveRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
@@ -52,24 +46,15 @@ namespace ComicsShelf.Helpers.Observables
             Items.Remove(i);
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
       }
-      #endregion
-
-      #region ReplaceRange
 
       public void Replace(T item)
-      {
-         this.ReplaceRange(new T[] { item });
-      }
-
+      { this.ReplaceRange(new T[] { item }); }
       public void ReplaceRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
-
-         Items.Clear();
+         this.Items.Clear();
          this.AddRange(collection, NotifyCollectionChangedAction.Reset);
       }
-
-      #endregion
 
    }
 }
