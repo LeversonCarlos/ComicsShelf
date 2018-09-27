@@ -4,15 +4,16 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    NavigationPage.HasNavigationBar="False" 
-   x:Class="ComicsShelf.File.FileReadPage"
+   x:Class="ComicsShelf.Views.File.PageView"
    x:Name="MyPage">
    <controls:Page.Content>
-      <controls:PageReader 
-         ItemsSource="{Binding Data.Pages}" Position="{Binding Data.ReadingPage}" 
-         IsSwipeEnabled="{Binding IsSwipeEnabled, Mode=TwoWay}"
+      <controls:PagesSwipeView 
+         ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" 
          ArrowsBackgroundColor="{StaticResource colorLighter}">
-         <controls:PageReader.ItemTemplate>
+         <controls:PagesSwipeView.ItemTemplate>
             <DataTemplate>
+               <Label Text="{Binding Path}"></Label>
+               <!--
                <AbsoluteLayout>
                   <controls:PageReaderImage ImageSource="{Binding Path}" IsVisible="{Binding IsVisible}" 
                         IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}"
@@ -27,8 +28,9 @@
                      </StackLayout>
                   </ContentView>
                </AbsoluteLayout>
+               -->
             </DataTemplate>
-         </controls:PageReader.ItemTemplate>
-      </controls:PageReader>
+         </controls:PagesSwipeView.ItemTemplate>
+      </controls:PagesSwipeView>
    </controls:Page.Content>
 </controls:Page>

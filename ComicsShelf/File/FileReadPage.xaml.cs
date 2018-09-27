@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.File
+namespace ComicsShelf.Views.File
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class FileReadPage : Helpers.Controls.Page
+   public partial class PageView : Helpers.Controls.Page
    {
-      public FileReadPage()
+      public PageView()
       {
          InitializeComponent();
       }
