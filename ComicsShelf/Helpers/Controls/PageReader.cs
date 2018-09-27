@@ -1,11 +1,11 @@
 ﻿using CarouselView.FormsPlugin.Abstractions;
-using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class PageReader : CarouselViewControl
+   public class PagesSwipeView : CarouselViewControl
    {
-      public PageReader()
+
+      public PagesSwipeView()
       {
          this.Orientation = CarouselViewOrientation.Horizontal;
          this.InterPageSpacing = 10;
@@ -20,13 +20,12 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             this.IsSwipeEnabled = true;
-
             if (this.LastPosition != this.Position)
             {
                this.LastPosition = this.Position;
                this.SetPositionVisibility((this.Position - 2), false);
                this.SetPositionVisibility((this.Position - 1), true);
-               this.SetPositionVisibility((this.Position ), true);
+               this.SetPositionVisibility((this.Position), true);
                this.SetPositionVisibility((this.Position + 1), true);
                this.SetPositionVisibility((this.Position + 2), false);
             }
@@ -38,7 +37,7 @@ namespace ComicsShelf.Helpers.Controls
       {
          if (position >= 0 && position < this.ItemsSource.GetCount())
          {
-            var positionData = (File.FilePageData)this.ItemsSource.GetItem(position);
+            var positionData = (Views.File.PageData)this.ItemsSource.GetItem(position);
             if (positionData.IsVisible != visibility)
             { positionData.IsVisible = visibility; }
          }
