@@ -4,7 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    xmlns:models="clr-namespace:ComicsShelf.File"
-   x:Class="ComicsShelf.File.FileSplashPage">
+   x:Class="ComicsShelf.Views.File.FileView">
    <controls:Page.Content>
 
       <AbsoluteLayout VerticalOptions="FillAndExpand">
@@ -23,7 +23,7 @@
                   </Grid.ColumnDefinitions>
 
                   <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Column="0" >
-                     <Switch VerticalOptions="Center" IsToggled="{Binding Data.Readed}" />
+                     <Switch VerticalOptions="Center" IsToggled="{Binding Readed}" />
                      <Label VerticalOptions="Center" Text="{controls:Translate Text=FILE_COMIC_ALREADY_READED_LABEL}" />
                   </StackLayout>
                   <Button Text="{controls:Translate Text=FILE_OPEN_COMIC_LABEL}" Command="{Binding OpenTappedCommand}" HorizontalOptions="FillAndExpand" Grid.Column="1" />
@@ -31,7 +31,7 @@
                </Grid>
             </ContentView>
          </StackLayout>
-         <controls:RatingView Rating="{Binding Data.Rating}" AbsoluteLayout.LayoutBounds="0.5,0.7" AbsoluteLayout.LayoutFlags="PositionProportional" >
+         <controls:RatingView Rating="{Binding Rating}" AbsoluteLayout.LayoutBounds="0.5,0.7" AbsoluteLayout.LayoutFlags="PositionProportional" >
             <controls:RatingView.HeightRequest>
                <OnIdiom x:TypeArguments="x:Double">
                   <OnIdiom.Phone>50</OnIdiom.Phone>

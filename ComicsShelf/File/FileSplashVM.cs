@@ -1,22 +1,22 @@
 ﻿using System;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.File
+namespace ComicsShelf.Views.File
 {
-   public class FileSplashVM : Helpers.ViewModels.DataVM<FileData>
+   public class FileVM : Helpers.DataVM<FileData>
    {
 
       #region New
-      public FileSplashVM(FileData args)
+      public FileVM(FileData args)
       {
-         this.Title = args.Text;
-         this.ViewType = typeof(FileSplashPage);
+         this.Title = args.FullText;
+         this.ViewType = typeof(FileView);
          this.Data = args;
+         this._Readed = args.Readed;
+         this._Rating = args.Rating;
          this.OpenTappedCommand = new Command(async (item) => await this.OpenTapped(item));
+         this.Finalize += this.OnFinalize;
       }
       #endregion
 
@@ -28,9 +28,9 @@ namespace ComicsShelf.File
          {
             this.IsBusy = true;
             await this.OpenFile();
-            await PushAsync<FileReadVM>(this.Data);
+            await PushAsync<PageVM>(this.Data);
          }
-         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+         catch (Exception ex) { await App.ShowMessage(ex); }
          finally { this.IsBusy = false; }
       }
       #endregion
@@ -40,8 +40,10 @@ namespace ComicsShelf.File
       {
          try
          {
-            if (this.Data.Pages == null) { this.Data.Pages = new Helpers.Observables.ObservableList<FilePageData>(); }
+            if (this.Data.Pages == null) { this.Data.Pages = new Helpers.Observables.ObservableList<PageData>(); }
             if (this.Data.Pages.Count != 0) { return; }
+
+            /*
             var fileSystem = Helpers.FileSystem.Get();
 
             // DEFINE PATH
@@ -95,9 +97,54 @@ namespace ComicsShelf.File
             }
 
             this.Data.Pages.Add(new FilePageData { });
+            */
+
          }
          catch (Exception ex) { throw; }
          finally { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
+      }
+      #endregion
+
+
+      #region Readed
+      bool _Readed;
+      public bool Readed
+      {
+         get { return this._Readed; }
+         set
+         {
+            this.SetProperty(ref this._Readed, value);
+
+            this.Data.Readed = value;
+            this.Data.ReadingDate = (value ? App.Database.GetDate() : null);
+            this.Data.ReadingPercent = (value ? 1 : 0);
+            App.Database.Update(this.Data.ComicFile);
+         }
+      }
+      #endregion
+
+      #region Rating
+      int _Rating;
+      public int Rating
+      {
+         get { return this._Rating; }
+         set
+         {
+            this.SetProperty(ref this._Rating, value);
+
+            this.Data.Rating = value;
+            App.Database.Update(this.Data.ComicFile);
+         }
+      }
+      #endregion     
+
+
+      #region OnFinalize
+      private async void OnFinalize()
+      {
+         try
+         { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion
 
