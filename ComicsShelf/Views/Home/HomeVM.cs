@@ -37,7 +37,7 @@ namespace ComicsShelf.Views.Home
       private async Task OpenLibrary(object item)
       {
          try
-         { /*await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(false);*/ }
+         { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(false); }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion
