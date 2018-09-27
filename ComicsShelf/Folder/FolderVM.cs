@@ -2,15 +2,15 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Folder
+namespace ComicsShelf.Views.Folder
 {
-   public class FolderVM : Helpers.ViewModels.DataVM<FolderData>
+   public class FolderVM : Helpers.DataVM<FolderData>
    {
 
       #region New
       public FolderVM(FolderData args)
       {
-         this.Title = args.Text;
+         this.Title = args.FullText;
          this.ViewType = typeof(FolderPage);
 
          this.Data = args;
@@ -20,16 +20,14 @@ namespace ComicsShelf.Folder
       }
       #endregion
 
+
       #region FolderTapped
       public Command FolderTappedCommand { get; set; }
       private async Task FolderTapped(object item)
       {
          try
-         {
-            var folderItem = (FolderData)item;
-            await PushAsync<FolderVM>(folderItem);
-         }
-         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+         { await PushAsync<FolderVM>((FolderData)item); }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion
 
@@ -38,13 +36,11 @@ namespace ComicsShelf.Folder
       private async Task FileTapped(object item)
       {
          try
-         {
-            var fileItem = (File.FileData)item;
-            await PushAsync<File.FileSplashVM>(fileItem);
-         }
-         catch (Exception ex) { await App.Message.Show(ex.ToString()); }
+         { await PushAsync<File.FileVM>((File.FileData)item); }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion
+
 
       #region OnSizeChanged
       private enum ScrennOrientationEnum : short { Portrait, Landscape };
