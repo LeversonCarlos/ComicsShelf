@@ -11,7 +11,7 @@ namespace ComicsShelf.Views.Folder
       public FolderVM(FolderData args)
       {
          this.Title = args.FullText;
-         this.ViewType = typeof(FolderPage);
+         this.ViewType = typeof(FolderView);
 
          this.Data = args;
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));

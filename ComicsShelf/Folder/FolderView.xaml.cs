@@ -1,11 +1,11 @@
 ﻿using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Folder
+namespace ComicsShelf.Views.Folder
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class FolderPage : Helpers.Controls.Page
+   public partial class FolderView : Helpers.Controls.Page
    {
-      public FolderPage()
+      public FolderView()
       {
          InitializeComponent();
       }

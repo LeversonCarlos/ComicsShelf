@@ -4,7 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Name="MyPage"
-   x:Class="ComicsShelf.Folder.FolderPage">
+   x:Class="ComicsShelf.Views.Folder.FolderView">
    <controls:Page.Content>
       <ScrollView Style="{StaticResource CoverListMainView}">
          <StackLayout Style="{StaticResource CoverListMainLayout}">
