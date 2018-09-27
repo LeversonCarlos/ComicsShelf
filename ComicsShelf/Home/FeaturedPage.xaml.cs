@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Home
+namespace ComicsShelf.Views.Home
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class FeaturedPage : ContentPage

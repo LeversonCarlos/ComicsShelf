@@ -4,7 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Name="MyPage"
-   x:Class="ComicsShelf.Home.FeaturedPage">
+   x:Class="ComicsShelf.Views.Home.FeaturedPage">
    <ContentPage.Content>
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
@@ -23,7 +23,7 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding FullText}" />
                               <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
                         </Frame>
@@ -46,7 +46,7 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding FullText}" />
                               <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
                         </Frame>
@@ -69,7 +69,7 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding FullText}" />
                               <ProgressBar Progress="{Binding ReadingPercent}" />
                            </StackLayout>
                         </Frame>
@@ -78,10 +78,10 @@
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout IsVisible="{Binding Data.StepData.IsRunning}" VerticalOptions="FillAndExpand" Padding="10" >
-               <Label Text="{Binding Data.StepData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Default" />
-               <ProgressBar Progress="{Binding Data.StepData.Progress}" HorizontalOptions="FillAndExpand" />
-               <Label Text="{Binding Data.StepData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
+            <StackLayout IsVisible="{Binding Data.EngineData.IsRunning}" VerticalOptions="FillAndExpand" Padding="10" >
+               <Label Text="{Binding Data.EngineData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Default" />
+               <ProgressBar Progress="{Binding Data.EngineData.Progress}" HorizontalOptions="FillAndExpand" />
+               <Label Text="{Binding Data.EngineData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
             </StackLayout>
 
             <StackLayout IsVisible="{Binding Data.NoComics}" VerticalOptions="FillAndExpand" Padding="10,80" >
