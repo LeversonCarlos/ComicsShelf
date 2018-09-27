@@ -50,8 +50,8 @@ namespace ComicsShelf.Helpers.Controls
       private ImageSource EmptyStar;
       private void LoadStarImages()
       {
-         this.FullStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingViewFullStar.png", System.Reflection.Assembly.GetExecutingAssembly());
-         this.EmptyStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingViewEmptyStar.png", System.Reflection.Assembly.GetExecutingAssembly());
+         this.FullStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingView.FullStar.png", System.Reflection.Assembly.GetExecutingAssembly());
+         this.EmptyStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingView.EmptyStar.png", System.Reflection.Assembly.GetExecutingAssembly());
       }
       #endregion
 
