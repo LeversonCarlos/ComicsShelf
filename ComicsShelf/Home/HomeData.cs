@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace ComicsShelf.Home
+namespace ComicsShelf.Views.Home
 {
    public class HomeData : Folder.FolderData
    {
 
       #region New
-      public HomeData()
+      public HomeData() : base(new Helpers.Database.ComicFolder { FullText = R.Strings.AppTitle })
       {
-         this.StepData = new Engine.StepData();
+         this.EngineData = new Engine.BaseData();
 
          this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
          this.RecentFiles.CollectionChanged += this.RecentFiles_CollectionChanged;
@@ -20,6 +20,7 @@ namespace ComicsShelf.Home
          this.TopRatedFiles.CollectionChanged += this.TopRatedFiles_CollectionChanged;
       }
       #endregion
+
 
       #region RecentFiles
 
@@ -33,9 +34,7 @@ namespace ComicsShelf.Home
       }
 
       private void RecentFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      {
-         this.HasRecentFiles = this.RecentFiles.Count != 0;
-      }
+      { this.HasRecentFiles = this.RecentFiles.Count != 0; }
 
       #endregion
 
@@ -51,11 +50,7 @@ namespace ComicsShelf.Home
       }
 
       private void ReadingFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      {
-         this.HasReadingFiles = this.ReadingFiles.Count != 0;
-      }
-
-
+      { this.HasReadingFiles = this.ReadingFiles.Count != 0; }
 
       #endregion
 
@@ -71,11 +66,10 @@ namespace ComicsShelf.Home
       }
 
       private void TopRatedFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      {
-         this.HasTopRatedFiles = this.TopRatedFiles.Count != 0;
-      }
+      { this.HasTopRatedFiles = this.TopRatedFiles.Count != 0; }
 
       #endregion
+
 
       #region NoComics
       bool _NoComics;
@@ -86,12 +80,12 @@ namespace ComicsShelf.Home
       }
       #endregion
 
-      #region StepData
-      Engine.StepData _StepData;
-      public Engine.StepData StepData
+      #region EngineData
+      Engine.BaseData _EngineData;
+      internal Engine.BaseData EngineData
       {
-         get { return this._StepData; }
-         set { this.SetProperty(ref this._StepData, value); }
+         get { return this._EngineData; }
+         set { this.SetProperty(ref this._EngineData, value); }
       }
       #endregion
 
@@ -106,13 +100,13 @@ namespace ComicsShelf.Home
             { this.Files.ReplaceRange(new List<File.FileData>()); }
 
             if (this.ReadingFiles.Count != 0)
-            { this.ReadingFiles.Clear(); App.RootFolder.HasReadingFiles = false; }
+            { this.ReadingFiles.Clear(); this.HasReadingFiles = false; }
 
             if (this.RecentFiles.Count != 0)
-            { this.RecentFiles.Clear(); App.RootFolder.HasRecentFiles = false; }
+            { this.RecentFiles.Clear(); this.HasRecentFiles = false; }
 
             if (this.TopRatedFiles.Count != 0)
-            { this.TopRatedFiles.Clear(); App.RootFolder.HasTopRatedFiles = false; }
+            { this.TopRatedFiles.Clear(); this.HasTopRatedFiles = false; }
 
          }
          catch { }

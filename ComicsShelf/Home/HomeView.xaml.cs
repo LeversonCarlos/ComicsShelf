@@ -1,13 +1,13 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Home
+namespace ComicsShelf.Views.Home
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class HomePage : TabbedPage
+   public partial class HomeView : TabbedPage
    {
 
-      public HomePage()
+      public HomeView()
       {
          InitializeComponent();
          if (Device.RuntimePlatform == Device.iOS)
@@ -19,14 +19,14 @@ namespace ComicsShelf.Home
          base.OnAppearing();
          if (this.BindingContext == null) { return; }
          this.SetBinding(Page.TitleProperty, "Title");
-         (this.BindingContext as Helpers.ViewModels.BaseVM).InitializeAsync();
+         (this.BindingContext as Helpers.BaseVM).InitializeAsync();
       }
 
       protected override void OnDisappearing()
       {
          base.OnDisappearing();
          if (this.BindingContext == null) { return; }
-         (this.BindingContext as Helpers.ViewModels.BaseVM).FinalizeAsync();
+         (this.BindingContext as Helpers.BaseVM).FinalizeAsync();
       }
 
    }
