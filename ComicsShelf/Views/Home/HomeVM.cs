@@ -8,6 +8,7 @@ namespace ComicsShelf.Views.Home
    {
 
       #region New
+      public HomeVM() : this(new HomeData { FullText = R.Strings.AppTitle }) { }
       public HomeVM(HomeData args): base(args)
       {
          this.Title = args.FullText;

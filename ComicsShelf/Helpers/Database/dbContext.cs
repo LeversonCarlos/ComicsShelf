@@ -30,6 +30,8 @@ namespace ComicsShelf.Helpers.Database
                this.Connection.CreateTable<Configs>();
                this.Connection.CreateTable<ComicFolder>();
                this.Connection.CreateTable<ComicFile>();
+               // this.Connection.DeleteAll<ComicFile>();
+               // this.Connection.DeleteAll<ComicFolder>();
             });
          }
          catch (Exception ex) { throw; }

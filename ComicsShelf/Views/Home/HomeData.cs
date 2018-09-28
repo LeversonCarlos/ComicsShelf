@@ -18,6 +18,8 @@ namespace ComicsShelf.Views.Home
 
          this.TopRatedFiles = new Helpers.Observables.ObservableList<File.FileData>();
          this.TopRatedFiles.CollectionChanged += this.TopRatedFiles_CollectionChanged;
+
+         this.Files.ObservableCollectionChanged += this.Files_CollectionChanged;
       }
       #endregion
 
@@ -67,6 +69,13 @@ namespace ComicsShelf.Views.Home
 
       private void TopRatedFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       { this.HasTopRatedFiles = this.TopRatedFiles.Count != 0; }
+
+      #endregion
+
+      #region CollectionChanged
+
+      private void Files_CollectionChanged(object sender, System.EventArgs e)
+      { Engine.Statistics.Execute(); }
 
       #endregion
 

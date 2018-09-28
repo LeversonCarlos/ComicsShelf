@@ -26,7 +26,7 @@ namespace ComicsShelf.Views.Folder
       private async Task FolderTapped(object item)
       {
          try
-         { await PushAsync<FolderVM<T>>((T)item); }
+         { await PushAsync<FolderVM<Folder.FolderData>>((Folder.FolderData)item); }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion

@@ -6,7 +6,8 @@ using System.ComponentModel;
 
 namespace ComicsShelf.Helpers.Observables
 {
-   public class ObservableList<T> : ObservableCollection<T>
+
+   public class ObservableList<T> : ObservableCollection<T>, INotifyObservableCollectionChanged
    {
       public ObservableList() : base() { }
       public ObservableList(IEnumerable<T> collection) : base(collection) { }
@@ -47,14 +48,59 @@ namespace ComicsShelf.Helpers.Observables
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
       }
 
+      protected override void InsertItem(int index, T item)
+      {
+         base.InsertItem(index, item);
+         this.RefreshAnalysis(NotifyCollectionChangedAction.Add);
+      }
+
+      protected override void RemoveItem(int index)
+      {
+         base.RemoveItem(index);
+         this.RefreshAnalysis(NotifyCollectionChangedAction.Remove);
+      }
+
+      #region Replace
       public void Replace(T item)
       { this.ReplaceRange(new T[] { item }); }
       public void ReplaceRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
          this.Items.Clear();
-         this.AddRange(collection, NotifyCollectionChangedAction.Reset);
+         this.AddRange(collection, NotifyCollectionChangedAction.Replace);
+         this.RefreshAnalysis(NotifyCollectionChangedAction.Replace);
       }
+      #endregion
+
+      #region ObservableCollectionChangedAnalysis
+      public event EventHandler ObservableCollectionChanged;
+      private void RefreshAnalysis(NotifyCollectionChangedAction changedAction)
+      {
+         if (this.ObservableCollectionChanged != null)
+         {
+            var countBefore = this.Count;
+            System.Threading.Tasks.Task.Delay(1000).ContinueWith(x =>
+            {
+               var countAfter = this.Count;
+               if (countBefore == countAfter)
+               {
+                  Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                  {
+                     this.ObservableCollectionChanged(this, EventArgs.Empty);
+                  });
+               }
+            });
+         }
+      }
+      public void RefreshNow()
+      { this.ObservableCollectionChanged?.Invoke(this, EventArgs.Empty); }
+      #endregion
 
    }
+
+   public interface INotifyObservableCollectionChanged
+   {
+      event EventHandler ObservableCollectionChanged;
+   }
+
 }

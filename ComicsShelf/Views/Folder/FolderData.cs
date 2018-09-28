@@ -7,8 +7,8 @@
       internal Helpers.Database.ComicFolder ComicFolder { get; set; }
       internal FolderData(Helpers.Database.ComicFolder _ComicFolder)
       {
-         // this.Folders = new Helpers.Observables.ObservableList<FolderData>();
-         // this.Files = new Helpers.Observables.ObservableList<File.FileData>();
+         this.Folders = new Helpers.Observables.ObservableList<FolderData>();
+         this.Files = new Helpers.Observables.ObservableList<File.FileData>();
 
          this.ComicFolder = _ComicFolder;
          this.FullText = this.ComicFolder.FullText;
@@ -83,7 +83,7 @@
 
       #endregion
 
-      /*
+
       #region Available
       bool _Available;
       public bool Available
@@ -92,7 +92,6 @@
          set { this.SetProperty(ref this._Available, value); }
       }
       #endregion
-      */
 
    }
 }

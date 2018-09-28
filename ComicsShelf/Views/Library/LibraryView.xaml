@@ -3,7 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
-   x:Class="ComicsShelf.Library.Views.LibraryView">
+   x:Class="ComicsShelf.Views.Library.LibraryView">
    <controls:Page.Content>
       <StackLayout VerticalOptions="CenterAndExpand" Padding="10,80" Spacing="100" >
 

@@ -13,11 +13,15 @@ namespace ComicsShelf
       public static async Task ShowMessage(string message)
       {
          try
-         { await Application.Current.MainPage.DisplayAlert(R.Strings.AppTitle, message, R.Strings.BASE_OK_COMMAND); }
+         {
+            // Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => {
+               await Application.Current.MainPage.DisplayAlert(R.Strings.AppTitle, message, R.Strings.BASE_OK_COMMAND);
+            // });
+         }
          catch { }
       }
 
-      public static async Task<bool> Confirm(string message)
+      public static async Task<bool> ConfirmMessage(string message)
       {
          try
          { return await Application.Current.MainPage.DisplayAlert(R.Strings.AppTitle, message, R.Strings.BASE_OK_COMMAND, R.Strings.BASE_CANCEL_COMMAND); }

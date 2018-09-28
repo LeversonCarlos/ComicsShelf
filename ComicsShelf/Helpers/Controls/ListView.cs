@@ -67,12 +67,12 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             var VIEW = bindable as ListView;
-            var VALUES = newValue as INotifyCollectionChanged;
-            if (VALUES != null)
+            var itemsSource = VIEW.ItemsSource as Observables.INotifyObservableCollectionChanged; // INotifyCollectionChanged;
+            if (itemsSource != null)
             {
                VIEW.RefreshTiles();
-               VALUES.CollectionChanged += 
-                  (object sender, NotifyCollectionChangedEventArgs e) => 
+               itemsSource.ObservableCollectionChanged +=
+                  (object sender, EventArgs e) =>
                   { VIEW.RefreshTiles(); };
             }
             
