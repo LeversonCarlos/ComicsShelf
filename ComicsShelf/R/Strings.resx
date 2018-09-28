@@ -124,10 +124,10 @@
     <value>Cancel</value>
   </data>
   <data name="BASE_OK_COMMAND" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
-    <value>Wait...</value>
+    <value>wait...</value>
   </data>
   <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
     <value>Already Readed</value>
@@ -186,13 +186,16 @@
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Searching for new comic files on the device</value>
   </data>
-  <data name="STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE" xml:space="preserve">
-    <value>Loading settings database</value>
+  <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
+    <value>Checking permissions</value>
+  </data>
+  <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
+    <value>Loading database</value>
+  </data>
+  <data name="STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
+    <value>Loading settings</value>
   </data>
   <data name="STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE" xml:space="preserve">
-    <value>Validating the library path</value>
-  </data>
-  <data name="STARTUP_EXTRACTING_COMICS_COVER_MESSAGE" xml:space="preserve">
-    <value>Extracting comics cover for each new file... This may take a moment</value>
+    <value>Validating the library location</value>
   </data>
 </root>
