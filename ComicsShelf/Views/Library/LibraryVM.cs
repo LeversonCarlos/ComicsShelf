@@ -25,7 +25,9 @@ namespace ComicsShelf.Views.Library
          try
          {
             if (await Engine.Library.Execute())
-            { await Helpers.NavVM.PopAsync(); }
+            {             
+               await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
+            }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
