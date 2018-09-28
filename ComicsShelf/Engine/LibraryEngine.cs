@@ -20,15 +20,15 @@ namespace ComicsShelf.Engine
                {
                   Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                   {
-                     App.RootFolder.ClearAll();
-                     Engine.Search.Execute();
+                     App.HomeData.ClearAll();
+                     Engine.Search.Execute(); 
                   });
                }
             }
             System.Diagnostics.Debug.WriteLine("Library Engine Finish");
             return result;
          }
-         catch (Exception ex) { await App.Message.Show(ex.ToString()); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
       #endregion
 
@@ -39,14 +39,14 @@ namespace ComicsShelf.Engine
          {
 
             /* LOAD CONFIGS DATA */
-            Database.Configs configs = null;
+            Helpers.Database.Configs configs = null;
             await Task.Run(() =>
             {
-               var configsTable = App.Database.Table<Database.Configs>();
+               var configsTable = App.Database.Table<Helpers.Database.Configs>();
                configs = configsTable.FirstOrDefault();
                if (configs == null)
                {
-                  configs = new Database.Configs();
+                  configs = new Helpers.Database.Configs();
                   App.Database.Insert(configs);
                }
             });
