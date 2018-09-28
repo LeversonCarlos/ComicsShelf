@@ -27,5 +27,7 @@ namespace ComicsShelf.Helpers.Database
       public double ReadingOpacity { get; set; }
       public string ReadingDate { get; set; }
 
+      public bool Available { get; set; }
+
    }
 }

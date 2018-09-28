@@ -143,7 +143,10 @@ namespace ComicsShelf.Views.File
       private async void OnFinalize()
       {
          try
-         { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
+         {
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+            Engine.Statistics.Execute();
+         }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion

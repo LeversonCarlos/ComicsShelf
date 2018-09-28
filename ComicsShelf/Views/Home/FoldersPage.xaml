@@ -8,7 +8,7 @@
    <ContentPage.Content>
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
-
+            
             <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasFolders}" >
                <controls:ListView
                   Style="{StaticResource SectionListView}" Columns="{Binding Data.FolderColumns}" 
