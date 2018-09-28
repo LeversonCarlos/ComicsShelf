@@ -1,20 +1,19 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using System.IO.Compression;
-using System;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Droid
 {
    partial class FileSystem
    {
 
-      #region GetZipArchive
-      public async Task<ZipArchive> GetZipArchive(ComicsShelf.Helpers.Settings.Settings settings, File.FileData comicFile)
+      public async Task<ZipArchive> GetZipArchive(ComicsShelf.Helpers.Settings.Settings settings, string filePath)
       {
          try
          {
 
             // COMPOSE FILE PATH
-            var comicFilePath = $"{settings.Paths.LibraryPath}{settings.Paths.Separator}{comicFile.FullPath}";
+            var comicFilePath = $"{settings.Paths.LibraryPath}{settings.Paths.Separator}{filePath}";
 
             // OPEN ZIP ARCHIVE
             ZipArchive zipArchive = null;
@@ -25,7 +24,6 @@ namespace ComicsShelf.Droid
          }
          catch (Exception ex) { throw; }
       }
-      #endregion      
 
    }
 }

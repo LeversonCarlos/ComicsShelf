@@ -1,23 +1,22 @@
-﻿using System.Threading.Tasks;
-using System.IO.Compression;
-using System;
-using Windows.Storage.AccessCache;
-using Windows.Storage;
+﻿using System;
 using System.IO;
+using System.IO.Compression;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.AccessCache;
 
 namespace ComicsShelf.UWP
 {
    partial class FileSystem
    {
 
-      #region GetZipArchive
-      public async Task<ZipArchive> GetZipArchive(ComicsShelf.Helpers.Settings.Settings settings, File.FileData comicFile)
+      public async Task<ZipArchive> GetZipArchive(ComicsShelf.Helpers.Settings.Settings settings, string fullPath)
       {
          try
          {
 
             // INITIALIZE
-            var splitedPath = comicFile.FullPath
+            var splitedPath = fullPath
                .Split(new string[] { settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
             Windows.Storage.StorageFolder storageFolder = null;
@@ -45,7 +44,6 @@ namespace ComicsShelf.UWP
          }
          catch (Exception ex) { throw; }
       }
-      #endregion      
 
    }
 }

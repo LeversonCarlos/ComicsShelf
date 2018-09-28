@@ -5,10 +5,17 @@ using System.Linq;
 
 namespace ComicsShelf.Droid
 {
-   internal class Permission 
+   partial class FileSystem
    {
 
-      public static async void Validate(string[] permissionList, Action grantedCallback, Action revokedCallback)
+      public void CheckPermissions(Action grantedCallback, Action revokedCallback)
+      {
+         CheckPermissions(
+            new string[] { Android.Manifest.Permission.ReadExternalStorage, Android.Manifest.Permission.WriteExternalStorage },
+            grantedCallback, revokedCallback);
+      }
+
+      private static async void CheckPermissions(string[] permissionList, Action grantedCallback, Action revokedCallback)
       {
 
          // CHECK SDK VERSION 
