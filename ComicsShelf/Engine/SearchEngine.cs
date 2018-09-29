@@ -408,63 +408,6 @@ namespace ComicsShelf.Engine
       #endregion
 
 
-      #region ExtractFileData
-      /*
-      private async Task ExtractFileData(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Views.Folder.FolderData comicFolder, Views.File.FileData comicFile)
-      {
-         try
-         {
-
-            // CHECK IF THE COVER FILE ALREADY EXISTS
-            if (!System.IO.File.Exists(comicFile.ComicFile.CoverPath)) {
-
-               // OPEN ZIP ARCHIVE
-               if (!comicFile.FullPath.ToLower().EndsWith(".cbr"))
-               {
-                  using (var fileSystem = Helpers.FileSystem.Get())
-                  {
-                     using (var zipArchive = await fileSystem.GetZipArchive(settings, comicFile.FullPath))
-                     {
-
-                        // LOCATE FIRST JPG ENTRY
-                        var zipEntry = zipArchive.Entries
-                           .Where(x => x.Name.ToLower().EndsWith(".jpg"))
-                           .OrderBy(x => x.Name)
-                           .Take(1)
-                           .FirstOrDefault();
-
-                        // OPEN STREAM
-                        using (System.IO.Stream zipStream = zipEntry.Open())
-                        {
-
-                           // RELEASE DATE
-                           comicFile.ComicFile.ReleaseDate = database.GetDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
-                           database.Update(comicFile.ComicFile);
-
-                           // COVER THUMBNAIL
-                           await fileSystem.Thumbnail(zipStream, comicFile.ComicFile.CoverPath);
-
-                        }
-
-                     }
-                  }
-               }
-
-            }
-
-            // APPLY PROPERTY SO THE VIEW GETS REFRESHED
-            comicFile.CoverPath = comicFile.ComicFile.CoverPath;
-            if (comicFolder == null)
-            { comicFolder = this.ComicFoldersDictionary[comicFile.ComicFile.ParentPath]; }
-            if (comicFolder != null && string.IsNullOrEmpty(comicFolder.CoverPath))
-            { comicFolder.CoverPath = comicFile.ComicFile.CoverPath; }
-
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); }
-      }
-      */
-      #endregion
-
       #region AnalyseFoldersAvailability
       private async Task AnalyseFoldersAvailability()
       { await this.AnalyseFoldersAvailability(App.HomeData); }
