@@ -8,10 +8,10 @@ namespace ComicsShelf.Views.Home
    {
 
       #region New
-      public HomeVM() : this(new HomeData { FullText = R.Strings.AppTitle }) { }
+      public HomeVM() : this(new HomeData { Text = R.Strings.AppTitle }) { }
       public HomeVM(HomeData args) : base(args)
       {
-         this.Title = args.FullText;
+         this.Title = args.Text;
          this.ViewType = typeof(HomeView);
 
          this.Data = args;

@@ -38,7 +38,11 @@ namespace ComicsShelf.Engine
 
       protected void Notify()
       {
-         MessagingCenter.Send(this.Data, BaseData.KEY);
+         var dataMessage = this.Data;
+         var keyMessage = BaseData.KEY;
+         Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
+            MessagingCenter.Send(dataMessage, keyMessage );
+         });         
       }
 
       public void Dispose()

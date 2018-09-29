@@ -6,7 +6,7 @@ namespace ComicsShelf.Views.Home
    {
 
       #region New
-      public HomeData() : base(new Helpers.Database.ComicFolder { FullText = R.Strings.AppTitle })
+      public HomeData() : base(new Helpers.Database.ComicFolder { Text = R.Strings.AppTitle })
       {
          this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
          this.RecentFiles.CollectionChanged += this.RecentFiles_CollectionChanged;

@@ -1,6 +1,6 @@
 ﻿namespace ComicsShelf.Views.Folder
 {
-   public class FolderData : Thumbnail.ThumbnailData
+   public class FolderData : Helpers.Observables.ObservableObject
    {
 
       #region New
@@ -11,13 +11,29 @@
          this.Files = new Helpers.Observables.ObservableList<File.FileData>();
 
          this.ComicFolder = _ComicFolder;
-         this.FullText = this.ComicFolder.FullText;
-         this.SmallText = this.ComicFolder.SmallText;
+         this.Text = this.ComicFolder.Text;
          this.CoverPath = this.ComicFolder.CoverPath;
 
       }
       #endregion
 
+      #region Text
+      string _Text;
+      public string Text
+      {
+         get { return this._Text; }
+         set { this.SetProperty(ref this._Text, value); }
+      }
+      #endregion
+
+      #region CoverPath
+      string _CoverPath;
+      public string CoverPath
+      {
+         get { return this._CoverPath; }
+         set { this.SetProperty(ref this._CoverPath, value, AlwaysInvokePropertyChanged: true); }
+      }
+      #endregion
 
       #region Folders
 

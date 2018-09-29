@@ -206,7 +206,7 @@ namespace ComicsShelf.Engine
                   LibraryPath = App.Settings.Paths.LibraryPath,
                   FullPath = folderPath,
                   ParentPath = folderParent,
-                  FullText = folderText
+                  Text = folderText
                };
                comicFolder.Key = $"{comicFolder.LibraryPath}|{comicFolder.FullPath}";
                this.ComicFolders.Add(comicFolder);
@@ -331,8 +331,11 @@ namespace ComicsShelf.Engine
                if (fileData.FullPath.ToLower().EndsWith(".cbr")) { continue; }
 
                // EXECUTE
-               await this.ExtractComicData_File(fileData);
-               await this.ExtractComicData_Folder(fileData);
+               await Task.Run(async () =>
+               {
+                  await this.ExtractComicData_File(fileData);
+                  await this.ExtractComicData_Folder(fileData);
+               });
 
             }
 
@@ -449,7 +452,7 @@ namespace ComicsShelf.Engine
                   else { initialFolders = initialFolders.FirstOrDefault().Folders; }
                }
                App.HomeData.Folders.ReplaceRange(initialFolders);
-               App.HomeData.FullText = R.Strings.AppTitle;
+               App.HomeData.Text = R.Strings.AppTitle;
             }
             else { App.HomeData.Folders.RefreshNow(); }
          }

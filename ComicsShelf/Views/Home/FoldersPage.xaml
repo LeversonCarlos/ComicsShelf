@@ -21,7 +21,7 @@
                               <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
                                  <Image Style="{StaticResource CoverItemImageFolder}" Source="{Binding CoverPath}" />
                               </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding FullText}" />
+                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding Text}" />
                            </StackLayout>
                         </Frame>
                      </DataTemplate>

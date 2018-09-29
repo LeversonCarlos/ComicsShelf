@@ -16,8 +16,7 @@ namespace ComicsShelf.Helpers.Database
       public string ParentPath { get; set; }
       public string CoverPath { get; set; }
 
-      public string FullText { get; set; }
-      public string SmallText { get; set; }
+      public string Text { get; set; }
 
    }
 }
