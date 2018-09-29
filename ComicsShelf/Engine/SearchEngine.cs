@@ -27,7 +27,7 @@ namespace ComicsShelf.Engine
                await engine.PrepareFilesStructure();
                await engine.AnalyseFoldersAvailability();
                engine.DefineFirstFolder();
-               // engine.ExtractFileData();
+               await engine.ExtractComicData();
                /*
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Cover.Execute(engine.ComicFoldersDictionary));
@@ -222,6 +222,7 @@ namespace ComicsShelf.Engine
       }
       #endregion
 
+
       #region PrepareFoldersStructure
       private async Task PrepareFoldersStructure()
       {
@@ -290,7 +291,7 @@ namespace ComicsShelf.Engine
                   parentFolder.HasFiles = true;
                   App.HomeData.Files.Add(comicFile);
 
-                  await ExtractFileData(App.Settings, App.Database, parentFolder, comicFile);
+                  // await ExtractFileData(App.Settings, App.Database, parentFolder, comicFile);
 
                }
                catch (Exception loopException)
@@ -301,6 +302,109 @@ namespace ComicsShelf.Engine
          catch (Exception ex) { throw; }
       }
       #endregion
+
+
+      #region ExtractComicData
+      private async Task ExtractComicData()
+      {
+         try
+         {
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE);
+
+            // LOOP THROUGH FILES
+            var filesQuantity = App.HomeData.Files.Count;
+            for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
+            {
+               var fileData = App.HomeData.Files[fileIndex];
+               var progress = ((double)fileIndex / (double)filesQuantity);
+               this.Notify(fileData.FullText, progress);
+
+               // VALIDATE
+               if (fileData.FullPath.ToLower().EndsWith(".cbr")) { continue; }
+
+               // EXECUTE
+               await this.ExtractComicData_File(fileData);
+               await this.ExtractComicData_Folder(fileData);
+
+            }
+
+         }
+         catch (Exception ex) { throw; }
+      }
+      #endregion
+
+      #region ExtractComicData_File
+      private async Task ExtractComicData_File(Views.File.FileData fileData)
+      {
+         try
+         {
+
+            // CHECK IF THE COVER FILE ALREADY EXISTS
+            if (System.IO.File.Exists(fileData.ComicFile.CoverPath))
+            { fileData.CoverPath = fileData.ComicFile.CoverPath; return; }
+
+            // OPEN ZIP ARCHIVE
+            using (var fileSystem = Helpers.FileSystem.Get())
+            {
+               using (var zipArchive = await fileSystem.GetZipArchive(App.Settings, fileData.FullPath))
+               {
+
+                  // LOCATE FIRST JPG ENTRY
+                  var zipEntry = zipArchive.Entries
+                     .Where(x => x.Name.ToLower().EndsWith(".jpg"))
+                     .OrderBy(x => x.Name)
+                     .Take(1)
+                     .FirstOrDefault();
+
+                  // OPEN STREAM
+                  using (System.IO.Stream zipStream = zipEntry.Open())
+                  {
+
+                     // RELEASE DATE
+                     fileData.ComicFile.ReleaseDate = App.Database.GetDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
+                     App.Database.Update(fileData.ComicFile);
+
+                     // COVER THUMBNAIL
+                     await fileSystem.Thumbnail(zipStream, fileData.ComicFile.CoverPath);
+
+                  }
+
+               }
+            }
+
+            // APPLY PROPERTY SO THE VIEW GETS REFRESHED
+            fileData.CoverPath = fileData.ComicFile.CoverPath;
+
+         }
+         catch (Exception ex) { throw; }
+      }
+      #endregion
+
+      #region ExtractComicData_Folder
+      private async Task ExtractComicData_Folder(Views.File.FileData fileData)
+      {
+         try
+         {
+
+            // APPLY COVER PATH TO THE FOLDER STRUCTURE
+            var parentFolder = this.ComicFoldersDictionary[fileData.ComicFile.ParentPath];
+            while (parentFolder != null)
+            {
+               if (!string.IsNullOrEmpty(parentFolder.CoverPath)) { break; }
+
+               parentFolder.CoverPath = fileData.CoverPath;
+               parentFolder.ComicFolder.CoverPath = fileData.CoverPath;
+               await Task.Run(() => App.Database.Update(parentFolder.ComicFolder));
+
+               if (string.IsNullOrEmpty(parentFolder.ComicFolder.ParentPath)) { break; }
+               parentFolder = this.ComicFoldersDictionary[parentFolder.ComicFolder.ParentPath];
+            }
+
+         }
+         catch (Exception ex) { throw; }
+      }
+      #endregion
+
 
       #region ExtractFileData
 
@@ -419,6 +523,7 @@ namespace ComicsShelf.Engine
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
+
       #endregion
 
       #region AnalyseFoldersAvailability
