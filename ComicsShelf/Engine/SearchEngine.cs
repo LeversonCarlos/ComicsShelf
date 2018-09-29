@@ -27,6 +27,7 @@ namespace ComicsShelf.Engine
                await engine.PrepareFilesStructure();
                await engine.AnalyseFoldersAvailability();
                engine.DefineFirstFolder();
+               // engine.ExtractFileData();
                /*
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Cover.Execute(engine.ComicFoldersDictionary));
@@ -302,6 +303,70 @@ namespace ComicsShelf.Engine
       #endregion
 
       #region ExtractFileData
+
+      private async void ExtractFileData()
+      {
+         try
+         {
+
+            var taskAllItems = App.HomeData.Files
+               .Where(x => string.IsNullOrEmpty(x.CoverPath))
+               .ToList();
+            var taskCount = taskAllItems.Count;
+            int taskQtty = (int)(taskCount / Environment.ProcessorCount);
+            int taskIndex = 0;
+
+            while (taskIndex < taskCount)
+            {
+
+               var taskItems = taskAllItems
+                  .Skip(taskIndex)
+                  .Take(taskQtty)
+                  .ToList();
+               if (taskItems == null || taskItems.Count == 0) { break; }
+
+               var tasks = new List<Task>(taskItems.Count);
+               foreach (var taskItem in taskItems)
+               {
+                  tasks.Add(ExtractFileData(App.Settings, App.Database, null, taskItem));
+               }
+               Task.WaitAll(tasks.ToArray());
+
+               // Parallel.ForEach(taskItems, x => { ExtractFileData(App.Settings, App.Database, null, x); });
+
+               taskIndex += taskQtty;
+            }
+
+            /*
+            var taskItems = App.HomeData.Files
+               .Select(x => ExtractFileData(App.Settings, App.Database, null, x))
+               .ToArray();
+            var taskOptions = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
+            Task.WaitAll(taskItems);
+            */
+
+            /*
+            while (true)
+            {
+               var taskItems = App.HomeData.Files
+                  .Where(x => string.IsNullOrEmpty(x.CoverPath))
+                  .Take(100)
+                  .ToList();
+               if (taskItems == null || taskItems.Count == 0) { break; }
+               var taskOptions = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
+               Task.Run(() => Parallel.ForEach(taskItems, taskOptions, async x => { await ExtractFileData(App.Settings, App.Database, null, x); }));
+            }
+            */
+
+            /*
+            var taskItems = App.HomeData.Files;
+            var taskOptions = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
+            var taskResult = Parallel.ForEach(taskItems, taskOptions,  async x => { await ExtractFileData(App.Settings, App.Database, null, x); });            
+            */
+         }
+         catch (Exception ex) { throw; }
+      }
+
       private async Task ExtractFileData(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Views.Folder.FolderData comicFolder, Views.File.FileData comicFile)
       {
          try
@@ -346,7 +411,9 @@ namespace ComicsShelf.Engine
 
             // APPLY PROPERTY SO THE VIEW GETS REFRESHED
             comicFile.CoverPath = comicFile.ComicFile.CoverPath;
-            if (string.IsNullOrEmpty(comicFolder.CoverPath))
+            if (comicFolder == null)
+            { comicFolder = this.ComicFoldersDictionary[comicFile.ComicFile.ParentPath]; }
+            if (comicFolder != null && string.IsNullOrEmpty(comicFolder.CoverPath))
             { comicFolder.CoverPath = comicFile.ComicFile.CoverPath; }
 
          }

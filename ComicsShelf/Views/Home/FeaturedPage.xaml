@@ -78,10 +78,10 @@
                </controls:ListView>
             </StackLayout>
 
-            <StackLayout IsVisible="{Binding Data.EngineData.IsRunning}" VerticalOptions="FillAndExpand" Padding="10" >
-               <Label Text="{Binding Data.EngineData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Default" />
-               <ProgressBar Progress="{Binding Data.EngineData.Progress}" HorizontalOptions="FillAndExpand" />
-               <Label Text="{Binding Data.EngineData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
+            <StackLayout IsVisible="{Binding NotifyData.IsRunning}" VerticalOptions="FillAndExpand" Padding="10" >
+               <Label Text="{Binding NotifyData.Text}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Default" />
+               <ProgressBar Progress="{Binding NotifyData.Progress}" HorizontalOptions="FillAndExpand" />
+               <Label Text="{Binding NotifyData.Details}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
             </StackLayout>
 
             <StackLayout IsVisible="{Binding Data.NoComics}" VerticalOptions="FillAndExpand" Padding="10,80" >

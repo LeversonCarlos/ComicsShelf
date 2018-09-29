@@ -8,8 +8,6 @@ namespace ComicsShelf.Views.Home
       #region New
       public HomeData() : base(new Helpers.Database.ComicFolder { FullText = R.Strings.AppTitle })
       {
-         this.EngineData = new Engine.BaseData();
-
          this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
          this.RecentFiles.CollectionChanged += this.RecentFiles_CollectionChanged;
 
@@ -27,7 +25,7 @@ namespace ComicsShelf.Views.Home
       #region RecentFiles
 
       public Helpers.Observables.ObservableList<File.FileData> RecentFiles { get; set; }
-      
+
       bool _HasRecentFiles;
       public bool HasRecentFiles
       {
@@ -89,17 +87,9 @@ namespace ComicsShelf.Views.Home
       }
       #endregion
 
-      #region EngineData
-      Engine.BaseData _EngineData;
-      internal Engine.BaseData EngineData
-      {
-         get { return this._EngineData; }
-         set { this.SetProperty(ref this._EngineData, value); }
-      }
-      #endregion
-
       #region ClearAll
-      internal void ClearAll() {
+      internal void ClearAll()
+      {
          try
          {
             if (this.Folders.Count != 0)
