@@ -289,7 +289,14 @@ namespace ComicsShelf.Engine
                   parentFolder.HasFiles = true;
                   App.HomeData.Files.Add(comicFile);
 
-                  // await ExtractFileData(App.Settings, App.Database, parentFolder, comicFile);
+                  // VALIDATE COVER PATH
+                  var coverParentPath = System.IO.Path.GetDirectoryName(comicFile.ComicFile.CoverPath);
+                  if (coverParentPath != App.Settings.Paths.CoversCachePath)
+                  {
+                     var coverPath = System.IO.Path.GetFileName(comicFile.ComicFile.CoverPath);
+                     comicFile.ComicFile.CoverPath = $"{App.Settings.Paths.CoversCachePath}{App.Settings.Paths.Separator}{coverPath}";
+                     await Task.Run(() => App.Database.Update(comicFile.ComicFile));
+                  }
 
                }
                catch (Exception loopException)
