@@ -55,7 +55,7 @@
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Fill" />
          </Style>
-         
+
          <!-- CoverItem -->
          <Style TargetType="Frame" x:Key="CoverItemFrame">
             <Setter Property="Margin" Value="4" />
@@ -93,7 +93,7 @@
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Margin" Value="4,0"/>
          </Style>
-         
+
          <!-- SPLASH -->
          <Style TargetType="ContentView" x:Key="SplashItemDetails" >
             <Setter Property="BackgroundColor" Value="{StaticResource colorLightGray}" />

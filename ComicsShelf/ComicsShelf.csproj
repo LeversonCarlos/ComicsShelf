@@ -4,64 +4,36 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Product>Comics Shelf</Product>
     <Company>Friendship Solutions</Company>
-    <AssemblyVersion>18.06.02.0</AssemblyVersion>
-    <Version>18.06.02</Version>
     <Copyright>Copyright © Friendship Solutions 2018</Copyright>
+    <Version>18.09.23</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>full</DebugType>
+    <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Helpers\Controls\CoverFile.cs" />
-    <Compile Remove="Helpers\Controls\CoverFolder.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Examples\Blue Beetle\Blue Beetle 01.cbz" />
-    <None Remove="Examples\Blue Beetle\Blue Beetle [1967] #01.cbz" />
-    <None Remove="Examples\Plastic Man\Plastic Man 01.cbz" />
-    <None Remove="Examples\Plastic Man\Plastic Man 02.cbz" />
-    <None Remove="Examples\Plastic Man\Plastic Man 03.cbz" />
-    <None Remove="Examples\Plastic Man\Plastic Man [1943] #01.cbz" />
-    <None Remove="Examples\Plastic Man\Plastic Man [1943] #02.cbz" />
-    <None Remove="Examples\Plastic Man\Plastic Man [1943] #03.cbz" />
-    <None Remove="Examples\The Peacemaker\The Peacemaker 01.cbz" />
-    <None Remove="Examples\The Peacemaker\The Peacemaker [1967] #01.cbz" />
-    <None Remove="Helpers\Controls\RatingViewEmptyStar.png" />
-    <None Remove="Helpers\Controls\RatingViewFullStar.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Examples\Blue Beetle\Blue Beetle 01.cbz" />
-    <EmbeddedResource Include="Examples\Plastic Man\Plastic Man 01.cbz" />
-    <EmbeddedResource Include="Examples\Plastic Man\Plastic Man 02.cbz" />
-    <EmbeddedResource Include="Examples\Plastic Man\Plastic Man 03.cbz" />
-    <EmbeddedResource Include="Examples\The Peacemaker\The Peacemaker 01.cbz" />
-    <EmbeddedResource Include="Helpers\Controls\RatingViewEmptyStar.png" />
-    <EmbeddedResource Include="Helpers\Controls\RatingViewFullStar.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.6.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.6.0" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
-    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.3.6" />
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
-      <DependentUpon>*.xaml</DependentUpon>
+    <Compile Update="Views\Library\LibraryView.xaml.cs">
+      <DependentUpon>LibraryView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="File\FileSplashPage.xaml.cs">
-      <DependentUpon>FileSplashPage.xaml</DependentUpon>
+    <Compile Update="Views\Home\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Library\LibraryPage.xaml.cs">
-      <DependentUpon>LibraryPage.xaml</DependentUpon>
+    <Compile Update="Views\Folder\FolderView.xaml.cs">
+      <DependentUpon>FolderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\File\PageView.xaml.cs">
+      <DependentUpon>PageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\File\FileView.xaml.cs">
+      <DependentUpon>FileView.xaml</DependentUpon>
     </Compile>
     <Compile Update="R\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -71,30 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="File\FileReadPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="File\FileSplashPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Folder\FolderPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Home\FeaturedPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Home\FoldersPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Home\HomePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="R\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Library\LibraryPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
