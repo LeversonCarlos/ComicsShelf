@@ -189,6 +189,9 @@
   <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
     <value>Verificando permissões</value>
   </data>
+  <data name="STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE" xml:space="preserve">
+    <value>Extraindo informações dos arquivos de quadrinhos</value>
+  </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Carregando base de dados</value>
   </data>

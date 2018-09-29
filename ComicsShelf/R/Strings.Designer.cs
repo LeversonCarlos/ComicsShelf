@@ -277,6 +277,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extracting Data from Comic Files.
+        /// </summary>
+        internal static string STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading database.
         /// </summary>
         internal static string STARTUP_ENGINE_LOADING_DATABASE_MESSAGE {

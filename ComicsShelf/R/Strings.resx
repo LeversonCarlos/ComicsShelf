@@ -189,6 +189,9 @@
   <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
     <value>Checking permissions</value>
   </data>
+  <data name="STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE" xml:space="preserve">
+    <value>Extracting Data from Comic Files</value>
+  </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Loading database</value>
   </data>
