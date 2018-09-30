@@ -10,7 +10,7 @@
          this.ComicFile = _ComicFile;
          this.FullText = this.ComicFile.FullText;
          this.SmallText = this.ComicFile.SmallText;
-         // this.CoverPath = this.ComicFile.CoverPath;
+         this.CoverPath = this.ComicFile.CoverPath;
          this.FullPath = this.ComicFile.FullPath;
          this.Readed = this.ComicFile.Readed;
          this.ReadingPage = this.ComicFile.ReadingPage;

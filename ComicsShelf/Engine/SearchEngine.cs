@@ -18,11 +18,13 @@ namespace ComicsShelf.Engine
             {
                await engine.LoadDatabaseData();
                await engine.SearchComicFiles();
+               /*
                if (await engine.IncludePublicDomainExamples())
                {
                   await engine.LoadDatabaseData();
                   await engine.SearchComicFiles();
                }
+               */
                await engine.PrepareStructures_Folder();
                await engine.PrepareStructures_File();
                await engine.AnalyseFoldersAvailability();
@@ -331,11 +333,12 @@ namespace ComicsShelf.Engine
                if (fileData.FullPath.ToLower().EndsWith(".cbr")) { continue; }
 
                // EXECUTE
-               await Task.Run(async () =>
-               {
-                  await this.ExtractComicData_File(fileData);
-                  await this.ExtractComicData_Folder(fileData);
-               });
+               await Task.Factory.StartNew(async () => {
+                  //Parallel.Invoke(async () => {
+                  if (await this.ExtractComicData_File(fileData))
+                  { await this.ExtractComicData_Folder(fileData); }
+                  //});
+               }, TaskCreationOptions.RunContinuationsAsynchronously);
 
             }
 
@@ -345,14 +348,14 @@ namespace ComicsShelf.Engine
       #endregion
 
       #region ExtractComicData_File
-      private async Task ExtractComicData_File(Views.File.FileData fileData)
+      private async Task<bool> ExtractComicData_File(Views.File.FileData fileData)
       {
          try
          {
 
             // CHECK IF THE COVER FILE ALREADY EXISTS
             if (System.IO.File.Exists(fileData.ComicFile.CoverPath))
-            { fileData.CoverPath = fileData.ComicFile.CoverPath; return; }
+            { return false; }
 
             // OPEN ZIP ARCHIVE
             using (var fileSystem = Helpers.FileSystem.Get())
@@ -385,6 +388,7 @@ namespace ComicsShelf.Engine
 
             // APPLY PROPERTY SO THE VIEW GETS REFRESHED
             fileData.CoverPath = fileData.ComicFile.CoverPath;
+            return true;
 
          }
          catch (Exception ex) { throw; }
@@ -402,11 +406,12 @@ namespace ComicsShelf.Engine
             var parentFolder = this.ComicFoldersDictionary[fileData.ComicFile.ParentPath];
             while (parentFolder != null)
             {
-               if (!string.IsNullOrEmpty(parentFolder.CoverPath)) { break; }
 
+               if (string.IsNullOrEmpty(parentFolder.CoverPath)) {
+                  parentFolder.ComicFolder.CoverPath = fileData.CoverPath;
+                  await Task.Run(() => App.Database.Update(parentFolder.ComicFolder));
+               }
                parentFolder.CoverPath = fileData.CoverPath;
-               parentFolder.ComicFolder.CoverPath = fileData.CoverPath;
-               await Task.Run(() => App.Database.Update(parentFolder.ComicFolder));
 
                if (string.IsNullOrEmpty(parentFolder.ComicFolder.ParentPath)) { break; }
                parentFolder = this.ComicFoldersDictionary[parentFolder.ComicFolder.ParentPath];

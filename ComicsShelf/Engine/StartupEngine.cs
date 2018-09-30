@@ -60,7 +60,7 @@ namespace ComicsShelf.Engine
             { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }
 
             // SHOW HOME VIEW
-            await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData));
 
             // START SEARCH ENGINE
             // Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); 
