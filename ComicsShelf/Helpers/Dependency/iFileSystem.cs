@@ -18,8 +18,9 @@ namespace ComicsShelf.Helpers
 
       Task<string[]> GetFiles(string path);
 
-      Task<System.IO.Compression.ZipArchive> GetZipArchive(Helpers.Settings.Settings settings, string fullPath);
-      Task Thumbnail(System.IO.Stream imageStream, string imagePath);
+      Task CoverExtract(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile);
+      // Task<System.IO.Compression.ZipArchive> GetZipArchive(Helpers.Settings.Settings settings, string fullPath);
+      // Task Thumbnail(System.IO.Stream imageStream, string imagePath);
 
       void CheckPermissions(Action grantedCallback, Action revokedCallback);
    }
