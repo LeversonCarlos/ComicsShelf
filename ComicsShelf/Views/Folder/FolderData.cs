@@ -12,7 +12,7 @@
 
          this.ComicFolder = _ComicFolder;
          this.Text = this.ComicFolder.Text;
-         this.CoverPath = this.ComicFolder.CoverPath;
+         // this.CoverPath = this.ComicFolder.CoverPath;
 
       }
       #endregion

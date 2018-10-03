@@ -291,17 +291,6 @@ namespace ComicsShelf.Engine
                   parentFolder.HasFiles = true;
                   App.HomeData.Files.Add(comicFile);
 
-                  // VALIDATE COVER PATH
-                  /*
-                  var coverParentPath = System.IO.Path.GetDirectoryName(comicFile.ComicFile.CoverPath);
-                  if (coverParentPath != App.Settings.Paths.CoversCachePath)
-                  {
-                     var coverPath = System.IO.Path.GetFileName(comicFile.ComicFile.CoverPath);
-                     comicFile.ComicFile.CoverPath = $"{App.Settings.Paths.CoversCachePath}{App.Settings.Paths.Separator}{coverPath}";
-                     await Task.Run(() => App.Database.Update(comicFile.ComicFile));
-                  }
-                  */
-
                }
                catch (Exception loopException)
                { if (!await App.ConfirmMessage($"->Path:{DATA.FullPath}\n->File:{loopIndex}/{loopQuantity}\n->Exception:{loopException}")) { Environment.Exit(0); } }
@@ -310,9 +299,13 @@ namespace ComicsShelf.Engine
             // var files = System.IO.Directory.GetFiles(App.Settings.Paths.CoversCachePath);
             // Parallel.ForEach(files, file => { System.IO.File.Delete(file); });
 
-            Parallel.ForEach(App.HomeData.Files, fileData => {
+            var fileList = App.HomeData.Files
+               .OrderBy(x => x.FullPath)
+               .ToList();
+            Parallel.ForEach(fileList, fileData => {
                if (System.IO.File.Exists(fileData.ComicFile.CoverPath)) {
                   fileData.CoverPath = fileData.ComicFile.CoverPath;
+                  this.ExtractComicData_Folder(fileData);
                }
             });
 
@@ -330,7 +323,10 @@ namespace ComicsShelf.Engine
             this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE);
 
             // LOCATE FILES WITHOUT COVER
-            var fileList = App.HomeData.Files.Where(x => string.IsNullOrWhiteSpace(x.CoverPath)).ToList();
+            var fileList = App.HomeData.Files
+               .Where(x => string.IsNullOrWhiteSpace(x.CoverPath))
+               .OrderBy(x => x.FullPath)
+               .ToList();
             var filesQuantity = fileList.Count;
 
             // LOOP THROUGH FILES
@@ -345,17 +341,17 @@ namespace ComicsShelf.Engine
 
                // EXECUTE
                // await Task.Factory.StartNew(async () => {
-                  //Parallel.Invoke(async () => {
-                  if (await this.ExtractComicData_File(fileData))
-                  { await this.ExtractComicData_Folder(fileData); }
-                  //});
+               //Parallel.Invoke(async () => {
+               if (await this.ExtractComicData_File(fileData))
+               { this.ExtractComicData_Folder(fileData); }
+               //});
                // }, TaskCreationOptions.RunContinuationsAsynchronously);
 
             }
 
          }
          catch (Exception ex) { throw; }
-         finally { GC.Collect(2, GCCollectionMode.Forced); }
+         finally { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
 
       }
       #endregion
@@ -383,28 +379,20 @@ namespace ComicsShelf.Engine
       #endregion
 
       #region ExtractComicData_Folder
-      private async Task ExtractComicData_Folder(Views.File.FileData fileData)
+      private void ExtractComicData_Folder(Views.File.FileData fileData)
       {
          try
          {
-
-            // APPLY COVER PATH TO THE FOLDER STRUCTURE
-            var parentFolder = this.ComicFoldersDictionary[fileData.ComicFile.ParentPath];
-            while (parentFolder != null)
-            {
-
-               if (string.IsNullOrEmpty(parentFolder.CoverPath)) {
-                  parentFolder.CoverPath = fileData.CoverPath;
-                  parentFolder.ComicFolder.CoverPath = fileData.CoverPath;
-                  await Task.Run(() => App.Database.Update(parentFolder.ComicFolder));
-               }
-
-               if (string.IsNullOrEmpty(parentFolder.ComicFolder.ParentPath)) { break; }
-               parentFolder = this.ComicFoldersDictionary[parentFolder.ComicFolder.ParentPath];
-            }
-
+            var parentFolders = this.ComicFoldersDictionary
+               .Where(x => fileData.FullPath.Contains(x.Key))
+               .Where(x => string.IsNullOrEmpty(x.Value.CoverPath))
+               .Select(x => x.Value)
+               .ToList();
+            if (parentFolders != null && parentFolders.Count != 0)
+            { parentFolders.ForEach(x => x.CoverPath = fileData.CoverPath); }
+            // await Task.Run(() => App.Database.Update(parentFolder.ComicFolder));
          }
-         catch (Exception ex) { throw; }
+         catch { }
       }
       #endregion
 
