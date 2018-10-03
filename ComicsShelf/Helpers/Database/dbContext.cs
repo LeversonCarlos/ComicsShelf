@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Helpers.Database
 {
-   internal class dbContext : IDisposable
+   public class dbContext : IDisposable
    {
       public SQLiteConnection Connection { get; set; }
 
