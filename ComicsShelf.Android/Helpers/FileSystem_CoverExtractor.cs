@@ -32,21 +32,48 @@ namespace ComicsShelf.Droid
                   comicFile.ReleaseDate = database.GetDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
                   await Task.Run(() => database.Update(comicFile));
 
-                  // COVER THUMBNAIL
-                  // await Task.Run(() => zipEntry.ExtractToFile(comicFile.CoverPath));
-
                   // OPEN STREAM
                   using (var zipEntryStream = zipEntry.Open())
                   {
 
+                     // LOAD IMAGE
+                     using (var originalBitmap = await Android.Graphics.BitmapFactory.DecodeStreamAsync(zipEntryStream))
+                     {
+
+                        // DEFINE SIZE
+                        double imageHeight = 450; double imageWidth = 150;
+                        double scaleFactor = (double)imageHeight / (double)originalBitmap.Height;
+                        imageHeight = originalBitmap.Height * scaleFactor;
+                        imageWidth = originalBitmap.Width * scaleFactor;
+
+                        // INITIALIZE THUMBNAIL STREAM
+                        // using (var thumbnailStream = new MemoryStream())
+                        using (var thumbnailFileStream = new System.IO.FileStream(comicFile.CoverPath, FileMode.CreateNew, FileAccess.Write))
+                        {
+
+                           // SCALE BITMAP
+                           using (var thumbnailBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(originalBitmap, (int)imageWidth, (int)imageHeight, false))
+                           {
+                              await thumbnailBitmap.CompressAsync(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
+                              // thumbnailStream.Position = 0;
+                              await thumbnailFileStream.FlushAsync();
+                           }
+
+                           thumbnailFileStream.Close();
+                        }
+
+                     }
+
                      // COVER THUMBNAIL
+                     /*
                      using (var thumbnailFile = new System.IO.FileStream(comicFile.CoverPath, FileMode.CreateNew, FileAccess.Write))
                      {
                         await zipEntryStream.CopyToAsync(thumbnailFile);
                         await thumbnailFile.FlushAsync();
                         thumbnailFile.Close();
                         thumbnailFile.Dispose();
-                     }                    
+                     }   
+                     */
 
                      zipEntryStream.Close();
                      zipEntryStream.Dispose();
