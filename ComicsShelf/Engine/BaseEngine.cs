@@ -41,7 +41,9 @@ namespace ComicsShelf.Engine
          var dataMessage = this.Data;
          var keyMessage = BaseData.KEY;
          Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
-            MessagingCenter.Send(dataMessage, keyMessage );
+            try
+            { MessagingCenter.Send(dataMessage, keyMessage); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"MessagingCenter.Send:\n{ex.ToString()}"); }
          });         
       }
 
