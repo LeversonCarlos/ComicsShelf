@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace ComicsShelf.UWP
 {
@@ -40,6 +41,36 @@ namespace ComicsShelf.UWP
          catch (Exception ex) { throw; }
       }
 
+      private async Task<Windows.Storage.StorageFile> GetStorageFile(ComicsShelf.Helpers.Settings.Settings settings, string fullPath)
+      {
+         try
+         {
+
+            // INITIALIZE
+            var splitedPath = fullPath
+               .Split(new string[] { settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
+
+            Windows.Storage.StorageFolder storageFolder = null;
+            if (settings.Paths.LibraryPath.Contains(this.PathSeparator))
+            { storageFolder = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(settings.Paths.LibraryPath); }
+            else { storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync(settings.Paths.LibraryPath); }
+            StorageFile storageFile = null;
+
+            // LOOP THROUGH SPLITED PATH PARTS
+            for (int splitIndex = 0; splitIndex < splitedPath.Length; splitIndex++)
+            {
+               var folderPath = splitedPath[splitIndex];
+               if (!folderPath.EndsWith(".cbz") && !folderPath.EndsWith(".cbr"))
+               { storageFolder = await storageFolder.GetFolderAsync(folderPath); }
+               else
+               { storageFile = await storageFolder.GetFileAsync(folderPath); }
+            }
+
+            // RESULT
+            return storageFile;
+         }
+         catch (Exception ex) { throw; }
+      }
 
    }
 }
