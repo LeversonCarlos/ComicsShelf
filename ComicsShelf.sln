@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicsShelf.iOS", "ComicsSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicsShelf.UWP", "ComicsShelf.UWP\ComicsShelf.UWP.csproj", "{24507C33-283C-473D-8943-50CB38F8DAE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicsShelf", "ComicsShelf\ComicsShelf.csproj", "{D28254BC-4AAA-4F41-8FFC-44A95DFF4834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicsShelf", "ComicsShelf\ComicsShelf.csproj", "{D28254BC-4AAA-4F41-8FFC-44A95DFF4834}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
