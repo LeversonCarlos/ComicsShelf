@@ -1,0 +1,7 @@
+*) Use o raw icon no Android Icon Generator
+*) Deixe com fundo transparente e sem nenhuma shape
+*) Gere os icones
+*) Abra cada icone gerado e expanda (via PaintNet) um canvas resize para 163%
+*) Mantenha o fundo transparente
+
+*) Depois, no xml, o launcher_background será #FF5722
