@@ -6,7 +6,15 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Views.Home.HomeView" >
    <TabbedPage.ToolbarItems>
-      <ToolbarItem Order="Primary" Text="{controls:Translate Text=HOME_LIBRARY_MENU}" Icon="icon_Library.png" Command="{Binding OpenLibraryCommand}" />
+      <ToolbarItem Order="Primary" Text="{controls:Translate Text=HOME_LIBRARY_MENU}" Command="{Binding OpenLibraryCommand}" >
+         <ToolbarItem.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource">
+               <On Platform="Android" Value="icon_Library.png"></On>
+               <On Platform="IOS" Value="icon_Library.png"></On>
+               <On Platform="UWP" Value="Assets/icon_Library.png"></On>
+            </OnPlatform>
+         </ToolbarItem.Icon>
+      </ToolbarItem>
    </TabbedPage.ToolbarItems>
    <TabbedPage.Children>
       <home:FeaturedPage />
