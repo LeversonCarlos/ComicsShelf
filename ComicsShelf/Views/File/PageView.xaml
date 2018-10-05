@@ -20,12 +20,8 @@
                         <!-- ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" -->
                   </controls:PageImage>
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
-                     <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding StatsOpacity}">
-                        <ProgressBar HorizontalOptions="Fill" HeightRequest="5" Progress="{Binding Data.ReadingPercent}" />
-                        <ContentView HorizontalOptions="Fill" VerticalOptions="End" Padding="2" BackgroundColor="{StaticResource colorLighter}" >
-                           <Label Text="{Binding Data.ReadingPage}" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
-                        </ContentView>
-                     </StackLayout>
+                     <controls:PageStats ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" >
+                     </controls:PageStats>
                   </ContentView>
                </AbsoluteLayout>
                
