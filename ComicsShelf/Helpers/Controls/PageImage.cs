@@ -4,12 +4,12 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class ImageView : ScrollView
+   public class PageImage : ScrollView
    {
       // PanGestureRecognizer panGesture;
 
       #region New
-      public ImageView()
+      public PageImage()
       {
          this.Content = new Image
          {
@@ -76,7 +76,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ImagePath
       public static readonly BindableProperty ImagePathProperty =
-         BindableProperty.Create("ImagePath", typeof(string), typeof(ImageView), string.Empty,
+         BindableProperty.Create("ImagePath", typeof(string), typeof(PageImage), string.Empty,
          propertyChanged: OnImagePathChanged, defaultBindingMode: BindingMode.TwoWay);
       public string ImagePath
       {
@@ -89,7 +89,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ImageLoaded
       public static readonly BindableProperty ImageLoadedProperty =
-         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(ImageView), false,
+         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageImage), false,
          propertyChanged: OnImageLoadedChanged, defaultBindingMode: BindingMode.TwoWay);
       public bool ImageLoaded
       {
@@ -97,7 +97,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ImageLoadedProperty, value); }
       }
       private static void OnImageLoadedChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as ImageView).ImageRefresh(); }
+      { (bindable as PageImage).ImageRefresh(); }
       #endregion
 
       #region ImageSource
