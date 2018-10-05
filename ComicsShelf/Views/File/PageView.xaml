@@ -12,13 +12,14 @@
          ArrowsBackgroundColor="{StaticResource colorLighter}">
          <controls:PagesSwipeView.ItemTemplate>
             <DataTemplate>
-               <Label Text="{Binding Path}"></Label>
-               <!--
                <AbsoluteLayout>
-                  <controls:PageReaderImage ImageSource="{Binding Path}" IsVisible="{Binding IsVisible}" 
-                        IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}"
-                        ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" 
-                        AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                  <controls:ImageView 
+                     ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}"
+                     AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                        <!-- IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}" -->
+                     <!-- ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" -->
+                  </controls:ImageView>
+                  <!--
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
                      <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding Data.StatsOpacity}">
                         <ProgressBar HorizontalOptions="Fill" HeightRequest="5" Progress="{Binding Data.ReadingPercent}" />
@@ -27,8 +28,9 @@
                         </ContentView>
                      </StackLayout>
                   </ContentView>
+                  -->
                </AbsoluteLayout>
-               -->
+               
             </DataTemplate>
          </controls:PagesSwipeView.ItemTemplate>
       </controls:PagesSwipeView>
