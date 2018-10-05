@@ -12,23 +12,19 @@ namespace ComicsShelf.Views.File
          this.ViewType = typeof(PageView);
          this.Data = args;
          this._ReadingPage = args.ReadingPage;
-         // this.Data.StatsOpacity = 1;
+         this.StatsOpacityTimer = new System.Timers.Timer
+         {
+            Enabled = false,
+            Interval = 100,
+            AutoReset = true
+         };
+         this.StatsOpacityTimer.Elapsed += this.StatsOpacityTimer_Elapsed;
+         this.StatsOpacity = 1.0;
          this.Initialize += this.OnInitialize;
          this.Finalize += this.OnFinalize;
       }
       #endregion
 
-
-      /*
-      #region IsSwipeEnabled
-      bool _IsSwipeEnabled;
-      public bool IsSwipeEnabled
-      {
-         get { return this._IsSwipeEnabled; }
-         set { this.SetProperty(ref this._IsSwipeEnabled, value); }
-      }
-      #endregion
-      */
 
       #region ReadingPage
       short _ReadingPage;
@@ -45,11 +41,39 @@ namespace ComicsShelf.Views.File
                this.Data.ReadingPercent = ((double)value / (double)this.Data.Pages.Count);
                this.Data.ReadingDate = App.Database.GetDate();
                this.Data.Readed = (value == (this.Data.Pages.Count - 1));
-               // this.StatsOpacity = 1.0;
+               this.StatsOpacity = 1.0;
             }
             App.Database.Update(this.Data.ComicFile);
          }
       }
+      #endregion
+
+      #region StatsOpacity
+       
+      double _StatsOpacity;
+      public double StatsOpacity
+      {
+         get { return this._StatsOpacity; }
+         set
+         {
+            this.SetProperty(ref this._StatsOpacity, value);
+            if (!this.StatsOpacityTimer.Enabled)
+            { this.StatsOpacityTimer.Start(); }
+         }
+      }
+
+      System.Timers.Timer StatsOpacityTimer;
+      private void StatsOpacityTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+      {
+         this.StatsOpacity -= 0.05;
+         if (this.StatsOpacity <= 0)
+         {
+            this.StatsOpacity = 0;
+            this.StatsOpacityTimer.Stop();
+            this.StatsOpacityTimer.Enabled = false;
+         }
+      }
+
       #endregion
 
 

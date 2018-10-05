@@ -66,47 +66,6 @@
       }
       #endregion
 
-      #region StatsOpacity
-      /*
-       
-      double _StatsOpacity;
-      public double StatsOpacity
-      {
-         get { return this._StatsOpacity; }
-         set
-         {
-            this.SetProperty(ref this._StatsOpacity, value);
-            if (this.StatsOpacityTimer == null)
-            {
-               this.StatsOpacityTimer = new System.Timers.Timer
-               {
-                  Enabled = false,
-                  Interval = 100,
-                  AutoReset = true
-               };
-               this.StatsOpacityTimer.Elapsed += this.StatsOpacityTimer_Elapsed;
-            }
-            if (!this.StatsOpacityTimer.Enabled)
-            { this.StatsOpacityTimer.Start(); }
-         }
-      }
-
-      System.Timers.Timer StatsOpacityTimer;
-      private void StatsOpacityTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-      {
-         this.StatsOpacity -= 0.05;
-         if (this.StatsOpacity <= 0)
-         {
-            this.StatsOpacity = 0;
-            this.StatsOpacityTimer.Stop();
-            this.StatsOpacityTimer.Enabled = false;
-         }
-      }
-
-      */
-      #endregion
-
-
 
       #region Readed
       bool _Readed;

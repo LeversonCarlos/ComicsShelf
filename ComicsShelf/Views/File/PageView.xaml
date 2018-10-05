@@ -17,18 +17,16 @@
                      ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}"
                      AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                         <!-- IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}" -->
-                     <!-- ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" -->
+                        <!-- ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" -->
                   </controls:ImageView>
-                  <!--
                   <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
-                     <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding Data.StatsOpacity}">
+                     <StackLayout Margin="0" Padding="0" Spacing="0" Opacity="{Binding StatsOpacity}">
                         <ProgressBar HorizontalOptions="Fill" HeightRequest="5" Progress="{Binding Data.ReadingPercent}" />
                         <ContentView HorizontalOptions="Fill" VerticalOptions="End" Padding="2" BackgroundColor="{StaticResource colorLighter}" >
                            <Label Text="{Binding Data.ReadingPage}" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
                         </ContentView>
                      </StackLayout>
                   </ContentView>
-                  -->
                </AbsoluteLayout>
                
             </DataTemplate>
