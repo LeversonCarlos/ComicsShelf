@@ -14,8 +14,8 @@ namespace ComicsShelf.Droid
          try
          {
 
+            // OPEN ZIP ARCHIVE
             var comicFilePath = $"{settings.Paths.LibraryPath}{settings.Paths.Separator}{comicFile.FullPath}";
-
             using (var zipArchiveStream = new System.IO.FileStream(comicFilePath, FileMode.Open, FileAccess.Read))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
