@@ -19,16 +19,19 @@ namespace ComicsShelf.Helpers.Controls
       {
          try
          {
-            this.IsSwipeEnabled = true;
-            if (this.LastPosition != this.Position)
-            {
-               this.LastPosition = this.Position;
-               this.SetPositionVisibility((this.Position - 2), false);
-               this.SetPositionVisibility((this.Position - 1), true);
-               this.SetPositionVisibility((this.Position), true);
-               this.SetPositionVisibility((this.Position + 1), true);
-               this.SetPositionVisibility((this.Position + 2), false);
+            // this.IsSwipeEnabled = true;
+            if (this.Position < 0) { return; }
+            if (this.Position == this.LastPosition) { return; }
+            if (this.Position == 0 && this.LastPosition != 1 && this.LastPosition != -1) {
+               if (this.LastPosition != this.ItemsSource.GetCount()) { return; }
             }
+
+            this.SetPositionVisibility((this.Position - 2), false);
+            this.SetPositionVisibility((this.Position - 1), true);
+            this.SetPositionVisibility((this.Position), true);
+            this.SetPositionVisibility((this.Position + 1), true);
+            this.SetPositionVisibility((this.Position + 2), false);
+            this.LastPosition = this.Position;
          }
          catch { }
       }
