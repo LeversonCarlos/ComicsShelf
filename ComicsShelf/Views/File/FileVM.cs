@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -40,8 +41,27 @@ namespace ComicsShelf.Views.File
       {
          try
          {
+
+            // VALIDATE
             if (this.Data.Pages == null) { this.Data.Pages = new Helpers.Observables.ObservableList<PageData>(); }
             if (this.Data.Pages.Count != 0) { return; }
+
+            // EXTRACT PAGES
+            using (var fileSystem = Helpers.FileSystem.Get())
+            { await fileSystem.PagesExtract(App.Settings, this.Data); }
+            this.Data.Pages.Add(new PageData { });
+
+            /*
+            var dummyPages = App.HomeData.Files.Where(x => !string.IsNullOrEmpty(x.CoverPath)).Select(x => x.CoverPath).OrderBy(x => x).Take(10).ToList();
+            short pageIndex = 0;
+            foreach (var pagePath in dummyPages)
+            {
+               var pageIndexText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
+               var pageData = new PageData { Page = pageIndex, Path = pagePath, IsVisible = false };
+               this.Data.Pages.Add(pageData);
+               pageIndex++;
+            }
+            */
 
             /*
             var fileSystem = Helpers.FileSystem.Get();
@@ -96,7 +116,6 @@ namespace ComicsShelf.Views.File
                }
             }
 
-            this.Data.Pages.Add(new FilePageData { });
             */
 
          }
