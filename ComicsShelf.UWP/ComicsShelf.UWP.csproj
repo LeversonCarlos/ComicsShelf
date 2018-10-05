@@ -97,7 +97,7 @@
     <Compile Include="Helpers\FileSystem_Image.cs" />
     <Compile Include="Helpers\FileSystem_Library.cs" />
     <Compile Include="Helpers\FileSystem_Permissions.cs" />
-    <Compile Include="Helpers\FileSystem_CoverExtract.cs" />
+    <Compile Include="Helpers\FileSystem_CoverExtractor.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
