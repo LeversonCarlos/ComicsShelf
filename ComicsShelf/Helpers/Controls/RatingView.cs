@@ -10,6 +10,11 @@ namespace ComicsShelf.Helpers.Controls
       public RatingView()
       {
          this.Orientation = StackOrientation.Horizontal;
+         if (Device.Idiom == TargetIdiom.Phone)
+         { this.HeightRequest = 50; }
+         else if (Device.Idiom == TargetIdiom.Tablet)
+         { this.HeightRequest = 75; }
+         else { this.HeightRequest = 90; }
          this.LoadStarImages();
          this.LoadRatingButtons();
          this.RatingRedraw();
@@ -25,14 +30,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(RatingProperty, value); }
       }
       private static void OnRatingChanged(BindableObject bindable, object oldValue, object newValue)
-      {
-         try
-         {
-            var VIEW = bindable as RatingView;
-            VIEW.RatingRedraw();
-         }
-         catch { }
-      }
+      { (bindable as RatingView).RatingRedraw(); }
       private void RatingRedraw()
       {
          foreach (RatingButton ratingButton in this.Children)

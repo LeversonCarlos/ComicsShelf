@@ -32,15 +32,7 @@
             </ContentView>
          </StackLayout>
          <controls:RatingView Rating="{Binding Rating}" AbsoluteLayout.LayoutBounds="0.5,0.7" AbsoluteLayout.LayoutFlags="PositionProportional" >
-            <controls:RatingView.HeightRequest>
-               <OnIdiom x:TypeArguments="x:Double">
-                  <OnIdiom.Phone>50</OnIdiom.Phone>
-                  <OnIdiom.Tablet>75</OnIdiom.Tablet>
-                  <OnIdiom.Desktop>90</OnIdiom.Desktop>
-               </OnIdiom>
-            </controls:RatingView.HeightRequest>
          </controls:RatingView>
-
       </AbsoluteLayout>
 
    </controls:Page.Content>
