@@ -126,9 +126,6 @@
   <data name="BASE_OK_COMMAND" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
-    <value>wait...</value>
-  </data>
   <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
     <value>Already Readed</value>
   </data>

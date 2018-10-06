@@ -31,6 +31,7 @@ namespace ComicsShelf.Helpers.Controls
             HorizontalOptions = LayoutOptions.Center,
             LineBreakMode = LineBreakMode.MiddleTruncation,
             FontAttributes = FontAttributes.Bold,
+            FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
             Margin = new Thickness(4, 0)
          };
 
@@ -77,7 +78,7 @@ namespace ComicsShelf.Helpers.Controls
       private static void OnImageAspectChanged(BindableObject bindable, object oldValue, object newValue)
       {
          var image = (bindable as CoverFrameView).Image;
-         var aspect = (Aspect)newValue;
+         image.Aspect = (Aspect)newValue;
          if ((Aspect)newValue == Aspect.AspectFit)
          { image.HorizontalOptions = LayoutOptions.Center; }
          else { image.HorizontalOptions = LayoutOptions.FillAndExpand; }

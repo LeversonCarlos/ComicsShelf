@@ -88,15 +88,6 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to wait....
-        /// </summary>
-        internal static string BASE_WAIT_MESSAGE {
-            get {
-                return ResourceManager.GetString("BASE_WAIT_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Already Readed.
         /// </summary>
         internal static string FILE_COMIC_ALREADY_READED_LABEL {
