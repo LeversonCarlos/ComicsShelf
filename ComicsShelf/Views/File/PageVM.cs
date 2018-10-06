@@ -28,13 +28,21 @@ namespace ComicsShelf.Views.File
             this.SetProperty(ref this._ReadingPage, value);
 
             this.Data.ReadingPage = value;
+            var wasReaded = this.Data.Readed;
             if (this.Data.Pages != null && this.Data.Pages.Count != 0)
             {
                this.Data.ReadingPercent = ((double)value / (double)this.Data.Pages.Count);
                this.Data.ReadingDate = App.Database.GetDate();
                this.Data.Readed = (value == (this.Data.Pages.Count - 1));
+               if (this.Data.Readed) {
+                  this.Data.ReadingPage = 0;
+                  this.Data.ReadingPercent = 1;
+               }
             }
             App.Database.Update(this.Data.ComicFile);
+            if (this.Data.Readed && !wasReaded) {
+               Xamarin.Forms.Device.BeginInvokeOnMainThread(async() => await Helpers.NavVM.PopAsync());
+            }
          }
       }
       #endregion
