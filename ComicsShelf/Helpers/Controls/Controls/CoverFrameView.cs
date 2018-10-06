@@ -1,16 +1,9 @@
-﻿using System.Runtime.CompilerServices;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
    public class CoverFrameView : Frame
    {
-
-      // CoverItemFrame
-      // CoverItemLayout
-      // CoverItemImageGrid
-      // CoverItemImage
-      // CoverItemTitle
 
       #region New
       public CoverFrameView()

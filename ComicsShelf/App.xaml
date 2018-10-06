@@ -51,44 +51,6 @@
             <Setter Property="VerticalOptions" Value="Fill" />
          </Style>
 
-         <!-- CoverItem -->
-         <Style TargetType="Frame" x:Key="CoverItemFrame">
-            <Setter Property="Margin" Value="4" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="HasShadow" Value="True" />
-            <Setter Property="BackgroundColor" Value="White" />
-            <Setter Property="OutlineColor" Value="{StaticResource colorGray}" />
-            <Setter Property="CornerRadius" Value="0" />
-         </Style>
-         <Style TargetType="StackLayout" x:Key="CoverItemLayout">
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Spacing" Value="0" />
-         </Style>
-
-         <!-- CoverItemImage -->
-         <Style TargetType="Grid" x:Key="CoverItemImageGrid">
-            <Setter Property="Padding" Value="4" />
-         </Style>
-         <Style TargetType="Image" x:Key="CoverItemImageFile">
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="VerticalOptions" Value="Start" />
-            <Setter Property="Aspect" Value="AspectFit" />
-         </Style>
-         <Style TargetType="Image" x:Key="CoverItemImageFolder" >
-            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="VerticalOptions" Value="Start" />
-            <Setter Property="Aspect" Value="AspectFill" />
-         </Style>
-
-         <!-- CoverItemTitle -->
-         <Style TargetType="Label" x:Key="CoverItemTitle">
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="LineBreakMode" Value="MiddleTruncation" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="Margin" Value="4,0"/>
-         </Style>
-
          <!-- SPLASH -->
          <Style TargetType="ContentView" x:Key="SplashItemDetails" >
             <Setter Property="BackgroundColor" Value="{StaticResource colorLightGray}" />
