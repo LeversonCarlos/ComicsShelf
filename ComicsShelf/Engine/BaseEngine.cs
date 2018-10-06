@@ -5,14 +5,13 @@ namespace ComicsShelf.Engine
 {
    internal abstract class BaseEngine : IDisposable
    {
-
       protected Helpers.iFileSystem FileSystem { get; set; }
-      protected StepData Data { get; set; }
+      protected BaseData Data { get; set; }
 
       public BaseEngine()
       {
          this.FileSystem = Helpers.FileSystem.Get();
-         this.Data = new StepData
+         this.Data = new BaseData
          {
             Text = string.Empty,
             Details = string.Empty,
@@ -39,7 +38,13 @@ namespace ComicsShelf.Engine
 
       protected void Notify()
       {
-         MessagingCenter.Send(this.Data, StepData.KEY);
+         var dataMessage = this.Data;
+         var keyMessage = BaseData.KEY;
+         Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
+            try
+            { MessagingCenter.Send(dataMessage, keyMessage); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"MessagingCenter.Send:\n{ex.ToString()}"); }
+         });         
       }
 
       public void Dispose()

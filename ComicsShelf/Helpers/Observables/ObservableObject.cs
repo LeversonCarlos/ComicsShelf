@@ -8,8 +8,7 @@ namespace ComicsShelf.Helpers.Observables
    public class ObservableObject : INotifyPropertyChanged
    {
 
-      #region SetProperty
-      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null, bool AlwaysInvokePropertyChanged=false)
+      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null, bool AlwaysInvokePropertyChanged = false)
       {
          if (EqualityComparer<T>.Default.Equals(backingStore, value))
          {
@@ -22,9 +21,7 @@ namespace ComicsShelf.Helpers.Observables
          OnPropertyChanged(propertyName);
          return true;
       }
-      #endregion
 
-      #region OnPropertyChanged
       public event PropertyChangedEventHandler PropertyChanged;
       protected void OnPropertyChanged([CallerMemberName]string propertyName = "")
       {
@@ -34,7 +31,6 @@ namespace ComicsShelf.Helpers.Observables
 
          changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
-      #endregion
 
    }
 }

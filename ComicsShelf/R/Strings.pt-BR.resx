@@ -124,10 +124,10 @@
     <value>Cancelar</value>
   </data>
   <data name="BASE_OK_COMMAND" xml:space="preserve">
-    <value>Ok</value>
+    <value>OK</value>
   </data>
   <data name="BASE_WAIT_MESSAGE" xml:space="preserve">
-    <value>Aguarde...</value>
+    <value>aguarde...</value>
   </data>
   <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
     <value>Já Lido</value>
@@ -151,13 +151,13 @@
     <value>Nenhum arquivo de quadrinhos foi encontrado no dispositivo</value>
   </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
-    <value>Continue lendo</value>
+    <value>Continue Lendo</value>
   </data>
   <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
-    <value>Adicionados recentemente</value>
+    <value>Adicionados Recentemente</value>
   </data>
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
-    <value>Melhor qualificado</value>
+    <value>Melhor Qualificado</value>
   </data>
   <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
     <value>Biblioteca de Quadrinhos</value>
@@ -173,5 +173,32 @@
   </data>
   <data name="LIBRARY_UNDEFINED_FOLDER_MESSAGE" xml:space="preserve">
     <value>Como esta é a sua primeira vez aqui, você NÃO tem BIBLIOTECA definida ainda. Clique no botão abaixo e SELECIONE UMA PASTA no seu dispositivo que contenha seus arquivos de quadrinhos (aqueles arquivos com a extensão CBZ).</value>
+  </data>
+  <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
+    <value>Carregando dados da base de dados</value>
+  </data>
+  <data name="SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
+    <value>Preparando a estrutura de arquivos</value>
+  </data>
+  <data name="SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
+    <value>Preparando a estrutura de pastas</value>
+  </data>
+  <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
+    <value>Procurando novos quadrinhos no dispositivo</value>
+  </data>
+  <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
+    <value>Verificando permissões</value>
+  </data>
+  <data name="STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE" xml:space="preserve">
+    <value>Extraindo informações dos arquivos de quadrinhos</value>
+  </data>
+  <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
+    <value>Carregando base de dados</value>
+  </data>
+  <data name="STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
+    <value>Carregando configurações</value>
+  </data>
+  <data name="STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE" xml:space="preserve">
+    <value>Validando a localização da biblioteca</value>
   </data>
 </root>

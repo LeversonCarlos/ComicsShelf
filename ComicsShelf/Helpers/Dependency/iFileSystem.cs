@@ -1,25 +1,34 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers
 {
-   public interface iFileSystem
+
+   public interface iFileSystem : IDisposable
    {
+
       string PathSeparator { get; }
-      Task<string> GetCachePath();
-      Task<string> GetDataPath();
+
+      string GetCachePath();
+      string GetDataPath();
+
       Task<bool> ValidateLibraryPath(string libraryPath);
       Task<string> GetLibraryPath();
-      Task<string[]> GetFiles(string path);
-      Task<System.IO.Compression.ZipArchive> GetZipArchive(Settings.Settings settings, File.FileData comicFile);
-      Task<bool> FileExists(string path);
-      Task Thumbnail(System.IO.Stream imageStream, string imagePath);
 
-      void CheckPermissions(System.Action grantedCallback, System.Action revokedCallback);
+      Task<string[]> GetFiles(string path);
+
+      Task CoverExtract(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile);
+      Task PagesExtract(Helpers.Settings.Settings settings, Views.File.FileData fileData);
+
+      void CheckPermissions(Action grantedCallback, Action revokedCallback);
    }
+
    public class FileSystem
    {
       public static iFileSystem Get()
       { return DependencyService.Get<iFileSystem>(); }
+
    }
+
 }

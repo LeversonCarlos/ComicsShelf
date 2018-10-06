@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.ViewModels
+namespace ComicsShelf.Helpers
 {
    public class NavVM : BaseVM
    {
@@ -27,7 +27,6 @@ namespace ComicsShelf.Helpers.ViewModels
       }
       #endregion
 
-
       #region PushAsync
 
       public static async Task PushAsync<T>(params object[] args) where T : NavVM
@@ -40,7 +39,6 @@ namespace ComicsShelf.Helpers.ViewModels
             var viewModelType = typeof(T);
             var viewModel = Activator.CreateInstance(viewModelType, args) as T;
             if (viewModel == null) { throw new Exception("Cannot create view model instance."); }
-
             await PushAsync(viewModel, popAll);
          }
          catch (Exception ex) { throw; }
@@ -60,12 +58,12 @@ namespace ComicsShelf.Helpers.ViewModels
             // VIEW SIZE
             view.SizeChanged += (object sender, EventArgs e) =>
             {
-               if (viewModel.ScreenSize != Size.Zero && 
-                   viewModel.ScreenSize.Width == view.Width && 
+               if (viewModel.ScreenSize != Size.Zero &&
+                   viewModel.ScreenSize.Width == view.Width &&
                    viewModel.ScreenSize.Height == view.Height)
                { return; };
                viewModel.ScreenSize = new Size(view.Width, view.Height);
-               viewModel.SizeChanged?.Invoke(null, EventArgs.Empty); 
+               viewModel.SizeChanged?.Invoke(null, EventArgs.Empty);
             };
 
             // NAVIGATION
@@ -93,7 +91,6 @@ namespace ComicsShelf.Helpers.ViewModels
          await navigation.PopAsync(true);
       }
       #endregion
-
 
       #region Dispose
       public override void Dispose()

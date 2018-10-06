@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
@@ -12,6 +10,11 @@ namespace ComicsShelf.Helpers.Controls
       public RatingView()
       {
          this.Orientation = StackOrientation.Horizontal;
+         if (Device.Idiom == TargetIdiom.Phone)
+         { this.HeightRequest = 50; }
+         else if (Device.Idiom == TargetIdiom.Tablet)
+         { this.HeightRequest = 75; }
+         else { this.HeightRequest = 90; }
          this.LoadStarImages();
          this.LoadRatingButtons();
          this.RatingRedraw();
@@ -27,14 +30,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(RatingProperty, value); }
       }
       private static void OnRatingChanged(BindableObject bindable, object oldValue, object newValue)
-      {
-         try
-         {
-            var VIEW = bindable as RatingView;
-            VIEW.RatingRedraw();
-         }
-         catch { }
-      }
+      { (bindable as RatingView).RatingRedraw(); }
       private void RatingRedraw()
       {
          foreach (RatingButton ratingButton in this.Children)
@@ -50,8 +46,9 @@ namespace ComicsShelf.Helpers.Controls
       private ImageSource EmptyStar;
       private void LoadStarImages()
       {
-         this.FullStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingViewFullStar.png", System.Reflection.Assembly.GetExecutingAssembly());
-         this.EmptyStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingViewEmptyStar.png", System.Reflection.Assembly.GetExecutingAssembly());
+         var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+         this.FullStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingView.FullStar.png", executingAssembly);
+         this.EmptyStar = ImageSource.FromResource("ComicsShelf.Helpers.Controls.RatingView.EmptyStar.png", executingAssembly);
       }
       #endregion
 

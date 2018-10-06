@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="180602" android:versionName="18.06.02" package="com.friendship.ComicsShelf" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="26" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<application android:label="Comics Shelf" android:icon="@drawable/icon"></application>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="180923" android:versionName="18.09.23" package="com.friendship.ComicsShelf">
+   <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="25" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+   <application android:label="Comics Shelf" android:icon="@mipmap/icon"></application>
 </manifest>

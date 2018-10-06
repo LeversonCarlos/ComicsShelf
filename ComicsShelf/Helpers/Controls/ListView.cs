@@ -67,12 +67,12 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             var VIEW = bindable as ListView;
-            var VALUES = newValue as INotifyCollectionChanged;
-            if (VALUES != null)
+            var itemsSource = VIEW.ItemsSource as Observables.INotifyObservableCollectionChanged; // INotifyCollectionChanged;
+            if (itemsSource != null)
             {
                VIEW.RefreshTiles();
-               VALUES.CollectionChanged += 
-                  (object sender, NotifyCollectionChangedEventArgs e) => 
+               itemsSource.ObservableCollectionChanged +=
+                  (object sender, EventArgs e) =>
                   { VIEW.RefreshTiles(); };
             }
             
@@ -118,7 +118,7 @@ namespace ComicsShelf.Helpers.Controls
             {
                var columnIndex = index % this.Columns;
                var rowIndex = (int)Math.Floor(index / (float)this.Columns);
-               var itemTile = this.RefreshTiles_GetItemTile(ITEMS[index]);              
+               var itemTile = this.RefreshTiles_GetItemTile(ITEMS[index]);
                this.Children?.Add(itemTile, columnIndex, rowIndex);
             }
 

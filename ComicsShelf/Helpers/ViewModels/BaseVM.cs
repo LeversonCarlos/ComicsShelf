@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 
-namespace ComicsShelf.Helpers.ViewModels
+namespace ComicsShelf.Helpers
 {
    public class BaseVM : Observables.ObservableObject, IDisposable
    {
@@ -34,9 +33,7 @@ namespace ComicsShelf.Helpers.ViewModels
 
       #region Dispose
       public virtual void Dispose()
-      {
-         /* throw new NotImplementedException(); */
-      }
+      { /* throw new NotImplementedException(); */ }
       #endregion
 
    }

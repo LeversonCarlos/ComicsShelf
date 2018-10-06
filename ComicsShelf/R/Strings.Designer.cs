@@ -79,7 +79,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ok.
+        ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string BASE_OK_COMMAND {
             get {
@@ -88,7 +88,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wait....
+        ///   Looks up a localized string similar to wait....
         /// </summary>
         internal static string BASE_WAIT_MESSAGE {
             get {
@@ -268,29 +268,47 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading settings database.
+        ///   Looks up a localized string similar to Checking permissions.
         /// </summary>
-        internal static string STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE {
+        internal static string STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_ENGINE_LOADING_SETTINGS_DATABASE_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validating the library path.
+        ///   Looks up a localized string similar to Extracting Data from Comic Files.
+        /// </summary>
+        internal static string STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading database.
+        /// </summary>
+        internal static string STARTUP_ENGINE_LOADING_DATABASE_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_ENGINE_LOADING_DATABASE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading settings.
+        /// </summary>
+        internal static string STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE {
+            get {
+                return ResourceManager.GetString("STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validating the library location.
         /// </summary>
         internal static string STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE {
             get {
                 return ResourceManager.GetString("STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Extracting comics cover for each new file... This may take a moment.
-        /// </summary>
-        internal static string STARTUP_EXTRACTING_COMICS_COVER_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_EXTRACTING_COMICS_COVER_MESSAGE", resourceCulture);
             }
         }
     }

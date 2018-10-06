@@ -32,7 +32,7 @@ namespace ComicsShelf.Droid
             {
 
                // DEFINE SIZE
-               double imageHeight = 600; double imageWidth = 200;
+               double imageHeight = 450; double imageWidth = 150;
                double scaleFactor = (double)imageHeight / (double)originalImage.Height;
                imageHeight = originalImage.Height * scaleFactor;
                imageWidth = originalImage.Width * scaleFactor;
@@ -40,7 +40,7 @@ namespace ComicsShelf.Droid
                // THUMBNAIL
                using (var thumbnailImage = Android.Graphics.Bitmap.CreateScaledBitmap(originalImage, (int)imageWidth, (int)imageHeight, false))
                {
-                  await thumbnailImage.CompressAsync(Android.Graphics.Bitmap.CompressFormat.Jpeg, 75, thumbnailStream);
+                  await thumbnailImage.CompressAsync(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailStream);
                   thumbnailStream.Position = 0;
                }
 

@@ -1,6 +1,6 @@
-﻿namespace ComicsShelf.Helpers.ViewModels
+﻿namespace ComicsShelf.Helpers
 {
-   public class DataVM<T> : NavVM
+   public class DataVM<T>: NavVM
    {
 
       public T Data { get; protected set; }

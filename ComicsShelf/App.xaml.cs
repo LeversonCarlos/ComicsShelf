@@ -1,11 +1,12 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ComicsShelf
 {
    public partial class App : Application
-	{
+   {
 
-      #region New
       public App()
       {
          InitializeComponent();
@@ -20,59 +21,38 @@ namespace ComicsShelf
             }
          });
       }
-      #endregion
 
-      #region Settings
+
       private Helpers.Settings.Settings _Settings = null;
       internal static Helpers.Settings.Settings Settings
       {
          get { return ((App)Application.Current)._Settings; }
          set { ((App)Application.Current)._Settings = value; }
       }
-      #endregion
 
-      #region Database
-      private Database.Connector _Database = null;
-      internal static Database.Connector Database
+      private Helpers.Database.dbContext _Database = null;
+      internal static Helpers.Database.dbContext Database
       {
          get { return ((App)Application.Current)._Database; }
          set { ((App)Application.Current)._Database = value; }
       }
-      #endregion
 
-      #region Message
-      private static Helpers.Controls.Messages _Message = null;
-      public static Helpers.Controls.Messages Message
+      private Views.Home.HomeData _HomeData = null;
+      public static Views.Home.HomeData HomeData
       {
-         get
-         {
-            if (_Message == null) { _Message = new Helpers.Controls.Messages(); }
-            return _Message;
-         }
+         get { return ((App)Application.Current)._HomeData; }
+         set { ((App)Application.Current)._HomeData = value; }
       }
-      #endregion
 
-      #region RootFolder
-      private Home.HomeData _RootFolder = null;
-      public static Home.HomeData RootFolder
-      {
-         get { return ((App)Application.Current)._RootFolder; }
-         set { ((App)Application.Current)._RootFolder = value; }
-      }
-      #endregion
 
       protected override void OnStart()
-      {
-         Helpers.FileSystem.Get().CheckPermissions(
-          () => Engine.Startup.Execute(),
-          () => System.Environment.Exit(0));
-      }
+      { Engine.Startup.Execute(); }
 
-      protected override void OnSleep ()
-		{ /* Handle when your app sleeps */ }
+      protected override void OnSleep()
+      { /* Handle when your app sleeps */ }
 
-		protected override void OnResume ()
-		{ /* Handle when your app resumes */ }
+      protected override void OnResume()
+      { /* Handle when your app resumes */ }
 
-	}
+   }
 }

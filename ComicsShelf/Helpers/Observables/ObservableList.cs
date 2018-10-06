@@ -6,15 +6,12 @@ using System.ComponentModel;
 
 namespace ComicsShelf.Helpers.Observables
 {
-   public class ObservableList<T> : ObservableCollection<T>
-   {
 
-      #region New
+   public class ObservableList<T> : ObservableCollection<T>, INotifyObservableCollectionChanged
+   {
       public ObservableList() : base() { }
       public ObservableList(IEnumerable<T> collection) : base(collection) { }
-      #endregion
 
-      #region AddRange
       public void AddRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
       {
 
@@ -41,9 +38,7 @@ namespace ComicsShelf.Helpers.Observables
          this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems, startIndex));
       }
-      #endregion
 
-      #region RemoveRange
       public void RemoveRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
@@ -52,24 +47,60 @@ namespace ComicsShelf.Helpers.Observables
             Items.Remove(i);
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
       }
-      #endregion
 
-      #region ReplaceRange
-
-      public void Replace(T item)
+      protected override void InsertItem(int index, T item)
       {
-         this.ReplaceRange(new T[] { item });
+         base.InsertItem(index, item);
+         this.RefreshAnalysis(NotifyCollectionChangedAction.Add);
       }
 
+      protected override void RemoveItem(int index)
+      {
+         base.RemoveItem(index);
+         this.RefreshAnalysis(NotifyCollectionChangedAction.Remove);
+      }
+
+      #region Replace
+      public void Replace(T item)
+      { this.ReplaceRange(new T[] { item }); }
       public void ReplaceRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
-
-         Items.Clear();
-         this.AddRange(collection, NotifyCollectionChangedAction.Reset);
+         this.Items.Clear();
+         this.AddRange(collection, NotifyCollectionChangedAction.Replace);
+         this.RefreshAnalysis(NotifyCollectionChangedAction.Replace);
       }
+      #endregion
 
+      #region ObservableCollectionChangedAnalysis
+      public event EventHandler ObservableCollectionChanged;
+      private void RefreshAnalysis(NotifyCollectionChangedAction changedAction)
+      {
+         if (this.ObservableCollectionChanged != null)
+         {
+            var countBefore = this.Count;
+            System.Threading.Tasks.Task.Delay(1000).ContinueWith(x =>
+            {
+               var countAfter = this.Count;
+               if (countBefore == countAfter)
+               {
+                  Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                  {
+                     this.ObservableCollectionChanged(this, EventArgs.Empty);
+                  });
+               }
+            });
+         }
+      }
+      public void RefreshNow()
+      { this.ObservableCollectionChanged?.Invoke(this, EventArgs.Empty); }
       #endregion
 
    }
+
+   public interface INotifyObservableCollectionChanged
+   {
+      event EventHandler ObservableCollectionChanged;
+   }
+
 }

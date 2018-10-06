@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:Page 
+   xmlns="http://xamarin.com/schemas/2014/forms"             
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   NavigationPage.HasNavigationBar="False" 
+   x:Class="ComicsShelf.Views.File.PageView"
+   x:Name="MyPage">
+   <controls:Page.Content>
+      <controls:PagesSwipeView 
+         ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" 
+         ArrowsBackgroundColor="{StaticResource colorLighter}">
+         <controls:PagesSwipeView.ItemTemplate>
+            <DataTemplate>
+               <AbsoluteLayout>
+                  <controls:PageImage 
+                     ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}"
+                     AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                        <!-- IsSwipeEnabled="{Binding BindingContext.IsSwipeEnabled, Source={x:Reference Name=MyPage}, Mode=TwoWay}" -->
+                        <!-- ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" -->
+                  </controls:PageImage>
+                  <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
+                     <controls:PageStats ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" >
+                     </controls:PageStats>
+                  </ContentView>
+               </AbsoluteLayout>
+               
+            </DataTemplate>
+         </controls:PagesSwipeView.ItemTemplate>
+      </controls:PagesSwipeView>
+   </controls:Page.Content>
+</controls:Page>
