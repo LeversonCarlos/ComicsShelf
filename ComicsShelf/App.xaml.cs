@@ -10,7 +10,7 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
-         MainPage = new Helpers.Controls.Pages.NavPage();
+         MainPage = new Helpers.Controls.NavPage();
       }
 
 

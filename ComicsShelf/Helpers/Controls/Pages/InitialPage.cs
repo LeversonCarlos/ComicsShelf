@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.Controls.Pages
+namespace ComicsShelf.Helpers.Controls
 {
 
    public class NavPage : NavigationPage
