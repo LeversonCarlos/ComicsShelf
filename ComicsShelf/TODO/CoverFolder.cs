@@ -2,6 +2,7 @@
 
 namespace ComicsShelf.Helpers.Controls
 {
+   /*
    public class CoverFolder : AbsoluteLayout
    {
 
@@ -77,4 +78,5 @@ namespace ComicsShelf.Helpers.Controls
       #endregion
 
    }
+   */
 }

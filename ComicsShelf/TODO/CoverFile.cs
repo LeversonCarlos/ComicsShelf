@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
+   /*
    public class CoverFile : AbsoluteLayout
    {
 
@@ -87,4 +88,5 @@ namespace ComicsShelf.Helpers.Controls
       #endregion
 
    }
+   */
 }
