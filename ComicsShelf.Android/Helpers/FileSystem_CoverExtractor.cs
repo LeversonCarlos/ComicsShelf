@@ -64,17 +64,6 @@ namespace ComicsShelf.Droid
 
                      }
 
-                     // COVER THUMBNAIL
-                     /*
-                     using (var thumbnailFile = new System.IO.FileStream(comicFile.CoverPath, FileMode.CreateNew, FileAccess.Write))
-                     {
-                        await zipEntryStream.CopyToAsync(thumbnailFile);
-                        await thumbnailFile.FlushAsync();
-                        thumbnailFile.Close();
-                        thumbnailFile.Dispose();
-                     }   
-                     */
-
                      zipEntryStream.Close();
                      zipEntryStream.Dispose();
                   }
