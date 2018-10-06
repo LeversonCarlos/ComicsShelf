@@ -2,10 +2,10 @@
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class Page : ContentPage
+   public class BasePage : ContentPage
    {
 
-      public Page()
+      public BasePage()
       {
          if (Device.RuntimePlatform == Device.iOS)
          { this.Padding = new Thickness(0, 20, 0, 0); }
@@ -15,7 +15,7 @@ namespace ComicsShelf.Helpers.Controls
       {
          base.OnAppearing();
          if (this.BindingContext == null) { return; }
-         this.SetBinding(Page.TitleProperty, "Title");
+         this.SetBinding(BasePage.TitleProperty, "Title");
          (this.BindingContext as BaseVM).InitializeAsync();
       }
 

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:Page 
+<controls:BasePage 
    xmlns="http://xamarin.com/schemas/2014/forms"             
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    NavigationPage.HasNavigationBar="False" 
    x:Class="ComicsShelf.Views.File.PageView"
    x:Name="MyPage">
-   <controls:Page.Content>
+   <controls:BasePage.Content>
       <controls:PagesSwipeView 
          ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" 
          ArrowsBackgroundColor="{StaticResource colorLighter}">
@@ -28,5 +28,5 @@
             </DataTemplate>
          </controls:PagesSwipeView.ItemTemplate>
       </controls:PagesSwipeView>
-   </controls:Page.Content>
-</controls:Page>
+   </controls:BasePage.Content>
+</controls:BasePage>

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:Page 
+<controls:BasePage 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    xmlns:models="clr-namespace:ComicsShelf.File"
    x:Class="ComicsShelf.Views.File.FileView">
-   <controls:Page.Content>
+   <controls:BasePage.Content>
 
       <AbsoluteLayout VerticalOptions="FillAndExpand">
          <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
@@ -35,5 +35,5 @@
          </controls:RatingView>
       </AbsoluteLayout>
 
-   </controls:Page.Content>
-</controls:Page>
+   </controls:BasePage.Content>
+</controls:BasePage>

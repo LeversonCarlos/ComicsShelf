@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:Page 
+<controls:BasePage 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Name="MyPage"
    x:Class="ComicsShelf.Views.Folder.FolderView">
-   <controls:Page.Content>
+   <controls:BasePage.Content>
       <ScrollView Style="{StaticResource CoverListMainView}">
          <StackLayout Style="{StaticResource CoverListMainLayout}">
 
@@ -45,5 +45,5 @@
 
          </StackLayout>
       </ScrollView>
-   </controls:Page.Content>
-</controls:Page>
+   </controls:BasePage.Content>
+</controls:BasePage>

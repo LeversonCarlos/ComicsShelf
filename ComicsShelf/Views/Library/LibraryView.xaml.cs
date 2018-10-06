@@ -3,7 +3,7 @@
 namespace ComicsShelf.Views.Library
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class LibraryView : Helpers.Controls.Page
+   public partial class LibraryView : Helpers.Controls.BasePage
    {
       public LibraryView()
       {
