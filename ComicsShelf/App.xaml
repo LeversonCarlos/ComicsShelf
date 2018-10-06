@@ -16,11 +16,6 @@
          <Color x:Key="colorLightGray">#BDBDBD</Color>
          <Color x:Key="colorBackground">#EEEEEE</Color>
 
-         <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="{StaticResource colorPrimary}" />
-            <Setter Property="BarTextColor" Value="#ffffff" />
-         </Style>
-
          <Style TargetType="ScrollView" x:Key="CoverListMainView">
             <Setter Property="BackgroundColor" Value="{StaticResource colorBackground}" />
             <Setter Property="Orientation" Value="Vertical" />
