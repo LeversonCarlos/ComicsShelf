@@ -23,11 +23,7 @@ namespace ComicsShelf.Helpers.Controls
          this.CornerRadius = 0;
 
          this.Image = new Image
-         {
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Start,
-            Aspect = Aspect.AspectFit
-         };
+         { VerticalOptions = LayoutOptions.Start };
          this.ImageGrid = new Grid { Padding = 4, Children = { this.Image } };
 
          this.Label = new Label
@@ -67,6 +63,25 @@ namespace ComicsShelf.Helpers.Controls
       }
       private static void OnImageHeightChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as CoverFrameView).ImageGrid.HeightRequest = (double)newValue; }
+      #endregion
+
+      #region ImageAspect
+      public static readonly BindableProperty ImageAspectProperty =
+         BindableProperty.Create("ImageAspect", typeof(Aspect), typeof(CoverFrameView), Aspect.AspectFit,
+         propertyChanged: OnImageAspectChanged, defaultBindingMode: BindingMode.TwoWay);
+      public Aspect ImageAspect
+      {
+         get { return (Aspect)GetValue(ImageAspectProperty); }
+         set { SetValue(ImageAspectProperty, value); }
+      }
+      private static void OnImageAspectChanged(BindableObject bindable, object oldValue, object newValue)
+      {
+         var image = (bindable as CoverFrameView).Image;
+         var aspect = (Aspect)newValue;
+         if ((Aspect)newValue == Aspect.AspectFit)
+         { image.HorizontalOptions = LayoutOptions.Center; }
+         else { image.HorizontalOptions = LayoutOptions.FillAndExpand; }
+      }
       #endregion
 
       #region ImageSource

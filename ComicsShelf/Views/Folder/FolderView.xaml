@@ -38,7 +38,8 @@
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <controls:CoverFrameView
-                           ImageSource="{Binding CoverPath}" Text="{Binding SmallText}" Progress="{Binding ReadingPercent}" 
+                           Text="{Binding SmallText}" Progress="{Binding ReadingPercent}" 
+                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
                            ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}"  >
                         </controls:CoverFrameView>
                      </DataTemplate>

@@ -19,7 +19,8 @@
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <controls:CoverFrameView 
-                           ImageSource="{Binding CoverPath}" Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
                            ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
@@ -37,7 +38,8 @@
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <controls:CoverFrameView
-                           ImageSource="{Binding CoverPath}" Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
                            ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
@@ -55,7 +57,8 @@
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
                         <controls:CoverFrameView
-                           ImageSource="{Binding CoverPath}" Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
                            ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
