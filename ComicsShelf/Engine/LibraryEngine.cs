@@ -18,10 +18,10 @@ namespace ComicsShelf.Engine
                result = await engine.DefineLibraryPath();
                if (result)
                {
-                  Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                  Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
                   {
                      App.HomeData.ClearAll();
-                     Engine.Search.Execute(); 
+                     await Engine.Search.Execute(); 
                   });
                }
             }

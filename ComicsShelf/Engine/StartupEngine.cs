@@ -6,7 +6,7 @@ namespace ComicsShelf.Engine
    internal class Startup: BaseEngine
    {
 
-      public static async void Execute()
+      public static async Task Execute()
       {
          try
          {
@@ -64,7 +64,7 @@ namespace ComicsShelf.Engine
 
             // START SEARCH ENGINE
             // Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); 
-            Engine.Search.Execute();
+            await Engine.Search.Execute();
 
          }
          catch (Exception ex) { throw; }

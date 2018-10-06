@@ -45,8 +45,8 @@ namespace ComicsShelf
       }
 
 
-      protected override void OnStart()
-      { Engine.Startup.Execute(); }
+      protected override async void OnStart()
+      { await Engine.Startup.Execute(); }
 
       protected override void OnSleep()
       { /* Handle when your app sleeps */ }

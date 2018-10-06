@@ -9,7 +9,7 @@ namespace ComicsShelf.Engine
    {
 
       #region Execute
-      public static async void Execute()
+      public static async Task Execute()
       {
          try
          {
