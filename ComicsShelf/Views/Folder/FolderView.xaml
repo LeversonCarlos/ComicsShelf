@@ -37,15 +37,10 @@
                   ItemsSource="{Binding Data.Files}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <Frame Style="{StaticResource CoverItemFrame}" Opacity="{Binding ReadingOpacity}">
-                           <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
-                              </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding SmallText}" />
-                              <ProgressBar Progress="{Binding ReadingPercent}" />
-                           </StackLayout>
-                        </Frame>
+                        <controls:CoverFrameView
+                           ImageSource="{Binding CoverPath}" Text="{Binding SmallText}" Progress="{Binding ReadingPercent}" 
+                           ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}"  >
+                        </controls:CoverFrameView>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>

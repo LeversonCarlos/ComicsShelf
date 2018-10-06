@@ -18,15 +18,10 @@
                   ItemsSource="{Binding Data.ReadingFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <Frame Style="{StaticResource CoverItemFrame}">
-                           <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
-                              </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding FullText}" />
-                              <ProgressBar Progress="{Binding ReadingPercent}" />
-                           </StackLayout>
-                        </Frame>
+                        <controls:CoverFrameView 
+                           ImageSource="{Binding CoverPath}" Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                        </controls:CoverFrameView>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
@@ -41,15 +36,10 @@
                   ItemsSource="{Binding Data.RecentFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <Frame Style="{StaticResource CoverItemFrame}">
-                           <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
-                              </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding FullText}" />
-                              <ProgressBar Progress="{Binding ReadingPercent}" />
-                           </StackLayout>
-                        </Frame>
+                        <controls:CoverFrameView
+                           ImageSource="{Binding CoverPath}" Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                        </controls:CoverFrameView>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
@@ -64,15 +54,10 @@
                   ItemsSource="{Binding Data.TopRatedFiles}">
                   <controls:ListView.ItemTemplate>
                      <DataTemplate>
-                        <Frame Style="{StaticResource CoverItemFrame}">
-                           <StackLayout Style="{StaticResource CoverItemLayout}">
-                              <Grid Style="{StaticResource CoverItemImageGrid}" HeightRequest="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
-                                 <Image Style="{StaticResource CoverItemImageFile}" Source="{Binding CoverPath}" />
-                              </Grid>
-                              <Label Style="{StaticResource CoverItemTitle}" Text="{Binding FullText}" />
-                              <ProgressBar Progress="{Binding ReadingPercent}" />
-                           </StackLayout>
-                        </Frame>
+                        <controls:CoverFrameView
+                           ImageSource="{Binding CoverPath}" Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                           ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
+                        </controls:CoverFrameView>
                      </DataTemplate>
                   </controls:ListView.ItemTemplate>
                </controls:ListView>
