@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
@@ -13,9 +12,9 @@ namespace ComicsShelf.Helpers.Controls
       {
          this.Content = new Image
          {
-            Aspect = Aspect.AspectFill,
-            HorizontalOptions = LayoutOptions.CenterAndExpand,
-            VerticalOptions = LayoutOptions.CenterAndExpand,
+            Aspect = Aspect.AspectFit,
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            VerticalOptions = LayoutOptions.FillAndExpand,
             InputTransparent = false
          };
          this.Orientation = ScrollOrientation.Horizontal;
