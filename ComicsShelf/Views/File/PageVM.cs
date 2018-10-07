@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Views.File
 {
@@ -64,7 +66,11 @@ namespace ComicsShelf.Views.File
       private async void OnFinalize()
       {
          try
-         { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
+         {
+            this.Data.Pages.Where(page => page.IsVisible).ForEach(page => page.IsVisible = false);
+            this.Data.Pages.Clear();
+            GC.Collect();
+         }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion

@@ -25,13 +25,13 @@ namespace ComicsShelf.Helpers.Controls
                if (this.LastPosition != this.ItemsSource.GetCount()) { return; }
             }
 
-            this.SetPositionVisibility((this.Position - 3), false);
-            this.SetPositionVisibility((this.Position - 2), true);
+            // this.SetPositionVisibility((this.Position - 3), false);
+            this.SetPositionVisibility((this.Position - 2), false);
             this.SetPositionVisibility((this.Position - 1), true);
             this.SetPositionVisibility((this.Position), true);
             this.SetPositionVisibility((this.Position + 1), true);
-            this.SetPositionVisibility((this.Position + 2), true);
-            this.SetPositionVisibility((this.Position + 3), false);
+            this.SetPositionVisibility((this.Position + 2), false);
+            // this.SetPositionVisibility((this.Position + 3), false);
             this.LastPosition = this.Position;
          }
          catch { }
