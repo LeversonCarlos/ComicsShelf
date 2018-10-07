@@ -112,13 +112,9 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             if (!this.ImageLoaded && this.ImageSource != null)
-            {
-               this.ImageSource = null;
-            }
+            { this.ImageSource = null; }
             if (this.ImageLoaded && this.ImageSource == null)
-            {
-               this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath)));
-            }
+            { this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
          }
          catch { }
       }

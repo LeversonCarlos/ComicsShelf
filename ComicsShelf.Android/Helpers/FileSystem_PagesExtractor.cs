@@ -54,6 +54,7 @@ namespace ComicsShelf.Droid
                      if (System.IO.File.Exists(pagePath)) { continue; }
 
                      // OPEN STREAM
+                     /*
                      using (var zipEntryStream = zipEntry.Open())
                      {
 
@@ -86,9 +87,9 @@ namespace ComicsShelf.Droid
                         zipEntryStream.Close();
                         zipEntryStream.Dispose();
                      }
+                     */
 
-                     /*
-                      * SIMPLE EXACT FILE
+                     // SIMPLE EXACT FILE 
                      using (var zipEntryStream = zipEntry.Open())
                      {
                         using (var thumbnailFile = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
@@ -99,7 +100,6 @@ namespace ComicsShelf.Droid
                            thumbnailFile.Dispose();
                         }
                      }
-                     */
 
                   }
 
