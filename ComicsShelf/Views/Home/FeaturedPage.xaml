@@ -20,7 +20,7 @@
                      <DataTemplate>
                         <controls:CoverFrameView 
                            Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
-                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
+                           ImagePath="{Binding CoverPath}" ImageAspect="AspectFit" ImageLoaded="{Binding BindingContext.IsLoaded, Source={x:Reference MyPage}}"
                            ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
@@ -39,7 +39,7 @@
                      <DataTemplate>
                         <controls:CoverFrameView
                            Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
-                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
+                           ImagePath="{Binding CoverPath}" ImageAspect="AspectFit" ImageLoaded="{Binding BindingContext.IsLoaded, Source={x:Reference MyPage}}"
                            ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
@@ -58,7 +58,7 @@
                      <DataTemplate>
                         <controls:CoverFrameView
                            Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
-                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
+                           ImagePath="{Binding CoverPath}" ImageAspect="AspectFit" ImageLoaded="{Binding BindingContext.IsLoaded, Source={x:Reference MyPage}}"
                            ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>

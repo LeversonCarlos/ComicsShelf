@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.IO;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
@@ -78,18 +79,53 @@ namespace ComicsShelf.Helpers.Controls
       }
       #endregion
 
+      #region ImagePath
+      public static readonly BindableProperty ImagePathProperty =
+         BindableProperty.Create("ImagePath", typeof(string), typeof(PageImage), string.Empty,
+         propertyChanged: OnImagePathChanged, defaultBindingMode: BindingMode.TwoWay);
+      public string ImagePath
+      {
+         get { return (string)GetValue(ImagePathProperty); }
+         set { SetValue(ImagePathProperty, value); }
+      }
+      private static void OnImagePathChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as CoverFrameView).ImageRefresh(); }
+      #endregion
+      
+      #region ImageLoaded
+      public static readonly BindableProperty ImageLoadedProperty =
+         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageImage), true,
+         propertyChanged: OnImageLoadedChanged, defaultBindingMode: BindingMode.TwoWay);
+      public bool ImageLoaded
+      {
+         get { return (bool)GetValue(ImageLoadedProperty); }
+         set { SetValue(ImageLoadedProperty, value); }
+      }
+      private static void OnImageLoadedChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as CoverFrameView).ImageRefresh(); }
+      #endregion
+
       #region ImageSource
       Image Image { get; set; }
-      public static readonly BindableProperty ImageSourceProperty =
-         BindableProperty.Create("ImageSource", typeof(ImageSource), typeof(CoverFrameView), null,
-         propertyChanged: OnImageSourceChanged, defaultBindingMode: BindingMode.TwoWay);
-      public ImageSource ImageSource
+      private ImageSource ImageSource
       {
-         get { return (ImageSource)GetValue(ImageSourceProperty); }
-         set { SetValue(ImageSourceProperty, value); }
+         get { return this.Image.Source; }
+         set { this.Image.Source = value; }
       }
-      private static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as CoverFrameView).Image.Source = (ImageSource)newValue; }
+      #endregion
+
+      #region ImageRefresh
+      private void ImageRefresh()
+      {
+         try
+         {
+            if (!this.ImageLoaded && this.ImageSource != null)
+            { this.ImageSource = null; }
+            if (this.ImageLoaded && this.ImageSource == null)
+            { this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
+         }
+         catch { }
+      }
       #endregion
 
       #region Text
