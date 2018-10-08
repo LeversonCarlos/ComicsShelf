@@ -19,7 +19,7 @@
                         <controls:CoverFrameView 
                            IsVisible="{Binding Data.Available}"
                            Text="{Binding Text}" Progress="{Binding ReadingPercent}"
-                           ImagePath="{Binding CoverPath}" ImageAspect="AspectFill" ImageLoaded="{Binding BindingContext.IsLoaded, Source={x:Reference MyPage}}"
+                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFill" 
                            ImageHeight="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
