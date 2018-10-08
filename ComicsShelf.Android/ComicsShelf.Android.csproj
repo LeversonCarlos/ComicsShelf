@@ -34,8 +34,6 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidSupportedAbis />
-    <JavaMaximumHeapSize>
-    </JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +42,9 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AotAssemblies>true</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
@@ -74,7 +75,6 @@
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\FileSystem_PagesExtractor.cs" />
     <Compile Include="Helpers\FileSystem_Files.cs" />
-    <Compile Include="Helpers\FileSystem_Image.cs" />
     <Compile Include="Helpers\FileSystem_Library.cs" />
     <Compile Include="Helpers\FileSystem_Permissions.cs" />
     <Compile Include="Helpers\FileSystem_CoverExtractor.cs" />
