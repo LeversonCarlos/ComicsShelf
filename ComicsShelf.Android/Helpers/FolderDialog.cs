@@ -73,7 +73,7 @@ namespace ComicsShelf.Droid
             _currentPathView.SetPadding(viewPadding * 2, viewPadding, viewPadding, viewPadding);
             _currentPathView.SetTextColor(Color.Black);
             _currentPathView.Gravity = GravityFlags.Top;
-            _currentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 32);
+            _currentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
             _currentPathView.SetTypeface(null, TypefaceStyle.Bold);
 
             // DIRECTORY LIST VIEW

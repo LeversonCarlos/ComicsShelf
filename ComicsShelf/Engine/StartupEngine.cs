@@ -60,6 +60,7 @@ namespace ComicsShelf.Engine
             { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }
 
             // SHOW HOME VIEW
+            // TODO: REMOVE THIS INVOKE, JUST PUSH THE VIEW AND, STARTS THE FOLLOWING SEARCH.EXECUTE ON A BACKGROUND NOT BLOCKING THREAD
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData));
 
             // START SEARCH ENGINE

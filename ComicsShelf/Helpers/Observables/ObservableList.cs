@@ -79,7 +79,7 @@ namespace ComicsShelf.Helpers.Observables
          if (this.ObservableCollectionChanged != null)
          {
             var countBefore = this.Count;
-            System.Threading.Tasks.Task.Delay(1000).ContinueWith(x =>
+            System.Threading.Tasks.Task.Delay(500).ContinueWith(x =>
             {
                var countAfter = this.Count;
                if (countBefore == countAfter)

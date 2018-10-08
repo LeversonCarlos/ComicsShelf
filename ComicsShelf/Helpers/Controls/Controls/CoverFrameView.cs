@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {

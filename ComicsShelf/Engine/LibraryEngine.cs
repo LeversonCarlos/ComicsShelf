@@ -16,13 +16,9 @@ namespace ComicsShelf.Engine
             using (var engine = new Library())
             {
                result = await engine.DefineLibraryPath();
-               if (result)
-               {
-                  Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
-                  {
-                     App.HomeData.ClearAll();
-                     await Engine.Search.Execute(); 
-                  });
+               if (result) {
+                  App.HomeData.ClearAll();
+                  await Engine.Search.Execute();
                }
             }
             System.Diagnostics.Debug.WriteLine("Library Engine Finish");
