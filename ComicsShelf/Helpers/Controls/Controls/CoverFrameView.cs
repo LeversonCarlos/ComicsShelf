@@ -8,73 +8,36 @@ namespace ComicsShelf.Helpers.Controls
       #region New
       public CoverFrameView()
       {
-         this.Margin = 4;
+         this.Margin = new Thickness(10, 10, 0, 0);
          this.Padding = 0;
          this.HasShadow = true;
          this.BackgroundColor = Color.White;
-         this.BorderColor = (Color)Application.Current.Resources["colorGray"];
+         this.BorderColor = Color.LightGray;
          this.CornerRadius = 0;
+         // this.WidthRequest = 100;
 
          this.Image = new Image
-         { VerticalOptions = LayoutOptions.Start };
-         this.ImageGrid = new Grid { Padding = 4, Children = { this.Image } };
+         { VerticalOptions = LayoutOptions.Start, Margin = new Thickness(5, 5, 5, 0), Aspect = Aspect.AspectFit };
 
          this.Label = new Label
          {
             HorizontalOptions = LayoutOptions.Center,
             LineBreakMode = LineBreakMode.MiddleTruncation,
             FontAttributes = FontAttributes.Bold,
-            FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
-            Margin = new Thickness(4, 0)
+            FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label))
          };
 
          this.ProgressBar = new ProgressBar
-         {
-            HorizontalOptions = LayoutOptions.Fill,
-            HeightRequest = 5, 
-         };
+         { HorizontalOptions = LayoutOptions.Fill, HeightRequest = 5 };
 
          this.Content = new StackLayout
          {
             Margin = 0,
             Padding = 0,
-            Spacing = 0,
-            Children = { this.ImageGrid, this.Label, this.ProgressBar }
+            Spacing = 2,
+            Children = { this.Image, this.Label, this.ProgressBar }
          };
 
-      }
-      #endregion
-
-      #region ImageHeight
-      Grid ImageGrid { get; set; }
-      public static readonly BindableProperty ImageHeightProperty =
-         BindableProperty.Create("ImageHeight", typeof(double), typeof(CoverFrameView), (double)0,
-         propertyChanged: OnImageHeightChanged, defaultBindingMode: BindingMode.TwoWay);
-      public double ImageHeight
-      {
-         get { return (double)GetValue(ImageHeightProperty); }
-         set { SetValue(ImageHeightProperty, value); }
-      }
-      private static void OnImageHeightChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as CoverFrameView).ImageGrid.HeightRequest = (double)newValue; }
-      #endregion
-
-      #region ImageAspect
-      public static readonly BindableProperty ImageAspectProperty =
-         BindableProperty.Create("ImageAspect", typeof(Aspect), typeof(CoverFrameView), Aspect.AspectFit,
-         propertyChanged: OnImageAspectChanged, defaultBindingMode: BindingMode.TwoWay);
-      public Aspect ImageAspect
-      {
-         get { return (Aspect)GetValue(ImageAspectProperty); }
-         set { SetValue(ImageAspectProperty, value); }
-      }
-      private static void OnImageAspectChanged(BindableObject bindable, object oldValue, object newValue)
-      {
-         var image = (bindable as CoverFrameView).Image;
-         image.Aspect = (Aspect)newValue;
-         if ((Aspect)newValue == Aspect.AspectFit)
-         { image.HorizontalOptions = LayoutOptions.Center; }
-         else { image.HorizontalOptions = LayoutOptions.FillAndExpand; }
       }
       #endregion
 

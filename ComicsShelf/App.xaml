@@ -2,7 +2,6 @@
 <Application 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.App">
    <Application.Resources>
       <ResourceDictionary>
@@ -20,8 +19,6 @@
             <Setter Property="BackgroundColor" Value="{StaticResource colorBackground}" />
             <Setter Property="Orientation" Value="Vertical" />
             <Setter Property="VerticalOptions" Value="FillAndExpand" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="8" />
          </Style>
 
          <Style TargetType="StackLayout" x:Key="CoverListMainLayout">
@@ -43,12 +40,6 @@
             <Setter Property="TextColor" Value="{StaticResource colorAccent}" />
             <Setter Property="FontSize" Value="Medium" />
             <Setter Property="FontAttributes" Value="Bold" />
-         </Style>
-         <Style TargetType="controls:ListView" x:Key="SectionListView">
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="HorizontalOptions" Value="Fill" />
-            <Setter Property="VerticalOptions" Value="Fill" />
          </Style>
 
          <!-- SPLASH -->

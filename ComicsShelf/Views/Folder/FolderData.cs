@@ -46,20 +46,6 @@
          set { this.SetProperty(ref this._HasFolders, value); }
       }
 
-      int _FolderColumns = 1;
-      public int FolderColumns
-      {
-         get { return this._FolderColumns; }
-         set { this.SetProperty(ref this._FolderColumns, value); }
-      }
-
-      double _FolderHeightRequest;
-      public double FolderHeightRequest
-      {
-         get { return this._FolderHeightRequest; }
-         set { this.SetProperty(ref this._FolderHeightRequest, value); }
-      }
-
       /*
       private void Folders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       { this.HasFolders = this.Folders.Count != 0; }
@@ -76,20 +62,6 @@
       {
          get { return this._HasFiles; }
          set { this.SetProperty(ref this._HasFiles, value); }
-      }
-
-      int _FileColumns = 1;
-      public int FileColumns
-      {
-         get { return this._FileColumns; }
-         set { this.SetProperty(ref this._FileColumns, value); }
-      }
-
-      double _FileHeightRequest;
-      public double FileHeightRequest
-      {
-         get { return this._FileHeightRequest; }
-         set { this.SetProperty(ref this._FileHeightRequest, value); }
       }
 
       /*

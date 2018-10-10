@@ -10,37 +10,35 @@
          <StackLayout Style="{StaticResource CoverListMainLayout}">
 
             <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasFolders}">
-               <controls:ListView
-                  Style="{StaticResource SectionListView}" Columns="{Binding Data.FolderColumns}" 
+               <controls:CoverListView
                   ItemTappedCommand="{Binding FolderTappedCommand}"
                   ItemsSource="{Binding Data.Folders}">
-                  <controls:ListView.ItemTemplate>
+                  <controls:CoverListView.ItemTemplate>
                      <DataTemplate>
                         <controls:CoverFrameView 
                            Text="{Binding Text}" Progress="{Binding ReadingPercent}" 
-                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFill" 
-                           ImageHeight="{Binding BindingContext.Data.FolderHeightRequest, Source={x:Reference MyPage}}" >
+                           ImageSource="{Binding CoverPath}" 
+                           WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
-                  </controls:ListView.ItemTemplate>
-               </controls:ListView>
+                  </controls:CoverListView.ItemTemplate>
+               </controls:CoverListView>
             </StackLayout>
 
             <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasFiles}">
-               <controls:ListView
-                  Style="{StaticResource SectionListView}" Columns="{Binding Data.FileColumns}" 
+               <controls:CoverListView
                   ItemTappedCommand="{Binding FileTappedCommand}"
                   ItemsSource="{Binding Data.Files}">
-                  <controls:ListView.ItemTemplate>
+                  <controls:CoverListView.ItemTemplate>
                      <DataTemplate>
                         <controls:CoverFrameView
                            Text="{Binding SmallText}" Progress="{Binding ReadingPercent}" 
-                           ImageSource="{Binding CoverPath}" ImageAspect="AspectFit" 
-                           ImageHeight="{Binding BindingContext.Data.FileHeightRequest, Source={x:Reference MyPage}}"  >
+                           ImageSource="{Binding CoverPath}" 
+                           WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
                         </controls:CoverFrameView>
                      </DataTemplate>
-                  </controls:ListView.ItemTemplate>
-               </controls:ListView>
+                  </controls:CoverListView.ItemTemplate>
+               </controls:CoverListView>
             </StackLayout>
 
          </StackLayout>

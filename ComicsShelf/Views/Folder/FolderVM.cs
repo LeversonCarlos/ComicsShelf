@@ -41,36 +41,28 @@ namespace ComicsShelf.Views.Folder
       }
       #endregion
 
+      #region CoverWidthRequest
+      double _CoverWidthRequest;
+      public double CoverWidthRequest
+      {
+         get { return this._CoverWidthRequest; }
+         set { this.SetProperty(ref this._CoverWidthRequest, value); }
+      }
+      #endregion
 
       #region OnSizeChanged
-      private enum ScrennOrientationEnum : short { Portrait, Landscape };
+      // private enum ScreenOrientation : short { Portrait, Landscape };
       private void OnSizeChanged(object sender, EventArgs e)
       {
-         var screenOrientation = (this.ScreenSize.Width > this.ScreenSize.Height ? ScrennOrientationEnum.Landscape : ScrennOrientationEnum.Portrait);
+         // var screenOrientation = (this.ScreenSize.Width > this.ScreenSize.Height ? ScreenOrientation.Landscape : ScreenOrientation.Portrait);
+         var fileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)120);
 
-         if (Device.Idiom == TargetIdiom.Phone)
-         {
-            this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 3 : 5);
-            this.Data.FolderColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 2 : 3);
-         }
-         else if (Device.Idiom == TargetIdiom.Tablet)
-         {
-            this.Data.FileColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 5 : 7);
-            this.Data.FolderColumns = (screenOrientation == ScrennOrientationEnum.Portrait ? 3 : 4);
-         }
-         else if (Device.Idiom == TargetIdiom.Desktop)
-         {
-            this.Data.FileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)100);
-            this.Data.FolderColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)240);
-         }
-         else
-         {
-            this.Data.FileColumns = 10;
-            this.Data.FolderColumns = 6;
-         }
+         //if (Device.Idiom == TargetIdiom.Phone)
+         //{ fileColumns = (screenOrientation == ScreenOrientation.Portrait ? 3 : 5); }
+         //else if (Device.Idiom == TargetIdiom.Tablet)
+         //{ fileColumns = (screenOrientation == ScreenOrientation.Portrait ? 5 : 7); }
 
-         this.Data.FileHeightRequest = this.ScreenSize.Width / (double)this.Data.FileColumns * (double)1.30;
-         this.Data.FolderHeightRequest = this.ScreenSize.Width / (double)this.Data.FolderColumns * (double)0.60;
+         this.CoverWidthRequest = (int)this.ScreenSize.Width / fileColumns;
       }
       #endregion
 
