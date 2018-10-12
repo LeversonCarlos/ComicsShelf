@@ -16,7 +16,7 @@ namespace ComicsShelf.UWP
             /* STORAGE QUERY */
             var fileTypeFilter = new System.Collections.Generic.List<string>();
             fileTypeFilter.Add(".cbz");
-            fileTypeFilter.Add(".cbr");
+         /* fileTypeFilter.Add(".cbr"); */
             var queryOptions = new Windows.Storage.Search.QueryOptions(Windows.Storage.Search.CommonFileQuery.OrderByName, fileTypeFilter);
 
             /* LOCATE FILES */

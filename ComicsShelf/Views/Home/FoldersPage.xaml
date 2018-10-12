@@ -30,11 +30,7 @@
                IsVisible="{Binding NotifyData.IsRunning}" 
                Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
             </controls:ProgressView>
-
-            <StackLayout IsVisible="{Binding Data.NoComics}" VerticalOptions="FillAndExpand" Padding="10,80" >
-               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" TextColor="{StaticResource colorAccent}" />
-               <Label Text="{controls:Translate Text=HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small" />
-            </StackLayout>
+            <controls:EmptyLibraryView IsVisible="{Binding Data.NoComics}" ></controls:EmptyLibraryView>
 
          </StackLayout>
       </ScrollView>

@@ -14,8 +14,9 @@ namespace ComicsShelf.Droid
             var fileList = System.IO.Directory
                .EnumerateFiles(path, "*.*", System.IO.SearchOption.AllDirectories)
                .Where(x =>
-                  x.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase) ||
-                  x.EndsWith(".cbr", StringComparison.OrdinalIgnoreCase))
+                  x.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase) 
+            /* || x.EndsWith(".cbr", StringComparison.OrdinalIgnoreCase) */
+               )
                .ToList();
 
             var folderPath = $"{path}{this.PathSeparator}";
