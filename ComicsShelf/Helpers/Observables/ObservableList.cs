@@ -73,7 +73,7 @@ namespace ComicsShelf.Helpers.Observables
       #endregion
 
       #region ObservableCollectionChangedAnalysis
-      public event EventHandler ObservableCollectionChanged;
+      public event NotifyCollectionChangedEventHandler ObservableCollectionChanged;
       private void RefreshAnalysis(NotifyCollectionChangedAction changedAction)
       {
          if (this.ObservableCollectionChanged != null)
@@ -86,21 +86,23 @@ namespace ComicsShelf.Helpers.Observables
                {
                   Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                   {
-                     this.ObservableCollectionChanged(this, EventArgs.Empty);
+                     this.ObservableCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                   });
                }
             });
          }
       }
       public void RefreshNow()
-      { this.ObservableCollectionChanged?.Invoke(this, EventArgs.Empty); }
+      { this.ObservableCollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); }
       #endregion
 
    }
 
    public interface INotifyObservableCollectionChanged
    {
-      event EventHandler ObservableCollectionChanged;
+      // object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e
+      event NotifyCollectionChangedEventHandler ObservableCollectionChanged;
+      // event EventHandler ObservableCollectionChanged;
    }
 
 }

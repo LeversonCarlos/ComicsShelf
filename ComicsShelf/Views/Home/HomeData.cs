@@ -9,13 +9,13 @@ namespace ComicsShelf.Views.Home
       public HomeData() : base(new Helpers.Database.ComicFolder { Text = R.Strings.AppTitle })
       {
          this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.RecentFiles.CollectionChanged += this.RecentFiles_CollectionChanged;
+         this.RecentFiles.ObservableCollectionChanged += this.RecentFiles_CollectionChanged;
 
          this.ReadingFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.ReadingFiles.CollectionChanged += this.ReadingFiles_CollectionChanged;
+         this.ReadingFiles.ObservableCollectionChanged += this.ReadingFiles_CollectionChanged;
 
          this.TopRatedFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.TopRatedFiles.CollectionChanged += this.TopRatedFiles_CollectionChanged;
+         this.TopRatedFiles.ObservableCollectionChanged += this.TopRatedFiles_CollectionChanged;
 
          this.Files.ObservableCollectionChanged += this.Files_CollectionChanged;
       }
@@ -98,14 +98,9 @@ namespace ComicsShelf.Views.Home
             if (this.Files.Count != 0)
             { this.Files.ReplaceRange(new List<File.FileData>()); }
 
-            if (this.ReadingFiles.Count != 0)
-            { this.ReadingFiles.Clear(); this.HasReadingFiles = false; }
-
-            if (this.RecentFiles.Count != 0)
-            { this.RecentFiles.Clear(); this.HasRecentFiles = false; }
-
-            if (this.TopRatedFiles.Count != 0)
-            { this.TopRatedFiles.Clear(); this.HasTopRatedFiles = false; }
+            if (this.ReadingFiles.Count != 0) { this.ReadingFiles.Clear(); }
+            if (this.RecentFiles.Count != 0) { this.RecentFiles.Clear(); }
+            if (this.TopRatedFiles.Count != 0) { this.TopRatedFiles.Clear(); }
 
          }
          catch { }

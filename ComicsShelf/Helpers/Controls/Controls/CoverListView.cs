@@ -47,7 +47,7 @@ namespace ComicsShelf.Helpers.Controls
          var itemsSource = (this.ItemsSource as Observables.INotifyObservableCollectionChanged);
          if (itemsSource != null) {
             itemsSource.ObservableCollectionChanged +=
-               (object sender, EventArgs e) => { this.ItemsRefresh(); };
+               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => { this.ItemsRefresh(); };
          }
 
       }
