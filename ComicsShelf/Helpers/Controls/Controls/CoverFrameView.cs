@@ -17,7 +17,12 @@ namespace ComicsShelf.Helpers.Controls
          // this.WidthRequest = 100;
 
          this.Image = new Image
-         { VerticalOptions = LayoutOptions.Start, Margin = new Thickness(5, 5, 5, 0), Aspect = Aspect.AspectFit };
+         {
+            VerticalOptions = LayoutOptions.Start,
+          /*MinimumHeightRequest = 165,*/
+            Margin = new Thickness(5, 5, 5, 0),
+            Aspect = Aspect.AspectFit
+         };
 
          this.Label = new Label
          {
