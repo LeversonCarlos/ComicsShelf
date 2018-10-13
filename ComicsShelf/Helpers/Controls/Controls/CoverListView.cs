@@ -81,8 +81,8 @@ namespace ComicsShelf.Helpers.Controls
 
                // ATTACH GESTURE
                itemView?.GestureRecognizers.Add(new TapGestureRecognizer {
-                  Command = this.ItemTappedCommand,
-                  CommandParameter = item,
+                  Command = this.ItemTappedTransition,
+                  CommandParameter = itemView,
                   NumberOfTapsRequired = 1
                });
 
@@ -95,9 +95,25 @@ namespace ComicsShelf.Helpers.Controls
       #endregion
 
 
+      #region ItemTappedTransition
+      private ICommand ItemTappedTransition
+      {
+         get
+         {
+            return new Command(async (commandParameter) =>
+            {
+               var itemView = (View)commandParameter;
+               await itemView.FadeTo(0.5, 050, Easing.SinIn);
+               await itemView.FadeTo(1.0, 250, Easing.SinOut);
+               await System.Threading.Tasks.Task.Run(() => Xamarin.Forms.Device.BeginInvokeOnMainThread(() => this.ItemTappedCommand?.Execute(itemView.BindingContext)));
+            });
+         }
+      }
+      #endregion
+
       #region ItemTappedCommand
       public static readonly BindableProperty ItemTappedCommandProperty =
-         BindableProperty.Create("ItemTappedCommand", typeof(ICommand), typeof(ListView), null);
+         BindableProperty.Create("ItemTappedCommand", typeof(ICommand), typeof(CoverListView), null);
       public ICommand ItemTappedCommand
       {
          get { return (ICommand)GetValue(ItemTappedCommandProperty); }

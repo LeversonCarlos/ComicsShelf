@@ -14,11 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Helpers\Controls\Controls\CoverFrameView.Empty.png" />
     <None Remove="Helpers\Controls\RatingView.EmptyStar.png" />
     <None Remove="Helpers\Controls\RatingView.FullStar.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Helpers\Controls\Controls\CoverFrameView.Empty.png" />
     <EmbeddedResource Include="Helpers\Controls\RatingView.EmptyStar.png" />
     <EmbeddedResource Include="Helpers\Controls\RatingView.FullStar.png" />
   </ItemGroup>

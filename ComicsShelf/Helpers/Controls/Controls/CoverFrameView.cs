@@ -23,6 +23,8 @@ namespace ComicsShelf.Helpers.Controls
             Margin = new Thickness(5, 5, 5, 0),
             Aspect = Aspect.AspectFit
          };
+         var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+         this.Image.Source = ImageSource.FromResource("ComicsShelf.Helpers.Controls.Controls.CoverFrameView.Empty.png", executingAssembly);
 
          this.Label = new Label
          {
