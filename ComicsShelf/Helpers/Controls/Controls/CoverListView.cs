@@ -103,8 +103,8 @@ namespace ComicsShelf.Helpers.Controls
             return new Command(async (commandParameter) =>
             {
                var itemView = (View)commandParameter;
-               await itemView.FadeTo(0.5, 050, Easing.SinIn);
-               await itemView.FadeTo(1.0, 250, Easing.SinOut);
+               await itemView.FadeTo(0.5, 100, Easing.SinOut);
+               await itemView.FadeTo(1.0, 400, Easing.SinIn);
                await System.Threading.Tasks.Task.Run(() => Xamarin.Forms.Device.BeginInvokeOnMainThread(() => this.ItemTappedCommand?.Execute(itemView.BindingContext)));
             });
          }

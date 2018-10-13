@@ -87,7 +87,11 @@ namespace ComicsShelf.Helpers.Controls
       {      
          this.Aspect = Aspect.AspectFit;
          var tapGesture = new TapGestureRecognizer();
-         tapGesture.Tapped += (object sender, EventArgs e) => { this.RatingButtonTapped(this.Stars); };
+         tapGesture.Tapped += async (object sender, EventArgs e) => {
+            await this.FadeTo(0.5, 100, Easing.SinOut);
+            await this.FadeTo(1.0, 400, Easing.SinIn);
+            this.RatingButtonTapped(this.Stars);
+         };
          this.GestureRecognizers.Add(tapGesture);
       }
    }
