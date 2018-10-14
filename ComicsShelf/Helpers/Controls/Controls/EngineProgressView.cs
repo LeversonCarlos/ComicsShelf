@@ -2,10 +2,10 @@
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class ProgressView : StackLayout
+   public class EngineProgressView : StackLayout
    {
 
-      public ProgressView()
+      public EngineProgressView()
       {
          this.VerticalOptions = LayoutOptions.FillAndExpand;
          this.Padding = new Thickness(10);
@@ -43,7 +43,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(TextProperty, value); }
       }
       private static void OnTextChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as ProgressView).TextLabel.Text = (string)newValue; }
+      { (bindable as EngineProgressView).TextLabel.Text = (string)newValue; }
       #endregion
 
       #region Progress
@@ -57,7 +57,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ProgressProperty, value); }
       }
       private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as ProgressView).ProgressBar.Progress = (double)newValue; }
+      { (bindable as EngineProgressView).ProgressBar.Progress = (double)newValue; }
       #endregion
 
       #region Details
@@ -71,7 +71,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(DetailsProperty, value); }
       }
       private static void OnDetailsChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as ProgressView).DetailsLabel.Text = (string)newValue; }
+      { (bindable as EngineProgressView).DetailsLabel.Text = (string)newValue; }
       #endregion
 
    }
