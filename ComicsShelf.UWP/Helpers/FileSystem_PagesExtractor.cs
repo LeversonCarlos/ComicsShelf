@@ -50,17 +50,27 @@ namespace ComicsShelf.UWP
                      pageIndex++;
 
                      // EXTRACT PAGE IMAGE
-                     if (System.IO.File.Exists(pagePath)) { continue; }
-                     using (var zipEntryStream = zipEntry.Open())
+                     if (!System.IO.File.Exists(pagePath))
                      {
-                        using (var thumbnailFile = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
+                        using (var zipEntryStream = zipEntry.Open())
                         {
-                           await zipEntryStream.CopyToAsync(thumbnailFile);
-                           await thumbnailFile.FlushAsync();
-                           thumbnailFile.Close();
-                           thumbnailFile.Dispose();
+                           using (var thumbnailFile = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
+                           {
+                              await zipEntryStream.CopyToAsync(thumbnailFile);
+                              await thumbnailFile.FlushAsync();
+                              thumbnailFile.Close();
+                              thumbnailFile.Dispose();
+                           }
                         }
                      }
+
+                     // IMAGE SIZE
+                     /*
+                     using (var bitmap = await System.Drawing.Image(pagePath))
+                     {
+                        pageData.Size = new Xamarin.Forms.Size(bitmap.Width, bitmap.Height);
+                     }
+                     */
 
                   }
 

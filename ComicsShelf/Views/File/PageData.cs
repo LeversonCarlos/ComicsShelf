@@ -21,6 +21,15 @@
       }
       #endregion
 
+      #region Size
+      Helpers.Controls.PageSize _Size;
+      public Helpers.Controls.PageSize Size
+      {
+         get { return this._Size; }
+         set { this.SetProperty(ref this._Size, value); }
+      }
+      #endregion
+
       #region IsVisible
       bool _IsVisible;
       public bool IsVisible

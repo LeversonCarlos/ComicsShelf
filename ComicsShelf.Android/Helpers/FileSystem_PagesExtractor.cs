@@ -47,11 +47,6 @@ namespace ComicsShelf.Droid
                      var pageIndexText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
                      var pagePath = $"{cachePath}{settings.Paths.Separator}P{pageIndexText}.jpg";
                      var pageData = new Views.File.PageData { Page = pageIndex, Path = pagePath, IsVisible = false };
-                     fileData.Pages.Add(pageData);
-                     pageIndex++;
-
-                     // CHECK IF IMAGE ALREADY EXISTS
-                     if (System.IO.File.Exists(pagePath)) { continue; }
 
                      // OPEN STREAM
                      /*
@@ -90,16 +85,27 @@ namespace ComicsShelf.Droid
                      */
 
                      // SIMPLE EXACT FILE 
-                     using (var zipEntryStream = zipEntry.Open())
-                     {
-                        using (var thumbnailFile = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
+                     if (!System.IO.File.Exists(pagePath)) {
+                        using (var zipEntryStream = zipEntry.Open())
                         {
-                           await zipEntryStream.CopyToAsync(thumbnailFile);
-                           await thumbnailFile.FlushAsync();
-                           thumbnailFile.Close();
-                           thumbnailFile.Dispose();
+                           using (var thumbnailFile = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
+                           {
+                              await zipEntryStream.CopyToAsync(thumbnailFile);
+                              await thumbnailFile.FlushAsync();
+                              thumbnailFile.Close();
+                              thumbnailFile.Dispose();
+                           }
                         }
                      }
+
+                     // IMAGE SIZE
+                     using (var bitmap = await Android.Graphics.BitmapFactory.DecodeFileAsync(pagePath))
+                     {
+                        pageData.Size = new Helpers.Controls.PageSize(bitmap.Width, bitmap.Height);
+                     }
+
+                     fileData.Pages.Add(pageData);
+                     pageIndex++;
 
                   }
 
