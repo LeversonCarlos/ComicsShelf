@@ -10,13 +10,17 @@ namespace ComicsShelf.Helpers.Controls
       #region New
       public PageImage()
       {
+         // this.BackgroundColor = Color.Red;
          this.Content = new Image
          {
+            // BackgroundColor = Color.Green,
             Aspect = Aspect.AspectFit,
             HorizontalOptions = LayoutOptions.FillAndExpand,
             VerticalOptions = LayoutOptions.FillAndExpand,
             InputTransparent = false
          };
+         this.HorizontalOptions = LayoutOptions.FillAndExpand;
+         this.VerticalOptions = LayoutOptions.FillAndExpand;
          this.Orientation = ScrollOrientation.Horizontal;
 
          // var tapGesture = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
@@ -31,13 +35,9 @@ namespace ComicsShelf.Helpers.Controls
       }
       #endregion
 
-
       #region ScreenSize
-      /*
-       Size ImageSize { get; set; }
-
       public static readonly BindableProperty ScreenSizeProperty =
-         BindableProperty.Create("ScreenSize", typeof(Size), typeof(PageReaderImage), Size.Zero,
+         BindableProperty.Create("ScreenSize", typeof(Size), typeof(PageImage), Size.Zero,
          propertyChanged: OnScreenSizeChanged, defaultBindingMode: BindingMode.TwoWay);
       public Size ScreenSize
       {
@@ -45,31 +45,50 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ScreenSizeProperty, value); }
       }
       private static void OnScreenSizeChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as PageImage).ScreenSizeChanged(); }
+
+      private void ScreenSizeChanged()
       {
          try
          {
-            var VIEW = bindable as PageReaderImage;
-            var SIZE = (Size)newValue;
-            VIEW.ReviewScreenOrientation();
+            if (this.ImageSize == null || this.ImageSize.IsZero()) { return; }
+            if (this.ScreenSize.Height >= this.ScreenSize.Width)
+            {
+               if (this.ImageSize.Orientation == PageSize.OrientationEnum.Portrait)
+               {
+                  this.HeightRequest = this.ScreenSize.Height;
+                  this.WidthRequest = this.ScreenSize.Width;
+               }
+               else if (this.ImageSize.Orientation == PageSize.OrientationEnum.Landscape)
+               {
+                  this.HeightRequest = this.ScreenSize.Height;
+                  this.WidthRequest = this.ScreenSize.Height * (this.ImageSize.Width / this.ImageSize.Height);
+               }
+               this.Orientation = ScrollOrientation.Horizontal;
+            }
+            else if (this.ScreenSize.Height < this.ScreenSize.Width)
+            {
+               if (this.ImageSize.Orientation == PageSize.OrientationEnum.Landscape)
+               {
+                  this.WidthRequest = this.ScreenSize.Width;
+                  this.HeightRequest = this.ScreenSize.Height;
+               }
+               else if (this.ImageSize.Orientation == PageSize.OrientationEnum.Portrait)
+               {
+                  this.WidthRequest = this.ScreenSize.Width;
+                  this.HeightRequest = this.ScreenSize.Width * (this.ImageSize.Height / this.ImageSize.Width);
+               }
+               this.Orientation = ScrollOrientation.Vertical;
+            }
+
+            var image = (this.Content as Image);
+            image.WidthRequest = this.WidthRequest;
+            image.HeightRequest = this.HeightRequest;
+            this.LayoutTo(new Rectangle(0, 0, this.WidthRequest, this.HeightRequest));
+
          }
          catch { }
-      }
-      private void ReviewScreenOrientation()
-      {
-         return;
-         // / *
-         if (this.ImageSize == Size.Zero) { return; }
-         if (this.ScreenSize.Height >= this.ScreenSize.Width)
-         { this.Orientation = ScrollOrientation.Horizontal; }
-         else
-         { this.Orientation = ScrollOrientation.Vertical; }
-         this.Image.ReloadImage();
-         this.Image.AnchorX = 0.5;
-         this.Image.AnchorY = 0.5;
-         this.ForceLayout();
-         // * /
-      }
-      */
+      }      
       #endregion
 
 
@@ -106,6 +125,17 @@ namespace ComicsShelf.Helpers.Controls
       }
       #endregion
 
+      #region ImageSize
+      public static readonly BindableProperty ImageSizeProperty =
+         BindableProperty.Create("ImageSize", typeof(PageSize), typeof(PageImage), PageSize.Zero,
+         defaultBindingMode: BindingMode.TwoWay);
+      public PageSize ImageSize
+      {
+         get { return (PageSize)GetValue(ImageSizeProperty); }
+         set { SetValue(ImageSizeProperty, value); }
+      }
+      #endregion
+
       #region ImageRefresh
       private void ImageRefresh()
       {
@@ -119,6 +149,7 @@ namespace ComicsShelf.Helpers.Controls
          catch { }
       }
       #endregion
+
 
       #region OnDoubleTapped
       /*
