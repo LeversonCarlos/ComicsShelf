@@ -65,12 +65,12 @@ namespace ComicsShelf.UWP
                      }
 
                      // IMAGE SIZE
-                     /*
-                     using (var bitmap = await System.Drawing.Image(pagePath))
-                     {
-                        pageData.Size = new Xamarin.Forms.Size(bitmap.Width, bitmap.Height);
-                     }
-                     */
+                     var pageUri = new Uri(pagePath);
+                     var pageStorageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(pagePath);
+                     var pageProperties = await pageStorageFile.Properties.GetImagePropertiesAsync();
+                     pageData.Size = new Helpers.Controls.PageSize(pageProperties.Width, pageProperties.Height);
+                     pageProperties = null;
+                     pageStorageFile = null;
 
                   }
 
