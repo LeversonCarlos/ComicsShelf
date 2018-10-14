@@ -7,24 +7,25 @@
    x:Class="ComicsShelf.Views.File.PageView"
    x:Name="MyPage">
    <controls:BasePage.Content>
-      <controls:PagesSwipeView 
-         ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" 
-         ArrowsBackgroundColor="{StaticResource colorLighter}">
-         <controls:PagesSwipeView.ItemTemplate>
-            <DataTemplate>
-               <AbsoluteLayout>
+      <AbsoluteLayout>
+         <controls:PagesSwipeView 
+            AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+            ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" 
+            ArrowsBackgroundColor="{StaticResource colorLighter}">
+            <controls:PagesSwipeView.ItemTemplate>
+               <DataTemplate>
                   <controls:PageImage 
-                     ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" 
-                     AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                     <!-- ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" -->
+                     ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding Size}" 
+                     ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" >
                   </controls:PageImage>
-                  <ContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" HorizontalOptions="FillAndExpand" VerticalOptions="End" BindingContext="{Binding BindingContext, Source={x:Reference Name=MyPage}}" >
-                     <controls:PageStats ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" >
-                     </controls:PageStats>
-                  </ContentView>
-               </AbsoluteLayout>
-            </DataTemplate>
-         </controls:PagesSwipeView.ItemTemplate>
-      </controls:PagesSwipeView>
+               </DataTemplate>
+            </controls:PagesSwipeView.ItemTemplate>
+         </controls:PagesSwipeView>
+         <ContentView 
+            AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" 
+            HorizontalOptions="FillAndExpand" VerticalOptions="End" >
+            <controls:PageStats ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" />
+         </ContentView>
+      </AbsoluteLayout>
    </controls:BasePage.Content>
 </controls:BasePage>
