@@ -3,12 +3,12 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class PageImage : ScrollView
+   public class PageImageView : ScrollView
    {
       // PanGestureRecognizer panGesture;
 
       #region New
-      public PageImage()
+      public PageImageView()
       {
          this.Content = new Image
          {
@@ -36,7 +36,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ScreenSize
       public static readonly BindableProperty ScreenSizeProperty =
-         BindableProperty.Create("ScreenSize", typeof(Size), typeof(PageImage), Size.Zero,
+         BindableProperty.Create("ScreenSize", typeof(Size), typeof(PageImageView), Size.Zero,
          propertyChanged: OnScreenSizeChanged, defaultBindingMode: BindingMode.TwoWay);
       public Size ScreenSize
       {
@@ -44,7 +44,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ScreenSizeProperty, value); }
       }
       private static void OnScreenSizeChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImage).OnImageResize(); }
+      { (bindable as PageImageView).OnImageResize(); }
       #endregion
 
       #region ImageSource
@@ -57,7 +57,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ImagePath
       public static readonly BindableProperty ImagePathProperty =
-         BindableProperty.Create("ImagePath", typeof(string), typeof(PageImage), string.Empty,
+         BindableProperty.Create("ImagePath", typeof(string), typeof(PageImageView), string.Empty,
          propertyChanged: OnImagePathChanged, defaultBindingMode: BindingMode.TwoWay);
       public string ImagePath
       {
@@ -70,7 +70,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ImageLoaded
       public static readonly BindableProperty ImageLoadedProperty =
-         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageImage), false,
+         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageImageView), false,
          propertyChanged: OnImageLoadedChanged, defaultBindingMode: BindingMode.TwoWay);
       public bool ImageLoaded
       {
@@ -78,12 +78,12 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ImageLoadedProperty, value); }
       }
       private static void OnImageLoadedChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImage).OnImageRefresh(); }
+      { (bindable as PageImageView).OnImageRefresh(); }
       #endregion
 
       #region ImageSize
       public static readonly BindableProperty ImageSizeProperty =
-         BindableProperty.Create("ImageSize", typeof(PageSize), typeof(PageImage), PageSize.Zero,
+         BindableProperty.Create("ImageSize", typeof(PageSize), typeof(PageImageView), PageSize.Zero,
          propertyChanged: OnImageSizeChanged, defaultBindingMode: BindingMode.TwoWay);
       public PageSize ImageSize
       {
@@ -91,7 +91,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ImageSizeProperty, value); }
       }
       private static void OnImageSizeChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImage).OnImageResize(); }
+      { (bindable as PageImageView).OnImageResize(); }
       #endregion
 
 

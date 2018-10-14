@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class PageStats: StackLayout
+   public class PageStatsView: StackLayout
    {
 
       public ProgressBar readingProgress { get; set; }
       public Label readingText { get; set; }
 
       #region New
-      public PageStats()
+      public PageStatsView()
       {
          this.readingProgress = new ProgressBar { HorizontalOptions = LayoutOptions.Fill, HeightRequest = 5 };
          this.Children.Add(this.readingProgress);
@@ -33,7 +30,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ReadingPage
       public static readonly BindableProperty ReadingPageProperty =
-         BindableProperty.Create("ReadingPage", typeof(short), typeof(PageStats), (short)0,
+         BindableProperty.Create("ReadingPage", typeof(short), typeof(PageStatsView), (short)0,
          propertyChanged: OnReadingPageChanged, defaultBindingMode: BindingMode.TwoWay);
       public short ReadingPage
       {
@@ -42,7 +39,7 @@ namespace ComicsShelf.Helpers.Controls
       }
       private static void OnReadingPageChanged(BindableObject bindable, object oldValue, object newValue)
       {
-         var self = (bindable as PageStats);
+         var self = (bindable as PageStatsView);
          self.readingText.Text = ((short)newValue).ToString();
          self.FadeTo(1.0, 250, Easing.SinIn)
             .ContinueWith((task1)=> {
@@ -56,7 +53,7 @@ namespace ComicsShelf.Helpers.Controls
 
       #region ReadingPercent
       public static readonly BindableProperty ReadingPercentProperty =
-         BindableProperty.Create("ReadingPercent", typeof(double), typeof(PageStats), (double)0,
+         BindableProperty.Create("ReadingPercent", typeof(double), typeof(PageStatsView), (double)0,
          propertyChanged: OnReadingPercentChanged, defaultBindingMode: BindingMode.TwoWay);
       public double ReadingPercent
       {
@@ -64,7 +61,7 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ReadingPercentProperty, value); }
       }
       private static void OnReadingPercentChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageStats).readingProgress.Progress = (double)newValue; }
+      { (bindable as PageStatsView).readingProgress.Progress = (double)newValue; }
       #endregion
 
    }

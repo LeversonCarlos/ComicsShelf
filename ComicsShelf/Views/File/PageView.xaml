@@ -13,17 +13,17 @@
             ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" >
             <controls:PagesSwipeView.ItemTemplate>
                <DataTemplate>
-                  <controls:PageImage 
+                  <controls:PageImageView 
                      ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding Size}" 
                      ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" >
-                  </controls:PageImage>
+                  </controls:PageImageView>
                </DataTemplate>
             </controls:PagesSwipeView.ItemTemplate>
          </controls:PagesSwipeView>
          <ContentView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" 
             HorizontalOptions="FillAndExpand" VerticalOptions="End" >
-            <controls:PageStats ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" />
+            <controls:PageStatsView ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" />
          </ContentView>
       </AbsoluteLayout>
    </controls:BasePage.Content>
