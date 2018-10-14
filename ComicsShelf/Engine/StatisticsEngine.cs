@@ -34,7 +34,7 @@ namespace ComicsShelf.Engine
                .ToList();
             App.HomeData.RecentFiles.ReplaceRange(recentFiles);
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
@@ -80,7 +80,7 @@ namespace ComicsShelf.Engine
             App.HomeData.TopRatedFiles.ReplaceRange(topRatedFiles);
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
@@ -144,7 +144,7 @@ namespace ComicsShelf.Engine
             App.HomeData.ReadingFiles.ReplaceRange(readingFiles);
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
