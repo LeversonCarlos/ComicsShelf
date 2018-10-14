@@ -51,18 +51,11 @@ namespace ComicsShelf.Views.Folder
       #endregion
 
       #region OnSizeChanged
-      // private enum ScreenOrientation : short { Portrait, Landscape };
       private void OnSizeChanged(object sender, EventArgs e)
       {
-         // var screenOrientation = (this.ScreenSize.Width > this.ScreenSize.Height ? ScreenOrientation.Landscape : ScreenOrientation.Portrait);
-         var fileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)120);
-
-         //if (Device.Idiom == TargetIdiom.Phone)
-         //{ fileColumns = (screenOrientation == ScreenOrientation.Portrait ? 3 : 5); }
-         //else if (Device.Idiom == TargetIdiom.Tablet)
-         //{ fileColumns = (screenOrientation == ScreenOrientation.Portrait ? 5 : 7); }
-
-         this.CoverWidthRequest = (int)this.ScreenSize.Width / fileColumns;
+         var fileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)130);
+         var frameMargins = (double)((fileColumns + 1) * 10);
+         this.CoverWidthRequest = (this.ScreenSize.Width - frameMargins) / (double)fileColumns;
       }
       #endregion
 

@@ -19,7 +19,6 @@ namespace ComicsShelf.Helpers.Controls
          this.Image = new Image
          {
             VerticalOptions = LayoutOptions.Start,
-          /*MinimumHeightRequest = 165,*/
             Margin = new Thickness(5, 5, 5, 0),
             Aspect = Aspect.AspectFit
          };
@@ -31,6 +30,7 @@ namespace ComicsShelf.Helpers.Controls
             HorizontalOptions = LayoutOptions.Center,
             LineBreakMode = LineBreakMode.MiddleTruncation,
             FontAttributes = FontAttributes.Bold,
+            Margin = new Thickness(5,0), 
             FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label))
          };
 
