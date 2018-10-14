@@ -8,7 +8,7 @@ namespace ComicsShelf.Helpers.Controls
       public NavPage() : base(new InitialPage())
       {
          this.BarTextColor = Color.White;
-         this.BarBackgroundColor = (Color)Application.Current.Resources["colorPrimary"];
+         this.BarBackgroundColor = Colors.Primary;
       }
    }
 

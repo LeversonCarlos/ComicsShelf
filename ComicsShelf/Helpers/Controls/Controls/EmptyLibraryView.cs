@@ -15,7 +15,7 @@ namespace ComicsShelf.Helpers.Controls
             HorizontalOptions = LayoutOptions.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
-            TextColor = Color.Black /* colorAccent */
+            TextColor = Colors.Accent
          });
 
          this.Children.Add(new Label
@@ -24,7 +24,7 @@ namespace ComicsShelf.Helpers.Controls
             HorizontalOptions = LayoutOptions.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-            TextColor = Color.DimGray /* colorAccent */
+            TextColor = Colors.Accent
          });
 
       }

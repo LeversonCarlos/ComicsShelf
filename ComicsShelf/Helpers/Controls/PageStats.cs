@@ -22,7 +22,7 @@ namespace ComicsShelf.Helpers.Controls
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.End,
             Padding = 2,
-            BackgroundColor = (Color)Application.Current.Resources["colorLighter"],
+            BackgroundColor = Colors.Lighter,
             Content = this.readingText
          });
          this.Margin = 0;

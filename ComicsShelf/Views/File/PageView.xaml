@@ -10,8 +10,7 @@
       <AbsoluteLayout>
          <controls:PagesSwipeView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
-            ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" 
-            ArrowsBackgroundColor="{StaticResource colorLighter}">
+            ItemsSource="{Binding Data.Pages}" Position="{Binding ReadingPage}" >
             <controls:PagesSwipeView.ItemTemplate>
                <DataTemplate>
                   <controls:PageImage 

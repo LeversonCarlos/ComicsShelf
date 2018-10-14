@@ -7,11 +7,7 @@
       <ResourceDictionary>
 
          <!-- COLORS -->
-         <Color x:Key="colorPrimary">#FF5722</Color>
-         <Color x:Key="colorLighter">#ff8a50</Color>
-         <Color x:Key="colorDarker">#c41c00</Color>
          <Color x:Key="colorAccent">#536DFE</Color>
-         <Color x:Key="colorGray">#9E9E9E</Color>
          <Color x:Key="colorLightGray">#BDBDBD</Color>
          <Color x:Key="colorBackground">#EEEEEE</Color>
 
@@ -52,10 +48,6 @@
          </Style>
 
          <!-- BASE -->
-         <Style TargetType="Button">
-            <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
-            <Setter Property="TextColor" Value="#ffffff" />
-         </Style>
          <Style TargetType="ProgressBar">
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="HeightRequest" Value="5" />

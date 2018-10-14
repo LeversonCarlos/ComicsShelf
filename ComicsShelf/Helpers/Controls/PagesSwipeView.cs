@@ -12,6 +12,7 @@ namespace ComicsShelf.Helpers.Controls
          this.ShowArrows = true;
          this.LastPosition = -1;
          this.PositionSelected += this.OnPositionSelected;
+         this.ArrowsBackgroundColor = Colors.Lighter;
       }
 
       int LastPosition { get; set; }
