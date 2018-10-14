@@ -63,10 +63,10 @@
                </controls:CoverListView>
             </StackLayout>
 
-            <controls:ProgressView 
+            <controls:EngineProgressView
                IsVisible="{Binding NotifyData.IsRunning}" 
                Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
-            </controls:ProgressView>
+            </controls:EngineProgressView>
             <controls:EmptyLibraryView IsVisible="{Binding Data.NoComics}" ></controls:EmptyLibraryView>
 
          </StackLayout>
