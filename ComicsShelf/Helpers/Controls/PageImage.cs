@@ -10,17 +10,15 @@ namespace ComicsShelf.Helpers.Controls
       #region New
       public PageImage()
       {
-         // this.BackgroundColor = Color.Red;
          this.Content = new Image
          {
-            // BackgroundColor = Color.Green,
             Aspect = Aspect.AspectFit,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            VerticalOptions = LayoutOptions.FillAndExpand,
+            // HorizontalOptions = LayoutOptions.FillAndExpand,
+            // VerticalOptions = LayoutOptions.FillAndExpand,
             InputTransparent = false
          };
-         this.HorizontalOptions = LayoutOptions.FillAndExpand;
-         this.VerticalOptions = LayoutOptions.FillAndExpand;
+         // this.HorizontalOptions = LayoutOptions.FillAndExpand;
+         // this.VerticalOptions = LayoutOptions.FillAndExpand;
          this.Orientation = ScrollOrientation.Horizontal;
 
          // var tapGesture = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
@@ -35,6 +33,7 @@ namespace ComicsShelf.Helpers.Controls
       }
       #endregion
 
+
       #region ScreenSize
       public static readonly BindableProperty ScreenSizeProperty =
          BindableProperty.Create("ScreenSize", typeof(Size), typeof(PageImage), Size.Zero,
@@ -45,9 +44,73 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ScreenSizeProperty, value); }
       }
       private static void OnScreenSizeChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImage).ScreenSizeChanged(); }
+      { (bindable as PageImage).OnImageResize(); }
+      #endregion
 
-      private void ScreenSizeChanged()
+      #region ImageSource
+      public ImageSource ImageSource
+      {
+         get { return (this.Content as Image).Source; }
+         set { (this.Content as Image).Source = value; }
+      }
+      #endregion
+
+      #region ImagePath
+      public static readonly BindableProperty ImagePathProperty =
+         BindableProperty.Create("ImagePath", typeof(string), typeof(PageImage), string.Empty,
+         propertyChanged: OnImagePathChanged, defaultBindingMode: BindingMode.TwoWay);
+      public string ImagePath
+      {
+         get { return (string)GetValue(ImagePathProperty); }
+         set { SetValue(ImagePathProperty, value); }
+      }
+      private static void OnImagePathChanged(BindableObject bindable, object oldValue, object newValue)
+      { /*(bindable as ImageView).Redraw();*/ }
+      #endregion
+
+      #region ImageLoaded
+      public static readonly BindableProperty ImageLoadedProperty =
+         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageImage), false,
+         propertyChanged: OnImageLoadedChanged, defaultBindingMode: BindingMode.TwoWay);
+      public bool ImageLoaded
+      {
+         get { return (bool)GetValue(ImageLoadedProperty); }
+         set { SetValue(ImageLoadedProperty, value); }
+      }
+      private static void OnImageLoadedChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as PageImage).OnImageRefresh(); }
+      #endregion
+
+      #region ImageSize
+      public static readonly BindableProperty ImageSizeProperty =
+         BindableProperty.Create("ImageSize", typeof(PageSize), typeof(PageImage), PageSize.Zero,
+         propertyChanged: OnImageSizeChanged, defaultBindingMode: BindingMode.TwoWay);
+      public PageSize ImageSize
+      {
+         get { return (PageSize)GetValue(ImageSizeProperty); }
+         set { SetValue(ImageSizeProperty, value); }
+      }
+      private static void OnImageSizeChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as PageImage).OnImageResize(); }
+      #endregion
+
+
+      #region OnImageRefresh
+      private void OnImageRefresh()
+      {
+         try
+         {
+            if (!this.ImageLoaded && this.ImageSource != null)
+            { this.ImageSource = null; }
+            if (this.ImageLoaded && this.ImageSource == null)
+            { this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
+         }
+         catch { }
+      }
+      #endregion
+
+      #region OnImageResize
+      private void OnImageResize()
       {
          try
          {
@@ -86,65 +149,6 @@ namespace ComicsShelf.Helpers.Controls
             image.HeightRequest = this.HeightRequest;
             this.LayoutTo(new Rectangle(0, 0, this.WidthRequest, this.HeightRequest));
 
-         }
-         catch { }
-      }      
-      #endregion
-
-
-      #region ImagePath
-      public static readonly BindableProperty ImagePathProperty =
-         BindableProperty.Create("ImagePath", typeof(string), typeof(PageImage), string.Empty,
-         propertyChanged: OnImagePathChanged, defaultBindingMode: BindingMode.TwoWay);
-      public string ImagePath
-      {
-         get { return (string)GetValue(ImagePathProperty); }
-         set { SetValue(ImagePathProperty, value); }
-      }
-      private static void OnImagePathChanged(BindableObject bindable, object oldValue, object newValue)
-      { /*(bindable as ImageView).Redraw();*/ }
-      #endregion
-
-      #region ImageLoaded
-      public static readonly BindableProperty ImageLoadedProperty =
-         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageImage), false,
-         propertyChanged: OnImageLoadedChanged, defaultBindingMode: BindingMode.TwoWay);
-      public bool ImageLoaded
-      {
-         get { return (bool)GetValue(ImageLoadedProperty); }
-         set { SetValue(ImageLoadedProperty, value); }
-      }
-      private static void OnImageLoadedChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImage).ImageRefresh(); }
-      #endregion
-
-      #region ImageSource
-      public ImageSource ImageSource {
-         get { return (this.Content as Image).Source; }
-         set { (this.Content as Image).Source = value; }
-      }
-      #endregion
-
-      #region ImageSize
-      public static readonly BindableProperty ImageSizeProperty =
-         BindableProperty.Create("ImageSize", typeof(PageSize), typeof(PageImage), PageSize.Zero,
-         defaultBindingMode: BindingMode.TwoWay);
-      public PageSize ImageSize
-      {
-         get { return (PageSize)GetValue(ImageSizeProperty); }
-         set { SetValue(ImageSizeProperty, value); }
-      }
-      #endregion
-
-      #region ImageRefresh
-      private void ImageRefresh()
-      {
-         try
-         {
-            if (!this.ImageLoaded && this.ImageSource != null)
-            { this.ImageSource = null; }
-            if (this.ImageLoaded && this.ImageSource == null)
-            { this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
          }
          catch { }
       }
