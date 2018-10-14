@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="181009" android:versionName="18.10.09" package="com.friendship.ComicsShelf">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="181011" android:versionName="18.10.11" package="com.friendship.ComicsShelf">
    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="26" />
    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
