@@ -56,6 +56,14 @@ namespace ComicsShelf.Views.File
          {
             this.Data.ReadingDate = App.Database.GetDate();
             App.Database.Update(this.Data.ComicFile);
+            if (this.Data.Pages != null && this.Data.Pages.Count != 0)
+            {
+               if (this.Data.Pages.Count(page => page.IsVisible) == 0) {
+                  var pages = this.Data.Pages.Where(page => page.Page >= (this.ReadingPage - 1) && page.Page <= (this.ReadingPage + 1)).ToList();
+                  pages.ForEach(page => page.IsVisible = true);
+                  // this.OnPropertyChanged("ReadingPage");
+               }
+            }
          }
          catch { }
       }
@@ -67,7 +75,7 @@ namespace ComicsShelf.Views.File
          try
          {
             this.Data.Pages.Where(page => page.IsVisible).ForEach(page => page.IsVisible = false);
-            this.Data.Pages.Clear();
+            // this.Data.Pages.Clear();
             GC.Collect();
          }
          catch (Exception ex) { await App.ShowMessage(ex); }

@@ -64,9 +64,5 @@ namespace ComicsShelf.Helpers.Controls
       { (bindable as PageStatsView).readingProgress.Progress = (double)newValue; }
       #endregion
 
-      #region ShowStats
-      
-      #endregion
-
    }
 }

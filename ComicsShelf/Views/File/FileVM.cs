@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -96,7 +95,7 @@ namespace ComicsShelf.Views.File
       {
          try
          {
-            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+            GC.Collect();
             Engine.Statistics.Execute();
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
