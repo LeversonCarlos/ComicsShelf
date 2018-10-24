@@ -1,4 +1,5 @@
 ﻿using CarouselView.FormsPlugin.Abstractions;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
@@ -13,6 +14,14 @@ namespace ComicsShelf.Helpers.Controls
          this.LastPosition = -1;
          this.PositionSelected += this.OnPositionSelected;
          this.ArrowsBackgroundColor = Colors.Lighter;
+
+         this.GestureRecognizers.Add(new TapGestureRecognizer
+         {
+            Command = new Command((param) =>
+            { Controls.Messaging.Send(Messaging.Keys.PageTapped); }),
+            NumberOfTapsRequired = 1
+         });
+
       }
 
       int LastPosition { get; set; }
@@ -47,6 +56,6 @@ namespace ComicsShelf.Helpers.Controls
             { positionData.IsVisible = visibility; }
          }
       }
-
+   
    }
 }

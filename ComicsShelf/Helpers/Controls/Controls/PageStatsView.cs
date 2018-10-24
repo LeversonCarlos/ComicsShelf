@@ -1,8 +1,9 @@
-﻿using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class PageStatsView: StackLayout
+   public class PageStatsView : StackLayout
    {
 
       public ProgressBar readingProgress { get; set; }
@@ -25,6 +26,8 @@ namespace ComicsShelf.Helpers.Controls
          this.Margin = 0;
          this.Padding = 0;
          this.Spacing = 0;
+
+         Messaging.Subscribe(Messaging.Keys.PageTapped, async (param) => await this.ShowStats());
       }
       #endregion
 
@@ -41,13 +44,7 @@ namespace ComicsShelf.Helpers.Controls
       {
          var self = (bindable as PageStatsView);
          self.readingText.Text = ((short)newValue).ToString();
-         self.FadeTo(1.0, 250, Easing.SinIn)
-            .ContinueWith((task1)=> {
-               System.Threading.Tasks.Task.Delay(1000)
-                  .ContinueWith((task) => {
-                     self.FadeTo(0.0, 250, Easing.SinIn);
-                  });
-            });
+         Task.Run(() => self.ShowStats());
       }
       #endregion
 
@@ -62,6 +59,25 @@ namespace ComicsShelf.Helpers.Controls
       }
       private static void OnReadingPercentChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as PageStatsView).readingProgress.Progress = (double)newValue; }
+      #endregion
+
+      #region ShowStats
+      private async Task ShowStats()
+      {
+         try
+         {
+            await this.FadeTo(1.0, 250, Easing.SinIn)
+               .ContinueWith((task1) =>
+               {
+                  Task.Delay(1000)
+                     .ContinueWith(async (task) =>
+                     {
+                        await this.FadeTo(0.0, 250, Easing.SinIn);
+                     });
+               });
+         }
+         catch { }
+      }
       #endregion
 
    }

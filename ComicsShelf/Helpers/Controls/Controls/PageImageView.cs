@@ -13,17 +13,9 @@ namespace ComicsShelf.Helpers.Controls
          this.Content = new Image
          {
             Aspect = Aspect.AspectFit,
-            // HorizontalOptions = LayoutOptions.FillAndExpand,
-            // VerticalOptions = LayoutOptions.FillAndExpand,
             InputTransparent = false
          };
-         // this.HorizontalOptions = LayoutOptions.FillAndExpand;
-         // this.VerticalOptions = LayoutOptions.FillAndExpand;
          this.Orientation = ScrollOrientation.Horizontal;
-
-         // var tapGesture = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
-         // tapGesture.Tapped += this.OnDoubleTapped;
-         // this.Image.GestureRecognizers.Add(tapGesture);
 
          // panGesture = new  PanGestureRecognizer();
          // panGesture.TouchPoints = 1;

@@ -61,7 +61,6 @@ namespace ComicsShelf.Views.File
                if (this.Data.Pages.Count(page => page.IsVisible) == 0) {
                   var pages = this.Data.Pages.Where(page => page.Page >= (this.ReadingPage - 1) && page.Page <= (this.ReadingPage + 1)).ToList();
                   pages.ForEach(page => page.IsVisible = true);
-                  // this.OnPropertyChanged("ReadingPage");
                }
             }
          }
