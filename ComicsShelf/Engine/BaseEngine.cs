@@ -1,5 +1,4 @@
 ﻿using System;
-using Xamarin.Forms;
 
 namespace ComicsShelf.Engine
 {
@@ -37,15 +36,7 @@ namespace ComicsShelf.Engine
       }
 
       protected void Notify()
-      {
-         var dataMessage = this.Data;
-         var keyMessage = BaseData.KEY;
-         Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
-            try
-            { MessagingCenter.Send(dataMessage, keyMessage); }
-            catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"MessagingCenter.Send:\n{ex.ToString()}"); }
-         });         
-      }
+      { Helpers.Controls.Messaging.Send(Helpers.Controls.Messaging.Keys.SearchEngine, this.Data); }
 
       public void Dispose()
       {

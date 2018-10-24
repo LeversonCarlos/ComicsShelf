@@ -2,7 +2,6 @@
 {
    public class BaseData : Helpers.Observables.ObservableObject
    {
-      internal const string KEY = "Engine";
 
       #region Text
       string _Text;

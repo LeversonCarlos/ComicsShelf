@@ -5,7 +5,7 @@ namespace ComicsShelf.Helpers.Controls
    internal class Messaging
     {
 
-      public enum Keys : short { PageTapped = 0 }
+      public enum Keys : short { SearchEngine = 0, PageTapped = 1 }
 
       public static void Send(Keys message)
       {
@@ -15,8 +15,19 @@ namespace ComicsShelf.Helpers.Controls
          });
       }
 
+      public static void Send<T>(Keys message, T data)
+      {
+         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+         {
+            MessagingCenter.Send<Application, T>(Application.Current, message.ToString(), data);
+         });
+      }
+
       public static void Subscribe(Keys message, System.Action<Application> callback)
       { MessagingCenter.Subscribe<Application>(Application.Current, message.ToString(), callback); }
+
+      public static void Subscribe<T>(Keys message, System.Action<T> callback)
+      { MessagingCenter.Subscribe<Application, T>(Application.Current, message.ToString(),  (app, data)=> { callback(data); }); }
 
    }
 }

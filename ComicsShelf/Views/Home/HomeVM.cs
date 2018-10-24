@@ -18,8 +18,7 @@ namespace ComicsShelf.Views.Home
          this.OpenLibraryCommand = new Command(async (item) => await this.OpenLibrary(item));
 
          this.NotifyData = new Engine.BaseData();
-         MessagingCenter.Subscribe<Engine.BaseData>(this, Engine.BaseData.KEY, (data) =>
-         {
+         Helpers.Controls.Messaging.Subscribe<Engine.BaseData>(Helpers.Controls.Messaging.Keys.SearchEngine, (data) => {
             this.NotifyData.Text = data.Text;
             this.NotifyData.Details = data.Details;
             this.NotifyData.Progress = data.Progress;
