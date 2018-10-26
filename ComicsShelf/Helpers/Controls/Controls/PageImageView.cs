@@ -151,7 +151,7 @@ namespace ComicsShelf.Helpers.Controls
             image.WidthRequest = this.WidthRequest;
             image.HeightRequest = this.HeightRequest;
 
-            this.LayoutTo(new Rectangle(0, 0, this.WidthRequest, this.HeightRequest), 100, Easing.SinOut)
+            this.LayoutTo(new Rectangle(0, 0, this.WidthRequest, this.HeightRequest), 250, Easing.Linear)
                .ContinueWith(task => {
                   if (this.ImageZoom != 1.0)
                   {
