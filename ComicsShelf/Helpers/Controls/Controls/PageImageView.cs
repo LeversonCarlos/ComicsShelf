@@ -151,17 +151,15 @@ namespace ComicsShelf.Helpers.Controls
             image.WidthRequest = this.WidthRequest;
             image.HeightRequest = this.HeightRequest;
 
-            this.LayoutTo(new Rectangle(0, 0, this.WidthRequest, this.HeightRequest), easing: Easing.SinOut).ContinueWith(task =>
-            {
-               if (this.ImageZoom != 1.0)
-               {
-                  this.Orientation = ScrollOrientation.Both;
-                  Device.BeginInvokeOnMainThread(async () => { 
-                     await this.ScrollToAsync((this.ScreenSize.Width / 2), (this.ScreenSize.Height / 2), true);
-                  });
-               }
-            });
-
+            this.LayoutTo(new Rectangle(0, 0, this.WidthRequest, this.HeightRequest), 100, Easing.SinOut)
+               .ContinueWith(task => {
+                  if (this.ImageZoom != 1.0)
+                  {
+                     this.Orientation = ScrollOrientation.Both;
+                     Device.BeginInvokeOnMainThread(async () =>
+                     { await this.ScrollToAsync((this.ScreenSize.Width / 2), (this.ScreenSize.Height / 2), true); });
+                  }
+               });
 
          }
          catch { }
