@@ -5,7 +5,6 @@ namespace ComicsShelf.Helpers.Controls
 {
    public class PageImageView : ScrollView
    {
-      // PanGestureRecognizer panGesture;
 
       #region New
       public PageImageView()
@@ -22,12 +21,7 @@ namespace ComicsShelf.Helpers.Controls
             Command = new Command((param) =>
             { this.ImageZoom = (this.ImageZoom == 1.0 ? 2.0 : 1.0); this.OnImageResize(); }),
             NumberOfTapsRequired = 2
-         });        
-
-         // panGesture = new  PanGestureRecognizer();
-         // panGesture.TouchPoints = 1;
-         // panGesture.PanUpdated += this.OnPanUpdated;
-         // this.Image.GestureRecognizers.Add(panGesture);
+         });
 
       }
       #endregion
@@ -172,69 +166,6 @@ namespace ComicsShelf.Helpers.Controls
          }
          catch { }
       }
-      #endregion
-
-
-      #region OnDoubleTapped
-      /*
-      private void OnDoubleTapped(object sender, EventArgs e)
-      {
-         if (this.Image.Scale == 1)
-         {
-            this.ImageLoaded = false;
-            // this.Orientation = ScrollOrientation.Both;
-            this.InputTransparent = true;
-            this.Image.HorizontalOptions = LayoutOptions.FillAndExpand;
-            this.Image.VerticalOptions = LayoutOptions.FillAndExpand;
-            this.Image.ScaleTo(3, 250, Easing.CubicInOut);
-            //this.Image.TranslateTo(0.5, 0.5, 250, Easing.CubicInOut);
-            this.Image.GestureRecognizers.Add(panGesture);
-         }
-         else
-         {
-            this.ImageLoaded = true;
-            //this.Orientation = ScrollOrientation.Horizontal;
-            this.InputTransparent = false;
-            this.Image.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            this.Image.VerticalOptions = LayoutOptions.CenterAndExpand;
-            this.Image.ScaleTo(1, 250, Easing.CubicInOut);
-            //this.Image.TranslateTo(0.5, 0.5, 250, Easing.CubicInOut);
-            this.Image.GestureRecognizers.Remove(panGesture);
-         }
-      }
-      */
-      #endregion
-
-      #region OnPanUpdated
-      /*
-
-   double StartX; double StartY;
-   double xOffset; double yOffset;
-
-   private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
-   {
-      switch (e.StatusType)
-      {
-         case GestureStatus.Started:
-            // xOffset = this.Image.TranslationX;
-            // yOffset = this.Image.TranslationY;
-            xOffset = (1 - this.Image.AnchorX) * this.ImageSize.Width;
-            yOffset = (1 - this.Image.AnchorY) * this.ImageSize.Height;
-            System.Diagnostics.Debug.WriteLine($"STARTED: translationX{this.Image.TranslationX}, translationY={this.Image.TranslationY}, anchorX{this.Image.AnchorX}, anchorY{this.Image.AnchorY}, totalX{e.TotalX}, totalY{e.TotalY}");
-            break;
-         case GestureStatus.Running:
-            // this.Image.TranslationX = xOffset + e.TotalX;
-            // this.Image.TranslationY = yOffset + e.TotalY;
-            var anchorX = 1 - ((xOffset + e.TotalX) / this.ImageSize.Width);
-            var anchorY = 1 - ((yOffset + e.TotalY) / this.ImageSize.Height);
-            this.Image.AnchorX = anchorX;
-            this.Image.AnchorY = anchorY;
-            System.Diagnostics.Debug.WriteLine($"RUNNING: translationX{this.Image.TranslationX}, translationY={this.Image.TranslationY}, anchorX{this.Image.AnchorX}, anchorY{this.Image.AnchorY}, totalX{e.TotalX}, totalY{e.TotalY}");
-            break;
-      }
-   }
-
-   */
       #endregion
 
    }
