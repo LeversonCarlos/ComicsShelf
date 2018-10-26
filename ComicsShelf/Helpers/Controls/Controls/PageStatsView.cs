@@ -14,12 +14,18 @@ namespace ComicsShelf.Helpers.Controls
       {
          this.readingProgress = new ProgressBar { HorizontalOptions = LayoutOptions.Fill, HeightRequest = 5 };
          this.Children.Add(this.readingProgress);
-         this.readingText = new Label { HorizontalOptions = LayoutOptions.CenterAndExpand, HorizontalTextAlignment = TextAlignment.Center };
+         this.readingText = new Label
+         {
+            HorizontalOptions = LayoutOptions.CenterAndExpand,
+            HorizontalTextAlignment = TextAlignment.Center,
+            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)), 
+            FontAttributes = FontAttributes.Bold
+         };
          this.Children.Add(new ContentView
          {
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.End,
-            Padding = 2,
+            Padding = 10,
             BackgroundColor = Colors.Lighter,
             Content = this.readingText
          });
