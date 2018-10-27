@@ -8,7 +8,32 @@
    <ContentPage.Content>
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
+
+            <controls:RepeaterView ItemsSource="{Binding Data.FolderSections}">
+               <controls:RepeaterView.ItemTemplate>
+                  <DataTemplate>
+
+                     <StackLayout Style="{StaticResource SectionListLayout}" >
+                        <Label Style="{StaticResource SectionListTitle}" Text="{Binding Text}" />
+                        <controls:CoverListView 
+                                 ItemsSource="{Binding Folders}"
+                                 ItemTappedCommand="{Binding BindingContext.FolderTappedCommand, Source={x:Reference MyPage}}" >
+                           <controls:CoverListView.ItemTemplate>
+                              <DataTemplate>
+                                 <controls:CoverFrameView 
+                                       Text="{Binding Text}" ImageSource="{Binding CoverPath}" 
+                                       WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
+                                 </controls:CoverFrameView>
+                              </DataTemplate>
+                           </controls:CoverListView.ItemTemplate>
+                        </controls:CoverListView>
+                     </StackLayout>
+
+                  </DataTemplate>
+               </controls:RepeaterView.ItemTemplate>
+            </controls:RepeaterView>
             
+            <!-- 
             <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasFolders}" >
                <controls:CoverListView
                   ItemTappedCommand="{Binding FolderTappedCommand}"
@@ -25,6 +50,7 @@
                   </controls:CoverListView.ItemTemplate>
                </controls:CoverListView>
             </StackLayout>
+            -->
 
             <controls:EngineProgressView
                IsVisible="{Binding NotifyData.IsRunning}" 
