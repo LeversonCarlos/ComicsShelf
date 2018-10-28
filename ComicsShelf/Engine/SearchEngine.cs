@@ -226,7 +226,8 @@ namespace ComicsShelf.Engine
             // COMIC FILES
             this.Notify("Loading Files", 0.0);
             var comicFiles = this.ComicFiles.Where(x => x.Available).ToList();
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                comicFiles.ForEach(x => App.HomeData.Files.Add(new Views.File.FileData(x)));
                // App.HomeData.Files.AddRange(comicFiles.Select(x => new Views.File.FileData(x)));
                // Statistics.Execute();
@@ -235,10 +236,12 @@ namespace ComicsShelf.Engine
             // COMIC FOLDERS
             this.Notify("Loading Folders", 0.3);
             List<Helpers.Database.ComicFolder> comicFolders = null;
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                comicFolders = comicFiles
                   .GroupBy(x => x.ParentPath)
-                  .Select(x => new Helpers.Database.ComicFolder {
+                  .Select(x => new Helpers.Database.ComicFolder
+                  {
                      LibraryPath = App.Settings.Paths.LibraryPath,
                      FullPath = x.Key,
                      ParentPath = System.IO.Path.GetDirectoryName(x.Key),
@@ -261,28 +264,28 @@ namespace ComicsShelf.Engine
             var comicSections = comicFolders
                .GroupBy(x => x.ParentPath)
                .Select(x => x.FirstOrDefault())
-               .Select(x => new Helpers.Database.ComicFolder {
+               .Select(x => new Helpers.Database.ComicFolder
+               {
                   FullPath = x.ParentPath,
                   LibraryPath = x.LibraryPath,
                   Key = $"{x.LibraryPath}|{x.ParentPath}"
                })
                .ToList();
-            await Task.Run(() => {
-               foreach (var comicSection in comicSections)
-               {
+            foreach (var comicSection in comicSections)
+            {
 
-                  comicSection.Text = comicSection.FullPath
-                     .Replace(comicSection.LibraryPath, "");
-                  if (string.IsNullOrEmpty(comicSection.Text))
-                  { comicSection.Text = R.Strings.HOME_FOLDERS_PAGE_TITLE; }
+               comicSection.Text = comicSection.FullPath
+                  .Replace(comicSection.LibraryPath, "");
+               if (string.IsNullOrEmpty(comicSection.Text))
+               { comicSection.Text = R.Strings.HOME_FOLDERS_PAGE_TITLE; }
 
-                  var section = new Views.Folder.FolderData(comicSection);
-                  section.Folders.AddRange(App.HomeData.Folders.Where(x => x.ComicFolder.ParentPath == comicSection.FullPath));
-                  section.HasFolders = section.Folders.Count != 0;
+               var section = new Views.Folder.FolderData(comicSection);
+               section.Folders.AddRange(App.HomeData.Folders.Where(x => x.ComicFolder.ParentPath == comicSection.FullPath));
+               section.HasFolders = section.Folders.Count != 0;
 
-                  App.HomeData.FolderSections.Add(section);
-               }
-            });
+               await Task.Run(() => { App.HomeData.FolderSections.Add(section); });
+               
+            }
 
             this.Notify("Done", 1.0);
          }

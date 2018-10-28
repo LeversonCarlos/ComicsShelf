@@ -33,25 +33,6 @@
                </controls:RepeaterView.ItemTemplate>
             </controls:RepeaterView>
             
-            <!-- 
-            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasFolders}" >
-               <controls:CoverListView
-                  ItemTappedCommand="{Binding FolderTappedCommand}"
-                  ItemsSource="{Binding Data.Folders}">
-                  <controls:CoverListView.ItemTemplate>
-                     <DataTemplate>
-                        <controls:CoverFrameView 
-                           IsVisible="{Binding Data.Available}"
-                           Text="{Binding Text}" Progress="{Binding ReadingPercent}"
-                           ImageSource="{Binding CoverPath}" 
-                           WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
-                        </controls:CoverFrameView>
-                     </DataTemplate>
-                  </controls:CoverListView.ItemTemplate>
-               </controls:CoverListView>
-            </StackLayout>
-            -->
-
             <controls:EngineProgressView
                IsVisible="{Binding NotifyData.IsRunning}" 
                Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >

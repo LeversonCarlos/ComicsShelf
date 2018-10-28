@@ -53,7 +53,7 @@ namespace ComicsShelf.Views.Folder
       #region OnSizeChanged
       private void OnSizeChanged(object sender, EventArgs e)
       {
-         var fileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)130);
+         var fileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)160);
          var frameMargins = (double)((fileColumns + 1) * 10);
          this.CoverWidthRequest = (this.ScreenSize.Width - frameMargins) / (double)fileColumns;
       }
