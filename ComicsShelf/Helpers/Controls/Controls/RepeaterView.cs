@@ -30,29 +30,41 @@ namespace ComicsShelf.Helpers.Controls
       private void ItemsRefreshObserve()
       {
 
-         Device.BeginInvokeOnMainThread(() => {
-            var e = new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset);
-            this.ItemsRefresh(e);
-         });
+         var resetParam = new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset);
+         this.ItemsRefreshing(resetParam);
 
          var itemsSource = (this.ItemsSource as System.Collections.Specialized.INotifyCollectionChanged);
          if (itemsSource != null)
          {
             itemsSource.CollectionChanged +=
-               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => {
-                  Device.BeginInvokeOnMainThread(() => this.ItemsRefresh(e));
-               };
+               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
+               { this.ItemsRefreshing(e); };
          }
 
       }
       #endregion
 
       #region ItemsRefresh
+
+      private void ItemsRefreshing(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+      {
+         try
+         {
+            System.Threading.Tasks.Parallel.Invoke( ()=> {
+               Device.BeginInvokeOnMainThread(() => {
+                  this.ItemsRefresh(e);
+               });
+            });
+         }
+         catch { }
+      }
+
       private void ItemsRefresh(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
          try
          {
 
+            // RESET
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
 
                // LOAD CURRENT ITEMS LIST
@@ -77,7 +89,7 @@ namespace ComicsShelf.Helpers.Controls
                return;
             }
 
-            // REMOVE ITEMS
+            // REMOVE ACTION
             if (e.OldItems != null && e.OldItems.Count != 0 && e.OldStartingIndex != -1)
             {
                for (int i = 0; i < e.OldItems.Count; i++)
@@ -88,7 +100,7 @@ namespace ComicsShelf.Helpers.Controls
                }
             }
 
-            // ADD NEW ITEMS
+            // ADD ACTION
             if (e.NewItems != null && e.NewItems.Count != 0) {
                var itemIndex = e.NewStartingIndex;
                foreach (var item in e.NewItems)
@@ -116,6 +128,7 @@ namespace ComicsShelf.Helpers.Controls
          }
          catch (Exception ex) { throw; }
       }
+
       #endregion
 
    }
