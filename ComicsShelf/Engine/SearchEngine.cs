@@ -253,10 +253,12 @@ namespace ComicsShelf.Engine
             this.Notify("Writing Folders", 0.6);
             foreach (var comicFolder in comicFolders)
             {
-               var folder = new Views.Folder.FolderData(comicFolder);
-               folder.Files.AddRange(App.HomeData.Files.Where(x => x.ComicFile.ParentPath == comicFolder.FullPath));
-               folder.HasFiles = folder.Files.Count != 0;
-               await Task.Run(() => App.HomeData.Folders.Add(folder));
+               await Task.Run(() => {
+                  var folder = new Views.Folder.FolderData(comicFolder);
+                  folder.Files.AddRange(App.HomeData.Files.Where(x => x.ComicFile.ParentPath == comicFolder.FullPath));
+                  folder.HasFiles = folder.Files.Count != 0;
+                  App.HomeData.Folders.Add(folder);
+                });
             }
 
             // COMIC SECTIONS
@@ -273,18 +275,21 @@ namespace ComicsShelf.Engine
                .ToList();
             foreach (var comicSection in comicSections)
             {
+               await Task.Run(() =>
+               {
 
-               comicSection.Text = comicSection.FullPath
+                  comicSection.Text = comicSection.FullPath
                   .Replace(comicSection.LibraryPath, "");
-               if (string.IsNullOrEmpty(comicSection.Text))
-               { comicSection.Text = R.Strings.HOME_FOLDERS_PAGE_TITLE; }
+                  if (string.IsNullOrEmpty(comicSection.Text))
+                  { comicSection.Text = R.Strings.HOME_FOLDERS_PAGE_TITLE; }
 
-               var section = new Views.Folder.FolderData(comicSection);
-               section.Folders.AddRange(App.HomeData.Folders.Where(x => x.ComicFolder.ParentPath == comicSection.FullPath));
-               section.HasFolders = section.Folders.Count != 0;
+                  var section = new Views.Folder.FolderData(comicSection);
+                  section.Folders.AddRange(App.HomeData.Folders.Where(x => x.ComicFolder.ParentPath == comicSection.FullPath));
+                  section.HasFolders = section.Folders.Count != 0;
 
-               await Task.Run(() => { App.HomeData.FolderSections.Add(section); });
-               
+                  App.HomeData.FolderSections.Add(section);
+
+               });               
             }
 
             this.Notify("Done", 1.0);
