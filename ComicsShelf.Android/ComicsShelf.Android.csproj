@@ -73,6 +73,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderers\ReadingPage.cs" />
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Helpers\FileSystem_PagesExtractor.cs" />
     <Compile Include="Helpers\FileSystem_Files.cs" />

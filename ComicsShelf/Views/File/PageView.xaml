@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:BasePage 
+<controls:ReadingPage 
    xmlns="http://xamarin.com/schemas/2014/forms"             
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    NavigationPage.HasNavigationBar="False" 
    x:Class="ComicsShelf.Views.File.PageView"
    x:Name="MyPage">
-   <controls:BasePage.Content>
+   <controls:ReadingPage.Content>
       <AbsoluteLayout>
          <controls:PagesSwipeView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -26,5 +26,5 @@
             <controls:PageStatsView ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" />
          </ContentView>
       </AbsoluteLayout>
-   </controls:BasePage.Content>
-</controls:BasePage>
+   </controls:ReadingPage.Content>
+</controls:ReadingPage>
