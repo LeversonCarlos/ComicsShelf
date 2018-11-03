@@ -32,7 +32,7 @@ https://play.google.com/apps/testing/com.friendship.ComicsShelf
 
 ## Authors
 
-* [PurpleBooth](https://github.com/LeversonCarlos)
+* [Leverson Carlos](https://github.com/LeversonCarlos)
 
 ## License
 
