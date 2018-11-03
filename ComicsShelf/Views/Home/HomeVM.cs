@@ -12,6 +12,10 @@ namespace ComicsShelf.Views.Home
       public HomeVM(HomeData args) : base(args)
       {
          this.Title = args.Text;
+#if DEBUG
+         var appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+         this.Title += $" - v{appVersion.Major}.{appVersion.Minor}.{appVersion.Revision}";
+#endif
          this.ViewType = typeof(HomeView);
 
          this.Data = args;

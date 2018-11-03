@@ -9,13 +9,8 @@ namespace ComicsShelf.Views.Home
       public HomeData() : base(new Helpers.Database.ComicFolder { Text = R.Strings.AppTitle })
       {
          this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.RecentFiles.ObservableCollectionChanged += this.RecentFiles_CollectionChanged;
-
          this.ReadingFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.ReadingFiles.ObservableCollectionChanged += this.ReadingFiles_CollectionChanged;
-
          this.TopRatedFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.TopRatedFiles.ObservableCollectionChanged += this.TopRatedFiles_CollectionChanged;
 
          this.FolderSections = new Helpers.Observables.ObservableList<Folder.FolderData>();
 
@@ -35,9 +30,6 @@ namespace ComicsShelf.Views.Home
          set { this.SetProperty(ref this._HasRecentFiles, value); }
       }
 
-      private void RecentFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      { this.HasRecentFiles = this.RecentFiles.Count != 0; }
-
       #endregion
 
       #region ReadingFiles
@@ -51,9 +43,6 @@ namespace ComicsShelf.Views.Home
          set { this.SetProperty(ref this._HasReadingFiles, value); }
       }
 
-      private void ReadingFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      { this.HasReadingFiles = this.ReadingFiles.Count != 0; }
-
       #endregion
 
       #region TopRatedFiles
@@ -66,9 +55,6 @@ namespace ComicsShelf.Views.Home
          get { return this._HasTopRatedFiles; }
          set { this.SetProperty(ref this._HasTopRatedFiles, value); }
       }
-
-      private void TopRatedFiles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      { this.HasTopRatedFiles = this.TopRatedFiles.Count != 0; }
 
       #endregion
 

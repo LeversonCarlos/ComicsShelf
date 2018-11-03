@@ -22,6 +22,17 @@ namespace ComicsShelf.Engine
       }
       #endregion
 
+      #region HasChanged
+      private bool HasChanged(Helpers.Observables.ObservableList<Views.File.FileData> from, System.Collections.Generic.List<Views.File.FileData> to)
+      {
+         var fromArray = from.Select(x => x.FullPath).ToList();
+         var fromText = ""; fromArray.ForEach(x => fromText += $"{x}|");
+         var toArray = to.Select(x => x.FullPath).ToList();
+         var toText = ""; toArray.ForEach(x => toText += $"{x}|");
+         return fromText != toText;
+      }
+      #endregion
+
       #region RecentFiles
       private void RecentFiles()
       {
@@ -32,7 +43,11 @@ namespace ComicsShelf.Engine
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .Take(5)
                .ToList();
-            App.HomeData.RecentFiles.ReplaceRange(recentFiles);
+            if (this.HasChanged(App.HomeData.RecentFiles, recentFiles))
+            {
+               App.HomeData.RecentFiles.ReplaceRange(recentFiles);
+               App.HomeData.HasRecentFiles = (App.HomeData.RecentFiles.Count != 0);
+            }
          }
          catch (Exception) { throw; }
       }
@@ -76,8 +91,12 @@ namespace ComicsShelf.Engine
                .Take(10)
                .ToList();
 
-            //APPLY
-            App.HomeData.TopRatedFiles.ReplaceRange(topRatedFiles);
+            // APPLY
+            if (this.HasChanged(App.HomeData.TopRatedFiles, topRatedFiles))
+            {
+               App.HomeData.TopRatedFiles.ReplaceRange(topRatedFiles);
+               App.HomeData.HasTopRatedFiles = (App.HomeData.TopRatedFiles.Count != 0);
+            }
 
          }
          catch (Exception) { throw; }
@@ -141,7 +160,11 @@ namespace ComicsShelf.Engine
                .ToList();
 
             // APPLY
-            App.HomeData.ReadingFiles.ReplaceRange(readingFiles);
+            if (this.HasChanged(App.HomeData.ReadingFiles, readingFiles))
+            {
+               App.HomeData.ReadingFiles.ReplaceRange(readingFiles);
+               App.HomeData.HasReadingFiles = (App.HomeData.ReadingFiles.Count != 0);
+            }
 
          }
          catch (Exception) { throw; }
