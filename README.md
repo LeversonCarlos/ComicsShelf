@@ -1,0 +1,39 @@
+# Comics Shelf
+
+The definitive lightweight viewer for your comic book files
+
+## A litle history first
+
+I'm a comic book reader (and collector) for a long time. And, as a developer, i wanted to study and learn a new programing language (in this case, Xamarin). So i put this things togheter and decided to make a CBZ file reader that would meet my needs. 
+With the result already satisfying me, i decided to publish the app in the store to facilitate the distribution to the friends who started to ask me to install it on their devices. 
+In fact, this is the result of a learning work, but done with love and dedication. All critics and suggestion will be welcomed. 
+
+## Say hello to your final comic book viewer
+
+It's really straightforward.
+Select and folder on your device where you put yor comic books (those CBZ files).
+The app will continually search your folder for newly added files.
+Then extract covers and display it as a eye candy shelf.
+You click the one you want to read, and start fliping the pages.
+The app will learn from your reading habits and suggest other comics from your library for you.
+Happy reading.
+
+## Try it out
+
+I put a test version on play store that can be accessed from the link below. 
+
+```
+https://play.google.com/apps/testing/com.friendship.ComicsShelf
+```
+
+## Built With
+
+* [Xamarin Forms](https://docs.microsoft.com/pt-br/xamarin/xamarin-forms)
+
+## Authors
+
+* [PurpleBooth](https://github.com/LeversonCarlos)
+
+## License
+
+GNU General Public License - see the [LICENSE.md](LICENSE.md) file for details
