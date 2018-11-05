@@ -13,7 +13,6 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            System.Diagnostics.Debug.WriteLine("Search Engine Start");
             using (var engine = new Search())
             {
                await engine.LoadDatabaseData();
@@ -26,12 +25,7 @@ namespace ComicsShelf.Engine
                */
                await engine.PrepareFolders();
                await engine.ExtractComicData();
-
-               /*
-               Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Statistics.Execute());
-               */
             }
-            System.Diagnostics.Debug.WriteLine("Search Engine Finish");
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -79,7 +73,6 @@ namespace ComicsShelf.Engine
 
             // LOCATE COMICS LIST
             var fileList = await this.FileSystem.GetFiles(App.Settings.Paths.LibraryPath);
-            // fileList = fileList.Take(10).ToArray();
 
             // MARK AVAILABLE FILES
             this.ComicFiles.Where(x => fileList.Contains(x.FullPath)).ToList().ForEach(x => x.Available = true);

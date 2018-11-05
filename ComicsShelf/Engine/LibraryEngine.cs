@@ -12,7 +12,6 @@ namespace ComicsShelf.Engine
          try
          {
             var result = false;
-            System.Diagnostics.Debug.WriteLine("Library Engine Start");
             using (var engine = new Library())
             {
                result = await engine.DefineLibraryPath();
@@ -21,7 +20,6 @@ namespace ComicsShelf.Engine
                   await Engine.Search.Execute();
                }
             }
-            System.Diagnostics.Debug.WriteLine("Library Engine Finish");
             return result;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }

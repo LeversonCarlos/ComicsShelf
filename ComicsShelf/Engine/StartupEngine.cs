@@ -64,8 +64,7 @@ namespace ComicsShelf.Engine
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData));
 
             // START SEARCH ENGINE
-            // Xamarin.Forms.Device.BeginInvokeOnMainThread(() => Engine.Search.Execute()); 
-            await Engine.Search.Execute();
+            await Task.Factory.StartNew(Engine.Search.Execute, TaskCreationOptions.LongRunning);
 
          }
          catch (Exception ex) { throw; }
