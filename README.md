@@ -1,6 +1,6 @@
 # Comics Shelf
 
-The definitive lightweight viewer for your comic book files
+Mobile viewer for comic book [cbz] files, done as a learning path to Xamarin framework
 
 ## A litle history first
 
@@ -10,6 +10,7 @@ In fact, this is the result of a learning work, but done with love and dedicatio
 
 ## Say hello to your final comic book viewer
 
+The definitive lightweight viewer for your comic book files.
 It's really straightforward.
 Select and folder on your device where you put yor comic books (those CBZ files).
 The app will continually search your folder for newly added files.
