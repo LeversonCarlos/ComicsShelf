@@ -20,7 +20,7 @@ namespace ComicsShelf.Helpers.Controls
          this.Content = new ActivityIndicator
          {
             HorizontalOptions = LayoutOptions.CenterAndExpand,
-            VerticalOptions = LayoutOptions.CenterAndExpand
+            VerticalOptions = LayoutOptions.StartAndExpand
          };
       }
    }
