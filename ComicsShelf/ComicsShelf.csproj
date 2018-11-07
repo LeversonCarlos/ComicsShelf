@@ -5,7 +5,7 @@
     <Product>Comics Shelf</Product>
     <Company>Friendship Solutions</Company>
     <Copyright>Copyright © Friendship Solutions 2018</Copyright>
-    <Version>1.4.23</Version>
+    <Version>1.4.24</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
