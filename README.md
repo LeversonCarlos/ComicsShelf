@@ -19,6 +19,19 @@ You click the one you want to read, and start fliping the pages.
 The app will learn from your reading habits and suggest other comics from your library for you.
 Happy reading.
 
+## Some screenshots
+
+<p align="center">
+  <img src="./resources/Screenshots/PhoneFeatured.png" 
+     title="Phone Featured" width="108" height="192" />
+  <img src="./resources/Screenshots/PhoneCollection.png" 
+     title="Phone Collection" width="108" height="192" />  
+  <img src="./resources/Screenshots/PhoneOpened.png" 
+     title="Phone Opened" width="108" height="192" />  
+  <img src="./resources/Screenshots/TabletFeatured.png" 
+     title="Tablet Featured" width="256" height="192" />    
+</p>
+
 ## Try it out
 
 I put a test version on play store that can be accessed from the link below. 
