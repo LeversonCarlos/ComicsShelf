@@ -12,19 +12,26 @@ namespace ComicsShelf.Engine
          {
             var engine = new Startup();
             {
-               engine.Notify(R.Strings.STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE);
-               engine.FileSystem.CheckPermissions(
+               engine.CheckPermissions(
                   async () =>
                   {
                      App.HomeData = new Views.Home.HomeData();
                      await engine.LoadSettings();
                      await engine.LoadDatabase();
                      await engine.LoadInitialView();
-                  },
-                  () => { Environment.Exit(0); });
+                  });
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+      private void CheckPermissions(Action action)
+      {
+         this.Notify(R.Strings.STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE);
+         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+         {
+            this.FileSystem.CheckPermissions(action, () => { Environment.Exit(0); });
+         });
       }
 
       private async Task LoadSettings()
@@ -61,7 +68,9 @@ namespace ComicsShelf.Engine
 
             // SHOW HOME VIEW
             // TODO: REMOVE THIS INVOKE, JUST PUSH THE VIEW AND, STARTS THE FOLLOWING SEARCH.EXECUTE ON A BACKGROUND NOT BLOCKING THREAD
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData));
+            // Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+            await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
+            // );
 
             // START SEARCH ENGINE
             await Task.Factory.StartNew(Engine.Search.Execute, TaskCreationOptions.LongRunning);

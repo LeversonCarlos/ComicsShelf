@@ -111,7 +111,6 @@ namespace ComicsShelf.Engine
             this.ComicFolders = this.ComicFolders
                .OrderBy(x => x.FullPath)
                .ToList();
-            App.HomeData.NoComics = (this.ComicFiles == null || this.ComicFiles.Count == 0);
 
          }
          catch (Exception ex) { throw; }
@@ -322,9 +321,6 @@ namespace ComicsShelf.Engine
                var fileData = fileList[fileIndex];
                var progress = ((double)fileIndex / (double)filesQuantity);
                this.Notify(fileData.FullText, progress);
-
-               // VALIDATE
-               // if (fileData.FullPath.ToLower().EndsWith(".cbr")) { continue; }
 
                // EXECUTE
                // await Task.Factory.StartNew(async () => {
