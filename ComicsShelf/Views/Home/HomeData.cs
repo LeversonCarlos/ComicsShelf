@@ -8,12 +8,18 @@ namespace ComicsShelf.Views.Home
       #region New
       public HomeData() : base(new Helpers.Database.ComicFolder { Text = R.Strings.AppTitle })
       {
+         this.NoComics = true;
+
          this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
+         this.RecentFiles.ObservableCollectionChanged += this.RecentFiles_CollectionChanged;
+
          this.ReadingFiles = new Helpers.Observables.ObservableList<File.FileData>();
+         this.ReadingFiles.ObservableCollectionChanged += this.ReadingFiles_CollectionChanged;
+
          this.TopRatedFiles = new Helpers.Observables.ObservableList<File.FileData>();
+         this.TopRatedFiles.ObservableCollectionChanged += this.TopRatedFiles_CollectionChanged;
 
          this.FolderSections = new Helpers.Observables.ObservableList<Folder.FolderData>();
-
          this.Files.ObservableCollectionChanged += this.Files_CollectionChanged;
       }
       #endregion
@@ -22,6 +28,8 @@ namespace ComicsShelf.Views.Home
       #region RecentFiles
 
       public Helpers.Observables.ObservableList<File.FileData> RecentFiles { get; set; }
+      private void RecentFiles_CollectionChanged(object sender, System.EventArgs e)
+      { this.HasRecentFiles = this.RecentFiles.Count != 0; }
 
       bool _HasRecentFiles;
       public bool HasRecentFiles
@@ -35,6 +43,8 @@ namespace ComicsShelf.Views.Home
       #region ReadingFiles
 
       public Helpers.Observables.ObservableList<File.FileData> ReadingFiles { get; set; }
+      private void ReadingFiles_CollectionChanged(object sender, System.EventArgs e)
+      { this.HasReadingFiles = this.ReadingFiles.Count != 0; }
 
       bool _HasReadingFiles;
       public bool HasReadingFiles
@@ -48,6 +58,8 @@ namespace ComicsShelf.Views.Home
       #region TopRatedFiles
 
       public Helpers.Observables.ObservableList<File.FileData> TopRatedFiles { get; set; }
+      private void TopRatedFiles_CollectionChanged(object sender, System.EventArgs e)
+      { this.HasTopRatedFiles = this.TopRatedFiles.Count != 0; }
 
       bool _HasTopRatedFiles;
       public bool HasTopRatedFiles
@@ -67,7 +79,10 @@ namespace ComicsShelf.Views.Home
       #region CollectionChanged
 
       private void Files_CollectionChanged(object sender, System.EventArgs e)
-      { Engine.Statistics.Execute(); }
+      {
+         this.NoComics = this.Files.Count == 0;
+         Engine.Statistics.Execute();
+      }
 
       #endregion
 

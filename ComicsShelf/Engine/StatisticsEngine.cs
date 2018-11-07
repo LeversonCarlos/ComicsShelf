@@ -44,10 +44,7 @@ namespace ComicsShelf.Engine
                .Take(5)
                .ToList();
             if (this.HasChanged(App.HomeData.RecentFiles, recentFiles))
-            {
-               App.HomeData.RecentFiles.ReplaceRange(recentFiles);
-               App.HomeData.HasRecentFiles = (App.HomeData.RecentFiles.Count != 0);
-            }
+            { App.HomeData.RecentFiles.ReplaceRange(recentFiles); }
          }
          catch (Exception) { throw; }
       }
@@ -93,10 +90,7 @@ namespace ComicsShelf.Engine
 
             // APPLY
             if (this.HasChanged(App.HomeData.TopRatedFiles, topRatedFiles))
-            {
-               App.HomeData.TopRatedFiles.ReplaceRange(topRatedFiles);
-               App.HomeData.HasTopRatedFiles = (App.HomeData.TopRatedFiles.Count != 0);
-            }
+            { App.HomeData.TopRatedFiles.ReplaceRange(topRatedFiles); }
 
          }
          catch (Exception) { throw; }
@@ -161,10 +155,7 @@ namespace ComicsShelf.Engine
 
             // APPLY
             if (this.HasChanged(App.HomeData.ReadingFiles, readingFiles))
-            {
-               App.HomeData.ReadingFiles.ReplaceRange(readingFiles);
-               App.HomeData.HasReadingFiles = (App.HomeData.ReadingFiles.Count != 0);
-            }
+            { App.HomeData.ReadingFiles.ReplaceRange(readingFiles); }
 
          }
          catch (Exception) { throw; }
