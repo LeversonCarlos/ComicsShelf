@@ -14,16 +14,14 @@ namespace ComicsShelf.Helpers.Controls
          this.BackgroundColor = Color.White;
          this.BorderColor = Color.LightGray;
          this.CornerRadius = 0;
-         // this.WidthRequest = 100;
 
          this.Image = new Image
          {
             VerticalOptions = LayoutOptions.Start,
             Margin = new Thickness(5, 5, 5, 0),
-            Aspect = Aspect.AspectFit
+            Aspect = Aspect.AspectFit,
+            Source = App.HomeData.EmptyCoverImage
          };
-         var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-         this.Image.Source = ImageSource.FromResource("ComicsShelf.Helpers.Controls.Controls.CoverFrameView.Empty.png", executingAssembly);
 
          this.Label = new Label
          {
