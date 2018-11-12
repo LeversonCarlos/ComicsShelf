@@ -16,7 +16,7 @@ namespace ComicsShelf.Views.Home
          try
          {
             var appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            this.Title += $" - v{appVersion.Major}.{appVersion.Minor}.{appVersion.Revision}";
+            this.Title += $" - v{appVersion.Major}.{appVersion.Minor}.{appVersion.Build}";
          }
          catch { }
 #endif
