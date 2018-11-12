@@ -16,18 +16,18 @@ namespace ComicsShelf.Helpers.Controls
       #region ItemsSource
       public static readonly BindableProperty ItemsSourceProperty =
          BindableProperty.Create(nameof(ItemsSource), typeof(IList), typeof(RepeaterView), null,
-            BindingMode.TwoWay, propertyChanged: OnItemsSourceChanged);
+         propertyChanged: OnItemsSourceChanged);
       public IList ItemsSource
       {
          get { return (IList)GetValue(ItemsSourceProperty); }
          set { SetValue(ItemsSourceProperty, value); }
       }
       private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as RepeaterView)?.ItemsRefreshObserve(); }
+      { (bindable as RepeaterView).ItemsObserve(); }
       #endregion
 
-      #region ItemsRefreshObserve
-      private void ItemsRefreshObserve()
+      #region ItemsObserve
+      private void ItemsObserve()
       {
 
          var resetParam = new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset);

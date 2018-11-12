@@ -50,7 +50,7 @@ namespace ComicsShelf.Helpers.Controls
       Image Image { get; set; }
       public static readonly BindableProperty ImageSourceProperty =
          BindableProperty.Create("ImageSource", typeof(ImageSource), typeof(CoverFrameView), null,
-         propertyChanged: OnImageSourceChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnImageSourceChanged);
       public ImageSource ImageSource
       {
          get { return (ImageSource)GetValue(ImageSourceProperty); }
@@ -64,7 +64,7 @@ namespace ComicsShelf.Helpers.Controls
       Label Label { get; set; }
       public static readonly BindableProperty TextProperty =
          BindableProperty.Create("Text", typeof(string), typeof(CoverFrameView), string.Empty,
-         propertyChanged: OnTextChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnTextChanged);
       public string Text
       {
          get { return (string)GetValue(TextProperty); }
@@ -78,7 +78,7 @@ namespace ComicsShelf.Helpers.Controls
       ProgressBar ProgressBar { get; set; }
       public static readonly BindableProperty ProgressProperty =
          BindableProperty.Create("Progress", typeof(double), typeof(CoverFrameView), (double)0,
-         propertyChanged: OnProgressChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnProgressChanged);
       public double Progress
       {
          get { return (double)GetValue(ProgressProperty); }
