@@ -14,7 +14,6 @@ namespace ComicsShelf.Helpers.Controls
          this.BackgroundColor = Color.White;
          this.BorderColor = Color.LightGray;
          this.CornerRadius = 0;
-         // this.WidthRequest = 100;
 
          this.Image = new Image
          {
@@ -22,8 +21,7 @@ namespace ComicsShelf.Helpers.Controls
             Margin = new Thickness(5, 5, 5, 0),
             Aspect = Aspect.AspectFit
          };
-         var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-         this.Image.Source = ImageSource.FromResource("ComicsShelf.Helpers.Controls.Controls.CoverFrameView.Empty.png", executingAssembly);
+         this.Image.Source = App.HomeData.EmptyCoverImage;
 
          this.Label = new Label
          {
@@ -52,7 +50,7 @@ namespace ComicsShelf.Helpers.Controls
       Image Image { get; set; }
       public static readonly BindableProperty ImageSourceProperty =
          BindableProperty.Create("ImageSource", typeof(ImageSource), typeof(CoverFrameView), null,
-         propertyChanged: OnImageSourceChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnImageSourceChanged);
       public ImageSource ImageSource
       {
          get { return (ImageSource)GetValue(ImageSourceProperty); }
@@ -66,7 +64,7 @@ namespace ComicsShelf.Helpers.Controls
       Label Label { get; set; }
       public static readonly BindableProperty TextProperty =
          BindableProperty.Create("Text", typeof(string), typeof(CoverFrameView), string.Empty,
-         propertyChanged: OnTextChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnTextChanged);
       public string Text
       {
          get { return (string)GetValue(TextProperty); }
@@ -80,7 +78,7 @@ namespace ComicsShelf.Helpers.Controls
       ProgressBar ProgressBar { get; set; }
       public static readonly BindableProperty ProgressProperty =
          BindableProperty.Create("Progress", typeof(double), typeof(CoverFrameView), (double)0,
-         propertyChanged: OnProgressChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnProgressChanged);
       public double Progress
       {
          get { return (double)GetValue(ProgressProperty); }

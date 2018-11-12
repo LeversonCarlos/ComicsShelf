@@ -35,8 +35,8 @@ namespace ComicsShelf.Helpers.Controls
       #region Text
       Label TextLabel { get; set; }
       public static readonly BindableProperty TextProperty =
-         BindableProperty.Create("Text", typeof(string), typeof(CoverFrameView), string.Empty,
-         propertyChanged: OnTextChanged, defaultBindingMode: BindingMode.TwoWay);
+         BindableProperty.Create("Text", typeof(string), typeof(EngineProgressView), string.Empty,
+         propertyChanged: OnTextChanged);
       public string Text
       {
          get { return (string)GetValue(TextProperty); }
@@ -49,8 +49,8 @@ namespace ComicsShelf.Helpers.Controls
       #region Progress
       ProgressBar ProgressBar { get; set; }
       public static readonly BindableProperty ProgressProperty =
-         BindableProperty.Create("Progress", typeof(double), typeof(CoverFrameView), (double)0,
-         propertyChanged: OnProgressChanged, defaultBindingMode: BindingMode.TwoWay);
+         BindableProperty.Create("Progress", typeof(double), typeof(EngineProgressView), (double)0,
+         propertyChanged: OnProgressChanged);
       public double Progress
       {
          get { return (double)GetValue(ProgressProperty); }
@@ -63,8 +63,8 @@ namespace ComicsShelf.Helpers.Controls
       #region Details
       Label DetailsLabel { get; set; }
       public static readonly BindableProperty DetailsProperty =
-         BindableProperty.Create("Details", typeof(string), typeof(CoverFrameView), string.Empty,
-         propertyChanged: OnDetailsChanged, defaultBindingMode: BindingMode.TwoWay);
+         BindableProperty.Create("Details", typeof(string), typeof(EngineProgressView), string.Empty,
+         propertyChanged: OnDetailsChanged);
       public string Details
       {
          get { return (string)GetValue(DetailsProperty); }

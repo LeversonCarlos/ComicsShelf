@@ -25,6 +25,16 @@ namespace ComicsShelf.Views.Home
       #endregion
 
 
+      #region EmptyCoverImage
+      Xamarin.Forms.ImageSource _EmptyCoverImage = null;
+      public Xamarin.Forms.ImageSource EmptyCoverImage
+      {
+         get { return this._EmptyCoverImage; }
+         set { this.SetProperty(ref this._EmptyCoverImage, value); }
+      }
+      #endregion
+
+
       #region RecentFiles
 
       public Helpers.Observables.ObservableList<File.FileData> RecentFiles { get; set; }

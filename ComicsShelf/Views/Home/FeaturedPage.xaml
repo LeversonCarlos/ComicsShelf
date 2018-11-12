@@ -9,59 +9,50 @@
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
 
-            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasReadingFiles}">
-               <Label Style="{StaticResource SectionListTitle}"
-                      Text="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" />
-               <controls:CoverListView
-                  ItemTappedCommand="{Binding FileTappedCommand}"
-                  ItemsSource="{Binding Data.ReadingFiles}">
-                  <controls:CoverListView.ItemTemplate>
-                     <DataTemplate>
-                        <controls:CoverFrameView 
-                           Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
-                           ImageSource="{Binding CoverPath}" 
-                           WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
-                        </controls:CoverFrameView>
-                     </DataTemplate>
-                  </controls:CoverListView.ItemTemplate>
-               </controls:CoverListView>
-            </StackLayout>
+            <controls:SectionView 
+               Title="{controls:Translate Text=HOME_READING_FILES_SECTION_TITLE}" 
+               ItemsSource="{Binding Data.ReadingFiles}" ItemTappedCommand="{Binding FileTappedCommand}"
+               IsVisible="{Binding Data.HasReadingFiles}" >
+               <controls:SectionView.ItemTemplate>
+                  <DataTemplate>
+                     <controls:CoverFrameView 
+                        Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                        ImageSource="{Binding CoverPath}" 
+                        WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
+                     </controls:CoverFrameView>
+                  </DataTemplate>
+               </controls:SectionView.ItemTemplate>
+            </controls:SectionView>
 
-            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasRecentFiles}" >
-               <Label Style="{StaticResource SectionListTitle}"
-                      Text="{controls:Translate Text=HOME_RECENT_FILES_SECTION_TITLE}" />
-               <controls:CoverListView 
-                  ItemTappedCommand="{Binding FileTappedCommand}"
-                  ItemsSource="{Binding Data.RecentFiles}">
-                  <controls:CoverListView.ItemTemplate>
-                     <DataTemplate>
-                        <controls:CoverFrameView
-                           Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
-                           ImageSource="{Binding CoverPath}" 
-                           WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
-                        </controls:CoverFrameView>
-                     </DataTemplate>
-                  </controls:CoverListView.ItemTemplate>
-               </controls:CoverListView>
-            </StackLayout>
+            <controls:SectionView 
+               Title="{controls:Translate Text=HOME_RECENT_FILES_SECTION_TITLE}" 
+               ItemsSource="{Binding Data.RecentFiles}" ItemTappedCommand="{Binding FileTappedCommand}"
+               IsVisible="{Binding Data.HasRecentFiles}" >
+               <controls:SectionView.ItemTemplate>
+                  <DataTemplate>
+                     <controls:CoverFrameView
+                        Text="{Binding FullText}" Progress="{Binding ReadingPercent}" 
+                        ImageSource="{Binding CoverPath}" 
+                        WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
+                     </controls:CoverFrameView>
+                  </DataTemplate>
+               </controls:SectionView.ItemTemplate>
+            </controls:SectionView>
 
-            <StackLayout Style="{StaticResource SectionListLayout}" IsVisible="{Binding Data.HasTopRatedFiles}" >
-               <Label Style="{StaticResource SectionListTitle}"
-                      Text="{controls:Translate Text=HOME_TOP_RATED_SECTION_TITLE}" />
-               <controls:CoverListView 
-                  ItemTappedCommand="{Binding FileTappedCommand}"
-                  ItemsSource="{Binding Data.TopRatedFiles}">
-                  <controls:CoverListView.ItemTemplate>
-                     <DataTemplate>
-                        <controls:CoverFrameView
-                           Text="{Binding FullText}" Progress="{Binding ReadingPercent}"
-                           ImageSource="{Binding CoverPath}" 
-                           WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
-                        </controls:CoverFrameView>
-                     </DataTemplate>
-                  </controls:CoverListView.ItemTemplate>
-               </controls:CoverListView>
-            </StackLayout>
+            <controls:SectionView 
+               Title="{controls:Translate Text=HOME_TOP_RATED_SECTION_TITLE}" 
+               ItemsSource="{Binding Data.TopRatedFiles}" ItemTappedCommand="{Binding FileTappedCommand}"
+               IsVisible="{Binding Data.HasTopRatedFiles}" >
+               <controls:SectionView.ItemTemplate>
+                  <DataTemplate>
+                     <controls:CoverFrameView
+                        Text="{Binding FullText}" Progress="{Binding ReadingPercent}"
+                        ImageSource="{Binding CoverPath}" 
+                        WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
+                     </controls:CoverFrameView>
+                  </DataTemplate>
+               </controls:SectionView.ItemTemplate>
+            </controls:SectionView>
 
             <controls:EngineProgressView
                IsVisible="{Binding NotifyData.IsRunning}" 

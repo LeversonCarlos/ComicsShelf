@@ -15,7 +15,7 @@ namespace ComicsShelf.Engine
                engine.CheckPermissions(
                   async () =>
                   {
-                     App.HomeData = new Views.Home.HomeData();
+                     engine.Initialize();
                      await engine.LoadSettings();
                      await engine.LoadDatabase();
                      await engine.LoadInitialView();
@@ -32,6 +32,19 @@ namespace ComicsShelf.Engine
          {
             this.FileSystem.CheckPermissions(action, () => { Environment.Exit(0); });
          });
+      }
+
+      private void Initialize()
+      {
+         try
+         {
+            App.HomeData = new Views.Home.HomeData();
+
+            var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            App.HomeData.EmptyCoverImage = Xamarin.Forms.ImageSource.FromResource("ComicsShelf.Helpers.Controls.Controls.CoverFrameView.Empty.png", executingAssembly);
+            executingAssembly = null;
+         }
+         catch (Exception ex) { throw; }
       }
 
       private async Task LoadSettings()
