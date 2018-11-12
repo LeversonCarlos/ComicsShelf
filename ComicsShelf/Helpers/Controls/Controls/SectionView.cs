@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -84,10 +85,10 @@ namespace ComicsShelf.Helpers.Controls
       {
          this.ItemsRefresh();
 
-         var itemsSource = (this.ItemsSource as Observables.INotifyObservableCollectionChanged);
+         var itemsSource = (this.ItemsSource as INotifyCollectionChanged);
          if (itemsSource != null)
          {
-            itemsSource.ObservableCollectionChanged +=
+            itemsSource.CollectionChanged +=
                (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => { this.ItemsRefresh(); };
          }
 

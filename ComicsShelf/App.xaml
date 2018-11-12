@@ -25,19 +25,6 @@
             <Setter Property="Spacing" Value="16" />
          </Style>
 
-         <!-- SectionList -->
-         <Style TargetType="StackLayout" x:Key="SectionListLayout">
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Spacing" Value="0" />
-         </Style>
-         <Style TargetType="Label" x:Key="SectionListTitle">
-            <Setter Property="Margin" Value="4,0" />
-            <Setter Property="TextColor" Value="{StaticResource colorAccent}" />
-            <Setter Property="FontSize" Value="Medium" />
-            <Setter Property="FontAttributes" Value="Bold" />
-         </Style>
-
          <!-- SPLASH -->
          <Style TargetType="ContentView" x:Key="SplashItemDetails" >
             <Setter Property="BackgroundColor" Value="{StaticResource colorLightGray}" />

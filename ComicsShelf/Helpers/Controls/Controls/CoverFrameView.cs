@@ -19,9 +19,9 @@ namespace ComicsShelf.Helpers.Controls
          {
             VerticalOptions = LayoutOptions.Start,
             Margin = new Thickness(5, 5, 5, 0),
-            Aspect = Aspect.AspectFit,
-            Source = App.HomeData.EmptyCoverImage
+            Aspect = Aspect.AspectFit
          };
+         this.Image.Source = App.HomeData.EmptyCoverImage;
 
          this.Label = new Label
          {
