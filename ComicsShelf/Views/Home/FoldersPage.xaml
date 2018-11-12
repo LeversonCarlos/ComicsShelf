@@ -13,21 +13,18 @@
                <controls:RepeaterView.ItemTemplate>
                   <DataTemplate>
 
-                     <StackLayout Style="{StaticResource SectionListLayout}" >
-                        <Label Style="{StaticResource SectionListTitle}" Text="{Binding Text}" />
-                        <controls:CoverListView 
-                                 ItemsSource="{Binding Folders}"
-                                 ItemTappedCommand="{Binding BindingContext.FolderTappedCommand, Source={x:Reference MyPage}}" >
-                           <controls:CoverListView.ItemTemplate>
-                              <DataTemplate>
-                                 <controls:CoverFrameView 
-                                       Text="{Binding Text}" ImageSource="{Binding CoverPath}" 
-                                       WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
-                                 </controls:CoverFrameView>
-                              </DataTemplate>
-                           </controls:CoverListView.ItemTemplate>
-                        </controls:CoverListView>
-                     </StackLayout>
+                     <controls:SectionView
+                        Title="{Binding Text}" ItemsSource="{Binding Folders}"
+                        ItemTappedCommand="{Binding BindingContext.FolderTappedCommand, Source={x:Reference MyPage}}" >
+                        <controls:SectionView.ItemTemplate>
+                           <DataTemplate>
+                              <controls:CoverFrameView 
+                                 Text="{Binding Text}" ImageSource="{Binding CoverPath}" 
+                                 WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyPage}}" >
+                              </controls:CoverFrameView>
+                           </DataTemplate>
+                        </controls:SectionView.ItemTemplate>
+                     </controls:SectionView>
 
                   </DataTemplate>
                </controls:RepeaterView.ItemTemplate>
