@@ -33,7 +33,6 @@ namespace ComicsShelf.Engine
 
       #region Properties
       private List<Helpers.Database.ComicFile> ComicFiles { get; set; }
-      private List<Helpers.Database.ComicFolder> ComicFolders { get; set; }
       #endregion
 
       #region LoadDatabaseData
@@ -42,22 +41,13 @@ namespace ComicsShelf.Engine
          try
          {
             this.Notify(R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE);
-
             await Task.Run(() =>
             {
-
                this.ComicFiles = App.Database
                   .Table<Helpers.Database.ComicFile>()
                   .Where(x => x.LibraryPath == App.Settings.Paths.LibraryPath)
                   .ToList();
-
-               this.ComicFolders = App.Database
-                  .Table<Helpers.Database.ComicFolder>()
-                  .Where(x => x.LibraryPath == App.Settings.Paths.LibraryPath)
-                  .ToList();
-
             });
-
          }
          catch (Exception ex) { throw; }
       }
@@ -96,7 +86,6 @@ namespace ComicsShelf.Engine
                      this.Notify(filePath, progress);
 
                      var comicFile = await this.SearchComicFiles_GetFile(filePath);
-                     await this.SearchComicFiles_GetFolder(comicFile);
 
                   }
                   catch (Exception fileException)
@@ -106,9 +95,6 @@ namespace ComicsShelf.Engine
 
             // REORDER THE LISTS
             this.ComicFiles = this.ComicFiles
-               .OrderBy(x => x.FullPath)
-               .ToList();
-            this.ComicFolders = this.ComicFolders
                .OrderBy(x => x.FullPath)
                .ToList();
 
@@ -159,49 +145,6 @@ namespace ComicsShelf.Engine
             await Task.Run(() => App.Database.Insert(comicFile));
 
             return comicFile;
-         }
-         catch (Exception ex) { throw; }
-      }
-      #endregion
-
-      #region SearchComicFiles_GetFolder
-      private async Task SearchComicFiles_GetFolder(Helpers.Database.ComicFile comicFile)
-      {
-         try
-         {
-
-            // INITIALIZE
-            var folderPath = comicFile.ParentPath;
-
-            // ADD FOLDER STRUCTURE
-            while (!string.IsNullOrEmpty(folderPath) && folderPath != App.Settings.Paths.LibraryPath)
-            {
-
-               // CHECK IF FOLDER ALREADY EXISTS
-               var comicFolder = this.ComicFolders
-                  .Where(x => x.FullPath == folderPath)
-                  .FirstOrDefault();
-               if (comicFolder != null) { break; }
-
-               // PROPERTIES
-               var folderText = System.IO.Path.GetFileNameWithoutExtension(folderPath);
-               var folderParent = System.IO.Path.GetDirectoryName(folderPath);
-
-               // ADD FOLDER
-               comicFolder = new Helpers.Database.ComicFolder
-               {
-                  LibraryPath = App.Settings.Paths.LibraryPath,
-                  FullPath = folderPath,
-                  ParentPath = folderParent,
-                  Text = folderText
-               };
-               comicFolder.Key = $"{comicFolder.LibraryPath}|{comicFolder.FullPath}";
-               this.ComicFolders.Add(comicFolder);
-               await Task.Run(() => App.Database.Insert(comicFolder));
-
-               folderPath = folderParent;
-            }
-
          }
          catch (Exception ex) { throw; }
       }
@@ -289,6 +232,7 @@ namespace ComicsShelf.Engine
          catch (Exception ex) { throw; }
       }
       #endregion
+
 
       #region ExtractComicData
       private async Task ExtractComicData()
@@ -437,7 +381,6 @@ namespace ComicsShelf.Engine
       {
          base.Dispose();
          this.ComicFiles = null;
-         this.ComicFolders = null;
       }
       #endregion
 
