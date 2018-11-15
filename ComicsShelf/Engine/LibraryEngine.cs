@@ -45,7 +45,7 @@ namespace ComicsShelf.Engine
 
             /* DEFINE COMICS PATH */
             library.LibraryPath = await this.FileSystem.GetLibraryPath();
-            library.Available = await this.FileSystem.ValidateLibraryPath(library.LibraryPath);
+            library.Available = await this.FileSystem.ValidateLibraryPath(library);
 
             /* STORE DATA */
             if (library.Available)

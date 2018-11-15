@@ -125,7 +125,7 @@ namespace ComicsShelf.Engine
             {
                foreach (var library in libraries)
                {
-                  library.Available = await this.FileSystem.ValidateLibraryPath(library.LibraryPath);
+                  library.Available = await this.FileSystem.ValidateLibraryPath(library);
                   App.Database.Update(library);
                }
             });
