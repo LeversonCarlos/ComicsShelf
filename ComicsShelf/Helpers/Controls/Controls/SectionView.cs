@@ -143,16 +143,16 @@ namespace ComicsShelf.Helpers.Controls
             return new Command(async (commandParameter) =>
             {
                var itemView = (View)commandParameter;
-               
+
                await Task.WhenAll(
-                  itemView.FadeTo(0.50, 250, Easing.SinIn),
-                  itemView.RelScaleTo(0.50, 250, Easing.SinIn)
+                  itemView.FadeTo(0.75, 150, Easing.CubicOut),
+                  itemView.ScaleTo(0.75, 150, Easing.CubicOut)
+               );
+               await Task.WhenAll(
+                  itemView.ScaleTo(1.00, 100, Easing.CubicIn),
+                  itemView.FadeTo(1.00, 100, Easing.CubicIn)
                );
                Device.BeginInvokeOnMainThread(() => this.ItemTappedCommand.Execute(itemView.BindingContext));
-               await Task.WhenAll(
-                  itemView.RelScaleTo(1.00, 250, Easing.SinOut),
-                  itemView.FadeTo(1.00, 250, Easing.SinOut)
-               );
 
             });
          }
