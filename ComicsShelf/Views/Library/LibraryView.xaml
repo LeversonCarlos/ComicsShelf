@@ -14,6 +14,19 @@
             <Button Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding LibraryTappedCommand}" HorizontalOptions="Center" />
          </StackLayout>
 
+         <ListView ItemsSource="{Binding Data.Libraries}" HasUnevenRows="True" >
+            <ListView.ItemTemplate>
+               <DataTemplate>
+                  <ViewCell>
+                     <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding LibraryText}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"></Label>
+                        <Button Text="[DEL]" HorizontalOptions="End"></Button>
+                     </StackLayout>                     
+                  </ViewCell>
+               </DataTemplate>
+            </ListView.ItemTemplate>
+         </ListView>
+
          <StackLayout Spacing="5" >
             <Label Text="{controls:Translate Text=LIBRARY_SUGGESTION_MESSAGE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
             <Label Text="www.comicbookplus.com" HorizontalOptions="Center" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource colorAccent}" >
