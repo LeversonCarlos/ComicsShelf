@@ -60,5 +60,51 @@ namespace ComicsShelf.Engine
       }
       #endregion
 
+
+      #region NewLibrary
+      internal static async Task<Helpers.Database.Library> NewLibrary()
+      {
+         try
+         {
+            using (var fileSystem = Helpers.FileSystem.Get())
+            {
+
+               // DEFINE LIBRARY PATH
+               var library = new Helpers.Database.Library();
+               library.LibraryPath = await fileSystem.GetLibraryPath();
+
+               // VALIDATE 
+               await fileSystem.ValidateLibraryPath(library);
+               if (!library.Available)
+               { await App.ShowMessage("INVALID LIBRARY PATH"); return null; }
+
+               // RESULT
+               App.Database.Insert(library);
+               App.HomeData.ClearAll();
+               Engine.Search.Execute();
+               return library;
+
+            }
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); return null; }
+      }
+      #endregion
+
+      #region RemoveLibrary
+      internal static async Task RemoveLibrary(Helpers.Database.Library library)
+      {
+         try
+         {
+
+            // RESULT
+            App.Database.Delete(library);
+            App.HomeData.ClearAll();
+            Engine.Search.Execute();
+
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+      #endregion
+
    }
 }

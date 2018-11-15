@@ -17,6 +17,9 @@ namespace ComicsShelf.Helpers.Database
       public int Update(object data)
       { return this.Connection.Update(data); }
 
+      public int Delete(object data)
+      { return this.Connection.Delete(data); }
+
       #region Initialize
       public async Task Initialize()
       {

@@ -3,7 +3,8 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
-   x:Class="ComicsShelf.Views.Library.LibraryView">
+   x:Class="ComicsShelf.Views.Library.LibraryView"
+   x:Name="MyPage">
    <controls:BasePage.Content>
       <StackLayout VerticalOptions="CenterAndExpand" Padding="10,80" Spacing="100" >
 
@@ -11,7 +12,7 @@
             <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" HorizontalOptions="Center" FontSize="Large" />
             <Label Text="{Binding Data.LibraryPath}" IsVisible="{Binding Data.IsLibraryDefined}" HorizontalOptions="Center" FontAttributes="Bold" />
             <Label Text="{controls:Translate Text=LIBRARY_UNDEFINED_FOLDER_MESSAGE}" IsVisible="{Binding Data.IsLibraryEmpty}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-            <Button Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding LibraryTappedCommand}" HorizontalOptions="Center" />
+            <Button Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding AddLibraryTappedCommand}" HorizontalOptions="Center" />
          </StackLayout>
 
          <ListView ItemsSource="{Binding Data.Libraries}" HasUnevenRows="True" >
@@ -20,7 +21,11 @@
                   <ViewCell>
                      <StackLayout Orientation="Horizontal">
                         <Label Text="{Binding LibraryText}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"></Label>
-                        <Button Text="[DEL]" HorizontalOptions="End"></Button>
+                        <Button 
+                           Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
+                           CommandParameter="{Binding .}"
+                           Text="[DEL]" HorizontalOptions="End">
+                        </Button>
                      </StackLayout>                     
                   </ViewCell>
                </DataTemplate>
