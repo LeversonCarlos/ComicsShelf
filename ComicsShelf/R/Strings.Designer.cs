@@ -106,7 +106,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Featured Comics.
+        ///   Looks up a localized string similar to Featured.
         /// </summary>
         internal static string HOME_FEATURED_PAGE_TITLE {
             get {
@@ -178,6 +178,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This folder has no CBZ files. Choose a valid folder containing some comic book files on it..
+        /// </summary>
+        internal static string LIBRARY_INVALID_FOLDER_MESSAGE {
+            get {
+                return ResourceManager.GetString("LIBRARY_INVALID_FOLDER_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comic Books Library.
         /// </summary>
         internal static string LIBRARY_MAIN_LABEL {
@@ -196,7 +205,16 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to select the folder for the library.
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string LIBRARY_REMOVE_LIBRARY_COMMAND {
+            get {
+                return ResourceManager.GetString("LIBRARY_REMOVE_LIBRARY_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add folder for the Library.
         /// </summary>
         internal static string LIBRARY_SELECT_FOLDER_COMMAND {
             get {

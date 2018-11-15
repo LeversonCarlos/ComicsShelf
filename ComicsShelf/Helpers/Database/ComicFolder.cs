@@ -2,16 +2,16 @@
 
 namespace ComicsShelf.Helpers.Database
 {
-   [Table("ComicFolders")]
+   // [Table("ComicFolders")]
    public class ComicFolder
    {
 
-      [PrimaryKey]
+      // [PrimaryKey]
       public string Key { get; set; }
 
-      [Indexed]
+      // [Indexed]
       public string LibraryPath { get; set; }
-      [Indexed]
+      // [Indexed]
       public string FullPath { get; set; }
       public string ParentPath { get; set; }
       public string CoverPath { get; set; }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SQLite;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
@@ -80,10 +82,7 @@ namespace ComicsShelf.Engine
             { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }
 
             // SHOW HOME VIEW
-            // TODO: REMOVE THIS INVOKE, JUST PUSH THE VIEW AND, STARTS THE FOLLOWING SEARCH.EXECUTE ON A BACKGROUND NOT BLOCKING THREAD
-            // Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
             await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
-            // );
 
             // START SEARCH ENGINE
             await Task.Factory.StartNew(Engine.Search.Execute, TaskCreationOptions.LongRunning);
@@ -98,33 +97,31 @@ namespace ComicsShelf.Engine
          {
             this.Notify(R.Strings.STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE);
 
-            /* LOAD CONFIGS DATA */
-            Helpers.Database.Configs configs = null;
-            await Task.Run(() =>
+            /* LIBRARIES */
+            TableQuery<Helpers.Database.Library> libraries = null;
+            await Task.Run(() => { libraries = App.Database.Table<Helpers.Database.Library>(); });
+
+            /* VALIDATE LIBRARIES */
+            await Task.Run(async () =>
             {
-               var configsTable = App.Database.Table<Helpers.Database.Configs>();
-               configs = configsTable.FirstOrDefault();
-               if (configs == null)
+               foreach (var library in libraries)
                {
-                  configs = new Helpers.Database.Configs();
-                  App.Database.Insert(configs);
+                  await this.FileSystem.ValidateLibraryPath(library);
+                  App.Database.Update(library);
                }
             });
 
-            /* VALIDATE COMICS PATH */
-            var validateLibraryPath = await this.FileSystem.ValidateLibraryPath(configs.LibraryPath);
-
-            /* STORE DATA */
-            if (validateLibraryPath)
+            /* RESULT */
+            await Task.Run(() =>
             {
-               await Task.Run(() =>
-               {
-                  App.Database.Update(configs);
-                  App.Settings.Paths.LibraryPath = configs.LibraryPath;
-               });
-            }
+               App.Settings.Paths.LibrariesPath = libraries
+                  .Where(x => x.Available == true)
+                  .Select(x => x.LibraryPath)
+                  .ToArray();
+               App.Settings.Paths.LibraryPath = App.Settings.Paths.LibrariesPath.FirstOrDefault();
+            });
+            return !string.IsNullOrEmpty(App.Settings.Paths.LibraryPath);
 
-            return validateLibraryPath;
          }
          catch (Exception ex) { throw; }
       }

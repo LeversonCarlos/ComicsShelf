@@ -8,7 +8,7 @@ namespace ComicsShelf.Helpers.Controls
       public BasePage()
       {
          if (Device.RuntimePlatform == Device.iOS)
-         { this.Padding = new Thickness(0, 20, 0, 0); }
+         { this.Padding = new Thickness(0, 30, 0, 0); }
       }
 
       protected override void OnAppearing()

@@ -13,17 +13,30 @@ namespace ComicsShelf.UWP
          try
          {
 
-            /* STORAGE QUERY */
-            var fileTypeFilter = new System.Collections.Generic.List<string>();
-            fileTypeFilter.Add(".cbz");
-         /* fileTypeFilter.Add(".cbr"); */
-            var queryOptions = new Windows.Storage.Search.QueryOptions(Windows.Storage.Search.CommonFileQuery.OrderByName, fileTypeFilter);
 
             /* LOCATE FILES */
             Windows.Storage.StorageFolder folder = null;
             if (path.Contains(this.PathSeparator))
             { folder = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(path); }
             else { folder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync(path); }
+
+            return await this.GetFiles(folder);
+         }
+         catch (Exception ex) { throw; }
+      }
+
+      private async Task<string[]> GetFiles(Windows.Storage.StorageFolder folder)
+      {
+         try
+         {
+
+            /* STORAGE QUERY */
+            var fileTypeFilter = new System.Collections.Generic.List<string>();
+            fileTypeFilter.Add(".cbz");
+            /* fileTypeFilter.Add(".cbr"); */
+            var queryOptions = new Windows.Storage.Search.QueryOptions(Windows.Storage.Search.CommonFileQuery.OrderByName, fileTypeFilter);
+
+            /* EXECUTE QUERY */
             var query = folder.CreateFileQueryWithOptions(queryOptions);
             var fileList = await query.GetFilesAsync();
 

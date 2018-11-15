@@ -1,37 +1,48 @@
-﻿namespace ComicsShelf.Views.Library
+﻿using Xamarin.Forms.Internals;
+
+namespace ComicsShelf.Views.Library
 {
    public class LibraryData : Helpers.Observables.ObservableObject
    {
 
-      #region LibraryPath
-      string _LibraryPath;
-      public string LibraryPath
+      #region New
+      public LibraryData()
       {
-         get { return this._LibraryPath; }
-         set
-         {
-            this.SetProperty(ref this._LibraryPath, value);
-            this.IsLibraryEmpty = string.IsNullOrEmpty(value);
-            this.IsLibraryDefined = !string.IsNullOrEmpty(value);
-         }
+         this.Libraries = new Helpers.Observables.ObservableList<LibraryDataItem>();
+         this.Libraries.CollectionChanged += this.Libraries_CollectionChanged;
+
+         var libraries = App.Database.Table<Helpers.Database.Library>();
+         libraries.ForEach(library => this.Libraries.Add(new LibraryDataItem(library)));
       }
       #endregion
 
-      #region IsLibraryEmpty
-      bool _IsLibraryEmpty;
-      public bool IsLibraryEmpty
+      #region Libraries
+
+      public Helpers.Observables.ObservableList<LibraryDataItem> Libraries { get; set; }
+
+      private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
-         get { return this._IsLibraryEmpty; }
-         set { this.SetProperty(ref this._IsLibraryEmpty, value); }
+         this.HasLibraries = this.Libraries.Count != 0;
+         this.HasntLibraries = (this.Libraries.Count == 0);
+      }
+
+      #endregion
+
+      #region HasLibraries
+      bool _HasLibraries;
+      public bool HasLibraries
+      {
+         get { return this._HasLibraries; }
+         set { this.SetProperty(ref this._HasLibraries, value); }
       }
       #endregion
 
-      #region IsLibraryDefined
-      bool _IsLibraryDefined;
-      public bool IsLibraryDefined
+      #region HasntLibraries
+      bool _HasntLibraries;
+      public bool HasntLibraries
       {
-         get { return this._IsLibraryDefined; }
-         set { this.SetProperty(ref this._IsLibraryDefined, value); }
+         get { return this._HasntLibraries; }
+         set { this.SetProperty(ref this._HasntLibraries, value); }
       }
       #endregion
 

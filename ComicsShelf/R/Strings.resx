@@ -133,7 +133,7 @@
     <value>Open</value>
   </data>
   <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
-    <value>Featured Comics</value>
+    <value>Featured</value>
   </data>
   <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
     <value>All Comics</value>
@@ -156,14 +156,20 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Top Rated Comics</value>
   </data>
+  <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
+    <value>This folder has no CBZ files. Choose a valid folder containing some comic book files on it.</value>
+  </data>
   <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
     <value>Comic Books Library</value>
   </data>
   <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
     <value>Library</value>
   </data>
+  <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
-    <value>Click here to select the folder for the library</value>
+    <value>Add folder for the Library</value>
   </data>
   <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
     <value>You may legally and freely download some public domain comics on the the following site</value>

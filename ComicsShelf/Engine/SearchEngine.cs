@@ -197,7 +197,7 @@ namespace ComicsShelf.Engine
             }
 
             // COMIC SECTIONS
-            this.Notify("Loading Sections", 0.9);
+            this.Notify("Loading Sections", 0.8);
             var comicSections = comicFolders
                .GroupBy(x => x.ParentPath)
                .Select(x => x.FirstOrDefault())

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
@@ -6,64 +7,60 @@ namespace ComicsShelf.Engine
    internal class Library : BaseEngine
    {
 
-      #region Execute
-      public static async Task<bool> Execute()
+      #region NewLibrary
+      internal static async Task<Helpers.Database.Library> NewLibrary()
       {
          try
          {
-            var result = false;
-            using (var engine = new Library())
+            using (var fileSystem = Helpers.FileSystem.Get())
             {
-               result = await engine.DefineLibraryPath();
-               if (result) {
-                  App.HomeData.ClearAll();
-                  await Engine.Search.Execute();
-               }
+
+               // DEFINE LIBRARY PATH
+               var library = new Helpers.Database.Library();
+               library.LibraryPath = await fileSystem.GetLibraryPath();
+
+               // VALIDATE 
+               await fileSystem.ValidateLibraryPath(library);
+               if (!library.Available)
+               { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
+
+               // RESULT
+               App.Database.Insert(library);
+               await RefreshLibrary();
+               return library;
+
             }
-            return result;
          }
-         catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return null; }
       }
       #endregion
 
-      #region DefineLibraryPath
-      private async Task<bool> DefineLibraryPath()
+      #region RemoveLibrary
+      internal static async Task RemoveLibrary(Helpers.Database.Library library)
       {
          try
          {
-
-            /* LOAD CONFIGS DATA */
-            Helpers.Database.Configs configs = null;
-            await Task.Run(() =>
-            {
-               var configsTable = App.Database.Table<Helpers.Database.Configs>();
-               configs = configsTable.FirstOrDefault();
-               if (configs == null)
-               {
-                  configs = new Helpers.Database.Configs();
-                  App.Database.Insert(configs);
-               }
-            });
-
-            /* DEFINE COMICS PATH */
-            configs.LibraryPath = await this.FileSystem.GetLibraryPath();
-
-            /* VALIDATE COMICS PATH */
-            var validateLibraryPath = await this.FileSystem.ValidateLibraryPath(configs.LibraryPath);
-
-            /* STORE DATA */
-            if (validateLibraryPath)
-            {
-               await Task.Run(() =>
-               {
-                  App.Database.Update(configs);
-                  App.Settings.Paths.LibraryPath = configs.LibraryPath;
-               });
-            }
-
-            return validateLibraryPath;
+            App.Database.Delete(library);
+            await RefreshLibrary();
          }
-         catch (Exception ex) { throw; }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+      #endregion
+
+      #region RefreshLibrary
+      private static async Task RefreshLibrary()
+      {
+         await Task.Run(() =>
+         {
+            var libraries = App.Database.Table<Helpers.Database.Library>();
+            App.Settings.Paths.LibrariesPath = libraries
+               .Where(x => x.Available == true)
+               .Select(x => x.LibraryPath)
+               .ToArray();
+            App.Settings.Paths.LibraryPath = App.Settings.Paths.LibrariesPath.FirstOrDefault();
+         });
+         App.HomeData.ClearAll();
+         Task.Factory.StartNew(Engine.Search.Execute, TaskCreationOptions.LongRunning);
       }
       #endregion
 
