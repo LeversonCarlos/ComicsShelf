@@ -111,15 +111,24 @@ namespace ComicsShelf.Views.Home
       {
          try
          {
+
+            if (this.FolderSections.Count != 0)
+            { this.FolderSections.ReplaceRange(new List<Folder.FolderData>()); }
+
             if (this.Folders.Count != 0)
             { this.Folders.ReplaceRange(new List<Folder.FolderData>()); }
 
             if (this.Files.Count != 0)
             { this.Files.ReplaceRange(new List<File.FileData>()); }
 
-            if (this.ReadingFiles.Count != 0) { this.ReadingFiles.Clear(); }
-            if (this.RecentFiles.Count != 0) { this.RecentFiles.Clear(); }
-            if (this.TopRatedFiles.Count != 0) { this.TopRatedFiles.Clear(); }
+            if (this.ReadingFiles.Count != 0)
+            { this.ReadingFiles.ReplaceRange(new List<File.FileData>()); }
+
+            if (this.RecentFiles.Count != 0)
+            { this.RecentFiles.ReplaceRange(new List<File.FileData>()); }
+
+            if (this.TopRatedFiles.Count != 0)
+            { this.TopRatedFiles.ReplaceRange(new List<File.FileData>()); }
 
          }
          catch { }

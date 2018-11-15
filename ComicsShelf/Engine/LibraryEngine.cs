@@ -32,36 +32,29 @@ namespace ComicsShelf.Engine
          try
          {
 
-            /* LOAD CONFIGS DATA */
-            Helpers.Database.Configs configs = null;
-            await Task.Run(() =>
+            /* LIBRARIES */
+            var libraries = App.Database.Table<Helpers.Database.Library>();
+
+            /* LOAD DATA */
+            var library = libraries.FirstOrDefault();
+            if (library == null)
             {
-               var configsTable = App.Database.Table<Helpers.Database.Configs>();
-               configs = configsTable.FirstOrDefault();
-               if (configs == null)
-               {
-                  configs = new Helpers.Database.Configs();
-                  App.Database.Insert(configs);
-               }
-            });
-
-            /* DEFINE COMICS PATH */
-            configs.LibraryPath = await this.FileSystem.GetLibraryPath();
-
-            /* VALIDATE COMICS PATH */
-            var validateLibraryPath = await this.FileSystem.ValidateLibraryPath(configs.LibraryPath);
-
-            /* STORE DATA */
-            if (validateLibraryPath)
-            {
-               await Task.Run(() =>
-               {
-                  App.Database.Update(configs);
-                  App.Settings.Paths.LibraryPath = configs.LibraryPath;
-               });
+               library = new Helpers.Database.Library { Available = false };
+               App.Database.Insert(library);
             }
 
-            return validateLibraryPath;
+            /* DEFINE COMICS PATH */
+            library.LibraryPath = await this.FileSystem.GetLibraryPath();
+            library.Available = await this.FileSystem.ValidateLibraryPath(library.LibraryPath);
+
+            /* STORE DATA */
+            if (library.Available)
+            {
+               App.Database.Update(library);
+               App.Settings.Paths.LibraryPath = library.LibraryPath;
+            }
+
+            return library.Available;
          }
          catch (Exception ex) { throw; }
       }

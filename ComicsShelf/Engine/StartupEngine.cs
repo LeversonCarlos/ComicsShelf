@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SQLite;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
@@ -98,33 +100,47 @@ namespace ComicsShelf.Engine
          {
             this.Notify(R.Strings.STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE);
 
-            /* LOAD CONFIGS DATA */
-            Helpers.Database.Configs configs = null;
+            /* LIBRARIES */
+            TableQuery<Helpers.Database.Library> libraries = null;
+            await Task.Run(() => { libraries = App.Database.Table<Helpers.Database.Library>(); });
+
+            /* CONVERT LIBRARY CONFIG TO LIBRARY TABLE */
             await Task.Run(() =>
             {
-               var configsTable = App.Database.Table<Helpers.Database.Configs>();
-               configs = configsTable.FirstOrDefault();
-               if (configs == null)
+               if (libraries.Count() == 0)
                {
-                  configs = new Helpers.Database.Configs();
-                  App.Database.Insert(configs);
+                  var configsTable = App.Database.Table<Helpers.Database.Configs>();
+                  var configs = configsTable.FirstOrDefault();
+                  if (configs != null)
+                  {
+                     var library = new Helpers.Database.Library();
+                     library.LibraryPath = configs.LibraryPath;
+                     App.Database.Insert(library);
+                  }
                }
             });
 
-            /* VALIDATE COMICS PATH */
-            var validateLibraryPath = await this.FileSystem.ValidateLibraryPath(configs.LibraryPath);
-
-            /* STORE DATA */
-            if (validateLibraryPath)
+            /* VALIDATE LIBRARIES */
+            await Task.Run(async () =>
             {
-               await Task.Run(() =>
+               foreach (var library in libraries)
                {
-                  App.Database.Update(configs);
-                  App.Settings.Paths.LibraryPath = configs.LibraryPath;
-               });
-            }
+                  library.Available = await this.FileSystem.ValidateLibraryPath(library.LibraryPath);
+                  App.Database.Update(library);
+               }
+            });
 
-            return validateLibraryPath;
+            /* RESULT */
+            await Task.Run(() =>
+            {
+               App.Settings.Paths.LibrariesPath = libraries
+                  .Where(x => x.Available == true)
+                  .Select(x => x.LibraryPath)
+                  .ToArray();
+               App.Settings.Paths.LibraryPath = App.Settings.Paths.LibrariesPath.FirstOrDefault();
+            });
+            return !string.IsNullOrEmpty(App.Settings.Paths.LibraryPath);
+
          }
          catch (Exception ex) { throw; }
       }
