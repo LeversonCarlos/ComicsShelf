@@ -8,7 +8,7 @@ namespace ComicsShelf.Helpers.Controls
       public EngineProgressView()
       {
          this.VerticalOptions = LayoutOptions.FillAndExpand;
-         this.Padding = new Thickness(10);
+         this.Padding = new Thickness(50, 10);
 
          this.TextLabel = new Label
          {

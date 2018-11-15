@@ -106,7 +106,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Featured Comics.
+        ///   Looks up a localized string similar to Featured.
         /// </summary>
         internal static string HOME_FEATURED_PAGE_TITLE {
             get {

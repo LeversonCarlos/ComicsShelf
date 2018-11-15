@@ -14,18 +14,20 @@
             <controls:PrimaryButton Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding AddLibraryTappedCommand}" HorizontalOptions="Center" />
          </StackLayout>
 
-         <controls:RepeaterView ItemsSource="{Binding Data.Libraries}" HorizontalOptions="CenterAndExpand" >
+         <controls:RepeaterView ItemsSource="{Binding Data.Libraries}" HorizontalOptions="CenterAndExpand" Spacing="5" >
             <controls:RepeaterView.ItemTemplate>
                <DataTemplate>
-                  <StackLayout Orientation="Horizontal" >
-                     <Label Text="{Binding LibraryText}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontAttributes="Bold"></Label>
-                     <controls:PrimaryButton 
-                        Text="{controls:Translate Text=LIBRARY_REMOVE_LIBRARY_COMMAND}" 
-                        Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
-                        CommandParameter="{Binding .}"
-                        HorizontalOptions="End">
-                     </controls:PrimaryButton>
-                  </StackLayout>
+                  <Frame>
+                     <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="20,0" Spacing="20" >
+                        <Label Text="{Binding LibraryText}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="Medium" FontAttributes="Bold"></Label>
+                        <controls:PrimaryButton 
+                           Text="{controls:Translate Text=LIBRARY_REMOVE_LIBRARY_COMMAND}" 
+                           Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
+                           CommandParameter="{Binding .}"
+                           HorizontalOptions="End" FontSize="Small" >
+                        </controls:PrimaryButton>
+                     </StackLayout>
+                  </Frame>
                </DataTemplate>
             </controls:RepeaterView.ItemTemplate>
          </controls:RepeaterView>
