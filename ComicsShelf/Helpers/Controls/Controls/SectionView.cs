@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -142,9 +143,17 @@ namespace ComicsShelf.Helpers.Controls
             return new Command(async (commandParameter) =>
             {
                var itemView = (View)commandParameter;
-               await itemView.FadeTo(0.5, 100, Easing.SinOut);
-               await itemView.FadeTo(1.0, 300, Easing.SinIn);
-               await System.Threading.Tasks.Task.Run(() => Device.BeginInvokeOnMainThread(() => this.ItemTappedCommand?.Execute(itemView.BindingContext)));
+               
+               await Task.WhenAll(
+                  itemView.FadeTo(0.50, 250, Easing.SinIn),
+                  itemView.RelScaleTo(0.50, 250, Easing.SinIn)
+               );
+               Device.BeginInvokeOnMainThread(() => this.ItemTappedCommand.Execute(itemView.BindingContext));
+               await Task.WhenAll(
+                  itemView.RelScaleTo(1.00, 250, Easing.SinOut),
+                  itemView.FadeTo(1.00, 250, Easing.SinOut)
+               );
+
             });
          }
       }
