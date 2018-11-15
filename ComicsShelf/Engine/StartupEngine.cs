@@ -104,22 +104,6 @@ namespace ComicsShelf.Engine
             TableQuery<Helpers.Database.Library> libraries = null;
             await Task.Run(() => { libraries = App.Database.Table<Helpers.Database.Library>(); });
 
-            /* CONVERT LIBRARY CONFIG TO LIBRARY TABLE */
-            await Task.Run(() =>
-            {
-               if (libraries.Count() == 0)
-               {
-                  var configsTable = App.Database.Table<Helpers.Database.Configs>();
-                  var configs = configsTable.FirstOrDefault();
-                  if (configs != null)
-                  {
-                     var library = new Helpers.Database.Library();
-                     library.LibraryPath = configs.LibraryPath;
-                     App.Database.Insert(library);
-                  }
-               }
-            });
-
             /* VALIDATE LIBRARIES */
             await Task.Run(async () =>
             {

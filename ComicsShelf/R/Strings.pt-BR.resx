@@ -162,8 +162,11 @@
   <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
     <value>Biblioteca</value>
   </data>
+  <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
+    <value>Remover</value>
+  </data>
   <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
-    <value>Clique aqui para selecionar a pasta para a biblioteca</value>
+    <value>Adicionar pasta para a Biblioteca</value>
   </data>
   <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
     <value>Você pode gratuita e legalmente baixar alguns quadrinhos de domínio público no site a seguir</value>

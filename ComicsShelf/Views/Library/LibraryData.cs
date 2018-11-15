@@ -20,51 +20,31 @@ namespace ComicsShelf.Views.Library
 
       public Helpers.Observables.ObservableList<LibraryDataItem> Libraries { get; set; }
 
+      private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+      {
+         this.HasLibraries = this.Libraries.Count != 0;
+         this.HasntLibraries = (this.Libraries.Count == 0);
+      }
+
+      #endregion
+
+      #region HasLibraries
       bool _HasLibraries;
       public bool HasLibraries
       {
          get { return this._HasLibraries; }
          set { this.SetProperty(ref this._HasLibraries, value); }
       }
-
-      private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      { this.HasLibraries = this.Libraries.Count != 0; }
-
       #endregion
 
-
-      #region LibraryPath
-      string _LibraryPath;
-      public string LibraryPath
+      #region HasntLibraries
+      bool _HasntLibraries;
+      public bool HasntLibraries
       {
-         get { return this._LibraryPath; }
-         set
-         {
-            this.SetProperty(ref this._LibraryPath, value);
-            this.IsLibraryEmpty = string.IsNullOrEmpty(value);
-            this.IsLibraryDefined = !string.IsNullOrEmpty(value);
-         }
+         get { return this._HasntLibraries; }
+         set { this.SetProperty(ref this._HasntLibraries, value); }
       }
       #endregion
-
-      #region IsLibraryEmpty
-      bool _IsLibraryEmpty;
-      public bool IsLibraryEmpty
-      {
-         get { return this._IsLibraryEmpty; }
-         set { this.SetProperty(ref this._IsLibraryEmpty, value); }
-      }
-      #endregion
-
-      #region IsLibraryDefined
-      bool _IsLibraryDefined;
-      public bool IsLibraryDefined
-      {
-         get { return this._IsLibraryDefined; }
-         set { this.SetProperty(ref this._IsLibraryDefined, value); }
-      }
-      #endregion
-
 
    }
 }

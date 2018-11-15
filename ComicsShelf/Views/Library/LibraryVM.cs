@@ -12,7 +12,7 @@ namespace ComicsShelf.Views.Library
       {
          this.Title = R.Strings.LIBRARY_MAIN_TITLE; ;
          this.ViewType = typeof(LibraryView);
-         this.Data = new LibraryData { LibraryPath = App.Settings.Paths.LibraryPath };
+         this.Data = new LibraryData();
          this.AddLibraryTappedCommand = new Command(async (item) => await this.AddLibraryTapped(item));
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
          this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
@@ -44,8 +44,8 @@ namespace ComicsShelf.Views.Library
          try
          {
             var library = (item as LibraryDataItem);
-            App.Database.Delete(library.Library);
             this.Data.Libraries.Remove(library);
+            await Engine.Library.RemoveLibrary(library.Library);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }

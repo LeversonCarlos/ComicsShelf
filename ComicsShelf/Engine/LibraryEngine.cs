@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
@@ -80,8 +81,7 @@ namespace ComicsShelf.Engine
 
                // RESULT
                App.Database.Insert(library);
-               App.HomeData.ClearAll();
-               Engine.Search.Execute();
+               await RefreshLibrary();
                return library;
 
             }
@@ -95,14 +95,27 @@ namespace ComicsShelf.Engine
       {
          try
          {
-
-            // RESULT
             App.Database.Delete(library);
-            App.HomeData.ClearAll();
-            Engine.Search.Execute();
-
+            await RefreshLibrary();
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+      #endregion
+
+      #region RefreshLibrary
+      private static async Task RefreshLibrary()
+      {
+         await Task.Run(() =>
+         {
+            var libraries = App.Database.Table<Helpers.Database.Library>();
+            App.Settings.Paths.LibrariesPath = libraries
+               .Where(x => x.Available == true)
+               .Select(x => x.LibraryPath)
+               .ToArray();
+            App.Settings.Paths.LibraryPath = App.Settings.Paths.LibrariesPath.FirstOrDefault();
+         });
+         App.HomeData.ClearAll();
+         Task.Run(async () => Engine.Search.Execute());
       }
       #endregion
 

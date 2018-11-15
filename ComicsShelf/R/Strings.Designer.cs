@@ -196,7 +196,16 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to select the folder for the library.
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string LIBRARY_REMOVE_LIBRARY_COMMAND {
+            get {
+                return ResourceManager.GetString("LIBRARY_REMOVE_LIBRARY_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add folder for the Library.
         /// </summary>
         internal static string LIBRARY_SELECT_FOLDER_COMMAND {
             get {

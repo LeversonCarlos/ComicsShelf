@@ -162,8 +162,11 @@
   <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
     <value>Library</value>
   </data>
+  <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
-    <value>Click here to select the folder for the library</value>
+    <value>Add folder for the Library</value>
   </data>
   <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
     <value>You may legally and freely download some public domain comics on the the following site</value>
