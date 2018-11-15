@@ -156,6 +156,9 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Top Rated Comics</value>
   </data>
+  <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
+    <value>This folder has no CBZ files. Choose a valid folder containing some comic book files on it.</value>
+  </data>
   <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
     <value>Comic Books Library</value>
   </data>

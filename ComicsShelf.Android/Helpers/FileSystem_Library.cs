@@ -7,6 +7,7 @@ namespace ComicsShelf.Droid
 
       public async Task<bool> ValidateLibraryPath(Helpers.Database.Library library)
       {
+         library.Available = false;
          if (string.IsNullOrEmpty(library.LibraryPath)) { return false; }
          if (!await Task.Run(() => System.IO.Directory.Exists(library.LibraryPath))) { return false; }
 

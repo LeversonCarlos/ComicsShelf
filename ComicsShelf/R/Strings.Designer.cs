@@ -178,6 +178,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This folder has no CBZ files. Choose a valid folder containing some comic book files on it..
+        /// </summary>
+        internal static string LIBRARY_INVALID_FOLDER_MESSAGE {
+            get {
+                return ResourceManager.GetString("LIBRARY_INVALID_FOLDER_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comic Books Library.
         /// </summary>
         internal static string LIBRARY_MAIN_LABEL {

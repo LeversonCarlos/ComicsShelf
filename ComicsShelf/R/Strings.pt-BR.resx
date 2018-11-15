@@ -156,6 +156,9 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Melhor Qualificado</value>
   </data>
+  <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
+    <value>Essa pasta não possui arquivos CBZ. Escolha uma pasta válida que contenha alguns arquivos de quadrinhos dentro dela.</value>
+  </data>
   <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
     <value>Biblioteca de Quadrinhos</value>
   </data>
