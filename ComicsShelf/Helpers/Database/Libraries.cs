@@ -12,6 +12,7 @@ namespace ComicsShelf.Helpers.Database
       [Indexed]
       public string LibraryPath { get; set; }
 
+      public string LibraryText { get; set; }
       public bool Available { get; set; }
       public int FileCount { get; set; }
 

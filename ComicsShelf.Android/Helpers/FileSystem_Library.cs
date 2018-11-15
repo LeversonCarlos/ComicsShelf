@@ -9,7 +9,14 @@ namespace ComicsShelf.Droid
       {
          if (string.IsNullOrEmpty(library.LibraryPath)) { return false; }
          if (!await Task.Run(() => System.IO.Directory.Exists(library.LibraryPath))) { return false; }
-         return true;
+
+         await Task.Run(() => { library.LibraryText = System.IO.Path.GetDirectoryName(library.LibraryPath); });
+
+         var libraryFiles = await this.GetFiles(library.LibraryPath);
+         library.FileCount = libraryFiles.Length;
+         library.Available = (library.FileCount != 0);
+
+         return library.Available;
       }
 
       public async Task<string> GetLibraryPath()
