@@ -37,18 +37,20 @@
                            </controls:SectionView.ItemTemplate>
                         </controls:SectionView>
 
-                        <!--
-                        <controls:EngineProgressView
-                           IsVisible="{Binding NotifyData.IsRunning}" 
-                           Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
-                        </controls:EngineProgressView>
-                        <controls:EmptyLibraryView IsVisible="{Binding Data.NoComics}" ></controls:EmptyLibraryView>
-                        -->
-
                      </StackLayout>
                   </DataTemplate>
                </controls:RepeaterView.ItemTemplate>
             </controls:RepeaterView>
+
+            <StackLayout IsVisible="{Binding IsFeaturedPage}">
+               <controls:EngineProgressView
+                  IsVisible="{Binding NotifyData.IsRunning}" 
+                  Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
+               </controls:EngineProgressView>
+               <!-- 
+               <controls:EmptyLibraryView IsVisible="{Binding Data.NoComics}" ></controls:EmptyLibraryView>
+               -->
+            </StackLayout>
 
          </StackLayout>
       </ScrollView>

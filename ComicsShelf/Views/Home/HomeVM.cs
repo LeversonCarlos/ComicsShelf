@@ -25,22 +25,6 @@ namespace ComicsShelf.Views.Home
          this.Data = args;
          this.OpenLibraryCommand = new Command(async (item) => await this.OpenLibrary(item));
 
-         this.NotifyData = new Engine.BaseData();
-         Helpers.Controls.Messaging.Subscribe<Engine.BaseData>(Helpers.Controls.Messaging.Keys.SearchEngine, (data) => {
-            this.NotifyData.Text = data.Text;
-            this.NotifyData.Details = data.Details;
-            this.NotifyData.Progress = data.Progress;
-            this.NotifyData.IsRunning = data.IsRunning;
-         });
-      }
-      #endregion
-
-      #region NotifyData
-      Engine.BaseData _NotifyData;
-      public Engine.BaseData NotifyData
-      {
-         get { return this._NotifyData; }
-         set { this.SetProperty(ref this._NotifyData, value); }
       }
       #endregion
 

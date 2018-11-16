@@ -11,6 +11,9 @@ namespace ComicsShelf.Views.Home
       {
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
+         this.NotifyData = new Engine.BaseData();
+         Helpers.Controls.Messaging.Subscribe<Engine.BaseData>(Helpers.Controls.Messaging.Keys.SearchEngine, this.OnNotifyDataChanged);
+
       }
 
       public Command FileTappedCommand { get; set; }
@@ -34,6 +37,20 @@ namespace ComicsShelf.Views.Home
       {
          get { return this._IsFeaturedPage; }
          set { this.SetProperty(ref this._IsFeaturedPage, value); }
+      }
+
+      Engine.BaseData _NotifyData;
+      public Engine.BaseData NotifyData
+      {
+         get { return this._NotifyData; }
+         set { this.SetProperty(ref this._NotifyData, value); }
+      }
+      private void OnNotifyDataChanged(Engine.BaseData data)
+      {
+         this.NotifyData.Text = data.Text;
+         this.NotifyData.Details = data.Details;
+         this.NotifyData.Progress = data.Progress;
+         this.NotifyData.IsRunning = data.IsRunning;
       }
 
    }
