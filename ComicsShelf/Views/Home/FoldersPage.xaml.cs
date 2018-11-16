@@ -9,7 +9,7 @@ namespace ComicsShelf.Views.Home
       public FoldersPage()
       {
          InitializeComponent();
-         this.Title = R.Strings.HOME_FOLDERS_PAGE_TITLE;
+         // this.Title = R.Strings.HOME_FOLDERS_PAGE_TITLE;
       }
    }
 }
