@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Class="ComicsShelf.Views.Home.LibraryPage">
+   <ContentPage.Content>
+      <ScrollView Style="{StaticResource CoverListMainView}" >
+         <StackLayout Style="{StaticResource CoverListMainLayout}" >
+
+            <controls:RepeaterView ItemsSource="{Binding Folders}">
+               <controls:RepeaterView.ItemTemplate>
+                  <DataTemplate>
+                     <StackLayout>
+
+                        <controls:SectionView
+                           Title="{Binding Text}" IsVisible="{Binding HasFiles}" ItemsSource="{Binding Files}"
+                           ItemTappedCommand="{Binding BindingContext.FileTappedCommand, Source={x:Reference MyLibraryContent}}">
+                           <controls:SectionView.ItemTemplate>
+                              <DataTemplate>
+                                 <controls:CoverFrameView 
+                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" >
+                                 </controls:CoverFrameView>
+                              </DataTemplate>
+                           </controls:SectionView.ItemTemplate>
+                        </controls:SectionView>
+
+                        <controls:SectionView
+                           Title="{Binding Text}" IsVisible="{Binding HasFolders}" ItemsSource="{Binding Folders}"
+                           ItemTappedCommand="{Binding BindingContext.FolderTappedCommand, Source={x:Reference MyLibraryContent}}">
+                           <controls:SectionView.ItemTemplate>
+                              <DataTemplate>
+                                 <controls:CoverFrameView 
+                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" >
+                                 </controls:CoverFrameView>
+                              </DataTemplate>
+                           </controls:SectionView.ItemTemplate>
+                        </controls:SectionView>
+
+                     </StackLayout>
+                  </DataTemplate>
+               </controls:RepeaterView.ItemTemplate>
+            </controls:RepeaterView>
+
+            <StackLayout IsVisible="{Binding IsFeaturedPage}" >
+               <controls:EngineProgressView
+                  IsVisible="{Binding NotifyData.IsRunning}" 
+                  Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
+               </controls:EngineProgressView>
+               <controls:EmptyLibraryView IsVisible="{Binding IsEmptyLibrary}" ></controls:EmptyLibraryView>
+            </StackLayout>
+
+         </StackLayout>
+      </ScrollView>
+   </ContentPage.Content>
+</ContentPage>

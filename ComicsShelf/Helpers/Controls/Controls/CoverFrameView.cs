@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
@@ -43,6 +44,8 @@ namespace ComicsShelf.Helpers.Controls
             Children = { this.Image, this.Label, this.ProgressBar }
          };
 
+         Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
+         this.OnScreenSizeChanged(((NavPage)App.Current.MainPage).ScreenSize);
       }
       #endregion
 
@@ -86,6 +89,15 @@ namespace ComicsShelf.Helpers.Controls
       }
       private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as CoverFrameView).ProgressBar.Progress = (double)newValue; }
+      #endregion
+
+      #region OnScreenSizeChanged
+      private void OnScreenSizeChanged(Size screenSize)
+      {
+         var fileColumns = (int)Math.Ceiling(screenSize.Width / (double)160);
+         var frameMargins = (double)((fileColumns + 1) * 10);
+         this.WidthRequest = (screenSize.Width - frameMargins) / (double)fileColumns;
+      }
       #endregion
 
    }

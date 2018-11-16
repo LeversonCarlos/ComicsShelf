@@ -5,7 +5,7 @@ namespace ComicsShelf.Helpers.Controls
    internal class Messaging
     {
 
-      public enum Keys : short { SearchEngine = 0, PageTapped = 1 }
+      public enum Keys : short { SearchEngine = 0, PageTapped = 1, ScreenSizeChanged = 2 }
 
       public static void Send(Keys message)
       {

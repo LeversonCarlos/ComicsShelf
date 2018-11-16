@@ -16,7 +16,6 @@ namespace ComicsShelf.Views.Folder
          this.Data = args;
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
-         this.SizeChanged += this.OnSizeChanged;
       }
       #endregion
 
@@ -38,24 +37,6 @@ namespace ComicsShelf.Views.Folder
          try
          { await PushAsync<File.FileVM>((File.FileData)item); }
          catch (Exception ex) { await App.ShowMessage(ex); }
-      }
-      #endregion
-
-      #region CoverWidthRequest
-      double _CoverWidthRequest;
-      public double CoverWidthRequest
-      {
-         get { return this._CoverWidthRequest; }
-         set { this.SetProperty(ref this._CoverWidthRequest, value); }
-      }
-      #endregion
-
-      #region OnSizeChanged
-      private void OnSizeChanged(object sender, EventArgs e)
-      {
-         var fileColumns = (int)Math.Ceiling(this.ScreenSize.Width / (double)160);
-         var frameMargins = (double)((fileColumns + 1) * 10);
-         this.CoverWidthRequest = (this.ScreenSize.Width - frameMargins) / (double)fileColumns;
       }
       #endregion
 

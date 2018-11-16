@@ -54,7 +54,7 @@ namespace ComicsShelf.UWP
          catch (Exception ex) { throw; }
       }
 
-      private async Task<Windows.Storage.StorageFile> GetStorageFile(ComicsShelf.Helpers.Settings.Settings settings, string fullPath)
+      private async Task<Windows.Storage.StorageFile> GetStorageFile(ComicsShelf.Helpers.Settings.Settings settings, string libraryPath, string fullPath)
       {
          try
          {
@@ -64,9 +64,9 @@ namespace ComicsShelf.UWP
                .Split(new string[] { settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
             Windows.Storage.StorageFolder storageFolder = null;
-            if (settings.Paths.LibraryPath.Contains(this.PathSeparator))
-            { storageFolder = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(settings.Paths.LibraryPath); }
-            else { storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync(settings.Paths.LibraryPath); }
+            if (libraryPath.Contains(this.PathSeparator))
+            { storageFolder = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(libraryPath); }
+            else { storageFolder = await Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.GetFolderAsync(libraryPath); }
             StorageFile storageFile = null;
 
             // LOOP THROUGH SPLITED PATH PARTS

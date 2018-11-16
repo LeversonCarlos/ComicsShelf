@@ -4,13 +4,12 @@
    {
 
       #region New
-      internal Helpers.Database.ComicFile ComicFile { get; set; }
+      public Helpers.Database.ComicFile ComicFile { get; set; }
       internal FileData(Helpers.Database.ComicFile _ComicFile)
       {
          this.ComicFile = _ComicFile;
          this.FullText = this.ComicFile.FullText;
          this.SmallText = this.ComicFile.SmallText;
-         // this.CoverPath = this.ComicFile.CoverPath;
          this.FullPath = this.ComicFile.FullPath;
          this.Readed = this.ComicFile.Readed;
          this.ReadingPage = this.ComicFile.ReadingPage;

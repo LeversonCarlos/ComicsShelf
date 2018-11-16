@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Views.Home
 {
@@ -10,16 +12,7 @@ namespace ComicsShelf.Views.Home
       {
          this.NoComics = true;
 
-         this.RecentFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.RecentFiles.ObservableCollectionChanged += this.RecentFiles_CollectionChanged;
-
-         this.ReadingFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.ReadingFiles.ObservableCollectionChanged += this.ReadingFiles_CollectionChanged;
-
-         this.TopRatedFiles = new Helpers.Observables.ObservableList<File.FileData>();
-         this.TopRatedFiles.ObservableCollectionChanged += this.TopRatedFiles_CollectionChanged;
-
-         this.FolderSections = new Helpers.Observables.ObservableList<Folder.FolderData>();
+         this.Libraries = new Helpers.Observables.ObservableList<LibraryData>();
          this.Files.ObservableCollectionChanged += this.Files_CollectionChanged;
       }
       #endregion
@@ -34,55 +27,39 @@ namespace ComicsShelf.Views.Home
       }
       #endregion
 
+      #region Featured
 
-      #region RecentFiles
+      private LibraryData FeaturedLibrary()
+      { return this.Libraries.Where(x => x.IsFeaturedPage).FirstOrDefault(); } 
 
-      public Helpers.Observables.ObservableList<File.FileData> RecentFiles { get; set; }
-      private void RecentFiles_CollectionChanged(object sender, System.EventArgs e)
-      { this.HasRecentFiles = this.RecentFiles.Count != 0; }
-
-      bool _HasRecentFiles;
-      public bool HasRecentFiles
+      private Folder.FolderData FeaturedSection(string featuredSectionName)
       {
-         get { return this._HasRecentFiles; }
-         set { this.SetProperty(ref this._HasRecentFiles, value); }
+         var featuredLibrary = this.FeaturedLibrary();
+         if (featuredLibrary == null) { return null; }
+         return featuredLibrary.Folders.Where(x => x.ComicFolder.Key == featuredSectionName).FirstOrDefault();
       }
+
+      private Helpers.Observables.ObservableList<File.FileData> FeaturedSectionFiles(string featuredSectionName)
+      {
+         var featuredSection = this.FeaturedSection(featuredSectionName);
+         if (featuredSection == null) { return new Helpers.Observables.ObservableList<File.FileData>(); }
+         return featuredSection.Files;
+      }
+
+      public Helpers.Observables.ObservableList<File.FileData> RecentFiles
+      { get { return this.FeaturedSectionFiles("RECENT_FILES"); } }
+
+      public Helpers.Observables.ObservableList<File.FileData> ReadingFiles
+      { get { return this.FeaturedSectionFiles("READING_FILES"); } }
+
+      public Helpers.Observables.ObservableList<File.FileData> TopRatedFiles
+      { get { return this.FeaturedSectionFiles("TOP_RATED_FILES"); } }
 
       #endregion
 
-      #region ReadingFiles
+      #region Libraries
 
-      public Helpers.Observables.ObservableList<File.FileData> ReadingFiles { get; set; }
-      private void ReadingFiles_CollectionChanged(object sender, System.EventArgs e)
-      { this.HasReadingFiles = this.ReadingFiles.Count != 0; }
-
-      bool _HasReadingFiles;
-      public bool HasReadingFiles
-      {
-         get { return this._HasReadingFiles; }
-         set { this.SetProperty(ref this._HasReadingFiles, value); }
-      }
-
-      #endregion
-
-      #region TopRatedFiles
-
-      public Helpers.Observables.ObservableList<File.FileData> TopRatedFiles { get; set; }
-      private void TopRatedFiles_CollectionChanged(object sender, System.EventArgs e)
-      { this.HasTopRatedFiles = this.TopRatedFiles.Count != 0; }
-
-      bool _HasTopRatedFiles;
-      public bool HasTopRatedFiles
-      {
-         get { return this._HasTopRatedFiles; }
-         set { this.SetProperty(ref this._HasTopRatedFiles, value); }
-      }
-
-      #endregion
-
-      #region FolderSections
-
-      public Helpers.Observables.ObservableList<Folder.FolderData> FolderSections { get; set; }
+      public Helpers.Observables.ObservableList<LibraryData> Libraries { get; set; }
 
       #endregion
 
@@ -112,8 +89,22 @@ namespace ComicsShelf.Views.Home
          try
          {
 
-            if (this.FolderSections.Count != 0)
-            { this.FolderSections.ReplaceRange(new List<Folder.FolderData>()); }
+            if (this.Libraries.Count != 0)
+            {
+               this.Libraries
+                  .ForEach(library =>
+                  {
+                     library.Folders
+                        .ForEach(section =>
+                        {
+                           section.Folders.Clear();
+                           section.Files.Clear();
+                        });
+                     library.Folders.Clear();
+                  });
+               this.Libraries.Clear();
+            }
+            this.Libraries.Add(new FeaturedData());
 
             if (this.Folders.Count != 0)
             { this.Folders.ReplaceRange(new List<Folder.FolderData>()); }
@@ -121,17 +112,8 @@ namespace ComicsShelf.Views.Home
             if (this.Files.Count != 0)
             { this.Files.ReplaceRange(new List<File.FileData>()); }
 
-            if (this.ReadingFiles.Count != 0)
-            { this.ReadingFiles.ReplaceRange(new List<File.FileData>()); }
-
-            if (this.RecentFiles.Count != 0)
-            { this.RecentFiles.ReplaceRange(new List<File.FileData>()); }
-
-            if (this.TopRatedFiles.Count != 0)
-            { this.TopRatedFiles.ReplaceRange(new List<File.FileData>()); }
-
          }
-         catch { }
+         catch (System.Exception ex) { throw ex; }
       }
       #endregion
 

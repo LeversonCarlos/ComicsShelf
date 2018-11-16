@@ -85,7 +85,7 @@ namespace ComicsShelf.Engine
             await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
 
             // START SEARCH ENGINE
-            await Task.Factory.StartNew(Engine.Search.Execute, TaskCreationOptions.LongRunning);
+            await Engine.Library.Refresh();
 
          }
          catch (Exception ex) { throw; }

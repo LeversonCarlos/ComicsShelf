@@ -106,6 +106,7 @@ namespace ComicsShelf.Helpers.Controls
             this.Items.Children.Clear();
 
             // LOAD CURRENT ITEMS LIST
+            if (this.ItemsSource == null) { return; }
             var itemsList = ((IEnumerable<object>)this.ItemsSource).ToList();
             if (itemsList == null || itemsList.Count == 0) { return; }
 

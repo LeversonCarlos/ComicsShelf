@@ -5,7 +5,7 @@
     <Product>Comics Shelf</Product>
     <Company>Friendship Solutions</Company>
     <Copyright>Copyright © Friendship Solutions 2018</Copyright>
-    <Version>1.4.28</Version>
+    <Version>1.4.29</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Home\LibraryPage.xaml.cs">
+      <DependentUpon>LibraryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Library\LibraryView.xaml.cs">
       <DependentUpon>LibraryView.xaml</DependentUpon>
     </Compile>
