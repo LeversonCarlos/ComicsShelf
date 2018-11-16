@@ -20,7 +20,7 @@
    </TabbedPage.ToolbarItems>
    <TabbedPage.ItemTemplate>
       <DataTemplate>
-         <home:FoldersPage x:Name="MyLibraryContent" Title="{Binding Text}" />
+         <home:LibraryPage x:Name="MyLibraryContent" Title="{Binding Text}" />
       </DataTemplate>   
    </TabbedPage.ItemTemplate>
 </TabbedPage>

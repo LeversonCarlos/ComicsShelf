@@ -3,7 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
-   x:Class="ComicsShelf.Views.Home.FoldersPage">
+   x:Class="ComicsShelf.Views.Home.LibraryPage">
    <ContentPage.Content>
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
