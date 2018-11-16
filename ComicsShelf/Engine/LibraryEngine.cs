@@ -7,8 +7,8 @@ namespace ComicsShelf.Engine
    internal class Library : BaseEngine
    {
 
-      #region NewLibrary
-      internal static async Task<Helpers.Database.Library> NewLibrary()
+      #region AddNew
+      internal static async Task<Helpers.Database.Library> AddNew()
       {
          try
          {
@@ -26,7 +26,7 @@ namespace ComicsShelf.Engine
 
                // RESULT
                App.Database.Insert(library);
-               await RefreshLibrary();
+               await Refresh();
                return library;
 
             }
@@ -35,20 +35,20 @@ namespace ComicsShelf.Engine
       }
       #endregion
 
-      #region RemoveLibrary
-      internal static async Task RemoveLibrary(Helpers.Database.Library library)
+      #region Remove
+      internal static async Task Remove(Helpers.Database.Library library)
       {
          try
          {
             App.Database.Delete(library);
-            await RefreshLibrary();
+            await Refresh();
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion
 
-      #region RefreshLibrary
-      private static async Task RefreshLibrary()
+      #region Refresh
+      internal static async Task Refresh()
       {
          await Task.Run(() =>
          {

@@ -243,32 +243,6 @@ namespace ComicsShelf.Engine
                   });
             });
 
-            // FEATURED PAGE
-            var featuredFolder = new Helpers.Database.ComicFolder
-            { Key = "FEATURED", Text = R.Strings.HOME_FEATURED_PAGE_TITLE };
-            var featuredData = new Views.Home.LibraryData(featuredFolder);
-            featuredData.IsFeaturedPage = true;
-            featuredData.HasFolders = true;
-            App.HomeData.Libraries.Insert(0, featuredData);
-
-            var readingFiles = new Views.Folder.FolderData(new Helpers.Database.ComicFolder
-            { Key = "READING_FILES", Text = R.Strings.HOME_READING_FILES_SECTION_TITLE });
-            readingFiles.Files.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
-            { readingFiles.HasFiles = readingFiles.Files.Count != 0; };
-            featuredData.Folders.Add(readingFiles);
-
-            var recentFiles = new Views.Folder.FolderData(new Helpers.Database.ComicFolder
-            { Key = "RECENT_FILES", Text = R.Strings.HOME_RECENT_FILES_SECTION_TITLE});
-            recentFiles.Files.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
-            { recentFiles.HasFiles = recentFiles.Files.Count!=0; };
-            featuredData.Folders.Add(recentFiles);
-
-            var topRatedFiles = new Views.Folder.FolderData(new Helpers.Database.ComicFolder
-            { Key = "TOP_RATED_FILES", Text = R.Strings.HOME_TOP_RATED_SECTION_TITLE});
-            topRatedFiles.Files.CollectionChanged += (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
-            { topRatedFiles.HasFiles = topRatedFiles.Files.Count != 0; };
-            featuredData.Folders.Add(topRatedFiles);
-
             this.Notify("Done", 1.0);
          }
          catch (Exception ex) { throw; }

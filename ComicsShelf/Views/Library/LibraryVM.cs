@@ -25,7 +25,7 @@ namespace ComicsShelf.Views.Library
       {
          try
          {
-            var library = await Engine.Library.NewLibrary();
+            var library = await Engine.Library.AddNew();
             if (library == null) { return; }
 
             this.Data.Libraries.Add(new LibraryDataItem(library));
@@ -45,7 +45,7 @@ namespace ComicsShelf.Views.Library
          {
             var library = (item as LibraryDataItem);
             this.Data.Libraries.Remove(library);
-            await Engine.Library.RemoveLibrary(library.Library);
+            await Engine.Library.Remove(library.Library);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }

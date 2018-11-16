@@ -88,7 +88,6 @@ namespace ComicsShelf.Views.Home
       {
          try
          {
-            // Xamarin.Forms.Device.BeginInvokeOnMainThread(() => { });
 
             if (this.Libraries.Count != 0)
             {
@@ -105,6 +104,7 @@ namespace ComicsShelf.Views.Home
                   });
                this.Libraries.Clear();
             }
+            this.Libraries.Add(new FeaturedData());
 
             if (this.Folders.Count != 0)
             { this.Folders.ReplaceRange(new List<Folder.FolderData>()); }
