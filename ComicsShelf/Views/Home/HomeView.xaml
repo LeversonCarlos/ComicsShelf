@@ -23,7 +23,4 @@
          <home:FoldersPage x:Name="MyLibraryContent" Title="{Binding Text}" />
       </DataTemplate>   
    </TabbedPage.ItemTemplate>
-   <TabbedPage.Children>
-      <home:FeaturedPage />
-   </TabbedPage.Children>
 </TabbedPage>

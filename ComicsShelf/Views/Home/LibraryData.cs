@@ -11,8 +11,6 @@ namespace ComicsShelf.Views.Home
       {
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
-         Helpers.Controls.Messaging.Subscribe<Size>(Helpers.Controls.Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
-         this.OnScreenSizeChanged(((Helpers.Controls.NavPage)App.Current.MainPage).ScreenSize);
       }
 
       public Command FileTappedCommand { get; set; }
@@ -36,20 +34,6 @@ namespace ComicsShelf.Views.Home
       {
          get { return this._IsFeaturedPage; }
          set { this.SetProperty(ref this._IsFeaturedPage, value); }
-      }
-
-      double _CoverWidthRequest;
-      public double CoverWidthRequest
-      {
-         get { return this._CoverWidthRequest; }
-         set { this.SetProperty(ref this._CoverWidthRequest, value); }
-      }
-
-      private void OnScreenSizeChanged(Size screenSize)
-      {
-         var fileColumns = (int)Math.Ceiling(screenSize.Width / (double)160);
-         var frameMargins = (double)((fileColumns + 1) * 10);
-         this.CoverWidthRequest = (screenSize.Width - frameMargins) / (double)fileColumns;
       }
 
    }

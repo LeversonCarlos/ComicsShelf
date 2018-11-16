@@ -19,8 +19,7 @@
                            <controls:SectionView.ItemTemplate>
                               <DataTemplate>
                                  <controls:CoverFrameView 
-                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" 
-                                    WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyLibraryContent}}">
+                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" >
                                  </controls:CoverFrameView>
                               </DataTemplate>
                            </controls:SectionView.ItemTemplate>
@@ -32,8 +31,7 @@
                            <controls:SectionView.ItemTemplate>
                               <DataTemplate>
                                  <controls:CoverFrameView 
-                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" 
-                                    WidthRequest="{Binding BindingContext.CoverWidthRequest, Source={x:Reference MyLibraryContent}}">
+                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" >
                                  </controls:CoverFrameView>
                               </DataTemplate>
                            </controls:SectionView.ItemTemplate>
