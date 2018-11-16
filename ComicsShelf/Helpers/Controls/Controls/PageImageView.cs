@@ -23,21 +23,19 @@ namespace ComicsShelf.Helpers.Controls
             NumberOfTapsRequired = 2
          });
 
+         Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
+         this.OnScreenSizeChanged(((NavPage)App.Current.MainPage).ScreenSize);
       }
       #endregion
 
 
       #region ScreenSize
-      public static readonly BindableProperty ScreenSizeProperty =
-         BindableProperty.Create("ScreenSize", typeof(Size), typeof(PageImageView), Size.Zero,
-         propertyChanged: OnScreenSizeChanged, defaultBindingMode: BindingMode.TwoWay);
-      public Size ScreenSize
+      public Size ScreenSize { get; set; }
+      private void OnScreenSizeChanged(Size screenSize)
       {
-         get { return (Size)GetValue(ScreenSizeProperty); }
-         set { SetValue(ScreenSizeProperty, value); }
+         this.ScreenSize = screenSize;
+         this.OnImageResize();
       }
-      private static void OnScreenSizeChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImageView).OnImageResize(); }
       #endregion
 
       #region ImageZoom

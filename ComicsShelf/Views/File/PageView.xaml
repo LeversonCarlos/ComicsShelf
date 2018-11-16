@@ -14,8 +14,7 @@
             <controls:PagesSwipeView.ItemTemplate>
                <DataTemplate>
                   <controls:PageImageView 
-                     ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding Size}" 
-                     ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference Name=MyPage}}" >
+                     ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding Size}" >
                   </controls:PageImageView>
                </DataTemplate>
             </controls:PagesSwipeView.ItemTemplate>
