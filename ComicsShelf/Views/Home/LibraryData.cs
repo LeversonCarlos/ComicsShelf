@@ -39,6 +39,13 @@ namespace ComicsShelf.Views.Home
          set { this.SetProperty(ref this._IsFeaturedPage, value); }
       }
 
+      bool _IsEmptyLibrary;
+      public bool IsEmptyLibrary
+      {
+         get { return this._IsEmptyLibrary; }
+         set { this.SetProperty(ref this._IsEmptyLibrary, value); }
+      }
+
       Engine.BaseData _NotifyData;
       public Engine.BaseData NotifyData
       {
