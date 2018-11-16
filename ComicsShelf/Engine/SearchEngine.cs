@@ -393,59 +393,6 @@ namespace ComicsShelf.Engine
       #endregion
 
 
-      #region IncludePublicDomainExamples
-      private async Task<bool> IncludePublicDomainExamples()
-      {
-         try
-         {
-
-            // CHECK LIBRARY
-            if (!App.HomeData.NoComics) { return false; }
-            /*
-            var libraryPath = $"{App.Settings.Paths.DataPath}{App.Settings.Paths.Separator}Examples";
-
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var manifestResourceNames = assembly.GetManifestResourceNames();
-            var exampleNames = manifestResourceNames
-               .Where(x => x.StartsWith("ComicsShelf.Examples."))
-               .ToList();
-
-            foreach (var exampleName in exampleNames)
-            {
-               var examplePath = exampleName.Replace("ComicsShelf.Examples.", "");
-               var examplePathArray = examplePath.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries);
-
-               var folderName = examplePathArray[0]
-                  .Replace("__", " ")
-                  .Replace("_", " ")
-                  .Trim();
-               var fileName = examplePathArray[1] + "." + examplePathArray[2];
-               var folderPath = $"{libraryPath}{App.Settings.Paths.Separator}{folderName}";
-               var filePath = $"{folderPath}{App.Settings.Paths.Separator}{fileName}";
-
-               if (!System.IO.File.Exists(filePath)) {
-                  if (!System.IO.Directory.Exists(folderPath))
-                  { System.IO.Directory.CreateDirectory(folderPath); }
-                  var exampleStream = assembly.GetManifestResourceStream(exampleName);
-                  System.IO.FileStream fileStream = null;
-                  await Task.Run(() => fileStream = System.IO.File.Open(filePath, System.IO.FileMode.OpenOrCreate));
-                  await exampleStream.CopyToAsync(fileStream);
-                  await fileStream.FlushAsync();
-                  fileStream.Dispose();
-                  GC.Collect();
-               }
-
-            }
-
-            App.Settings.Paths.LibraryPath = libraryPath;
-            */
-            return true;
-         }
-         catch (Exception ex) { throw; }
-      }
-      #endregion
-
-
       #region Dispose
       public new void Dispose()
       {
