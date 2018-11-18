@@ -77,12 +77,12 @@ namespace ComicsShelf.Engine
          {
             this.Notify(R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE);
 
-            // SHOW LIBRARY SELECTOR IF HASNT A LIBRARY DEFINED YET
-            if (!await this.ValidateLibraryPath())
-            { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }
-
             // SHOW HOME VIEW
             await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
+
+            // SHOW LIBRARY SELECTOR IF HASNT A LIBRARY DEFINED YET
+            // if (!await this.ValidateLibraryPath())
+            // { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }
 
             // START SEARCH ENGINE
             await Engine.Library.Refresh();

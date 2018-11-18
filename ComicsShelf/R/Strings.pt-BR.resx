@@ -145,7 +145,7 @@
     <value>Biblioteca</value>
   </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
-    <value>Coloque alguns arquivos CBZ no seu dispositivo e reinicie o aplicativo ou defina uma pasta diferente para a sua biblioteca.</value>
+    <value>Use o botão superior direito para selecionar uma pasta no seu dispositivo contendo alguns arquivos CBZ.</value>
   </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE" xml:space="preserve">
     <value>Nenhum arquivo de quadrinhos foi encontrado no dispositivo</value>
@@ -195,14 +195,14 @@
   <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
     <value>Verificando permissões</value>
   </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE" xml:space="preserve">
-    <value>Extraindo informações dos arquivos de quadrinhos</value>
+  <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
+    <value>Extraindo informações dos quadrinhos em Destaque</value>
   </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_FEATURED_COMICS_DATA_MESSAGE" xml:space="preserve">
-    <value>Extraindo informações dos arquivos de quadrinhos em destaque</value>
+  <data name="STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE" xml:space="preserve">
+    <value>Extraindo informações dos quadrinhos Capa de Pasta</value>
   </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_FOLDER_COVER_DATA_MESSAGE" xml:space="preserve">
-    <value>Extraindo informações dos arquivos de quadrinhos capa de pasta</value>
+  <data name="STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE" xml:space="preserve">
+    <value>Extraindo informações dos quadrinhos Restantes</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Carregando base de dados</value>

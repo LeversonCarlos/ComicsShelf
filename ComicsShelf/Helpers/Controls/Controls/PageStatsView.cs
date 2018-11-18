@@ -86,13 +86,13 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             if (this.ReadingPage == 0) { return; }
-            await this.FadeTo(0.8, 250, Easing.SinOut)
+            await this.FadeTo(0.85, 250, Easing.SinOut)
                .ContinueWith((task1) =>
                {
                   Task.Delay(1000)
                      .ContinueWith(async (task) =>
                      {
-                        await this.FadeTo(0.0, 400, Easing.SinIn);
+                        await this.FadeTo(0.0, 500, Easing.SinIn);
                      });
                });
          }

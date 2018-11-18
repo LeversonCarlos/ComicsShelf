@@ -258,21 +258,24 @@ namespace ComicsShelf.Engine
          {
 
             // ALREADY EXISTING COVERS 
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE);
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
             var fileList = App.HomeData.Files
-               .OrderBy(x => x.FullPath)
+               .OrderBy(x => x.ComicFile.LibraryPath)
+               .ThenBy(x => x.FullPath)
                .ToList();
-            Parallel.ForEach(fileList, fileData =>
-            {
-               if (System.IO.File.Exists(fileData.ComicFile.CoverPath))
+            await Task.Run(() => {
+               foreach (var fileData in fileList)
                {
-                  fileData.CoverPath = fileData.ComicFile.CoverPath;
-                  this.ExtractComicData_ApplyFolderData(fileData);
+                  if (System.IO.File.Exists(fileData.ComicFile.CoverPath))
+                  {
+                     fileData.CoverPath = fileData.ComicFile.CoverPath;
+                     this.ExtractComicData_ApplyFolderData(fileData);
+                  }
                }
             });
 
             // FIRST FILE FROM EACH FOLDER
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_FOLDER_COVER_DATA_MESSAGE);
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE);
             fileList = App.HomeData.Files
                .OrderBy(x => x.ComicFile.LibraryPath).ThenBy(x => x.FullPath)
                .GroupBy(x => new { x.ComicFile.LibraryPath, x.ComicFile.ParentPath })
@@ -282,7 +285,7 @@ namespace ComicsShelf.Engine
             await this.ExtractComicData(fileList);
 
             // FEATURED FILES
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_FEATURED_COMICS_DATA_MESSAGE);
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
             // Statistics.Execute();
             fileList = App.HomeData.ReadingFiles
                .Union(App.HomeData.RecentFiles)
@@ -292,7 +295,7 @@ namespace ComicsShelf.Engine
             await this.ExtractComicData(fileList);
 
             // ALL REMAINING FILES WITHOUT COVER
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE);
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
             fileList = App.HomeData.Files
                .Where(x => string.IsNullOrWhiteSpace(x.CoverPath))
                .OrderBy(x => x.ComicFile.LibraryPath).ThenBy(x => x.FullPath)
@@ -308,7 +311,6 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE);
 
             // LOOP THROUGH FILES
             var filesQuantity = fileList.Count;

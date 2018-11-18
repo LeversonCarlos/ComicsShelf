@@ -21,11 +21,8 @@
          </Style>
 
          <Style TargetType="StackLayout" x:Key="CoverListMainLayout">
-            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+            <Setter Property="VerticalOptions" Value="FillAndExpand" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Spacing" Value="16" />
          </Style>
 
          <!-- SPLASH -->

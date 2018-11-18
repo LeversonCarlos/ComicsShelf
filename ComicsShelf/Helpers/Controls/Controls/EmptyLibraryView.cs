@@ -7,7 +7,7 @@ namespace ComicsShelf.Helpers.Controls
 
       public EmptyLibraryView()
       {
-         this.VerticalOptions = LayoutOptions.CenterAndExpand;
+         this.VerticalOptions = LayoutOptions.FillAndExpand;
          this.Margin = new Thickness(10, 80);
 
          this.Children.Add(new Label {
@@ -15,6 +15,7 @@ namespace ComicsShelf.Helpers.Controls
             HorizontalOptions = LayoutOptions.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+            FontAttributes = FontAttributes.Bold, 
             TextColor = Colors.Accent
          });
 
@@ -23,7 +24,7 @@ namespace ComicsShelf.Helpers.Controls
             Text = R.Strings.HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS,
             HorizontalOptions = LayoutOptions.Center,
             HorizontalTextAlignment = TextAlignment.Center,
-            FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+            FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label)),
             TextColor = Colors.Accent
          });
 
