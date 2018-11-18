@@ -26,7 +26,7 @@ namespace ComicsShelf.Helpers.Controls
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.End,
             Padding = 10,
-            BackgroundColor = Colors.Lighter,
+            BackgroundColor = Colors.LightGray,
             Content = this.readingText
          });
          this.Margin = 0;
@@ -86,13 +86,13 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             if (this.ReadingPage == 0) { return; }
-            await this.FadeTo(1.0, 250, Easing.SinOut)
+            await this.FadeTo(0.8, 250, Easing.SinOut)
                .ContinueWith((task1) =>
                {
                   Task.Delay(1000)
                      .ContinueWith(async (task) =>
                      {
-                        await this.FadeTo(0.0, 250, Easing.SinIn);
+                        await this.FadeTo(0.0, 400, Easing.SinIn);
                      });
                });
          }

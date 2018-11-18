@@ -11,5 +11,7 @@ namespace ComicsShelf.Helpers.Controls
 
       public static Color Accent { get { return Color.FromHex("536DFE"); } }
 
+      public static Color LightGray { get { return Color.FromHex("BDBDBD"); } }
+
    }
 }
