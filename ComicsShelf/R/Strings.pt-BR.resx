@@ -132,6 +132,9 @@
   <data name="FILE_OPEN_COMIC_LABEL" xml:space="preserve">
     <value>Abrir</value>
   </data>
+  <data name="FILE_PAGESTATS_TEXT" xml:space="preserve">
+    <value>página {0} de {1}</value>
+  </data>
   <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
     <value>Destaques</value>
   </data>

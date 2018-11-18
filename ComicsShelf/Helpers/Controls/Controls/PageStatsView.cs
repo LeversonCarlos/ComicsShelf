@@ -32,15 +32,26 @@ namespace ComicsShelf.Helpers.Controls
          this.Margin = 0;
          this.Padding = 0;
          this.Spacing = 0;
+         this.Opacity = 0;
 
          Messaging.Subscribe(Messaging.Keys.PageTapped, async (param) => await this.ShowStats());
+      }
+      #endregion
+
+      #region TotalPages
+      public static readonly BindableProperty TotalPagesProperty =
+         BindableProperty.Create("TotalPages", typeof(short), typeof(PageStatsView), (short)0);
+      public short TotalPages
+      {
+         get { return (short)GetValue(TotalPagesProperty); }
+         set { SetValue(TotalPagesProperty, value); }
       }
       #endregion
 
       #region ReadingPage
       public static readonly BindableProperty ReadingPageProperty =
          BindableProperty.Create("ReadingPage", typeof(short), typeof(PageStatsView), (short)0,
-         propertyChanged: OnReadingPageChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnReadingPageChanged);
       public short ReadingPage
       {
          get { return (short)GetValue(ReadingPageProperty); }
@@ -49,7 +60,9 @@ namespace ComicsShelf.Helpers.Controls
       private static void OnReadingPageChanged(BindableObject bindable, object oldValue, object newValue)
       {
          var self = (bindable as PageStatsView);
-         self.readingText.Text = ((short)newValue).ToString();
+         var pageStatsText = R.Strings.FILE_PAGESTATS_TEXT;
+         pageStatsText = string.Format(pageStatsText, self.ReadingPage, self.TotalPages);
+         self.readingText.Text = pageStatsText;
          Task.Run(() => self.ShowStats());
       }
       #endregion
@@ -57,7 +70,7 @@ namespace ComicsShelf.Helpers.Controls
       #region ReadingPercent
       public static readonly BindableProperty ReadingPercentProperty =
          BindableProperty.Create("ReadingPercent", typeof(double), typeof(PageStatsView), (double)0,
-         propertyChanged: OnReadingPercentChanged, defaultBindingMode: BindingMode.TwoWay);
+         propertyChanged: OnReadingPercentChanged);
       public double ReadingPercent
       {
          get { return (double)GetValue(ReadingPercentProperty); }
@@ -72,7 +85,8 @@ namespace ComicsShelf.Helpers.Controls
       {
          try
          {
-            await this.FadeTo(1.0, 250, Easing.SinIn)
+            if (this.ReadingPage == 0) { return; }
+            await this.FadeTo(1.0, 250, Easing.SinOut)
                .ContinueWith((task1) =>
                {
                   Task.Delay(1000)

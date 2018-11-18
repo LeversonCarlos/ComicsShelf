@@ -63,23 +63,24 @@ namespace ComicsShelf.Droid
          {
 
             // INITIALIZE
-            var viewPadding = this.ConvertDpToPx(10);
+            var viewPadding = this.ConvertDpToPx(24);
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(_androidContext);
             dialogBuilder.SetTitle(rSelectFolder);
 
             // CURRENT PATH
             _currentPathView = new TextView(_androidContext);
             _currentPathView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-            _currentPathView.SetPadding(viewPadding * 2, viewPadding, viewPadding, viewPadding);
+            _currentPathView.SetMaxLines(2);
+            _currentPathView.SetPadding(viewPadding, viewPadding, viewPadding, viewPadding);
             _currentPathView.SetTextColor(Color.Black);
             _currentPathView.Gravity = GravityFlags.Top;
-            _currentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 48);
+            _currentPathView.SetTextSize(Android.Util.ComplexUnitType.Dip, 20);
             _currentPathView.SetTypeface(null, TypefaceStyle.Bold);
 
             // DIRECTORY LIST VIEW
             _directoryListView = new ListView(_androidContext);
             _directoryListView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-            _directoryListView.SetPadding(viewPadding * 2, viewPadding, viewPadding, viewPadding);
+            _directoryListView.SetPadding(viewPadding , viewPadding, viewPadding, viewPadding);
             _directoryListView.SetForegroundGravity(GravityFlags.FillVertical);
 
             // DIRECTORY SELECTION
@@ -96,6 +97,7 @@ namespace ComicsShelf.Droid
             // LAYOUT VIEW
             var layoutView = new LinearLayout(_androidContext);
             layoutView.Orientation = Orientation.Vertical;
+            layoutView.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
             layoutView.SetBackgroundColor(Color.White);
             layoutView.AddView(_currentPathView);
             layoutView.AddView(_directoryListView);

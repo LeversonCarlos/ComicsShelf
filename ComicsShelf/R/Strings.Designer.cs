@@ -106,6 +106,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to page {0} of {1}.
+        /// </summary>
+        internal static string FILE_PAGESTATS_TEXT {
+            get {
+                return ResourceManager.GetString("FILE_PAGESTATS_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Featured.
         /// </summary>
         internal static string HOME_FEATURED_PAGE_TITLE {

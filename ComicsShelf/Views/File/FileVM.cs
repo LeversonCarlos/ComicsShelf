@@ -47,7 +47,10 @@ namespace ComicsShelf.Views.File
 
             // EXTRACT PAGES
             using (var fileSystem = Helpers.FileSystem.Get())
-            { await fileSystem.PagesExtract(App.Settings, this.Data); }
+            {
+               await fileSystem.PagesExtract(App.Settings, this.Data);
+               this.Data.TotalPages = (short)this.Data.Pages.Count;
+            }
             this.Data.Pages.Add(new PageData { });
 
          }

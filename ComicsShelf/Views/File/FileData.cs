@@ -65,6 +65,18 @@
       }
       #endregion
 
+      #region TotalPages
+      short _TotalPages;
+      public short TotalPages
+      {
+         get { return this._TotalPages; }
+         set
+         {
+            this.SetProperty(ref this._TotalPages, value);
+         }
+      }
+      #endregion
+
 
       #region Readed
       bool _Readed;

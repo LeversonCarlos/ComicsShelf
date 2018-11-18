@@ -22,7 +22,7 @@
          <ContentView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" 
             HorizontalOptions="FillAndExpand" VerticalOptions="End" >
-            <controls:PageStatsView ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" />
+            <controls:PageStatsView TotalPages="{Binding Data.TotalPages}" ReadingPercent="{Binding Data.ReadingPercent}" ReadingPage="{Binding Data.ReadingPage}" />
          </ContentView>
       </AbsoluteLayout>
    </controls:ReadingPage.Content>
