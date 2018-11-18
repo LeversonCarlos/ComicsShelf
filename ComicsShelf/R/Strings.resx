@@ -132,6 +132,9 @@
   <data name="FILE_OPEN_COMIC_LABEL" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="FILE_PAGESTATS_TEXT" xml:space="preserve">
+    <value>page {0} of {1}</value>
+  </data>
   <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
     <value>Featured</value>
   </data>
@@ -142,7 +145,7 @@
     <value>Library</value>
   </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
-    <value>Put some CBZ files on your device and restart the app or set a different folder for your library.</value>
+    <value>Use the upper right button to select a folder on your device containing some CBZ files.</value>
   </data>
   <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE" xml:space="preserve">
     <value>No comic file was found on device</value>
@@ -192,14 +195,14 @@
   <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
     <value>Checking permissions</value>
   </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE" xml:space="preserve">
-    <value>Extracting Data from Comic Files</value>
+  <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
+    <value>Extracting data from Featured comic files</value>
   </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_FEATURED_COMICS_DATA_MESSAGE" xml:space="preserve">
-    <value>Extracting Data from Featured Comic Files</value>
+  <data name="STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE" xml:space="preserve">
+    <value>Extracting data from Folders comic files</value>
   </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_FOLDER_COVER_DATA_MESSAGE" xml:space="preserve">
-    <value>Extracting data from Folder's Comic Files</value>
+  <data name="STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE" xml:space="preserve">
+    <value>Extracting data from all Remaining comic files</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Loading database</value>

@@ -19,7 +19,7 @@
                            <controls:SectionView.ItemTemplate>
                               <DataTemplate>
                                  <controls:CoverFrameView 
-                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" >
+                                    Text="{Binding FullText}" Progress="{Binding ReadingPercent}" ImageSource="{Binding CoverPath}" >
                                  </controls:CoverFrameView>
                               </DataTemplate>
                            </controls:SectionView.ItemTemplate>
@@ -47,7 +47,7 @@
                   IsVisible="{Binding NotifyData.IsRunning}" 
                   Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
                </controls:EngineProgressView>
-               <controls:EmptyLibraryView IsVisible="{Binding IsEmptyLibrary}" ></controls:EmptyLibraryView>
+               <controls:EmptyLibraryView IsVisible="{Binding HasFiles, Converter={StaticResource notConverter}}" ></controls:EmptyLibraryView>
             </StackLayout>
 
          </StackLayout>

@@ -13,7 +13,6 @@ namespace ComicsShelf.Views.Home
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
          this.NotifyData = new Engine.BaseData();
          Helpers.Controls.Messaging.Subscribe<Engine.BaseData>(Helpers.Controls.Messaging.Keys.SearchEngine, this.OnNotifyDataChanged);
-
       }
 
       public Command FileTappedCommand { get; set; }
@@ -37,13 +36,6 @@ namespace ComicsShelf.Views.Home
       {
          get { return this._IsFeaturedPage; }
          set { this.SetProperty(ref this._IsFeaturedPage, value); }
-      }
-
-      bool _IsEmptyLibrary;
-      public bool IsEmptyLibrary
-      {
-         get { return this._IsEmptyLibrary; }
-         set { this.SetProperty(ref this._IsEmptyLibrary, value); }
       }
 
       Engine.BaseData _NotifyData;

@@ -2,9 +2,12 @@
 <Application 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.App">
    <Application.Resources>
       <ResourceDictionary>
+
+         <controls:NotConverter x:Key="notConverter" />
 
          <!-- COLORS -->
          <Color x:Key="colorAccent">#536DFE</Color>
@@ -18,11 +21,8 @@
          </Style>
 
          <Style TargetType="StackLayout" x:Key="CoverListMainLayout">
-            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+            <Setter Property="VerticalOptions" Value="FillAndExpand" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Spacing" Value="16" />
          </Style>
 
          <!-- SPLASH -->

@@ -106,6 +106,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to page {0} of {1}.
+        /// </summary>
+        internal static string FILE_PAGESTATS_TEXT {
+            get {
+                return ResourceManager.GetString("FILE_PAGESTATS_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Featured.
         /// </summary>
         internal static string HOME_FEATURED_PAGE_TITLE {
@@ -133,7 +142,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Put some CBZ files on your device and restart the app or set a different folder for your library..
+        ///   Looks up a localized string similar to Use the upper right button to select a folder on your device containing some CBZ files..
         /// </summary>
         internal static string HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS {
             get {
@@ -286,29 +295,29 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting Data from Comic Files.
+        ///   Looks up a localized string similar to Extracting data from Featured comic files.
         /// </summary>
-        internal static string STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE {
+        internal static string STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_COMICS_DATA_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting Data from Featured Comic Files.
+        ///   Looks up a localized string similar to Extracting data from Folders comic files.
         /// </summary>
-        internal static string STARTUP_ENGINE_EXTRACTING_FEATURED_COMICS_DATA_MESSAGE {
+        internal static string STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_FEATURED_COMICS_DATA_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting data from Folder&apos;s Comic Files.
+        ///   Looks up a localized string similar to Extracting data from all Remaining comic files.
         /// </summary>
-        internal static string STARTUP_ENGINE_EXTRACTING_FOLDER_COVER_DATA_MESSAGE {
+        internal static string STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_FOLDER_COVER_DATA_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE", resourceCulture);
             }
         }
         

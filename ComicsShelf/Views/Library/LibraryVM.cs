@@ -23,17 +23,9 @@ namespace ComicsShelf.Views.Library
       public Command AddLibraryTappedCommand { get; set; }
       private async Task AddLibraryTapped(object item)
       {
-         try
-         {
-            var library = await Engine.Library.AddNew();
-            if (library == null) { return; }
-
-            this.Data.Libraries.Add(new LibraryDataItem(library));
-
-            if (this.Data.Libraries.Count == 1)
-            { await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData); }
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); }
+         this.IsBusy = true;
+         await this.Data.AddLibrary();
+         this.IsBusy = false;
       }
       #endregion
 
@@ -41,13 +33,9 @@ namespace ComicsShelf.Views.Library
       public Command RemoveLibraryTappedCommand { get; set; }
       private async Task RemoveLibraryTapped(object item)
       {
-         try
-         {
-            var library = (item as LibraryDataItem);
-            this.Data.Libraries.Remove(library);
-            await Engine.Library.Remove(library.Library);
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); }
+         this.IsBusy = true;
+         await this.Data.RemoveLibrary(item as LibraryDataItem);
+         this.IsBusy = false;
       }
       #endregion
 

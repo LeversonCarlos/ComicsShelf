@@ -32,17 +32,13 @@ namespace ComicsShelf.Views.Home
 
       private void Files_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
-         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+         var hasFiles = false;
+         foreach (var folder in this.Folders)
          {
-            var hasFiles = false;
-            foreach (var folder in this.Folders)
-            {
-               folder.HasFiles = folder.Files.Count != 0;
-               if (folder.HasFiles) { hasFiles = true; }
-            }
-            this.HasFiles = hasFiles;
-            this.IsEmptyLibrary = !this.HasFiles;
-         });
+            folder.HasFiles = folder.Files.Count != 0;
+            if (folder.HasFiles) { hasFiles = true; }
+         }
+         this.HasFiles = hasFiles;
       }
 
    }
