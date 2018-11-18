@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms.Internals;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Views.Library
 {
@@ -8,13 +11,10 @@ namespace ComicsShelf.Views.Library
       #region New
       public LibraryData()
       {
-         this.Libraries = new Helpers.Observables.ObservableList<LibraryDataItem>();
-         this.Libraries.CollectionChanged += this.Libraries_CollectionChanged;
-
-         var libraries = App.Database.Table<Helpers.Database.Library>();
-         libraries.ForEach(library => this.Libraries.Add(new LibraryDataItem(library)));
+         this.RefreshLibraries();
       }
       #endregion
+
 
       #region Libraries
 
@@ -27,6 +27,59 @@ namespace ComicsShelf.Views.Library
       }
 
       #endregion
+
+
+      #region RefreshLibraries
+      private void RefreshLibraries()
+      {
+         try
+         {
+
+            if (this.Libraries != null)
+            { this.Libraries.CollectionChanged -= this.Libraries_CollectionChanged; }
+            this.Libraries = new Helpers.Observables.ObservableList<LibraryDataItem>();
+            this.Libraries.CollectionChanged += this.Libraries_CollectionChanged;
+
+            var libraries = App.Database
+               .Table<Helpers.Database.Library>()
+               .Select(x => new LibraryDataItem(x))
+               .AsEnumerable();
+            libraries.ForEach(library => this.Libraries.Add(library));
+         }
+         catch { }
+      }
+      #endregion
+
+      #region AddLibrary
+      internal async Task AddLibrary()
+      {
+         try
+         {
+            var library = await Engine.Library.AddNew();
+            if (library == null) { return; }
+
+            this.Libraries.Add(new LibraryDataItem(library));
+
+            if (this.Libraries.Count == 1)
+            { await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData); }
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+      #endregion
+
+      #region RemoveLibrary
+      internal async Task RemoveLibrary(LibraryDataItem library)
+      {
+         try
+         {
+            this.Libraries.Remove(library);
+            await Engine.Library.Remove(library.Library);
+            this.RefreshLibraries();
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+      #endregion
+
 
       #region HasLibraries
       bool _HasLibraries;

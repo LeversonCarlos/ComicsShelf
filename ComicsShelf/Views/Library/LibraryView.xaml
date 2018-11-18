@@ -31,6 +31,7 @@
                </DataTemplate>
             </controls:RepeaterView.ItemTemplate>
          </controls:RepeaterView>
+         <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
          <StackLayout Spacing="5" >
             <Label Text="{controls:Translate Text=LIBRARY_SUGGESTION_MESSAGE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />

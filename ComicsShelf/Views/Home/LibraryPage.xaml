@@ -19,7 +19,7 @@
                            <controls:SectionView.ItemTemplate>
                               <DataTemplate>
                                  <controls:CoverFrameView 
-                                    Text="{Binding Text}" ImageSource="{Binding CoverPath}" >
+                                    Text="{Binding FullText}" Progress="{Binding ReadingPercent}" ImageSource="{Binding CoverPath}" >
                                  </controls:CoverFrameView>
                               </DataTemplate>
                            </controls:SectionView.ItemTemplate>
