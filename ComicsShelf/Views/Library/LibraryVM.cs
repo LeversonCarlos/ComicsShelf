@@ -16,6 +16,7 @@ namespace ComicsShelf.Views.Library
          this.AddLibraryTappedCommand = new Command(async (item) => await this.AddLibraryTapped(item));
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
          this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
+         Engine.AppCenter.TrackEvent("Library: Show View");
       }
       #endregion
 

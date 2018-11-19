@@ -17,6 +17,7 @@ namespace ComicsShelf.Views.File
          this._Rating = args.Rating;
          this.OpenTappedCommand = new Command(async (item) => await this.OpenTapped(item));
          this.Finalize += this.OnFinalize;
+         Engine.AppCenter.TrackEvent("File: Show View");
       }
       #endregion
 
@@ -45,6 +46,10 @@ namespace ComicsShelf.Views.File
             if (this.Data.Pages == null) { this.Data.Pages = new Helpers.Observables.ObservableList<PageData>(); }
             if (this.Data.Pages.Count != 0) { return; }
 
+            // TRACK
+            var OpeningTime = DateTime.Now;
+            Engine.AppCenter.TrackEvent("File: Opening");
+
             // EXTRACT PAGES
             using (var fileSystem = Helpers.FileSystem.Get())
             {
@@ -52,6 +57,10 @@ namespace ComicsShelf.Views.File
                this.Data.TotalPages = (short)this.Data.Pages.Count;
             }
             this.Data.Pages.Add(new PageData { });
+
+            // TRACK
+            var milliseconds = (long)(DateTime.Now - OpeningTime).TotalMilliseconds;
+            Engine.AppCenter.TrackEvent("File: Opened", "milliseconds", milliseconds.ToString());
 
          }
          catch (Exception ex) { throw; }

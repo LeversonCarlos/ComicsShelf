@@ -12,6 +12,7 @@ namespace ComicsShelf.Engine
       {
          try
          {
+            AppCenter.Initialize();
             var engine = new Startup();
             {
                engine.CheckPermissions(
