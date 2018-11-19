@@ -13,9 +13,20 @@ namespace ComicsShelf.Engine
          {
             using (var engine = new Statistics())
             {
+
+               // TRACK
+               var initializeTime = DateTime.Now;
+               AppCenter.TrackEvent("Statistics: Executing");
+
+               // EXECUTION
                engine.RecentFiles();
                engine.TopRatedFiles();
                engine.ReadingFiles();
+
+               // TRACK
+               var milliseconds = (long)(DateTime.Now - initializeTime).TotalMilliseconds;
+               AppCenter.TrackEvent("Statistics: Executed", "milliseconds", milliseconds.ToString());
+
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }

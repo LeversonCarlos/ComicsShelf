@@ -94,9 +94,13 @@ namespace ComicsShelf.Helpers.Controls
       #region OnScreenSizeChanged
       private void OnScreenSizeChanged(Size screenSize)
       {
-         var fileColumns = (int)Math.Ceiling(screenSize.Width / (double)160);
-         var frameMargins = (double)((fileColumns + 1) * 10);
-         this.WidthRequest = (screenSize.Width - frameMargins) / (double)fileColumns;
+         try
+         {
+            var fileColumns = (int)Math.Ceiling(screenSize.Width / (double)160);
+            var frameMargins = (double)((fileColumns + 1) * 10);
+            this.WidthRequest = (screenSize.Width - frameMargins) / (double)fileColumns;
+         }
+         catch { }
       }
       #endregion
 

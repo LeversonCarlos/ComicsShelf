@@ -16,6 +16,7 @@ namespace ComicsShelf.Views.File
          this._ReadingPage = args.ReadingPage;
          this.Initialize += this.OnInitialize;
          this.Finalize += this.OnFinalize;
+         Engine.AppCenter.TrackEvent("Page: Show View");
       }
       #endregion
 
@@ -50,10 +51,16 @@ namespace ComicsShelf.Views.File
 
 
       #region OnInitialize
+      DateTime InitializeTime;
       private void OnInitialize()
       {
          try
          {
+
+            // TRACK
+            this.InitializeTime = DateTime.Now;
+            Engine.AppCenter.TrackEvent("Page: Initializing");
+
             this.Data.ReadingDate = App.Database.GetDate();
             App.Database.Update(this.Data.ComicFile);
             if (this.Data.Pages != null && this.Data.Pages.Count != 0)
@@ -73,6 +80,11 @@ namespace ComicsShelf.Views.File
       {
          try
          {
+
+            // TRACK
+            var milliseconds = (long)(DateTime.Now - this.InitializeTime).TotalMilliseconds;
+            Engine.AppCenter.TrackEvent("Page: Finalizing", "milliseconds", milliseconds.ToString());
+
             this.Data.Pages.Where(page => page.IsVisible).ForEach(page => page.IsVisible = false);
             // this.Data.Pages.Clear();
             GC.Collect();

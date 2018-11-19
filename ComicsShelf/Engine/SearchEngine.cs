@@ -15,10 +15,20 @@ namespace ComicsShelf.Engine
          {
             using (var engine = new Search())
             {
+               engine.TrackEvent("Search: Initializing");
+
                await engine.LoadDatabaseData();
+               engine.TrackEvent("Search: Loading Database Data");
+
                await engine.SearchComicFiles();
+               engine.TrackEvent("Search: Searching Comic Files");
+
                await engine.PrepareFolders();
+               engine.TrackEvent("Search: Preparing Folders Structure");
+
                await engine.ExtractComicData();
+               engine.TrackEvent("Search: Extracting Data Info");
+
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -27,6 +37,19 @@ namespace ComicsShelf.Engine
 
       #region Properties
       private List<Helpers.Database.ComicFile> ComicFiles { get; set; }
+      #endregion
+
+      #region TrackEvent
+      DateTime TrackEventTime = DateTime.MinValue;
+      private void TrackEvent(string text)
+      {
+         var now = DateTime.Now;
+         long milliseconds = 0;
+         if (TrackEventTime != DateTime.MinValue)
+         { milliseconds = (long)(now - TrackEventTime).TotalMilliseconds; }
+         AppCenter.TrackEvent(text, "milliseconds", milliseconds.ToString());
+         TrackEventTime = now;
+      }
       #endregion
 
       #region LoadDatabaseData

@@ -25,6 +25,7 @@ namespace ComicsShelf.Views.Home
          this.Data = args;
          this.OpenLibraryCommand = new Command(async (item) => await this.OpenLibrary(item));
 
+         Engine.AppCenter.TrackEvent("Home: Show View");
       }
       #endregion
 
