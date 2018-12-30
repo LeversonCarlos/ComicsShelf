@@ -24,7 +24,7 @@ namespace ComicsShelf.Views.Library
       {
          this.HasLibraries = this.Libraries.Count != 0;
          this.HasntLibraries = this.Libraries.Count == 0;
-         this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == Helpers.Database.LibraryTypeEnum.OneDrive) == 0;
+         this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == ComicsShelf.Library.LibraryTypeEnum.OneDrive) == 0;
       }
 
       #endregion
@@ -52,7 +52,7 @@ namespace ComicsShelf.Views.Library
       #endregion
 
       #region AddLibrary
-      internal async Task AddLibrary(Helpers.Database.LibraryTypeEnum libraryType)
+      internal async Task AddLibrary(ComicsShelf.Library.LibraryTypeEnum libraryType)
       {
          try
          {

@@ -26,7 +26,7 @@ namespace ComicsShelf.Views.Library
       private async Task AddLibraryTapped(object item)
       {
          this.IsBusy = true;
-         await this.Data.AddLibrary(Helpers.Database.LibraryTypeEnum.FileSystem);
+         await this.Data.AddLibrary(ComicsShelf.Library.LibraryTypeEnum.FileSystem);
          this.IsBusy = false;
       }
       #endregion
@@ -36,7 +36,7 @@ namespace ComicsShelf.Views.Library
       private async Task AddOneDriveLibrary(object item)
       {
          this.IsBusy = true;
-         await this.Data.AddLibrary(Helpers.Database.LibraryTypeEnum.OneDrive);
+         await this.Data.AddLibrary(ComicsShelf.Library.LibraryTypeEnum.OneDrive);
          this.IsBusy = false;
       }
       #endregion

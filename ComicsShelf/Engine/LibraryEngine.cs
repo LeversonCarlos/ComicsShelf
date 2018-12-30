@@ -8,7 +8,7 @@ namespace ComicsShelf.Engine
    {
 
       #region AddNew
-      internal static async Task<Helpers.Database.Library> AddNew(Helpers.Database.LibraryTypeEnum libraryType)
+      internal static async Task<Helpers.Database.Library> AddNew(ComicsShelf.Library.LibraryTypeEnum libraryType)
       {
          try
          {
@@ -16,17 +16,10 @@ namespace ComicsShelf.Engine
             // INITIALIZE
             var library = new Helpers.Database.Library { Type = libraryType };
 
-            // FILESYSTEM LIBRARY
-            if (libraryType == Helpers.Database.LibraryTypeEnum.FileSystem)
+            // USE SERVICE IMPLEMENTATION
+            using (var libraryService = ComicsShelf.Library.Service.Get(library))
             {
-               if (!await AddFileSystem(library))
-               { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
-            }
-
-            // ONEDRIVE LIBRARY
-            if (libraryType == Helpers.Database.LibraryTypeEnum.OneDrive)
-            {
-               if (!await AddFileSystem(library))
+               if (!await libraryService.AddLibrary(library))
                { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
             }
 
@@ -37,27 +30,6 @@ namespace ComicsShelf.Engine
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); return null; }
-      }
-      #endregion
-
-      #region AddFileSystem
-      private static async Task<bool> AddFileSystem(Helpers.Database.Library library)
-      {
-         try
-         {
-            using (var fileSystem = Helpers.FileSystem.Get())
-            {
-
-               // DEFINE LIBRARY PATH
-               library.LibraryPath = await fileSystem.GetLibraryPath();
-
-               // VALIDATE 
-               await fileSystem.ValidateLibraryPath(library);
-               return library.Available;              
-
-            }
-         }
-         catch (Exception) { throw; }
       }
       #endregion
 

@@ -46,8 +46,8 @@
       #endregion
 
       #region LibraryType
-      Helpers.Database.LibraryTypeEnum _LibraryType;
-      public Helpers.Database.LibraryTypeEnum LibraryType
+      ComicsShelf.Library.LibraryTypeEnum _LibraryType;
+      public ComicsShelf.Library.LibraryTypeEnum LibraryType
       {
          get { return this._LibraryType; }
          set

@@ -2,7 +2,6 @@
 
 namespace ComicsShelf.Helpers.Database
 {
-   public enum LibraryTypeEnum : short { FileSystem = 0, OneDrive = 1 }
 
    [Table("Libraries")]
    public class Library
@@ -17,9 +16,9 @@ namespace ComicsShelf.Helpers.Database
       public string LibraryPath { get; set; }
 
       [Ignore]
-      public LibraryTypeEnum Type
+      public ComicsShelf.Library.LibraryTypeEnum Type
       {
-         get { return (LibraryTypeEnum)this.TypeInner; }
+         get { return (ComicsShelf.Library.LibraryTypeEnum)this.TypeInner; }
          set { this.TypeInner = (short)value; }
       }
       public short TypeInner { get; set; }
