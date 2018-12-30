@@ -2,7 +2,7 @@
 
 namespace ComicsShelf.Library.Implementation
 {
-   internal class FileSystemService : IService
+   internal class FileSystemService : ILibraryService
    {
 
       Helpers.iFileSystem FileSystem { get; set; }

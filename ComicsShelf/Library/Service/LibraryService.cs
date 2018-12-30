@@ -3,13 +3,13 @@ using System.Threading;
 
 namespace ComicsShelf.Library
 {
-   internal class Service
+   internal class LibraryService
    {
-      static Lazy<IService> FileSystem = new Lazy<IService>(() => new Implementation.FileSystemService(), LazyThreadSafetyMode.PublicationOnly);
-      static Lazy<IService> OneDrive = new Lazy<IService>(() => new Implementation.OneDrive(), LazyThreadSafetyMode.PublicationOnly);
-      public static IService Get(Helpers.Database.Library library)
+      static Lazy<ILibraryService> FileSystem = new Lazy<ILibraryService>(() => new Implementation.FileSystemService(), LazyThreadSafetyMode.PublicationOnly);
+      static Lazy<ILibraryService> OneDrive = new Lazy<ILibraryService>(() => new Implementation.OneDrive(), LazyThreadSafetyMode.PublicationOnly);
+      public static ILibraryService Get(Helpers.Database.Library library)
       {
-         IService ret = null;
+         ILibraryService ret = null;
          if (library.Type == LibraryTypeEnum.FileSystem)
          { ret = FileSystem.Value; }
          if (library.Type == LibraryTypeEnum.OneDrive)
