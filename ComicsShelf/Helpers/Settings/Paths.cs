@@ -32,7 +32,6 @@ namespace ComicsShelf.Helpers.Settings
 
       internal string DataPath { get; set; }
       internal string CachePath { get; set; }
-      public string LibraryPath { get; set; }
       public string[] LibrariesPath { get; set; }
 
       internal string DatabasePath { get { return $"{this.DataPath}{this.Separator}Database.db3"; } }

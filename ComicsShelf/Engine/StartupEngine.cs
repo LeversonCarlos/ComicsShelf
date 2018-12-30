@@ -113,18 +113,20 @@ namespace ComicsShelf.Engine
             });
 
             /* RESULT */
+            var hasLibriries = false;
             await Task.Run(() =>
             {
                App.Settings.Paths.LibrariesPath = libraries
                   .Where(x => x.Available == true)
+                  .Where(x => x.LibraryPath != "")
                   .Select(x => x.LibraryPath)
                   .ToArray();
-               App.Settings.Paths.LibraryPath = App.Settings.Paths.LibrariesPath.FirstOrDefault();
+               hasLibriries = App.Settings.Paths.LibrariesPath.Length != 0;
             });
-            return !string.IsNullOrEmpty(App.Settings.Paths.LibraryPath);
+            return hasLibriries;
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }

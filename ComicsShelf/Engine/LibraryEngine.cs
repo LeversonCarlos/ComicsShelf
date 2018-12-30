@@ -81,9 +81,9 @@ namespace ComicsShelf.Engine
             var libraries = App.Database.Table<Helpers.Database.Library>();
             App.Settings.Paths.LibrariesPath = libraries
                .Where(x => x.Available == true)
+               .Where(x => x.LibraryPath != "")
                .Select(x => x.LibraryPath)
                .ToArray();
-            App.Settings.Paths.LibraryPath = App.Settings.Paths.LibrariesPath.FirstOrDefault();
          });
          App.HomeData.ClearAll();
          Task.Factory.StartNew(Engine.Search.Execute, TaskCreationOptions.LongRunning);
