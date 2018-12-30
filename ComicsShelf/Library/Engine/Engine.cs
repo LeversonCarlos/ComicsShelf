@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Engine
+namespace ComicsShelf.Library
 {
-   internal class Library : BaseEngine
+   internal class Engine 
    {
 
-      #region AddNew
-      internal static async Task<Helpers.Database.Library> AddNew(ComicsShelf.Library.LibraryTypeEnum libraryType)
+      #region NewLibrary
+      internal static async Task<Helpers.Database.Library> NewLibrary(LibraryTypeEnum libraryType)
       {
          try
          {
@@ -17,7 +17,7 @@ namespace ComicsShelf.Engine
             var library = new Helpers.Database.Library { Type = libraryType };
 
             // USE SERVICE IMPLEMENTATION
-            using (var libraryService = ComicsShelf.Library.Service.Get(library))
+            using (var libraryService = Service.Get(library))
             {
                if (!await libraryService.AddLibrary(library))
                { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
@@ -25,7 +25,7 @@ namespace ComicsShelf.Engine
 
             // RESULT
             App.Database.Insert(library);
-            await Refresh();
+            await RefreshLibrary();
             return library;
 
          }
@@ -33,20 +33,20 @@ namespace ComicsShelf.Engine
       }
       #endregion
 
-      #region Remove
-      internal static async Task Remove(Helpers.Database.Library library)
+      #region RemoveLibrary
+      internal static async Task RemoveLibrary(Helpers.Database.Library library)
       {
          try
          {
             App.Database.Delete(library);
-            await Refresh();
+            await RefreshLibrary();
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
       #endregion
 
-      #region Refresh
-      internal static async Task Refresh()
+      #region RefreshLibrary
+      internal static async Task RefreshLibrary()
       {
          await Task.Run(() =>
          {
@@ -58,7 +58,7 @@ namespace ComicsShelf.Engine
                .ToArray();
          });
          App.HomeData.ClearAll();
-         Task.Factory.StartNew(Engine.Search.Execute, TaskCreationOptions.LongRunning);
+         Task.Factory.StartNew(ComicsShelf.Engine.Search.Execute, TaskCreationOptions.LongRunning);
       }
       #endregion
 
