@@ -12,6 +12,7 @@
             <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" HorizontalOptions="Center" FontSize="Large" />
             <Label Text="{controls:Translate Text=LIBRARY_UNDEFINED_FOLDER_MESSAGE}" IsVisible="{Binding Data.HasntLibraries}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
             <controls:PrimaryButton Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding AddLibraryTappedCommand}" HorizontalOptions="Center" />
+            <controls:PrimaryButton Text="{controls:Translate Text=LIBRARY_CONNECT_ONEDRIVE_COMMAND}" Command="{Binding AddOneDriveLibraryCommand}" HorizontalOptions="Center" />
          </StackLayout>
 
          <controls:RepeaterView ItemsSource="{Binding Data.Libraries}" HorizontalOptions="CenterAndExpand" Spacing="5" >

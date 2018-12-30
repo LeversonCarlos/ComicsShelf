@@ -8,7 +8,40 @@ namespace ComicsShelf.Engine
    {
 
       #region AddNew
-      internal static async Task<Helpers.Database.Library> AddNew()
+      internal static async Task<Helpers.Database.Library> AddNew(Helpers.Database.LibraryTypeEnum libraryType)
+      {
+         try
+         {
+
+            // INITIALIZE
+            var library = new Helpers.Database.Library { Type = libraryType };
+
+            // FILESYSTEM LIBRARY
+            if (libraryType == Helpers.Database.LibraryTypeEnum.FileSystem)
+            {
+               if (!await AddFileSystem(library))
+               { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
+            }
+
+            // ONEDRIVE LIBRARY
+            if (libraryType == Helpers.Database.LibraryTypeEnum.OneDrive)
+            {
+               if (!await AddFileSystem(library))
+               { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
+            }
+
+            // RESULT
+            App.Database.Insert(library);
+            await Refresh();
+            return library;
+
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); return null; }
+      }
+      #endregion
+
+      #region AddFileSystem
+      private static async Task<bool> AddFileSystem(Helpers.Database.Library library)
       {
          try
          {
@@ -16,22 +49,15 @@ namespace ComicsShelf.Engine
             {
 
                // DEFINE LIBRARY PATH
-               var library = new Helpers.Database.Library();
                library.LibraryPath = await fileSystem.GetLibraryPath();
 
                // VALIDATE 
                await fileSystem.ValidateLibraryPath(library);
-               if (!library.Available)
-               { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
-
-               // RESULT
-               App.Database.Insert(library);
-               await Refresh();
-               return library;
+               return library.Available;              
 
             }
          }
-         catch (Exception ex) { await App.ShowMessage(ex); return null; }
+         catch (Exception) { throw; }
       }
       #endregion
 

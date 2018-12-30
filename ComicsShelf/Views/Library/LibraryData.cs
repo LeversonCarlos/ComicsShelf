@@ -23,7 +23,8 @@ namespace ComicsShelf.Views.Library
       private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
          this.HasLibraries = this.Libraries.Count != 0;
-         this.HasntLibraries = (this.Libraries.Count == 0);
+         this.HasntLibraries = this.Libraries.Count == 0;
+         this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == Helpers.Database.LibraryTypeEnum.OneDrive) == 0;
       }
 
       #endregion
@@ -51,11 +52,11 @@ namespace ComicsShelf.Views.Library
       #endregion
 
       #region AddLibrary
-      internal async Task AddLibrary()
+      internal async Task AddLibrary(Helpers.Database.LibraryTypeEnum libraryType)
       {
          try
          {
-            var library = await Engine.Library.AddNew();
+            var library = await Engine.Library.AddNew(libraryType);
             if (library == null) { return; }
 
             this.Libraries.Add(new LibraryDataItem(library));
@@ -96,6 +97,15 @@ namespace ComicsShelf.Views.Library
       {
          get { return this._HasntLibraries; }
          set { this.SetProperty(ref this._HasntLibraries, value); }
+      }
+      #endregion
+
+      #region HasntOneDriveLibrary
+      bool _HasntOneDriveLibrary;
+      public bool HasntOneDriveLibrary
+      {
+         get { return this._HasntOneDriveLibrary; }
+         set { this.SetProperty(ref this._HasntOneDriveLibrary, value); }
       }
       #endregion
 

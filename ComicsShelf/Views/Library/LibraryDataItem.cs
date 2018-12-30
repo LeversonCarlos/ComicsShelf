@@ -10,6 +10,7 @@
          this.Library = _Library;
          this._LibraryPath = this.Library.LibraryPath;
          this._LibraryText = this.Library.LibraryText;
+         this._LibraryType = this.Library.Type;
          this._FileCount = this.Library.FileCount;
       }
       #endregion
@@ -39,6 +40,21 @@
             this.SetProperty(ref this._LibraryText, value);
 
             this.Library.LibraryText = value;
+            App.Database.Update(this.Library);
+         }
+      }
+      #endregion
+
+      #region LibraryType
+      Helpers.Database.LibraryTypeEnum _LibraryType;
+      public Helpers.Database.LibraryTypeEnum LibraryType
+      {
+         get { return this._LibraryType; }
+         set
+         {
+            this.SetProperty(ref this._LibraryType, value);
+
+            this.Library.Type = value; 
             App.Database.Update(this.Library);
          }
       }

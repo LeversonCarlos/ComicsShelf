@@ -187,6 +187,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Autorizar OneDrive Account.
+        /// </summary>
+        internal static string LIBRARY_CONNECT_ONEDRIVE_COMMAND {
+            get {
+                return ResourceManager.GetString("LIBRARY_CONNECT_ONEDRIVE_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This folder has no CBZ files. Choose a valid folder containing some comic book files on it..
         /// </summary>
         internal static string LIBRARY_INVALID_FOLDER_MESSAGE {

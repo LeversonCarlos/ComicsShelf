@@ -15,6 +15,7 @@ namespace ComicsShelf.Views.Library
          this.Data = new LibraryData();
          this.AddLibraryTappedCommand = new Command(async (item) => await this.AddLibraryTapped(item));
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
+         this.AddOneDriveLibraryCommand = new Command(async (item) => await this.AddOneDriveLibrary(item));
          this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
          Engine.AppCenter.TrackEvent("Library: Show View");
       }
@@ -25,7 +26,17 @@ namespace ComicsShelf.Views.Library
       private async Task AddLibraryTapped(object item)
       {
          this.IsBusy = true;
-         await this.Data.AddLibrary();
+         await this.Data.AddLibrary(Helpers.Database.LibraryTypeEnum.FileSystem);
+         this.IsBusy = false;
+      }
+      #endregion
+
+      #region AddOneDriveLibrary
+      public Command AddOneDriveLibraryCommand { get; set; }
+      private async Task AddOneDriveLibrary(object item)
+      {
+         this.IsBusy = true;
+         await this.Data.AddLibrary(Helpers.Database.LibraryTypeEnum.OneDrive);
          this.IsBusy = false;
       }
       #endregion
