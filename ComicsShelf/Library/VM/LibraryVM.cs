@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Views.Library
+namespace ComicsShelf.Library
 {
    public class LibraryVM : Helpers.DataVM<LibraryData>
    {
@@ -17,7 +17,7 @@ namespace ComicsShelf.Views.Library
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
          this.AddOneDriveLibraryCommand = new Command(async (item) => await this.AddOneDriveLibrary(item));
          this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
-         Engine.AppCenter.TrackEvent("Library: Show View");
+         ComicsShelf.Engine.AppCenter.TrackEvent("Library: Show View");
       }
       #endregion
 
@@ -26,7 +26,7 @@ namespace ComicsShelf.Views.Library
       private async Task AddLibraryTapped(object item)
       {
          this.IsBusy = true;
-         await this.Data.AddLibrary(ComicsShelf.Library.LibraryTypeEnum.FileSystem);
+         await this.Data.AddLibrary(LibraryTypeEnum.FileSystem);
          this.IsBusy = false;
       }
       #endregion
@@ -36,7 +36,7 @@ namespace ComicsShelf.Views.Library
       private async Task AddOneDriveLibrary(object item)
       {
          this.IsBusy = true;
-         await this.Data.AddLibrary(ComicsShelf.Library.LibraryTypeEnum.OneDrive);
+         await this.Data.AddLibrary(LibraryTypeEnum.OneDrive);
          this.IsBusy = false;
       }
       #endregion

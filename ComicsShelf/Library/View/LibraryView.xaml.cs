@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Views.Library
+namespace ComicsShelf.Library
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class LibraryView : Helpers.Controls.BasePage

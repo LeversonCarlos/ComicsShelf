@@ -1,4 +1,4 @@
-﻿namespace ComicsShelf.Views.Library
+﻿namespace ComicsShelf.Library
 {
    public class LibraryDataItem : Helpers.Observables.ObservableObject
    {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 
-namespace ComicsShelf.Views.Library
+namespace ComicsShelf.Library
 {
    public class LibraryData : Helpers.Observables.ObservableObject
    {
@@ -56,7 +56,7 @@ namespace ComicsShelf.Views.Library
       {
          try
          {
-            var library = await ComicsShelf.Library.Engine.NewLibrary(libraryType);
+            var library = await Engine.NewLibrary(libraryType);
             if (library == null) { return; }
 
             this.Libraries.Add(new LibraryDataItem(library));
@@ -74,7 +74,7 @@ namespace ComicsShelf.Views.Library
          try
          {
             this.Libraries.Remove(library);
-            await ComicsShelf.Library.Engine.RemoveLibrary(library.Library);
+            await Engine.RemoveLibrary(library.Library);
             this.RefreshLibraries();
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
