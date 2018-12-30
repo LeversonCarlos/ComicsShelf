@@ -27,5 +27,9 @@ namespace ComicsShelf.Library.Implementation
       {
       }
 
+      public async Task ExtractPagesAsync(Helpers.Database.Library library, Views.File.FileData fileData)
+      {
+      }
+
    }
 }
