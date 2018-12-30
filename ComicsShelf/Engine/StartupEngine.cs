@@ -107,13 +107,11 @@ namespace ComicsShelf.Engine
             {
                foreach (var library in libraries)
                {
-                  using (var libraryService = Library.LibraryService.Get(library))
-                  {
-                     var previousState = library.Available;
-                     await libraryService.Validate(library);
-                     if (library.Available != previousState)
-                     { App.Database.Update(library); }
-                  }
+                  var libraryService = Library.LibraryService.Get(library);
+                  var previousState = library.Available;
+                  await libraryService.Validate(library);
+                  if (library.Available != previousState)
+                  { App.Database.Update(library); }
                }
             });
 

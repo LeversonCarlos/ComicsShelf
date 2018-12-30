@@ -17,11 +17,9 @@ namespace ComicsShelf.Library
             var library = new Helpers.Database.Library { Type = libraryType };
 
             // USE SERVICE IMPLEMENTATION
-            using (var libraryService = LibraryService.Get(library))
-            {
-               if (!await libraryService.AddLibrary(library))
-               { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
-            }
+            var libraryService = LibraryService.Get(library);
+            if (!await libraryService.AddLibrary(library))
+            { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return null; }
 
             // RESULT
             App.Database.Insert(library);

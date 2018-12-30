@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Library.Implementation
 {
@@ -17,9 +18,13 @@ namespace ComicsShelf.Library.Implementation
          return true;
       }
 
-      public void Dispose()
+      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(Helpers.Database.Library library)
       {
-         // throw new NotImplementedException();
+         return null;
+      }
+
+      public async Task ExtractCoverAsync(Helpers.Database.Library library, Helpers.Database.ComicFile comicFile)
+      {
       }
 
    }
