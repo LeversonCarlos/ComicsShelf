@@ -86,7 +86,7 @@ namespace ComicsShelf.Engine
             // { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }
 
             // START SEARCH ENGINE
-            await Library.Engine.RefreshLibrary();
+            await Library.LibraryEngine.RefreshLibrary();
 
          }
          catch (Exception ex) { throw; }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Library
 {
-   internal class Engine 
+   internal class LibraryEngine 
    {
 
       #region NewLibrary
