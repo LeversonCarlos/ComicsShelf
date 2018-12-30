@@ -51,10 +51,9 @@ namespace ComicsShelf.Library
          await Task.Run(() =>
          {
             var libraries = App.Database.Table<Helpers.Database.Library>();
-            App.Settings.Paths.LibrariesPath = libraries
+            App.Settings.Paths.Libraries = libraries
                .Where(x => x.Available == true)
                .Where(x => x.LibraryPath != "")
-               .Select(x => x.LibraryPath)
                .ToArray();
          });
          App.HomeData.ClearAll();

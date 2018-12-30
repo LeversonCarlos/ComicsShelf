@@ -121,12 +121,11 @@ namespace ComicsShelf.Engine
             var hasLibriries = false;
             await Task.Run(() =>
             {
-               App.Settings.Paths.LibrariesPath = libraries
+               App.Settings.Paths.Libraries = libraries
                   .Where(x => x.Available == true)
                   .Where(x => x.LibraryPath != "")
-                  .Select(x => x.LibraryPath)
                   .ToArray();
-               hasLibriries = App.Settings.Paths.LibrariesPath.Length != 0;
+               hasLibriries = App.Settings.Paths.Libraries.Length != 0;
             });
             return hasLibriries;
 

@@ -60,9 +60,12 @@ namespace ComicsShelf.Engine
             this.Notify(R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE);
             await Task.Run(() =>
             {
+               var librariesPaths = App.Settings.Paths.Libraries
+                  .Select(x => x.LibraryPath)
+                  .ToArray();
                this.ComicFiles = App.Database
                   .Table<Helpers.Database.ComicFile>()
-                  .Where(x => App.Settings.Paths.LibrariesPath.Contains(x.LibraryPath))
+                  .Where(x => librariesPaths.Contains(x.LibraryPath))
                   .ToList();
             });
          }
@@ -80,18 +83,18 @@ namespace ComicsShelf.Engine
             this.ComicFiles.AsParallel().ForAll(x => x.Available = false);
 
             // LOOP THROUGH LIBRARIES
-            foreach (var libraryPath in App.Settings.Paths.LibrariesPath)
+            foreach (var library in App.Settings.Paths.Libraries)
             {
 
                // LOCATE COMICS LIST
-               var fileList = await this.FileSystem.GetFiles(libraryPath);
+               var fileList = await this.FileSystem.GetFiles(library.LibraryPath);
                this.ComicFiles
-                  .Where(x => x.LibraryPath == libraryPath && fileList.Contains(x.FullPath))
+                  .Where(x => x.LibraryPath == library.LibraryPath && fileList.Contains(x.FullPath))
                   .AsParallel()
                   .ForAll(x => x.Available = true);
 
                // REMOVE FILES ALREADY LOADED
-               var alreadyExistingList = this.ComicFiles.Where(x => x.LibraryPath == libraryPath).Select(x => x.FullPath).ToList();
+               var alreadyExistingList = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryPath).Select(x => x.FullPath).ToList();
                if (alreadyExistingList != null && alreadyExistingList.Count != 0)
                { fileList = fileList.Where(x => !alreadyExistingList.Contains(x)).ToArray(); }
 
@@ -109,7 +112,7 @@ namespace ComicsShelf.Engine
                         var progress = ((double)fileIndex / (double)fileQuantity);
                         this.Notify(filePath, progress);
 
-                        await this.SearchComicFiles_AddFile(libraryPath, filePath);
+                        await this.SearchComicFiles_AddFile(library, filePath);
                      }
                      catch (Exception fileException)
                      { if (!await App.ConfirmMessage($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
@@ -131,7 +134,7 @@ namespace ComicsShelf.Engine
       #endregion
 
       #region SearchComicFiles_AddFile
-      private async Task SearchComicFiles_AddFile(string libraryPath, string filePath)
+      private async Task SearchComicFiles_AddFile(Helpers.Database.Library library, string filePath)
       {
          try
          {
@@ -139,7 +142,7 @@ namespace ComicsShelf.Engine
             // INITIALIZE
             var comicFile = new Helpers.Database.ComicFile
             {
-               LibraryPath = libraryPath,
+               LibraryPath = library.LibraryPath,
                FullPath = filePath,
                Available = true
             };
