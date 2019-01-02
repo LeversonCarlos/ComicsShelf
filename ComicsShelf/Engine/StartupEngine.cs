@@ -81,6 +81,7 @@ namespace ComicsShelf.Engine
             // SHOW HOME VIEW
             await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
 
+            await this.ValidateLibraryPath();
             // SHOW LIBRARY SELECTOR IF HASNT A LIBRARY DEFINED YET
             // if (!await this.ValidateLibraryPath())
             // { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }

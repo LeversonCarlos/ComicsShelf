@@ -13,12 +13,15 @@ namespace ComicsShelf.Library.Implementation
       Xamarin.OneDrive.Connector Connector { get; set; }
       public OneDrive()
       {
-         var clientID = System.Environment.GetEnvironmentVariable("clientID");
+         var clientID = System.Environment.GetEnvironmentVariable("ComicsShelfApplicationID");
          this.Connector = new Xamarin.OneDrive.Connector(clientID, "User.Read", "Files.Read");
       }
 
       public async Task<bool> Validate(Helpers.Database.Library library)
-      { return await this.Connector.ConnectAsync(); }
+      {
+         library.Available = await this.Connector.ConnectAsync();
+         return library.Available;
+      }
 
       public async Task<bool> AddLibrary(Helpers.Database.Library library)
       {
@@ -27,6 +30,7 @@ namespace ComicsShelf.Library.Implementation
          if (profile == null) { return false; }
          library.LibraryPath = profile.id;
          library.LibraryText = profile.Name;
+         library.Available = true;
          return true;
       }
 
