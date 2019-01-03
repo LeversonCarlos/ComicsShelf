@@ -8,8 +8,19 @@ namespace ComicsShelf.Engine
    internal class Search : BaseEngine, IDisposable
    {
 
+      #region Initialize
+      public static async Task Initialize() {
+         await Execute(false);
+
+         var task = Execute(true);
+         await task.ConfigureAwait(false);
+         task.Start();
+         // Task.Factory.StartNew(async () => { await Execute(true); }, TaskCreationOptions.LongRunning);
+      }
+      #endregion
+
       #region Execute
-      public static async Task Execute()
+      public static async Task Execute(bool searchNewFiles)
       {
          try
          {
@@ -20,8 +31,11 @@ namespace ComicsShelf.Engine
                await engine.LoadDatabaseData();
                engine.TrackEvent("Search: Loading Database Data");
 
-               await engine.SearchComicFiles();
-               engine.TrackEvent("Search: Searching Comic Files");
+               if (searchNewFiles)
+               {
+                  await engine.SearchComicFiles();
+                  engine.TrackEvent("Search: Searching Comic Files");
+               }
 
                await engine.PrepareFolders();
                engine.TrackEvent("Search: Preparing Folders Structure");

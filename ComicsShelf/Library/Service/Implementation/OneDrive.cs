@@ -41,12 +41,6 @@ namespace ComicsShelf.Library.Implementation
 
             // LOCATE FILES
             var fileList = await this.Connector.SearchFilesAsync("*.cbz");
-            /*
-            fileList = fileList
-               .Where(x => x.FilePath.StartsWith("/Media"))
-               .Take(50)
-               .ToList();
-            */
 
             // CONVERT
             var comicFiles = fileList

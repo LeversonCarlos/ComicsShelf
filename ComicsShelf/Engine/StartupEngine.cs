@@ -90,36 +90,34 @@ namespace ComicsShelf.Engine
             this.Notify(R.Strings.STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE);
 
             /* LIBRARIES */
-            TableQuery<Helpers.Database.Library> libraries = null;
-            await Task.Run(() => { libraries = App.Database.Table<Helpers.Database.Library>(); });
+            var libraries = App.Database.Table<Helpers.Database.Library>();
 
             /* VALIDATE LIBRARIES */
-            await Task.Run(async () =>
+            foreach (var library in libraries)
             {
-               foreach (var library in libraries)
-               {
-                  var libraryService = Library.LibraryService.Get(library);
-                  var previousState = library.Available;
-                  await libraryService.Validate(library);
-                  if (library.Available != previousState)
-                  { App.Database.Update(library); }
-               }
-            });
+               var libraryService = Library.LibraryService.Get(library);
+               var previousState = library.Available;
+               await libraryService.Validate(library);
+               if (library.Available != previousState)
+               { App.Database.Update(library); }
+            }
 
-            /* RESULT */
-            await Task.Run(() =>
-            {
-               App.Settings.Paths.Libraries = libraries
-                  .Where(x => x.Available == true)
-                  .Where(x => x.LibraryPath != "")
-                  .ToArray();
-            });
+            /* AVAILABLE LIBRARIES */
+            App.Settings.Paths.Libraries = libraries
+               .Where(x => x.Available == true)
+               .Where(x => x.LibraryPath != "")
+               .ToArray();
 
             // START SEARCH ENGINE
-            await Library.LibraryEngine.RefreshLibrary();
+            await Search.Execute(false);
+            // var task = Search.Execute(true);
+            // await task.ConfigureAwait(false);
+            // task.Start();
+            Task.Factory.StartNew(async () => await Search.Execute(true), TaskCreationOptions.LongRunning);
+            // Library.LibraryEngine.RefreshLibrary();
 
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { throw; }
       }
 
    }

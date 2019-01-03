@@ -46,16 +46,17 @@ namespace ComicsShelf.Library
       #region RefreshLibrary
       internal static async Task RefreshLibrary()
       {
-         await Task.Run(() =>
-         {
-            var libraries = App.Database.Table<Helpers.Database.Library>();
-            App.Settings.Paths.Libraries = libraries
-               .Where(x => x.Available == true)
-               .Where(x => x.LibraryPath != "")
-               .ToArray();
-         });
+         var libraries = App.Database.Table<Helpers.Database.Library>();
+         App.Settings.Paths.Libraries = libraries
+            .Where(x => x.Available == true)
+            .Where(x => x.LibraryPath != "")
+            .ToArray();
          App.HomeData.ClearAll();
-         Task.Factory.StartNew(ComicsShelf.Engine.Search.Execute, TaskCreationOptions.LongRunning);
+
+         // var task = Engine.Search.Execute(true);
+         // await task.ConfigureAwait(false);
+         // task.Start();
+         Task.Factory.StartNew(async () => await Engine.Search.Execute(true), TaskCreationOptions.LongRunning);
       }
       #endregion
 
