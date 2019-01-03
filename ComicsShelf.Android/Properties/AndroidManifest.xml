@@ -6,5 +6,14 @@
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<application android:label="Comics Shelf"></application>
+	<application android:label="Comics Shelf">
+		<activity android:name="microsoft.identity.client.BrowserTabActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="msal{YOUR_MICROSOFT_APPLICATION_ID}" android:host="auth" />
+			</intent-filter>
+		</activity>
+   </application>
 </manifest>
