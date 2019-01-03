@@ -21,7 +21,8 @@ namespace ComicsShelf.Engine
                      engine.Initialize();
                      await engine.LoadSettings();
                      await engine.LoadDatabase();
-                     await engine.LoadInitialView();
+                     await engine.ShowHomeView();
+                     await engine.InitializeLibrary();
                   });
             }
          }
@@ -47,7 +48,7 @@ namespace ComicsShelf.Engine
             App.HomeData.EmptyCoverImage = Xamarin.Forms.ImageSource.FromResource("ComicsShelf.Helpers.Controls.Controls.CoverFrameView.Empty.png", executingAssembly);
             executingAssembly = null;
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
       private async Task LoadSettings()
@@ -58,7 +59,7 @@ namespace ComicsShelf.Engine
             App.Settings = new Helpers.Settings.Settings();
             await App.Settings.Initialize();
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
       private async Task LoadDatabase()
@@ -69,31 +70,20 @@ namespace ComicsShelf.Engine
             App.Database = new Helpers.Database.dbContext();
             await App.Database.Initialize();
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
-      private async Task LoadInitialView()
+      private async Task ShowHomeView()
       {
          try
          {
             this.Notify(R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE);
-
-            // SHOW HOME VIEW
             await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData);
-
-            await this.ValidateLibraryPath();
-            // SHOW LIBRARY SELECTOR IF HASNT A LIBRARY DEFINED YET
-            // if (!await this.ValidateLibraryPath())
-            // { await Helpers.NavVM.PushAsync<Views.Library.LibraryVM>(true); return; }
-
-            // START SEARCH ENGINE
-            await Library.LibraryEngine.RefreshLibrary();
-
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
-      private async Task<bool> ValidateLibraryPath()
+      private async Task InitializeLibrary()
       {
          try
          {
@@ -117,16 +107,16 @@ namespace ComicsShelf.Engine
             });
 
             /* RESULT */
-            var hasLibriries = false;
             await Task.Run(() =>
             {
                App.Settings.Paths.Libraries = libraries
                   .Where(x => x.Available == true)
                   .Where(x => x.LibraryPath != "")
                   .ToArray();
-               hasLibriries = App.Settings.Paths.Libraries.Length != 0;
             });
-            return hasLibriries;
+
+            // START SEARCH ENGINE
+            await Library.LibraryEngine.RefreshLibrary();
 
          }
          catch (Exception) { throw; }
