@@ -31,34 +31,21 @@ namespace ComicsShelf.Helpers.Controls
       {
 
          var resetParam = new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset);
-         this.ItemsRefreshing(resetParam);
+         this.ItemsRefresh(resetParam);
 
          var itemsSource = (this.ItemsSource as System.Collections.Specialized.INotifyCollectionChanged);
          if (itemsSource != null)
          {
             itemsSource.CollectionChanged +=
-               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
-               { this.ItemsRefreshing(e); };
+               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => {
+                  Device.BeginInvokeOnMainThread(() => this.ItemsRefresh(e));
+               };
          }
 
       }
       #endregion
 
       #region ItemsRefresh
-
-      private void ItemsRefreshing(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-      {
-         try
-         {
-            System.Threading.Tasks.Parallel.Invoke( ()=> {
-               Device.BeginInvokeOnMainThread(() => {
-                  this.ItemsRefresh(e);
-               });
-            });
-         }
-         catch { }
-      }
-
       private void ItemsRefresh(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
          try
@@ -129,7 +116,6 @@ namespace ComicsShelf.Helpers.Controls
          }
          catch (Exception ex) { throw; }
       }
-
       #endregion
 
    }
