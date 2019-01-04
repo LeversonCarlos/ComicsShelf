@@ -16,6 +16,7 @@ namespace ComicsShelf.Droid
 
             // OPEN ZIP ARCHIVE
             var comicFilePath = $"{comicFile.LibraryPath}{settings.Paths.Separator}{comicFile.FullPath}";
+            if (!System.IO.File.Exists(comicFilePath)) { return; }
             using (var zipArchiveStream = new System.IO.FileStream(comicFilePath, FileMode.Open, FileAccess.Read))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))

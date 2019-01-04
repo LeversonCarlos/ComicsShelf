@@ -16,6 +16,7 @@ namespace ComicsShelf.UWP
 
             // OPEN ZIP ARCHIVE
             var comicStorageFile = await GetStorageFile(settings, comicFile.LibraryPath, comicFile.FullPath);
+            if (comicStorageFile==null) { return; }
             using (var zipArchiveStream = await comicStorageFile.OpenStreamForReadAsync())
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))

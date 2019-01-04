@@ -104,7 +104,6 @@ namespace ComicsShelf.Engine
             {
                var libraryService = Library.LibraryService.Get(library);
 
-
                // LOCATE COMIC FILES
                var comicFiles = await libraryService.SearchFilesAsync(library);
                if (comicFiles == null || comicFiles.Count == 0) { continue; }
@@ -137,12 +136,9 @@ namespace ComicsShelf.Engine
 
             }
 
-            // REORDER THE LISTS
-            this.ComicFiles = this.ComicFiles
-               .Where(x => x.Available)
-               .OrderBy(x => x.LibraryPath)
-               .ThenBy(x => x.FullPath)
-               .ToList();
+            await Task.Run(() => {
+               this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x));
+            });
 
          }
          catch (Exception) { throw; }
@@ -182,15 +178,24 @@ namespace ComicsShelf.Engine
          {
             List<string> comicKeys = null;
 
+            // REORDER THE LISTS
+            var countA = this.ComicFiles.Count;
+            this.ComicFiles = this.ComicFiles
+               .Where(x => x.Available)
+               .Where(x => !x.FullPath.EndsWith(".cbr"))
+               .OrderBy(x => x.LibraryPath)
+               .ThenBy(x => x.FullPath)
+               .ToList();
+            var countB = this.ComicFiles.Count;
+
+            // LOOP THROUGH LIBRARIES
             foreach (var library in App.Settings.Paths.Libraries)
             {
 
-               if (App.HomeData.Files.Count == 0)
-               {
-                  var countA = this.ComicFiles.Count;
-                  this.ComicFiles.RemoveAll(x => x.FullText.Contains("White Knight [2018]"));
-                  var countB = this.ComicFiles.Count;
-               }
+               /*
+               if (App.HomeData.Files.Count != 0)
+               { this.ComicFiles.RemoveAll(x => x.FullText.Contains("White Knight [2018]")); }
+               */
 
                // REMOVE NOEXISTING FILES
                comicKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryPath).Select(x => x.Key).ToList();
@@ -242,8 +247,8 @@ namespace ComicsShelf.Engine
             var homeDataFolders = App.HomeData.Folders
                .Where(x => !comicKeys.Contains(x.ComicFolder.Key))
                .ToList();
-            if (homeDataFolders.Count != 0)
-            { App.HomeData.Folders.RemoveRange(homeDataFolders); }
+            foreach(var homeDataFolder in homeDataFolders)
+            { App.HomeData.Folders.Remove(homeDataFolder); }
 
             // DISCARD ALREADY EXISTING FOLDERS
             comicKeys = App.HomeData.Folders.Select(x => x.ComicFolder.Key).ToList();
@@ -265,16 +270,16 @@ namespace ComicsShelf.Engine
                var folderFiles = folder.Files
                   .Where(x => x.ComicFile.LibraryPath == folder.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFile.Key))
                   .ToList();
-               if (folderFiles.Count != 0)
-               { folder.Files.RemoveRange(folderFiles); }
+               foreach (var folderFile in folderFiles)
+               { folder.Files.Remove(folderFile); }
 
                // ADD NEW FILES
                comicKeys = folder.Files.Select(x => x.ComicFile.Key).ToList();
                folderFiles = App.HomeData.Files
                   .Where(x => x.ComicFile.LibraryPath == folder.ComicFolder.LibraryPath && x.ComicFile.ParentPath == folder.ComicFolder.FullPath && !comicKeys.Contains(x.ComicFile.Key))
                   .ToList();
-               if (folderFiles.Count != 0)
-               { folder.Files.AddRange(folderFiles); }
+               foreach (var folderFile in folderFiles)
+               { folder.Files.Add(folderFile); }
 
                folder.HasFiles = folder.Files.Count != 0;
             }
@@ -308,8 +313,8 @@ namespace ComicsShelf.Engine
             var homeDataSections = App.HomeData.Sections
                .Where(x => !comicKeys.Contains(x.ComicFolder.Key))
                .ToList();
-            if (homeDataSections.Count != 0)
-            { App.HomeData.Sections.RemoveRange(homeDataSections); }
+            foreach (var homeDataSection in homeDataSections)
+            { App.HomeData.Sections.Remove(homeDataSection); }
 
             // DISCARD ALREADY EXISTING SECTIONS
             comicKeys = App.HomeData.Sections.Select(x => x.ComicFolder.Key).ToList();
@@ -331,16 +336,16 @@ namespace ComicsShelf.Engine
                var sectionFolders = section.Folders
                   .Where(x => x.ComicFolder.LibraryPath == section.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFolder.Key))
                   .ToList();
-               if (sectionFolders.Count != 0)
-               { section.Folders.RemoveRange(sectionFolders); }
+               foreach (var sectionFolder in sectionFolders)
+               { section.Folders.Remove(sectionFolder); }
 
                // ADD NEW FOLDERS
                comicKeys = section.Folders.Select(x => x.ComicFolder.Key).ToList();
                sectionFolders = App.HomeData.Folders
                   .Where(x => x.ComicFolder.LibraryPath == section.ComicFolder.LibraryPath && x.ComicFolder.ParentPath == section.ComicFolder.FullPath && !comicKeys.Contains(x.ComicFolder.Key))
                   .ToList();
-               if (sectionFolders.Count != 0)
-               { section.Folders.AddRange(sectionFolders); }
+               foreach (var sectionFolder in sectionFolders)
+               { section.Folders.Add(sectionFolder); }
 
                section.HasFolders = section.Folders.Count != 0;
             }
@@ -387,16 +392,16 @@ namespace ComicsShelf.Engine
                var librarySections = library.Folders
                   .Where(x => x.ComicFolder.LibraryPath == library.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFolder.Key))
                   .ToList();
-               if (librarySections.Count != 0)
-               { library.Folders.RemoveRange(librarySections); }
+               foreach (var librarySection in librarySections)
+               { library.Folders.Remove(librarySection); }
 
                // ADD NEW FOLDERS
                comicKeys = library.Folders.Select(x => x.ComicFolder.Key).ToList();
                librarySections = App.HomeData.Sections
                   .Where(x => x.ComicFolder.LibraryPath == library.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFolder.Key))
                   .ToList();
-               if (librarySections.Count != 0)
-               { library.Folders.AddRange(librarySections); }
+               foreach (var librarySection in librarySections)
+               { library.Folders.Add(librarySection); }
 
                library.HasFolders = library.Folders.Count != 0;
             }
