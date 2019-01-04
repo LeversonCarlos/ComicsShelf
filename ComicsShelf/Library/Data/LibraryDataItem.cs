@@ -1,4 +1,4 @@
-﻿namespace ComicsShelf.Views.Library
+﻿namespace ComicsShelf.Library
 {
    public class LibraryDataItem : Helpers.Observables.ObservableObject
    {
@@ -10,6 +10,7 @@
          this.Library = _Library;
          this._LibraryPath = this.Library.LibraryPath;
          this._LibraryText = this.Library.LibraryText;
+         this._LibraryType = this.Library.Type;
          this._FileCount = this.Library.FileCount;
       }
       #endregion
@@ -39,6 +40,21 @@
             this.SetProperty(ref this._LibraryText, value);
 
             this.Library.LibraryText = value;
+            App.Database.Update(this.Library);
+         }
+      }
+      #endregion
+
+      #region LibraryType
+      ComicsShelf.Library.LibraryTypeEnum _LibraryType;
+      public ComicsShelf.Library.LibraryTypeEnum LibraryType
+      {
+         get { return this._LibraryType; }
+         set
+         {
+            this.SetProperty(ref this._LibraryType, value);
+
+            this.Library.Type = value; 
             App.Database.Update(this.Library);
          }
       }

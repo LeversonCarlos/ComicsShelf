@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Engine
 {
    internal class Search : BaseEngine, IDisposable
    {
 
+      #region Initialize
+      public static async Task Initialize() {
+         await Execute(false);
+
+         var task = Execute(true);
+         await task.ConfigureAwait(false);
+         task.Start();
+         // Task.Factory.StartNew(async () => { await Execute(true); }, TaskCreationOptions.LongRunning);
+      }
+      #endregion
+
       #region Execute
-      public static async Task Execute()
+      public static async Task Execute(bool searchNewFiles)
       {
          try
          {
@@ -20,11 +32,14 @@ namespace ComicsShelf.Engine
                await engine.LoadDatabaseData();
                engine.TrackEvent("Search: Loading Database Data");
 
-               await engine.SearchComicFiles();
-               engine.TrackEvent("Search: Searching Comic Files");
+               if (searchNewFiles)
+               {
+                  await engine.SearchComicFiles();
+                  engine.TrackEvent("Search: Searching Comic Files");
+               }
 
-               await engine.PrepareFolders();
-               engine.TrackEvent("Search: Preparing Folders Structure");
+               await engine.PrepareStructure();
+               engine.TrackEvent("Search: Preparing Structure");
 
                await engine.ExtractComicData();
                engine.TrackEvent("Search: Extracting Data Info");
@@ -60,13 +75,18 @@ namespace ComicsShelf.Engine
             this.Notify(R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE);
             await Task.Run(() =>
             {
+               var librariesPaths = App.Settings.Paths.Libraries
+                  .Select(x => x.LibraryPath)
+                  .ToArray();
                this.ComicFiles = App.Database
                   .Table<Helpers.Database.ComicFile>()
-                  .Where(x => App.Settings.Paths.LibrariesPath.Contains(x.LibraryPath))
+                  .Where(x => librariesPaths.Contains(x.LibraryPath))
+                  .GroupBy(x => new { x.LibraryPath, x.Key })
+                  .Select(x => x.FirstOrDefault())
                   .ToList();
             });
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
@@ -80,123 +100,138 @@ namespace ComicsShelf.Engine
             this.ComicFiles.AsParallel().ForAll(x => x.Available = false);
 
             // LOOP THROUGH LIBRARIES
-            foreach (var libraryPath in App.Settings.Paths.LibrariesPath)
+            foreach (var library in App.Settings.Paths.Libraries)
             {
+               var libraryService = Library.LibraryService.Get(library);
 
-               // LOCATE COMICS LIST
-               var fileList = await this.FileSystem.GetFiles(libraryPath);
+               // LOCATE COMIC FILES
+               var comicFiles = await libraryService.SearchFilesAsync(library);
+               if (comicFiles == null || comicFiles.Count == 0) { continue; }
+
+               // ACTIVATE FOUND FILES
+               var foundKeys = comicFiles.Select(x => x.Key).ToList();
                this.ComicFiles
-                  .Where(x => x.LibraryPath == libraryPath && fileList.Contains(x.FullPath))
+                  .Where(x => x.LibraryPath == library.LibraryPath && foundKeys.Contains(x.Key))
                   .AsParallel()
                   .ForAll(x => x.Available = true);
 
-               // REMOVE FILES ALREADY LOADED
-               var alreadyExistingList = this.ComicFiles.Where(x => x.LibraryPath == libraryPath).Select(x => x.FullPath).ToList();
-               if (alreadyExistingList != null && alreadyExistingList.Count != 0)
-               { fileList = fileList.Where(x => !alreadyExistingList.Contains(x)).ToArray(); }
+               // ALREADY EXISTING FILES
+               var existingKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryPath).Select(x => x.Key).ToList();
+               comicFiles
+                  .RemoveAll(x => x.LibraryPath == library.LibraryPath && existingKeys.Contains(x.Key));
 
-               // LOOP THROUGH FILE LIST
-               var fileQuantity = fileList.Length;
-               if (fileQuantity != 0)
+               // COVER PATH   
+               comicFiles
+                  .AsParallel()
+                  .ForAll(x => x.CoverPath = $"{App.Settings.Paths.CoversCachePath}{App.Settings.Paths.Separator}{x.Key}.jpg");
+
+               await Task.Run(() =>
                {
-                  for (int fileIndex = 0; fileIndex < fileQuantity; fileIndex++)
+                  foreach (var comicFile in comicFiles)
                   {
-                     string filePath = "";
-                     try
-                     {
-                        filePath = fileList[fileIndex];
-
-                        var progress = ((double)fileIndex / (double)fileQuantity);
-                        this.Notify(filePath, progress);
-
-                        await this.SearchComicFiles_AddFile(libraryPath, filePath);
-                     }
-                     catch (Exception fileException)
-                     { if (!await App.ConfirmMessage($"->Path:{filePath}\n->File:{fileIndex}/{fileQuantity}\n->Exception:{fileException}")) { Environment.Exit(0); } }
+                     this.ComicFiles.Add(comicFile);
+                     App.Database.Insert(comicFile);
                   }
-               }
+               });
 
             }
 
-            // REORDER THE LISTS
-            this.ComicFiles = this.ComicFiles
-               .Where(x => x.Available)
-               .OrderBy(x => x.LibraryPath)
-               .ThenBy(x => x.FullPath)
-               .ToList();
+            await Task.Run(() => {
+               this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x));
+            });
 
          }
-         catch (Exception ex) { throw; }
-      }
-      #endregion
-
-      #region SearchComicFiles_AddFile
-      private async Task SearchComicFiles_AddFile(string libraryPath, string filePath)
-      {
-         try
-         {
-
-            // INITIALIZE
-            var comicFile = new Helpers.Database.ComicFile
-            {
-               LibraryPath = libraryPath,
-               FullPath = filePath,
-               Available = true
-            };
-            comicFile.Key = $"{comicFile.LibraryPath}|{comicFile.FullPath}";
-
-            // PARENT PATH
-            var folderPath = System.IO.Path.GetDirectoryName(filePath);
-            var folderText = System.IO.Path.GetFileNameWithoutExtension(folderPath);
-            comicFile.ParentPath = folderPath;
-
-            // TEXT
-            comicFile.FullText = System.IO.Path.GetFileNameWithoutExtension(filePath).Trim();
-            if (!string.IsNullOrEmpty(folderText))
-            { comicFile.SmallText = comicFile.FullText.Replace(folderText, ""); }
-            if (string.IsNullOrEmpty(comicFile.SmallText))
-            { comicFile.SmallText = comicFile.FullText; }
-
-            // COVER PATH   
-            var coverPath = $"{filePath}.jpg";
-            coverPath = coverPath
-               .Replace(App.Settings.Paths.Separator, "_")
-               .Replace("#", "")
-               .Replace(" ", "_")
-               .Replace("___", "_")
-               .Replace("__", "_");
-            comicFile.CoverPath = $"{App.Settings.Paths.CoversCachePath}{App.Settings.Paths.Separator}{coverPath}";
-
-            // INSERT COMIC FILE
-            this.ComicFiles.Add(comicFile);
-            await Task.Run(() => App.Database.Insert(comicFile));
-
-         }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
 
-      #region PrepareFolders
-      private async Task PrepareFolders()
+      #region PrepareStructure
+      private async Task PrepareStructure()
       {
          try
          {
             this.Notify(R.Strings.SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE);
 
-            // COMIC FILES
-            this.Notify("Loading Files", 0.0);
-            await Task.Run(() =>
+            this.Notify("Preparing Files", 0.0);
+            this.PrepareFiles();
+
+            this.Notify("Preparing Folders", 0.4);
+            this.PrepareFolders();
+
+            this.Notify("Preparing Sections", 0.6);
+            this.PrepareSections();
+
+            this.Notify("Preparing Libraries", 0.8);
+            this.PrepareLibraries();
+
+            this.Notify("Done", 1.0);
+         }
+         catch (Exception ex) { throw; }
+      }
+      #endregion
+
+      #region PrepareFiles
+      private void PrepareFiles()
+      {
+         try
+         {
+            List<string> comicKeys = null;
+
+            // REORDER THE LISTS
+            var countA = this.ComicFiles.Count;
+            this.ComicFiles = this.ComicFiles
+               .Where(x => x.Available)
+               .Where(x => !x.FullPath.EndsWith(".cbr"))
+               .OrderBy(x => x.LibraryPath)
+               .ThenBy(x => x.FullPath)
+               .ToList();
+            var countB = this.ComicFiles.Count;
+
+            // LOOP THROUGH LIBRARIES
+            foreach (var library in App.Settings.Paths.Libraries)
             {
+
+               /*
+               if (App.HomeData.Files.Count != 0)
+               { this.ComicFiles.RemoveAll(x => x.FullText.Contains("White Knight [2018]")); }
+               */
+
+               // REMOVE NOEXISTING FILES
+               comicKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryPath).Select(x => x.Key).ToList();
+               var homeDataFiles = App.HomeData.Files
+                  .Where(x => x.ComicFile.LibraryPath == library.LibraryPath && !comicKeys.Contains(x.ComicFile.Key))
+                  .ToList();
+               foreach (var homeDataFile in homeDataFiles)
+               { App.HomeData.Files.Remove(homeDataFile); }
+
+               // DISCARD ALREADY EXISTING FILES
+               comicKeys = App.HomeData.Files.Where(x => x.ComicFile.LibraryPath == library.LibraryPath).Select(x => x.ComicFile.Key).ToList();
+               this.ComicFiles
+                  .RemoveAll(x => x.LibraryPath == library.LibraryPath && comicKeys.Contains(x.Key));
+
+               // ADD NEW FILES
                this.ComicFiles.ForEach(comicFile => App.HomeData.Files.Add(new Views.File.FileData(comicFile)));
                // App.HomeData.Files.AddRange(comicFiles.Select(x => new Views.File.FileData(x)));
                // Statistics.Execute();
-            });
 
-            // COMIC FOLDERS
-            this.Notify("Loading Folders", 0.3);
-            var comicFolders = this.ComicFiles
-               .GroupBy(x => new { x.LibraryPath, x.ParentPath })
+            }
+
+         }
+         catch (Exception) { throw; }
+      }
+      #endregion
+
+      #region PrepareFolders
+      private void PrepareFolders()
+      {
+         try
+         {
+            List<string> comicKeys = null;
+
+            // PREPARE FOLDERS
+            var comicFolders = App.HomeData.Files
+               .GroupBy(x => new { x.ComicFile.LibraryPath, x.ComicFile.ParentPath })
                .Select(x => new Helpers.Database.ComicFolder
                {
                   LibraryPath = x.Key.LibraryPath,
@@ -206,20 +241,64 @@ namespace ComicsShelf.Engine
                   Key = $"{x.Key.LibraryPath}|{x.Key.ParentPath}"
                })
                .ToList();
-            comicFolders
-               .ForEach(comicFolder =>
-               {
-                  var folderData = new Views.Folder.FolderData(comicFolder);
-                  var folderFiles = App.HomeData.Files.Where(x => x.ComicFile.LibraryPath == comicFolder.LibraryPath && x.ComicFile.ParentPath == comicFolder.FullPath);
-                  folderData.Files.AddRange(folderFiles);
-                  folderData.HasFiles = folderData.Files.Count != 0;
-                  App.HomeData.Folders.Add(folderData);
-               });
 
-            // COMIC SECTIONS
-            this.Notify("Loading Sections", 0.6);
-            var comicSections = comicFolders
-               .GroupBy(x => new { x.LibraryPath, x.ParentPath })
+            // REMOVE NOEXISTING FOLDERS
+            comicKeys = comicFolders.Select(x => x.Key).ToList();
+            var homeDataFolders = App.HomeData.Folders
+               .Where(x => !comicKeys.Contains(x.ComicFolder.Key))
+               .ToList();
+            foreach(var homeDataFolder in homeDataFolders)
+            { App.HomeData.Folders.Remove(homeDataFolder); }
+
+            // DISCARD ALREADY EXISTING FOLDERS
+            comicKeys = App.HomeData.Folders.Select(x => x.ComicFolder.Key).ToList();
+            comicFolders
+               .RemoveAll(x => comicKeys.Contains(x.Key));
+
+            // ADD NEW FOLDERS
+            comicFolders.ForEach(comicFolder => App.HomeData.Folders.Add(new Views.Folder.FolderData(comicFolder)));
+
+            // REVIEW FOLDER's FILES
+            foreach (var folder in App.HomeData.Folders)
+            {
+
+               // REMOVE NOEXISTING FILES
+               comicKeys = App.HomeData.Files
+                  .Where(x => x.ComicFile.LibraryPath == folder.ComicFolder.LibraryPath && x.ComicFile.ParentPath == folder.ComicFolder.FullPath)
+                  .Select(x => x.ComicFile.Key)
+                  .ToList();
+               var folderFiles = folder.Files
+                  .Where(x => x.ComicFile.LibraryPath == folder.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFile.Key))
+                  .ToList();
+               foreach (var folderFile in folderFiles)
+               { folder.Files.Remove(folderFile); }
+
+               // ADD NEW FILES
+               comicKeys = folder.Files.Select(x => x.ComicFile.Key).ToList();
+               folderFiles = App.HomeData.Files
+                  .Where(x => x.ComicFile.LibraryPath == folder.ComicFolder.LibraryPath && x.ComicFile.ParentPath == folder.ComicFolder.FullPath && !comicKeys.Contains(x.ComicFile.Key))
+                  .ToList();
+               foreach (var folderFile in folderFiles)
+               { folder.Files.Add(folderFile); }
+
+               folder.HasFiles = folder.Files.Count != 0;
+            }
+
+         }
+         catch (Exception) { throw; }
+      }
+      #endregion
+
+      #region PrepareSections
+      private void PrepareSections()
+      {
+         try
+         {
+            List<string> comicKeys = null;
+
+            // PREPARE SECTIONS
+            var comicSections = App.HomeData.Folders
+               .GroupBy(x => new { x.ComicFolder.LibraryPath, x.ComicFolder.ParentPath })
                .Select(x => new Helpers.Database.ComicFolder
                {
                   LibraryPath = x.Key.LibraryPath,
@@ -228,47 +307,107 @@ namespace ComicsShelf.Engine
                   Key = $"{x.Key.LibraryPath}|{x.Key.ParentPath}"
                })
                .ToList();
-            var comicSectionsData = new List<Views.Folder.FolderData>();
-            comicSections
-               .ForEach(comicSection =>
-               {
-                  // if (string.IsNullOrEmpty(comicSection.Text)) { comicSection.Text = R.Strings.HOME_FOLDERS_PAGE_TITLE; }
 
-                  var sectionData = new Views.Folder.FolderData(comicSection);
-                  var sectionFolders = App.HomeData.Folders.Where(x => x.ComicFolder.LibraryPath == comicSection.LibraryPath && x.ComicFolder.ParentPath == comicSection.FullPath);
-                  sectionData.Folders.AddRange(sectionFolders);
-                  sectionData.HasFolders = sectionData.Folders.Count != 0;
-                  comicSectionsData.Add(sectionData);
-               });
-
-            // LIBRARIES
-            this.Notify("Loading Libraries", 0.8);
-            var comicLibraries = App.Database.Table<Helpers.Database.Library>()
-               .Select(x => new Helpers.Database.ComicFolder
-               {
-                  LibraryPath = x.LibraryPath,
-                  FullPath = x.LibraryPath,
-                  Text = x.LibraryText,
-                  Key = $"{x.LibraryPath}"
-               })
-               .OrderBy(x => x.Text)
+            // REMOVE NOEXISTING SECTIONS
+            comicKeys = comicSections.Select(x => x.Key).ToList();
+            var homeDataSections = App.HomeData.Sections
+               .Where(x => !comicKeys.Contains(x.ComicFolder.Key))
                .ToList();
-            await Task.Run(() =>
-            {
-               comicLibraries
-                  .ForEach(comicLibrary =>
-                  {
-                     var libraryData = new Views.Home.LibraryData(comicLibrary);
-                     var librarySections = comicSectionsData.Where(x => x.ComicFolder.LibraryPath == comicLibrary.LibraryPath);
-                     libraryData.Folders.AddRange(librarySections);
-                     libraryData.HasFolders = libraryData.Folders.Count != 0;
-                     App.HomeData.Libraries.Add(libraryData);
-                  });
-            });
+            foreach (var homeDataSection in homeDataSections)
+            { App.HomeData.Sections.Remove(homeDataSection); }
 
-            this.Notify("Done", 1.0);
+            // DISCARD ALREADY EXISTING SECTIONS
+            comicKeys = App.HomeData.Sections.Select(x => x.ComicFolder.Key).ToList();
+            comicSections
+               .RemoveAll(x => comicKeys.Contains(x.Key));
+
+            // ADD NEW SECTIONS
+            comicSections.ForEach(comicFolder => App.HomeData.Sections.Add(new Views.Folder.FolderData(comicFolder)));
+
+            // REVIEW SECTION's FOLDERS
+            foreach (var section in App.HomeData.Sections)
+            {
+
+               // REMOVE NOEXISTING FOLDERS
+               comicKeys = App.HomeData.Folders
+                  .Where(x => x.ComicFolder.LibraryPath == section.ComicFolder.LibraryPath && x.ComicFolder.ParentPath == section.ComicFolder.FullPath)
+                  .Select(x => x.ComicFolder.Key)
+                  .ToList();
+               var sectionFolders = section.Folders
+                  .Where(x => x.ComicFolder.LibraryPath == section.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFolder.Key))
+                  .ToList();
+               foreach (var sectionFolder in sectionFolders)
+               { section.Folders.Remove(sectionFolder); }
+
+               // ADD NEW FOLDERS
+               comicKeys = section.Folders.Select(x => x.ComicFolder.Key).ToList();
+               sectionFolders = App.HomeData.Folders
+                  .Where(x => x.ComicFolder.LibraryPath == section.ComicFolder.LibraryPath && x.ComicFolder.ParentPath == section.ComicFolder.FullPath && !comicKeys.Contains(x.ComicFolder.Key))
+                  .ToList();
+               foreach (var sectionFolder in sectionFolders)
+               { section.Folders.Add(sectionFolder); }
+
+               section.HasFolders = section.Folders.Count != 0;
+            }
+
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
+      }
+      #endregion
+
+      #region PrepareLibraries
+      private void PrepareLibraries()
+      {
+         try
+         {
+            List<string> comicKeys = null;
+
+            // ADD NEW LIBRARIES
+            if (App.HomeData.Libraries.Count == 0)
+            {
+               var comicLibraries = App.Settings.Paths.Libraries
+                  .Select(x => new Helpers.Database.ComicFolder
+                  {
+                     LibraryPath = x.LibraryPath,
+                     FullPath = x.LibraryPath,
+                     Text = x.LibraryText,
+                     Key = $"{x.LibraryPath}"
+                  })
+                  .OrderBy(x => x.Text)
+                  .ToList();
+               App.HomeData.Libraries.Add(new Views.Home.FeaturedData());
+               comicLibraries.ForEach(comicLibrary => App.HomeData.Libraries.Add(new Views.Home.LibraryData(comicLibrary)));
+            }
+
+            // REVIEW LIBRARIES's SECTIONS
+            foreach (var library in App.HomeData.Libraries)
+            {
+               if (library.IsFeaturedPage) { continue; }
+
+               // REMOVE NOEXISTING SECTIONS
+               comicKeys = App.HomeData.Sections
+                  .Where(x => x.ComicFolder.LibraryPath == library.ComicFolder.LibraryPath)
+                  .Select(x => x.ComicFolder.Key)
+                  .ToList();
+               var librarySections = library.Folders
+                  .Where(x => x.ComicFolder.LibraryPath == library.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFolder.Key))
+                  .ToList();
+               foreach (var librarySection in librarySections)
+               { library.Folders.Remove(librarySection); }
+
+               // ADD NEW FOLDERS
+               comicKeys = library.Folders.Select(x => x.ComicFolder.Key).ToList();
+               librarySections = App.HomeData.Sections
+                  .Where(x => x.ComicFolder.LibraryPath == library.ComicFolder.LibraryPath && !comicKeys.Contains(x.ComicFolder.Key))
+                  .ToList();
+               foreach (var librarySection in librarySections)
+               { library.Folders.Add(librarySection); }
+
+               library.HasFolders = library.Folders.Count != 0;
+            }
+
+         }
+         catch (Exception) { throw; }
       }
       #endregion
 
@@ -326,7 +465,7 @@ namespace ComicsShelf.Engine
             await this.ExtractComicData(fileList);
 
          }
-         catch (Exception ex) { throw ex; }
+         catch (Exception) { throw; }
          finally { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
       }
 
@@ -334,6 +473,16 @@ namespace ComicsShelf.Engine
       {
          try
          {
+
+            // LIBRARY SERVICES
+            var libraryServices = App.Settings.Paths.Libraries
+               .Select(x => new
+               {
+                  Library = x,
+                  Path = x.LibraryPath,
+                  Service = Library.LibraryService.Get(x)
+               })
+               .ToList();
 
             // LOOP THROUGH FILES
             var filesQuantity = fileList.Count;
@@ -343,37 +492,25 @@ namespace ComicsShelf.Engine
                var progress = ((double)fileIndex / (double)filesQuantity);
                this.Notify(fileData.FullText, progress);
 
-               // EXECUTE
-               if (await this.ExtractComicData_CoverExtracted(fileData))
-               { this.ExtractComicData_ApplyFolderData(fileData); }
+               // CHECK IF THE COVER FILE ALREADY EXISTS
+               if (!string.IsNullOrEmpty(fileData.CoverPath)) { continue; }
+
+               // COVER EXTRACT
+               var library = libraryServices
+                  .Where(x => x.Path == fileData.ComicFile.LibraryPath)
+                  .FirstOrDefault();
+               await library.Service.ExtractCoverAsync(library.Library, fileData.ComicFile);
+
+               // APPLY PROPERTY SO THE VIEW GETS REFRESHED
+               fileData.CoverPath = fileData.ComicFile.CoverPath;
+               this.ExtractComicData_ApplyFolderData(fileData); 
 
             }
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
-      #endregion
-
-      #region ExtractComicData_CoverExtracted
-      private async Task<bool> ExtractComicData_CoverExtracted(Views.File.FileData fileData)
-      {
-         try
-         {
-
-            // CHECK IF THE COVER FILE ALREADY EXISTS
-            if (!string.IsNullOrEmpty(fileData.CoverPath)) { return false; }
-
-            // COVER EXTRACT
-            await this.FileSystem.CoverExtract(App.Settings, App.Database, fileData.ComicFile);
-
-            // APPLY PROPERTY SO THE VIEW GETS REFRESHED
-            fileData.CoverPath = fileData.ComicFile.CoverPath;
-            return true;
-
-         }
-         catch (Exception ex) { throw; }
-      }
       #endregion
 
       #region ExtractComicData_ApplyFolderData

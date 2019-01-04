@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -51,11 +52,12 @@ namespace ComicsShelf.Views.File
             Engine.AppCenter.TrackEvent("File: Opening");
 
             // EXTRACT PAGES
-            using (var fileSystem = Helpers.FileSystem.Get())
-            {
-               await fileSystem.PagesExtract(App.Settings, this.Data);
-               this.Data.TotalPages = (short)this.Data.Pages.Count;
-            }
+            var library = App.Settings.Paths.Libraries
+               .Where(x => x.LibraryPath == this.Data.ComicFile.LibraryPath)
+               .FirstOrDefault();
+            var libraryService = Library.LibraryService.Get(library);
+            await libraryService.ExtractPagesAsync(library, this.Data);
+            this.Data.TotalPages = (short)this.Data.Pages.Count;
             this.Data.Pages.Add(new PageData { });
 
             // TRACK

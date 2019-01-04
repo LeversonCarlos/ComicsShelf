@@ -90,7 +90,9 @@ namespace ComicsShelf.Helpers.Controls
          if (itemsSource != null)
          {
             itemsSource.CollectionChanged +=
-               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => { this.ItemsRefresh(); };
+               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => {
+                  Device.BeginInvokeOnMainThread(this.ItemsRefresh);
+               };
          }
 
       }

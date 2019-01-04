@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -24,6 +25,12 @@ namespace ComicsShelf.Droid
       {
          base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
          OnPermissionsResult?.Invoke(requestCode, permissions, grantResults);
+      }
+
+      protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+      {
+         base.OnActivityResult(requestCode, resultCode, data);
+         Xamarin.OneDrive.Connector.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
       }
 
    }
