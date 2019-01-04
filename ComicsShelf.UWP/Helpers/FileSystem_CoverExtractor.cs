@@ -16,7 +16,7 @@ namespace ComicsShelf.UWP
 
             // OPEN ZIP ARCHIVE
             var comicStorageFile = await GetStorageFile(settings, comicFile.LibraryPath, comicFile.FullPath);
-            if (comicStorageFile==null) { return; }
+            if (comicStorageFile == null) { return; }
             using (var zipArchiveStream = await comicStorageFile.OpenStreamForReadAsync())
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
@@ -36,16 +36,7 @@ namespace ComicsShelf.UWP
                   // OPEN STREAM
                   using (var zipEntryStream = zipEntry.Open())
                   {
-
-                     // COVER THUMBNAIL
-                     using (var thumbnailFile = new System.IO.FileStream(comicFile.CoverPath, FileMode.CreateNew, FileAccess.Write))
-                     {
-                        await zipEntryStream.CopyToAsync(thumbnailFile);
-                        await thumbnailFile.FlushAsync();
-                        thumbnailFile.Close();
-                        thumbnailFile.Dispose();
-                     }   
-
+                     await this.SaveThumbnail(zipEntryStream, comicFile.CoverPath);
                      zipEntryStream.Close();
                      zipEntryStream.Dispose();
                   }
@@ -58,7 +49,22 @@ namespace ComicsShelf.UWP
             }
 
          }
-         catch (Exception ex) { }
+         catch { }
+      }
+
+      public async Task SaveThumbnail(Stream imageStream, string imagePath)
+      {
+         try
+         {
+            using (var thumbnailFile = new FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
+            {
+               await imageStream.CopyToAsync(thumbnailFile);
+               await thumbnailFile.FlushAsync();
+               thumbnailFile.Close();
+               thumbnailFile.Dispose();
+            }
+         }
+         catch (Exception) { throw; }
       }
 
    }

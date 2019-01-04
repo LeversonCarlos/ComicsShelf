@@ -25,15 +25,7 @@ namespace ComicsShelf.Library.Implementation
                   .OrderBy(x => x.FileName)
                   .FirstOrDefault();
                await zipStream.ExtractAsync(entry, async (entryStream) => {
-
-                  using (var thumbnailFile = new System.IO.FileStream(comicFile.CoverPath, System.IO.FileMode.CreateNew, System.IO.FileAccess.Write))
-                  {
-                     await entryStream.CopyToAsync(thumbnailFile);
-                     await thumbnailFile.FlushAsync();
-                     thumbnailFile.Close();
-                     thumbnailFile.Dispose();
-                  }
-
+                  await this.FileSystem.SaveThumbnail(entryStream, comicFile.CoverPath);
                });
             }
          }
