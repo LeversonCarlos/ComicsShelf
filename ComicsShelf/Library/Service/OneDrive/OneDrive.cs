@@ -7,7 +7,7 @@ using Xamarin.OneDrive.Profile;
 
 namespace ComicsShelf.Library.Implementation
 {
-   internal class OneDrive : ILibraryService
+   internal partial class OneDrive : ILibraryService
    {
 
       Xamarin.OneDrive.Connector Connector { get; set; }
@@ -15,12 +15,6 @@ namespace ComicsShelf.Library.Implementation
       {
          var clientID = System.Environment.GetEnvironmentVariable("ComicsShelfApplicationID");
          this.Connector = new Xamarin.OneDrive.Connector(clientID, "User.Read", "Files.Read");
-      }
-
-      public async Task<bool> Validate(Helpers.Database.Library library)
-      {
-         library.Available = await this.Connector.ConnectAsync();
-         return library.Available;
       }
 
       public async Task<bool> AddLibrary(Helpers.Database.Library library)

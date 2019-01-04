@@ -5,18 +5,13 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Library.Implementation
 {
-   internal class FileSystemService : ILibraryService
+   internal partial class FileSystemService : ILibraryService
    {
 
       Helpers.iFileSystem FileSystem { get; set; }
       public FileSystemService()
       {
          this.FileSystem = Helpers.FileSystem.Get();
-      }
-
-      public async Task<bool> Validate(Helpers.Database.Library library)
-      {
-         return await this.FileSystem.ValidateLibraryPath(library);
       }
 
       public async Task<bool> AddLibrary(Helpers.Database.Library library)
@@ -63,7 +58,7 @@ namespace ComicsShelf.Library.Implementation
                comicFile.Key = comicFile.FullPath
                   .Replace(App.Settings.Paths.Separator, "_")
                   .Replace("#", "")
-                  .Replace(".", "")
+                  .Replace(".", "_")
                   .Replace("[", "")
                   .Replace("]", "")
                   .Replace("(", "")
