@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace ComicsShelf.Library.Implementation
+﻿namespace ComicsShelf.Library.Implementation
 {
    internal partial class FileSystemService : ILibraryService
    {
@@ -9,11 +7,6 @@ namespace ComicsShelf.Library.Implementation
       public FileSystemService()
       {
          this.FileSystem = Helpers.FileSystem.Get();
-      }
-
-      public async Task ExtractPagesAsync(Helpers.Database.Library library, Views.File.FileData fileData)
-      {
-         await this.FileSystem.PagesExtract(App.Settings, fileData);
       }
 
    }
