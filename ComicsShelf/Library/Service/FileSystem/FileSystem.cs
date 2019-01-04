@@ -14,12 +14,6 @@ namespace ComicsShelf.Library.Implementation
          this.FileSystem = Helpers.FileSystem.Get();
       }
 
-      public async Task<bool> AddLibrary(Helpers.Database.Library library)
-      {
-         library.LibraryPath = await this.FileSystem.GetLibraryPath();
-         return await this.Validate(library);
-      }
-
       public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(Helpers.Database.Library library)
       {
          try
