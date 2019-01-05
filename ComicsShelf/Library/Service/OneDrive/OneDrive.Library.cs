@@ -17,5 +17,10 @@ namespace ComicsShelf.Library.Implementation
          return true;
       }
 
+      public async Task<bool> RemoveLibrary(Helpers.Database.Library library)
+      {
+         return await this.Connector.DisconnectAsync();
+      }
+
    }
 }
