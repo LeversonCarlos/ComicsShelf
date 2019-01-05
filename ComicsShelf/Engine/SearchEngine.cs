@@ -182,7 +182,7 @@ namespace ComicsShelf.Engine
             var countA = this.ComicFiles.Count;
             this.ComicFiles = this.ComicFiles
                .Where(x => x.Available)
-               .Where(x => !x.FullPath.EndsWith(".cbr"))
+               .Where(x => x.FullPath.ToLower().EndsWith(".cbz"))
                .OrderBy(x => x.LibraryPath)
                .ThenBy(x => x.FullPath)
                .ToList();
