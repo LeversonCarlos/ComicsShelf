@@ -16,6 +16,7 @@ namespace ComicsShelf.Library.Implementation
 
             // LOCATE FILES
             var fileList = await this.Connector.SearchFilesAsync("*.cbz");
+            fileList.RemoveAll(x => !x.FileName.EndsWith(".cbz"));
 
             // CONVERT
             var comicFiles = fileList

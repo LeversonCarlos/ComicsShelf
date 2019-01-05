@@ -36,7 +36,22 @@ namespace ComicsShelf.Library
       {
          try
          {
-            App.Database.Delete(library);
+
+            // USE SERVICE IMPLEMENTATION
+            var libraryService = LibraryService.Get(library);
+            if (!await libraryService.RemoveLibrary(library)) { return; }
+
+            // REMOVE FILES AND THE LIBRARY ITSELF
+            var comicFiles = App.Database.Table<Helpers.Database.ComicFile>()
+               .Where(x => x.LibraryPath == library.LibraryPath)
+               .ToList();
+            await Task.Run(() => { 
+               foreach (var comicFile in comicFiles)
+               { App.Database.Delete(comicFile); }
+               App.Database.Delete(library);
+            });
+
+            // REFRESH 
             await RefreshLibrary();
          }
          catch (Exception ex) { await App.ShowMessage(ex); }

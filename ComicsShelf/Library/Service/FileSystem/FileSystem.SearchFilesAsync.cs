@@ -18,6 +18,7 @@ namespace ComicsShelf.Library.Implementation
 
             // CONVERT
             var comicFiles = fileList
+               .Where(x => x.ToLower().EndsWith(".cbz"))
                .Select(file => new Helpers.Database.ComicFile
                {
                   LibraryPath = library.LibraryPath,

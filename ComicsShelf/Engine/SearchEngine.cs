@@ -182,7 +182,7 @@ namespace ComicsShelf.Engine
             var countA = this.ComicFiles.Count;
             this.ComicFiles = this.ComicFiles
                .Where(x => x.Available)
-               .Where(x => !x.FullPath.EndsWith(".cbr"))
+               .Where(x => x.FullPath.ToLower().EndsWith(".cbz"))
                .OrderBy(x => x.LibraryPath)
                .ThenBy(x => x.FullPath)
                .ToList();
@@ -499,11 +499,12 @@ namespace ComicsShelf.Engine
                var library = libraryServices
                   .Where(x => x.Path == fileData.ComicFile.LibraryPath)
                   .FirstOrDefault();
-               await library.Service.ExtractCoverAsync(library.Library, fileData.ComicFile);
+               await library.Service.ExtractCoverAsync(library.Library, fileData.ComicFile, () => {
 
-               // APPLY PROPERTY SO THE VIEW GETS REFRESHED
-               fileData.CoverPath = fileData.ComicFile.CoverPath;
-               this.ExtractComicData_ApplyFolderData(fileData); 
+                  fileData.CoverPath = fileData.ComicFile.CoverPath;
+                  this.ExtractComicData_ApplyFolderData(fileData);
+
+               });
 
             }
 

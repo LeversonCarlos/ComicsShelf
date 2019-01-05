@@ -53,4 +53,4 @@ https://play.google.com/apps/testing/com.friendship.ComicsShelf
 
 ## License
 
-GNU General Public License - see the [LICENSE.md](LICENSE.md) file for details
+MIT License - see the [LICENSE](LICENSE) file for details
