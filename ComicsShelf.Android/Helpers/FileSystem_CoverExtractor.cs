@@ -64,6 +64,7 @@ namespace ComicsShelf.Droid
             // LOAD IMAGE
             using (var originalBitmap = await Android.Graphics.BitmapFactory.DecodeStreamAsync(imageStream))
             {
+               if (originalBitmap == null) { return; }
 
                // DEFINE SIZE
                double imageHeight = 450; double imageWidth = 150;
@@ -72,19 +73,17 @@ namespace ComicsShelf.Droid
                imageWidth = originalBitmap.Width * scaleFactor;
 
                // INITIALIZE THUMBNAIL STREAM
-               // using (var thumbnailStream = new MemoryStream())
-               using (var thumbnailFileStream = new System.IO.FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
+               using (var thumbnailFileStream = new FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
                {
 
                   // SCALE BITMAP
                   using (var thumbnailBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(originalBitmap, (int)imageWidth, (int)imageHeight, false))
                   {
                      await thumbnailBitmap.CompressAsync(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
-                     // thumbnailStream.Position = 0;
                      await thumbnailFileStream.FlushAsync();
                   }
-
                   thumbnailFileStream.Close();
+
                }
 
             }
