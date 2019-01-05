@@ -8,7 +8,7 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task ExtractCoverAsync(Helpers.Database.Library library, Helpers.Database.ComicFile comicFile)
+      public async Task ExtractCoverAsync(Helpers.Database.Library library, Helpers.Database.ComicFile comicFile, Action successCallback)
       {
          try
          {
@@ -34,12 +34,14 @@ namespace ComicsShelf.Library.Implementation
                      await imageStream.FlushAsync();
                      imageStream.Position = 0;
                      await this.FileSystem.SaveThumbnail(imageStream, comicFile.CoverPath);
+                     if (System.IO.File.Exists(comicFile.CoverPath)) { successCallback(); }
                   }
                });
             }
 
          }
          catch (Exception ex) { throw new Exception(comicFile.FullPath, ex); }
+         finally { GC.Collect(); }
       }
 
    }
