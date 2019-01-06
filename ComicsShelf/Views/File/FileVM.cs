@@ -32,7 +32,7 @@ namespace ComicsShelf.Views.File
             await this.OpenFile();
             await PushAsync<PageVM>(this.Data);
          }
-         catch (Exception ex) { await App.ShowMessage(ex); }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("File: Exception", "Exception", ex.Message); await App.ShowMessage(ex); }
          finally { this.IsBusy = false; }
       }
       #endregion

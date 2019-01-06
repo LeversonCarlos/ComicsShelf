@@ -47,7 +47,7 @@ namespace ComicsShelf.Library.Implementation
             return comicFiles;
 
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Searching File: Exception", "Exception", ex.Message); return null; }
       }
 
    }
