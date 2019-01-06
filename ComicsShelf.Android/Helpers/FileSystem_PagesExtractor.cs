@@ -14,25 +14,17 @@ namespace ComicsShelf.Droid
          try
          {
 
+            // DEFINE CACHE PATHS
+            var cachePath = $"{settings.Paths.FilesCachePath}{settings.Paths.Separator}{fileData.ComicFile.Key}";
+            cachePath = $"{cachePath}{settings.Paths.Separator}Pages";
+            if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
+
             // OPEN ZIP ARCHIVE            
             var comicFilePath = $"{fileData.ComicFile.LibraryPath}{settings.Paths.Separator}{fileData.FullPath}";
-            using (var zipArchiveStream = new System.IO.FileStream(comicFilePath, FileMode.Open, FileAccess.Read))
+            using (var zipArchiveStream = new FileStream(comicFilePath, FileMode.Open, FileAccess.Read))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
                {
-                  var heightPixels = Android.Content.Res.Resources.System.DisplayMetrics.HeightPixels;
-
-                  // DEFINE EXTRACT PATH REMOVING INVALID CHARACTERS
-                  var cachePath = fileData.FullPath
-                     .Replace(settings.Paths.Separator, "_")
-                     .Replace("#", "")
-                     .Replace(":", "")
-                     .Replace(".", "_")
-                     .Replace(" ", "_")
-                     .Replace("___", "_")
-                     .Replace("__", "_");
-                  cachePath = $"{settings.Paths.FilesCachePath}{settings.Paths.Separator}{cachePath}";
-                  if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
 
                   // LOOP THROUGH ZIP ENTRIES
                   short pageIndex = 0;
@@ -47,77 +39,45 @@ namespace ComicsShelf.Droid
                      var pageIndexText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
                      var pagePath = $"{cachePath}{settings.Paths.Separator}P{pageIndexText}.jpg";
                      var pageData = new Views.File.PageData { Page = pageIndex, Path = pagePath, IsVisible = false };
-
-                     // OPEN STREAM
-                     /*
-                     using (var zipEntryStream = zipEntry.Open())
-                     {
-
-                        // LOAD IMAGE
-                        using (var originalBitmap = await Android.Graphics.BitmapFactory.DecodeStreamAsync(zipEntryStream))
-                        {
-
-                           // DEFINE SIZE
-                           double imageHeight = heightPixels; double imageWidth = (heightPixels/3);
-                           double scaleFactor = (double)imageHeight / (double)originalBitmap.Height;
-                           imageHeight = originalBitmap.Height * scaleFactor;
-                           imageWidth = originalBitmap.Width * scaleFactor;
-
-                           // INITIALIZE THUMBNAIL STREAM
-                           using (var thumbnailFileStream = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
-                           {
-
-                              // SCALE BITMAP
-                              using (var thumbnailBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(originalBitmap, (int)imageWidth, (int)imageHeight, false))
-                              {
-                                 await thumbnailBitmap.CompressAsync(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
-                                 await thumbnailFileStream.FlushAsync();
-                              }
-
-                              thumbnailFileStream.Close();
-                           }
-
-                        }
-
-                        zipEntryStream.Close();
-                        zipEntryStream.Dispose();
-                     }
-                     */
-
-                     // SIMPLE EXACT FILE 
-                     if (!System.IO.File.Exists(pagePath)) {
-                        using (var zipEntryStream = zipEntry.Open())
-                        {
-                           using (var thumbnailFile = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
-                           {
-                              await zipEntryStream.CopyToAsync(thumbnailFile);
-                              await thumbnailFile.FlushAsync();
-                              thumbnailFile.Close();
-                              thumbnailFile.Dispose();
-                           }
-                        }
-                     }
-
-                     // IMAGE SIZE
-                     using (var bitmap = await Android.Graphics.BitmapFactory.DecodeFileAsync(pagePath))
-                     {
-                        pageData.Size = new Helpers.Controls.PageSize(bitmap.Width, bitmap.Height);
-                     }
-
                      fileData.Pages.Add(pageData);
                      pageIndex++;
 
+                     // EXTRACT PAGE FILE 
+                     if (!File.Exists(pagePath))
+                     {
+                        using (var zipEntryStream = zipEntry.Open())
+                        {
+                           using (var pageStream = new FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
+                           {
+                              await zipEntryStream.CopyToAsync(pageStream);
+                              await pageStream.FlushAsync();
+                              pageStream.Close();
+                           }
+                        }
+                     }
+                     await this.PageSize(settings, pageData);
+
                   }
 
-                  zipArchive.Dispose();
                }
 
                zipArchiveStream.Close();
-               zipArchiveStream.Dispose();
             }
 
          }
-         catch (Exception ex) { }
+         catch (Exception) { throw; }
+      }
+
+      public async Task PageSize(Helpers.Settings.Settings settings, Views.File.PageData pageData)
+      {
+         try
+         {
+            using (var bitmap = await Android.Graphics.BitmapFactory.DecodeFileAsync(pageData.Path))
+            {
+               pageData.Size = new Helpers.Controls.PageSize(bitmap.Width, bitmap.Height);
+            }
+         }
+         catch (Exception) { throw; }
       }
 
    }
