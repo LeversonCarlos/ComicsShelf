@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
-    <PackageReference Include="HttpZipStream" Version="0.1.59" />
+    <PackageReference Include="HttpZipStream" Version="0.1.62" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
