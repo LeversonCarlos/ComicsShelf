@@ -81,7 +81,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.OneDrive.Connector">
-      <Version>0.1.55</Version>
+      <Version>0.1.61</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
