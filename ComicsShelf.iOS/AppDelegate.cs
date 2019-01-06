@@ -26,9 +26,7 @@ namespace ComicsShelf.iOS
 
       public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
       {
-         // TODO
-         // AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url, "");
-         // Xamarin.OneDrive.Connector.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
+         Xamarin.OneDrive.Connector.SetAuthenticationContinuationEventArgs(url);
          return true;
       }
 

@@ -47,6 +47,7 @@ namespace ComicsShelf.Engine
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+         finally { GC.Collect(); }
       }
       #endregion
 
@@ -448,7 +449,6 @@ namespace ComicsShelf.Engine
 
             // FEATURED FILES
             this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
-            // Statistics.Execute();
             fileList = App.HomeData.ReadingFiles
                .Union(App.HomeData.RecentFiles)
                .Union(App.HomeData.TopRatedFiles)
@@ -466,7 +466,6 @@ namespace ComicsShelf.Engine
 
          }
          catch (Exception) { throw; }
-         finally { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
       }
 
       private async Task ExtractComicData(List<Views.File.FileData> fileList)
@@ -509,7 +508,8 @@ namespace ComicsShelf.Engine
             }
 
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Extract Comic Data: Exception", "Exception", ex.Message); }
+         finally { GC.Collect(); }
       }
 
       #endregion

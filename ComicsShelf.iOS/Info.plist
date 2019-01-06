@@ -27,7 +27,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.friendship.ComicsShelf</string>
 	<key>CFBundleVersion</key>
-	<string>18.0</string>
+	<string>1.4.34</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -47,5 +47,7 @@
 			<string>None</string>
 		</dict>
 	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>10104034</string>
 </dict>
 </plist>

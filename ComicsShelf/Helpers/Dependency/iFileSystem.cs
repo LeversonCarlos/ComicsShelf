@@ -20,6 +20,7 @@ namespace ComicsShelf.Helpers
 
       Task CoverExtract(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile);
       Task PagesExtract(Helpers.Settings.Settings settings, Views.File.FileData fileData);
+      Task PageSize(Helpers.Settings.Settings settings, Views.File.PageData pageData);
 
       Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
 

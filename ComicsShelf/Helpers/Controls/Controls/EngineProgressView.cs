@@ -10,6 +10,9 @@ namespace ComicsShelf.Helpers.Controls
          this.VerticalOptions = LayoutOptions.FillAndExpand;
          this.Padding = new Thickness(50, 10);
 
+         this.Activity = new ActivityIndicator { IsEnabled = true, IsVisible = true, IsRunning = true };
+         this.Children.Add(this.Activity);
+
          this.TextLabel = new Label
          {
             HorizontalOptions = LayoutOptions.Center,
@@ -31,6 +34,10 @@ namespace ComicsShelf.Helpers.Controls
          this.Children.Add(this.DetailsLabel);
 
       }
+
+      #region Activity
+      ActivityIndicator Activity { get; set; }
+      #endregion
 
       #region Text
       Label TextLabel { get; set; }

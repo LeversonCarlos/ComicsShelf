@@ -14,24 +14,17 @@ namespace ComicsShelf.UWP
          try
          {
 
+            // DEFINE CACHE PATHS
+            var cachePath = $"{settings.Paths.FilesCachePath}{settings.Paths.Separator}{fileData.ComicFile.Key}";
+            cachePath = $"{cachePath}{settings.Paths.Separator}Pages";
+            if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
+
             // OPEN ZIP ARCHIVE
             var comicStorageFile = await GetStorageFile(settings, fileData.ComicFile.LibraryPath, fileData.FullPath);
             using (var zipArchiveStream = await comicStorageFile.OpenStreamForReadAsync())
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
                {
-
-                  // DEFINE EXTRACT PATH REMOVING INVALID CHARACTERS
-                  var cachePath = fileData.FullPath
-                     .Replace(settings.Paths.Separator, "_")
-                     .Replace("#", "")
-                     .Replace(":", "")
-                     .Replace(".", "_")
-                     .Replace(" ", "_")
-                     .Replace("___", "_")
-                     .Replace("__", "_");
-                  cachePath = $"{settings.Paths.FilesCachePath}{settings.Paths.Separator}{cachePath}";
-                  if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
 
                   // LOOP THROUGH ZIP ENTRIES
                   short pageIndex = 0;
@@ -50,39 +43,42 @@ namespace ComicsShelf.UWP
                      pageIndex++;
 
                      // EXTRACT PAGE IMAGE
-                     if (!System.IO.File.Exists(pagePath))
+                     if (!File.Exists(pagePath))
                      {
                         using (var zipEntryStream = zipEntry.Open())
                         {
-                           using (var thumbnailFile = new System.IO.FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
+                           using (var pageStream = new FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
                            {
-                              await zipEntryStream.CopyToAsync(thumbnailFile);
-                              await thumbnailFile.FlushAsync();
-                              thumbnailFile.Close();
-                              thumbnailFile.Dispose();
+                              await zipEntryStream.CopyToAsync(pageStream);
+                              await pageStream.FlushAsync();
+                              pageStream.Close();
                            }
                         }
                      }
-
-                     // IMAGE SIZE
-                     var pageUri = new Uri(pagePath);
-                     var pageStorageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(pagePath);
-                     var pageProperties = await pageStorageFile.Properties.GetImagePropertiesAsync();
-                     pageData.Size = new Helpers.Controls.PageSize(pageProperties.Width, pageProperties.Height);
-                     pageProperties = null;
-                     pageStorageFile = null;
+                     await this.PageSize(settings, pageData);
 
                   }
 
-                  zipArchive.Dispose();
                }
 
                zipArchiveStream.Close();
-               zipArchiveStream.Dispose();
             }
 
          }
-         catch (Exception ex) { }
+         catch (Exception) { throw; }
+      }
+
+      public async Task PageSize(Helpers.Settings.Settings settings, Views.File.PageData pageData)
+      {
+         try
+         {
+            var pageStorageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(pageData.Path);
+            var pageProperties = await pageStorageFile.Properties.GetImagePropertiesAsync();
+            pageData.Size = new Helpers.Controls.PageSize(pageProperties.Width, pageProperties.Height);
+            pageProperties = null;
+            pageStorageFile = null;
+         }
+         catch (Exception) { throw; }
       }
 
    }
