@@ -21,7 +21,7 @@ namespace ComicsShelf.Engine
       #endregion
 
       #region Execute
-      public static async Task Execute(bool searchNewFiles)
+      public static async Task Execute(bool deepSearch)
       {
          try
          {
@@ -32,7 +32,7 @@ namespace ComicsShelf.Engine
                await engine.LoadDatabaseData();
                engine.TrackEvent("Search: Loading Database Data");
 
-               if (searchNewFiles)
+               if (deepSearch)
                {
                   await engine.SearchComicFiles();
                   engine.TrackEvent("Search: Searching Comic Files");
@@ -44,13 +44,13 @@ namespace ComicsShelf.Engine
                await engine.ExtractAlreadyExistingData();
                engine.TrackEvent("Search: Extracting Already Existing Data");
 
-               if (searchNewFiles)
+               if (deepSearch)
                {
                   await engine.ExtractFeaturedData();
                   engine.TrackEvent("Search: Extracting Featured Data");
                }
 
-               if (searchNewFiles)
+               if (deepSearch)
                {
                   await engine.ExtractRemainingData();
                   engine.TrackEvent("Search: Extracting Remaining Data");
