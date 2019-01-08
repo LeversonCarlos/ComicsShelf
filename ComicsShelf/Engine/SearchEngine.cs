@@ -41,8 +41,20 @@ namespace ComicsShelf.Engine
                await engine.PrepareStructure();
                engine.TrackEvent("Search: Preparing Structure");
 
-               await engine.ExtractComicData();
-               engine.TrackEvent("Search: Extracting Data Info");
+               await engine.ExtractAlreadyExistingData();
+               engine.TrackEvent("Search: Extracting Already Existing Data");
+
+               if (searchNewFiles)
+               {
+                  await engine.ExtractFeaturedData();
+                  engine.TrackEvent("Search: Extracting Featured Data");
+               }
+
+               if (searchNewFiles)
+               {
+                  await engine.ExtractRemainingData();
+                  engine.TrackEvent("Search: Extracting Remaining Data");
+               }
 
             }
          }
@@ -413,39 +425,47 @@ namespace ComicsShelf.Engine
       #endregion
 
 
-      #region ExtractComicData
-
-      private async Task ExtractComicData()
+      #region ExtractAlreadyExistingData
+      private async Task ExtractAlreadyExistingData()
       {
          try
          {
-
-            // ALREADY EXISTING COVERS 
             this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
             var fileList = App.HomeData.Files
                .OrderBy(x => x.ComicFile.LibraryPath)
                .ThenBy(x => x.FullPath)
                .ToList();
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                foreach (var fileData in fileList)
                {
                   if (System.IO.File.Exists(fileData.ComicFile.CoverPath))
                   {
                      fileData.CoverPath = fileData.ComicFile.CoverPath;
-                     this.ExtractComicData_ApplyFolderData(fileData);
+                     this.ApplyFolderData(fileData);
                   }
                }
             });
+         }
+         catch (Exception) { throw; }
+      }
+      #endregion
+
+      #region ExtractFeaturedData
+      private async Task ExtractFeaturedData()
+      {
+         try
+         {
 
             // FIRST FILE FROM EACH FOLDER
             this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE);
-            fileList = App.HomeData.Files
+            var fileList = App.HomeData.Files
                .OrderBy(x => x.ComicFile.LibraryPath).ThenBy(x => x.FullPath)
                .GroupBy(x => new { x.ComicFile.LibraryPath, x.ComicFile.ParentPath })
                .Select(x => x.FirstOrDefault())
                .Where(x => string.IsNullOrEmpty(x.CoverPath))
                .ToList();
-            await this.ExtractComicData(fileList);
+            await this.ExtractData(fileList);
 
             // FEATURED FILES
             this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
@@ -454,21 +474,31 @@ namespace ComicsShelf.Engine
                .Union(App.HomeData.TopRatedFiles)
                .Where(x => string.IsNullOrEmpty(x.CoverPath))
                .ToList();
-            await this.ExtractComicData(fileList);
-
-            // ALL REMAINING FILES WITHOUT COVER
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
-            fileList = App.HomeData.Files
-               .Where(x => string.IsNullOrWhiteSpace(x.CoverPath))
-               .OrderBy(x => x.ComicFile.LibraryPath).ThenBy(x => x.FullPath)
-               .ToList();
-            await this.ExtractComicData(fileList);
+            await this.ExtractData(fileList);
 
          }
          catch (Exception) { throw; }
       }
+      #endregion
 
-      private async Task ExtractComicData(List<Views.File.FileData> fileList)
+      #region ExtractRemainingData
+      private async Task ExtractRemainingData()
+      {
+         try
+         {
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
+            var fileList = App.HomeData.Files
+               .Where(x => string.IsNullOrWhiteSpace(x.CoverPath))
+               .OrderBy(x => x.ComicFile.LibraryPath).ThenBy(x => x.FullPath)
+               .ToList();
+            await this.ExtractData(fileList);
+         }
+         catch (Exception) { throw; }
+      }
+      #endregion
+
+      #region ExtractData
+      private async Task ExtractData(List<Views.File.FileData> fileList)
       {
          try
          {
@@ -501,7 +531,7 @@ namespace ComicsShelf.Engine
                await library.Service.ExtractCoverAsync(library.Library, fileData.ComicFile, () => {
 
                   fileData.CoverPath = fileData.ComicFile.CoverPath;
-                  this.ExtractComicData_ApplyFolderData(fileData);
+                  this.ApplyFolderData(fileData);
 
                });
 
@@ -511,11 +541,11 @@ namespace ComicsShelf.Engine
          catch (Exception ex) { Engine.AppCenter.TrackEvent("Extract Comic Data: Exception", "Exception", ex.Message); }
          finally { GC.Collect(); }
       }
-
       #endregion
 
-      #region ExtractComicData_ApplyFolderData
-      private void ExtractComicData_ApplyFolderData(Views.File.FileData fileData)
+
+      #region ApplyFolderData
+      private void ApplyFolderData(Views.File.FileData fileData)
       {
          try
          {
