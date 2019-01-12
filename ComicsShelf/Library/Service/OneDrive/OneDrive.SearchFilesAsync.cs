@@ -58,7 +58,7 @@ namespace ComicsShelf.Library.Implementation
             return comicFiles;
 
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.SearchFilesAsync", ex); return null; }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive Searching Files", ex); return null; }
       }
 
    }

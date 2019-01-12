@@ -65,18 +65,19 @@ namespace ComicsShelf.Views.File
             App.Database.Update(this.Data.ComicFile);
             if (this.Data.Pages != null && this.Data.Pages.Count != 0)
             {
-               if (this.Data.Pages.Count(page => page.IsVisible) == 0) {
+               if (this.Data.Pages.Count(page => page.IsVisible) == 0)
+               {
                   var pages = this.Data.Pages.Where(page => page.Page >= (this.ReadingPage - 1) && page.Page <= (this.ReadingPage + 1)).ToList();
                   pages.ForEach(page => page.IsVisible = true);
                }
             }
          }
-         catch { }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Page: Initializing", ex); }
       }
       #endregion
 
       #region OnFinalize
-      private async void OnFinalize()
+      private void OnFinalize()
       {
          try
          {
@@ -89,7 +90,7 @@ namespace ComicsShelf.Views.File
             // this.Data.Pages.Clear();
             GC.Collect();
          }
-         catch (Exception ex) { await App.ShowMessage(ex); }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Page: Finalizing", ex); }
       }
       #endregion
 

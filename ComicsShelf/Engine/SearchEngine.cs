@@ -15,19 +15,26 @@ namespace ComicsShelf.Engine
          var searchTitle = (deepSearch ? "DeepSearch" : "Search");
          try
          {
+
+            // TRACK
+            var initializeTime = DateTime.Now;
+            AppCenter.TrackEvent($"{searchTitle}: Initialize");
+
+            // EXECUTE
             using (var engine = new Search())
             {
-               engine.TrackEvent($"{searchTitle}: Initialize");
-
                await engine.LoadDatabaseData();
                if (deepSearch) { await engine.SearchComicFiles(); }
                await engine.PrepareStructure();
                await engine.ExtractAlreadyExistingData();
                if (deepSearch) { await engine.ExtractFeaturedData(); }
                if (deepSearch) { await engine.ExtractRemainingData(); }
-
-               engine.TrackEvent($"{searchTitle}: Finalize");
             }
+
+            // TRACK
+            var milliseconds = (long)(DateTime.Now - initializeTime).TotalMilliseconds;
+            AppCenter.TrackEvent($"{searchTitle}: Finalize", "milliseconds", milliseconds.ToString());
+
          }
          catch (Exception ex) { AppCenter.TrackEvent(searchTitle, ex); await App.ShowMessage(ex); }
          finally { GC.Collect(); }
@@ -36,19 +43,6 @@ namespace ComicsShelf.Engine
 
       #region Properties
       private List<Helpers.Database.ComicFile> ComicFiles { get; set; }
-      #endregion
-
-      #region TrackEvent
-      DateTime TrackEventTime = DateTime.MinValue;
-      private void TrackEvent(string text)
-      {
-         var now = DateTime.Now;
-         long milliseconds = 0;
-         if (TrackEventTime != DateTime.MinValue)
-         { milliseconds = (long)(now - TrackEventTime).TotalMilliseconds; }
-         AppCenter.TrackEvent(text, "milliseconds", milliseconds.ToString());
-         TrackEventTime = now;
-      }
       #endregion
 
       #region LoadDatabaseData
@@ -122,7 +116,6 @@ namespace ComicsShelf.Engine
 
             await Task.Run(() => {
                this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x));
-               Statistics.Execute();
             });           
 
          }
@@ -192,8 +185,7 @@ namespace ComicsShelf.Engine
 
                // ADD NEW FILES
                this.ComicFiles.ForEach(comicFile => App.HomeData.Files.Add(new Views.File.FileData(comicFile)));
-               // App.HomeData.Files.AddRange(comicFiles.Select(x => new Views.File.FileData(x)));
-               // Statistics.Execute();
+               Statistics.Execute();
 
             }
 
@@ -504,7 +496,7 @@ namespace ComicsShelf.Engine
                   }
 
                }
-               catch (Exception ex) { Engine.AppCenter.TrackEvent("Extract Comic Data: Exception", "Exception", ex.ToString()); }
+               catch (Exception ex) { Engine.AppCenter.TrackEvent("Extracting Comic Data", ex); }
             }
 
          }
