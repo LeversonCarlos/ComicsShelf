@@ -14,16 +14,27 @@ namespace ComicsShelf.Library.Implementation
          try
          {
 
-            // LOCATE FILES
-            var fileList = await this.Connector.SearchFilesAsync("cbz", 10000);
-            fileList.RemoveAll(x => !x.FileName.EndsWith(".cbz"));
+            // LOCATE FILES [try 5 times with a 100 milisec sleep between]
+            List<FileData> fileList = null;
+            int fileListTries = 0;
+            while (fileListTries <= 5)
+            {
+               fileList = await this.Connector.SearchFilesAsync("cbz", 10000);
+               if (fileList != null && fileList.Count != 0)
+               {
+                  fileList.RemoveAll(x => !x.FileName.EndsWith(".cbz"));
+                  break;
+               }
+               System.Threading.Thread.Sleep(100);
+               fileListTries++;
+            }
 
             // CONVERT
             var comicFiles = fileList
                .Select(file => new Helpers.Database.ComicFile
                {
                   LibraryPath = library.LibraryPath,
-                  Key = file.id.Replace("!", "_"),
+                  Key = file.id,
                   FullPath = $"{file.FilePath}/{file.FileName}",
                   ParentPath = file.FilePath,
                   ReleaseDate = (!file.CreatedDateTime.HasValue ? "" : App.Database.GetDate(file.CreatedDateTime.Value.ToLocalTime())),
