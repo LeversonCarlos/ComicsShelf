@@ -9,56 +9,27 @@ namespace ComicsShelf.Engine
    internal class Search : BaseEngine, IDisposable
    {
 
-      #region Initialize
-      public static async Task Initialize() {
-         await Execute(false);
-
-         var task = Execute(true);
-         await task.ConfigureAwait(false);
-         task.Start();
-         // Task.Factory.StartNew(async () => { await Execute(true); }, TaskCreationOptions.LongRunning);
-      }
-      #endregion
-
       #region Execute
       public static async Task Execute(bool deepSearch)
       {
+         var searchTitle = (deepSearch ? "DeepSearch" : "Search");
          try
          {
             using (var engine = new Search())
             {
-               engine.TrackEvent("Search: Initializing");
+               engine.TrackEvent($"{searchTitle}: Initialize");
 
                await engine.LoadDatabaseData();
-               engine.TrackEvent("Search: Loading Database Data");
-
-               if (deepSearch)
-               {
-                  await engine.SearchComicFiles();
-                  engine.TrackEvent("Search: Searching Comic Files");
-               }
-
+               if (deepSearch) { await engine.SearchComicFiles(); }
                await engine.PrepareStructure();
-               engine.TrackEvent("Search: Preparing Structure");
-
                await engine.ExtractAlreadyExistingData();
-               engine.TrackEvent("Search: Extracting Already Existing Data");
+               if (deepSearch) { await engine.ExtractFeaturedData(); }
+               if (deepSearch) { await engine.ExtractRemainingData(); }
 
-               if (deepSearch)
-               {
-                  await engine.ExtractFeaturedData();
-                  engine.TrackEvent("Search: Extracting Featured Data");
-               }
-
-               if (deepSearch)
-               {
-                  await engine.ExtractRemainingData();
-                  engine.TrackEvent("Search: Extracting Remaining Data");
-               }
-
+               engine.TrackEvent($"{searchTitle}: Finalize");
             }
          }
-         catch (Exception ex) { await App.ShowMessage(ex); }
+         catch (Exception ex) { AppCenter.TrackEvent(searchTitle, ex); await App.ShowMessage(ex); }
          finally { GC.Collect(); }
       }
       #endregion
@@ -151,7 +122,8 @@ namespace ComicsShelf.Engine
 
             await Task.Run(() => {
                this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x));
-            });
+               Statistics.Execute();
+            });           
 
          }
          catch (Exception) { throw; }
@@ -180,7 +152,7 @@ namespace ComicsShelf.Engine
 
             this.Notify("Done", 1.0);
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
@@ -204,11 +176,6 @@ namespace ComicsShelf.Engine
             // LOOP THROUGH LIBRARIES
             foreach (var library in App.Settings.Paths.Libraries)
             {
-
-               /*
-               if (App.HomeData.Files.Count != 0)
-               { this.ComicFiles.RemoveAll(x => x.FullText.Contains("White Knight [2018]")); }
-               */
 
                // REMOVE NOEXISTING FILES
                comicKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryPath).Select(x => x.Key).ToList();
@@ -430,7 +397,7 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
             var fileList = App.HomeData.Files
                .OrderBy(x => x.ComicFile.LibraryPath)
                .ThenBy(x => x.FullPath)
@@ -457,21 +424,21 @@ namespace ComicsShelf.Engine
          try
          {
 
-            // FIRST FILE FROM EACH FOLDER
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE);
-            var fileList = App.HomeData.Files
-               .OrderBy(x => x.ComicFile.LibraryPath).ThenBy(x => x.FullPath)
-               .GroupBy(x => new { x.ComicFile.LibraryPath, x.ComicFile.ParentPath })
-               .Select(x => x.FirstOrDefault())
+            // FEATURED FILES
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
+            var fileList = App.HomeData.ReadingFiles
+               .Union(App.HomeData.RecentFiles)
+               .Union(App.HomeData.TopRatedFiles)
                .Where(x => string.IsNullOrEmpty(x.CoverPath))
                .ToList();
             await this.ExtractData(fileList);
 
-            // FEATURED FILES
-            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
-            fileList = App.HomeData.ReadingFiles
-               .Union(App.HomeData.RecentFiles)
-               .Union(App.HomeData.TopRatedFiles)
+            // FIRST FILE FROM EACH FOLDER
+            this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE);
+            fileList = App.HomeData.Files
+               .OrderBy(x => x.ComicFile.LibraryPath).ThenBy(x => x.FullPath)
+               .GroupBy(x => new { x.ComicFile.LibraryPath, x.ComicFile.ParentPath })
+               .Select(x => x.FirstOrDefault())
                .Where(x => string.IsNullOrEmpty(x.CoverPath))
                .ToList();
             await this.ExtractData(fileList);
@@ -517,28 +484,31 @@ namespace ComicsShelf.Engine
             var filesQuantity = fileList.Count;
             for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
             {
-               var fileData = fileList[fileIndex];
-               var progress = ((double)fileIndex / (double)filesQuantity);
-               this.Notify(fileData.FullText, progress);
+               try
+               {
+                  var fileData = fileList[fileIndex];
+                  var progress = ((double)fileIndex / (double)filesQuantity);
+                  this.Notify(fileData.FullText, progress);
 
-               // CHECK IF THE COVER FILE ALREADY EXISTS
-               if (!string.IsNullOrEmpty(fileData.CoverPath)) { continue; }
+                  // CHECK IF THE COVER FILE ALREADY EXISTS
+                  if (!string.IsNullOrEmpty(fileData.CoverPath)) { continue; }
 
-               // COVER EXTRACT
-               var library = libraryServices
-                  .Where(x => x.Path == fileData.ComicFile.LibraryPath)
-                  .FirstOrDefault();
-               await library.Service.ExtractCoverAsync(library.Library, fileData.ComicFile, () => {
+                  // COVER EXTRACT
+                  var library = libraryServices
+                     .Where(x => x.Path == fileData.ComicFile.LibraryPath)
+                     .FirstOrDefault();
+                  if (await library.Service.ExtractCoverAsync(library.Library, fileData.ComicFile))
+                  {
+                     fileData.CoverPath = fileData.ComicFile.CoverPath;
+                     this.ApplyFolderData(fileData);
+                  }
 
-                  fileData.CoverPath = fileData.ComicFile.CoverPath;
-                  this.ApplyFolderData(fileData);
-
-               });
-
+               }
+               catch (Exception ex) { Engine.AppCenter.TrackEvent("Extract Comic Data: Exception", "Exception", ex.ToString()); }
             }
 
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("Extract Comic Data: Exception", "Exception", ex.Message); }
+         catch (Exception) { throw; }
          finally { GC.Collect(); }
       }
       #endregion
