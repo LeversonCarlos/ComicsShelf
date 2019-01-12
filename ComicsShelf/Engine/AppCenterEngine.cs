@@ -22,6 +22,9 @@ namespace ComicsShelf.Engine
       public static void TrackEvent(string text)
       { Analytics.TrackEvent(text); }
 
+      public static void TrackEvent(string text, System.Exception ex)
+      { TrackEvent(text, "Exception", ex.Message); }
+
       public static void TrackEvent(string text, string propertyKey, string propertyValue)
       { Analytics.TrackEvent(text, new Dictionary<string, string> { { propertyKey, propertyValue } }); }
 
