@@ -15,7 +15,7 @@ namespace ComicsShelf.Library.Implementation
          {
 
             // LOCATE FILES
-            var fileList = await this.Connector.SearchFilesAsync("*.cbz");
+            var fileList = await this.Connector.SearchFilesAsync("cbz", 10000);
             fileList.RemoveAll(x => !x.FileName.EndsWith(".cbz"));
 
             // CONVERT
@@ -23,7 +23,7 @@ namespace ComicsShelf.Library.Implementation
                .Select(file => new Helpers.Database.ComicFile
                {
                   LibraryPath = library.LibraryPath,
-                  Key = file.id,
+                  Key = file.id.Replace("!", "_"),
                   FullPath = $"{file.FilePath}/{file.FileName}",
                   ParentPath = file.FilePath,
                   ReleaseDate = (!file.CreatedDateTime.HasValue ? "" : App.Database.GetDate(file.CreatedDateTime.Value.ToLocalTime())),
