@@ -11,7 +11,7 @@ namespace ComicsShelf.Library
       Task<bool> AddLibrary(Helpers.Database.Library library);
       Task<bool> RemoveLibrary(Helpers.Database.Library library);
       Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(Helpers.Database.Library library);
-      Task ExtractCoverAsync(Helpers.Database.Library library, Helpers.Database.ComicFile comicFile, Action successCallback);
+      Task<bool> ExtractCoverAsync(Helpers.Database.Library library, Helpers.Database.ComicFile comicFile);
       Task ExtractPagesAsync(Helpers.Database.Library library, Views.File.FileData fileData);
    }
 }
