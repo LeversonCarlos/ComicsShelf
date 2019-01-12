@@ -110,14 +110,10 @@ namespace ComicsShelf.Engine
 
             // START SEARCH ENGINE
             await Search.Execute(false);
-            // var task = Search.Execute(true);
-            // await task.ConfigureAwait(false);
-            // task.Start();
-            Task.Factory.StartNew(async () => await Search.Execute(true), TaskCreationOptions.LongRunning);
-            // Library.LibraryEngine.RefreshLibrary();
+            await Task.Factory.StartNew(async () => await Search.Execute(true), TaskCreationOptions.LongRunning);
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }
