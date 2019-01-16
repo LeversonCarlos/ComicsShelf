@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Library
@@ -8,18 +6,10 @@ namespace ComicsShelf.Library
    public class LibraryData : Helpers.Observables.ObservableObject
    {
 
-      #region New
       public LibraryData()
-      {
-         this.RefreshLibraries();
-      }
-      #endregion
-
-
-      #region Libraries
+      { this.RefreshLibraries(); }
 
       public Helpers.Observables.ObservableList<LibraryDataItem> Libraries { get; set; }
-
       private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
          this.HasLibraries = this.Libraries.Count != 0;
@@ -27,11 +17,7 @@ namespace ComicsShelf.Library
          this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) == 0;
       }
 
-      #endregion
-
-
-      #region RefreshLibraries
-      private void RefreshLibraries()
+      internal void RefreshLibraries()
       {
          try
          {
@@ -48,37 +34,6 @@ namespace ComicsShelf.Library
          }
          catch { }
       }
-      #endregion
-
-      #region AddLibrary
-      internal async Task AddLibrary(vTwo.Libraries.TypeEnum libraryType)
-      {
-         try
-         {
-            var library = await LibraryEngine.NewLibrary(libraryType);
-            if (library == null) { return; }
-
-            this.Libraries.Add(new LibraryDataItem(library));
-
-            if (this.Libraries.Count == 1)
-            { await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData); }
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); }
-      }
-      #endregion
-
-      #region RemoveLibrary
-      internal async Task RemoveLibrary(LibraryDataItem library)
-      {
-         try
-         {
-            this.Libraries.Remove(library);
-            await LibraryEngine.RemoveLibrary(library.Library);
-            this.RefreshLibraries();
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); }
-      }
-      #endregion
 
 
       #region HasLibraries

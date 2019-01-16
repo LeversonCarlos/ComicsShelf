@@ -104,7 +104,6 @@ namespace ComicsShelf.Views.Home
                   });
                this.Libraries.Clear();
             }
-            this.Libraries.Add(new FeaturedData());
 
             if (this.Sections.Count != 0)
             { this.Sections.ReplaceRange(new List<Folder.FolderData>()); }
@@ -116,7 +115,7 @@ namespace ComicsShelf.Views.Home
             { this.Files.ReplaceRange(new List<File.FileData>()); }
 
          }
-         catch (System.Exception ex) { throw ex; }
+         catch (System.Exception ex) { throw; }
       }
       #endregion
 

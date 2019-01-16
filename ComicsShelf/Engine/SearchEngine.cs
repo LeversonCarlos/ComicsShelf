@@ -9,6 +9,15 @@ namespace ComicsShelf.Engine
    internal class Search : BaseEngine, IDisposable
    {
 
+      #region Refresh
+      public static async void Refresh()
+      {
+         await Search.Execute(false);
+         await Task.Factory.StartNew(async () => await Search.Execute(true), TaskCreationOptions.LongRunning);
+      }
+      #endregion
+
+
       #region Execute
       public static async Task Execute(bool deepSearch)
       {
@@ -335,22 +344,37 @@ namespace ComicsShelf.Engine
          {
             List<string> comicKeys = null;
 
-            // ADD NEW LIBRARIES
+            // ADD FEATURED LIBRARIES
             if (App.HomeData.Libraries.Count == 0)
-            {
-               var comicLibraries = App.Settings.Libraries
-                  .Select(x => new Helpers.Database.ComicFolder
-                  {
-                     LibraryPath = x.LibraryID,
-                     FullPath = x.LibraryID,
-                     Text = x.Description,
-                     Key = $"{x.LibraryID}"
-                  })
-                  .OrderBy(x => x.Text)
-                  .ToList();
-               App.HomeData.Libraries.Add(new Views.Home.FeaturedData());
-               comicLibraries.ForEach(comicLibrary => App.HomeData.Libraries.Add(new Views.Home.LibraryData(comicLibrary)));
-            }
+            { App.HomeData.Libraries.Add(new Views.Home.FeaturedData()); }
+
+            // COMIC LIBRARIES
+            var comicLibraries = App.Settings.Libraries
+               .Select(x => new Helpers.Database.ComicFolder
+               {
+                  LibraryPath = x.LibraryID,
+                  FullPath = x.LibraryID,
+                  Text = x.Description,
+                  Key = $"{x.LibraryID}"
+               })
+               .OrderBy(x => x.Text)
+               .ToList();
+
+            // REMOVE NOEXISTING SECTIONS
+            comicKeys = comicLibraries.Select(x => x.Key).ToList();
+            var homeDataLibraries = App.HomeData.Libraries
+               .Where(x => !comicKeys.Contains(x.ComicFolder.Key) && !x.IsFeaturedPage)
+               .ToList();
+            foreach (var homeDataLibrary in homeDataLibraries)
+            { App.HomeData.Libraries.Remove(homeDataLibrary); }
+
+            // DISCARD ALREADY EXISTING SECTIONS
+            comicKeys = App.HomeData.Libraries.Select(x => x.ComicFolder.Key).ToList();
+            comicLibraries
+               .RemoveAll(x => comicKeys.Contains(x.Key));
+
+            // ADD NEW SECTIONS
+            comicLibraries.ForEach(comicLibrary => App.HomeData.Libraries.Add(new Views.Home.LibraryData(comicLibrary)));
 
             // REVIEW LIBRARIES's SECTIONS
             foreach (var library in App.HomeData.Libraries)
