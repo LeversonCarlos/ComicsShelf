@@ -1,4 +1,6 @@
-﻿namespace ComicsShelf.vTwo.Settings
+﻿using System.IO;
+
+namespace ComicsShelf.vTwo.Settings
 {
 
    partial class Engine
@@ -15,6 +17,10 @@
                CachePath = fileSystem.GetCachePath(),
                DataPath = fileSystem.GetDataPath()
             };
+            if (!Directory.Exists(this.Paths.DataPath)) { Directory.CreateDirectory(this.Paths.DataPath); }
+            if (!Directory.Exists(this.Paths.CachePath)) { Directory.CreateDirectory(this.Paths.CachePath); }
+            if (!Directory.Exists(this.Paths.CoversCachePath)) { Directory.CreateDirectory(this.Paths.CoversCachePath); }
+            if (!Directory.Exists(this.Paths.FilesCachePath)) { Directory.CreateDirectory(this.Paths.FilesCachePath); }
          }
       }
 
