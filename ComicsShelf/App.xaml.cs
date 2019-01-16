@@ -13,9 +13,8 @@ namespace ComicsShelf
          MainPage = new Helpers.Controls.NavPage();
       }
 
-
-      private Helpers.Settings.Settings _Settings = null;
-      internal static Helpers.Settings.Settings Settings
+      private vTwo.Settings.Engine _Settings = null;
+      public static vTwo.Settings.Engine Settings
       {
          get { return ((App)Application.Current)._Settings; }
          set { ((App)Application.Current)._Settings = value; }
@@ -37,7 +36,9 @@ namespace ComicsShelf
 
 
       protected override async void OnStart()
-      { await Engine.Startup.Execute(); }
+      {
+         await Engine.Startup.Execute();
+      }
 
       protected override void OnSleep()
       { /* Handle when your app sleeps */ }

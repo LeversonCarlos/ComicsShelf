@@ -9,16 +9,15 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task CoverExtract(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile)
+      public async Task CoverExtract(Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile)
       {
          try
          {
-
-            var comicFilePath = $"{comicFile.LibraryPath}{settings.Paths.Separator}{comicFile.FullPath}";
+            var comicFilePath = $"{comicFile.LibraryPath}{App.Settings.Paths.Separator}{comicFile.FullPath}";
             if (!File.Exists(comicFilePath)) { return; }
 
             // OPEN ZIP ARCHIVE
-            using (var zipArchiveStream = new System.IO.FileStream(comicFilePath, FileMode.Open, FileAccess.Read))
+            using (var zipArchiveStream = new FileStream(comicFilePath, FileMode.Open, FileAccess.Read))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
                {

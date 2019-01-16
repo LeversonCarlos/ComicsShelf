@@ -9,10 +9,11 @@ namespace ComicsShelf.UWP
    partial class FileSystem
    {
 
-      public async Task PagesExtract(Helpers.Settings.Settings settings, Views.File.FileData fileData)
+      public async Task PagesExtract(Views.File.FileData fileData)
       {
          try
          {
+            var settings = ComicsShelf.App.Settings;
 
             // DEFINE CACHE PATHS
             var cachePath = $"{settings.Paths.FilesCachePath}{settings.Paths.Separator}{fileData.ComicFile.Key}";
@@ -20,7 +21,7 @@ namespace ComicsShelf.UWP
             if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
 
             // OPEN ZIP ARCHIVE
-            var comicStorageFile = await GetStorageFile(settings, fileData.ComicFile.LibraryPath, fileData.FullPath);
+            var comicStorageFile = await GetStorageFile(fileData.ComicFile.LibraryPath, fileData.FullPath);
             using (var zipArchiveStream = await comicStorageFile.OpenStreamForReadAsync())
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
@@ -55,7 +56,7 @@ namespace ComicsShelf.UWP
                            }
                         }
                      }
-                     await this.PageSize(settings, pageData);
+                     await this.PageSize(pageData);
 
                   }
 
@@ -68,7 +69,7 @@ namespace ComicsShelf.UWP
          catch (Exception) { throw; }
       }
 
-      public async Task PageSize(Helpers.Settings.Settings settings, Views.File.PageData pageData)
+      public async Task PageSize(Views.File.PageData pageData)
       {
          try
          {

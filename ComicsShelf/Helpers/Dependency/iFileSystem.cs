@@ -13,14 +13,14 @@ namespace ComicsShelf.Helpers
       string GetCachePath();
       string GetDataPath();
 
-      Task<bool> ValidateLibraryPath(Helpers.Database.Library library);
+      Task<bool> ValidateLibraryPath(vTwo.Libraries.Library library);
       Task<string> GetLibraryPath();
 
       Task<string[]> GetFiles(string path);
 
-      Task CoverExtract(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile);
-      Task PagesExtract(Helpers.Settings.Settings settings, Views.File.FileData fileData);
-      Task PageSize(Helpers.Settings.Settings settings, Views.File.PageData pageData);
+      Task CoverExtract(Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile);
+      Task PagesExtract(Views.File.FileData fileData);
+      Task PageSize(Views.File.PageData pageData);
 
       Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
 

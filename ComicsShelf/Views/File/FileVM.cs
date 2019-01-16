@@ -52,8 +52,8 @@ namespace ComicsShelf.Views.File
             Engine.AppCenter.TrackEvent("File: Opening");
 
             // EXTRACT PAGES
-            var library = App.Settings.Paths.Libraries
-               .Where(x => x.LibraryPath == this.Data.ComicFile.LibraryPath)
+            var library = App.Settings.Libraries
+               .Where(x => x.LibraryID == this.Data.ComicFile.LibraryPath)
                .FirstOrDefault();
             var libraryService = Library.LibraryService.Get(library);
             await libraryService.ExtractPagesAsync(library, this.Data);

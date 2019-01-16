@@ -9,7 +9,7 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(Helpers.Database.Library library)
+      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(vTwo.Libraries.Library library)
       {
          try
          {
@@ -33,7 +33,7 @@ namespace ComicsShelf.Library.Implementation
             var comicFiles = fileList
                .Select(file => new Helpers.Database.ComicFile
                {
-                  LibraryPath = library.LibraryPath,
+                  LibraryPath = library.LibraryID,
                   Key = file.id,
                   FullPath = $"{file.FilePath}/{file.FileName}",
                   ParentPath = file.FilePath,

@@ -6,18 +6,24 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task<bool> AddLibrary(Helpers.Database.Library library)
+      public async Task<bool> Validate(vTwo.Libraries.Library library)
+      {
+         library.Available = await this.Connector.ConnectAsync();
+         return library.Available;
+      }
+
+      public async Task<bool> AddLibrary(vTwo.Libraries.Library library)
       {
          if (!await this.Connector.ConnectAsync()) { return false; }
          var profile = await this.Connector.GetProfileAsync();
          if (profile == null) { return false; }
-         library.LibraryPath = profile.id;
-         library.LibraryText = profile.Name;
+         library.LibraryID = profile.id;
+         library.Description = profile.Name;
          library.Available = true;
          return true;
       }
 
-      public async Task<bool> RemoveLibrary(Helpers.Database.Library library)
+      public async Task<bool> RemoveLibrary(vTwo.Libraries.Library library)
       {
          return await this.Connector.DisconnectAsync();
       }

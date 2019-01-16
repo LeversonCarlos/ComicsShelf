@@ -56,8 +56,7 @@ namespace ComicsShelf.Engine
          try
          {
             this.Notify(R.Strings.STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE);
-            App.Settings = new Helpers.Settings.Settings();
-            await App.Settings.Initialize();
+            App.Settings = new vTwo.Settings.Engine();
          }
          catch (Exception) { throw; }
       }
@@ -89,24 +88,18 @@ namespace ComicsShelf.Engine
          {
             this.Notify(R.Strings.STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE);
 
-            /* LIBRARIES */
-            var libraries = App.Database.Table<Helpers.Database.Library>();
-
             /* VALIDATE LIBRARIES */
-            foreach (var library in libraries)
+            var librariesChanged = false;
+            foreach (var library in App.Settings.Libraries)
             {
                var libraryService = Library.LibraryService.Get(library);
                var previousState = library.Available;
                await libraryService.Validate(library);
                if (library.Available != previousState)
-               { App.Database.Update(library); }
+               { librariesChanged=true; }
             }
-
-            /* AVAILABLE LIBRARIES */
-            App.Settings.Paths.Libraries = libraries
-               .Where(x => x.Available == true)
-               .Where(x => x.LibraryPath != "")
-               .ToArray();
+            if (librariesChanged)
+            { await App.Settings.SaveLibraries(); }
 
             // START SEARCH ENGINE
             await Search.Execute(false);

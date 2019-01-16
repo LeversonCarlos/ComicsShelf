@@ -5,9 +5,9 @@ namespace ComicsShelf.Library.Implementation
    partial class FileSystemService
    {
 
-      public async Task<bool> ExtractCoverAsync(Helpers.Database.Library library, Helpers.Database.ComicFile comicFile)
+      public async Task<bool> ExtractCoverAsync(vTwo.Libraries.Library library, Helpers.Database.ComicFile comicFile)
       {
-         await this.FileSystem.CoverExtract(App.Settings, App.Database, comicFile);
+         await this.FileSystem.CoverExtract(App.Database, comicFile);
          return (System.IO.File.Exists(comicFile.CoverPath));
       }
 

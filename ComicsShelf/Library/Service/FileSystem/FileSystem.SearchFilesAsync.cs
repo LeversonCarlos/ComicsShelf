@@ -8,20 +8,20 @@ namespace ComicsShelf.Library.Implementation
    partial class FileSystemService
    {
 
-      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(Helpers.Database.Library library)
+      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(vTwo.Libraries.Library library)
       {
          try
          {
 
             // LOCATE FILES
-            var fileList = await this.FileSystem.GetFiles(library.LibraryPath);
+            var fileList = await this.FileSystem.GetFiles(library.LibraryID);
 
             // CONVERT
             var comicFiles = fileList
                .Where(x => x.ToLower().EndsWith(".cbz"))
                .Select(file => new Helpers.Database.ComicFile
                {
-                  LibraryPath = library.LibraryPath,
+                  LibraryPath = library.LibraryID,
                   FullPath = file,
                   Available = true
                })

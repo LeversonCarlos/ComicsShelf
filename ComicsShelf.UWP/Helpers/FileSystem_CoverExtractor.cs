@@ -9,13 +9,13 @@ namespace ComicsShelf.UWP
    partial class FileSystem
    {
 
-      public async Task CoverExtract(Helpers.Settings.Settings settings, Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile)
+      public async Task CoverExtract(Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile)
       {
          try
          {
 
             // OPEN ZIP ARCHIVE
-            var comicStorageFile = await GetStorageFile(settings, comicFile.LibraryPath, comicFile.FullPath);
+            var comicStorageFile = await GetStorageFile(comicFile.LibraryPath, comicFile.FullPath);
             if (comicStorageFile == null) { return; }
             using (var zipArchiveStream = await comicStorageFile.OpenStreamForReadAsync())
             {

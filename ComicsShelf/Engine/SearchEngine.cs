@@ -53,12 +53,12 @@ namespace ComicsShelf.Engine
             this.Notify(R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE);
             await Task.Run(() =>
             {
-               var librariesPaths = App.Settings.Paths.Libraries
-                  .Select(x => x.LibraryPath)
+               var librariesIDs = App.Settings.Libraries
+                  .Select(x => x.LibraryID)
                   .ToArray();
                this.ComicFiles = App.Database
                   .Table<Helpers.Database.ComicFile>()
-                  .Where(x => librariesPaths.Contains(x.LibraryPath))
+                  .Where(x => librariesIDs.Contains(x.LibraryPath))
                   .GroupBy(x => new { x.LibraryPath, x.Key })
                   .Select(x => x.FirstOrDefault())
                   .ToList();
@@ -76,9 +76,10 @@ namespace ComicsShelf.Engine
          {
             this.Notify(R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE);
             this.ComicFiles.AsParallel().ForAll(x => x.Available = false);
+            var settings = App.Settings;
 
             // LOOP THROUGH LIBRARIES
-            foreach (var library in App.Settings.Paths.Libraries)
+            foreach (var library in settings.Libraries)
             {
                var libraryService = Library.LibraryService.Get(library);
 
@@ -89,19 +90,19 @@ namespace ComicsShelf.Engine
                // ACTIVATE FOUND FILES
                var foundKeys = comicFiles.Select(x => x.Key).ToList();
                this.ComicFiles
-                  .Where(x => x.LibraryPath == library.LibraryPath && foundKeys.Contains(x.Key))
+                  .Where(x => x.LibraryPath == library.LibraryID && foundKeys.Contains(x.Key))
                   .AsParallel()
                   .ForAll(x => x.Available = true);
 
                // ALREADY EXISTING FILES
-               var existingKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryPath).Select(x => x.Key).ToList();
+               var existingKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryID).Select(x => x.Key).ToList();
                comicFiles
-                  .RemoveAll(x => x.LibraryPath == library.LibraryPath && existingKeys.Contains(x.Key));
+                  .RemoveAll(x => x.LibraryPath == library.LibraryID && existingKeys.Contains(x.Key));
 
                // COVER PATH   
                comicFiles
                   .AsParallel()
-                  .ForAll(x => x.CoverPath = $"{App.Settings.Paths.CoversCachePath}{App.Settings.Paths.Separator}{x.Key}.jpg");
+                  .ForAll(x => x.CoverPath = $"{settings.Paths.CoversCachePath}{settings.Paths.Separator}{x.Key}.jpg");
 
                await Task.Run(() =>
                {
@@ -167,21 +168,21 @@ namespace ComicsShelf.Engine
             var countB = this.ComicFiles.Count;
 
             // LOOP THROUGH LIBRARIES
-            foreach (var library in App.Settings.Paths.Libraries)
+            foreach (var library in App.Settings.Libraries)
             {
 
                // REMOVE NOEXISTING FILES
-               comicKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryPath).Select(x => x.Key).ToList();
+               comicKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryID).Select(x => x.Key).ToList();
                var homeDataFiles = App.HomeData.Files
-                  .Where(x => x.ComicFile.LibraryPath == library.LibraryPath && !comicKeys.Contains(x.ComicFile.Key))
+                  .Where(x => x.ComicFile.LibraryPath == library.LibraryID && !comicKeys.Contains(x.ComicFile.Key))
                   .ToList();
                foreach (var homeDataFile in homeDataFiles)
                { App.HomeData.Files.Remove(homeDataFile); }
 
                // DISCARD ALREADY EXISTING FILES
-               comicKeys = App.HomeData.Files.Where(x => x.ComicFile.LibraryPath == library.LibraryPath).Select(x => x.ComicFile.Key).ToList();
+               comicKeys = App.HomeData.Files.Where(x => x.ComicFile.LibraryPath == library.LibraryID).Select(x => x.ComicFile.Key).ToList();
                this.ComicFiles
-                  .RemoveAll(x => x.LibraryPath == library.LibraryPath && comicKeys.Contains(x.Key));
+                  .RemoveAll(x => x.LibraryPath == library.LibraryID && comicKeys.Contains(x.Key));
 
                // ADD NEW FILES
                this.ComicFiles.ForEach(comicFile => App.HomeData.Files.Add(new Views.File.FileData(comicFile)));
@@ -337,13 +338,13 @@ namespace ComicsShelf.Engine
             // ADD NEW LIBRARIES
             if (App.HomeData.Libraries.Count == 0)
             {
-               var comicLibraries = App.Settings.Paths.Libraries
+               var comicLibraries = App.Settings.Libraries
                   .Select(x => new Helpers.Database.ComicFolder
                   {
-                     LibraryPath = x.LibraryPath,
-                     FullPath = x.LibraryPath,
-                     Text = x.LibraryText,
-                     Key = $"{x.LibraryPath}"
+                     LibraryPath = x.LibraryID,
+                     FullPath = x.LibraryID,
+                     Text = x.Description,
+                     Key = $"{x.LibraryID}"
                   })
                   .OrderBy(x => x.Text)
                   .ToList();
@@ -463,11 +464,11 @@ namespace ComicsShelf.Engine
          {
 
             // LIBRARY SERVICES
-            var libraryServices = App.Settings.Paths.Libraries
+            var libraryServices = App.Settings.Libraries
                .Select(x => new
                {
                   Library = x,
-                  Path = x.LibraryPath,
+                  Path = x.LibraryID,
                   Service = Library.LibraryService.Get(x)
                })
                .ToList();

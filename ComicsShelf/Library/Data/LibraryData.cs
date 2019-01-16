@@ -24,7 +24,7 @@ namespace ComicsShelf.Library
       {
          this.HasLibraries = this.Libraries.Count != 0;
          this.HasntLibraries = this.Libraries.Count == 0;
-         this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == ComicsShelf.Library.LibraryTypeEnum.OneDrive) == 0;
+         this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) == 0;
       }
 
       #endregion
@@ -41,8 +41,7 @@ namespace ComicsShelf.Library
             this.Libraries = new Helpers.Observables.ObservableList<LibraryDataItem>();
             this.Libraries.CollectionChanged += this.Libraries_CollectionChanged;
 
-            var libraries = App.Database
-               .Table<Helpers.Database.Library>()
+            var libraries = App.Settings .Libraries 
                .Select(x => new LibraryDataItem(x))
                .AsEnumerable();
             libraries.ForEach(library => this.Libraries.Add(library));
@@ -52,7 +51,7 @@ namespace ComicsShelf.Library
       #endregion
 
       #region AddLibrary
-      internal async Task AddLibrary(ComicsShelf.Library.LibraryTypeEnum libraryType)
+      internal async Task AddLibrary(vTwo.Libraries.TypeEnum libraryType)
       {
          try
          {

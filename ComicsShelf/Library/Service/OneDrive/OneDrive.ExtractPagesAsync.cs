@@ -10,17 +10,18 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task ExtractPagesAsync(Helpers.Database.Library library, Views.File.FileData fileData)
+      public async Task ExtractPagesAsync(vTwo.Libraries.Library library, Views.File.FileData fileData)
       {
          try
          {
+            var settings = App.Settings;
 
             // DEFINE CACHE PATHS
-            var cachePath = $"{App.Settings.Paths.FilesCachePath}{App.Settings.Paths.Separator}{fileData.ComicFile.Key}";
+            var cachePath = $"{settings.Paths.FilesCachePath}{settings.Paths.Separator}{fileData.ComicFile.Key}";
             if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
-            var cachePagesPath = $"{cachePath}{App.Settings.Paths.Separator}Pages";
+            var cachePagesPath = $"{cachePath}{settings.Paths.Separator}Pages";
             if (!Directory.Exists(cachePagesPath)) { Directory.CreateDirectory(cachePagesPath); }
-            var cacheFilePath = $"{cachePath}{App.Settings.Paths.Separator}ComicFile.cbz";
+            var cacheFilePath = $"{cachePath}{settings.Paths.Separator}ComicFile.cbz";
 
             // DOWNLOAD COMIC FILE FROM REMOTE SERVER IF LOCAL CACHE DOESNT EXIST YET
             if (!File.Exists(cacheFilePath))
@@ -58,7 +59,7 @@ namespace ComicsShelf.Library.Implementation
 
                      // INITIALIZE PAGE DATA
                      var pageIndexText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
-                     var pagePath = $"{cachePagesPath}{App.Settings.Paths.Separator}P{pageIndexText}.jpg";
+                     var pagePath = $"{cachePagesPath}{settings.Paths.Separator}P{pageIndexText}.jpg";
                      var pageData = new Views.File.PageData { Page = pageIndex, Path = pagePath, IsVisible = false };
                      fileData.Pages.Add(pageData);
                      pageIndex++;
@@ -75,7 +76,7 @@ namespace ComicsShelf.Library.Implementation
                            }
                         }
                      }
-                     await this.FileSystem.PageSize(App.Settings, pageData);
+                     await this.FileSystem.PageSize(pageData);
 
                   }
 
