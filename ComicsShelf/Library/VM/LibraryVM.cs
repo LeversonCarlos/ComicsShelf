@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -57,7 +58,7 @@ namespace ComicsShelf.Library
             this.Data.Libraries.Add(new LibraryDataItem(library));
 
             // SCHEDULE LIBRARY REFRESH
-            Engine.Search.Refresh();
+            Engine.Search.Refresh(library);
 
             /*
             if (this.Data.Libraries.Count == 1)
@@ -98,12 +99,36 @@ namespace ComicsShelf.Library
                foreach (var comicFile in comicFiles)
                { App.Database.Delete(comicFile); }
             });
+
+            // REMOVE HOME DATA
+            System.Collections.Generic.List<Views.Folder.FolderData> dataList;
+            var fileList = App.HomeData.Files
+               .Where(x => x.ComicFile.LibraryPath == library.LibraryID)
+               .ToList();
+            foreach (var fileItem in fileList) { App.HomeData.Files.Remove(fileItem); }
+
+            dataList = App.HomeData.Folders
+               .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
+               .ToList();
+            foreach (var dataItem in dataList) { App.HomeData.Folders.Remove(dataItem); }
+
+            dataList = App.HomeData.Sections
+               .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
+               .ToList();
+            foreach (var dataItem in dataList) { App.HomeData.Sections.Remove(dataItem); }
+
+            var libraryList = App.HomeData.Libraries
+               .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
+               .ToList();
+            foreach (var libraryItem in libraryList) { App.HomeData.Libraries.Remove(libraryItem); }
+
+            // REMOVE LIBRARY ITSELF
             App.Settings.Libraries.Remove(library);
             await App.Settings.SaveLibraries();
             this.Data.Libraries.Remove(item);
 
             // SCHEDULE LIBRARY REFRESH
-            Engine.Search.Refresh();
+            // Engine.Search.Refresh(library);
             // this.Data.RefreshLibraries();
 
          }

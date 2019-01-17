@@ -102,7 +102,7 @@ namespace ComicsShelf.Engine
             { await App.Settings.SaveLibraries(); }
 
             // START SEARCH ENGINE
-            Search.Refresh();
+            Search.RefreshAll();
 
          }
          catch (Exception) { throw; }

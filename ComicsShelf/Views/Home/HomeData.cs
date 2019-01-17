@@ -81,43 +81,7 @@ namespace ComicsShelf.Views.Home
          get { return this._NoComics; }
          set { this.SetProperty(ref this._NoComics, value); }
       }
-      #endregion
-
-      #region ClearAll
-      internal void ClearAll()
-      {
-         try
-         {
-
-            if (this.Libraries.Count != 0)
-            {
-               this.Libraries
-                  .ForEach(library =>
-                  {
-                     library.Folders
-                        .ForEach(section =>
-                        {
-                           section.Folders.Clear();
-                           section.Files.Clear();
-                        });
-                     library.Folders.Clear();
-                  });
-               this.Libraries.Clear();
-            }
-
-            if (this.Sections.Count != 0)
-            { this.Sections.ReplaceRange(new List<Folder.FolderData>()); }
-
-            if (this.Folders.Count != 0)
-            { this.Folders.ReplaceRange(new List<Folder.FolderData>()); }
-
-            if (this.Files.Count != 0)
-            { this.Files.ReplaceRange(new List<File.FileData>()); }
-
-         }
-         catch (System.Exception ex) { throw; }
-      }
-      #endregion
+      #endregion    
 
    }
 }
