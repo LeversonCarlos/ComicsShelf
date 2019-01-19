@@ -137,14 +137,13 @@ namespace ComicsShelf.Engine
             // ACTIVATE FOUND FILES
             var foundKeys = comicFiles.Select(x => x.Key).ToList();
             this.ComicFiles
-               .Where(x => x.LibraryPath == library.LibraryID && foundKeys.Contains(x.Key))
+               .Where(x => foundKeys.Contains(x.Key))
                .AsParallel()
                .ForAll(x => x.Available = true);
 
             // ALREADY EXISTING FILES
-            var existingKeys = this.ComicFiles.Where(x => x.LibraryPath == library.LibraryID).Select(x => x.Key).ToList();
-            comicFiles
-               .RemoveAll(x => x.LibraryPath == library.LibraryID && existingKeys.Contains(x.Key));
+            var existingKeys = this.ComicFiles.Select(x => x.Key).ToList();
+            comicFiles.RemoveAll(x => existingKeys.Contains(x.Key));
 
             // COVER PATH   
             comicFiles
@@ -162,9 +161,7 @@ namespace ComicsShelf.Engine
             });
 
             await Task.Run(() =>
-            {
-               this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x));
-            });
+            { this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x)); });
 
          }
          catch (Exception) { throw; }
@@ -246,8 +243,8 @@ namespace ComicsShelf.Engine
                {
                   LibraryPath = this.library.LibraryID,
                   FullPath = x.Key.ParentPath,
-                  ParentPath = System.IO.Path.GetDirectoryName(x.Key.ParentPath),
-                  Text = System.IO.Path.GetFileNameWithoutExtension(x.Key.ParentPath),
+                  ParentPath = (string.IsNullOrEmpty(x.Key.ParentPath) ? "" : System.IO.Path.GetDirectoryName(x.Key.ParentPath)),
+                  Text = (string.IsNullOrEmpty(x.Key.ParentPath) ? this.library.Description : System.IO.Path.GetFileNameWithoutExtension(x.Key.ParentPath)),
                   Key = $"{this.library.LibraryID}|{x.Key.ParentPath}"
                })
                .ToList();
@@ -313,7 +310,7 @@ namespace ComicsShelf.Engine
                {
                   LibraryPath = this.library.LibraryID,
                   FullPath = x.Key.ParentPath,
-                  Text = x.Key.ParentPath.Replace(this.library.LibraryID, ""),
+                  Text = (string.IsNullOrEmpty(x.Key.ParentPath) ? this.library.Description : x.Key.ParentPath.Replace(this.library.LibraryID, "")),
                   Key = $"{this.library.LibraryID}|{x.Key.ParentPath}"
                })
                .ToList();
