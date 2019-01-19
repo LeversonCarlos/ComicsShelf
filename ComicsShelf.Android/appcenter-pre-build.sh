@@ -9,13 +9,8 @@ then
     echo "You need define the ComicsShelfApplicationID variable in App Center"
     exit
 fi
-echo "ComicsShelfApplicationID:"
-echo $ComicsShelfApplicationID
 
-
-ANDROID_MANIFEST_FILE=$APPCENTER_SOURCE_DIRECTORY/Droid/Properties/AndroidManifest.xml
-INFO_PLIST_FILE=$APPCENTER_SOURCE_DIRECTORY/iOS/Info.plist
-
+ANDROID_MANIFEST_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf.Android/Properties/AndroidManifest.xml
 if [ -e "$ANDROID_MANIFEST_FILE" ]
 then
     echo "Updating applicationID to $ComicsShelfApplicationID in AndroidManifest.xml"
@@ -24,7 +19,7 @@ fi
 echo "ANDROID_MANIFEST_FILE CONTENT:"
 cat $ANDROID_MANIFEST_FILE
 
-
+INFO_PLIST_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf.iOS/Info.plist
 if [ -e "$INFO_PLIST_FILE" ]
 then
     echo "Updating applicationID to $ComicsShelfApplicationID in Info.plist"
