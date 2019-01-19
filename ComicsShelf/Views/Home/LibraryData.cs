@@ -35,6 +35,13 @@ namespace ComicsShelf.Views.Home
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
+      bool _IsEmptyPage;
+      public bool IsEmptyPage
+      {
+         get { return this._IsEmptyPage; }
+         set { this.SetProperty(ref this._IsEmptyPage, value); }
+      }
+
       bool _IsFeaturedPage;
       public bool IsFeaturedPage
       {

@@ -47,8 +47,9 @@
                   IsVisible="{Binding NotifyData.IsRunning}" 
                   Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
                </controls:EngineProgressView>
-               <controls:EmptyLibraryView IsVisible="{Binding HasFiles, Converter={StaticResource notConverter}}" ></controls:EmptyLibraryView>
             </StackLayout>
+
+            <controls:EmptyLibraryView IsVisible="{Binding IsEmptyPage}" ></controls:EmptyLibraryView>
 
          </StackLayout>
       </ScrollView>
