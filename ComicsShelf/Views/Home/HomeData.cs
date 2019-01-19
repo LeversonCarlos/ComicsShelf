@@ -12,7 +12,6 @@ namespace ComicsShelf.Views.Home
       {
          this.NoComics = true;
 
-         this.Sections = new Helpers.Observables.ObservableList<Folder.FolderData>();
          this.Libraries = new Helpers.Observables.ObservableList<LibraryData>();
          this.Files.ObservableCollectionChanged += this.Files_CollectionChanged;
       }
@@ -59,7 +58,6 @@ namespace ComicsShelf.Views.Home
       #endregion
 
       #region Libraries
-      public Helpers.Observables.ObservableList<Folder.FolderData> Sections { get; set; }
       public Helpers.Observables.ObservableList<LibraryData> Libraries { get; set; }
       #endregion
 

@@ -100,36 +100,25 @@ namespace ComicsShelf.Library
                { App.Database.Delete(comicFile); }
             });
 
-            // REMOVE HOME DATA
-            System.Collections.Generic.List<Views.Folder.FolderData> dataList;
-            var fileList = App.HomeData.Files
-               .Where(x => x.ComicFile.LibraryPath == library.LibraryID)
-               .ToList();
-            foreach (var fileItem in fileList) { App.HomeData.Files.Remove(fileItem); }
-
-            dataList = App.HomeData.Folders
+            // REMOVE LIBRARY DATA
+            var libraryData = App.HomeData.Libraries
                .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
-               .ToList();
-            foreach (var dataItem in dataList) { App.HomeData.Folders.Remove(dataItem); }
-
-            dataList = App.HomeData.Sections
-               .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
-               .ToList();
-            foreach (var dataItem in dataList) { App.HomeData.Sections.Remove(dataItem); }
-
-            var libraryList = App.HomeData.Libraries
-               .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
-               .ToList();
-            foreach (var libraryItem in libraryList) { App.HomeData.Libraries.Remove(libraryItem); }
+               .FirstOrDefault();
+            foreach (var librarySection in libraryData.Sections)
+            {
+               foreach (var libraryFolder in librarySection.Folders)
+               { libraryFolder.Files.Clear(); }
+               librarySection.Folders.Clear();
+            }
+            libraryData.Sections.Clear();
+            libraryData.Folders.Clear();
+            libraryData.Files.Clear();
+            App.HomeData.Libraries.Remove(libraryData);
 
             // REMOVE LIBRARY ITSELF
             App.Settings.Libraries.Remove(library);
             await App.Settings.SaveLibraries();
             this.Data.Libraries.Remove(item);
-
-            // SCHEDULE LIBRARY REFRESH
-            // Engine.Search.Refresh(library);
-            // this.Data.RefreshLibraries();
 
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("RemoveLibrary", ex); await App.ShowMessage(ex); }
