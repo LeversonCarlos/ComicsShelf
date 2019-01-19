@@ -11,8 +11,9 @@ namespace ComicsShelf.Views.Home
       {
          this.FileTappedCommand = new Command(async (item) => await this.FileTapped(item));
          this.FolderTappedCommand = new Command(async (item) => await this.FolderTapped(item));
-         this.NotifyData = new Engine.BaseData();
          this.Sections = new Helpers.Observables.ObservableList<Folder.FolderData>();
+
+         this.NotifyData = new Engine.BaseData();
          Helpers.Controls.Messaging.Subscribe<Engine.BaseData>(Helpers.Controls.Messaging.Keys.SearchEngine, this.OnNotifyDataChanged);
       }
 
