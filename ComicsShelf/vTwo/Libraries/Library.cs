@@ -1,4 +1,6 @@
-﻿namespace ComicsShelf.vTwo.Libraries
+﻿using System.Threading;
+
+namespace ComicsShelf.vTwo.Libraries
 {
    public enum TypeEnum : short { FileSystem = 0, OneDrive = 1 }
 
@@ -8,6 +10,9 @@
       public string Description { get; set; }
       public TypeEnum Type { get; set; }
       public bool Available { get; set; }
+
+      internal CancellationTokenSource CancellationTokenSource { get; set; }
+
    }
 
 }
