@@ -8,7 +8,7 @@
       <ScrollView Style="{StaticResource CoverListMainView}" >
          <StackLayout Style="{StaticResource CoverListMainLayout}" >
 
-            <controls:RepeaterView ItemsSource="{Binding Folders}">
+            <controls:RepeaterView ItemsSource="{Binding Sections}">
                <controls:RepeaterView.ItemTemplate>
                   <DataTemplate>
                      <StackLayout>

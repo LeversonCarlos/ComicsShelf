@@ -8,22 +8,21 @@ namespace ComicsShelf.UWP
    partial class FileSystem
    {
 
-      public async Task<bool> ValidateLibraryPath(Helpers.Database.Library library)
+      public async Task<bool> ValidateLibraryPath(vTwo.Libraries.Library library)
       {
-         if (string.IsNullOrEmpty(library.LibraryPath)) { return false; }
+         if (string.IsNullOrEmpty(library.LibraryID)) { return false; }
          Windows.Storage.StorageFolder folder = null;
          try
          {
             library.Available = false;
-            folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(library.LibraryPath);
+            folder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(library.LibraryID);
 
-            library.LibraryText = folder.DisplayName;
+            library.Description = folder.DisplayName;
 
             var libraryFiles = await this.GetFiles(folder);
-            library.FileCount = libraryFiles.Length;
-            library.Available = (library.FileCount != 0);
+            library.Available = (libraryFiles.Length != 0);
          }
-         catch { try { StorageApplicationPermissions.FutureAccessList.Remove(library.LibraryPath); } catch { } }
+         catch { try { StorageApplicationPermissions.FutureAccessList.Remove(library.LibraryID); } catch { } }
          return library.Available;
       }
 

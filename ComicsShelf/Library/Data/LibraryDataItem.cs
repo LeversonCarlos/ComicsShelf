@@ -4,28 +4,25 @@
    {
 
       #region New
-      internal Helpers.Database.Library Library { get; set; }
-      internal LibraryDataItem(Helpers.Database.Library _Library)
+      internal vTwo.Libraries.Library Library { get; set; }
+      internal LibraryDataItem(vTwo.Libraries.Library _Library)
       {
          this.Library = _Library;
-         this._LibraryPath = this.Library.LibraryPath;
-         this._LibraryText = this.Library.LibraryText;
+         this._LibraryID = this.Library.LibraryID;
+         this._LibraryText = this.Library.Description;
          this._LibraryType = this.Library.Type;
-         this._FileCount = this.Library.FileCount;
       }
       #endregion
 
-      #region LibraryPath
-      string _LibraryPath;
-      public string LibraryPath
+      #region LibraryID
+      string _LibraryID;
+      public string LibraryID
       {
-         get { return this._LibraryPath; }
+         get { return this._LibraryID; }
          set
          {
-            this.SetProperty(ref this._LibraryPath, value);
-
-            this.Library.LibraryPath = value;
-            App.Database.Update(this.Library);
+            this.SetProperty(ref this._LibraryID, value);
+            this.Library.LibraryID = value;
          }
       }
       #endregion
@@ -38,16 +35,14 @@
          set
          {
             this.SetProperty(ref this._LibraryText, value);
-
-            this.Library.LibraryText = value;
-            App.Database.Update(this.Library);
+            this.Library.Description = value;
          }
       }
       #endregion
 
       #region LibraryType
-      ComicsShelf.Library.LibraryTypeEnum _LibraryType;
-      public ComicsShelf.Library.LibraryTypeEnum LibraryType
+      vTwo.Libraries.TypeEnum _LibraryType;
+      public vTwo.Libraries.TypeEnum LibraryType
       {
          get { return this._LibraryType; }
          set
@@ -55,22 +50,6 @@
             this.SetProperty(ref this._LibraryType, value);
 
             this.Library.Type = value; 
-            App.Database.Update(this.Library);
-         }
-      }
-      #endregion
-
-      #region FileCount
-      int _FileCount;
-      public int FileCount
-      {
-         get { return this._FileCount; }
-         set
-         {
-            this.SetProperty(ref this._FileCount, value);
-
-            this.Library.FileCount = value;
-            App.Database.Update(this.Library);
          }
       }
       #endregion

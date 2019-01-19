@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -17,38 +18,112 @@ namespace ComicsShelf.Library
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
          this.AddOneDriveLibraryCommand = new Command(async (item) => await this.AddOneDriveLibrary(item));
          this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
-         ComicsShelf.Engine.AppCenter.TrackEvent("Library: Show View");
       }
       #endregion
 
-      #region AddLibraryTapped
+      #region AddLibrary 
+
       public Command AddLibraryTappedCommand { get; set; }
       private async Task AddLibraryTapped(object item)
       {
          this.IsBusy = true;
-         await this.Data.AddLibrary(LibraryTypeEnum.FileSystem);
+         await this.AddLibrary(vTwo.Libraries.TypeEnum.FileSystem);
          this.IsBusy = false;
       }
-      #endregion
 
-      #region AddOneDriveLibrary
       public Command AddOneDriveLibraryCommand { get; set; }
       private async Task AddOneDriveLibrary(object item)
       {
          this.IsBusy = true;
-         await this.Data.AddLibrary(LibraryTypeEnum.OneDrive);
+         await this.AddLibrary(vTwo.Libraries.TypeEnum.OneDrive);
          this.IsBusy = false;
       }
+
+      private async Task AddLibrary(vTwo.Libraries.TypeEnum libraryType)
+      {
+         try
+         {
+
+            // INITIALIZE
+            var library = new vTwo.Libraries.Library { Type = libraryType };
+
+            // USE SERVICE IMPLEMENTATION
+            var libraryService = LibraryService.Get(library);
+            if (!await libraryService.AddLibrary(library))
+            { await App.ShowMessage(R.Strings.LIBRARY_INVALID_FOLDER_MESSAGE); return; }
+
+            // SAVE LIBRARY CONFIG
+            App.Settings.Libraries.Add(library);
+            await App.Settings.SaveLibraries();
+            this.Data.Libraries.Add(new LibraryDataItem(library));
+
+            // SCHEDULE LIBRARY REFRESH
+            Engine.Search.Refresh(library);
+
+            /*
+            if (this.Data.Libraries.Count == 1)
+            { await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData); }
+            */
+
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("AddLibrary", ex); await App.ShowMessage(ex); }
+      }
+
       #endregion
 
-      #region RemoveLibraryTapped
+      #region RemoveLibrary
+
       public Command RemoveLibraryTappedCommand { get; set; }
       private async Task RemoveLibraryTapped(object item)
       {
          this.IsBusy = true;
-         await this.Data.RemoveLibrary(item as LibraryDataItem);
+         await this.RemoveLibrary(item as LibraryDataItem);
          this.IsBusy = false;
       }
+
+      internal async Task RemoveLibrary(LibraryDataItem item)
+      {
+         try
+         {
+
+            // USE SERVICE IMPLEMENTATION
+            var library = item.Library;
+            var libraryService = LibraryService.Get(library);
+            if (!await libraryService.RemoveLibrary(library)) { return; }
+
+            // REMOVE FILES AND THE LIBRARY ITSELF
+            var comicFiles = App.Database.Table<Helpers.Database.ComicFile>()
+               .Where(x => x.LibraryPath == library.LibraryID)
+               .ToList();
+            await Task.Run(() => {
+               foreach (var comicFile in comicFiles)
+               { App.Database.Delete(comicFile); }
+            });
+
+            // REMOVE LIBRARY DATA
+            var libraryData = App.HomeData.Libraries
+               .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
+               .FirstOrDefault();
+            foreach (var librarySection in libraryData.Sections)
+            {
+               foreach (var libraryFolder in librarySection.Folders)
+               { libraryFolder.Files.Clear(); }
+               librarySection.Folders.Clear();
+            }
+            libraryData.Sections.Clear();
+            libraryData.Folders.Clear();
+            libraryData.Files.Clear();
+            App.HomeData.Libraries.Remove(libraryData);
+
+            // REMOVE LIBRARY ITSELF
+            App.Settings.Libraries.Remove(library);
+            await App.Settings.SaveLibraries();
+            this.Data.Libraries.Remove(item);
+
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("RemoveLibrary", ex); await App.ShowMessage(ex); }
+      }
+
       #endregion
 
       #region LinkTapped

@@ -48,12 +48,12 @@ namespace ComicsShelf.Views.File
             if (this.Data.Pages.Count != 0) { return; }
 
             // TRACK
-            var OpeningTime = DateTime.Now;
+            var openingTime = DateTime.Now;
             Engine.AppCenter.TrackEvent("File: Opening");
 
             // EXTRACT PAGES
-            var library = App.Settings.Paths.Libraries
-               .Where(x => x.LibraryPath == this.Data.ComicFile.LibraryPath)
+            var library = App.Settings.Libraries
+               .Where(x => x.LibraryID == this.Data.ComicFile.LibraryPath)
                .FirstOrDefault();
             var libraryService = Library.LibraryService.Get(library);
             await libraryService.ExtractPagesAsync(library, this.Data);
@@ -61,11 +61,11 @@ namespace ComicsShelf.Views.File
             this.Data.Pages.Add(new PageData { });
 
             // TRACK
-            var milliseconds = (long)(DateTime.Now - OpeningTime).TotalMilliseconds;
+            var milliseconds = (long)(DateTime.Now - openingTime).TotalMilliseconds;
             Engine.AppCenter.TrackEvent("File: Opened", "milliseconds", milliseconds.ToString());
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("File: Opening", ex); }
          finally { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced); }
       }
       #endregion

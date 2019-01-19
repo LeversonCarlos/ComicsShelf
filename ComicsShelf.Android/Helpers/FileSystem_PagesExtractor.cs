@@ -9,10 +9,11 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task PagesExtract(Helpers.Settings.Settings settings, Views.File.FileData fileData)
+      public async Task PagesExtract(Views.File.FileData fileData)
       {
          try
          {
+            var settings = App.Settings;
 
             // DEFINE CACHE PATHS
             var cachePath = $"{settings.Paths.FilesCachePath}{settings.Paths.Separator}{fileData.ComicFile.Key}";
@@ -55,7 +56,7 @@ namespace ComicsShelf.Droid
                            }
                         }
                      }
-                     await this.PageSize(settings, pageData);
+                     await this.PageSize(pageData);
 
                   }
 
@@ -68,7 +69,7 @@ namespace ComicsShelf.Droid
          catch (Exception) { throw; }
       }
 
-      public async Task PageSize(Helpers.Settings.Settings settings, Views.File.PageData pageData)
+      public async Task PageSize(Views.File.PageData pageData)
       {
          try
          {

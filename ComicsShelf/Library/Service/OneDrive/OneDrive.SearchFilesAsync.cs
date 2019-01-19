@@ -9,20 +9,31 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(Helpers.Database.Library library)
+      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(vTwo.Libraries.Library library)
       {
          try
          {
 
-            // LOCATE FILES
-            var fileList = await this.Connector.SearchFilesAsync("*.cbz");
-            fileList.RemoveAll(x => !x.FileName.EndsWith(".cbz"));
+            // LOCATE FILES [try 5 times with a 100 milisec sleep between]
+            List<FileData> fileList = null;
+            int fileListTries = 0;
+            while (fileListTries <= 5)
+            {
+               fileList = await this.Connector.SearchFilesAsync("cbz", 10000);
+               if (fileList != null && fileList.Count != 0)
+               {
+                  fileList.RemoveAll(x => !x.FileName.EndsWith(".cbz"));
+                  break;
+               }
+               System.Threading.Thread.Sleep(100);
+               fileListTries++;
+            }
 
             // CONVERT
             var comicFiles = fileList
                .Select(file => new Helpers.Database.ComicFile
                {
-                  LibraryPath = library.LibraryPath,
+                  LibraryPath = library.LibraryID,
                   Key = file.id,
                   FullPath = $"{file.FilePath}/{file.FileName}",
                   ParentPath = file.FilePath,
@@ -47,7 +58,7 @@ namespace ComicsShelf.Library.Implementation
             return comicFiles;
 
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("Searching File: Exception", "Exception", ex.Message); return null; }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive Searching Files", ex); return null; }
       }
 
    }

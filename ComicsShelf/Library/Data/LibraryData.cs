@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Library
@@ -8,30 +6,18 @@ namespace ComicsShelf.Library
    public class LibraryData : Helpers.Observables.ObservableObject
    {
 
-      #region New
       public LibraryData()
-      {
-         this.RefreshLibraries();
-      }
-      #endregion
-
-
-      #region Libraries
+      { this.RefreshLibraries(); }
 
       public Helpers.Observables.ObservableList<LibraryDataItem> Libraries { get; set; }
-
       private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
          this.HasLibraries = this.Libraries.Count != 0;
          this.HasntLibraries = this.Libraries.Count == 0;
-         this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == ComicsShelf.Library.LibraryTypeEnum.OneDrive) == 0;
+         this.HasntOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) == 0;
       }
 
-      #endregion
-
-
-      #region RefreshLibraries
-      private void RefreshLibraries()
+      internal void RefreshLibraries()
       {
          try
          {
@@ -41,45 +27,13 @@ namespace ComicsShelf.Library
             this.Libraries = new Helpers.Observables.ObservableList<LibraryDataItem>();
             this.Libraries.CollectionChanged += this.Libraries_CollectionChanged;
 
-            var libraries = App.Database
-               .Table<Helpers.Database.Library>()
+            var libraries = App.Settings .Libraries 
                .Select(x => new LibraryDataItem(x))
                .AsEnumerable();
             libraries.ForEach(library => this.Libraries.Add(library));
          }
          catch { }
       }
-      #endregion
-
-      #region AddLibrary
-      internal async Task AddLibrary(ComicsShelf.Library.LibraryTypeEnum libraryType)
-      {
-         try
-         {
-            var library = await LibraryEngine.NewLibrary(libraryType);
-            if (library == null) { return; }
-
-            this.Libraries.Add(new LibraryDataItem(library));
-
-            if (this.Libraries.Count == 1)
-            { await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData); }
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); }
-      }
-      #endregion
-
-      #region RemoveLibrary
-      internal async Task RemoveLibrary(LibraryDataItem library)
-      {
-         try
-         {
-            this.Libraries.Remove(library);
-            await LibraryEngine.RemoveLibrary(library.Library);
-            this.RefreshLibraries();
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); }
-      }
-      #endregion
 
 
       #region HasLibraries

@@ -31,9 +31,7 @@ namespace ComicsShelf.Helpers.Database
 
                this.Connection = new SQLiteConnection(databasePath);
                this.Connection.CreateTable<Configs>();
-               // this.Connection.CreateTable<ComicFolder>();
                this.Connection.CreateTable<ComicFile>();
-               this.Connection.CreateTable<Library>();
             });
          }
          catch (Exception ex) { throw; }

@@ -12,7 +12,6 @@ namespace ComicsShelf.Views.Home
       {
          this.NoComics = true;
 
-         this.Sections = new Helpers.Observables.ObservableList<Folder.FolderData>();
          this.Libraries = new Helpers.Observables.ObservableList<LibraryData>();
          this.Files.ObservableCollectionChanged += this.Files_CollectionChanged;
       }
@@ -59,7 +58,6 @@ namespace ComicsShelf.Views.Home
       #endregion
 
       #region Libraries
-      public Helpers.Observables.ObservableList<Folder.FolderData> Sections { get; set; }
       public Helpers.Observables.ObservableList<LibraryData> Libraries { get; set; }
       #endregion
 
@@ -81,44 +79,7 @@ namespace ComicsShelf.Views.Home
          get { return this._NoComics; }
          set { this.SetProperty(ref this._NoComics, value); }
       }
-      #endregion
-
-      #region ClearAll
-      internal void ClearAll()
-      {
-         try
-         {
-
-            if (this.Libraries.Count != 0)
-            {
-               this.Libraries
-                  .ForEach(library =>
-                  {
-                     library.Folders
-                        .ForEach(section =>
-                        {
-                           section.Folders.Clear();
-                           section.Files.Clear();
-                        });
-                     library.Folders.Clear();
-                  });
-               this.Libraries.Clear();
-            }
-            this.Libraries.Add(new FeaturedData());
-
-            if (this.Sections.Count != 0)
-            { this.Sections.ReplaceRange(new List<Folder.FolderData>()); }
-
-            if (this.Folders.Count != 0)
-            { this.Folders.ReplaceRange(new List<Folder.FolderData>()); }
-
-            if (this.Files.Count != 0)
-            { this.Files.ReplaceRange(new List<File.FileData>()); }
-
-         }
-         catch (System.Exception ex) { throw ex; }
-      }
-      #endregion
+      #endregion    
 
    }
 }

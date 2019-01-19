@@ -5,17 +5,16 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task<bool> ValidateLibraryPath(Helpers.Database.Library library)
+      public async Task<bool> ValidateLibraryPath(vTwo.Libraries.Library library)
       {
          library.Available = false;
-         if (string.IsNullOrEmpty(library.LibraryPath)) { return false; }
-         if (!await Task.Run(() => System.IO.Directory.Exists(library.LibraryPath))) { return false; }
+         if (string.IsNullOrEmpty(library.LibraryID)) { return false; }
+         if (!await Task.Run(() => System.IO.Directory.Exists(library.LibraryID))) { return false; }
 
-         await Task.Run(() => { library.LibraryText = System.IO.Path.GetFileNameWithoutExtension(library.LibraryPath); });
+         await Task.Run(() => { library.Description = System.IO.Path.GetFileNameWithoutExtension(library.LibraryID); });
 
-         var libraryFiles = await this.GetFiles(library.LibraryPath);
-         library.FileCount = libraryFiles.Length;
-         library.Available = (library.FileCount != 0);
+         var libraryFiles = await this.GetFiles(library.LibraryID);
+         library.Available = (libraryFiles.Length != 0);
 
          return library.Available;
       }

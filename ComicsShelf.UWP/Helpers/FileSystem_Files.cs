@@ -54,14 +54,14 @@ namespace ComicsShelf.UWP
          catch (Exception ex) { throw; }
       }
 
-      private async Task<Windows.Storage.StorageFile> GetStorageFile(ComicsShelf.Helpers.Settings.Settings settings, string libraryPath, string fullPath)
+      private async Task<Windows.Storage.StorageFile> GetStorageFile(string libraryPath, string fullPath)
       {
          try
          {
 
             // INITIALIZE
             var splitedPath = fullPath
-               .Split(new string[] { settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
+               .Split(new string[] { ComicsShelf.App.Settings.Paths.Separator }, StringSplitOptions.RemoveEmptyEntries);
 
             Windows.Storage.StorageFolder storageFolder = null;
             if (libraryPath.Contains(this.PathSeparator))
