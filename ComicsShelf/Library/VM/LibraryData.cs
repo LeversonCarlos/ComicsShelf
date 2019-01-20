@@ -1,11 +1,11 @@
 ﻿namespace ComicsShelf.Library
 {
-   public class LibraryDataItem : Helpers.Observables.ObservableObject
+   public class LibraryData : Helpers.Observables.ObservableObject
    {
 
       #region New
       internal vTwo.Libraries.Library Library { get; set; }
-      internal LibraryDataItem(vTwo.Libraries.Library _Library)
+      internal LibraryData(vTwo.Libraries.Library _Library)
       {
          this.Library = _Library;
          this._LibraryID = this.Library.LibraryID;

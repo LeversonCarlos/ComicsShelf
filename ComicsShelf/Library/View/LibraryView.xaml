@@ -17,7 +17,7 @@
          </StackLayout>
 
          <controls:RepeaterView 
-            ItemsSource="{Binding Libraries}" 
+            ItemsSource="{Binding Data}" 
             HorizontalOptions="FillAndExpand" Margin="40,0,40,0" Spacing="10" >
             <controls:RepeaterView.ItemTemplate>
                <DataTemplate>
@@ -33,6 +33,11 @@
                                  CommandParameter="{Binding .}">
                            </TapGestureRecognizer>
                         </Image.GestureRecognizers>
+                        <Image.BackgroundColor>
+                           <OnPlatform x:TypeArguments="Color">
+                              <On Platform="Android" Value="Silver"></On>
+                           </OnPlatform>
+                        </Image.BackgroundColor>
                         <Image.Source>
                            <OnPlatform x:TypeArguments="FileImageSource">
                               <On Platform="Android" Value="icon_Delete.png"></On>

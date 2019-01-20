@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.Helpers.Observables;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -6,7 +7,7 @@ using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Library
 {
-   public class LibraryVM : Helpers.DataVM<LibraryData>
+   public class LibraryVM : Helpers.DataVM<ObservableList<LibraryData>>
    {
 
       #region New
@@ -14,7 +15,6 @@ namespace ComicsShelf.Library
       {
          this.Title = R.Strings.LIBRARY_MAIN_TITLE; ;
          this.ViewType = typeof(LibraryView);
-         this.Data = new LibraryData();
          this.RefreshData();
          this.AddLibraryTappedCommand = new Command(async (item) => await this.AddLibraryTapped(item));
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
@@ -24,13 +24,11 @@ namespace ComicsShelf.Library
 
       #region Libraries
 
-      public Helpers.Observables.ObservableList<LibraryDataItem> Libraries { get; set; }
-
       private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
-         this.HasLibraries = this.Libraries.Count != 0;
+         this.HasLibraries = this.Data.Count != 0;
          // this.HasntLibraries = this.Libraries.Count == 0;
-         this.HasOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) != 0;
+         this.HasOneDriveLibrary = this.Data.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) != 0;
       }
 
       internal void RefreshData()
@@ -38,16 +36,16 @@ namespace ComicsShelf.Library
          try
          {
 
-            if (this.Libraries != null)
-            { this.Libraries.CollectionChanged -= this.Libraries_CollectionChanged; }
+            if (this.Data != null)
+            { this.Data.CollectionChanged -= this.Libraries_CollectionChanged; }
 
-            this.Libraries = new Helpers.Observables.ObservableList<LibraryDataItem>();
-            this.Libraries.CollectionChanged += this.Libraries_CollectionChanged;
+            this.Data = new Helpers.Observables.ObservableList<LibraryData>();
+            this.Data.CollectionChanged += this.Libraries_CollectionChanged;
 
             var libraries = App.Settings.Libraries
-               .Select(x => new LibraryDataItem(x))
+               .Select(x => new LibraryData(x))
                .AsEnumerable();
-            libraries.ForEach(library => this.Libraries.Add(library));
+            libraries.ForEach(library => this.Data.Add(library));
          }
          catch { }
       }
@@ -89,7 +87,7 @@ namespace ComicsShelf.Library
             // SAVE LIBRARY CONFIG
             App.Settings.Libraries.Add(library);
             await App.Settings.SaveLibraries();
-            this.Libraries.Add(new LibraryDataItem(library));
+            this.Data.Add(new LibraryData(library));
             this.RefreshData();
 
             // SCHEDULE LIBRARY REFRESH
@@ -107,11 +105,11 @@ namespace ComicsShelf.Library
       private async Task RemoveLibraryTapped(object item)
       {
          this.IsBusy = true;
-         await this.RemoveLibrary(item as LibraryDataItem);
+         await this.RemoveLibrary(item as LibraryData);
          this.IsBusy = false;
       }
 
-      internal async Task RemoveLibrary(LibraryDataItem item)
+      internal async Task RemoveLibrary(LibraryData item)
       {
          try
          {
@@ -148,7 +146,7 @@ namespace ComicsShelf.Library
             // REMOVE LIBRARY ITSELF
             App.Settings.Libraries.Remove(library);
             await App.Settings.SaveLibraries();
-            this.Libraries.Remove(item);
+            this.Data.Remove(item);
             this.RefreshData();
 
          }
