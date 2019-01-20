@@ -4,12 +4,13 @@ namespace ComicsShelf.Engine
 {
    internal abstract class BaseEngine : IDisposable
    {
-      protected Helpers.iFileSystem FileSystem { get; set; }
       protected BaseData Data { get; set; }
+      private string MessagePrefix { get; set; }
 
-      public BaseEngine()
+      public BaseEngine() : this("") { }
+      public BaseEngine(string messagePrefix)
       {
-         this.FileSystem = Helpers.FileSystem.Get();
+         this.MessagePrefix = messagePrefix;
          this.Data = new BaseData
          {
             Text = string.Empty,
@@ -36,14 +37,13 @@ namespace ComicsShelf.Engine
       }
 
       protected void Notify()
-      { Helpers.Controls.Messaging.Send(Helpers.Controls.Messaging.Keys.SearchEngine, this.Data); }
+      { Helpers.Controls.Messaging.Send(this.MessagePrefix, Helpers.Controls.Messaging.Keys.SearchEngine, this.Data); }
 
       public void Dispose()
       {
          this.Data.IsRunning = false;
          this.Notify();
          this.Data = null;
-         this.FileSystem = null;
       }
 
    }

@@ -13,6 +13,8 @@ namespace ComicsShelf.Views.Home
          this.NoComics = true;
 
          this.Libraries = new Helpers.Observables.ObservableList<LibraryData>();
+         this.Libraries.Add(new EmptyData());
+         this.Libraries.ObservableCollectionChanged += this.Libraries_CollectionChanged;
          this.Files.ObservableCollectionChanged += this.Files_CollectionChanged;
       }
       #endregion
@@ -58,7 +60,22 @@ namespace ComicsShelf.Views.Home
       #endregion
 
       #region Libraries
+
       public Helpers.Observables.ObservableList<LibraryData> Libraries { get; set; }
+
+      private void Libraries_CollectionChanged(object sender, System.EventArgs e)
+      {
+         if (this.Libraries.Count == 0)
+         { this.Libraries.Add(new EmptyData()); }
+         else {
+            if (this.Libraries.Count(x => x.IsEmptyPage == false) > 0) {
+               var empty = this.Libraries.Where(x => x.IsEmptyPage == true).FirstOrDefault();
+               if (empty != null)
+               { this.Libraries.Remove(empty); }
+            }
+         }
+      }
+
       #endregion
 
       #region CollectionChanged

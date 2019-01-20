@@ -16,10 +16,13 @@ namespace ComicsShelf.Helpers.Controls
       }
 
       public static void Send<T>(Keys message, T data)
+      { Send("", message, data); }
+
+      public static void Send<T>(string prefix, Keys message, T data)
       {
          Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
          {
-            MessagingCenter.Send<Application, T>(Application.Current, message.ToString(), data);
+            MessagingCenter.Send<Application, T>(Application.Current, $"{prefix}{message.ToString()}", data);
          });
       }
 
@@ -27,7 +30,10 @@ namespace ComicsShelf.Helpers.Controls
       { MessagingCenter.Subscribe<Application>(Application.Current, message.ToString(), callback); }
 
       public static void Subscribe<T>(Keys message, System.Action<T> callback)
-      { MessagingCenter.Subscribe<Application, T>(Application.Current, message.ToString(),  (app, data)=> { callback(data); }); }
+      { Subscribe("", message, callback); }
+
+      public static void Subscribe<T>(string prefix, Keys message, System.Action<T> callback)
+      { MessagingCenter.Subscribe<Application, T>(Application.Current, $"{prefix}{message.ToString()}", (app, data) => { callback(data); }); }
 
    }
 }

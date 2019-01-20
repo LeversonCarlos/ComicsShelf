@@ -14,7 +14,8 @@ namespace ComicsShelf.Views.Home
          this.Sections = new Helpers.Observables.ObservableList<Folder.FolderData>();
 
          this.NotifyData = new Engine.BaseData();
-         Helpers.Controls.Messaging.Subscribe<Engine.BaseData>(Helpers.Controls.Messaging.Keys.SearchEngine, this.OnNotifyDataChanged);
+         if (!string.IsNullOrEmpty(comicFolder.LibraryPath))
+         { Helpers.Controls.Messaging.Subscribe<Engine.BaseData>(comicFolder.LibraryPath, Helpers.Controls.Messaging.Keys.SearchEngine, this.OnNotifyDataChanged); }
       }
 
       public Helpers.Observables.ObservableList<Folder.FolderData> Sections { get; set; }
@@ -33,6 +34,13 @@ namespace ComicsShelf.Views.Home
          try
          { await Helpers.NavVM.PushAsync<Folder.FolderVM<Folder.FolderData>>((Folder.FolderData)item); }
          catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+      bool _IsEmptyPage;
+      public bool IsEmptyPage
+      {
+         get { return this._IsEmptyPage; }
+         set { this.SetProperty(ref this._IsEmptyPage, value); }
       }
 
       bool _IsFeaturedPage;

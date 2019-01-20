@@ -1,6 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engine
@@ -34,7 +32,8 @@ namespace ComicsShelf.Engine
          this.Notify(R.Strings.STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE);
          Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
          {
-            this.FileSystem.CheckPermissions(action, () => { Environment.Exit(0); });
+            var fileSystem = Helpers.FileSystem.Get();
+            fileSystem.CheckPermissions(action, () => { Environment.Exit(0); });
          });
       }
 
