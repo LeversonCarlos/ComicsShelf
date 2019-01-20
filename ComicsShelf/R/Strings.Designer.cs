@@ -187,7 +187,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Autorizar OneDrive Account.
+        ///   Looks up a localized string similar to Autorize OneDrive Account.
         /// </summary>
         internal static string LIBRARY_CONNECT_ONEDRIVE_COMMAND {
             get {
@@ -232,7 +232,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add folder for the Library.
+        ///   Looks up a localized string similar to Add folder to Library.
         /// </summary>
         internal static string LIBRARY_SELECT_FOLDER_COMMAND {
             get {

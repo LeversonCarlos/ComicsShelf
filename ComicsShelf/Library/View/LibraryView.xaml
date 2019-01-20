@@ -6,7 +6,7 @@
    x:Class="ComicsShelf.Library.LibraryView"
    x:Name="MyPage">
    <controls:BasePage.Content>
-      <StackLayout VerticalOptions="CenterAndExpand" >
+      <StackLayout VerticalOptions="StartAndExpand" Margin="0,40,0,0" Spacing="40" >
 
          <StackLayout Spacing="5">
             <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" 
@@ -16,35 +16,35 @@
                    HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
          </StackLayout>
 
-         <ListView ItemsSource="{Binding Libraries}" HasUnevenRows="True">
-            <ListView.ItemTemplate>
+         <controls:RepeaterView 
+            ItemsSource="{Binding Libraries}" 
+            HorizontalOptions="FillAndExpand" Margin="40,0,40,0" Spacing="5" >
+            <controls:RepeaterView.ItemTemplate>
                <DataTemplate>
-                  <ViewCell>
-                     <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding LibraryText}" 
+                  <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                     <Label Text="{Binding LibraryText}" 
                                HorizontalOptions="StartAndExpand" VerticalOptions="Center" 
                                FontSize="Medium" FontAttributes="Bold">
-                        </Label>
-                        <Image HorizontalOptions="End">
-                           <Image.GestureRecognizers>
-                              <TapGestureRecognizer 
+                     </Label>
+                     <Image HorizontalOptions="End" HeightRequest="20" Aspect="AspectFit">
+                        <Image.GestureRecognizers>
+                           <TapGestureRecognizer 
                                  Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
                                  CommandParameter="{Binding .}">
-                              </TapGestureRecognizer>
-                           </Image.GestureRecognizers>
-                           <Image.Source>
-                              <OnPlatform x:TypeArguments="FileImageSource">
-                                 <On Platform="Android" Value="icon_Library.png"></On>
-                                 <On Platform="IOS" Value="icon_Library.png"></On>
-                                 <On Platform="UWP" Value="Assets/icon_Delete.png"></On>
-                              </OnPlatform>
-                           </Image.Source>
-                        </Image>
-                     </StackLayout>
-                  </ViewCell>
+                           </TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                        <Image.Source>
+                           <OnPlatform x:TypeArguments="FileImageSource">
+                              <On Platform="Android" Value="icon_Delete.png"></On>
+                              <On Platform="IOS" Value="icon_Delete.png"></On>
+                              <On Platform="UWP" Value="Assets/icon_Delete.png"></On>
+                           </OnPlatform>
+                        </Image.Source>
+                     </Image>
+                  </StackLayout>
                </DataTemplate>
-            </ListView.ItemTemplate>
-         </ListView>
+            </controls:RepeaterView.ItemTemplate>
+         </controls:RepeaterView>
 
          <StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">

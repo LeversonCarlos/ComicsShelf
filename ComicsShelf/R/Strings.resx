@@ -160,7 +160,7 @@
     <value>Top Rated Comics</value>
   </data>
   <data name="LIBRARY_CONNECT_ONEDRIVE_COMMAND" xml:space="preserve">
-    <value>Autorizar OneDrive Account</value>
+    <value>Autorize OneDrive Account</value>
   </data>
   <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
     <value>This folder has no CBZ files. Choose a valid folder containing some comic book files on it.</value>
@@ -175,7 +175,7 @@
     <value>Remove</value>
   </data>
   <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
-    <value>Add folder for the Library</value>
+    <value>Add folder to Library</value>
   </data>
   <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
     <value>You may legally and freely download some public domain comics on the the following site</value>
