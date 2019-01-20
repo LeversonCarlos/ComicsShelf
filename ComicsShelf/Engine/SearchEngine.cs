@@ -31,7 +31,6 @@ namespace ComicsShelf.Engine
 
       #endregion
 
-
       #region Execute
       public static async Task Execute(vTwo.Libraries.Library library, bool deepSearch)
       {
@@ -44,7 +43,7 @@ namespace ComicsShelf.Engine
             AppCenter.TrackEvent($"{searchTitle}: Initialize");
 
             // EXECUTE
-            using (var engine = new Search { library = library })
+            using (var engine = new Search(library))
             {
                await engine.InitializeData();
                if (deepSearch) { await engine.SearchComicFiles(); }
@@ -61,6 +60,14 @@ namespace ComicsShelf.Engine
          }
          catch (Exception ex) { AppCenter.TrackEvent(searchTitle, ex); await App.ShowMessage(ex); }
          finally { GC.Collect(); }
+      }
+      #endregion
+
+
+      #region Constructor
+      public Search(vTwo.Libraries.Library library) : base(library.LibraryID)
+      {
+         this.library = library;
       }
       #endregion
 

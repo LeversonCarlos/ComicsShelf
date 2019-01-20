@@ -42,12 +42,12 @@
                </controls:RepeaterView.ItemTemplate>
             </controls:RepeaterView>
 
-            <StackLayout IsVisible="{Binding IsFeaturedPage}" >
-               <controls:EngineProgressView
-                  IsVisible="{Binding NotifyData.IsRunning}" 
-                  Text="{Binding NotifyData.Text}" Progress="{Binding NotifyData.Progress}" Details="{Binding NotifyData.Details}" >
-               </controls:EngineProgressView>
-            </StackLayout>
+            <controls:EngineProgressView
+               IsVisible="{Binding NotifyData.IsRunning}" 
+               Text="{Binding NotifyData.Text}" 
+               Progress="{Binding NotifyData.Progress}" 
+               Details="{Binding NotifyData.Details}" >
+            </controls:EngineProgressView>
 
             <controls:EmptyLibraryView IsVisible="{Binding IsEmptyPage}" ></controls:EmptyLibraryView>
 
