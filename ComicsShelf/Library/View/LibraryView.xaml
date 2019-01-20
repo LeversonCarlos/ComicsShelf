@@ -6,41 +6,57 @@
    x:Class="ComicsShelf.Library.LibraryView"
    x:Name="MyPage">
    <controls:BasePage.Content>
-      <StackLayout VerticalOptions="CenterAndExpand" Spacing="40" >
+      <StackLayout VerticalOptions="CenterAndExpand" >
 
          <StackLayout Spacing="5">
-            <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" HorizontalOptions="Center" FontSize="Large" />
-            <Label Text="{controls:Translate Text=LIBRARY_UNDEFINED_FOLDER_MESSAGE}" IsVisible="{Binding Data.HasntLibraries}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-            <controls:PrimaryButton Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" Command="{Binding AddLibraryTappedCommand}" HorizontalOptions="Center" />
-            <controls:PrimaryButton Text="{controls:Translate Text=LIBRARY_CONNECT_ONEDRIVE_COMMAND}" Command="{Binding AddOneDriveLibraryCommand}" HorizontalOptions="Center" />
+            <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" 
+                   HorizontalOptions="Center" FontSize="Large" />
+            <Label Text="{controls:Translate Text=LIBRARY_UNDEFINED_FOLDER_MESSAGE}" 
+                   IsVisible="{Binding HasLibraries, Converter={StaticResource notConverter}}" 
+                   HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
          </StackLayout>
 
-         <controls:RepeaterView ItemsSource="{Binding Data.Libraries}" HorizontalOptions="CenterAndExpand" Spacing="5" >
-            <controls:RepeaterView.ItemTemplate>
+         <ListView ItemsSource="{Binding Libraries}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
                <DataTemplate>
-                  <Frame>
-                     <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="20,0" Spacing="20" >
-                        <Label Text="{Binding LibraryText}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="Medium" FontAttributes="Bold"></Label>
-                        <controls:PrimaryButton 
-                           Text="{controls:Translate Text=LIBRARY_REMOVE_LIBRARY_COMMAND}" 
-                           Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
-                           CommandParameter="{Binding .}"
-                           HorizontalOptions="End" FontSize="Small" >
-                        </controls:PrimaryButton>
+                  <ViewCell>
+                     <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding LibraryText}" 
+                               HorizontalOptions="StartAndExpand" VerticalOptions="Center" 
+                               FontSize="Medium" FontAttributes="Bold">
+                        </Label>
+                        <Image HorizontalOptions="End">
+                           <Image.GestureRecognizers>
+                              <TapGestureRecognizer 
+                                 Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
+                                 CommandParameter="{Binding .}">
+                              </TapGestureRecognizer>
+                           </Image.GestureRecognizers>
+                           <Image.Source>
+                              <OnPlatform x:TypeArguments="FileImageSource">
+                                 <On Platform="Android" Value="icon_Library.png"></On>
+                                 <On Platform="IOS" Value="icon_Library.png"></On>
+                                 <On Platform="UWP" Value="Assets/icon_Delete.png"></On>
+                              </OnPlatform>
+                           </Image.Source>
+                        </Image>
                      </StackLayout>
-                  </Frame>
+                  </ViewCell>
                </DataTemplate>
-            </controls:RepeaterView.ItemTemplate>
-         </controls:RepeaterView>
-         <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            </ListView.ItemTemplate>
+         </ListView>
 
-         <StackLayout Spacing="5" >
-            <Label Text="{controls:Translate Text=LIBRARY_SUGGESTION_MESSAGE}" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Micro" />
-            <Label Text="www.comicbookplus.com" HorizontalOptions="Center" FontSize="Micro" FontAttributes="Bold" TextColor="{StaticResource colorAccent}" >
-               <Label.GestureRecognizers>
-                  <TapGestureRecognizer Command="{Binding LinkTappedCommand}" />
-               </Label.GestureRecognizers>
-            </Label>
+         <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+               <controls:PrimaryButton 
+                  Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" 
+                  Command="{Binding AddLibraryTappedCommand}" />
+               <controls:PrimaryButton 
+                  Text="{controls:Translate Text=LIBRARY_CONNECT_ONEDRIVE_COMMAND}" 
+                  IsEnabled="{Binding HasOneDriveLibrary, Converter={StaticResource notConverter}}" 
+                  Command="{Binding AddOneDriveLibraryCommand}" />
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
          </StackLayout>
 
       </StackLayout>
