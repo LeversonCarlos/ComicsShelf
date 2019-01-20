@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Xamarin.OneDrive.Profile;
 
 namespace ComicsShelf.Library.Implementation
@@ -8,7 +9,11 @@ namespace ComicsShelf.Library.Implementation
 
       public async Task<bool> Validate(vTwo.Libraries.Library library)
       {
-         library.Available = await this.Connector.ConnectAsync();
+         try
+         {
+            library.Available = await this.Connector.ConnectAsync();
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.Validate", ex); library.Available = false; }
          return library.Available;
       }
 
