@@ -10,11 +10,17 @@ then
     exit
 fi
 
+echo "defining versionBuild"
+versionBuild = `printf "%03d" $APPCENTER_BUILD_ID`;
+echo $versionBuild
+
 ANDROID_MANIFEST_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf.Android/Properties/AndroidManifest.xml
 if [ -e "$ANDROID_MANIFEST_FILE" ]
 then
     echo "Updating applicationID to $ComicsShelfApplicationID in AndroidManifest.xml"
     sed -i '' 's/{YOUR_MICROSOFT_APPLICATION_ID}/'$ComicsShelfApplicationID'/' $ANDROID_MANIFEST_FILE
+    sed -i '' 's/versionCode="[0-9.]*"/&$versionBuild"/' $ANDROID_MANIFEST_FILE
+    sed -i '' 's/versionName="[0-9.]*"/&.$versionBuild"/' $ANDROID_MANIFEST_FILE
 fi
 echo "ANDROID_MANIFEST_FILE CONTENT:"
 cat $ANDROID_MANIFEST_FILE

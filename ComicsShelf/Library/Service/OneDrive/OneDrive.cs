@@ -8,7 +8,7 @@
       public OneDrive()
       {
          this.FileSystem = Helpers.FileSystem.Get();
-         var clientID = System.Environment.GetEnvironmentVariable("ComicsShelfApplicationID");
+         var clientID = "{YOUR_MICROSOFT_APPLICATION_ID}";
          this.Connector = new Xamarin.OneDrive.Connector(clientID, "User.Read", "Files.Read");
       }
 

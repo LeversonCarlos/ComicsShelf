@@ -444,32 +444,7 @@ namespace ComicsShelf.Engine
       #endregion
 
       #region ExtractData
-
       private async Task ExtractData(List<Views.File.FileData> fileList)
-      {
-         try
-         {
-
-            if (this.library.CancellationTokenSource != null)
-            {
-               this.library.CancellationTokenSource.Cancel();
-               this.library.CancellationTokenSource.Dispose();
-               this.library.CancellationTokenSource = null;
-            }
-
-            this.library.CancellationTokenSource = new System.Threading.CancellationTokenSource();
-            var token = this.library.CancellationTokenSource.Token;
-
-            await Task.Factory.StartNew(async () => { await this.ExtractingData(fileList, token); }, token);
-
-            this.library.CancellationTokenSource.Dispose();
-            this.library.CancellationTokenSource = null;
-
-         }
-         catch (Exception) { throw; }
-      }
-
-      private async Task ExtractingData(List<Views.File.FileData> fileList, System.Threading.CancellationToken token)
       {
          try
          {
@@ -480,7 +455,6 @@ namespace ComicsShelf.Engine
             {
                try
                {
-                  if (token.IsCancellationRequested) { break; }
                   var fileData = fileList[fileIndex];
                   var progress = ((double)fileIndex / (double)filesQuantity);
                   this.Notify(fileData.FullText, progress);
