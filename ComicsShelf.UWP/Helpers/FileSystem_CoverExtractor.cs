@@ -29,10 +29,6 @@ namespace ComicsShelf.UWP
                      .Take(1)
                      .FirstOrDefault();
 
-                  // RELEASE DATE
-                  comicFile.ReleaseDate = database.GetDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
-                  await Task.Run(() => database.Update(comicFile));
-
                   // OPEN STREAM
                   using (var zipEntryStream = zipEntry.Open())
                   {
@@ -40,6 +36,11 @@ namespace ComicsShelf.UWP
                      zipEntryStream.Close();
                      zipEntryStream.Dispose();
                   }
+
+                  // RELEASE DATE
+                  System.IO.File.SetLastWriteTime(comicFile.CoverPath, zipEntry.LastWriteTime.DateTime.ToLocalTime());
+                  comicFile.ReleaseDate = database.GetDate(zipEntry.LastWriteTime.DateTime.ToLocalTime());
+                  await Task.Run(() => database.Update(comicFile));
 
                   zipArchive.Dispose();
                }

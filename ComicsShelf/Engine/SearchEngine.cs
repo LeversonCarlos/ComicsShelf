@@ -163,7 +163,6 @@ namespace ComicsShelf.Engine
             {
                foreach (var comicFile in comicFiles)
                {
-                  comicFile.ReleaseDate = App.Database.GetDate(DateTime.Now.ToLocalTime());
                   this.ComicFiles.Add(comicFile);
                   App.Database.Insert(comicFile);
                }
@@ -398,6 +397,17 @@ namespace ComicsShelf.Engine
                   {
                      fileData.CoverPath = fileData.ComicFile.CoverPath;
                      this.ApplyFolderData(fileData);
+                     try
+                     {
+                        if (string.IsNullOrEmpty(fileData.ComicFile.ReleaseDate))
+                        {
+                           var coverDate = System.IO.File.GetLastWriteTime(fileData.ComicFile.CoverPath);
+                           fileData.ComicFile.ReleaseDate = App.Database.GetDate(coverDate);
+                           App.Database.Update(fileData.ComicFile);
+                        }
+                     }
+                     catch { }
+
                   }
                }
             });
