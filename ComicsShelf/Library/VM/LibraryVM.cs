@@ -149,6 +149,7 @@ namespace ComicsShelf.Library
             App.Settings.Libraries.Remove(library);
             await App.Settings.SaveLibraries();
             this.Libraries.Remove(item);
+            this.RefreshData();
 
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("RemoveLibrary", ex); await App.ShowMessage(ex); }

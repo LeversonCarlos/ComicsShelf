@@ -18,7 +18,7 @@
 
          <controls:RepeaterView 
             ItemsSource="{Binding Libraries}" 
-            HorizontalOptions="FillAndExpand" Margin="40,0,40,0" Spacing="5" >
+            HorizontalOptions="FillAndExpand" Margin="40,0,40,0" Spacing="10" >
             <controls:RepeaterView.ItemTemplate>
                <DataTemplate>
                   <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
