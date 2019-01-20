@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Library
 {
@@ -14,12 +15,45 @@ namespace ComicsShelf.Library
          this.Title = R.Strings.LIBRARY_MAIN_TITLE; ;
          this.ViewType = typeof(LibraryView);
          this.Data = new LibraryData();
+         this.RefreshData();
          this.AddLibraryTappedCommand = new Command(async (item) => await this.AddLibraryTapped(item));
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
          this.AddOneDriveLibraryCommand = new Command(async (item) => await this.AddOneDriveLibrary(item));
-         this.LinkTappedCommand = new Command(async (item) => await this.LinkTapped(item));
       }
       #endregion
+
+      #region Libraries
+
+      public Helpers.Observables.ObservableList<LibraryDataItem> Libraries { get; set; }
+
+      private void Libraries_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+      {
+         this.HasLibraries = this.Libraries.Count != 0;
+         // this.HasntLibraries = this.Libraries.Count == 0;
+         this.HasOneDriveLibrary = this.Libraries.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) != 0;
+      }
+
+      internal void RefreshData()
+      {
+         try
+         {
+
+            if (this.Libraries != null)
+            { this.Libraries.CollectionChanged -= this.Libraries_CollectionChanged; }
+
+            this.Libraries = new Helpers.Observables.ObservableList<LibraryDataItem>();
+            this.Libraries.CollectionChanged += this.Libraries_CollectionChanged;
+
+            var libraries = App.Settings.Libraries
+               .Select(x => new LibraryDataItem(x))
+               .AsEnumerable();
+            libraries.ForEach(library => this.Libraries.Add(library));
+         }
+         catch { }
+      }
+
+      #endregion
+
 
       #region AddLibrary 
 
@@ -55,15 +89,11 @@ namespace ComicsShelf.Library
             // SAVE LIBRARY CONFIG
             App.Settings.Libraries.Add(library);
             await App.Settings.SaveLibraries();
-            this.Data.Libraries.Add(new LibraryDataItem(library));
+            this.Libraries.Add(new LibraryDataItem(library));
+            this.RefreshData();
 
             // SCHEDULE LIBRARY REFRESH
             Engine.Search.Refresh(library);
-
-            /*
-            if (this.Data.Libraries.Count == 1)
-            { await Helpers.NavVM.PushAsync<Views.Home.HomeVM>(true, App.HomeData); }
-            */
 
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("AddLibrary", ex); await App.ShowMessage(ex); }
@@ -118,7 +148,7 @@ namespace ComicsShelf.Library
             // REMOVE LIBRARY ITSELF
             App.Settings.Libraries.Remove(library);
             await App.Settings.SaveLibraries();
-            this.Data.Libraries.Remove(item);
+            this.Libraries.Remove(item);
 
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("RemoveLibrary", ex); await App.ShowMessage(ex); }
@@ -126,13 +156,22 @@ namespace ComicsShelf.Library
 
       #endregion
 
-      #region LinkTapped
-      public Command LinkTappedCommand { get; set; }
-      private async Task LinkTapped(object item)
+
+      #region HasLibraries
+      bool _HasLibraries;
+      public bool HasLibraries
       {
-         try
-         { Device.OpenUri(new Uri("http://www.comicbookplus.com")); }
-         catch (Exception ex) { await App.ShowMessage(ex); }
+         get { return this._HasLibraries; }
+         set { this.SetProperty(ref this._HasLibraries, value); }
+      }
+      #endregion
+
+      #region HasOneDriveLibrary
+      bool _HasOneDriveLibrary;
+      public bool HasOneDriveLibrary
+      {
+         get { return this._HasOneDriveLibrary; }
+         set { this.SetProperty(ref this._HasOneDriveLibrary, value); }
       }
       #endregion
 
