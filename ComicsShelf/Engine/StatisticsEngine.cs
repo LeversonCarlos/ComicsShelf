@@ -7,18 +7,30 @@ namespace ComicsShelf.Engine
    {
 
       #region Execute
-      public static async void Execute()
+      public static async void Execute(vTwo.Libraries.Library library)
       {
          try
          {
-            using (var engine = new Statistics())
+            using (var engine = new Statistics(library))
             {
                engine.RecentFiles();
-               engine.TopRatedFiles();
                engine.ReadingFiles();
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+      #endregion
+
+
+      #region Constructor
+      private vTwo.Libraries.Library library { get; set; }
+      private Views.Home.LibraryData libraryData { get; set; }
+      public Statistics(vTwo.Libraries.Library library)
+      {
+         this.library = library;
+         this.libraryData = App.HomeData.Libraries
+            .Where(x => x.ComicFolder.LibraryPath == this.library.LibraryID)
+            .FirstOrDefault();
       }
       #endregion
 
@@ -38,60 +50,16 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            var recentFiles = App.HomeData.Files
+            var recentFiles = this.libraryData.Files
                .Where(x => !string.IsNullOrEmpty(x.ComicFile.ReleaseDate))
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .Take(5)
                .ToList();
-            if (this.HasChanged(App.HomeData.RecentFiles, recentFiles))
-            { App.HomeData.RecentFiles.ReplaceRange(recentFiles); }
-         }
-         catch (Exception) { throw; }
-      }
-      #endregion
-
-      #region TopRatedFiles
-      private void TopRatedFiles()
-      {
-         try
-         {
-
-            // GET ALL RATED FILES
-            var allRatedFiles = App.HomeData.Files
-               .Where(x => x.ComicFile.Rating > 0)
-               .ToList();
-
-            // GROUP FILES WITH ITS AVERAGE RATING
-            var groupFiles = allRatedFiles
-               .GroupBy(x => x.ComicFile.ParentPath)
-               .Select(x => new
-               {
-                  ParentPath = x.Key,
-                  Rating = x.Average(g => (double)g.ComicFile.Rating)
-               })
-               .ToList();
-
-            // TOP RATED FILES
-            var topRatedFiles = allRatedFiles
-               .Select(x => new
-               {
-                  File = x,
-                  GroupRating = groupFiles
-                     .Where(g => g.ParentPath == x.ComicFile.ParentPath)
-                     .Select(g => g.Rating)
-                     .FirstOrDefault()
-               })
-               .OrderByDescending(x => x.GroupRating)
-               .ThenByDescending(x => x.File.ComicFile.Rating)
-               .ThenByDescending(x => x.File.ComicFile.ReadingDate)
-               .Select(x => x.File)
-               .Take(10)
-               .ToList();
-
-            // APPLY
-            if (this.HasChanged(App.HomeData.TopRatedFiles, topRatedFiles))
-            { App.HomeData.TopRatedFiles.ReplaceRange(topRatedFiles); }
-
+            if (this.HasChanged(this.libraryData.RecentFiles.Files, recentFiles))
+            {
+               this.libraryData.RecentFiles.Files.ReplaceRange(recentFiles);
+               this.libraryData.RecentFiles.HasFiles = this.libraryData.RecentFiles.Files.Count != 0;
+            }
          }
          catch (Exception) { throw; }
       }
@@ -104,14 +72,14 @@ namespace ComicsShelf.Engine
          {
 
             // GET LAST 10 OPENED FILES
-            var openedFiles = App.HomeData.Files
+            var openedFiles = this.libraryData.Files
                .Where(x => x.ComicFile.ReadingPercent > 0.0 && x.ComicFile.ReadingPercent < 1.0)
                .OrderByDescending(x => x.ComicFile.ReadingDate)
                .Take(10)
                .ToList();
 
             // GET ALL READED FILES
-            var readedFiles = App.HomeData.Files
+            var readedFiles = this.libraryData.Files
                .Where(x => x.ComicFile.ReadingPercent == 1.0)
                .ToList();
 
@@ -132,7 +100,7 @@ namespace ComicsShelf.Engine
 
             // FROM THAT, TAKE THE NEXT FILE FOR EACH GROUP
             var readedNextFiles = readedFiles
-               .Select(x => App.HomeData.Files
+               .Select(x => this.libraryData.Files
                   .Where(f => f.ComicFile.ParentPath == x.ComicFile.ParentPath)
                   .Where(f => String.Compare(f.ComicFile.FullPath, x.ComicFile.FullPath) > 0)
                   .OrderBy(f => f.ComicFile.FullPath)
@@ -154,8 +122,11 @@ namespace ComicsShelf.Engine
                .ToList();
 
             // APPLY
-            if (this.HasChanged(App.HomeData.ReadingFiles, readingFiles))
-            { App.HomeData.ReadingFiles.ReplaceRange(readingFiles); }
+            if (this.HasChanged(this.libraryData.ReadingFiles.Files, readingFiles))
+            {
+               this.libraryData.ReadingFiles.Files.ReplaceRange(readingFiles);
+               this.libraryData.ReadingFiles.HasFiles = this.libraryData.ReadingFiles.Files.Count != 0;
+            }
 
          }
          catch (Exception) { throw; }

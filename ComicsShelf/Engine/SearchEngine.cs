@@ -51,6 +51,7 @@ namespace ComicsShelf.Engine
                await engine.ExtractAlreadyExistingData();
                if (deepSearch) { await engine.ExtractFeaturedData(); }
                if (deepSearch) { await engine.ExtractRemainingData(); }
+               Engine.Statistics.Execute(library);
             }
 
             // TRACK
@@ -325,6 +326,7 @@ namespace ComicsShelf.Engine
             // REMOVE NOEXISTING SECTIONS
             comicKeys = comicSections.Select(x => x.Key).ToList();
             var dataSections = this.libraryData.Sections
+               .Where(x => !x.ComicFolder.Key.StartsWith("FEATURED_"))
                .Where(x => !comicKeys.Contains(x.ComicFolder.Key))
                .ToList();
             foreach (var dataSection in dataSections)
@@ -395,6 +397,17 @@ namespace ComicsShelf.Engine
                   {
                      fileData.CoverPath = fileData.ComicFile.CoverPath;
                      this.ApplyFolderData(fileData);
+                     try
+                     {
+                        if (string.IsNullOrEmpty(fileData.ComicFile.ReleaseDate))
+                        {
+                           var coverDate = System.IO.File.GetLastWriteTime(fileData.ComicFile.CoverPath);
+                           fileData.ComicFile.ReleaseDate = App.Database.GetDate(coverDate);
+                           App.Database.Update(fileData.ComicFile);
+                        }
+                     }
+                     catch { }
+
                   }
                }
             });
@@ -411,9 +424,8 @@ namespace ComicsShelf.Engine
 
             // FEATURED FILES
             this.Notify(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
-            var fileList = App.HomeData.ReadingFiles
-               .Union(App.HomeData.RecentFiles)
-               .Union(App.HomeData.TopRatedFiles)
+            var fileList = this.libraryData.ReadingFiles.Files
+               .Union(this.libraryData.RecentFiles.Files)
                .Where(x => x.ComicFile.LibraryPath == this.library.LibraryID)
                .Where(x => string.IsNullOrEmpty(x.CoverPath))
                .ToList();
