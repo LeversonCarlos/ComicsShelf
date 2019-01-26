@@ -53,14 +53,14 @@
          </StackLayout>
 
          <ListView 
-            VerticalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" HasUnevenRows="True"
             IsVisible="{Binding HasLibraries}" 
             ItemsSource="{Binding Data}">
             <ListView.ItemTemplate>
                <DataTemplate>
                   <ViewCell>
                      <StackLayout Margin="20" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20" >
-                        <Image HorizontalOptions="Start" HeightRequest="50" Aspect="AspectFit" Source="{Binding LibraryImage}" >
+                        <Image HorizontalOptions="Start" HeightRequest="50" Source="{Binding LibraryImage}" >
                         </Image>
                         <Label 
                            Text="{Binding LibraryText}" 
