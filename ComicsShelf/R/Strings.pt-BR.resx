@@ -141,14 +141,11 @@
   <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
     <value>Todos os Quadrinhos</value>
   </data>
+  <data name="HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
+    <value>Use o botão superior direito para definir bibliotecas contendo alguns arquivos CBZ.</value>
+  </data>
   <data name="HOME_LIBRARY_MENU" xml:space="preserve">
     <value>Biblioteca</value>
-  </data>
-  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
-    <value>Use o botão superior direito para selecionar uma pasta no seu dispositivo contendo alguns arquivos CBZ.</value>
-  </data>
-  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE" xml:space="preserve">
-    <value>Nenhum arquivo de quadrinhos foi encontrado no dispositivo</value>
   </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Lendo</value>
@@ -159,8 +156,11 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Melhor Qualificado</value>
   </data>
-  <data name="LIBRARY_EMPTY_MESSAGE" xml:space="preserve">
-    <value>Como esta é a sua primeira vez aqui, você NÃO tem BIBLIOTECA definida ainda. Clique nos botões acima para adicionar uma pasta LOCAL ou em seu ONEDRIVE que contenha arquivos de quadrinhos (aqueles com a extensão CBZ).</value>
+  <data name="LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
+    <value>Clique nos botões acima para adicionar uma pasta LOCAL ou do ONEDRIVE que contenha seus arquivos de quadrinhos (aqueles com a extensão CBZ).</value>
+  </data>
+  <data name="LIBRARY_EMPTY_MESSAGE_TITLE" xml:space="preserve">
+    <value>Você não tem uma biblioteca definida ainda.</value>
   </data>
   <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
     <value>Essa pasta não possui arquivos CBZ. Escolha uma pasta válida que contenha alguns arquivos de quadrinhos dentro dela.</value>

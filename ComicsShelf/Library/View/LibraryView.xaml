@@ -33,14 +33,24 @@
    </controls:BasePage.ToolbarItems>
    <controls:BasePage.Content>
 
-      <StackLayout VerticalOptions="FillAndExpand">
+      <StackLayout VerticalOptions="Center">
 
-         <Label 
-            Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE}" 
+         <StackLayout Padding="20, 0, 20, 60"
             IsVisible="{Binding HasLibraries, Converter={StaticResource notConverter}}" 
-            VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
-            HorizontalOptions="Center" HorizontalTextAlignment="Center" 
-            FontAttributes="Bold" />
+            VerticalOptions="FillAndExpand" HorizontalOptions="Center" >
+            <Label 
+               Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE_TITLE}" 
+               VerticalOptions="CenterAndExpand"
+               VerticalTextAlignment="Center" HorizontalTextAlignment="Center" 
+               FontSize="Large" FontAttributes="Bold" TextColor="Accent" >
+            </Label>
+            <Label 
+               Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS}" 
+               VerticalOptions="CenterAndExpand"
+               VerticalTextAlignment="Center" HorizontalTextAlignment="Center" 
+               TextColor="Accent">
+            </Label>
+         </StackLayout>
 
          <ListView 
             VerticalOptions="FillAndExpand"
