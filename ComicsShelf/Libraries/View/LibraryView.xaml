@@ -52,6 +52,7 @@
             </Label>
          </StackLayout>
 
+         <ActivityIndicator IsRunning="{Binding IsBusy}" />
          <ListView 
             VerticalOptions="FillAndExpand" HasUnevenRows="True"
             IsVisible="{Binding HasLibraries}" 
