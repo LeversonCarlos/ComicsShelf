@@ -33,12 +33,13 @@
    </controls:BasePage.ToolbarItems>
    <controls:BasePage.Content>
 
-      <StackLayout VerticalOptions="FillAndExpand" >
+      <StackLayout VerticalOptions="FillAndExpand">
 
          <Label 
             Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE}" 
             IsVisible="{Binding HasLibraries, Converter={StaticResource notConverter}}" 
-            VerticalOptions="FillAndExpand" HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+            VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
+            HorizontalOptions="Center" HorizontalTextAlignment="Center" 
             FontAttributes="Bold" />
 
          <ListView 
@@ -49,14 +50,7 @@
                <DataTemplate>
                   <ViewCell>
                      <StackLayout Margin="20" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20" >
-                        <Image HorizontalOptions="Start" HeightRequest="50" Aspect="AspectFit">
-                           <Image.Source>
-                              <OnPlatform x:TypeArguments="FileImageSource">
-                                 <On Platform="Android" Value="icon_OneDrive_Black.png"></On>
-                                 <On Platform="IOS" Value="icon_OneDrive_Black.png"></On>
-                                 <On Platform="UWP" Value="Assets/icon_OneDrive_Black.png"></On>
-                              </OnPlatform>
-                           </Image.Source>
+                        <Image HorizontalOptions="Start" HeightRequest="50" Aspect="AspectFit" Source="{Binding LibraryImage}" >
                         </Image>
                         <Label 
                            Text="{Binding LibraryText}" 

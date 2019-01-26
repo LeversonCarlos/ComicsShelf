@@ -172,10 +172,10 @@
     <value>Biblioteca</value>
   </data>
   <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
-    <value>+ Pasta Local</value>
+    <value>Adicionar Pasta</value>
   </data>
   <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
-    <value>+ Pasta do OneDrive</value>
+    <value>Adicionar OneDrive</value>
   </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remover</value>

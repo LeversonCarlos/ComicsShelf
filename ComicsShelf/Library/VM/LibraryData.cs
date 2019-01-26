@@ -54,7 +54,6 @@
       }
       #endregion
 
-      /*
       #region LibraryImage
       public string LibraryImage
       {
@@ -66,11 +65,10 @@
             if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.UWP)
             { libraryImage = $"Assets/{libraryImage}"; }
 
-            return libraryImage
+            return $"{libraryImage}.png";
          }
       }
       #endregion
-   */
 
    }
 }

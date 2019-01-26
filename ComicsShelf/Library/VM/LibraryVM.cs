@@ -15,7 +15,14 @@ namespace ComicsShelf.Library
       {
          this.Title = R.Strings.LIBRARY_MAIN_TITLE; ;
          this.ViewType = typeof(LibraryView);
-         this.RefreshData();
+
+         this.Data = new Helpers.Observables.ObservableList<LibraryData>();
+         this.Data.CollectionChanged += this.Libraries_CollectionChanged;
+         var libraries = App.Settings.Libraries
+            .Select(x => new LibraryData(x))
+            .AsEnumerable();
+         libraries.ForEach(library => this.Data.Add(library));
+
          this.AddLibraryTappedCommand = new Command(async (item) => await this.AddLibraryTapped(item));
          this.RemoveLibraryTappedCommand = new Command(async (item) => await this.RemoveLibraryTapped(item));
          this.AddOneDriveLibraryCommand = new Command(async (item) => await this.AddOneDriveLibrary(item));
@@ -29,25 +36,6 @@ namespace ComicsShelf.Library
          this.HasLibraries = this.Data.Count != 0;
          // this.HasntLibraries = this.Libraries.Count == 0;
          this.HasOneDriveLibrary = this.Data.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) != 0;
-      }
-
-      internal void RefreshData()
-      {
-         try
-         {
-
-            if (this.Data != null)
-            { this.Data.CollectionChanged -= this.Libraries_CollectionChanged; }
-
-            this.Data = new Helpers.Observables.ObservableList<LibraryData>();
-            this.Data.CollectionChanged += this.Libraries_CollectionChanged;
-
-            var libraries = App.Settings.Libraries
-               .Select(x => new LibraryData(x))
-               .AsEnumerable();
-            libraries.ForEach(library => this.Data.Add(library));
-         }
-         catch { }
       }
 
       #endregion
@@ -88,7 +76,6 @@ namespace ComicsShelf.Library
             App.Settings.Libraries.Add(library);
             await App.Settings.SaveLibraries();
             this.Data.Add(new LibraryData(library));
-            this.RefreshData();
 
             // SCHEDULE LIBRARY REFRESH
             Engine.Search.Refresh(library);
@@ -147,7 +134,6 @@ namespace ComicsShelf.Library
             App.Settings.Libraries.Remove(library);
             await App.Settings.SaveLibraries();
             this.Data.Remove(item);
-            this.RefreshData();
 
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("RemoveLibrary", ex); await App.ShowMessage(ex); }

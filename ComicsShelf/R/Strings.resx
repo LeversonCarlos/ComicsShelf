@@ -172,10 +172,10 @@
     <value>Library</value>
   </data>
   <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
-    <value>+ Local Folder</value>
+    <value>Add Folder</value>
   </data>
   <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
-    <value>+ OneDrive Folder</value>
+    <value>Add OneDrive</value>
   </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remove</value>
