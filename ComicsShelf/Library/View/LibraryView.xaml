@@ -60,14 +60,14 @@
                <DataTemplate>
                   <ViewCell>
                      <StackLayout Margin="20" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20" >
-                        <Image HorizontalOptions="Start" HeightRequest="50" Source="{Binding LibraryImage}" >
+                        <Image HorizontalOptions="Start" Source="{Binding LibraryImage}" >
                         </Image>
                         <Label 
                            Text="{Binding LibraryText}" 
                            VerticalTextAlignment="Center"
                            HorizontalOptions="StartAndExpand">
                         </Label>
-                        <Image HorizontalOptions="End" HeightRequest="20" Aspect="AspectFit">
+                        <Image HorizontalOptions="End" >
                            <Image.GestureRecognizers>
                               <TapGestureRecognizer 
                                  Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
