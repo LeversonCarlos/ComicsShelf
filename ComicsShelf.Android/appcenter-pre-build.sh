@@ -10,7 +10,11 @@ then
     exit
 fi
 
-echo "defining versionBuild"
+echo "APPCENTER_BUILD_ID:"
+echo $APPCENTER_BUILD_ID
+echo "BuildCounter:"
+echo $BuildCounter
+echo "versionBuild:"
 printf -v versionBuild "%03d" $APPCENTER_BUILD_ID
 echo $versionBuild
 
@@ -21,6 +25,8 @@ then
     sed -i '' 's/versionCode="[0-9.]*/&'$versionBuild'/' $ANDROID_MANIFEST_FILE
     sed -i '' 's/versionName="[0-9.]*/&.'$versionBuild'/' $ANDROID_MANIFEST_FILE
 fi
+echo "ANDROID_MANIFEST_FILE:"
+echo $ANDROID_MANIFEST_FILE
 echo "ANDROID_MANIFEST_FILE CONTENT:"
 cat $ANDROID_MANIFEST_FILE
 
