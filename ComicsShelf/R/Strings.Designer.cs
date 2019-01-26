@@ -133,29 +133,20 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use the upper right button to define libraries containing some CBZ files..
+        /// </summary>
+        internal static string HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS {
+            get {
+                return ResourceManager.GetString("HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Library.
         /// </summary>
         internal static string HOME_LIBRARY_MENU {
             get {
                 return ResourceManager.GetString("HOME_LIBRARY_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use the upper right button to select a folder on your device containing some CBZ files..
-        /// </summary>
-        internal static string HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS {
-            get {
-                return ResourceManager.GetString("HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No comic file was found on device.
-        /// </summary>
-        internal static string HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE", resourceCulture);
             }
         }
         
@@ -187,11 +178,20 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Autorizar OneDrive Account.
+        ///   Looks up a localized string similar to Click on the buttons above to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension)..
         /// </summary>
-        internal static string LIBRARY_CONNECT_ONEDRIVE_COMMAND {
+        internal static string LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS {
             get {
-                return ResourceManager.GetString("LIBRARY_CONNECT_ONEDRIVE_COMMAND", resourceCulture);
+                return ResourceManager.GetString("LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You dont have a library defined yet..
+        /// </summary>
+        internal static string LIBRARY_EMPTY_MESSAGE_TITLE {
+            get {
+                return ResourceManager.GetString("LIBRARY_EMPTY_MESSAGE_TITLE", resourceCulture);
             }
         }
         
@@ -223,38 +223,29 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Folder.
+        /// </summary>
+        internal static string LIBRARY_NEW_LOCAL_FOLDER_COMMAND {
+            get {
+                return ResourceManager.GetString("LIBRARY_NEW_LOCAL_FOLDER_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add OneDrive.
+        /// </summary>
+        internal static string LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND {
+            get {
+                return ResourceManager.GetString("LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         internal static string LIBRARY_REMOVE_LIBRARY_COMMAND {
             get {
                 return ResourceManager.GetString("LIBRARY_REMOVE_LIBRARY_COMMAND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add folder for the Library.
-        /// </summary>
-        internal static string LIBRARY_SELECT_FOLDER_COMMAND {
-            get {
-                return ResourceManager.GetString("LIBRARY_SELECT_FOLDER_COMMAND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You may legally and freely download some public domain comics on the the following site.
-        /// </summary>
-        internal static string LIBRARY_SUGGESTION_MESSAGE {
-            get {
-                return ResourceManager.GetString("LIBRARY_SUGGESTION_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (those files with the CBZ extension)..
-        /// </summary>
-        internal static string LIBRARY_UNDEFINED_FOLDER_MESSAGE {
-            get {
-                return ResourceManager.GetString("LIBRARY_UNDEFINED_FOLDER_MESSAGE", resourceCulture);
             }
         }
         

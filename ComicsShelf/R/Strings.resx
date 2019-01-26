@@ -141,14 +141,11 @@
   <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
     <value>All Comics</value>
   </data>
+  <data name="HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
+    <value>Use the upper right button to define libraries containing some CBZ files.</value>
+  </data>
   <data name="HOME_LIBRARY_MENU" xml:space="preserve">
     <value>Library</value>
-  </data>
-  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_INSTRUCTIONS" xml:space="preserve">
-    <value>Use the upper right button to select a folder on your device containing some CBZ files.</value>
-  </data>
-  <data name="HOME_NO_COMIC_FILE_FOUND_ON_DEVICE_TITLE" xml:space="preserve">
-    <value>No comic file was found on device</value>
   </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Reading</value>
@@ -159,8 +156,11 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Top Rated Comics</value>
   </data>
-  <data name="LIBRARY_CONNECT_ONEDRIVE_COMMAND" xml:space="preserve">
-    <value>Autorizar OneDrive Account</value>
+  <data name="LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
+    <value>Click on the buttons above to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension).</value>
+  </data>
+  <data name="LIBRARY_EMPTY_MESSAGE_TITLE" xml:space="preserve">
+    <value>You dont have a library defined yet.</value>
   </data>
   <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
     <value>This folder has no CBZ files. Choose a valid folder containing some comic book files on it.</value>
@@ -171,17 +171,14 @@
   <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
     <value>Library</value>
   </data>
+  <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
+    <value>Add Folder</value>
+  </data>
+  <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
+    <value>Add OneDrive</value>
+  </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remove</value>
-  </data>
-  <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
-    <value>Add folder for the Library</value>
-  </data>
-  <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
-    <value>You may legally and freely download some public domain comics on the the following site</value>
-  </data>
-  <data name="LIBRARY_UNDEFINED_FOLDER_MESSAGE" xml:space="preserve">
-    <value>As this is your first time here, you have NO LIBRARY defined yet. Click the button bellow and SELECT A FOLDER on your device that contains your comic book files (those files with the CBZ extension).</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Loading current database data</value>

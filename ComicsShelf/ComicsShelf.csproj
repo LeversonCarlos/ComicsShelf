@@ -44,7 +44,7 @@
     <Compile Update="Views\Home\LibraryPage.xaml.cs">
       <DependentUpon>LibraryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Library\View\LibraryView.xaml.cs">
+    <Compile Update="Libraries\View\LibraryView.xaml.cs">
       <DependentUpon>LibraryView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Home\HomeView.xaml.cs">
@@ -71,9 +71,5 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="vTwo\Libraries\Engine\" />
   </ItemGroup>
 </Project>
