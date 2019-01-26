@@ -5,65 +5,86 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Library.LibraryView"
    x:Name="MyPage">
+   <controls:BasePage.ToolbarItems>
+      <ToolbarItem 
+         Order="Primary" 
+         Text="{controls:Translate Text=LIBRARY_NEW_LOCAL_FOLDER_COMMAND}" 
+         Command="{Binding AddLibraryTappedCommand}" >
+         <ToolbarItem.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource">
+               <On Platform="Android" Value="icon_Folder_White.png"></On>
+               <On Platform="IOS" Value="icon_Folder_White.png"></On>
+               <On Platform="UWP" Value="Assets/icon_Folder_White.png"></On>
+            </OnPlatform>
+         </ToolbarItem.Icon>
+      </ToolbarItem>
+      <ToolbarItem 
+         Order="Primary" 
+         Text="{controls:Translate Text=LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND}" 
+         Command="{Binding AddOneDriveLibraryCommand}" >
+         <ToolbarItem.Icon>
+            <OnPlatform x:TypeArguments="FileImageSource">
+               <On Platform="Android" Value="icon_OneDrive_White.png"></On>
+               <On Platform="IOS" Value="icon_OneDrive_White.png"></On>
+               <On Platform="UWP" Value="Assets/icon_OneDrive_White.png"></On>
+            </OnPlatform>
+         </ToolbarItem.Icon>
+      </ToolbarItem>
+   </controls:BasePage.ToolbarItems>
    <controls:BasePage.Content>
-      <StackLayout VerticalOptions="StartAndExpand" Margin="0,40,0,0" Spacing="40" >
 
-         <StackLayout Spacing="5">
-            <Label Text="{controls:Translate Text=LIBRARY_MAIN_LABEL}" 
-                   HorizontalOptions="Center" FontSize="Large" />
-            <Label Text="{controls:Translate Text=LIBRARY_UNDEFINED_FOLDER_MESSAGE}" 
-                   IsVisible="{Binding HasLibraries, Converter={StaticResource notConverter}}" 
-                   HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-         </StackLayout>
+      <StackLayout VerticalOptions="FillAndExpand" >
 
-         <controls:RepeaterView 
-            ItemsSource="{Binding Data}" 
-            HorizontalOptions="FillAndExpand" Margin="40,0,40,0" Spacing="10" >
-            <controls:RepeaterView.ItemTemplate>
+         <Label 
+            Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE}" 
+            IsVisible="{Binding HasLibraries, Converter={StaticResource notConverter}}" 
+            VerticalOptions="FillAndExpand" HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+            FontAttributes="Bold" />
+
+         <ListView 
+            VerticalOptions="FillAndExpand"
+            IsVisible="{Binding HasLibraries}" 
+            ItemsSource="{Binding Data}">
+            <ListView.ItemTemplate>
                <DataTemplate>
-                  <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
-                     <Label Text="{Binding LibraryText}" 
-                               HorizontalOptions="StartAndExpand" VerticalOptions="Center" 
-                               FontSize="Medium" FontAttributes="Bold">
-                     </Label>
-                     <Image HorizontalOptions="End" HeightRequest="20" Aspect="AspectFit">
-                        <Image.GestureRecognizers>
-                           <TapGestureRecognizer 
+                  <ViewCell>
+                     <StackLayout Margin="20" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20" >
+                        <Image HorizontalOptions="Start" HeightRequest="50" Aspect="AspectFit">
+                           <Image.Source>
+                              <OnPlatform x:TypeArguments="FileImageSource">
+                                 <On Platform="Android" Value="icon_OneDrive_Black.png"></On>
+                                 <On Platform="IOS" Value="icon_OneDrive_Black.png"></On>
+                                 <On Platform="UWP" Value="Assets/icon_OneDrive_Black.png"></On>
+                              </OnPlatform>
+                           </Image.Source>
+                        </Image>
+                        <Label 
+                           Text="{Binding LibraryText}" 
+                           VerticalTextAlignment="Center"
+                           HorizontalOptions="StartAndExpand">
+                        </Label>
+                        <Image HorizontalOptions="End" HeightRequest="20" Aspect="AspectFit">
+                           <Image.GestureRecognizers>
+                              <TapGestureRecognizer 
                                  Command="{Binding BindingContext.RemoveLibraryTappedCommand, Source={x:Reference MyPage}}"
                                  CommandParameter="{Binding .}">
-                           </TapGestureRecognizer>
-                        </Image.GestureRecognizers>
-                        <Image.BackgroundColor>
-                           <OnPlatform x:TypeArguments="Color">
-                              <On Platform="Android" Value="Silver"></On>
-                           </OnPlatform>
-                        </Image.BackgroundColor>
-                        <Image.Source>
-                           <OnPlatform x:TypeArguments="FileImageSource">
-                              <On Platform="Android" Value="icon_Delete.png"></On>
-                              <On Platform="IOS" Value="icon_Delete.png"></On>
-                              <On Platform="UWP" Value="Assets/icon_Delete.png"></On>
-                           </OnPlatform>
-                        </Image.Source>
-                     </Image>
-                  </StackLayout>
+                              </TapGestureRecognizer>
+                           </Image.GestureRecognizers>
+                           <Image.Source>
+                              <OnPlatform x:TypeArguments="FileImageSource">
+                                 <On Platform="Android" Value="icon_Delete.png"></On>
+                                 <On Platform="IOS" Value="icon_Delete.png"></On>
+                                 <On Platform="UWP" Value="Assets/icon_Delete.png"></On>
+                              </OnPlatform>
+                           </Image.Source>
+                        </Image>
+                     </StackLayout>
+                  </ViewCell>
                </DataTemplate>
-            </controls:RepeaterView.ItemTemplate>
-         </controls:RepeaterView>
-
-         <StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-               <controls:PrimaryButton 
-                  Text="{controls:Translate Text=LIBRARY_SELECT_FOLDER_COMMAND}" 
-                  Command="{Binding AddLibraryTappedCommand}" />
-               <controls:PrimaryButton 
-                  Text="{controls:Translate Text=LIBRARY_CONNECT_ONEDRIVE_COMMAND}" 
-                  IsEnabled="{Binding HasOneDriveLibrary, Converter={StaticResource notConverter}}" 
-                  Command="{Binding AddOneDriveLibraryCommand}" />
-            </StackLayout>
-            <ActivityIndicator IsRunning="{Binding IsBusy}" />
-         </StackLayout>
+            </ListView.ItemTemplate>
+         </ListView>
 
       </StackLayout>
+
    </controls:BasePage.Content>
 </controls:BasePage>

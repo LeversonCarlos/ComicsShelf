@@ -54,5 +54,23 @@
       }
       #endregion
 
+      /*
+      #region LibraryImage
+      public string LibraryImage
+      {
+         get {
+            var libraryImage = "icon_Folder_Black";
+            if (this.LibraryType == vTwo.Libraries.TypeEnum.OneDrive)
+            { libraryImage = "icon_OneDrive_Black"; }
+
+            if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.UWP)
+            { libraryImage = $"Assets/{libraryImage}"; }
+
+            return libraryImage
+         }
+      }
+      #endregion
+   */
+
    }
 }

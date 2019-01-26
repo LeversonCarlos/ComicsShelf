@@ -159,8 +159,8 @@
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
     <value>Melhor Qualificado</value>
   </data>
-  <data name="LIBRARY_CONNECT_ONEDRIVE_COMMAND" xml:space="preserve">
-    <value>Autorizar conta do OneDrive</value>
+  <data name="LIBRARY_EMPTY_MESSAGE" xml:space="preserve">
+    <value>Como esta é a sua primeira vez aqui, você NÃO tem BIBLIOTECA definida ainda. Clique nos botões acima para adicionar uma pasta LOCAL ou em seu ONEDRIVE que contenha arquivos de quadrinhos (aqueles com a extensão CBZ).</value>
   </data>
   <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
     <value>Essa pasta não possui arquivos CBZ. Escolha uma pasta válida que contenha alguns arquivos de quadrinhos dentro dela.</value>
@@ -171,17 +171,14 @@
   <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
     <value>Biblioteca</value>
   </data>
+  <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
+    <value>+ Pasta Local</value>
+  </data>
+  <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
+    <value>+ Pasta do OneDrive</value>
+  </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remover</value>
-  </data>
-  <data name="LIBRARY_SELECT_FOLDER_COMMAND" xml:space="preserve">
-    <value>Adicionar pasta na Biblioteca</value>
-  </data>
-  <data name="LIBRARY_SUGGESTION_MESSAGE" xml:space="preserve">
-    <value>Você pode gratuita e legalmente baixar alguns quadrinhos de domínio público no site a seguir</value>
-  </data>
-  <data name="LIBRARY_UNDEFINED_FOLDER_MESSAGE" xml:space="preserve">
-    <value>Como esta é a sua primeira vez aqui, você NÃO tem BIBLIOTECA definida ainda. Clique no botão abaixo e SELECIONE UMA PASTA no seu dispositivo que contenha seus arquivos de quadrinhos (aqueles arquivos com a extensão CBZ).</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Carregando dados da base de dados</value>
