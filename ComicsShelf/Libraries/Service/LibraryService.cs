@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ComicsShelf.Library
+namespace ComicsShelf.Libraries
 {
    internal class LibraryService
    {

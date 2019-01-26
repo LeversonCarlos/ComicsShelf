@@ -91,7 +91,7 @@ namespace ComicsShelf.Engine
             var librariesChanged = false;
             foreach (var library in App.Settings.Libraries)
             {
-               var libraryService = Library.LibraryService.Get(library);
+               var libraryService = Libraries.LibraryService.Get(library);
                var previousState = library.Available;
                await libraryService.Validate(library);
                if (library.Available != previousState)

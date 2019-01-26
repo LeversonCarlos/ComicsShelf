@@ -7,7 +7,7 @@ namespace ComicsShelf.Engine
    {
 
       #region Execute
-      public static async void Execute(Library.Library library)
+      public static async void Execute(Libraries.Library library)
       {
          try
          {
@@ -23,9 +23,9 @@ namespace ComicsShelf.Engine
 
 
       #region Constructor
-      private Library.Library library { get; set; }
+      private Libraries.Library library { get; set; }
       private Views.Home.LibraryData libraryData { get; set; }
-      public Statistics(Library.Library library)
+      public Statistics(Libraries.Library library)
       {
          this.library = library;
          this.libraryData = App.HomeData.Libraries

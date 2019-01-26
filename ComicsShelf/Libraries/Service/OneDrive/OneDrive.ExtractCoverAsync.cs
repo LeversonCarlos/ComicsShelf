@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.OneDrive.Files;
 
-namespace ComicsShelf.Library.Implementation
+namespace ComicsShelf.Libraries.Implementation
 {
    partial class OneDrive
    {

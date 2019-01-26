@@ -55,7 +55,7 @@ namespace ComicsShelf.Views.File
             var library = App.Settings.Libraries
                .Where(x => x.LibraryID == this.Data.ComicFile.LibraryPath)
                .FirstOrDefault();
-            var libraryService = Library.LibraryService.Get(library);
+            var libraryService = Libraries.LibraryService.Get(library);
             await libraryService.ExtractPagesAsync(library, this.Data);
             this.Data.TotalPages = (short)this.Data.Pages.Count;
             this.Data.Pages.Add(new PageData { });

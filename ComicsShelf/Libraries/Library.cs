@@ -1,4 +1,4 @@
-﻿namespace ComicsShelf.Library
+﻿namespace ComicsShelf.Libraries
 {
    public enum TypeEnum : short { FileSystem = 0, OneDrive = 1 }
 

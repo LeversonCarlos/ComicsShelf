@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ComicsShelf.Library.Implementation
+namespace ComicsShelf.Libraries.Implementation
 {
    partial class FileSystemService
    {

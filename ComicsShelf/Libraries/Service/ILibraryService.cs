@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Library
+namespace ComicsShelf.Libraries
 {
    internal interface ILibraryService
    {

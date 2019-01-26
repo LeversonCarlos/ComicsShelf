@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.OneDrive.Profile;
 
-namespace ComicsShelf.Library.Implementation
+namespace ComicsShelf.Libraries.Implementation
 {
    partial class OneDrive
    {

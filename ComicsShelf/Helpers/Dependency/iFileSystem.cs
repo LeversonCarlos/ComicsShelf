@@ -13,7 +13,7 @@ namespace ComicsShelf.Helpers
       string GetCachePath();
       string GetDataPath();
 
-      Task<bool> ValidateLibraryPath(Library.Library library);
+      Task<bool> ValidateLibraryPath(Libraries.Library library);
       Task<string> GetLibraryPath();
 
       Task<string[]> GetFiles(string path);

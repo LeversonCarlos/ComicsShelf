@@ -1,4 +1,4 @@
-﻿namespace ComicsShelf.Library.Implementation
+﻿namespace ComicsShelf.Libraries.Implementation
 {
    internal partial class OneDrive : ILibraryService
    {

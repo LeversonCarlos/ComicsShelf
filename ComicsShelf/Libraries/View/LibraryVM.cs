@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace ComicsShelf.Library
+namespace ComicsShelf.Libraries
 {
    public class LibraryVM : Helpers.DataVM<ObservableList<LibraryData>>
    {

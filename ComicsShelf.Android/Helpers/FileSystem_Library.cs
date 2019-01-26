@@ -5,7 +5,7 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task<bool> ValidateLibraryPath(Library.Library library)
+      public async Task<bool> ValidateLibraryPath(Libraries.Library library)
       {
          library.Available = false;
          if (string.IsNullOrEmpty(library.LibraryID)) { return false; }

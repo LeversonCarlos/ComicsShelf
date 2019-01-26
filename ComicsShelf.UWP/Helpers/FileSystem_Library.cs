@@ -8,7 +8,7 @@ namespace ComicsShelf.UWP
    partial class FileSystem
    {
 
-      public async Task<bool> ValidateLibraryPath(Library.Library library)
+      public async Task<bool> ValidateLibraryPath(Libraries.Library library)
       {
          if (string.IsNullOrEmpty(library.LibraryID)) { return false; }
          Windows.Storage.StorageFolder folder = null;
