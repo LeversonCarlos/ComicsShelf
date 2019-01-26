@@ -7,7 +7,7 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task<bool> Validate(vTwo.Libraries.Library library)
+      public async Task<bool> Validate(Library library)
       {
          try
          {
@@ -17,7 +17,7 @@ namespace ComicsShelf.Library.Implementation
          return library.Available;
       }
 
-      public async Task<bool> AddLibrary(vTwo.Libraries.Library library)
+      public async Task<bool> AddLibrary(Library library)
       {
          if (!await this.Connector.ConnectAsync()) { return false; }
          var profile = await this.Connector.GetProfileAsync();
@@ -28,7 +28,7 @@ namespace ComicsShelf.Library.Implementation
          return true;
       }
 
-      public async Task<bool> RemoveLibrary(vTwo.Libraries.Library library)
+      public async Task<bool> RemoveLibrary(Library library)
       {
          return await this.Connector.DisconnectAsync();
       }

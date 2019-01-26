@@ -9,7 +9,7 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(vTwo.Libraries.Library library)
+      public async Task<List<Helpers.Database.ComicFile>> SearchFilesAsync(Library library)
       {
          try
          {

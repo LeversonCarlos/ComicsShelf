@@ -23,7 +23,7 @@ namespace ComicsShelf.Engine
          }
       }
 
-      public static async void Refresh(vTwo.Libraries.Library library)
+      public static async void Refresh(Library.Library library)
       {
          await Search.Execute(library, false);
          await Task.Factory.StartNew(async () => await Search.Execute(library, true), TaskCreationOptions.LongRunning);
@@ -32,7 +32,7 @@ namespace ComicsShelf.Engine
       #endregion
 
       #region Execute
-      public static async Task Execute(vTwo.Libraries.Library library, bool deepSearch)
+      public static async Task Execute(Library.Library library, bool deepSearch)
       {
          var searchTitle = (deepSearch ? "DeepSearch" : "Search");
          try
@@ -66,14 +66,14 @@ namespace ComicsShelf.Engine
 
 
       #region Constructor
-      public Search(vTwo.Libraries.Library library) : base(library.LibraryID)
+      public Search(Library.Library library) : base(library.LibraryID)
       {
          this.library = library;
       }
       #endregion
 
       #region Properties
-      private vTwo.Libraries.Library library { get; set; }
+      private Library.Library library { get; set; }
       private Views.Home.LibraryData libraryData { get; set; }
       private Library.ILibraryService libraryService { get; set; }
       private List<Helpers.Database.ComicFile> ComicFiles { get; set; }

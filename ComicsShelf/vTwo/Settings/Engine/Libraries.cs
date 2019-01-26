@@ -5,12 +5,12 @@ namespace ComicsShelf.vTwo.Settings
 {
    partial class Engine
    {
-      public List<Libraries.Library> Libraries { get; set; }
+      public List<Library.Library> Libraries { get; set; }
 
       private async void InitializeLibraries()
       {
-         this.Libraries = await Helpers.FileStream.ReadFile<List<Libraries.Library>>(this.Paths.SettingsPath);
-         if (this.Libraries == null) { this.Libraries = new List<Libraries.Library>(); }
+         this.Libraries = await Helpers.FileStream.ReadFile<List<Library.Library>>(this.Paths.SettingsPath);
+         if (this.Libraries == null) { this.Libraries = new List<Library.Library>(); }
       }
 
       internal async Task<bool> SaveLibraries()

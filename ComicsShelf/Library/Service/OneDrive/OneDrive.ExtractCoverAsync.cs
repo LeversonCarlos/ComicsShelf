@@ -8,7 +8,7 @@ namespace ComicsShelf.Library.Implementation
    partial class OneDrive
    {
 
-      public async Task<bool> ExtractCoverAsync(vTwo.Libraries.Library library, Helpers.Database.ComicFile comicFile)
+      public async Task<bool> ExtractCoverAsync(Library library, Helpers.Database.ComicFile comicFile)
       {
          try
          {

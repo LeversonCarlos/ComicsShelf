@@ -35,7 +35,7 @@ namespace ComicsShelf.Library
       {
          this.HasLibraries = this.Data.Count != 0;
          // this.HasntLibraries = this.Libraries.Count == 0;
-         this.HasOneDriveLibrary = this.Data.Count(x => x.LibraryType == vTwo.Libraries.TypeEnum.OneDrive) != 0;
+         this.HasOneDriveLibrary = this.Data.Count(x => x.LibraryType == TypeEnum.OneDrive) != 0;
       }
 
       #endregion
@@ -47,7 +47,7 @@ namespace ComicsShelf.Library
       private async Task AddLibraryTapped(object item)
       {
          this.IsBusy = true;
-         await this.AddLibrary(vTwo.Libraries.TypeEnum.FileSystem);
+         await this.AddLibrary(TypeEnum.FileSystem);
          this.IsBusy = false;
       }
 
@@ -55,17 +55,17 @@ namespace ComicsShelf.Library
       private async Task AddOneDriveLibrary(object item)
       {
          this.IsBusy = true;
-         await this.AddLibrary(vTwo.Libraries.TypeEnum.OneDrive);
+         await this.AddLibrary(TypeEnum.OneDrive);
          this.IsBusy = false;
       }
 
-      private async Task AddLibrary(vTwo.Libraries.TypeEnum libraryType)
+      private async Task AddLibrary(TypeEnum libraryType)
       {
          try
          {
 
             // INITIALIZE
-            var library = new vTwo.Libraries.Library { Type = libraryType };
+            var library = new Library { Type = libraryType };
 
             // USE SERVICE IMPLEMENTATION
             var libraryService = LibraryService.Get(library);

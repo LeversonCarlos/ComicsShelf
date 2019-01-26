@@ -4,8 +4,8 @@
    {
 
       #region New
-      internal vTwo.Libraries.Library Library { get; set; }
-      internal LibraryData(vTwo.Libraries.Library _Library)
+      internal Library Library { get; set; }
+      internal LibraryData(Library _Library)
       {
          this.Library = _Library;
          this._LibraryID = this.Library.LibraryID;
@@ -41,8 +41,8 @@
       #endregion
 
       #region LibraryType
-      vTwo.Libraries.TypeEnum _LibraryType;
-      public vTwo.Libraries.TypeEnum LibraryType
+      TypeEnum _LibraryType;
+      public TypeEnum LibraryType
       {
          get { return this._LibraryType; }
          set
@@ -59,7 +59,7 @@
       {
          get {
             var libraryImage = "icon_Folder_Black";
-            if (this.LibraryType == vTwo.Libraries.TypeEnum.OneDrive)
+            if (this.LibraryType == TypeEnum.OneDrive)
             { libraryImage = "icon_OneDrive_Black"; }
 
             if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.UWP)
