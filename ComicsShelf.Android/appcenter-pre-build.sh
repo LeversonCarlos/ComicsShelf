@@ -8,8 +8,6 @@ then
     exit
 fi
 
-echo "BuildCounter:"
-echo $BuildCounter
 echo "versionBuild:"
 printf -v versionBuild "%03d" $APPCENTER_BUILD_ID
 echo $versionBuild
