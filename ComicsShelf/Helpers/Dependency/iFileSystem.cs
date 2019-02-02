@@ -24,7 +24,6 @@ namespace ComicsShelf.Helpers
 
       Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
 
-      void CheckPermissions(Action grantedCallback, Action revokedCallback);
    }
 
    public class FileSystem

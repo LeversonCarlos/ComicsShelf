@@ -38,7 +38,7 @@ namespace ComicsShelf.Droid
       {
          try
          {
-            using (var folderDialog = new FolderDialog(Xamarin.Forms.Forms.Context))
+            using (var folderDialog = new FolderDialog(Plugin.CurrentActivity.CrossCurrentActivity.Current.AppContext))
             {
 
                if (string.IsNullOrEmpty(initialPath))
