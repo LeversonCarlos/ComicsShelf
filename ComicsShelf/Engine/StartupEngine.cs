@@ -13,28 +13,14 @@ namespace ComicsShelf.Engine
             AppCenter.Initialize();
             var engine = new Startup();
             {
-               engine.CheckPermissions(
-                  async () =>
-                  {
-                     engine.Initialize();
-                     await engine.LoadSettings();
-                     await engine.LoadDatabase();
-                     await engine.ShowHomeView();
-                     await engine.InitializeLibrary();
-                  });
+               engine.Initialize();
+               await engine.LoadSettings();
+               await engine.LoadDatabase();
+               await engine.ShowHomeView();
+               await engine.InitializeLibrary();
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
-      }
-
-      private void CheckPermissions(Action action)
-      {
-         this.Notify(R.Strings.STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE);
-         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-         {
-            var fileSystem = Helpers.FileSystem.Get();
-            fileSystem.CheckPermissions(action, () => { Environment.Exit(0); });
-         });
       }
 
       private void Initialize()
@@ -93,9 +79,8 @@ namespace ComicsShelf.Engine
             {
                var libraryService = Libraries.LibraryService.Get(library);
                var previousState = library.Available;
-               await libraryService.Validate(library);
-               if (library.Available != previousState)
-               { librariesChanged=true; }
+               if (await libraryService.Validate(library) != previousState)
+               { librariesChanged = true; }
             }
             if (librariesChanged)
             { await App.Settings.SaveLibraries(); }

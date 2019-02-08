@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using System;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Libraries.Implementation
 {
@@ -7,7 +10,13 @@ namespace ComicsShelf.Libraries.Implementation
 
       public async Task<bool> Validate(Library library)
       {
-         return await this.FileSystem.ValidateLibraryPath(library);
+         try
+         {
+            if (!await Helpers.Permissions.HasStoragePermission()) { return false; }
+            if (!await this.FileSystem.ValidateLibraryPath(library)) { return false; }
+            return true;
+         }
+         catch (Exception) { throw; }
       }
 
       public async Task<bool> AddLibrary(Library library)
