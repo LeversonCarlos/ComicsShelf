@@ -14,6 +14,21 @@ printf -v versionBuild "%03d" $APPCENTER_BUILD_ID
 echo $versionBuild
 
 
+# ONEDRIVE FILE
+echo "ONEDRIVE_FILE:"
+ONEDRIVE_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf/Libraries/Service/OneDrive/OneDrive.cs
+echo $ONEDRIVE_FILE
+
+if [ -e "$ANDROID_MANIFEST_FILE" ]
+then
+    sed -i '' 's/{YOUR_MICROSOFT_APPLICATION_ID}/'$ComicsShelfApplicationID'/' $ONEDRIVE_FILE
+
+    echo "ONEDRIVE_FILE CONTENT:"
+    cat $ONEDRIVE_FILE
+fi
+
+
+# ANDROID MANIFEST FILE
 echo "ANDROID_MANIFEST_FILE:"
 ANDROID_MANIFEST_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf.Android/Properties/AndroidManifest.xml
 echo $ANDROID_MANIFEST_FILE
@@ -29,6 +44,7 @@ then
 fi
 
 
+# INFO PLIST FILE
 echo "INFO_PLIST_FILE:"
 INFO_PLIST_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf.iOS/Info.plist
 echo $INFO_PLIST_FILE
