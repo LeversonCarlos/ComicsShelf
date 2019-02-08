@@ -19,7 +19,7 @@ echo "ONEDRIVE_FILE:"
 ONEDRIVE_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf/Libraries/Service/OneDrive/OneDrive.cs
 echo $ONEDRIVE_FILE
 
-if [ -e "$ANDROID_MANIFEST_FILE" ]
+if [ -e "$ONEDRIVE_FILE" ]
 then
     sed -i '' 's/{YOUR_MICROSOFT_APPLICATION_ID}/'$ComicsShelfApplicationID'/' $ONEDRIVE_FILE
 
