@@ -22,7 +22,7 @@ namespace ComicsShelf.UWP
 
             return await this.GetFiles(folder);
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
       private async Task<string[]> GetFiles(Windows.Storage.StorageFolder folder)
@@ -51,7 +51,7 @@ namespace ComicsShelf.UWP
             return fileArray;
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
       private async Task<Windows.Storage.StorageFile> GetStorageFile(string libraryPath, string fullPath)
@@ -82,7 +82,7 @@ namespace ComicsShelf.UWP
             // RESULT
             return storageFile;
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }

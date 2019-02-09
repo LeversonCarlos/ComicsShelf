@@ -11,13 +11,14 @@ namespace ComicsShelf.Droid
       {
          try
          {
-            var fileList = System.IO.Directory
+            var fileListQuery = System.IO.Directory
                .EnumerateFiles(path, "*.*", System.IO.SearchOption.AllDirectories)
                .Where(x =>
-                  x.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase) 
-            /* || x.EndsWith(".cbr", StringComparison.OrdinalIgnoreCase) */
+                  x.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase)
+                  /* || x.EndsWith(".cbr", StringComparison.OrdinalIgnoreCase) */
                )
-               .ToList();
+               .AsQueryable();
+            var fileList = await Task.FromResult(fileListQuery.ToList());
 
             var folderPath = $"{path}{this.PathSeparator}";
             var fileListRenamed = fileList
@@ -27,7 +28,7 @@ namespace ComicsShelf.Droid
             var fileArray = fileListRenamed.ToArray();
             return fileArray;
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }

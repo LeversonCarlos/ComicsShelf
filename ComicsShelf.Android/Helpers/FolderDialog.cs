@@ -119,7 +119,7 @@ namespace ComicsShelf.Droid
 
             return true;
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
@@ -133,7 +133,7 @@ namespace ComicsShelf.Droid
             await Task.Run(() => { _autoResetEvent.WaitOne(); });
             return (!string.IsNullOrEmpty(this.ResultPath));
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 

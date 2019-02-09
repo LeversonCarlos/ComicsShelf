@@ -29,7 +29,7 @@ namespace ComicsShelf.Libraries.Implementation
 
       public async Task<bool> RemoveLibrary(Library library)
       {
-         return true;
+         return await Task.FromResult(true);
       }
 
    }
