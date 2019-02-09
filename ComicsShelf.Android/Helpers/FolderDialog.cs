@@ -38,7 +38,7 @@ namespace ComicsShelf.Droid
       {
          try
          {
-            using (var folderDialog = new FolderDialog(Plugin.CurrentActivity.CrossCurrentActivity.Current.AppContext))
+            using (var folderDialog = new FolderDialog(Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity))
             {
 
                if (string.IsNullOrEmpty(initialPath))
@@ -52,7 +52,7 @@ namespace ComicsShelf.Droid
                return folderDialog.ResultPath;
             }
          }
-         catch (Exception ex) { return string.Empty; }
+         catch (Exception ) { throw; }
       }
       #endregion
 
@@ -119,7 +119,7 @@ namespace ComicsShelf.Droid
 
             return true;
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 
@@ -133,7 +133,7 @@ namespace ComicsShelf.Droid
             await Task.Run(() => { _autoResetEvent.WaitOne(); });
             return (!string.IsNullOrEmpty(this.ResultPath));
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
       #endregion
 

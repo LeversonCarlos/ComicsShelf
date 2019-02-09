@@ -42,7 +42,7 @@ namespace ComicsShelf.UWP
             return folderToken;
 
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }
