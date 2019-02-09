@@ -24,6 +24,8 @@ namespace ComicsShelf.Helpers
 
       Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
 
+      Task<bool> SaveDataAsync(Libraries.Library library, byte[] serializedData);
+
    }
 
    public class FileSystem

@@ -37,16 +37,28 @@ namespace ComicsShelf.vTwo.Helpers
          catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
       }
 
+      public static byte[] Serialize<T>(T value)
+      {
+         try
+         {
+            if (value == null) { return null; }
+
+            var serializedContent = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            if (string.IsNullOrEmpty(serializedContent)) { return null; }
+
+            byte[] encodedContent = System.Text.Encoding.Unicode.GetBytes(serializedContent);
+            if (encodedContent == null || encodedContent.Length == 0) { return null; }
+
+            return encodedContent;
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.SaveFile", ex); return null; }
+      }
+
       public static async Task<bool> SaveFile<T>(string path, T value)
       {
          try
          {
-            if (value == null) { return false; }
-
-            var serializedContent = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-            if (string.IsNullOrEmpty(serializedContent)) { return false; }
-
-            byte[] encodedContent = System.Text.Encoding.Unicode.GetBytes(serializedContent);
+            var encodedContent = Serialize(value);
             if (encodedContent == null || encodedContent.Length == 0) { return false; }
 
             using (var fileStream = new System.IO.FileStream(path,
