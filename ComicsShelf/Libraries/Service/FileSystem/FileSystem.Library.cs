@@ -1,6 +1,4 @@
-﻿using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Libraries.Implementation
@@ -21,8 +19,12 @@ namespace ComicsShelf.Libraries.Implementation
 
       public async Task<bool> AddLibrary(Library library)
       {
-         library.LibraryID = await this.FileSystem.GetLibraryPath();
-         return await this.Validate(library);
+         try
+         {
+            library.LibraryID = await this.FileSystem.GetLibraryPath();
+            return await this.Validate(library);
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("FileSystemService.AddLibrary", ex); return false; }
       }
 
       public async Task<bool> RemoveLibrary(Library library)
