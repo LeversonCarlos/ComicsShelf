@@ -20,5 +20,19 @@ namespace ComicsShelf.Droid
          catch (Exception) { throw; }
       }
 
+      public async Task<byte[]> LoadDataAsync(Libraries.Library library)
+      {
+         try
+         {
+            var libraryDataPath = $"{library.LibraryID}{this.PathSeparator}ComicsShelf.config";
+            if (!System.IO.File.Exists(libraryDataPath)) { return null; }
+
+            byte[] serializedData = null;
+            await Task.Run(() => serializedData = System.IO.File.ReadAllBytes(libraryDataPath));
+            return serializedData;
+         }
+         catch (Exception) { throw; }
+      }
+
    }
 }

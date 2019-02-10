@@ -8,6 +8,27 @@ namespace ComicsShelf.vTwo.Helpers
    internal class FileStream
    {
 
+      public static T Deserialize<T>(byte[] value) where T : class
+      {
+         try
+         {
+            var serializedContent = System.Text.Encoding.Unicode.GetString(value);
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(serializedContent);
+            return result;
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
+      }
+
+      public static T Deserialize<T>(string value) where T : class
+      {
+         try
+         {
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(value);
+            return result;
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
+      }
+
       public static async Task<T> ReadFile<T>(string path) where T : class
       {
          try
@@ -30,7 +51,7 @@ namespace ComicsShelf.vTwo.Helpers
             }
             if (string.IsNullOrEmpty(serializedContent)) { return null; }
 
-            var value = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(serializedContent);
+            var value = Deserialize<T>(serializedContent);
             return value;
 
          }

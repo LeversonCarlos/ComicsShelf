@@ -15,7 +15,6 @@ namespace ComicsShelf.Engine
             {
                engine.RecentFiles();
                engine.ReadingFiles();
-               engine.SyncData();
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -129,18 +128,6 @@ namespace ComicsShelf.Engine
                this.libraryData.ReadingFiles.HasFiles = this.libraryData.ReadingFiles.Files.Count != 0;
             }
 
-         }
-         catch (Exception) { throw; }
-      }
-      #endregion
-
-      #region SyncData
-      private async void SyncData()
-      {
-         try
-         {
-            var libraryService = Libraries.LibraryService.Get(this.library);
-            await libraryService.SaveDataAsync(this.library);
          }
          catch (Exception) { throw; }
       }

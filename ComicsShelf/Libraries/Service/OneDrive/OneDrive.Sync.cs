@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Libraries.Implementation
@@ -7,42 +6,24 @@ namespace ComicsShelf.Libraries.Implementation
    partial class OneDrive
    {
 
-      public async Task<bool> SaveDataAsync(Library library)
+      public async Task<bool> SaveDataAsync(Library library, byte[] serializedValue)
       {
          try
          {
-            
-            // LOAD COMIC FILES
-            var libraryComics = App.HomeData.Libraries
-               .Where(x => x.ComicFolder.LibraryPath == library.LibraryID)
-               .Select(x => x.Files)
-               .SelectMany(x => x)
-               .Select(x => x.ComicFile)
-               .ToList();
-
-            // CONVERT AND SERIALIZE
-            var libraryData = libraryComics
-               .Select(x => new
-               {
-                  x.Key,
-                  x.ReleaseDate,
-                  x.Readed,
-                  x.ReadingDate,
-                  x.ReadingPage,
-                  x.ReadingPercent,
-                  x.Rating
-               })
-               .ToList();
-            var librarySerializedData = vTwo.Helpers.FileStream.Serialize(libraryData);
-
-            // SAVE DATA
-            // if (!await Helpers.Permissions.HasStoragePermission()) { return false; }
-            // if (!await this.FileSystem.SaveDataAsync(library, librarySerializedData)) { return false; }
-
-            // RESULT
+            // TODO
             return true;
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.SaveDataAsync", ex); await App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.SaveDataAsync", ex); return false; }
+      }
+
+      public async Task<byte[]> LoadDataAsync(Library library)
+      {
+         try
+         {
+            // TODO
+            return null;
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.LoadDataAsync", ex); return null; }
       }
 
    }
