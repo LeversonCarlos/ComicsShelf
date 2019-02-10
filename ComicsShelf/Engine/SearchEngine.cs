@@ -47,11 +47,13 @@ namespace ComicsShelf.Engine
             {
                await engine.InitializeData();
                if (deepSearch) { await engine.SearchComicFiles(); }
+               await engine.SyncComicFiles(); 
                await engine.PrepareStructure();
                await engine.ExtractAlreadyExistingData();
                if (deepSearch) { await engine.ExtractFeaturedData(); }
                if (deepSearch) { await engine.ExtractRemainingData(); }
                Engine.Statistics.Execute(library);
+               if (deepSearch) { Engine.SyncLibrary.Save(library); }
             }
 
             // TRACK
@@ -170,6 +172,38 @@ namespace ComicsShelf.Engine
 
             await Task.Run(() =>
             { this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x)); });
+
+         }
+         catch (Exception) { throw; }
+      }
+      #endregion
+
+      #region SyncComicFiles
+      private async Task SyncComicFiles()
+      {
+         try
+         {
+            // this.Notify(R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE);
+
+            // LOCATE COMIC FILES
+            var remoteFiles = await Engine.SyncLibrary.Load(library);
+            if (remoteFiles == null || remoteFiles.Count == 0) { return; }
+
+            // LOOP THROUGH REMOTE FILES
+            foreach (var remoteFile in remoteFiles)
+            {
+               var comicFile = this.ComicFiles
+                  .Where(x => x.Key == remoteFile.Key)
+                  .FirstOrDefault();
+               if (comicFile == null) { continue; }
+
+               comicFile.ReleaseDate = remoteFile.ReleaseDate;
+               comicFile.Readed = remoteFile.Readed;
+               comicFile.ReadingDate = remoteFile.ReadingDate;
+               comicFile.ReadingPage = remoteFile.ReadingPage;
+               comicFile.ReadingPercent = remoteFile.ReadingPercent;
+               comicFile.Rating = remoteFile.Rating;
+            }
 
          }
          catch (Exception) { throw; }

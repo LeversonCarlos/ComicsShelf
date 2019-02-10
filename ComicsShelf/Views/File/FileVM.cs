@@ -114,6 +114,7 @@ namespace ComicsShelf.Views.File
                .Where(x => x.LibraryID == this.Data.ComicFile.LibraryPath)
                .FirstOrDefault();
             Engine.Statistics.Execute(library);
+            Engine.SyncLibrary.Save(library);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }

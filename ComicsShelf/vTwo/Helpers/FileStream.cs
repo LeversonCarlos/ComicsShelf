@@ -8,6 +8,27 @@ namespace ComicsShelf.vTwo.Helpers
    internal class FileStream
    {
 
+      public static T Deserialize<T>(byte[] value) where T : class
+      {
+         try
+         {
+            var serializedContent = System.Text.Encoding.Unicode.GetString(value);
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(serializedContent);
+            return result;
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
+      }
+
+      public static T Deserialize<T>(string value) where T : class
+      {
+         try
+         {
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(value);
+            return result;
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
+      }
+
       public static async Task<T> ReadFile<T>(string path) where T : class
       {
          try
@@ -30,23 +51,35 @@ namespace ComicsShelf.vTwo.Helpers
             }
             if (string.IsNullOrEmpty(serializedContent)) { return null; }
 
-            var value = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(serializedContent);
+            var value = Deserialize<T>(serializedContent);
             return value;
 
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
       }
 
+      public static byte[] Serialize<T>(T value)
+      {
+         try
+         {
+            if (value == null) { return null; }
+
+            var serializedContent = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            if (string.IsNullOrEmpty(serializedContent)) { return null; }
+
+            byte[] encodedContent = System.Text.Encoding.Unicode.GetBytes(serializedContent);
+            if (encodedContent == null || encodedContent.Length == 0) { return null; }
+
+            return encodedContent;
+         }
+         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.SaveFile", ex); return null; }
+      }
+
       public static async Task<bool> SaveFile<T>(string path, T value)
       {
          try
          {
-            if (value == null) { return false; }
-
-            var serializedContent = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-            if (string.IsNullOrEmpty(serializedContent)) { return false; }
-
-            byte[] encodedContent = System.Text.Encoding.Unicode.GetBytes(serializedContent);
+            var encodedContent = Serialize(value);
             if (encodedContent == null || encodedContent.Length == 0) { return false; }
 
             using (var fileStream = new System.IO.FileStream(path,

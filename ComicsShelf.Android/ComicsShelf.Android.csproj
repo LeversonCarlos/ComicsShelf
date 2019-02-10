@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="CustomRenderers\ReadingPage.cs" />
     <Compile Include="Helpers\FileSystem.cs" />
+    <Compile Include="Helpers\FileSystem_Sync.cs" />
     <Compile Include="Helpers\FileSystem_PagesExtractor.cs" />
     <Compile Include="Helpers\FileSystem_Files.cs" />
     <Compile Include="Helpers\FileSystem_Library.cs" />
