@@ -103,7 +103,7 @@ namespace ComicsShelf.Helpers.Controls
             this.ImageZoom = 1.0;
             if (!this.ImageLoaded && this.ImageSource != null)
             { this.ImageSource = null; }
-            if (this.ImageLoaded && this.ImageSource == null)
+            if (this.ImageLoaded && this.ImageSource == null && ! string.IsNullOrEmpty( this.ImagePath ))
             { this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
          }
          catch { }
