@@ -9,7 +9,7 @@
       {
          this.FileSystem = Helpers.FileSystem.Get();
          var clientID = "{YOUR_MICROSOFT_APPLICATION_ID}";
-         this.Connector = new Xamarin.OneDrive.Connector(clientID, "User.Read", "Files.Read");
+         this.Connector = new Xamarin.OneDrive.Connector(clientID, "User.Read", "Files.ReadWrite");
       }
 
    }
