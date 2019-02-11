@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.OneDrive.Files;
 
 namespace ComicsShelf.Libraries.Implementation
 {
@@ -10,8 +12,25 @@ namespace ComicsShelf.Libraries.Implementation
       {
          try
          {
-            // TODO
-            return true;
+            using (var uploadStream = new System.IO.MemoryStream(serializedValue))
+            {
+               var libraryFile = new FileData { FileName = Engine.SyncLibrary.FileName };
+
+               // LIBRARY FILE ALREADY DEFINED
+               libraryFile.id = library.GetKeyValue("LibraryFileID");
+
+               // WILL SET THE MAIN FOLDER WHERE THE FILE MUST BE CREATED
+               if (string.IsNullOrEmpty(libraryFile.id))
+               { libraryFile.parentID = library.GetKeyValue("MainFolderID"); }
+
+               // UPLOAD CONTENT
+               libraryFile = await this.Connector.UploadAsync(libraryFile, uploadStream);
+               if (string.IsNullOrEmpty(libraryFile.id)) { return false; }
+
+               // STORE THE LIBRARY FILE ID
+               library.SetKeyValue("LibraryFileID", libraryFile.id);
+               return true;
+            }
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.SaveDataAsync", ex); return false; }
       }
@@ -20,8 +39,16 @@ namespace ComicsShelf.Libraries.Implementation
       {
          try
          {
-            // TODO
-            return null;
+
+            // LIBRARY FILE ALREADY DEFINED
+            var libraryFileID = library.GetKeyValue("LibraryFileID");
+            if (string.IsNullOrEmpty(libraryFileID)) { return null; }
+
+            // LOAD CONTENT
+            var httpUrl = $"me/drive/items/{libraryFileID}/content";
+            var serializedValue = await this.Connector.GetByteArrayAsync(httpUrl);
+
+            return serializedValue;
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.LoadDataAsync", ex); return null; }
       }
