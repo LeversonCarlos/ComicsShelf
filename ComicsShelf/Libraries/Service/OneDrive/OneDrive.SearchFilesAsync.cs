@@ -17,9 +17,10 @@ namespace ComicsShelf.Libraries.Implementation
             // LOCATE FILES [try 5 times with a 100 milisec sleep between]
             List<FileData> fileList = null;
             int fileListTries = 0;
+            var folder = new FileData { id = library.GetKeyValue("MainFolderID") };
             while (fileListTries <= 5)
             {
-               fileList = await this.Connector.SearchFilesAsync("cbz", 10000);
+               fileList = await this.Connector.SearchFilesAsync(folder, "cbz", 10000);
                if (fileList != null && fileList.Count != 0)
                {
                   fileList.RemoveAll(x => !x.FileName.EndsWith(".cbz"));
