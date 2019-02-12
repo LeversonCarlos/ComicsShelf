@@ -1,25 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
+<controls:BasePage 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Libraries.Service.OneDrive.FolderSelector.SelectorPage">
-   <ContentPage.Content>
-      <StackLayout Margin="20" Spacing="20" BackgroundColor="Yellow" >
+   <controls:BasePage.Content>
+      <StackLayout Padding="20" Spacing="20" BackgroundColor="Yellow" >
          
          <StackLayout BackgroundColor="White" Orientation="Vertical">
-            <Label Text="Current Path:" FontSize="Small"></Label>
-            <Label Text="{Binding SelectedItem.FilePath}" FontSize="Default" FontAttributes="Bold"></Label>
+            <Label Text="[Current Path]" FontSize="Small"></Label>
+            <Label Text="{Binding CurrentItem.FilePath}" FontSize="Default" FontAttributes="Bold"></Label>
          </StackLayout>
 
          <ScrollView BackgroundColor="White" Orientation="Vertical" VerticalOptions="Fill">
-            
+            <controls:RepeaterView ItemsSource="{Binding Data}" ItemTappedCommand="{Binding ItemSelectCommand}" >
+               <controls:RepeaterView.ItemTemplate>
+                  <DataTemplate>
+                     <StackLayout Orientation="Horizontal" Padding="10">
+                        <Label Text="{Binding FileName}"></Label>
+                     </StackLayout>
+                  </DataTemplate>
+               </controls:RepeaterView.ItemTemplate>
+            </controls:RepeaterView>
          </ScrollView>
 
          <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Button Text="Cancel" Command="{Binding ConfirmCommand}"></Button>
-            <Button Text="Confirm" Command="{Binding CancelCommand}"></Button>
+            <Button Text="[Cancel]" Command="{Binding ConfirmCommand}"></Button>
+            <controls:PrimaryButton Text="[Confirm]" Command="{Binding CancelCommand}"></controls:PrimaryButton>
          </StackLayout>
          
       </StackLayout>
-   </ContentPage.Content>
-</ContentPage>
+   </controls:BasePage.Content>
+</controls:BasePage>

@@ -54,14 +54,6 @@ namespace ComicsShelf.Libraries.Implementation
                { comicFile.SmallText = comicFile.FullText; }
             }
 
-            // MAIN FOLDER
-            var folderList = fileList
-               .GroupBy(x => x.FilePath)
-               .OrderBy(x => x.Key)
-               .Select(x => x.FirstOrDefault())
-               .ToList();
-            var folderMain = folderList.FirstOrDefault();
-            library.SetKeyValue("MainFolderID", folderMain.parentID);
 
             // RESULT
             return comicFiles;

@@ -1,10 +1,9 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms.Xaml;
 
 namespace ComicsShelf.Libraries.Service.OneDrive.FolderSelector
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class SelectorPage : ContentPage
+   public partial class SelectorPage : Helpers.Controls.BasePage
    {
       public SelectorPage()
       {
