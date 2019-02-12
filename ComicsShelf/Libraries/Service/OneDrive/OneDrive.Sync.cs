@@ -41,7 +41,7 @@ namespace ComicsShelf.Libraries.Implementation
          {
 
             // LIBRARY FILE ALREADY DEFINED
-            var libraryFileID = library.GetKeyValue("LibraryFileID");
+            var libraryFileID = await this.LoadDataAsync_GetFileID(library);
             if (string.IsNullOrEmpty(libraryFileID)) { return null; }
 
             // LOAD CONTENT
@@ -51,6 +51,23 @@ namespace ComicsShelf.Libraries.Implementation
             return serializedValue;
          }
          catch (Exception ex) { Engine.AppCenter.TrackEvent("OneDrive.LoadDataAsync", ex); return null; }
+      }
+
+      private async Task<string> LoadDataAsync_GetFileID(Library library)
+      {
+
+         // LIBRARY FILE ALREADY DEFINED
+         var libraryFileID = library.GetKeyValue("LibraryFileID");
+         if (!string.IsNullOrEmpty(libraryFileID)) { return libraryFileID; }
+
+         // TRY TO SEARCH ON FOLDER
+         var folder = new FileData { id = library.LibraryID };
+         var fileList = await this.Connector.SearchFilesAsync(folder, Engine.SyncLibrary.FileName);
+         if (fileList == null || fileList.Count == 0) { return string.Empty; }
+
+         // RESULT
+         return fileList.FirstOrDefault().id;
+
       }
 
    }

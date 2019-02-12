@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using Xamarin.OneDrive.Files;
 using Xamarin.OneDrive.Profile;
 
@@ -30,8 +29,8 @@ namespace ComicsShelf.Libraries.Implementation
          if (folder == null) { return false; }
          library.SetKeyValue("MainFolderID", folder.id);
 
-         library.LibraryID = profile.id;
-         library.Description = profile.Name;
+         library.LibraryID = folder.id;
+         library.Description = $"{folder.FileName}";
          library.Available = true;
          return true;
       }
@@ -80,10 +79,11 @@ namespace ComicsShelf.Libraries.Implementation
          catch (Exception) { throw; }
       }
 
-
       public async Task<bool> RemoveLibrary(Library library)
       {
-         return await this.Connector.DisconnectAsync();
+         if (App.Settings.Libraries.Where(x=> x.Type == TypeEnum.OneDrive).Count()<=1)
+         { await this.Connector.DisconnectAsync(); }
+         return true;
       }
 
    }
