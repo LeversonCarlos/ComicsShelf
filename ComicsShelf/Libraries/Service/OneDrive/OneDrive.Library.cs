@@ -48,12 +48,38 @@ namespace ComicsShelf.Libraries.Implementation
             vm.IsBusy = false;
          };
 
+         vm.CurrentItem = await this.GetRootDetailsAsync();
          var rootChilds = await this.Connector.GetChildFoldersAsync();
          vm.Data.ReplaceRange(rootChilds);
 
          var folder = await vm.OpenPage();
          return folder;
       }
+
+      private async Task<FileData> GetRootDetailsAsync()
+      {
+         try
+         {
+            var httpPath = $"me/drive/root?select=id,name";
+
+            // REQUEST DATA FROM SERVER
+            var httpMessage = await this.Connector.GetAsync(httpPath);
+            if (!httpMessage.IsSuccessStatusCode)
+            { throw new Exception(await httpMessage.Content.ReadAsStringAsync()); }
+
+            // SERIALIZE AND STORE RESULT
+            var httpContent = await httpMessage.Content.ReadAsStringAsync();
+            var folder = vTwo.Helpers.FileStream.Deserialize<FileData>(httpContent);
+            if (folder == null) { return null; }
+
+            // RESULT
+            folder.FilePath = "/";
+            return folder;
+
+         }
+         catch (Exception) { throw; }
+      }
+
 
       public async Task<bool> RemoveLibrary(Library library)
       {

@@ -49,8 +49,8 @@ namespace ComicsShelf.Libraries.Service.OneDrive.FolderSelector
       public Command ConfirmCommand { get; set; }
       async Task Confirm()
       {
-         tcs.SetResult(this.CurrentItem);
          await this.ClosePage();
+         tcs.SetResult(this.CurrentItem);
       }
       #endregion
 
@@ -58,8 +58,8 @@ namespace ComicsShelf.Libraries.Service.OneDrive.FolderSelector
       public Command CancelCommand { get; set; }
       async Task Cancel()
       {
-         tcs.SetResult(null);
          await this.ClosePage();
+         tcs.SetResult(null);
       }
       #endregion
 
