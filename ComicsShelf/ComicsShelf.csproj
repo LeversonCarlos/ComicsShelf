@@ -68,6 +68,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Libraries\Service\OneDrive\FolderSelector\SelectorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="R\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>

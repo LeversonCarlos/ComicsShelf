@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Libraries.Service.OneDrive.FolderSelector.SelectorPage">
+   <ContentPage.Content>
+      <StackLayout Margin="20" Spacing="20" BackgroundColor="Yellow" >
+         
+         <StackLayout BackgroundColor="White" Orientation="Vertical">
+            <Label Text="Current Path:" FontSize="Small"></Label>
+            <Label Text="{Binding SelectedItem.FilePath}" FontSize="Default" FontAttributes="Bold"></Label>
+         </StackLayout>
+
+         <ScrollView BackgroundColor="White" Orientation="Vertical" VerticalOptions="Fill">
+            
+         </ScrollView>
+
+         <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Button Text="Cancel" Command="{Binding ConfirmCommand}"></Button>
+            <Button Text="Confirm" Command="{Binding CancelCommand}"></Button>
+         </StackLayout>
+         
+      </StackLayout>
+   </ContentPage.Content>
+</ContentPage>
