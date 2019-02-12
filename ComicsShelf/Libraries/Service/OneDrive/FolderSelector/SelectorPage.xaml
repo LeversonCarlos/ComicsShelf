@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:BasePage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
+   x:Class="ComicsShelf.Libraries.Service.OneDrive.FolderSelector.SelectorPage">
+   <controls:BasePage.Content>
+      <StackLayout Padding="20" Spacing="20" BackgroundColor="{StaticResource colorBackground}" >
+
+         <Frame BackgroundColor="White" Padding="10">
+            <StackLayout Orientation="Vertical" Spacing="5">
+               <Label Text="[Current Path]" FontSize="Micro"></Label>
+               <Label Text="{Binding CurrentItem.FilePath}" FontSize="Default" FontAttributes="Bold"></Label>
+            </StackLayout>
+         </Frame>
+
+         <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+            <ScrollView Orientation="Vertical" >
+               <controls:RepeaterView ItemsSource="{Binding Data}" ItemTappedCommand="{Binding ItemSelectCommand}" >
+                  <controls:RepeaterView.ItemTemplate>
+                     <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="Fill" >
+                           <Label Text="{Binding FileName}"></Label>
+                        </StackLayout>
+                     </DataTemplate>
+                  </controls:RepeaterView.ItemTemplate>
+               </controls:RepeaterView>
+            </ScrollView>
+         </Frame>
+
+         <Frame BackgroundColor="White" Padding="10">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+               <Button Text="[Cancel]" Command="{Binding CancelCommand}"></Button>
+               <controls:PrimaryButton Text="[Confirm]" Command="{Binding ConfirmCommand}"></controls:PrimaryButton>
+            </StackLayout>
+         </Frame>
+
+      </StackLayout>
+   </controls:BasePage.Content>
+</controls:BasePage>

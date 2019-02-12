@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
@@ -37,7 +38,8 @@ namespace ComicsShelf.Helpers.Controls
          if (itemsSource != null)
          {
             itemsSource.CollectionChanged +=
-               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) => {
+               (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) =>
+               {
                   Device.BeginInvokeOnMainThread(() => this.ItemsRefresh(e));
                };
          }
@@ -52,7 +54,9 @@ namespace ComicsShelf.Helpers.Controls
          {
 
             // RESET
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
+            {
+               this.Children.Clear();
 
                // LOAD CURRENT ITEMS LIST
                if (this.ItemsSource == null) { return; }
@@ -72,6 +76,14 @@ namespace ComicsShelf.Helpers.Controls
                   if (bindableObject != null)
                   { bindableObject.BindingContext = item; }
 
+                  // ATTACH GESTURE
+                  itemView.GestureRecognizers.Add(new TapGestureRecognizer
+                  {
+                     Command = new Command(() => { this.ItemTappedCommand?.Execute(item); }),
+                     CommandParameter = item,
+                     NumberOfTapsRequired = 1
+                  });
+
                   this.Children.Add(itemView);
                }
                return;
@@ -89,7 +101,8 @@ namespace ComicsShelf.Helpers.Controls
             }
 
             // ADD ACTION
-            if (e.NewItems != null && e.NewItems.Count != 0) {
+            if (e.NewItems != null && e.NewItems.Count != 0)
+            {
                var itemIndex = e.NewStartingIndex;
                foreach (var item in e.NewItems)
                {
@@ -103,9 +116,18 @@ namespace ComicsShelf.Helpers.Controls
                   if (bindableObject != null)
                   { bindableObject.BindingContext = item; }
 
+                  // ATTACH GESTURE
+                  itemView.GestureRecognizers.Add(new TapGestureRecognizer
+                  {
+                     Command = new Command(() => { this.ItemTappedCommand?.Execute(item); }),
+                     CommandParameter = item,
+                     NumberOfTapsRequired = 1
+                  });
+
                   // ADD
                   if (e.NewStartingIndex == -1) { this.Children.Add(itemView); }
-                  else {
+                  else
+                  {
                      this.Children.Insert(itemIndex, itemView);
                      itemIndex++;
                   }
@@ -115,6 +137,16 @@ namespace ComicsShelf.Helpers.Controls
 
          }
          catch (Exception ex) { throw; }
+      }
+      #endregion
+
+      #region ItemTappedCommand
+      public static readonly BindableProperty ItemTappedCommandProperty =
+         BindableProperty.Create(nameof(ItemTappedCommand), typeof(ICommand), typeof(RepeaterView), null);
+      public ICommand ItemTappedCommand
+      {
+         get { return (ICommand)GetValue(ItemTappedCommandProperty); }
+         set { SetValue(ItemTappedCommandProperty, value); }
       }
       #endregion
 
