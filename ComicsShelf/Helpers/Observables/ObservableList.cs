@@ -67,8 +67,8 @@ namespace ComicsShelf.Helpers.Observables
       {
          if (collection == null) throw new ArgumentNullException("collection");
          this.Items.Clear();
-         this.AddRange(collection, NotifyCollectionChangedAction.Replace);
-         this.RefreshAnalysis(NotifyCollectionChangedAction.Replace);
+         this.AddRange(collection, NotifyCollectionChangedAction.Reset);
+         // this.RefreshAnalysis(NotifyCollectionChangedAction.Reset);
       }
       #endregion
 
