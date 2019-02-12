@@ -9,5 +9,12 @@ namespace ComicsShelf.Libraries.Service.OneDrive.FolderSelector
       {
          InitializeComponent();
       }
+
+      protected override bool OnBackButtonPressed()
+      {
+         // PREVENT THE BACK BUTON
+         return true;
+      }
+
    }
 }

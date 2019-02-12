@@ -5,30 +5,36 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Libraries.Service.OneDrive.FolderSelector.SelectorPage">
    <controls:BasePage.Content>
-      <StackLayout Padding="20" Spacing="20" BackgroundColor="Yellow" >
-         
-         <StackLayout BackgroundColor="White" Orientation="Vertical">
-            <Label Text="[Current Path]" FontSize="Small"></Label>
-            <Label Text="{Binding CurrentItem.FilePath}" FontSize="Default" FontAttributes="Bold"></Label>
-         </StackLayout>
+      <StackLayout Padding="20" Spacing="20" BackgroundColor="{StaticResource colorBackground}" >
 
-         <ScrollView BackgroundColor="White" Orientation="Vertical" VerticalOptions="Fill">
-            <controls:RepeaterView ItemsSource="{Binding Data}" ItemTappedCommand="{Binding ItemSelectCommand}" >
-               <controls:RepeaterView.ItemTemplate>
-                  <DataTemplate>
-                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label Text="{Binding FileName}"></Label>
-                     </StackLayout>
-                  </DataTemplate>
-               </controls:RepeaterView.ItemTemplate>
-            </controls:RepeaterView>
-         </ScrollView>
+         <Frame BackgroundColor="White" Padding="10">
+            <StackLayout Orientation="Vertical" Spacing="5">
+               <Label Text="[Current Path]" FontSize="Micro"></Label>
+               <Label Text="{Binding CurrentItem.FilePath}" FontSize="Default" FontAttributes="Bold"></Label>
+            </StackLayout>
+         </Frame>
 
-         <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Button Text="[Cancel]" Command="{Binding ConfirmCommand}"></Button>
-            <controls:PrimaryButton Text="[Confirm]" Command="{Binding CancelCommand}"></controls:PrimaryButton>
-         </StackLayout>
-         
+         <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+            <ScrollView Orientation="Vertical" >
+               <controls:RepeaterView ItemsSource="{Binding Data}" ItemTappedCommand="{Binding ItemSelectCommand}" >
+                  <controls:RepeaterView.ItemTemplate>
+                     <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="Fill" >
+                           <Label Text="{Binding FileName}"></Label>
+                        </StackLayout>
+                     </DataTemplate>
+                  </controls:RepeaterView.ItemTemplate>
+               </controls:RepeaterView>
+            </ScrollView>
+         </Frame>
+
+         <Frame BackgroundColor="White" Padding="10">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+               <Button Text="[Cancel]" Command="{Binding CancelCommand}"></Button>
+               <controls:PrimaryButton Text="[Confirm]" Command="{Binding ConfirmCommand}"></controls:PrimaryButton>
+            </StackLayout>
+         </Frame>
+
       </StackLayout>
    </controls:BasePage.Content>
 </controls:BasePage>
