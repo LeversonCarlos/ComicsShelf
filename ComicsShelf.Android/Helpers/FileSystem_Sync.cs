@@ -10,7 +10,8 @@ namespace ComicsShelf.Droid
       {
          try
          {
-            var libraryDataPath = $"{library.LibraryID}{this.PathSeparator}ComicsShelf.config";
+            
+            var libraryDataPath = $"{library.LibraryID}{this.PathSeparator}{Libraries.Library.FileName}";
             if (System.IO.File.Exists(libraryDataPath)) {
                System.IO.File.Delete(libraryDataPath);
             }
@@ -24,7 +25,7 @@ namespace ComicsShelf.Droid
       {
          try
          {
-            var libraryDataPath = $"{library.LibraryID}{this.PathSeparator}ComicsShelf.config";
+            var libraryDataPath = $"{library.LibraryID}{this.PathSeparator}{Libraries.Library.FileName}";
             if (!System.IO.File.Exists(libraryDataPath)) { return null; }
 
             byte[] serializedData = null;

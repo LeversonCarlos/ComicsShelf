@@ -16,7 +16,7 @@ namespace ComicsShelf.UWP
             var libraryFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(library.LibraryID);
             if (libraryFolder == null) { return false; }
 
-            var libraryDataFile = await libraryFolder.CreateFileAsync("ComicsShelf.config", Windows.Storage.CreationCollisionOption.ReplaceExisting);
+            var libraryDataFile = await libraryFolder.CreateFileAsync(Libraries.Library.FileName, Windows.Storage.CreationCollisionOption.ReplaceExisting);
             if (libraryDataFile == null) { return false; }
 
             using (var libraryDataStream = await libraryDataFile.OpenStreamForWriteAsync())
@@ -37,7 +37,7 @@ namespace ComicsShelf.UWP
             var libraryFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(library.LibraryID);
             if (libraryFolder == null) { return null; }
 
-            var libraryDataFile = await libraryFolder.GetFileAsync("ComicsShelf.config");
+            var libraryDataFile = await libraryFolder.GetFileAsync(Libraries.Library.FileName);
             if (libraryDataFile == null) { return null; }
            
 
