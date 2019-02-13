@@ -62,11 +62,13 @@ namespace ComicsShelf.Libraries.Implementation
 
          // TRY TO SEARCH ON FOLDER
          var folder = new FileData { id = library.LibraryID };
-         var fileList = await this.Connector.SearchFilesAsync(folder, Engine.SyncLibrary.FileName);
+         var fileList = await this.Connector.SearchFilesAsync(folder, Engine.SyncLibrary.FileName, 1);
          if (fileList == null || fileList.Count == 0) { return string.Empty; }
+         var file = fileList.Where(x => x.parentID == library.LibraryID).FirstOrDefault();
+         if (file == null) { return string.Empty; }
 
          // RESULT
-         return fileList.FirstOrDefault().id;
+         return file.id;
 
       }
 
