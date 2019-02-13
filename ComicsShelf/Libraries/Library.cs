@@ -6,6 +6,8 @@ namespace ComicsShelf.Libraries
 
    public class Library
    {
+      public const string FileName = "ComicsShef.library";
+
       public string LibraryID { get; set; }
       public string Description { get; set; }
       public TypeEnum Type { get; set; }

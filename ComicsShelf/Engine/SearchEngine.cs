@@ -49,6 +49,7 @@ namespace ComicsShelf.Engine
                if (deepSearch) { await engine.SearchComicFiles(); }
                await engine.SyncComicFiles(); 
                await engine.PrepareStructure();
+               Engine.Statistics.Execute(library);
                await engine.ExtractAlreadyExistingData();
                if (deepSearch) { await engine.ExtractFeaturedData(); }
                if (deepSearch) { await engine.ExtractRemainingData(); }
@@ -184,6 +185,7 @@ namespace ComicsShelf.Engine
          try
          {
             // this.Notify(R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE);
+            if (this.ComicFiles.Count == 0) { return; }
 
             // LOCATE COMIC FILES
             var remoteFiles = await Engine.SyncLibrary.Load(library);

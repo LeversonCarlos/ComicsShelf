@@ -27,7 +27,6 @@ namespace ComicsShelf.Libraries.Implementation
 
          var folder = await this.AddLibrary_FolderSelect(library);
          if (folder == null) { return false; }
-         library.SetKeyValue("MainFolderID", folder.id);
 
          library.LibraryID = folder.id;
          library.Description = $"{folder.FileName}";

@@ -14,21 +14,21 @@ namespace ComicsShelf.Libraries.Implementation
          {
             using (var uploadStream = new System.IO.MemoryStream(serializedValue))
             {
-               var libraryFile = new FileData { FileName = Engine.SyncLibrary.FileName };
+               var libraryFile = new FileData { FileName = Library.FileName };
 
                // LIBRARY FILE ALREADY DEFINED
-               libraryFile.id = library.GetKeyValue("LibraryFileID");
+               libraryFile.id = library.GetKeyValue(OneDrive.LibraryFileID);
 
                // WILL SET THE MAIN FOLDER WHERE THE FILE MUST BE CREATED
                if (string.IsNullOrEmpty(libraryFile.id))
-               { libraryFile.parentID = library.GetKeyValue("MainFolderID"); }
+               { libraryFile.parentID = library.LibraryID; }
 
                // UPLOAD CONTENT
                libraryFile = await this.Connector.UploadAsync(libraryFile, uploadStream);
                if (string.IsNullOrEmpty(libraryFile.id)) { return false; }
 
                // STORE THE LIBRARY FILE ID
-               library.SetKeyValue("LibraryFileID", libraryFile.id);
+               library.SetKeyValue(OneDrive.LibraryFileID, libraryFile.id);
                return true;
             }
          }
@@ -41,11 +41,11 @@ namespace ComicsShelf.Libraries.Implementation
          {
 
             // LIBRARY FILE ALREADY DEFINED
-            var libraryFileID = await this.LoadDataAsync_GetFileID(library);
-            if (string.IsNullOrEmpty(libraryFileID)) { return null; }
+            var fileID = await this.LoadDataAsync_GetFileID(library);
+            if (string.IsNullOrEmpty(fileID)) { return null; }
 
             // LOAD CONTENT
-            var httpUrl = $"me/drive/items/{libraryFileID}/content";
+            var httpUrl = $"me/drive/items/{fileID}/content";
             var serializedValue = await this.Connector.GetByteArrayAsync(httpUrl);
 
             return serializedValue;
@@ -57,16 +57,18 @@ namespace ComicsShelf.Libraries.Implementation
       {
 
          // LIBRARY FILE ALREADY DEFINED
-         var libraryFileID = library.GetKeyValue("LibraryFileID");
-         if (!string.IsNullOrEmpty(libraryFileID)) { return libraryFileID; }
+         var fileID = library.GetKeyValue(OneDrive.LibraryFileID);
+         if (!string.IsNullOrEmpty(fileID)) { return fileID; }
 
          // TRY TO SEARCH ON FOLDER
          var folder = new FileData { id = library.LibraryID };
-         var fileList = await this.Connector.SearchFilesAsync(folder, Engine.SyncLibrary.FileName);
+         var fileList = await this.Connector.SearchFilesAsync(folder, Library.FileName, 1);
          if (fileList == null || fileList.Count == 0) { return string.Empty; }
+         var file = fileList.Where(x => x.parentID == library.LibraryID).FirstOrDefault();
+         if (file == null) { return string.Empty; }
 
          // RESULT
-         return fileList.FirstOrDefault().id;
+         return file.id;
 
       }
 

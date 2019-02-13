@@ -8,7 +8,6 @@ namespace ComicsShelf.Engine
 
    internal class SyncLibrary 
    {
-      public const string FileName = "ComicsShef.library";
 
       public static async void Save(Libraries.Library library)
       {

@@ -2,6 +2,7 @@
 {
    internal partial class OneDrive : ILibraryService
    {
+      public const string LibraryFileID = "LibraryFileID";
 
       Helpers.iFileSystem FileSystem { get; set; }
       Xamarin.OneDrive.Connector Connector { get; set; }
