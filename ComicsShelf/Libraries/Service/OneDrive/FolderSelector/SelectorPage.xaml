@@ -17,17 +17,20 @@
          </Frame>
 
          <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
-            <ScrollView Orientation="Vertical" >
-               <controls:RepeaterView ItemsSource="{Binding Data}" ItemTappedCommand="{Binding ItemSelectCommand}" >
-                  <controls:RepeaterView.ItemTemplate>
-                     <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="Fill" >
-                           <Label Text="{Binding FileName}"></Label>
-                        </StackLayout>
-                     </DataTemplate>
-                  </controls:RepeaterView.ItemTemplate>
-               </controls:RepeaterView>
-            </ScrollView>
+            <StackLayout>
+               <ScrollView Orientation="Vertical" >
+                  <controls:RepeaterView ItemsSource="{Binding Data}" ItemTappedCommand="{Binding ItemSelectCommand}" >
+                     <controls:RepeaterView.ItemTemplate>
+                        <DataTemplate>
+                           <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="Fill" >
+                              <Label Text="{Binding FileName}"></Label>
+                           </StackLayout>
+                        </DataTemplate>
+                     </controls:RepeaterView.ItemTemplate>
+                  </controls:RepeaterView>
+               </ScrollView>
+               <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            </StackLayout>
          </Frame>
 
          <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">

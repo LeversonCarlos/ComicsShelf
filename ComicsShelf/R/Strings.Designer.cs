@@ -223,7 +223,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Folder.
+        ///   Looks up a localized string similar to New Local Folder.
         /// </summary>
         internal static string LIBRARY_NEW_LOCAL_FOLDER_COMMAND {
             get {
@@ -232,7 +232,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add OneDrive.
+        ///   Looks up a localized string similar to New OneDrive Folder.
         /// </summary>
         internal static string LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND {
             get {

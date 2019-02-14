@@ -5,32 +5,6 @@
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
    x:Class="ComicsShelf.Libraries.LibraryView"
    x:Name="MyPage">
-   <controls:BasePage.ToolbarItems>
-      <ToolbarItem 
-         Order="Primary" 
-         Text="{controls:Translate Text=LIBRARY_NEW_LOCAL_FOLDER_COMMAND}" 
-         Command="{Binding AddLibraryTappedCommand}" >
-         <ToolbarItem.Icon>
-            <OnPlatform x:TypeArguments="FileImageSource">
-               <On Platform="Android" Value="icon_Folder_White.png"></On>
-               <On Platform="IOS" Value="icon_Folder_White.png"></On>
-               <On Platform="UWP" Value="Assets/icon_Folder_White.png"></On>
-            </OnPlatform>
-         </ToolbarItem.Icon>
-      </ToolbarItem>
-      <ToolbarItem 
-         Order="Primary" 
-         Text="{controls:Translate Text=LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND}" 
-         Command="{Binding AddOneDriveLibraryCommand}" >
-         <ToolbarItem.Icon>
-            <OnPlatform x:TypeArguments="FileImageSource">
-               <On Platform="Android" Value="icon_OneDrive_White.png"></On>
-               <On Platform="IOS" Value="icon_OneDrive_White.png"></On>
-               <On Platform="UWP" Value="Assets/icon_OneDrive_White.png"></On>
-            </OnPlatform>
-         </ToolbarItem.Icon>
-      </ToolbarItem>
-   </controls:BasePage.ToolbarItems>
    <controls:BasePage.Content>
 
       <StackLayout VerticalOptions="CenterAndExpand" Padding="20" Spacing="20" BackgroundColor="{StaticResource colorBackground}" >
@@ -91,6 +65,11 @@
                <ActivityIndicator IsRunning="{Binding IsBusy}" />
             </StackLayout>
          </Frame>
+
+         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <controls:PrimaryButton Text="{controls:Translate Text=LIBRARY_NEW_LOCAL_FOLDER_COMMAND}" Command="{Binding AddLibraryTappedCommand}"></controls:PrimaryButton>
+            <controls:PrimaryButton Text="{controls:Translate Text=LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND}" Command="{Binding AddOneDriveLibraryCommand}"></controls:PrimaryButton>
+         </StackLayout>
 
       </StackLayout>
 
