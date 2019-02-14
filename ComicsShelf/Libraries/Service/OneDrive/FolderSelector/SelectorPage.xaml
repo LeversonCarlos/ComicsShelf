@@ -7,9 +7,11 @@
    <controls:BasePage.Content>
       <StackLayout Padding="20" Spacing="20" BackgroundColor="{StaticResource colorBackground}" >
 
+         <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" TextColor="Accent" ></Label>
+
          <Frame BackgroundColor="White" Padding="10">
             <StackLayout Orientation="Vertical" Spacing="5">
-               <Label Text="[Current Path]" FontSize="Micro"></Label>
+               <Label Text="{controls:Translate Text=ONEDRIVE_SELECTOR_SELECTED_PATH_LABEL}" FontSize="Micro"></Label>
                <Label Text="{Binding CurrentItem.FilePath}" FontSize="Default" FontAttributes="Bold"></Label>
             </StackLayout>
          </Frame>
@@ -28,12 +30,10 @@
             </ScrollView>
          </Frame>
 
-         <Frame BackgroundColor="White" Padding="10">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-               <Button Text="[Cancel]" Command="{Binding CancelCommand}"></Button>
-               <controls:PrimaryButton Text="[Confirm]" Command="{Binding ConfirmCommand}"></controls:PrimaryButton>
-            </StackLayout>
-         </Frame>
+         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Button Text="{controls:Translate Text=ONEDRIVE_SELECTOR_CANCEL_COMMAND}" Command="{Binding CancelCommand}"></Button>
+            <controls:PrimaryButton Text="{controls:Translate Text=ONEDRIVE_SELECTOR_CONFIRM_COMMAND}" Command="{Binding ConfirmCommand}"></controls:PrimaryButton>
+         </StackLayout>
 
       </StackLayout>
    </controls:BasePage.Content>
