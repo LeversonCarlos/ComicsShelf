@@ -15,7 +15,7 @@ namespace ComicsShelf.Libraries.Service.OneDrive.FolderSelector
       #region New
       public SelectorVM()
       {
-         this.Title = "[FolderSelector]";
+         this.Title = R.Strings.ONEDRIVE_SELECTOR_TITLE;
          this.ViewType = typeof(SelectorPage);
          this.Data = new ObservableList<FileData>();
          this.ConfirmCommand = new Command(async () => await this.Confirm());

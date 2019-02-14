@@ -22,10 +22,10 @@ namespace ComicsShelf.Helpers.Controls
 
          this.Label = new Label
          {
-            Margin = new Thickness(15, 0),
-            TextColor = Color.Accent, 
+            Margin = new Thickness(10, 0),
+            TextColor = Color.Accent,
             FontAttributes = FontAttributes.Bold,
-            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)), 
+            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
             IsVisible = false
          };
          this.Children.Add(this.Label);
@@ -36,7 +36,8 @@ namespace ComicsShelf.Helpers.Controls
             AlignItems = FlexAlignItems.Start,
             AlignContent = FlexAlignContent.Start,
             JustifyContent = FlexJustify.Start,
-            Wrap = FlexWrap.Wrap
+            Wrap = FlexWrap.Wrap,
+            Margin = new Thickness(10, 0, 0, 0)
          };
          this.Children.Add(this.Items);
 

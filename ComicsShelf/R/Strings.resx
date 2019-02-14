@@ -172,13 +172,25 @@
     <value>Library</value>
   </data>
   <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
-    <value>Add Folder</value>
+    <value>New Local Folder</value>
   </data>
   <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
-    <value>Add OneDrive</value>
+    <value>New OneDrive Folder</value>
   </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remove</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_CANCEL_COMMAND" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_CONFIRM_COMMAND" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_SELECTED_PATH_LABEL" xml:space="preserve">
+    <value>Selected folder:</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_TITLE" xml:space="preserve">
+    <value>OneDrive Foler Selector</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Loading current database data</value>

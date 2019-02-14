@@ -18,7 +18,7 @@
                            ItemTappedCommand="{Binding BindingContext.FileTappedCommand, Source={x:Reference MyLibraryContent}}">
                            <controls:SectionView.ItemTemplate>
                               <DataTemplate>
-                                 <controls:CoverFrameView 
+                                 <controls:CoverFrameView UseFrame="False"
                                     Text="{Binding FullText}" Progress="{Binding ReadingPercent}" ImageSource="{Binding CoverPath}" >
                                  </controls:CoverFrameView>
                               </DataTemplate>
@@ -30,7 +30,7 @@
                            ItemTappedCommand="{Binding BindingContext.FolderTappedCommand, Source={x:Reference MyLibraryContent}}">
                            <controls:SectionView.ItemTemplate>
                               <DataTemplate>
-                                 <controls:CoverFrameView 
+                                 <controls:CoverFrameView UseFrame="False"
                                     Text="{Binding Text}" ImageSource="{Binding CoverPath}" >
                                  </controls:CoverFrameView>
                               </DataTemplate>

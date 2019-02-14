@@ -223,7 +223,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Folder.
+        ///   Looks up a localized string similar to New Local Folder.
         /// </summary>
         internal static string LIBRARY_NEW_LOCAL_FOLDER_COMMAND {
             get {
@@ -232,7 +232,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add OneDrive.
+        ///   Looks up a localized string similar to New OneDrive Folder.
         /// </summary>
         internal static string LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND {
             get {
@@ -246,6 +246,42 @@ namespace ComicsShelf.R {
         internal static string LIBRARY_REMOVE_LIBRARY_COMMAND {
             get {
                 return ResourceManager.GetString("LIBRARY_REMOVE_LIBRARY_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string ONEDRIVE_SELECTOR_CANCEL_COMMAND {
+            get {
+                return ResourceManager.GetString("ONEDRIVE_SELECTOR_CANCEL_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        internal static string ONEDRIVE_SELECTOR_CONFIRM_COMMAND {
+            get {
+                return ResourceManager.GetString("ONEDRIVE_SELECTOR_CONFIRM_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected folder:.
+        /// </summary>
+        internal static string ONEDRIVE_SELECTOR_SELECTED_PATH_LABEL {
+            get {
+                return ResourceManager.GetString("ONEDRIVE_SELECTOR_SELECTED_PATH_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OneDrive Foler Selector.
+        /// </summary>
+        internal static string ONEDRIVE_SELECTOR_TITLE {
+            get {
+                return ResourceManager.GetString("ONEDRIVE_SELECTOR_TITLE", resourceCulture);
             }
         }
         

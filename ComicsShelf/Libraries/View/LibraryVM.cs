@@ -13,7 +13,7 @@ namespace ComicsShelf.Libraries
       #region New
       public LibraryVM()
       {
-         this.Title = R.Strings.LIBRARY_MAIN_TITLE; ;
+         this.Title = R.Strings.LIBRARY_MAIN_TITLE;
          this.ViewType = typeof(LibraryView);
 
          this.Data = new Helpers.Observables.ObservableList<LibraryData>();

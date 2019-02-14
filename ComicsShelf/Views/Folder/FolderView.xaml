@@ -9,12 +9,12 @@
       <ScrollView Style="{StaticResource CoverListMainView}">
          <StackLayout Style="{StaticResource CoverListMainLayout}">
 
-            <controls:SectionView 
+            <controls:SectionView Title="{Binding Data.Text}" 
                IsVisible="{Binding Data.HasFiles}" ItemsSource="{Binding Data.Files}"
                ItemTappedCommand="{Binding FileTappedCommand}">
                <controls:SectionView.ItemTemplate>
                   <DataTemplate>
-                     <controls:CoverFrameView
+                     <controls:CoverFrameView UseFrame="True"
                         Text="{Binding SmallText}" Progress="{Binding ReadingPercent}" 
                         ImageSource="{Binding CoverPath}" >
                      </controls:CoverFrameView>

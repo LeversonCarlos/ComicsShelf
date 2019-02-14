@@ -172,13 +172,25 @@
     <value>Biblioteca</value>
   </data>
   <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
-    <value>Adicionar Pasta</value>
+    <value>Nova Pasta Local</value>
   </data>
   <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
-    <value>Adicionar OneDrive</value>
+    <value>Nova Pasta do OneDrive</value>
   </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remover</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_CANCEL_COMMAND" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_CONFIRM_COMMAND" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_SELECTED_PATH_LABEL" xml:space="preserve">
+    <value>Pasta selecionada:</value>
+  </data>
+  <data name="ONEDRIVE_SELECTOR_TITLE" xml:space="preserve">
+    <value>Seletor de Pasta do OneDrive</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Carregando dados da base de dados</value>

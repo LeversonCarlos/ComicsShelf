@@ -9,9 +9,9 @@ namespace ComicsShelf.Helpers.Controls
       #region New
       public CoverFrameView()
       {
-         this.Margin = new Thickness(10, 10, 0, 0);
+         this.Margin = new Thickness(0, 0, 10, 10);
          this.Padding = 0;
-         this.HasShadow = true;
+         this.HasShadow = false;
          this.BackgroundColor = Color.White;
          this.BorderColor = Color.LightGray;
          this.CornerRadius = 0;
@@ -46,6 +46,33 @@ namespace ComicsShelf.Helpers.Controls
 
          Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
          this.OnScreenSizeChanged(((NavPage)App.Current.MainPage).ScreenSize);
+      }
+      #endregion
+
+      #region UseFrame
+      public static readonly BindableProperty UseFrameProperty =
+         BindableProperty.Create(nameof(UseFrame), typeof(bool), typeof(CoverFrameView), true,
+         propertyChanged: OnUseFrameChanged);
+      public bool UseFrame
+      {
+         get { return (bool)GetValue(UseFrameProperty); }
+         set { SetValue(UseFrameProperty, value); }
+      }
+      private static void OnUseFrameChanged(BindableObject bindable, object oldValue, object newValue)
+      {
+         var view = (bindable as CoverFrameView);
+         if ((bool)newValue)
+         {
+            view.Label.IsVisible = true;
+            view.Image.Margin = new Thickness(5, 5, 5, 0);
+            ((StackLayout)view.Content).Spacing = 2;
+         }
+         else
+         {
+            view.Label.IsVisible = false;
+            view.Image.Margin = 0;
+            ((StackLayout)view.Content).Spacing = 0;
+         }
       }
       #endregion
 
@@ -97,8 +124,10 @@ namespace ComicsShelf.Helpers.Controls
          try
          {
             var fileColumns = (int)Math.Ceiling(screenSize.Width / (double)160);
+            var screenMargin = 0;
+            if (Device.RuntimePlatform == Device.UWP) { screenMargin = 13 * 2; }
             var frameMargins = (double)((fileColumns + 1) * 10);
-            this.WidthRequest = (screenSize.Width - frameMargins) / (double)fileColumns;
+            this.WidthRequest = (screenSize.Width - screenMargin - frameMargins) / (double)fileColumns;
          }
          catch { }
       }
