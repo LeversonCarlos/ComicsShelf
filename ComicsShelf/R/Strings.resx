@@ -157,7 +157,7 @@
     <value>Top Rated Comics</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Click on the buttons above to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension).</value>
+    <value>Click on the buttons bellow to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension).</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_TITLE" xml:space="preserve">
     <value>You dont have a library defined yet.</value>

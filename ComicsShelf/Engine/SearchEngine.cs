@@ -47,8 +47,8 @@ namespace ComicsShelf.Engine
             {
                await engine.InitializeData();
                if (deepSearch) { await engine.SearchComicFiles(); }
-               await engine.SyncComicFiles(); 
                await engine.PrepareStructure();
+               await engine.SyncComicFiles();
                Engine.Statistics.Execute(library);
                await engine.ExtractAlreadyExistingData();
                if (deepSearch) { await engine.ExtractFeaturedData(); }

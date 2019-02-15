@@ -157,7 +157,7 @@
     <value>Melhor Qualificado</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Clique nos botões acima para adicionar uma pasta LOCAL ou do ONEDRIVE que contenha seus arquivos de quadrinhos (aqueles com a extensão CBZ).</value>
+    <value>Clique nos botões abaixo para adicionar uma pasta LOCAL ou do ONEDRIVE que contenha seus arquivos de quadrinhos (aqueles com a extensão CBZ).</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_TITLE" xml:space="preserve">
     <value>Você não tem uma biblioteca definida ainda.</value>

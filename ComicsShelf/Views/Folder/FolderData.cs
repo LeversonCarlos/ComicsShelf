@@ -71,6 +71,18 @@
 
       #endregion
 
+      #region ReadingPercent
+      double _ReadingPercent;
+      public double ReadingPercent
+      {
+         get { return this._ReadingPercent; }
+         set
+         {
+            this.SetProperty(ref this._ReadingPercent, value);
+         }
+      }
+      #endregion
+
 
       #region Available
       bool _Available;

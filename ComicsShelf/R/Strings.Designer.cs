@@ -178,7 +178,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click on the buttons above to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension)..
+        ///   Looks up a localized string similar to Click on the buttons bellow to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension)..
         /// </summary>
         internal static string LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS {
             get {
