@@ -14,17 +14,17 @@ printf -v versionBuild "%03d" $APPCENTER_BUILD_ID
 echo $versionBuild
 
 
-# ONEDRIVE FILE
-echo "ONEDRIVE_FILE:"
-ONEDRIVE_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf/Libraries/Service/OneDrive/OneDrive.cs
-echo $ONEDRIVE_FILE
+# APPKEY FILE
+echo "APPKEY_FILE:"
+APPKEY_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf/AppKeys.cs
+echo $APPKEY_FILE
 
-if [ -e "$ONEDRIVE_FILE" ]
+if [ -e "$APPKEY_FILE" ]
 then
-    sed -i '' 's/{YOUR_MICROSOFT_APPLICATION_ID}/'$ComicsShelfApplicationID'/' $ONEDRIVE_FILE
+    sed -i '' 's/{YOUR_MICROSOFT_APPLICATION_ID}/'$ComicsShelfApplicationID'/' $APPKEY_FILE
 
-    echo "ONEDRIVE_FILE CONTENT:"
-    cat $ONEDRIVE_FILE
+    echo "APPKEY_FILE CONTENT:"
+    cat $APPKEY_FILE
 fi
 
 

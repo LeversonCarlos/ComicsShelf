@@ -17,7 +17,7 @@ namespace ComicsShelf.Helpers.Controls
          this.Image = new Image
          {                 
             VerticalOptions = LayoutOptions.Start,
-            Aspect = Aspect.Fill
+            Aspect = Aspect.AspectFit
          };
          this.Image.Source = App.HomeData.EmptyCoverImage;
          var imageContainer = new Grid { Children = { this.Image } };
@@ -37,7 +37,7 @@ namespace ComicsShelf.Helpers.Controls
             VerticalOptions = LayoutOptions.Start,
             HorizontalOptions = LayoutOptions.Fill,
             Content = this.Label,
-            Padding = new Thickness(5),
+            Padding = new Thickness(2),
             BackgroundColor = Color.White,
             Opacity = 0.75
          };
@@ -137,7 +137,7 @@ namespace ComicsShelf.Helpers.Controls
             if (Device.RuntimePlatform == Device.UWP) { screenMargin = 13 * 2; }
             var frameMargins = (double)((fileColumns + 1) * 10);
             this.WidthRequest = (screenSize.Width - screenMargin - frameMargins) / (double)fileColumns;
-            this.HeightRequest = this.WidthRequest * 1.53;
+            this.Image.HeightRequest = this.WidthRequest * 1.53;
          }
          catch { }
       }
