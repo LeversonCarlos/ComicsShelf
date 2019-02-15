@@ -5,6 +5,7 @@
    xmlns:home="clr-namespace:ComicsShelf.Views.Home"
    xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls" 
    x:Class="ComicsShelf.Views.Home.HomeView" 
+   BackgroundColor="{StaticResource colorBackground}"
    x:Name="MyHomeView"  
    ItemsSource="{Binding Data.Libraries}">
    <TabbedPage.ToolbarItems>
