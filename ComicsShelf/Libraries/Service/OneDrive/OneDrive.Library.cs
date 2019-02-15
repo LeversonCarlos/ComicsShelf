@@ -27,10 +27,19 @@ namespace ComicsShelf.Libraries.Implementation
 
          var folder = await Service.OneDrive.FolderSelector.Selector.FolderSelect(this.Connector, library);
          if (folder == null) { return false; }
+         folder = await this.Connector.GetDetailsAsync(folder);
+
+         var root = await this.Connector.GetDetailsAsync();
+         folder.FilePath = folder.FilePath.Replace(root.FilePath, "");
+         if (!string.IsNullOrEmpty(folder.FilePath))
+         { folder.FilePath += "/"; }
+         folder.FilePath += folder.FileName;
+         folder.FilePath += "/";
 
          library.LibraryID = folder.id;
          library.Description = $"{folder.FileName}";
          library.Available = true;
+         library.SetKeyValue(LibraryPath, folder.FilePath);
          return true;
       }
 

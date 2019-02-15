@@ -167,7 +167,9 @@ namespace ComicsShelf.Engine
                foreach (var comicFile in comicFiles)
                {
                   this.ComicFiles.Add(comicFile);
-                  App.Database.Insert(comicFile);
+                  try
+                  { App.Database.Insert(comicFile); }
+                  catch { }
                }
             });
 

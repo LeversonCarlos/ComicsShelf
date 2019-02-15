@@ -16,7 +16,7 @@ namespace ComicsShelf.Helpers.Controls
       public SectionView()
       {
 
-         this.Margin = new Thickness(0, 0, 0, 20);
+         this.Margin = new Thickness(0, 0, 0, 5);
          this.Padding = 0;
          this.Spacing = 0;
 
