@@ -20,7 +20,7 @@ namespace ComicsShelf.Helpers.Controls
          {
             VerticalOptions = LayoutOptions.Start,
             Margin = new Thickness(5, 5, 5, 0),
-            Aspect = Aspect.AspectFit
+            Aspect = Aspect.AspectFill
          };
          this.Image.Source = App.HomeData.EmptyCoverImage;
 
@@ -128,6 +128,7 @@ namespace ComicsShelf.Helpers.Controls
             if (Device.RuntimePlatform == Device.UWP) { screenMargin = 13 * 2; }
             var frameMargins = (double)((fileColumns + 1) * 10);
             this.WidthRequest = (screenSize.Width - screenMargin - frameMargins) / (double)fileColumns;
+            this.HeightRequest = this.WidthRequest * 1.53;
          }
          catch { }
       }
