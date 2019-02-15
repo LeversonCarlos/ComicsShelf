@@ -146,7 +146,7 @@ namespace ComicsShelf.Engine
                {
                   ParentPath = x.Key,
                   Total = x.Count(),
-                  Readed = x.Count(f => f.Readed)
+                  Readed = x.Count(f => f.ComicFile.Readed)
                })
                .Select(x => new
                {

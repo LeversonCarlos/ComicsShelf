@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="5856ee04-548d-4ab8-8308-8dd4a500fad2" Publisher="CN=7b6f458e-465e-4208-b994-142c1a17dba1" Version="1.4.34.0" />
+  <Identity Name="5856ee04-548d-4ab8-8308-8dd4a500fad2" Publisher="CN=7b6f458e-465e-4208-b994-142c1a17dba1" Version="1.6.00.0" />
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Comics Shelf</DisplayName>
