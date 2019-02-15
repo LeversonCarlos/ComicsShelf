@@ -14,10 +14,16 @@ namespace ComicsShelf.Libraries.Implementation
          try
          {
 
+            // FOLDER DETAILS
+            var folder = new FileData
+            {
+               id = library.LibraryID,
+               FilePath = library.GetKeyValue(LibraryPath)
+            };
+
             // LOCATE FILES [try 5 times with a 100 milisec sleep between]
             List<FileData> fileList = null;
             int fileListTries = 0;
-            var folder = new FileData { id = library.LibraryID };
             while (fileListTries <= 5)
             {
                fileList = await this.Connector.SearchFilesAsync(folder, "cbz", 10000);
@@ -48,6 +54,8 @@ namespace ComicsShelf.Libraries.Implementation
             foreach (var comicFile in comicFiles)
             {
                comicFile.FullText = System.IO.Path.GetFileNameWithoutExtension(comicFile.FullPath).Trim();
+               if (!string.IsNullOrEmpty(folder.FilePath) && !string.IsNullOrEmpty(comicFile.ParentPath))
+               { comicFile.ParentPath = comicFile.ParentPath.Replace(folder.FilePath, ""); }
                var folderText = System.IO.Path.GetFileNameWithoutExtension(comicFile.ParentPath);
                if (!string.IsNullOrEmpty(folderText))
                { comicFile.SmallText = comicFile.FullText.Replace(folderText, ""); }
