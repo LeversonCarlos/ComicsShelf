@@ -7,7 +7,7 @@ namespace ComicsShelf.Engine
    {
 
       #region Execute
-      public static async void Execute(Libraries.Library library)
+      public static async void Execute(Libraries.Library library, Views.File.FileData fileData = null)
       {
          try
          {
@@ -15,6 +15,7 @@ namespace ComicsShelf.Engine
             {
                engine.RecentFiles();
                engine.ReadingFiles();
+               engine.ReadingFolders(fileData);
             }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -128,6 +129,41 @@ namespace ComicsShelf.Engine
                this.libraryData.ReadingFiles.HasFiles = this.libraryData.ReadingFiles.Files.Count != 0;
             }
 
+         }
+         catch (Exception) { throw; }
+      }
+      #endregion
+
+      #region ReadingFolders
+      private void ReadingFolders(Views.File.FileData fileData)
+      {
+         try
+         {
+            var folders = this.libraryData.Files
+               .Where(x=> fileData==null || x.ComicFile.ParentPath== fileData.ComicFile.ParentPath)
+               .GroupBy(x => x.ComicFile.ParentPath)
+               .Select(x => new
+               {
+                  ParentPath = x.Key,
+                  Total = x.Count(),
+                  Readed = x.Count(f => f.Readed)
+               })
+               .Select(x => new
+               {
+                  x.ParentPath,
+                  x.Total,
+                  x.Readed,
+                  Progress = (double)x.Readed / (double)x.Total 
+               })
+               .ToList();
+            foreach (var folder in folders)
+            {
+               var libraryFolder = this.libraryData.Folders
+                  .Where(f => f.ComicFolder.FullPath == folder.ParentPath)
+                  .FirstOrDefault();
+               if (libraryFolder != null)
+               { libraryFolder.ReadingPercent = folder.Progress; }
+            }
          }
          catch (Exception) { throw; }
       }

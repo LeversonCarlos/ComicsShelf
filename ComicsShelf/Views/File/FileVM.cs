@@ -113,7 +113,7 @@ namespace ComicsShelf.Views.File
             var library = App.Settings.Libraries
                .Where(x => x.LibraryID == this.Data.ComicFile.LibraryPath)
                .FirstOrDefault();
-            Engine.Statistics.Execute(library);
+            Engine.Statistics.Execute(library, this.Data);
             Engine.SyncLibrary.Save(library);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
