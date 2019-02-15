@@ -200,6 +200,12 @@ namespace ComicsShelf.Engine
                if (fileData == null) { continue; }
                var comicFile = fileData.ComicFile;
 
+               fileData.Readed = remoteFile.Readed;
+               fileData.ReadingDate = remoteFile.ReadingDate;
+               fileData.ReadingPage = remoteFile.ReadingPage;
+               fileData.ReadingPercent = remoteFile.ReadingPercent;
+               fileData.Rating = remoteFile.Rating;
+
                comicFile.ReleaseDate = remoteFile.ReleaseDate;
                comicFile.Readed = remoteFile.Readed;
                comicFile.ReadingDate = remoteFile.ReadingDate;
