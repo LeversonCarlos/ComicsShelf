@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.Controls
 {
-   public class CoverFrameView : Frame
+   public class CoverFrameView : AbsoluteLayout
    {
 
       #region New
@@ -11,68 +11,76 @@ namespace ComicsShelf.Helpers.Controls
       {
          this.Margin = new Thickness(0, 0, 10, 10);
          this.Padding = 0;
-         this.HasShadow = false;
          this.BackgroundColor = Color.White;
-         this.BorderColor = Color.LightGray;
-         this.CornerRadius = 0;
 
+         // IMAGE
          this.Image = new Image
-         {
+         {                 
             VerticalOptions = LayoutOptions.Start,
-            Margin = new Thickness(5, 5, 5, 0),
-            Aspect = Aspect.AspectFill
+            Aspect = Aspect.Fill
          };
          this.Image.Source = App.HomeData.EmptyCoverImage;
+         var imageContainer = new Grid { Children = { this.Image } };
+         this.Children.Add(imageContainer);
+         AbsoluteLayout.SetLayoutBounds(imageContainer, new Rectangle(0, 0, 1, 1));
+         AbsoluteLayout.SetLayoutFlags(imageContainer, AbsoluteLayoutFlags.All);
 
          this.Label = new Label
          {
             HorizontalOptions = LayoutOptions.Center,
             LineBreakMode = LineBreakMode.MiddleTruncation,
             FontAttributes = FontAttributes.Bold,
-            Margin = new Thickness(5,0), 
             FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label))
+         };
+         this.LabelContainer = new ContentView
+         {
+            VerticalOptions = LayoutOptions.Start,
+            HorizontalOptions = LayoutOptions.Fill,
+            Content = this.Label,
+            Padding = new Thickness(5),
+            BackgroundColor = Color.White,
+            Opacity = 0.75
          };
 
          this.ProgressBar = new ProgressBar
-         { HorizontalOptions = LayoutOptions.Fill, HeightRequest = 5 };
-
-         this.Content = new StackLayout
          {
-            Margin = 0,
-            Padding = 0,
-            Spacing = 2,
-            Children = { this.Image, this.Label, this.ProgressBar }
+            HorizontalOptions = LayoutOptions.Fill,
+            VerticalOptions = LayoutOptions.EndAndExpand,
+            HeightRequest = 5,
+            BackgroundColor = Color.White,
+            Opacity = 0.75
          };
+
+         this.OverlayContainer = new StackLayout
+         {
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            Children = { this.LabelContainer, this.ProgressBar },
+            InputTransparent = true
+         };
+         this.Children.Add(this.OverlayContainer);
+         AbsoluteLayout.SetLayoutBounds(this.OverlayContainer, new Rectangle(0, 0, 1, 1));
+         AbsoluteLayout.SetLayoutFlags(this.OverlayContainer, AbsoluteLayoutFlags.All);
 
          Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
          this.OnScreenSizeChanged(((NavPage)App.Current.MainPage).ScreenSize);
       }
       #endregion
 
-      #region UseFrame
-      public static readonly BindableProperty UseFrameProperty =
-         BindableProperty.Create(nameof(UseFrame), typeof(bool), typeof(CoverFrameView), true,
-         propertyChanged: OnUseFrameChanged);
-      public bool UseFrame
+      #region ShowOverlay
+      StackLayout OverlayContainer; 
+      public static readonly BindableProperty ShowOverlayProperty =
+         BindableProperty.Create(nameof(ShowOverlay), typeof(bool), typeof(CoverFrameView), true,
+         propertyChanged: OnShowOverlayChanged);
+      public bool ShowOverlay
       {
-         get { return (bool)GetValue(UseFrameProperty); }
-         set { SetValue(UseFrameProperty, value); }
+         get { return (bool)GetValue(ShowOverlayProperty); }
+         set { SetValue(ShowOverlayProperty, value); }
       }
-      private static void OnUseFrameChanged(BindableObject bindable, object oldValue, object newValue)
+      private static void OnShowOverlayChanged(BindableObject bindable, object oldValue, object newValue)
       {
          var view = (bindable as CoverFrameView);
-         if ((bool)newValue)
-         {
-            view.Label.IsVisible = true;
-            view.Image.Margin = new Thickness(5, 5, 5, 0);
-            ((StackLayout)view.Content).Spacing = 2;
-         }
-         else
-         {
-            view.Label.IsVisible = false;
-            view.Image.Margin = 0;
-            ((StackLayout)view.Content).Spacing = 0;
-         }
+         view.LabelContainer.IsVisible = (bool)newValue;
+         view.Label.IsVisible = (bool)newValue;
       }
       #endregion
 
@@ -91,6 +99,7 @@ namespace ComicsShelf.Helpers.Controls
       #endregion
 
       #region Text
+      ContentView LabelContainer { get; set; }
       Label Label { get; set; }
       public static readonly BindableProperty TextProperty =
          BindableProperty.Create("Text", typeof(string), typeof(CoverFrameView), string.Empty,

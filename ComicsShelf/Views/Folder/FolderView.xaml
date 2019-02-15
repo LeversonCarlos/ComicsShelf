@@ -14,7 +14,7 @@
                ItemTappedCommand="{Binding FileTappedCommand}">
                <controls:SectionView.ItemTemplate>
                   <DataTemplate>
-                     <controls:CoverFrameView UseFrame="False"
+                     <controls:CoverFrameView ShowOverlay="True"
                         Text="{Binding SmallText}" Progress="{Binding ReadingPercent}" 
                         ImageSource="{Binding CoverPath}" >
                      </controls:CoverFrameView>
