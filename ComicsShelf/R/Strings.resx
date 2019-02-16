@@ -202,7 +202,7 @@
     <value>Preparing the folders structure</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
-    <value>Searching for new comic files on the device</value>
+    <value>Searching for comic files on your libraries</value>
   </data>
   <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
     <value>Checking permissions</value>

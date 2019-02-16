@@ -313,7 +313,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Searching for new comic files on the device.
+        ///   Looks up a localized string similar to Searching for comic files on your libraries.
         /// </summary>
         internal static string SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE {
             get {
