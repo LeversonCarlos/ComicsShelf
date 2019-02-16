@@ -7,7 +7,7 @@ namespace ComicsShelf.Helpers.Controls
 
       public EngineProgressView()
       {
-         this.VerticalOptions = LayoutOptions.FillAndExpand;
+         this.VerticalOptions = LayoutOptions.End;
          this.Padding = new Thickness(50, 10);
 
          this.Activity = new ActivityIndicator { IsEnabled = true, IsVisible = true, IsRunning = true };

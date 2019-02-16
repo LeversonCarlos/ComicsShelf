@@ -202,7 +202,7 @@
     <value>Preparando a estrutura de pastas</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
-    <value>Procurando novos quadrinhos no dispositivo</value>
+    <value>Procurando quadrinhos em suas bibliotecas</value>
   </data>
   <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
     <value>Verificando permissões</value>

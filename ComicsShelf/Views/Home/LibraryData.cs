@@ -61,8 +61,6 @@ namespace ComicsShelf.Views.Home
       {
          var featuredSection = this.Sections.Where(x => x.ComicFolder.Key == featuredSectionName).FirstOrDefault();
          return featuredSection;
-         // if (featuredSection == null) { return new Helpers.Observables.ObservableList<File.FileData>(); }
-         // return featuredSection.Files;
       }
 
 
