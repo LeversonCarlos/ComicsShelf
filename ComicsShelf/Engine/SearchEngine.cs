@@ -144,36 +144,33 @@ namespace ComicsShelf.Engine
             var comicFiles = await this.libraryService.SearchFilesAsync(library);
             if (comicFiles == null || comicFiles.Count == 0) { return; }
 
-            // ACTIVATE FOUND FILES
-            var foundKeys = comicFiles.Select(x => x.Key).ToList();
-            this.ComicFiles
-               .Where(x => foundKeys.Contains(x.Key))
-               .AsParallel()
-               .ForAll(x => x.Available = true);
-
-            // ALREADY EXISTING FILES
-            var existingKeys = this.ComicFiles.Select(x => x.Key).ToList();
-            comicFiles.RemoveAll(x => existingKeys.Contains(x.Key));
-
-            // COVER PATH   
-            comicFiles
-               .AsParallel()
-               .ForAll(x => x.CoverPath = $"{settings.Paths.CoversCachePath}{settings.Paths.Separator}{x.Key}.jpg");
-
-            // SAVE 
-            await Task.Run(() =>
+            // LOOP THROUGH FILES
+            foreach (var file in comicFiles)
             {
-               foreach (var comicFile in comicFiles)
+               var locatedFile = this.ComicFiles.Where(x => x.Key == file.Key).FirstOrDefault();
+
+               // INSERT NEW FOUND FILE
+               if (locatedFile == null)
                {
-                  this.ComicFiles.Add(comicFile);
+                  file.CoverPath = $"{settings.Paths.CoversCachePath}{settings.Paths.Separator}{file.Key}.jpg";
+                  this.ComicFiles.Add(file);
                   try
-                  { App.Database.Insert(comicFile); }
+                  { await Task.Run(() => App.Database.Insert(file)); }
                   catch { }
                }
-            });
 
-            await Task.Run(() =>
-            { this.ComicFiles.AsParallel().ForAll(x => App.Database.Update(x)); });
+               // UPDATE ALREADY EXISTING FILE
+               if (locatedFile != null)
+               {
+                  locatedFile.Available = true;
+                  locatedFile.FullPath = file.FullPath;
+                  locatedFile.ParentPath = file.ParentPath;
+                  locatedFile.FullText = file.FullText;
+                  locatedFile.SmallText = file.SmallText;
+                  await Task.Run(()=> App.Database.Update(locatedFile));
+               }
+
+            }
 
          }
          catch (Exception) { throw; }
