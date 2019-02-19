@@ -227,7 +227,7 @@ namespace ComicsShelf.Engine
       {
          try
          {
-            this.Notify(R.Strings.SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE);
+            this.Notify(R.Strings.SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE);
 
             this.Notify("Preparing Files", 0.0);
             this.PrepareFiles();
