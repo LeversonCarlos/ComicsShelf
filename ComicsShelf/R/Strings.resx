@@ -195,26 +195,20 @@
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Loading current database data</value>
   </data>
-  <data name="SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparing the files structure</value>
-  </data>
-  <data name="SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparing the folders structure</value>
+  <data name="SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE" xml:space="preserve">
+    <value>Organizing shelves structure</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Searching for comic files on your libraries</value>
   </data>
-  <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
-    <value>Checking permissions</value>
-  </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
-    <value>Extracting data from Featured comic files</value>
+    <value>Loading covers for Featured comic files</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE" xml:space="preserve">
-    <value>Extracting data from Folders comic files</value>
+    <value>Loading covers for Folders comic files</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE" xml:space="preserve">
-    <value>Extracting data from all Remaining comic files</value>
+    <value>Loading covers for all Remaining comic files</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Loading database</value>

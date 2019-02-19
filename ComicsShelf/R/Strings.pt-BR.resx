@@ -195,26 +195,20 @@
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Carregando dados da base de dados</value>
   </data>
-  <data name="SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparando a estrutura de arquivos</value>
-  </data>
-  <data name="SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE" xml:space="preserve">
-    <value>Preparando a estrutura de pastas</value>
+  <data name="SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE" xml:space="preserve">
+    <value>Organizando estruturas das prateleiras</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Procurando quadrinhos em suas bibliotecas</value>
   </data>
-  <data name="STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE" xml:space="preserve">
-    <value>Verificando permissões</value>
-  </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
-    <value>Extraindo informações dos quadrinhos em Destaque</value>
+    <value>Carregando capas dos quadrinhos em Destaque</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE" xml:space="preserve">
-    <value>Extraindo informações dos quadrinhos Capa de Pasta</value>
+    <value>Carregando capas das àstas de quadrinhos</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE" xml:space="preserve">
-    <value>Extraindo informações dos quadrinhos Restantes</value>
+    <value>Carregando capas dos quadrinhos Restantes</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Carregando base de dados</value>

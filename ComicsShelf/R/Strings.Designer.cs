@@ -295,20 +295,11 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preparing the files structure.
+        ///   Looks up a localized string similar to Organizing shelves structure.
         /// </summary>
-        internal static string SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE {
+        internal static string SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE {
             get {
-                return ResourceManager.GetString("SEARCH_ENGINE_PREPARING_FILES_STRUCTURE_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preparing the folders structure.
-        /// </summary>
-        internal static string SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE {
-            get {
-                return ResourceManager.GetString("SEARCH_ENGINE_PREPARING_FOLDERS_STRUCTURE_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE", resourceCulture);
             }
         }
         
@@ -322,16 +313,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking permissions.
-        /// </summary>
-        internal static string STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_ENGINE_CHECK_PERMISSIONS_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Extracting data from Featured comic files.
+        ///   Looks up a localized string similar to Loading covers for Featured comic files.
         /// </summary>
         internal static string STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE {
             get {
@@ -340,7 +322,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting data from Folders comic files.
+        ///   Looks up a localized string similar to Loading covers for Folders comic files.
         /// </summary>
         internal static string STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE {
             get {
@@ -349,7 +331,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Extracting data from all Remaining comic files.
+        ///   Looks up a localized string similar to Loading covers for all Remaining comic files.
         /// </summary>
         internal static string STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE {
             get {
