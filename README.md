@@ -25,14 +25,14 @@ Happy reading.
 ## Some screenshots
 
 <p align="center">
-  <img src="./resources/Screenshots/PhoneFeatured.png" 
-     title="Phone Featured" width="108" height="192" />
-  <img src="./resources/Screenshots/PhoneCollection.png" 
-     title="Phone Collection" width="108" height="192" />  
-  <img src="./resources/Screenshots/PhoneOpened.png" 
-     title="Phone Opened" width="108" height="192" />  
-  <img src="./resources/Screenshots/TabletFeatured.png" 
-     title="Tablet Featured" width="256" height="192" />    
+  <img src="./resources/Screenshots/Phone/05.PNG" 
+     title="Comics Shelf on Phone" width="108" height="192" />
+  <img src="./resources/Screenshots/Phone/06.PNG" 
+     title="Opened Comic on Phone" width="108" height="192" />  
+  <img src="./resources/Screenshots/Phone/01.PNG" 
+     title="Empty Library on Phone" width="108" height="192" />  
+  <img src="./resources/Screenshots/Tablet10/06.PNG" 
+     title="Opened Comic on Tablet" width="256" height="192" />    
 </p>
 
 ## Try it out
