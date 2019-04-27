@@ -11,7 +11,7 @@
       
       private void NewLocalLibrary_Clicked(object sender, System.EventArgs e)
       {
-         (this.BindingContext as ShellVM).NewLibraryCommand.Execute(Libraries.LibraryType.FileSystem);
+         (this.BindingContext as ShellVM).NewLibraryCommand.Execute(Libraries.LibraryType.LocalDrive);
       }
 
       private void NewOneDriveLibrary_Clicked(object sender, System.EventArgs e)

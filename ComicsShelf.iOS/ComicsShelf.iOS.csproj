@@ -153,13 +153,13 @@
     <BundleResource Include="Resources\icon_home%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_FileSystem_New.png" />
+    <BundleResource Include="Resources\icon_LocalDrive_New.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_FileSystem_New%402x.png" />
+    <BundleResource Include="Resources\icon_LocalDrive_New%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_FileSystem_New%403x.png" />
+    <BundleResource Include="Resources\icon_LocalDrive_New%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_Delete.png" />

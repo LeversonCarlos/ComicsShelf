@@ -5021,13 +5021,13 @@ namespace ComicsShelf.Droid
 			public const int icon_Delete = 2130837772;
 			
 			// aapt resource value: 0x7f02010d
-			public const int icon_FileSystem = 2130837773;
+			public const int icon_home = 2130837773;
 			
 			// aapt resource value: 0x7f02010e
-			public const int icon_FileSystem_New = 2130837774;
+			public const int icon_LocalDrive = 2130837774;
 			
 			// aapt resource value: 0x7f02010f
-			public const int icon_home = 2130837775;
+			public const int icon_LocalDrive_New = 2130837775;
 			
 			// aapt resource value: 0x7f020110
 			public const int icon_OneDrive = 2130837776;

@@ -2,7 +2,7 @@
 
 namespace ComicsShelf.Libraries
 {
-   public enum LibraryType : short { FileSystem = 0, OneDrive = 1 }
+   public enum LibraryType : short { LocalDrive = 0, OneDrive = 1 }
    public class LibraryModel
    {
 

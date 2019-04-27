@@ -112,12 +112,12 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_FileSystem_New.png">
+    <AndroidResource Include="Resources\drawable\icon_LocalDrive_New.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_FileSystem.png">
+    <AndroidResource Include="Resources\drawable\icon_LocalDrive.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
   </ItemGroup>
