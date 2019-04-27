@@ -2,11 +2,11 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Helpers
+namespace ComicsShelf.Controls
 {
 
    [ContentProperty("Text")]
-   public class TranslateExtension : Observables.ObservableObject, IMarkupExtension
+   public class TranslateExtension : Helpers.Observables.ObservableObject, IMarkupExtension
    {
 
       public string Text { get; set; }

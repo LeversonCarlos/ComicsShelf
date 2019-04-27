@@ -2,6 +2,7 @@
 {
    public class FolderData
    {
-      public string Path { get; set; }
+      public string FolderPath { get; set; }
+      public string FolderName { get; set; }
    }
 }

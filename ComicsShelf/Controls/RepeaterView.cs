@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.Controls
+namespace ComicsShelf.Controls
 {
    public class RepeaterView : StackLayout
    {

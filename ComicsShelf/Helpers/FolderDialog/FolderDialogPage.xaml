@@ -2,7 +2,7 @@
 <ContentPage 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    x:Class="ComicsShelf.Helpers.FolderDialog.FolderDialogPage" 
    BackgroundColor="{StaticResource colorBackground}">
    <ContentPage.Content>
@@ -12,9 +12,15 @@
 
          <Frame BackgroundColor="White" Padding="10">
             <StackLayout Orientation="Vertical" Spacing="5">
-               <Label Text="{helpers:Translate Text=FOLDER_DIALOG_SELECTED_PATH_LABEL}" FontSize="Micro"></Label>
-               <Label Text="{Binding CurrentItem.Path}" FontSize="Default" FontAttributes="Bold"></Label>
+               <Label Text="{controls:Translate Text=FOLDER_DIALOG_SELECTED_PATH_LABEL}" FontSize="Micro"></Label>
+               <Label Text="{Binding CurrentItem.FolderPath}" FontSize="Default" FontAttributes="Bold"></Label>
             </StackLayout>
+         </Frame>
+
+         <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+            <ScrollView Orientation="Vertical" >
+
+            </ScrollView>
          </Frame>
 
       </StackLayout>
