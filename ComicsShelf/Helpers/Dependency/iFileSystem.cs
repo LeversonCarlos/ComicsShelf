@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers
 {
-
    public interface IFileSystem : IDisposable
    {
 
+      Task<bool> Validate(string libraryKey);
+
+      /*
       string PathSeparator { get; }
 
       string GetCachePath();
       string GetDataPath();
 
-      Task<bool> ValidateLibraryPath(Libraries.Library library);
       Task<string> GetLibraryPath();
 
       Task<string[]> GetFiles(string path);
@@ -26,14 +26,7 @@ namespace ComicsShelf.Helpers
 
       Task<bool> SaveDataAsync(Libraries.Library library, byte[] serializedData);
       Task<byte[]> LoadDataAsync(Libraries.Library library);
+      */
 
    }
-
-   public class FileSystem
-   {
-      public static iFileSystem Get()
-      { return DependencyService.Get<iFileSystem>(); }
-
-   }
-
 }
