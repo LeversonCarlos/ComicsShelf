@@ -47,7 +47,7 @@ namespace ComicsShelf.Libraries
             var shellSection = new ShellSection { Title = library.Description };
             shellSection.Items.Add(shellContent);
 
-            var shellItem = new ShellItem { Title = library.Description };
+            var shellItem = new ShellItem { Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
             shellItem.Items.Add(shellSection);
 
             Shell.CurrentShell.Items.Add(shellItem);
@@ -95,7 +95,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            for (int i = 0; i < Shell.CurrentShell.Items.Count-1; i++)
+            for (int i = 0; i < Shell.CurrentShell.Items.Count - 1; i++)
             {
                var shellItem = Shell.CurrentShell.Items[i];
                if (shellItem.Title == library.Description) /* this must be using a ID here */

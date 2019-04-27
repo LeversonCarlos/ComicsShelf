@@ -153,12 +153,12 @@
     <BundleResource Include="Resources\icon_home%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_folder-new.png" />
+    <BundleResource Include="Resources\icon_FileSystem_New.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_folder-new%402x.png" />
+    <BundleResource Include="Resources\icon_FileSystem_New%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_folder-new%403x.png" />
+    <BundleResource Include="Resources\icon_FileSystem_New%403x.png" />
   </ItemGroup>
 </Project>
