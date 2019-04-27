@@ -5,7 +5,7 @@ using Xamarin.Forms;
 namespace ComicsShelf.Helpers
 {
 
-   public interface iFileSystem : IDisposable
+   public interface IFileSystem : IDisposable
    {
 
       string PathSeparator { get; }
