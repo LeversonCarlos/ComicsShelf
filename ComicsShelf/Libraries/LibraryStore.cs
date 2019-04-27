@@ -41,7 +41,7 @@ namespace ComicsShelf.Libraries
             {
                Title = library.Description,
                BindingContext = new LibraryVM(library),
-               ContentTemplate = new DataTemplate(typeof(Libraries.LibraryPage))
+               ContentTemplate = new DataTemplate(typeof(LibraryPage))
             };
 
             var shellSection = new ShellSection { Title = library.Description };
@@ -109,7 +109,6 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception) { throw; }
       }
-
 
 
       public void LoadLibraries()

@@ -49,11 +49,11 @@
    </Shell.Resources>
 
    <Shell.MenuItems>
-      <MenuItem Text="New Library" Clicked="MenuItem_Clicked"></MenuItem>
+      <MenuItem Icon="icon_folder-new.png" Text="New Local Library" Clicked="MenuItem_Clicked"></MenuItem>
    </Shell.MenuItems>
 
    <!-- Your Pages -->
-   <ShellItem Title="Original">
+   <ShellItem FlyoutIcon="icon_home.png" Title="Home">
       <ShellSection Title="Browse" Icon="tab_feed.png">
          <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
       </ShellSection>
