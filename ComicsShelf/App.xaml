@@ -18,7 +18,7 @@
          </Style>
          <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}" >
             <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
-            <Setter Property="ForegroundColor" Value="White" />
+            <Setter Property="TextColor" Value="White" />
          </Style>
 
       </ResourceDictionary>

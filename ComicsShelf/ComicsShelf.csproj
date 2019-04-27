@@ -37,7 +37,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="R\Strings.pt-BR.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="R\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Helpers.FolderDialog
 {
-   internal class FolderDialog
+   internal class Selector
    {
 
-      public static async Task<FolderData> GetFolder(FolderData initialFolder, Func<FolderData, Task<List<FolderData>>> getFolderChilds)
+      public static async Task<Folder> GetFolder(Folder initialFolder, Func<Folder, Task<Folder[]>> getFolderChilds)
       {
          try
          {

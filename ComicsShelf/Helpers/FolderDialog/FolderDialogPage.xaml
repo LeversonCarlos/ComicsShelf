@@ -13,7 +13,7 @@
          <Frame BackgroundColor="White" Padding="10">
             <StackLayout Orientation="Vertical" Spacing="5">
                <Label Text="{controls:Translate Text=FOLDER_DIALOG_SELECTED_PATH_LABEL}" FontSize="Micro"></Label>
-               <Label Text="{Binding CurrentItem.FolderPath}" FontSize="Default" FontAttributes="Bold"></Label>
+               <Label Text="{Binding CurrentItem.Path}" FontSize="Default" FontAttributes="Bold"></Label>
             </StackLayout>
          </Frame>
 
@@ -24,7 +24,7 @@
                      <controls:RepeaterView.ItemTemplate>
                         <DataTemplate>
                            <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="Fill" >
-                              <Label Text="{Binding FolderName}"></Label>
+                              <Label Text="{Binding Name}"></Label>
                            </StackLayout>
                         </DataTemplate>
                      </controls:RepeaterView.ItemTemplate>
