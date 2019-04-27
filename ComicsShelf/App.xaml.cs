@@ -16,7 +16,12 @@ namespace ComicsShelf
 
       protected override void OnStart()
       {
-         // Handle when your app starts
+         try
+         {
+            var libraryStore = DependencyService.Get<Libraries.LibraryStore>();
+            libraryStore.LoadLibraries();
+         }
+         catch { throw; }
       }
 
       protected override void OnSleep()
