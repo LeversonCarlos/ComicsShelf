@@ -5,7 +5,7 @@
        RouteHost="friendship.com"
        RouteScheme="app"
        Route="ComicsShelf"
-       FlyoutBehavior="Disabled"
+       FlyoutBehavior="Flyout"
        Title="ComicsShelf"
        x:Class="ComicsShelf.AppShell">
 
@@ -48,8 +48,12 @@
       </ResourceDictionary>
    </Shell.Resources>
 
+   <Shell.MenuItems>
+      <MenuItem Text="New Library" Clicked="MenuItem_Clicked"></MenuItem>
+   </Shell.MenuItems>
+
    <!-- Your Pages -->
-   <ShellItem>
+   <ShellItem Title="Original">
       <ShellSection Title="Browse" Icon="tab_feed.png">
          <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
       </ShellSection>

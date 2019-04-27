@@ -1,8 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.Services;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using ComicsShelf.Services;
-using ComicsShelf.Views;
 
 namespace ComicsShelf
 {
@@ -13,6 +10,7 @@ namespace ComicsShelf
       {
          InitializeComponent();
          DependencyService.Register<MockDataStore>();
+         DependencyService.Register<Libraries.LibraryStore>();
          MainPage = new AppShell();
       }
 
