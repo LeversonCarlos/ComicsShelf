@@ -170,4 +170,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_Delete%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_OneDrive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_OneDrive%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_OneDrive%403x.png" />
+  </ItemGroup>
 </Project>
