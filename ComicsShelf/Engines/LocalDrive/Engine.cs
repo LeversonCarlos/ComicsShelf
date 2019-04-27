@@ -1,6 +1,7 @@
 ﻿using ComicsShelf.Libraries;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Engines.LocalDrive
 {
@@ -17,9 +18,9 @@ namespace ComicsShelf.Engines.LocalDrive
          throw new NotImplementedException();
       }
 
-      public Task<bool> Validate(LibraryModel library)
+      private Helpers.IFileSystem FileSystem
       {
-         throw new NotImplementedException();
+         get { return DependencyService.Get<Helpers.IFileSystem>(); }
       }
 
    }
