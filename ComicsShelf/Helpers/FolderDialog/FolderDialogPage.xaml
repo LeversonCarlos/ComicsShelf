@@ -18,10 +18,26 @@
          </Frame>
 
          <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
-            <ScrollView Orientation="Vertical" >
-
-            </ScrollView>
+            <StackLayout >
+               <ScrollView VerticalOptions="FillAndExpand" Orientation="Vertical" >
+                  <controls:RepeaterView ItemsSource="{Binding Data}" ItemTappedCommand="{Binding ItemSelectCommand}">
+                     <controls:RepeaterView.ItemTemplate>
+                        <DataTemplate>
+                           <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="Fill" >
+                              <Label Text="{Binding FolderName}"></Label>
+                           </StackLayout>
+                        </DataTemplate>
+                     </controls:RepeaterView.ItemTemplate>
+                  </controls:RepeaterView>
+               </ScrollView>
+               <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            </StackLayout>
          </Frame>
+
+         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Button Text="{controls:Translate Text=FOLDER_DIALOG_CANCEL_COMMAND}" Command="{Binding CancelCommand}" Style="{StaticResource BaseButton}"></Button>
+            <Button Text="{controls:Translate Text=FOLDER_DIALOG_CONFIRM_COMMAND}" Command="{Binding ConfirmCommand}" Style="{StaticResource PrimaryButton}" ></Button>
+         </StackLayout>
 
       </StackLayout>
    </ContentPage.Content>

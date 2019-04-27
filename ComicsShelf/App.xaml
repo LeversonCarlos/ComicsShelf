@@ -12,6 +12,15 @@
          <Color x:Key="colorLightGray">#BDBDBD</Color>
          <Color x:Key="colorBackground">#EEEEEE</Color>
 
+         <!-- BUTTON -->
+         <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="Padding" Value="5,10"></Setter>
+         </Style>
+         <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}" >
+            <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="ForegroundColor" Value="White" />
+         </Style>
+
       </ResourceDictionary>
    </Application.Resources>
 </Application>
