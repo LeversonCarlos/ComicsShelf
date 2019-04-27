@@ -5,11 +5,11 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers.FolderDialog
 {
-   public class FolderDialogVM : BaseVM
+   internal class FolderDialogVM : BaseVM
    {
 
-      readonly ObservableList<FolderData> Data;
-      readonly TaskCompletionSource<FolderData> tcs;
+      internal readonly ObservableList<FolderData> Data;
+      private readonly TaskCompletionSource<FolderData> tcs;
       public FolderDialogVM()
       {
          this.Title = R.Strings.FOLDER_DIALOG_TITLE;
