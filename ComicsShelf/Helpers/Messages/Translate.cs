@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Helpers.Controls
+namespace ComicsShelf.Helpers
 {
 
    [ContentProperty("Text")]
