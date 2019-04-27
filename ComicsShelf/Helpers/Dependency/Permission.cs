@@ -11,7 +11,7 @@ namespace ComicsShelf.Helpers
       public static async Task<bool> HasStoragePermission()
       {
          try
-         {
+         {  
             var permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
             if (permissionStatus != PermissionStatus.Granted)
             {

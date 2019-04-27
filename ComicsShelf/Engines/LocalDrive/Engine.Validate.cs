@@ -8,7 +8,9 @@ namespace ComicsShelf.Engines.LocalDrive
 
       public async Task<bool> Validate(LibraryModel library)
       {
-         return await this.FileSystem.Validate(library.Key);
+         if (!await Helpers.Permissions.HasStoragePermission()) { return false; }
+         if (!await this.FileSystem.Validate(library.Key)) { return false; }
+         return true;
       }
 
    }
