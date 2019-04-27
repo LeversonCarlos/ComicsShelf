@@ -2,33 +2,14 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
        xmlns:local="clr-namespace:ComicsShelf.Views"
-       RouteHost="companyname.com"
+       RouteHost="friendship.com"
        RouteScheme="app"
        Route="ComicsShelf"
        FlyoutBehavior="Disabled"
        Title="ComicsShelf"
        x:Class="ComicsShelf.AppShell">
 
-    <!--
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        XXXXXXXX|                            |XXXXXXXX
-        XXXXXXX'                              'XXXXXXX
-        XXXXXx.                                .xNXXXX
-        XXXNo.        ,ll;.        .;ll,        .oNXXX
-        XXX|.         ,OXNo.      .oNXO,          cXXX
-        XX|            'XXNx.    .xNXX'            |XX
-        X|              .xXXX.  .XXXx.              |X
-        |                .xXXOllOXXx.                |
-        |                .xXXXccXXXx.                |
-        X|              .XXXx.  .xXXX.              |X
-        XXc            ,OXNd.    .dNXO,            cXX
-        XXXl.         ;XXXo.      .oNXX;         .lXXX
-        XXXNd.        'cc,          ,cc'        .dNXXX
-        XXXXXx.                                .xXXXXX
-        XXXXXXO'                              'OXXXXXX
-        XXXXXXXX|                            |XXXXXXXX
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
+   <!--
         Shell is an all new way to quickly get started with your application. There are 3 levels to a Shell app:
         * ShellItem: populates the Flyout menu along with special menu items
         * ShellSection: groups of 1 or more ContentPage displayed as bottom tabs
@@ -47,38 +28,37 @@
         - David Ortinau, Senior Program Manager for Mobile Dev Tools [david.ortinau@microsoft.com]
     -->
 
-    <!-- 
+   <!-- 
         Styles and Resources 
     -->
-    <Shell.Resources>
-        <ResourceDictionary>
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
-            <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.ShellBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.ShellForegroundColor" Value="White" />
-                <Setter Property="Shell.ShellTitleColor" Value="White" />
-                <Setter Property="Shell.ShellDisabledColor" Value="#B4FFFFFF" />
-                <Setter Property="Shell.ShellUnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.ShellTabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="Shell.ShellTabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.ShellTabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.ShellTabBarTitleColor" Value="White"/>
-            </Style>
-            <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
-        </ResourceDictionary>
-    </Shell.Resources>
+   <Shell.Resources>
+      <ResourceDictionary>
+         <Style x:Key="BaseStyle" TargetType="Element">
+            <Setter Property="Shell.ShellBackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="Shell.ShellForegroundColor" Value="White" />
+            <Setter Property="Shell.ShellTitleColor" Value="White" />
+            <Setter Property="Shell.ShellDisabledColor" Value="#B4FFFFFF" />
+            <Setter Property="Shell.ShellUnselectedColor" Value="#95FFFFFF" />
+            <Setter Property="Shell.ShellTabBarBackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="Shell.ShellTabBarForegroundColor" Value="White"/>
+            <Setter Property="Shell.ShellTabBarUnselectedColor" Value="#95FFFFFF"/>
+            <Setter Property="Shell.ShellTabBarTitleColor" Value="White"/>
+         </Style>
+         <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
+      </ResourceDictionary>
+   </Shell.Resources>
 
-    <!-- Your Pages -->
-    <ShellItem>
-        <ShellSection Title="Browse" Icon="tab_feed.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
-        </ShellSection>
-        <ShellSection Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
-        </ShellSection>
-    </ShellItem>
+   <!-- Your Pages -->
+   <ShellItem>
+      <ShellSection Title="Browse" Icon="tab_feed.png">
+         <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+      </ShellSection>
+      <ShellSection Title="About" Icon="tab_about.png">
+         <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+      </ShellSection>
+   </ShellItem>
 
-    <!-- Optional Templates 
+   <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.
 
     // This header appears at the top of the Flyout.

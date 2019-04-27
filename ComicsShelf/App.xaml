@@ -2,7 +2,16 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ComicsShelf.App">
-    <Application.Resources>
-        
-    </Application.Resources>
+   <Application.Resources>
+      <ResourceDictionary>
+
+         <!-- COLORS -->
+         <Color x:Key="colorPrimary">#FF5722</Color>
+         <Color x:Key="colorPrimaryDark">#E64A19</Color>
+         <Color x:Key="colorAccent">#536DFE</Color>
+         <Color x:Key="colorLightGray">#BDBDBD</Color>
+         <Color x:Key="colorBackground">#EEEEEE</Color>
+
+      </ResourceDictionary>
+   </Application.Resources>
 </Application>
