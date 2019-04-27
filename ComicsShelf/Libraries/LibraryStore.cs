@@ -26,13 +26,15 @@ namespace ComicsShelf.Libraries
             this.SetLibraryIDs(libraryIDs);
 
             // UPDATE SHELL
-            this.AddLibraryShell(library);
+            var shellItem = this.AddLibraryShell(library);
+            Shell.CurrentShell.CurrentItem = shellItem;
+            Shell.CurrentShell.FlyoutIsPresented = false;
 
          }
          catch (Exception) { throw; }
       }
 
-      private void AddLibraryShell(LibraryModel library)
+      private ShellItem AddLibraryShell(LibraryModel library)
       {
          try
          {
@@ -51,6 +53,7 @@ namespace ComicsShelf.Libraries
             shellItem.Items.Add(shellSection);
 
             Shell.CurrentShell.Items.Add(shellItem);
+            return shellItem;
 
          }
          catch (Exception) { throw; }
@@ -70,12 +73,14 @@ namespace ComicsShelf.Libraries
       }
 
 
-      public void DeleteLibrary(LibraryModel library)
+      public void DeleteLibrary(ShellItem libraryShell)
       {
          try
          {
 
             // REMOVE LIBRARY MODEL
+            var libraryVM = libraryShell.Items[0].Items[0].BindingContext as LibraryVM;
+            var library = libraryVM.Library;
             var libraryID = $"{LibraryIDs}.{library.ID}";
             Xamarin.Essentials.Preferences.Remove(libraryID);
 
@@ -85,31 +90,12 @@ namespace ComicsShelf.Libraries
             this.SetLibraryIDs(libraryIDs);
 
             // UPDATE SHELL
-            this.DeleteLibraryShell(library);
+            Shell.CurrentShell.CurrentItem = Shell.CurrentShell.Items[0];
+            Shell.CurrentShell.Items.Remove(libraryShell);
 
          }
          catch (Exception) { throw; }
       }
-
-      private void DeleteLibraryShell(LibraryModel library)
-      {
-         try
-         {
-            for (int i = 0; i < Shell.CurrentShell.Items.Count - 1; i++)
-            {
-               var shellItem = Shell.CurrentShell.Items[i];
-               if (shellItem.Title == library.Description) /* this must be using a ID here */
-               {
-
-                  shellItem.Items.Clear();
-                  Shell.CurrentShell.Items.RemoveAt(i);
-                  break;
-               }
-            }
-         }
-         catch (Exception) { throw; }
-      }
-
 
       public void LoadLibraries()
       {

@@ -9,10 +9,9 @@
          this.BindingContext = new ShellVM();
       }
       
-      private void MenuItem_Clicked(object sender, System.EventArgs e)
+      private void NewLocalLibrary_Clicked(object sender, System.EventArgs e)
       {
-         (this.BindingContext as ShellVM).NewLibraryCommand.Execute(null);
-         // (this.BindingContext as ShellVM).NewLibrary();
+         (this.BindingContext as ShellVM).NewLibraryCommand.Execute(Libraries.LibraryType.FileSystem);
       }
 
    }

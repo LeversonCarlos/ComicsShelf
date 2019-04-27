@@ -10,5 +10,10 @@ namespace ComicsShelf.Libraries
       {
          InitializeComponent();
       }
+
+      private void DeleteLibrary_Clicked(object sender, System.EventArgs e)
+      {
+         (Shell.CurrentShell.BindingContext as ShellVM).DeleteLibraryCommand.Execute(Shell.CurrentShell.CurrentItem);
+      }
    }
 }

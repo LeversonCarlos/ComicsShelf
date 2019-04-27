@@ -49,7 +49,7 @@
    </Shell.Resources>
 
    <Shell.MenuItems>
-      <MenuItem Icon="icon_FileSystem_New.png" Text="New Local Library" Clicked="MenuItem_Clicked"></MenuItem>
+      <MenuItem Icon="icon_FileSystem_New.png" Text="New Local Library" Clicked="NewLocalLibrary_Clicked"></MenuItem>
    </Shell.MenuItems>
 
    <!-- Your Pages -->
