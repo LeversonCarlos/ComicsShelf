@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using ComicsShelf.Helpers.Observables;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,14 +12,15 @@ namespace ComicsShelf.Helpers.FolderDialog
       public FolderDialogVM()
       {
          this.Title = R.Strings.FOLDER_DIALOG_TITLE;
-         this.Data = new ObservableCollection<Folder>();
+         this.Data = new ObservableList<Folder>();
          this.ConfirmCommand = new Command(async () => await this.Confirm());
          this.CancelCommand = new Command(async () => await this.Cancel());
          this.ItemSelectCommand = new Command((item) => this.ItemSelect(item));
          this.tcs = new TaskCompletionSource<Folder>();
       }
 
-      public ObservableCollection<Folder> Data { get; private set; }
+      public ObservableList<Folder> Data { get; private set; }
+      public Folder SelectedItem { get; set; }
 
       Folder _CurrentItem;
       public Folder CurrentItem
@@ -32,7 +33,7 @@ namespace ComicsShelf.Helpers.FolderDialog
       public Command ItemSelectCommand { get; set; }
       void ItemSelect(object item)
       {
-         this.OnItemSelected?.Invoke(this, this.CurrentItem);
+         this.OnItemSelected?.Invoke(this, this.SelectedItem);
       }
 
       public Command ConfirmCommand { get; set; }

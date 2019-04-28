@@ -6,16 +6,13 @@ using System.ComponentModel;
 
 namespace ComicsShelf.Helpers.Observables
 {
-
    public class ObservableList<T> : ObservableCollection<T>, INotifyCollectionChanged
    {
       public ObservableList() : base() { }
       public ObservableList(IEnumerable<T> collection) : base(collection) { }
-      //public event NotifyCollectionChangedEventHandler CollectionChanged;
 
       public void AddRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
       {
-
          if (collection == null) throw new ArgumentNullException("collection");
          this.CheckReentrancy();
 
@@ -25,16 +22,12 @@ namespace ComicsShelf.Helpers.Observables
             this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            // this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             return;
          }
 
          int startIndex = Count;
          var changedItems = collection is List<T> ? (List<T>)collection : new List<T>(collection);
-         foreach (var i in changedItems)
-         {
-            Items.Add(i);
-         }
+         foreach (var i in changedItems) { Items.Add(i); }
 
          this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
          this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
@@ -44,24 +37,17 @@ namespace ComicsShelf.Helpers.Observables
       public void RemoveRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
-
-         foreach (var i in collection)
-            Items.Remove(i);
+         foreach (var i in collection) { Items.Remove(i); }
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
       }
 
-      #region Replace
-      public void Replace(T item)
-      { this.ReplaceRange(new T[] { item }); }
+      public void Replace(T item) { this.ReplaceRange(new T[] { item }); }
       public void ReplaceRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
          this.Items.Clear();
          this.AddRange(collection, NotifyCollectionChangedAction.Reset);
-         // this.RefreshAnalysis(NotifyCollectionChangedAction.Reset);
       }
-      #endregion      
 
    }
-
 }

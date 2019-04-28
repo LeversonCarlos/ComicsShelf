@@ -179,4 +179,22 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_OneDrive%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_ArrowLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_ArrowLeft%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_ArrowLeft%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_ArrowRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_ArrowRight%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_ArrowRight%403x.png" />
+  </ItemGroup>
 </Project>

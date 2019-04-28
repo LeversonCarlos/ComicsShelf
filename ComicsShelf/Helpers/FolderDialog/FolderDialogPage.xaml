@@ -20,10 +20,10 @@
          <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
             <StackLayout >
                <ScrollView Orientation="Vertical" >
-                  <CollectionView ItemsSource="{Binding Data}" SelectionChangedCommand="{Binding ItemSelectCommand}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}" SelectionMode="Single" >
+                  <CollectionView ItemsSource="{Binding Data}" SelectionChangedCommand="{Binding ItemSelectCommand}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
                      <CollectionView.ItemTemplate>
                         <DataTemplate>
-                           <StackLayout HeightRequest="50" Padding="10" HorizontalOptions="Fill" >
+                           <StackLayout HeightRequest="30" Padding="10,5" HorizontalOptions="Fill" >
                               <Label Text="{Binding Name}"></Label>
                            </StackLayout>
                         </DataTemplate>
