@@ -1,7 +1,6 @@
 ﻿using ComicsShelf.Helpers.FolderDialog;
 using ComicsShelf.Libraries;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engines.LocalDrive
@@ -13,10 +12,14 @@ namespace ComicsShelf.Engines.LocalDrive
       {
          try
          {
+
+            if (!await this.HasStoragePermission()) { return null; }
+
             var initialFolder = await this.FileSystem.GetRootPath();
             var selectedFolder = await Selector.GetFolder(initialFolder, async (folder) => {
                return await this.FileSystem.GetFolderChilds(folder);
             });
+            if (selectedFolder == null) { return null; }
 
             var library = new LibraryModel
             {

@@ -11,6 +11,7 @@ namespace ComicsShelf
          InitializeComponent();
          DependencyService.Register<MockDataStore>();
          DependencyService.Register<Libraries.LibraryStore>();
+         DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
          MainPage = new AppShell();
       }
 
