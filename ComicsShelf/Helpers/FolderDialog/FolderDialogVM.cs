@@ -15,7 +15,7 @@ namespace ComicsShelf.Helpers.FolderDialog
          this.Data = new ObservableList<Folder>();
          this.ConfirmCommand = new Command(async () => await this.Confirm());
          this.CancelCommand = new Command(async () => await this.Cancel());
-         this.ItemSelectCommand = new Command((item) => this.ItemSelect(item));
+         this.ItemSelectCommand = new Command(async (item) => await this.ItemSelect(item));
          this.tcs = new TaskCompletionSource<Folder>();
       }
 
@@ -31,7 +31,7 @@ namespace ComicsShelf.Helpers.FolderDialog
 
       public EventHandler<Folder> OnItemSelected;
       public Command ItemSelectCommand { get; set; }
-      void ItemSelect(object item)
+      async Task ItemSelect(object item)
       {
          this.OnItemSelected?.Invoke(this, this.SelectedItem);
       }
@@ -60,8 +60,10 @@ namespace ComicsShelf.Helpers.FolderDialog
 
       async Task ClosePage()
       {
+         this.IsBusy = true;
          var mainPage = Application.Current.MainPage as Page;
          await mainPage.Navigation.PopModalAsync(true);
+         this.IsBusy = false;
       }
 
    }
