@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Libraries
@@ -10,10 +11,16 @@ namespace ComicsShelf.Libraries
       private const string LibraryIDs = "ComicsShelf.LibraryIDs";
 
 
-      public void AddLibrary(LibraryModel library)
+      public async Task NewLibrary(LibraryType libraryType)
       {
          try
          {
+
+            // CREATE NEW LIBRARY THRUGH ENGINE
+            var engine = Engines.Engine.Get(libraryType);
+            if (engine == null) { return; }
+            var library = await engine.NewLibrary();
+            if (library == null) { return; }
 
             // STORE LIBRARY MODEL
             library.ID = Guid.NewGuid().ToString();
@@ -31,7 +38,7 @@ namespace ComicsShelf.Libraries
             Shell.CurrentShell.FlyoutIsPresented = false;
 
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
       private ShellItem AddLibraryShell(LibraryModel library)
@@ -73,14 +80,21 @@ namespace ComicsShelf.Libraries
       }
 
 
-      public void DeleteLibrary(ShellItem libraryShell)
+      public async Task DeleteLibrary(ShellItem libraryShell)
       {
          try
          {
 
-            // REMOVE LIBRARY MODEL
+            // LOCATE LIBRARY MODEL
             var libraryVM = libraryShell.Items[0].Items[0].BindingContext as LibraryVM;
             var library = libraryVM.Library;
+
+            // DELETE LIBRARY THROUGH ENGINE
+            var engine = Engines.Engine.Get(library.Type);
+            if (engine != null)
+            { await engine.DeleteLibrary(library); }
+
+            // DELETE LIBRARY FROM PREFERENCES
             var libraryID = $"{LibraryIDs}.{library.ID}";
             Xamarin.Essentials.Preferences.Remove(libraryID);
 
@@ -94,7 +108,7 @@ namespace ComicsShelf.Libraries
             Shell.CurrentShell.Items.Remove(libraryShell);
 
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
       public void LoadLibraries()

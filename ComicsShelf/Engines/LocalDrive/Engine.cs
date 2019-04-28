@@ -8,9 +8,9 @@ namespace ComicsShelf.Engines.LocalDrive
    internal partial class LocalDriveEngine : IEngine
    {
 
-      public Task<bool> RemoveLibrary(LibraryModel library)
+      public async Task<bool> DeleteLibrary(LibraryModel library)
       {
-         throw new NotImplementedException();
+         return await Task.FromResult(true);
       }
 
       private Helpers.IFileSystem FileSystem

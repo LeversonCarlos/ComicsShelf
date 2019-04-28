@@ -8,7 +8,7 @@ namespace ComicsShelf.Engines
    {
       Task<bool> Validate(Libraries.LibraryModel library);
       Task<Libraries.LibraryModel> NewLibrary();
-      Task<bool> RemoveLibrary(Libraries.LibraryModel library);
+      Task<bool> DeleteLibrary(Libraries.LibraryModel library);
    }
 
    internal class Engine
