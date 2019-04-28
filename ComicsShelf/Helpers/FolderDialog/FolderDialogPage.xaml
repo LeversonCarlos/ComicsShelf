@@ -13,7 +13,7 @@
          <Frame BackgroundColor="White" Padding="10">
             <StackLayout Orientation="Vertical" Spacing="5">
                <Label Text="{controls:Translate Text=FOLDER_DIALOG_SELECTED_PATH_LABEL}" FontSize="Micro"></Label>
-               <Label Text="{Binding CurrentItem.Path}" FontSize="Default" FontAttributes="Bold"></Label>
+               <Label Text="{Binding CurrentItem.Path}" FontAttributes="Bold"></Label>
             </StackLayout>
          </Frame>
 
@@ -23,8 +23,9 @@
                   <CollectionView ItemsSource="{Binding Data}" SelectionChangedCommand="{Binding ItemSelectCommand}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
                      <CollectionView.ItemTemplate>
                         <DataTemplate>
-                           <StackLayout HeightRequest="30" Padding="10,5" HorizontalOptions="Fill" >
-                              <Label Text="{Binding Name}"></Label>
+                           <StackLayout HeightRequest="20" Padding="5" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" >
+                              <Image Source="icon_ArrowRight.png"></Image>
+                              <Label Text="{Binding Name}" FontAttributes="Bold"></Label>
                            </StackLayout>
                         </DataTemplate>
                      </CollectionView.ItemTemplate>
