@@ -7,10 +7,11 @@ using System.ComponentModel;
 namespace ComicsShelf.Helpers.Observables
 {
 
-   public class ObservableList<T> : ObservableCollection<T>, INotifyObservableCollectionChanged
+   public class ObservableList<T> : ObservableCollection<T>, INotifyCollectionChanged
    {
       public ObservableList() : base() { }
       public ObservableList(IEnumerable<T> collection) : base(collection) { }
+      //public event NotifyCollectionChangedEventHandler CollectionChanged;
 
       public void AddRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
       {
@@ -24,6 +25,7 @@ namespace ComicsShelf.Helpers.Observables
             this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            // this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             return;
          }
 
@@ -48,18 +50,6 @@ namespace ComicsShelf.Helpers.Observables
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
       }
 
-      protected override void InsertItem(int index, T item)
-      {
-         base.InsertItem(index, item);
-         this.RefreshAnalysis(NotifyCollectionChangedAction.Add);
-      }
-
-      protected override void RemoveItem(int index)
-      {
-         base.RemoveItem(index);
-         this.RefreshAnalysis(NotifyCollectionChangedAction.Remove);
-      }
-
       #region Replace
       public void Replace(T item)
       { this.ReplaceRange(new T[] { item }); }
@@ -70,39 +60,8 @@ namespace ComicsShelf.Helpers.Observables
          this.AddRange(collection, NotifyCollectionChangedAction.Reset);
          // this.RefreshAnalysis(NotifyCollectionChangedAction.Reset);
       }
-      #endregion
+      #endregion      
 
-      #region ObservableCollectionChangedAnalysis
-      public event NotifyCollectionChangedEventHandler ObservableCollectionChanged;
-      private void RefreshAnalysis(NotifyCollectionChangedAction changedAction)
-      {
-         if (this.ObservableCollectionChanged != null)
-         {
-            var countBefore = this.Count;
-            System.Threading.Tasks.Task.Delay(500).ContinueWith(x =>
-            {
-               var countAfter = this.Count;
-               if (countBefore == countAfter)
-               {
-                  Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-                  {
-                     this.ObservableCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                  });
-               }
-            });
-         }
-      }
-      public void RefreshNow()
-      { this.ObservableCollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); }
-      #endregion
-
-   }
-
-   public interface INotifyObservableCollectionChanged
-   {
-      // object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e
-      event NotifyCollectionChangedEventHandler ObservableCollectionChanged;
-      // event EventHandler ObservableCollectionChanged;
    }
 
 }

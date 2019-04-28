@@ -1,5 +1,5 @@
-﻿using ComicsShelf.Helpers.Observables;
-using System;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -8,17 +8,18 @@ namespace ComicsShelf.Helpers.FolderDialog
    internal class FolderDialogVM : BaseVM
    {
 
-      internal readonly ObservableList<Folder> Data;
       private readonly TaskCompletionSource<Folder> tcs;
       public FolderDialogVM()
       {
          this.Title = R.Strings.FOLDER_DIALOG_TITLE;
-         this.Data = new ObservableList<Folder>();
+         this.Data = new ObservableCollection<Folder>();
          this.ConfirmCommand = new Command(async () => await this.Confirm());
          this.CancelCommand = new Command(async () => await this.Cancel());
-         this.ItemSelectCommand = new Command((item) => this.ItemSelect(item as Folder));
+         this.ItemSelectCommand = new Command((item) => this.ItemSelect(item));
          this.tcs = new TaskCompletionSource<Folder>();
       }
+
+      public ObservableCollection<Folder> Data { get; private set; }
 
       Folder _CurrentItem;
       public Folder CurrentItem
@@ -29,9 +30,9 @@ namespace ComicsShelf.Helpers.FolderDialog
 
       public EventHandler<Folder> OnItemSelected;
       public Command ItemSelectCommand { get; set; }
-      void ItemSelect(Folder item)
+      void ItemSelect(object item)
       {
-         this.OnItemSelected?.Invoke(this, item);
+         this.OnItemSelected?.Invoke(this, this.CurrentItem);
       }
 
       public Command ConfirmCommand { get; set; }
@@ -51,8 +52,7 @@ namespace ComicsShelf.Helpers.FolderDialog
       public async Task<Folder> OpenPage()
       {
          var mainPage = Application.Current.MainPage as Page;
-         var view = new FolderDialogPage();
-         view.BindingContext = this;
+         var view = new FolderDialogPage { BindingContext = this };
          await mainPage.Navigation.PushModalAsync(view, true);
          return await this.tcs.Task;
       }

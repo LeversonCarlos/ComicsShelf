@@ -21,14 +21,16 @@ namespace ComicsShelf.Helpers.FolderDialog
             {
                vm.IsBusy = true;
                var folderChilds = await getFolderChilds(item);
-               vm.Data.ReplaceRange(folderChilds);
+               vm.Data.Clear();
+               vm.Data.Add(new Folder { Name = "..", Path = ((Folder)item).Path });
+               foreach (var folderChild in folderChilds) { vm.Data.Add(folderChild); }
                vm.CurrentItem = item;
                vm.IsBusy = false;
             };
 
             // LOCATE ROOT CHILDS
             var rootChilds = await getFolderChilds(initialFolder);
-            vm.Data.ReplaceRange(rootChilds);
+            foreach (var rootChild in rootChilds) { vm.Data.Add(rootChild); }
             vm.CurrentItem = initialFolder;
 
             // SHOW DIALOG
