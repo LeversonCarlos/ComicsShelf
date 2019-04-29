@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using ComicsShelf.Helpers;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Engines
@@ -9,6 +10,9 @@ namespace ComicsShelf.Engines
       Task<bool> Validate(Libraries.LibraryModel library);
       Task<Libraries.LibraryModel> NewLibrary();
       Task<bool> DeleteLibrary(Libraries.LibraryModel library);
+
+      Task<File[]> SearchFiles(Libraries.LibraryModel library);
+
    }
 
    internal class Engine

@@ -10,12 +10,22 @@ namespace ComicsShelf.Helpers
       public string Name { get; set; }
    }
 
+   public class File
+   {
+      public string Key { get; set; }
+      public string FullPath { get; set; }
+      public string ParentPath { get; set; }
+      public string FullText { get; set; }
+      public string SmallText { get; set; }
+   }
+
    public interface IFileSystem : IDisposable
    {
 
       Task<bool> Validate(string libraryKey);
       Task<Folder> GetRootPath();
       Task<Folder[]> GetFolderChilds(Folder folder);
+      Task<File[]> GetFiles(Folder folder);
 
       /*
       string PathSeparator { get; }
@@ -23,9 +33,7 @@ namespace ComicsShelf.Helpers
       string GetCachePath();
       string GetDataPath();
 
-      Task<string> GetLibraryPath();
-
-      Task<string[]> GetFiles(string path);
+      Task<string> GetLibraryPath();      
 
       Task CoverExtract(Helpers.Database.dbContext database, Helpers.Database.ComicFile comicFile);
       Task PagesExtract(Views.File.FileData fileData);
