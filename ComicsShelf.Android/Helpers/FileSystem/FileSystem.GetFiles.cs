@@ -29,13 +29,13 @@ namespace ComicsShelf.Droid
             var fileResult = fileList
                .Select(filePath => new ComicFile
                {
-                  FullPath = filePath,
-                  ParentPath = System.IO.Path.GetDirectoryName(filePath),
+                  FilePath = filePath,
+                  FolderPath = System.IO.Path.GetDirectoryName(filePath),
                   FullText = System.IO.Path.GetFileNameWithoutExtension(filePath).Trim()
                })
                .Select(file => new ComicFile
                {
-                  Key = file.FullPath
+                  Key = file.FilePath
                      .Replace("#", "")
                      .Replace(".", "")
                      .Replace("[", "")
@@ -46,11 +46,11 @@ namespace ComicsShelf.Droid
                      .Replace(this.PathSeparator, "_")
                      .Replace("___", "_")
                      .Replace("__", "_"),
-                  FullPath = file.FullPath,
-                  ParentPath = file.ParentPath,
+                  FilePath = file.FilePath,
+                  FolderPath = file.FolderPath,
                   FullText = file.FullText,
                   SmallText = file.FullText
-                     .Replace(System.IO.Path.GetFileNameWithoutExtension(file.ParentPath), "")
+                     .Replace(System.IO.Path.GetFileNameWithoutExtension(file.FolderPath), "")
                })
                .ToArray();
 
