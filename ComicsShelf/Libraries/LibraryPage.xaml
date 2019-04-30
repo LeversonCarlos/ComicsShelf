@@ -10,10 +10,21 @@
    </ContentPage.ToolbarItems>
    
    <ContentPage.Content>
-      <StackLayout>
-         <Label Text="{Binding Title}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+      <StackLayout >
+         <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+         <ScrollView Orientation="Vertical" >
+            <CollectionView ItemsSource="{Binding Data}" >
+               <CollectionView.ItemTemplate>
+                  <DataTemplate>
+                     <StackLayout Padding="5" >
+                        <Label Text="{Binding FullText}" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding FullPath}" FontSize="Micro"></Label>
+                     </StackLayout>
+                  </DataTemplate>
+               </CollectionView.ItemTemplate>
+            </CollectionView>
+         </ScrollView>
+         <ActivityIndicator IsRunning="{Binding IsBusy}" />
       </StackLayout>
    </ContentPage.Content>
    

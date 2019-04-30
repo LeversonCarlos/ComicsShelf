@@ -11,7 +11,7 @@ namespace ComicsShelf.Engines
       Task<Libraries.LibraryModel> NewLibrary();
       Task<bool> DeleteLibrary(Libraries.LibraryModel library);
 
-      Task<File[]> SearchFiles(Libraries.LibraryModel library);
+      Task<File[]> SearchFiles(Folder folder);
 
    }
 

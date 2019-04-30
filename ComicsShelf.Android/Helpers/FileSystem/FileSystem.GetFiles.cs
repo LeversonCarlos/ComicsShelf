@@ -8,17 +8,20 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task<File[]> GetFiles(Libraries.LibraryModel library)
+      public async Task<File[]> GetFiles(Folder folder)
       {
          try
          {
 
-            var folderPath = $"{library.Key}";
+            System.IO.Directory
+               .EnumerateFiles(folder.Path, "*.cbz.zip", System.IO.SearchOption.AllDirectories)
+               .ToList()
+               .ForEach(file => {
+                  System.IO.File.Move(file, file.Replace(".cbz.zip", ".cbz"));
+               });
+
             var fileListQuery = System.IO.Directory
-               .EnumerateFiles(folderPath, "*.*", System.IO.SearchOption.AllDirectories)
-               .Where(x =>
-                  x.EndsWith(".cbz", StringComparison.OrdinalIgnoreCase)
-               )
+               .EnumerateFiles(folder.Path, "*.cbz", System.IO.SearchOption.AllDirectories)
                .AsQueryable();
             var fileList = await Task.FromResult(fileListQuery.ToList());
 
