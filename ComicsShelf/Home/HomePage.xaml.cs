@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using ComicsShelf.Models;
-using ComicsShelf.Views;
-using ComicsShelf.ViewModels;
-
-namespace ComicsShelf.Views
+namespace ComicsShelf.Home
 {
-   public partial class ItemsPage : ContentPage
+   [XamlCompilation(XamlCompilationOptions.Compile)]
+   public partial class HomePage : ContentPage
    {
-      ItemsViewModel viewModel;
 
-      public ItemsPage()
+      readonly HomeVM vm;
+      public HomePage()
       {
          InitializeComponent();
-
-         BindingContext = viewModel = new ItemsViewModel();
+         this.BindingContext = vm = new HomeVM();
       }
 
+      /*
       async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
       {
          var item = args.SelectedItem as Item;
@@ -48,5 +39,7 @@ namespace ComicsShelf.Views
          if (viewModel.Items.Count == 0)
             viewModel.LoadItemsCommand.Execute(null);
       }
+       */
+
    }
 }

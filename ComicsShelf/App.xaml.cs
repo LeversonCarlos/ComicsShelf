@@ -1,5 +1,4 @@
-﻿using ComicsShelf.Services;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf
 {
@@ -9,21 +8,13 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
-         DependencyService.Register<MockDataStore>();
          DependencyService.Register<Libraries.LibraryStore>();
          DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
          MainPage = new AppShell();
       }
 
-      protected override void OnStart()
-      {
-         try
-         {
-            var libraryStore = DependencyService.Get<Libraries.LibraryStore>();
-            libraryStore.LoadLibraries();
-         }
-         catch { throw; }
-      }
+      protected override async void OnStart()
+      { await DependencyService.Get<Libraries.LibraryStore>().LoadLibraries(); }
 
       protected override void OnSleep()
       {

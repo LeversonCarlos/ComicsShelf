@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-       xmlns:local="clr-namespace:ComicsShelf.Views"
+       xmlns:home="clr-namespace:ComicsShelf.Home"
        RouteHost="friendship.com"
        RouteScheme="app"
        Route="ComicsShelf"
@@ -55,11 +55,8 @@
 
    <!-- Your Pages -->
    <ShellItem FlyoutIcon="icon_home.png" Title="Home">
-      <ShellSection Title="Browse" Icon="tab_feed.png">
-         <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
-      </ShellSection>
-      <ShellSection Title="About" Icon="tab_about.png">
-         <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+      <ShellSection Title="Home" Icon="tab_feed.png">
+         <ShellContent Title="Home" ContentTemplate="{DataTemplate home:HomePage}" />
       </ShellSection>
    </ShellItem>
 

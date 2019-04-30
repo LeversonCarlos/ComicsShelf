@@ -87,7 +87,7 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
-      public void LoadLibraries()
+      public async Task LoadLibraries()
       {
          try
          {
@@ -100,13 +100,13 @@ namespace ComicsShelf.Libraries
                   if (!string.IsNullOrEmpty(libraryJSON))
                   {
                      var library = Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON);
-                     LibraryEngine.Add(library);
+                     await LibraryEngine.Add(library);
                   }
                }
                catch { }
             }
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
 
