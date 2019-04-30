@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Helpers;
+﻿using ComicsShelf.ComicFiles;
 using ComicsShelf.Helpers.Observables;
 using System.Threading.Tasks;
 
@@ -8,18 +8,18 @@ namespace ComicsShelf.Libraries
    {
 
       internal readonly LibraryModel Library;
-      public ObservableList<File> Data { get; private set; }
+      public ObservableList<ComicFile> Data { get; private set; }
       public LibraryVM(LibraryModel value)
       {
          this.Library = value;
          this.Title = value.Description;
-         this.Data = new ObservableList<File>();
+         this.Data = new ObservableList<ComicFile>();
       }
 
 
       public async Task LoadFiles()
       {
-         Messaging.Subscribe<File[]>("LoadFiles", this.Library.Key, async (files) =>
+         Messaging.Subscribe<ComicFile[]>("LoadFiles", this.Library.Key, async (files) =>
          {
             this.Data.ReplaceRange(files);
          });

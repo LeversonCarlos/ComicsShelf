@@ -1,4 +1,5 @@
-﻿using ComicsShelf.Helpers;
+﻿using ComicsShelf.ComicFiles;
+using ComicsShelf.Helpers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task<File[]> GetFiles(Folder folder)
+      public async Task<ComicFile[]> GetFiles(Folder folder)
       {
          try
          {
@@ -26,13 +27,13 @@ namespace ComicsShelf.Droid
             var fileList = await Task.FromResult(fileListQuery.ToList());
 
             var fileResult = fileList
-               .Select(filePath => new File
+               .Select(filePath => new ComicFile
                {
                   FullPath = filePath,
                   ParentPath = System.IO.Path.GetDirectoryName(filePath),
                   FullText = System.IO.Path.GetFileNameWithoutExtension(filePath).Trim()
                })
-               .Select(file => new File
+               .Select(file => new ComicFile
                {
                   Key = file.FullPath
                      .Replace("#", "")

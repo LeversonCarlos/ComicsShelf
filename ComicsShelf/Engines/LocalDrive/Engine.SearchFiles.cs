@@ -1,6 +1,5 @@
-﻿using ComicsShelf.Helpers;
-using ComicsShelf.Helpers.FolderDialog;
-using ComicsShelf.Libraries;
+﻿using ComicsShelf.ComicFiles;
+using ComicsShelf.Helpers;
 using System;
 using System.Threading.Tasks;
 
@@ -9,7 +8,7 @@ namespace ComicsShelf.Engines.LocalDrive
    partial class LocalDriveEngine
    {
 
-      public async Task<File[]> SearchFiles(Folder folder)
+      public async Task<ComicFile[]> SearchFiles(Folder folder)
       {
          try
          {

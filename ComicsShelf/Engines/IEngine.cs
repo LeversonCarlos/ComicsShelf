@@ -1,4 +1,5 @@
-﻿using ComicsShelf.Helpers;
+﻿using ComicsShelf.ComicFiles;
+using ComicsShelf.Helpers;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,7 +12,7 @@ namespace ComicsShelf.Engines
       Task<Libraries.LibraryModel> NewLibrary();
       Task<bool> DeleteLibrary(Libraries.LibraryModel library);
 
-      Task<File[]> SearchFiles(Folder folder);
+      Task<ComicFile[]> SearchFiles(Folder folder);
 
    }
 
