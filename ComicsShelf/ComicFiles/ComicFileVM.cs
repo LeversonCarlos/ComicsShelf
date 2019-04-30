@@ -1,0 +1,86 @@
+﻿using System;
+
+namespace ComicsShelf.ComicFiles
+{
+   public class ComicFileVM : Helpers.Observables.ObservableObject
+   {
+
+      readonly ComicFile ComicFile;
+      public ComicFileVM(ComicFile comicFile)
+      {
+         this.ComicFile = comicFile;
+         this._Readed = comicFile.Readed;
+         this._Rating = comicFile.Rating;
+         this._ReadingDate = comicFile.ReadingDate;
+         this._ReadingPage = comicFile.ReadingPage;
+         this._ReadingPercent = comicFile.ReadingPercent;
+      }
+
+      string _CoverPath;
+      public string CoverPath
+      {
+         get { return this._CoverPath; }
+         set
+         {
+            this.SetProperty(ref this._CoverPath, value);
+            this.ComicFile.CoverPath = value;
+         }
+      }
+
+      short _Rating;
+      public short Rating
+      {
+         get { return this._Rating; }
+         set
+         {
+            this.SetProperty(ref this._Rating, value);
+            this.ComicFile.Rating = value;
+         }
+      }
+
+      bool _Readed;
+      public bool Readed
+      {
+         get { return this._Readed; }
+         set
+         {
+            this.SetProperty(ref this._Readed, value);
+            this.ComicFile.Readed = value;
+         }
+      }
+
+      DateTime _ReadingDate;
+      public DateTime ReadingDate
+      {
+         get { return this._ReadingDate; }
+         set
+         {
+            this.SetProperty(ref this._ReadingDate, value);
+            this.ComicFile.ReadingDate = value;
+         }
+      }
+
+      short _ReadingPage;
+      public short ReadingPage
+      {
+         get { return this._ReadingPage; }
+         set
+         {
+            this.SetProperty(ref this._ReadingPage, value);
+            this.ComicFile.ReadingPage = value;
+         }
+      }
+
+      double _ReadingPercent;
+      public double ReadingPercent
+      {
+         get { return this._ReadingPercent; }
+         set
+         {
+            this.SetProperty(ref this._ReadingPercent, value);
+            this.ComicFile.ReadingPercent = value;
+         }
+      }
+
+   }
+}
