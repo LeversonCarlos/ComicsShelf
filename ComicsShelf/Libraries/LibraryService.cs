@@ -21,7 +21,8 @@ namespace ComicsShelf.Libraries
          {
             var service = DependencyService.Get<LibraryService>();
             if (service == null) { return; }
-            Task.Run(async () => await StartupLibrary(service, library));
+            // Task.Run(async () => await StartupLibrary(service, library));
+            await StartupLibrary(service, library);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }

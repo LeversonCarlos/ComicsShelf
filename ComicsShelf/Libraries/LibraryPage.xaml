@@ -17,8 +17,8 @@
                <CollectionView.ItemTemplate>
                   <DataTemplate>
                      <StackLayout Padding="5" >
-                        <Label Text="{Binding FullText}" FontAttributes="Bold"></Label>
-                        <Label Text="{Binding FullPath}" FontSize="Micro"></Label>
+                        <Label Text="{Binding ComicFile.FullText}" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding ComicFile.FullPath}" FontSize="Micro"></Label>
                      </StackLayout>
                   </DataTemplate>
                </CollectionView.ItemTemplate>
