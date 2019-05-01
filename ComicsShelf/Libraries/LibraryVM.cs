@@ -19,7 +19,7 @@ namespace ComicsShelf.Libraries
 
       public async Task LoadFiles()
       {
-         Messaging.Subscribe<ComicFile[]>("LoadFiles", this.Library.Key, async (files) =>
+         Messaging.Subscribe<ComicFile[]>("LoadFiles", this.Library.LibraryKey, async (files) =>
          {
             this.Data.ReplaceRange(files);
          });

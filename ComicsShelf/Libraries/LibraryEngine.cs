@@ -40,8 +40,8 @@ namespace ComicsShelf.Libraries
       {
          var engine = Engines.Engine.Get(library.Type);
          if (engine == null) { return; }
-         var files = await engine.SearchFiles(new Helpers.Folder { Path = library.Key });
-         Messaging.Send("LoadFiles", library.Key, files);
+         var files = await engine.SearchFiles(new Helpers.Folder { Path = library.LibraryKey });
+         Messaging.Send("LoadFiles", library.LibraryKey, files);
       }
 
    }

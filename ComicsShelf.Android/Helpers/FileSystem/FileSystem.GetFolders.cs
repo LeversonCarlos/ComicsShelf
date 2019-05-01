@@ -7,7 +7,7 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task<Folder[]> GetFolderChilds(Folder folder)
+      public async Task<Folder[]> GetFolders(Folder folder)
       {
          var folderChilds = await Task.FromResult(System.IO.Directory.GetDirectories(folder.Path));
          var result = folderChilds

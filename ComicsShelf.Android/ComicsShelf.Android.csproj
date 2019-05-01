@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\FileSystem\FileSystem.GetFiles.cs" />
-    <Compile Include="Helpers\FileSystem\FileSystem.GetFolderChilds.cs" />
+    <Compile Include="Helpers\FileSystem\FileSystem.GetFolders.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetRootPath.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.Validate.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.cs" />

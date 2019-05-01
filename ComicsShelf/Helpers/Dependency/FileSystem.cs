@@ -11,16 +11,26 @@ namespace ComicsShelf.Helpers
       public string Name { get; set; }
    }
 
+   public class File
+   {
+      public string FileKey { get; set; }
+      public string FilePath { get; set; }
+      public string FolderPath { get; set; }
+      public string Text { get; set; }
+   }
+
    public interface IFileSystem : IDisposable
    {
 
       Task<bool> Validate(string libraryKey);
+      string PathSeparator { get; }
+
       Task<Folder> GetRootPath();
-      Task<Folder[]> GetFolderChilds(Folder folder);
-      Task<ComicFile[]> GetFiles(Folder folder);
+      Task<Folder[]> GetFolders(Folder folder);
+      Task<File[]> GetFiles(Folder folder);
 
       /*
-      string PathSeparator { get; }
+      
 
       string GetCachePath();
       string GetDataPath();

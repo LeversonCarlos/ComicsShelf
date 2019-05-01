@@ -21,5 +21,4 @@ namespace ComicsShelf.ComicFiles
       public double ReadingPercent { get; set; }
 
    }
-
 }

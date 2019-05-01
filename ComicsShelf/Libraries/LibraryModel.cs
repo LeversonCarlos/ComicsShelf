@@ -10,7 +10,7 @@ namespace ComicsShelf.Libraries
       { this.KeyValues = new Dictionary<string, string>(); }
 
       public string ID { get; set; }
-      public string Key { get; set; }
+      public string LibraryKey { get; set; }
       public string Description { get; set; }
       public LibraryType Type { get; set; }
 
