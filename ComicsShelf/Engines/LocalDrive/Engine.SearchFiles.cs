@@ -9,13 +9,13 @@ namespace ComicsShelf.Engines.LocalDrive
    partial class LocalDriveEngine
    {
 
-      public async Task<ComicFile[]> SearchFiles(Folder folder)
+      public async Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library)
       {
          try
          {
             if (!await this.HasStoragePermission()) { return null; }
 
-            var fileList = await this.FileSystem.GetFiles(folder);
+            var fileList = await this.FileSystem.GetFiles(new Folder { Path = library.LibraryKey });
             var result = fileList.Select(file => new ComicFile
             {
                Key = file.FileKey,

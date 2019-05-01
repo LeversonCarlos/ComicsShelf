@@ -33,9 +33,12 @@ namespace ComicsShelf.Libraries
             this.SetLibraryIDs(libraryIDs);
 
             // UPDATE SHELL
-            var shellItem = await LibraryEngine.Add(library);
+            var shellItem = LibraryService.Add(library);
             Shell.CurrentShell.CurrentItem = shellItem;
             Shell.CurrentShell.FlyoutIsPresented = false;
+
+            // STARTUP LIBRARY
+            LibraryService.StartupLibrary(library);
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -100,7 +103,8 @@ namespace ComicsShelf.Libraries
                   if (!string.IsNullOrEmpty(libraryJSON))
                   {
                      var library = Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON);
-                     await LibraryEngine.Add(library);
+                     LibraryService.Add(library);
+                     LibraryService.StartupLibrary(library);
                   }
                }
                catch { }

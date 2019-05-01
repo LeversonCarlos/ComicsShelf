@@ -13,7 +13,7 @@
       <StackLayout >
          <Label Text="{Binding Title}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
          <ScrollView Orientation="Vertical" >
-            <CollectionView ItemsSource="{Binding Data}" >
+            <CollectionView ItemsSource="{Binding ComicFiles}" >
                <CollectionView.ItemTemplate>
                   <DataTemplate>
                      <StackLayout Padding="5" >

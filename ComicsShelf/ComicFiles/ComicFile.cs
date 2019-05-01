@@ -12,6 +12,7 @@ namespace ComicsShelf.ComicFiles
       public string FilePath { get; set; }
       public string FolderPath { get; set; }
       public string CoverPath { get; set; }
+      public string CachePath { get; set; }
       public short TotalPages { get; set; }
 
       public short Rating { get; set; }

@@ -14,9 +14,7 @@ namespace ComicsShelf.Engines
 
       Task<byte[]> LoadData(Libraries.LibraryModel library);
       Task<bool> SaveData(Libraries.LibraryModel library, byte[] serializedValue);
-
-      // Task<ComicFile[]> LoadFiles(Libraries.LibraryModel library);
-      Task<ComicFile[]> SearchFiles(Folder folder);
+      Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library);
 
    }
 

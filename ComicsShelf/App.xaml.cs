@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace ComicsShelf
 {
@@ -9,6 +10,7 @@ namespace ComicsShelf
       {
          InitializeComponent();
          DependencyService.Register<Libraries.LibraryStore>();
+         DependencyService.Register<Libraries.LibraryService>();
          DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
          MainPage = new AppShell();
       }

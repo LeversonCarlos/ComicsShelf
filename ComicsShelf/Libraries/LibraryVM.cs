@@ -1,6 +1,7 @@
 ﻿using ComicsShelf.ComicFiles;
 using ComicsShelf.Helpers.Observables;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Libraries
 {
@@ -8,22 +9,20 @@ namespace ComicsShelf.Libraries
    {
 
       internal readonly LibraryModel Library;
-      public ObservableList<ComicFile> Data { get; private set; }
+      public ObservableList<ComicFile> ComicFiles { get; private set; }
       public LibraryVM(LibraryModel value)
       {
          this.Library = value;
          this.Title = value.Description;
-         this.Data = new ObservableList<ComicFile>();
+         this.ComicFiles = new ObservableList<ComicFile>();
       }
 
-
-      public async Task LoadLibraryData()
+      public async Task OnAppearing()
       {
-         Messaging.Subscribe<ComicFile[]>("LoadLibraryData", this.Library.LibraryKey, async (files) =>
-         {
-            this.Data.ReplaceRange(files);
-         });
-         await Task.Factory.StartNew(() => LibraryEngine.LoadData(this.Library), TaskCreationOptions.LongRunning);
+         this.IsBusy = true;
+         var service = DependencyService.Get<LibraryService>();
+         this.ComicFiles.AddRange(service.GetLibraryFiles(this.Library));
+         this.IsBusy = false;
       }
 
    }

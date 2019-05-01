@@ -3,7 +3,7 @@
 namespace ComicsShelf
 {
    internal class Messaging
-    {
+   {
 
       public static void Send(string key)
       {

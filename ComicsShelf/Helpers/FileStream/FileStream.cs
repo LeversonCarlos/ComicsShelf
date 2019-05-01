@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.vTwo.Helpers
+namespace ComicsShelf.Helpers
 {
    internal class FileStream
    {
@@ -16,7 +16,7 @@ namespace ComicsShelf.vTwo.Helpers
             var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(serializedContent);
             return result;
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
+         catch (Exception) { throw; }
       }
 
       public static T Deserialize<T>(string value) where T : class
@@ -26,14 +26,14 @@ namespace ComicsShelf.vTwo.Helpers
             var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(value);
             return result;
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
+         catch (Exception) { throw; }
       }
 
       public static async Task<T> ReadFile<T>(string path) where T : class
       {
          try
          {
-            if (!File.Exists(path)) { return null; }
+            if (!System.IO.File.Exists(path)) { return null; }
 
             string serializedContent = string.Empty;
             using (var sourceStream = new System.IO.FileStream(path,
@@ -55,7 +55,7 @@ namespace ComicsShelf.vTwo.Helpers
             return value;
 
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.ReadFile", ex); return null; }
+         catch (Exception) { throw; }
       }
 
       public static byte[] Serialize<T>(T value)
@@ -72,7 +72,7 @@ namespace ComicsShelf.vTwo.Helpers
 
             return encodedContent;
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.SaveFile", ex); return null; }
+         catch (Exception) { throw; }
       }
 
       public static async Task<bool> SaveFile<T>(string path, T value)
@@ -88,9 +88,9 @@ namespace ComicsShelf.vTwo.Helpers
             {
                await fileStream.WriteAsync(encodedContent, 0, encodedContent.Length);
             };
-            return File.Exists(path);
+            return System.IO.File.Exists(path);
          }
-         catch (Exception ex) { Engine.AppCenter.TrackEvent("Helpers.FileStream.SaveFile", ex); return false; }
+         catch (Exception) { throw; }
       }
 
    }
