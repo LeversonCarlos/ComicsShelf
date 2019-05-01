@@ -1,5 +1,4 @@
-﻿using ComicsShelf.ComicFiles;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Helpers
@@ -29,6 +28,9 @@ namespace ComicsShelf.Helpers
       Task<Folder[]> GetFolders(Folder folder);
       Task<File[]> GetFiles(Folder folder);
 
+      Task<byte[]> LoadData(Libraries.LibraryModel library);
+      Task<bool> SaveData(Libraries.LibraryModel library, byte[] serializedData);
+
       /*
       
 
@@ -41,10 +43,8 @@ namespace ComicsShelf.Helpers
       Task PagesExtract(Views.File.FileData fileData);
       Task PageSize(Views.File.PageData pageData);
 
-      Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
-
-      Task<bool> SaveDataAsync(Libraries.Library library, byte[] serializedData);
-      Task<byte[]> LoadDataAsync(Libraries.Library library);
+      Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);      
+      
       */
 
    }

@@ -17,13 +17,13 @@ namespace ComicsShelf.Libraries
       }
 
 
-      public async Task LoadFiles()
+      public async Task LoadLibraryData()
       {
-         Messaging.Subscribe<ComicFile[]>("LoadFiles", this.Library.LibraryKey, async (files) =>
+         Messaging.Subscribe<ComicFile[]>("LoadLibraryData", this.Library.LibraryKey, async (files) =>
          {
             this.Data.ReplaceRange(files);
          });
-         await Task.Factory.StartNew(() => LibraryEngine.LoadFiles(this.Library), TaskCreationOptions.LongRunning);
+         await Task.Factory.StartNew(() => LibraryEngine.LoadData(this.Library), TaskCreationOptions.LongRunning);
       }
 
    }

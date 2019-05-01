@@ -3,8 +3,10 @@
 namespace ComicsShelf.Libraries
 {
    public enum LibraryType : short { LocalDrive = 0, OneDrive = 1 }
+
    public class LibraryModel
    {
+      public const string SyncFile = "ComicsShef.library";
 
       public LibraryModel()
       { this.KeyValues = new Dictionary<string, string>(); }

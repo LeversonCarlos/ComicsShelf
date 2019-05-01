@@ -29,14 +29,14 @@ namespace ComicsShelf.Libraries
             shellItem.Items.Add(shellSection);
 
             Shell.CurrentShell.Items.Add(shellItem);
-            await libraryVM.LoadFiles();
+            await libraryVM.LoadLibraryData();
             return shellItem;
 
          }
          catch (Exception) { throw; }
       }
 
-      public static async void LoadFiles(LibraryModel library)
+      public static async void LoadData(LibraryModel library)
       {
          var engine = Engines.Engine.Get(library.Type);
          if (engine == null) { return; }
