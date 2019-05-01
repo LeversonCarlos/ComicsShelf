@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,34 +14,6 @@ namespace ComicsShelf.Libraries
       {
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFile>>();
       }
-
-      public static ShellItem Add(LibraryModel library)
-      {
-         try
-         {
-
-            var libraryVM = new LibraryVM(library);
-
-            var shellContent = new ShellContent
-            {
-               Title = library.Description,
-               BindingContext = libraryVM,
-               ContentTemplate = new DataTemplate(typeof(LibraryPage))
-            };
-
-            var shellSection = new ShellSection { Title = library.Description };
-            shellSection.Items.Add(shellContent);
-
-            var shellItem = new ShellItem { Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
-            shellItem.Items.Add(shellSection);
-
-            Shell.CurrentShell.Items.Add(shellItem);
-            return shellItem;
-
-         }
-         catch (Exception) { throw; }
-      }
-
 
       public static async Task StartupLibrary(LibraryModel library)
       {
@@ -60,8 +31,22 @@ namespace ComicsShelf.Libraries
          try
          {
             service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFile>());
-            await service.StartupLibrary_LoadLibrary(library);
-            await service.StartupLibrary_RefreshLibrary(library);
+            /*
+             * loadData: base de dados local
+             * render
+             * syncData: ler arquivo remoto com rating e reading
+             * render
+             * statistics
+             * extractExistingData
+             * searchData: varredura remota
+             * render
+             * extractFeaturedData
+             * extractRemainingData
+             * statistics
+             * syncData: gravar arquivo remoto
+             */
+            await service.LoadLibrary(library);
+            await service.RefreshLibrary(library);
 
             Messaging.Send<List<ComicFiles.ComicFile>>("OnRefreshingList", library.ID, service.ComicFiles[library.ID]);
 
@@ -77,7 +62,8 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
-      private async Task StartupLibrary_LoadLibrary(LibraryModel library)
+
+      private async Task LoadLibrary(LibraryModel library)
       {
          try
          {
@@ -95,7 +81,7 @@ namespace ComicsShelf.Libraries
          catch (Exception) { throw; }
       }
 
-      private async Task StartupLibrary_RefreshLibrary(LibraryModel library)
+      private async Task RefreshLibrary(LibraryModel library)
       {
          try
          {

@@ -33,7 +33,7 @@ namespace ComicsShelf.Libraries
             this.SetLibraryIDs(libraryIDs);
 
             // UPDATE SHELL
-            var shellItem = LibraryService.Add(library);
+            var shellItem = this.AddShell(library);
             Shell.CurrentShell.CurrentItem = shellItem;
             Shell.CurrentShell.FlyoutIsPresented = false;
 
@@ -44,10 +44,37 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
+      public ShellItem AddShell(LibraryModel library)
+      {
+         try
+         {
+
+            var libraryVM = new LibraryVM(library);
+
+            var shellContent = new ShellContent
+            {
+               Title = library.Description,
+               BindingContext = libraryVM,
+               ContentTemplate = new DataTemplate(typeof(LibraryPage))
+            };
+
+            var shellSection = new ShellSection { Title = library.Description };
+            shellSection.Items.Add(shellContent);
+
+            var shellItem = new ShellItem { Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
+            shellItem.Items.Add(shellSection);
+
+            Shell.CurrentShell.Items.Add(shellItem);
+            return shellItem;
+
+         }
+         catch (Exception) { throw; }
+      }
 
 
       public void SetLibrary(LibraryModel library)
       { this.SetLibrary(library, $"{LibraryIDs}.{library.ID}"); }
+
       private void SetLibrary(LibraryModel library, string libraryID)
       {
          try
@@ -90,6 +117,7 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
+
       public async Task LoadLibraries()
       {
          try
@@ -103,7 +131,7 @@ namespace ComicsShelf.Libraries
                   if (!string.IsNullOrEmpty(libraryJSON))
                   {
                      var library = Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON);
-                     LibraryService.Add(library);
+                     this.AddShell(library);
                      LibraryService.StartupLibrary(library);
                   }
                }
