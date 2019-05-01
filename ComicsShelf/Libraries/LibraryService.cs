@@ -10,7 +10,7 @@ namespace ComicsShelf.Libraries
    internal class LibraryService
    {
 
-      private readonly Dictionary<string, List<ComicFiles.ComicFile>> ComicFiles;
+      public readonly Dictionary<string, List<ComicFiles.ComicFile>> ComicFiles;
       public LibraryService()
       {
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFile>>();
@@ -62,6 +62,8 @@ namespace ComicsShelf.Libraries
             service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFile>());
             await service.StartupLibrary_LoadLibrary(library);
             await service.StartupLibrary_RefreshLibrary(library);
+
+            Messaging.Send<List<ComicFiles.ComicFile>>("OnRefreshingList", library.ID, service.ComicFiles[library.ID]);
 
             /*
             Messaging.Send("RefreshLibrary", library.ID, files);
@@ -115,9 +117,13 @@ namespace ComicsShelf.Libraries
       }
 
 
-      public List<ComicFiles.ComicFile> GetLibraryFiles(LibraryModel library)
+      public void Test(string libraryID, string comicKey)
       {
-         return this.ComicFiles[library.ID];
+         var comicFile = this.ComicFiles[libraryID].Where(x => x.Key == comicKey).FirstOrDefault();
+         comicFile.FullText += " [changed]";
+
+         Messaging.Send("OnRefreshingItem", libraryID, comicFile);
+
       }
 
    }

@@ -18,8 +18,14 @@ namespace ComicsShelf.Libraries
 
       protected override async void OnAppearing()
       {
-         base.OnAppearing();
          await (this.BindingContext as LibraryVM).OnAppearing();
+         base.OnAppearing();
+      }
+
+      protected override async void OnDisappearing()
+      {
+         await(this.BindingContext as LibraryVM).OnDisappearing();
+         base.OnDisappearing();
       }
 
    }

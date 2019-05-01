@@ -33,5 +33,10 @@ namespace ComicsShelf
       public static void Subscribe<T>(string prefix, string key, System.Action<T> callback)
       { MessagingCenter.Subscribe<Application, T>(Application.Current, $"{prefix}{key}", (app, data) => { callback(data); }); }
 
+
+      public static void Unsubscribe(string prefix, string key)
+      { MessagingCenter.Unsubscribe<Application>(Application.Current, $"{prefix}{key}"); }
+
+
    }
 }

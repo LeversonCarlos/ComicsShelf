@@ -41,7 +41,21 @@ namespace ComicsShelf.Helpers.Observables
          this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
       }
 
-      public void Replace(T item) { this.ReplaceRange(new T[] { item }); }
+      public void Replace(T item)
+      {
+         var index = this.Items.IndexOf(item);
+         if (index == -1)
+         {
+            this.Items.Add(item);
+            // this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+         }
+         else
+         {
+            var oldItem = this.Items[index];
+            this.SetItem(index, item);
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, item, oldItem, index));
+         }
+      }
       public void ReplaceRange(IEnumerable<T> collection)
       {
          if (collection == null) throw new ArgumentNullException("collection");
