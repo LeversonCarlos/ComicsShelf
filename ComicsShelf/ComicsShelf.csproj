@@ -7,6 +7,8 @@
     <Company>Friendship Solutions</Company>
     <Copyright>Copyright © Friendship Solutions 2018</Copyright>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <BuildVersion>0</BuildVersion>	    
+    <Version>1.7.$(BuildVersion)</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
