@@ -47,7 +47,7 @@ namespace ComicsShelf.Helpers.Observables
          if (index == -1)
          {
             this.Items.Add(item);
-            // this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
          }
          else
          {
