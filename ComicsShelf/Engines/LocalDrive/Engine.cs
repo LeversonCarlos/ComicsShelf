@@ -1,5 +1,4 @@
 ﻿using ComicsShelf.Libraries;
-using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
