@@ -1,20 +1,17 @@
-﻿using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using System.Collections.Generic;
-
-namespace ComicsShelf.Engine
+﻿namespace ComicsShelf.Helpers
 {
    internal class AppCenter
    {
 
+      /*
       public static void Initialize()
       {
          Microsoft.AppCenter.AppCenter.Start(
             "android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
-            /*
+            / *
             "uwp={Your UWP App secret here};" +
             "ios={Your iOS App secret here}" + 
-            */
+            * /
             "",
             typeof(Analytics), typeof(Crashes));
       }
@@ -30,6 +27,14 @@ namespace ComicsShelf.Engine
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
       { Analytics.TrackEvent(text, properties); }
+
+      */
+
+      public static void TrackEvent(string text, System.Exception ex)
+      {
+         /*TrackEvent(text, "Exception", ex.Message);*/
+         System.Diagnostics.Debug.Print(ex.ToString());
+      }
 
    }
 }

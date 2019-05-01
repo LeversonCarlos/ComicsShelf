@@ -16,7 +16,10 @@ namespace ComicsShelf
       }
 
       protected override async void OnStart()
-      { await DependencyService.Get<Libraries.LibraryStore>().LoadLibraries(); }
+      {
+         await Helpers.DefaultCover.LoadDefaultCover();
+         await DependencyService.Get<Libraries.LibraryStore>().LoadLibraries();
+      }
 
       protected override void OnSleep()
       {

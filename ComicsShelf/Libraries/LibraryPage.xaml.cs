@@ -16,15 +16,15 @@ namespace ComicsShelf.Libraries
          (Shell.CurrentShell.BindingContext as ShellVM).DeleteLibraryCommand.Execute(Shell.CurrentShell.CurrentItem);
       }
 
-      protected override async void OnAppearing()
+      protected override void OnAppearing()
       {
-         await (this.BindingContext as LibraryVM).OnAppearing();
+         (this.BindingContext as LibraryVM).OnAppearing();
          base.OnAppearing();
       }
 
-      protected override async void OnDisappearing()
+      protected override void OnDisappearing()
       {
-         await(this.BindingContext as LibraryVM).OnDisappearing();
+         (this.BindingContext as LibraryVM).OnDisappearing();
          base.OnDisappearing();
       }
 

@@ -9,10 +9,10 @@ namespace ComicsShelf.Libraries
    internal class LibraryService
    {
 
-      public readonly Dictionary<string, List<ComicFiles.ComicFile>> ComicFiles;
+      public readonly Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles;
       public LibraryService()
       {
-         this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFile>>();
+         this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
       }
 
       public static async Task StartupLibrary(LibraryModel library)
@@ -30,83 +30,171 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFile>());
-            /*
-             * loadData: base de dados local
-             * render
-             * syncData: ler arquivo remoto com rating e reading
-             * render
-             * statistics
-             * extractExistingData
-             * searchData: varredura remota
-             * render
-             * extractFeaturedData
-             * extractRemainingData
-             * statistics
-             * syncData: gravar arquivo remoto
-             */
-            await service.LoadLibrary(library);
-            await service.RefreshLibrary(library);
-
-            Messaging.Send<List<ComicFiles.ComicFile>>("OnRefreshingList", library.ID, service.ComicFiles[library.ID]);
-
-            /*
-            Messaging.Send("RefreshLibrary", library.ID, files);
-            Messaging.Subscribe<ComicFile[]>("LoadLibrary", this.Library.ID, async (files) =>
-            {
-               await this.RenderLibrary(files); 
-               await this.RefreshLibrary();
-            });
-            */
+            service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>());
+            if (!await service.LoadData(library)) { return; }
+            if (!await service.Render(library)) { return; }
+            if (!await service.LoadSyncData(library)) { return; }
+            if (!await service.Render(library)) { return; }
+            if (!await service.Statistics(library)) { return; }
+            if (!await service.SearchData(library)) { return; }
+            if (!await service.Render(library)) { return; }
+            if (!await service.ExtractData(library)) { return; }
+            if (!await service.Statistics(library)) { return; }
+            if (!await service.SaveSyncData(library)) { return; }
+            if (!await service.SaveData(library)) { return; }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
 
-      private async Task LoadLibrary(LibraryModel library)
+      private async Task<bool> LoadData(LibraryModel library)
       {
          try
          {
-            var engine = Engines.Engine.Get(library.Type);
-            if (engine == null) { return; }
 
-            var byteArray = await engine.LoadData(library);
-            if (byteArray == null) { return; }
+            var files = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(LibraryConstants.DatabaseFile);
+            if (files == null) { return true; }
 
-            var comicFiles = Helpers.FileStream.Deserialize<List<ComicFiles.ComicFile>>(byteArray);
-            if (comicFiles == null) { return; }
+            var comicFiles = files.Select(x => new ComicFiles.ComicFileVM(x)).ToList();
+            foreach (var comicFile in comicFiles)
+            {
+               if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
+               {
+                  comicFile.CoverPath = comicFile.ComicFile.CoverPath;
+                  if (comicFile.ComicFile.ReleaseDate == DateTime.MinValue)
+                  { comicFile.ComicFile.ReleaseDate = System.IO.File.GetLastWriteTime(comicFile.CoverPath); }
+               }
+               if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
+               { comicFile.CachePath = comicFile.ComicFile.CachePath; }
+            }
 
             this.ComicFiles[library.ID].AddRange(comicFiles);
+            return true;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.LoadData", ex); return false; }
       }
 
-      private async Task RefreshLibrary(LibraryModel library)
+      private async Task<bool> Render(LibraryModel library)
+      {
+         try
+         {
+            Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]);
+
+            // TODO
+            return true;
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Render", ex); return false; }
+      }
+
+      private async Task<bool> LoadSyncData(LibraryModel library)
       {
          try
          {
             var engine = Engines.Engine.Get(library.Type);
-            if (engine == null) { return; }
+            if (engine == null) { return false; }
+
+            var byteArray = await engine.LoadSyncData(library);
+            if (byteArray == null) { return true; }
+
+            var comicFiles = Helpers.FileStream.Deserialize<List<ComicFiles.ComicFile>>(byteArray);
+            if (comicFiles == null) { return true; }
+
+            var libraryFiles = this.ComicFiles[library.ID];
+            foreach (var comicFile in comicFiles)
+            {
+               var libraryFile = libraryFiles.Where(x => x.ComicFile.Key == comicFile.Key).FirstOrDefault();
+               if (libraryFile != null) { libraryFile.Set(comicFile); }
+            }
+
+            return true;
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.LoadSyncData", ex); return false; }
+      }
+
+      private async Task<bool> Statistics(LibraryModel library)
+      {
+         try
+         {
+            // TODO
+            return true;
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Statistics", ex); return false; }
+      }
+
+      private async Task<bool> SearchData(LibraryModel library)
+      {
+         try
+         {
+            var engine = Engines.Engine.Get(library.Type);
+            if (engine == null) { return false; }
             var libraryFiles = this.ComicFiles[library.ID];
 
             var searchFiles = await engine.SearchFiles(library);
-            if (searchFiles == null) { return; }
+            if (searchFiles == null) { return true; }
 
             libraryFiles
-               .RemoveAll(x => !searchFiles.Select(i => i.Key).ToList().Contains(x.Key));
+               .RemoveAll(x => !searchFiles.Select(i => i.Key).ToList().Contains(x.ComicFile.Key));
             libraryFiles.AddRange(searchFiles
-               .Where(x => !libraryFiles.Select(i => i.Key).ToList().Contains(x.Key))
+               .Where(x => !libraryFiles.Select(i => i.ComicFile.Key).ToList().Contains(x.Key))
+               .Select(x => new ComicFiles.ComicFileVM(x))
                .ToList());
 
+            return true;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.SearchData", ex); return false; }
       }
+
+      private async Task<bool> ExtractData(LibraryModel library)
+      {
+         try
+         {
+            // TODO
+            return true;
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.ExtractData", ex); return false; }
+      }
+
+      private async Task<bool> SaveSyncData(LibraryModel library)
+      {
+         try
+         {
+            var engine = Engines.Engine.Get(library.Type);
+            if (engine == null) { return false; }
+
+            var comicFiles = this.ComicFiles[library.ID].Select(x => x.ComicFile).ToList();
+            if (comicFiles == null) { return true; }
+
+            var byteArray = Helpers.FileStream.Serialize(comicFiles);
+            if (byteArray == null) { return true; }
+
+            if (!await engine.SaveSyncData(library, byteArray)) { return false; }
+            return true;
+
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.SaveSyncData", ex); return false; }
+      }
+
+      private async Task<bool> SaveData(LibraryModel library)
+      {
+         try
+         {
+
+            var comicFiles = this.ComicFiles[library.ID].Select(x => x.ComicFile).ToList();
+            if (comicFiles == null) { return true; }
+
+            if (!await Helpers.FileStream.SaveFile(LibraryConstants.DatabaseFile, comicFiles)) { return false; }
+            return true;
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.SaveData", ex); return false; }
+      }
+
+
 
 
       public void Test(string libraryID, string comicKey)
       {
-         var comicFile = this.ComicFiles[libraryID].Where(x => x.Key == comicKey).FirstOrDefault();
-         comicFile.FullText += " [changed]";
+         var comicFile = this.ComicFiles[libraryID].Where(x => x.ComicFile.Key == comicKey).FirstOrDefault();
+         comicFile.ComicFile.FullText += " [changed]";
 
          Messaging.Send("OnRefreshingItem", libraryID, comicFile);
 

@@ -12,8 +12,8 @@ namespace ComicsShelf.Engines
       Task<Libraries.LibraryModel> NewLibrary();
       Task<bool> DeleteLibrary(Libraries.LibraryModel library);
 
-      Task<byte[]> LoadData(Libraries.LibraryModel library);
-      Task<bool> SaveData(Libraries.LibraryModel library, byte[] serializedValue);
+      Task<byte[]> LoadSyncData(Libraries.LibraryModel library);
+      Task<bool> SaveSyncData(Libraries.LibraryModel library, byte[] serializedValue);
       Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library);
 
    }

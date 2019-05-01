@@ -17,6 +17,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Helpers\DefaultCover\DefaultCover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers\DefaultCover\DefaultCover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />  

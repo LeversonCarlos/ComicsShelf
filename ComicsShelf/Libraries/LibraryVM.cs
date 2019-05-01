@@ -11,43 +11,41 @@ namespace ComicsShelf.Libraries
    {
 
       internal readonly LibraryModel Library;
-      public ObservableList<ComicFile> ComicFiles { get; private set; }
+      public ObservableList<ComicFileVM> ComicFiles { get; private set; }
       public LibraryVM(LibraryModel value)
       {
          this.Library = value;
          this.Title = value.Description;
-         this.ComicFiles = new ObservableList<ComicFile>();
+         this.ComicFiles = new ObservableList<ComicFileVM>();
          this.ItemSelectCommand = new Command(() => this.ItemSelect());
       }
 
-      public async Task OnAppearing()
+      public void OnAppearing()
       {
          this.IsBusy = true;
          var service = DependencyService.Get<LibraryService>();
          this.ComicFiles.AddRange(service.ComicFiles[this.Library.ID]);
 
-         Messaging.Subscribe<List<ComicFile>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
-         Messaging.Subscribe<ComicFile>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
+         Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
+         Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
 
          this.IsBusy = false;
       }
 
-      public async Task OnDisappearing()
+      public void OnDisappearing()
       {
-
          Messaging.Unsubscribe("OnRefreshingList", this.Library.ID);
          Messaging.Unsubscribe("OnRefreshingItem", this.Library.ID);
          this.ComicFiles.Clear();
-
       }
 
 
-      public void OnRefreshingList(List<ComicFile> comicFiles)
+      public void OnRefreshingList(List<ComicFileVM> comicFiles)
       {
          this.ComicFiles.ReplaceRange(comicFiles);
       }
 
-      public void OnRefreshingItem(ComicFile comicFile)
+      public void OnRefreshingItem(ComicFileVM comicFile)
       {
          this.ComicFiles.Replace(comicFile);
       }
@@ -60,7 +58,6 @@ namespace ComicsShelf.Libraries
          var service = DependencyService.Get<LibraryService>();
          service.Test(this.Library.ID, this.SelectedItem.Key);
       }
-
 
    }
 }

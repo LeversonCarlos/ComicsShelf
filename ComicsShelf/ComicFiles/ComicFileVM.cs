@@ -5,8 +5,13 @@ namespace ComicsShelf.ComicFiles
    public class ComicFileVM : Helpers.Observables.ObservableObject
    {
 
-      readonly ComicFile ComicFile;
+      public ComicFile ComicFile { get; private set; }
       public ComicFileVM(ComicFile comicFile)
+      {
+         this.Set(comicFile);
+      }
+
+      internal void Set(ComicFile comicFile)
       {
          this.ComicFile = comicFile;
          this._Readed = comicFile.Readed;
@@ -14,6 +19,8 @@ namespace ComicsShelf.ComicFiles
          this._ReadingDate = comicFile.ReadingDate;
          this._ReadingPage = comicFile.ReadingPage;
          this._ReadingPercent = comicFile.ReadingPercent;
+         this._CoverPath = Libraries.LibraryConstants.DefaultCover;
+         this._CachePath = string.Empty;
       }
 
       string _CoverPath;
@@ -24,6 +31,17 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._CoverPath, value);
             this.ComicFile.CoverPath = value;
+         }
+      }
+
+      string _CachePath;
+      public string CachePath
+      {
+         get { return this._CachePath; }
+         set
+         {
+            this.SetProperty(ref this._CachePath, value);
+            this.ComicFile.CachePath = value;
          }
       }
 

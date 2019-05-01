@@ -6,7 +6,7 @@ namespace ComicsShelf.Engines.LocalDrive
    partial class LocalDriveEngine
    {
 
-      public async Task<byte[]> LoadData(Libraries.LibraryModel library)
+      public async Task<byte[]> LoadSyncData(Libraries.LibraryModel library)
       {
          try
          {
@@ -17,7 +17,7 @@ namespace ComicsShelf.Engines.LocalDrive
          catch (Exception ex) { await App.ShowMessage(ex); return null; }
       }
 
-      public async Task<bool> SaveData(Libraries.LibraryModel library, byte[] serializedValue)
+      public async Task<bool> SaveSyncData(Libraries.LibraryModel library, byte[] serializedValue)
       {
          try
          {
