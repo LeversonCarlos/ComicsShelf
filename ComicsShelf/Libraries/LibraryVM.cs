@@ -11,12 +11,12 @@ namespace ComicsShelf.Libraries
    {
 
       internal readonly LibraryModel Library;
-      public ObservableList<ComicFileVM> ComicFiles { get; private set; }
+      public ObservableList<ComicFolderVM> ComicFolders { get; private set; }
       public LibraryVM(LibraryModel value)
       {
          this.Library = value;
          this.Title = value.Description;
-         this.ComicFiles = new ObservableList<ComicFileVM>();
+         this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.ItemSelectCommand = new Command(() => this.ItemSelect());
       }
 
@@ -24,7 +24,7 @@ namespace ComicsShelf.Libraries
       {
          this.IsBusy = true;
          var service = DependencyService.Get<LibraryService>();
-         this.ComicFiles.AddRange(service.ComicFiles[this.Library.ID]);
+         this.ComicFolders.AddRange(this.GetFolderList(service.ComicFiles[this.Library.ID]));
 
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
          Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
@@ -36,18 +36,39 @@ namespace ComicsShelf.Libraries
       {
          Messaging.Unsubscribe("OnRefreshingList", this.Library.ID);
          Messaging.Unsubscribe("OnRefreshingItem", this.Library.ID);
-         this.ComicFiles.Clear();
+         this.ComicFolders.Clear();
       }
 
+      private List<ComicFolderVM> GetFolderList(List<ComicFileVM> comicFiles)
+      {
+         var comicFolders = comicFiles
+            .GroupBy(x => new { x.ComicFile.FolderPath })
+            .Select(x => new ComicFolderVM
+            {
+               FolderPath = x.Key.FolderPath
+            })
+            .ToList();
+         foreach (var comicFolder in comicFolders)
+         {
+            comicFolder.ComicFiles.AddRange(comicFiles
+               .Where(comicFile => comicFile.ComicFile.FolderPath == comicFolder.FolderPath)
+               .ToList());
+         }
+         return comicFolders;
+      }
 
       public void OnRefreshingList(List<ComicFileVM> comicFiles)
       {
-         this.ComicFiles.ReplaceRange(comicFiles);
+         this.ComicFolders.ReplaceRange(this.GetFolderList(comicFiles));
       }
 
       public void OnRefreshingItem(ComicFileVM comicFile)
       {
-         this.ComicFiles.Replace(comicFile);
+         var comicFolder = this.ComicFolders
+            .Where(x => x.FolderPath == comicFile.ComicFile.FolderPath)
+            .FirstOrDefault();
+         if (comicFolder == null) { return; }
+         comicFolder.ComicFiles.Replace(comicFile);
       }
 
       public ComicFile SelectedItem { get; set; }
