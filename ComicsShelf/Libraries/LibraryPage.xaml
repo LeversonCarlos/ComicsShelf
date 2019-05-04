@@ -3,6 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    x:Class="ComicsShelf.Libraries.LibraryPage"
+   BackgroundColor="{StaticResource colorBackground}"
    Title="{Binding Title}">
 
    <ContentPage.ToolbarItems>
@@ -23,11 +24,14 @@
                         <DataTemplate>
 
                            <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
+                              <Image Source="{Binding CoverPath}" Aspect="AspectFit"></Image>
+                              <!-- 
                               <StackLayout BackgroundColor="Red" VerticalOptions="FillAndExpand" >
                                  <Label Text="{Binding ComicFile.FullText}" FontAttributes="Bold"></Label>
                                  <Label Text="{Binding ComicFile.FilePath}" FontSize="Micro" TextColor="White"></Label>
                                  <Label Text="{Binding CoverPath}" FontSize="Micro"></Label>
                               </StackLayout>
+                              -->
                            </StackLayout>
 
                         </DataTemplate>
