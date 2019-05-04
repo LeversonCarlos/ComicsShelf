@@ -152,13 +152,28 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+            const string generalKey = "General.RecentFiles";
+            if (!this.ComicFiles.ContainsKey(generalKey))
+            { this.ComicFiles.Add(generalKey, new List<ComicFiles.ComicFileVM>()); }
+
             var recentFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .Where(file => file.ComicFile.ReleaseDate != DateTime.MinValue)
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .Take(10)
                .ToList();
-            return recentFiles;
+
+            var recentFilesKeys = recentFiles.Select(x => x.ComicFile.Key).ToList();
+            var generalFiles = this.ComicFiles[generalKey]
+               .Where(x => !recentFilesKeys.Contains(x.ComicFile.Key))
+               .ToList();
+            recentFiles = recentFiles
+               .Union(generalFiles)
+               .OrderByDescending(x => x.ComicFile.ReleaseDate)
+               .ToList();
+            this.ComicFiles[generalKey] = recentFiles;
+
+            return recentFiles.Take(10).ToList();
          }
          catch (Exception) { throw; }
       }
@@ -167,6 +182,11 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+
+            const string generalKey = "General.ReadingFiles";
+            if (!this.ComicFiles.ContainsKey(generalKey))
+            { this.ComicFiles.Add(generalKey, new List<ComicFiles.ComicFileVM>()); }
+
             var libraryFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available);
 
@@ -220,7 +240,19 @@ namespace ComicsShelf.Libraries
                .Take(10)
                .ToList();
 
-            return readingFiles;
+            // ATTACH GENERAL
+            var readingFilesKeys = readingFiles.Select(x => x.ComicFile.Key).ToList();
+            var generalFiles = this.ComicFiles[generalKey]
+               .Where(x => !readingFilesKeys.Contains(x.ComicFile.Key))
+               .ToList();
+            readingFiles = readingFiles
+               .Union(generalFiles)
+               .OrderByDescending(x => x.ReadingDate)
+               .ToList();
+            this.ComicFiles[generalKey] = readingFiles;
+
+
+            return readingFiles.Take(10).ToList();
             ;
          }
          catch (Exception) { throw; }
