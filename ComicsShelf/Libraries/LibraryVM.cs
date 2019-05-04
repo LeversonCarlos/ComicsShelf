@@ -17,7 +17,7 @@ namespace ComicsShelf.Libraries
          this.Library = value;
          this.Title = value.Description;
          this.ComicFolders = new ObservableList<ComicFolderVM>();
-         this.ItemSelectCommand = new Command(() => this.ItemSelect());
+         this.OpenCommand = new Command(async (item) => await this.Open(item));
       }
 
       public void OnAppearing()
@@ -77,13 +77,11 @@ namespace ComicsShelf.Libraries
          comicFolder.ComicFiles.Replace(comicFile);
       }
 
-      public ComicFile SelectedItem { get; set; }
-
-      public Command ItemSelectCommand { get; set; }
-      void ItemSelect()
+      public Command OpenCommand { get; set; }
+      private async Task Open(object item)
       {
-         var service = DependencyService.Get<LibraryService>();
-         service.Test(this.Library.ID, this.SelectedItem.Key);
+         var t = item as ComicFileVM;
+         // await PushAsync<File.FileVM>((File.FileData)item);
       }
 
    }

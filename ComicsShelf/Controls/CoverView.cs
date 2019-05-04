@@ -1,4 +1,6 @@
 ﻿using ComicsShelf.ComicFiles;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
@@ -39,6 +41,12 @@ namespace ComicsShelf.Controls
          AbsoluteLayout.SetLayoutBounds(overlayContainer, new Rectangle(0, 0, 1, 1));
          AbsoluteLayout.SetLayoutFlags(overlayContainer, AbsoluteLayoutFlags.All);
 
+         this.GestureRecognizers.Add(new TapGestureRecognizer
+         {
+            Command = this.OpenTransition,
+            NumberOfTapsRequired = 1
+         });
+
       }
 
 
@@ -67,6 +75,7 @@ namespace ComicsShelf.Controls
       private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as CoverView).ProgressBar.Progress = (double)newValue; }
 
+
       public static readonly BindableProperty HasCacheProperty =
          BindableProperty.Create("HasCache", typeof(HasCacheEnum), typeof(CoverView), HasCacheEnum.Unknown,
             propertyChanged: OnHasCacheChanged);
@@ -80,6 +89,34 @@ namespace ComicsShelf.Controls
          var opacity = ((HasCacheEnum)newValue == HasCacheEnum.Yes ? 1 : 0.7);
          (bindable as CoverView).FadeTo(opacity);
       }
+
+
+      public static readonly BindableProperty OpenCommandProperty =
+         BindableProperty.Create("OpenCommand", typeof(ICommand), typeof(CoverView), null);
+      public ICommand OpenCommand
+      {
+         get { return (ICommand)GetValue(OpenCommandProperty); }
+         set { SetValue(OpenCommandProperty, value); }
+      }
+
+
+      private ICommand OpenTransition
+      {
+         get
+         {
+            return new Command(async () =>
+            {
+               await Task.WhenAll(
+                  this.ScaleTo(0.75, 150, Easing.SpringOut)
+               );
+               await Task.WhenAll(
+                  this.ScaleTo(1.00, 100, Easing.SpringOut)
+               );
+               Device.BeginInvokeOnMainThread(() => this.OpenCommand?.Execute(this.BindingContext));
+            });
+         }
+      }
+
 
    }
 }

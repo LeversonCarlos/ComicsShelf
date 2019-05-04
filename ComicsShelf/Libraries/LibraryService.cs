@@ -199,16 +199,5 @@ namespace ComicsShelf.Libraries
       }
 
 
-
-
-      public void Test(string libraryID, string comicKey)
-      {
-         var comicFile = this.ComicFiles[libraryID].Where(x => x.ComicFile.Key == comicKey).FirstOrDefault();
-         comicFile.ComicFile.FullText += " [changed]";
-
-         Messaging.Send("OnRefreshingItem", libraryID, comicFile);
-
-      }
-
    }
 }
