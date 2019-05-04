@@ -3,6 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    x:Class="ComicsShelf.Libraries.LibraryPage"
+   xmlns:constrols="clr-namespace:ComicsShelf.Controls"
    BackgroundColor="{StaticResource colorBackground}"
    Title="{Binding Title}">
 
@@ -24,7 +25,7 @@
                         <DataTemplate>
 
                            <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
-                              <Image Source="{Binding CoverPath}" Aspect="AspectFit"></Image>
+                              <constrols:CoverView ImageSource="{Binding CoverPath}" Progress="0.23" ></constrols:CoverView>
                               <!-- 
                               <StackLayout BackgroundColor="Red" VerticalOptions="FillAndExpand" >
                                  <Label Text="{Binding ComicFile.FullText}" FontAttributes="Bold"></Label>
