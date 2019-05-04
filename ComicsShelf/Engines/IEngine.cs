@@ -16,6 +16,8 @@ namespace ComicsShelf.Engines
       Task<bool> SaveSyncData(Libraries.LibraryModel library, byte[] serializedValue);
       Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library);
 
+      Task<bool> ExtractCover(Libraries.LibraryModel library, ComicFile comicFile);
+
    }
 
    internal class Engine

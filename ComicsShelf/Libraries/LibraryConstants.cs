@@ -18,5 +18,10 @@
          get { return $"{Xamarin.Essentials.FileSystem.CacheDirectory}/FilesCache/"; }
       }
 
+      public static string CoversCachePath
+      {
+         get { return $"{Xamarin.Essentials.FileSystem.CacheDirectory}/CoversCachePath/"; }
+      }
+
    }
 }

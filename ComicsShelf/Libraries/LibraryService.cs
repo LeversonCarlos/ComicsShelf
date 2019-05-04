@@ -32,13 +32,18 @@ namespace ComicsShelf.Libraries
          try
          {
             service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>());
+            if (!System.IO.Directory.Exists(LibraryConstants.CoversCachePath))
+            { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
+            if (!System.IO.Directory.Exists(LibraryConstants.FilesCachePath))
+            { System.IO.Directory.CreateDirectory(LibraryConstants.FilesCachePath); }
+
             if (!await service.LoadData(library)) { return; }
-            if (!await service.Render(library)) { return; }
+            if (!await service.Notify(library)) { return; }
             if (!await service.LoadSyncData(library)) { return; }
-            if (!await service.Render(library)) { return; }
+            if (!await service.Notify(library)) { return; }
             if (!await service.Statistics(library)) { return; }
             if (!await service.SearchData(library)) { return; }
-            if (!await service.Render(library)) { return; }
+            if (!await service.Notify(library)) { return; }
             if (!await service.ExtractData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
             if (!await service.SaveSyncData(library)) { return; }
@@ -76,26 +81,14 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.LoadData", ex); return false; }
       }
 
-      private async Task<bool> Render(LibraryModel library)
+      private async Task<bool> Notify(LibraryModel library)
       {
          try
          {
-
-            /*
-            var rnd = new Random(DateTime.Now.Second);
-            foreach (var item in this.ComicFiles[library.ID])
-            {
-               var hasCacheEnum = ((double)rnd.Next(0, 100) % 2) == 0;
-               item.CachePath = (hasCacheEnum ? library.LibraryKey : string.Empty);
-            }
-            */
-
             Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]);
-
-            // TODO
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Render", ex); return false; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Notify", ex); return false; }
       }
 
       private async Task<bool> LoadSyncData(LibraryModel library)
@@ -108,14 +101,14 @@ namespace ComicsShelf.Libraries
             var byteArray = await engine.LoadSyncData(library);
             if (byteArray == null) { return true; }
 
-            var comicFiles = Helpers.FileStream.Deserialize<List<ComicFiles.ComicFile>>(byteArray);
-            if (comicFiles == null) { return true; }
+            var syncFiles = Helpers.FileStream.Deserialize<List<ComicFiles.ComicFile>>(byteArray);
+            if (syncFiles == null) { return true; }
 
-            var libraryFiles = this.ComicFiles[library.ID];
-            foreach (var comicFile in comicFiles)
+            var comicFiles = this.ComicFiles[library.ID];
+            foreach (var syncFile in syncFiles)
             {
-               var libraryFile = libraryFiles.Where(x => x.ComicFile.Key == comicFile.Key).FirstOrDefault();
-               if (libraryFile != null) { libraryFile.Set(comicFile); }
+               var comicFile = comicFiles.Where(x => x.ComicFile.Key == syncFile.Key).FirstOrDefault();
+               if (comicFile != null) { comicFile.Set(syncFile); }
             }
 
             return true;
@@ -145,7 +138,9 @@ namespace ComicsShelf.Libraries
             if (searchFiles == null) { return true; }
 
             libraryFiles
-               .RemoveAll(x => !searchFiles.Select(i => i.Key).ToList().Contains(x.ComicFile.Key));
+               .Where(x => !searchFiles.Select(i => i.Key).ToList().Contains(x.ComicFile.Key))
+               .ToList()
+               .ForEach(file => file.ComicFile.Available = false);
             libraryFiles.AddRange(searchFiles
                .Where(x => !libraryFiles.Select(i => i.ComicFile.Key).ToList().Contains(x.Key))
                .Select(x => new ComicFiles.ComicFileVM(x))
@@ -160,10 +155,60 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            // TODO
+
+            // FEATURED FILES
+            var featuredFiles = this.ComicFiles[library.ID]
+               .Where(file => file.ComicFile.Available)
+               .GroupBy(file => file.ComicFile.FolderPath)
+               .SelectMany(file => file
+                  .OrderByDescending(order => order.ComicFile.FilePath)
+                  .Take(5)
+                  .ToList())
+               .Where(file => string.IsNullOrEmpty(file.CoverPath) || file.CoverPath == LibraryConstants.DefaultCover)
+               .ToList();
+            if (featuredFiles == null) { return true; }
+            if (!await this.ExtractData(library, featuredFiles)) { return false; }
+
             return true;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.ExtractData", ex); return false; }
+      }
+
+      private async Task<bool> ExtractData(LibraryModel library, List<ComicFiles.ComicFileVM> comicFiles)
+      {
+         try
+         {
+            var engine = Engines.Engine.Get(library.Type);
+            if (engine == null) { return false; }
+
+            var filesQuantity = comicFiles.Count;
+            for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
+            {
+               var comicFile = comicFiles[fileIndex];
+               try
+               {
+
+                  // PROGRESS
+                  var progress = ((double)fileIndex / (double)filesQuantity);
+                  // this.Notify(fileData.FullText, progress);
+
+                  // CHECK IF THE COVER FILE ALREADY EXISTS
+                  if (!string.IsNullOrEmpty(comicFile.CoverPath) && comicFile.CoverPath != LibraryConstants.DefaultCover)
+                  { continue; }
+
+                  // COVER EXTRACT
+                  if (await engine.ExtractCover(library, comicFile.ComicFile))
+                  { comicFile.CoverPath = comicFile.ComicFile.CoverPath; }
+                  else { return false; }
+
+               }
+               catch (Exception ex) { throw new Exception($"Extracting Comic Data{Environment.NewLine}{comicFile.ComicFile.FilePath}", ex); }
+            }
+
+            return true;
+         }
+         catch (Exception) { throw; }
+         finally { GC.Collect(); }
       }
 
       private async Task<bool> SaveSyncData(LibraryModel library)

@@ -52,6 +52,8 @@
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
     <Reference Include="System.Xml.Linq" />
@@ -73,6 +75,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\FileSystem\FileSystem.ExtractCover.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.SyncLibrary.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetFiles.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetFolders.cs" />

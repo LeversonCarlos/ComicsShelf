@@ -11,18 +11,21 @@ namespace ComicsShelf.ComicFiles
       public ComicFileVM(ComicFile comicFile)
       {
          this.Set(comicFile);
+         this.ComicFile.CoverPath = $"{Libraries.LibraryConstants.CoversCachePath}{comicFile.Key}.jpg";
+         this.ComicFile.CachePath = $"{Libraries.LibraryConstants.FilesCachePath}{comicFile.Key}";
+         this._CoverPath = Libraries.LibraryConstants.DefaultCover;
+         this._CachePath = string.Empty;
       }
 
       internal void Set(ComicFile comicFile)
       {
          this.ComicFile = comicFile;
+         this.ComicFile.Available = true;
          this._Readed = comicFile.Readed;
          this._Rating = comicFile.Rating;
          this._ReadingDate = comicFile.ReadingDate;
          this._ReadingPage = comicFile.ReadingPage;
          this._ReadingPercent = comicFile.ReadingPercent;
-         this._CoverPath = Libraries.LibraryConstants.DefaultCover;
-         this._CachePath = string.Empty;
       }
 
       string _CoverPath;
