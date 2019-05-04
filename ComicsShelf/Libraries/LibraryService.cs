@@ -81,12 +81,14 @@ namespace ComicsShelf.Libraries
          try
          {
 
+            /*
             var rnd = new Random(DateTime.Now.Second);
             foreach (var item in this.ComicFiles[library.ID])
             {
                var hasCacheEnum = ((double)rnd.Next(0, 100) % 2) == 0;
                item.CachePath = (hasCacheEnum ? library.LibraryKey : string.Empty);
             }
+            */
 
             Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]);
 

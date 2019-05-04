@@ -107,7 +107,7 @@ namespace ComicsShelf.Controls
             return new Command(async () =>
             {
                await Task.WhenAll(
-                  this.ScaleTo(0.75, 150, Easing.SpringOut)
+                  this.ScaleTo(0.85, 150, Easing.SpringIn)
                );
                await Task.WhenAll(
                   this.ScaleTo(1.00, 100, Easing.SpringOut)

@@ -80,7 +80,10 @@ namespace ComicsShelf.Libraries
       public Command OpenCommand { get; set; }
       private async Task Open(object item)
       {
-         var t = item as ComicFileVM;
+         var comicFile = item as ComicFileVM;
+         if (string.IsNullOrEmpty(comicFile.CachePath))
+         { comicFile.CachePath = this.Library.LibraryKey; }
+         else { comicFile.CachePath = string.Empty; }
          // await PushAsync<File.FileVM>((File.FileData)item);
       }
 
