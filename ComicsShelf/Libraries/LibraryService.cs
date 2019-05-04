@@ -85,7 +85,17 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]);
+            await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]));
+            return true;
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Notify", ex); return false; }
+      }
+
+      private async Task<bool> Notify(LibraryModel library, string prefix, List<ComicFiles.ComicFileVM> comicFiles)
+      {
+         try
+         {
+            await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>(prefix, comicFiles));
             return true;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Notify", ex); return false; }
@@ -120,10 +130,98 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            // TODO
+
+            // READING FILES
+            var readingFiles = this.Statistics_GetReadingFiles(library);
+            if (readingFiles == null) { return false; }
+            await this.Notify(library, "OnRefreshingReadingFilesList", readingFiles);
+
+            // RECENT FILES
+            var recentFiles = this.Statistics_GetRecentFiles(library);
+            if (recentFiles == null) { return false; }
+            await this.Notify(library, "OnRefreshingRecentFilesList", recentFiles);
+
             return true;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Statistics", ex); return false; }
+      }
+
+      private List<ComicFiles.ComicFileVM> Statistics_GetRecentFiles(LibraryModel library)
+      {
+         try
+         {
+            var recentFiles = this.ComicFiles[library.ID]
+               .Where(file => file.ComicFile.Available)
+               .Where(file => file.ComicFile.ReleaseDate != DateTime.MinValue)
+               .OrderByDescending(x => x.ComicFile.ReleaseDate)
+               .Take(10)
+               .ToList();
+            return recentFiles;
+         }
+         catch (Exception) { throw; }
+      }
+
+      private List<ComicFiles.ComicFileVM> Statistics_GetReadingFiles(LibraryModel library)
+      {
+         try
+         {
+            var libraryFiles = this.ComicFiles[library.ID]
+               .Where(file => file.ComicFile.Available);
+
+            // GET LAST 10 OPENED FILES
+            var openedFiles = libraryFiles
+               .Where(file => file.ComicFile.ReadingPercent > 0.0 && file.ComicFile.ReadingPercent < 1.0)
+               .OrderByDescending(file => file.ComicFile.ReadingDate)
+               .Take(10)
+               .ToList();
+
+            // GET ALL READED FILES
+            var readedFiles = libraryFiles
+               .Where(x => x.ComicFile.ReadingPercent == 1.0)
+               .ToList();
+
+            // REMOVE GROUPS THAT ALREADY HAS SOME OPENED FILES
+            readedFiles
+               .RemoveAll(x => openedFiles
+                  .Select(g => g.ComicFile.FolderPath)
+                  .Contains(x.ComicFile.FolderPath));
+
+            // GROUP FILES AND MANTAIN ONLY THE MOST RECENT FILE FOR EACH GROUP
+            readedFiles = readedFiles
+               .GroupBy(x => x.ComicFile.FolderPath)
+               .Select(x => readedFiles
+                  .Where(g => g.ComicFile.FolderPath == x.Key)
+                  .OrderByDescending(g => g.ComicFile.FilePath)
+                  .FirstOrDefault())
+               .ToList();
+
+            // FROM THAT, TAKE THE NEXT FILE FOR EACH GROUP
+            var readedNextFiles = readedFiles
+               .Select(x => libraryFiles
+                  .Where(f => f.ComicFile.FolderPath == x.ComicFile.FolderPath)
+                  .Where(f => String.Compare(f.ComicFile.FilePath, x.ComicFile.FilePath) > 0)
+                  .OrderBy(f => f.ComicFile.FilePath)
+                  .Take(1)
+                  .Select(f => new { f, x.ComicFile.ReadingDate })
+                  .FirstOrDefault())
+               .Where(x => x != null)
+               .ToList();
+
+            // UNION OPEN AND READED FILES
+            var unionFiles = readedNextFiles;
+            unionFiles.AddRange(openedFiles.Select(f => new { f, f.ComicFile.ReadingDate }).AsEnumerable());
+
+            // TAKE THE LAST 10
+            var readingFiles = unionFiles
+               .OrderByDescending(x => x.ReadingDate)
+               .Select(x => x.f)
+               .Take(10)
+               .ToList();
+
+            return readingFiles;
+;
+         }
+         catch (Exception) { throw; }
       }
 
       private async Task<bool> SearchData(LibraryModel library)
@@ -168,6 +266,17 @@ namespace ComicsShelf.Libraries
                .ToList();
             if (featuredFiles == null) { return true; }
             if (!await this.ExtractData(library, featuredFiles)) { return false; }
+
+            // REMAINING FILES
+            var remainingFiles = this.ComicFiles[library.ID]
+               .Where(file => file.ComicFile.Available)
+               .Where(file => string.IsNullOrEmpty(file.CoverPath) || file.CoverPath == LibraryConstants.DefaultCover)
+               .OrderBy(file => file.ComicFile.FolderPath)
+               .ThenByDescending(file => file.ComicFile.FilePath)
+               .ToList();
+            if (remainingFiles == null) { return true; }
+            if (!await this.ExtractData(library, remainingFiles)) { return false; }
+
 
             return true;
          }
