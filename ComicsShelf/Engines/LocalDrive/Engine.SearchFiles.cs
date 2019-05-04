@@ -20,7 +20,7 @@ namespace ComicsShelf.Engines.LocalDrive
             {
                Key = file.FileKey,
                FilePath = file.FilePath,
-               FolderPath = file.FolderPath.Replace(library.LibraryKey, ""),
+               FolderPath = file.FolderPath.Replace($"{library.LibraryKey}{this.FileSystem.PathSeparator}", ""),
                FullText = file.Text,
                SmallText = file.Text.Replace(System.IO.Path.GetFileNameWithoutExtension(file.FolderPath), "")
             })

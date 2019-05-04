@@ -10,36 +10,34 @@
    </ContentPage.ToolbarItems>
 
    <ContentPage.Content>
-      <StackLayout >
-         <ScrollView Orientation="Vertical" >
-            <CollectionView ItemsSource="{Binding ComicFolders}" >
-               <CollectionView.ItemTemplate>
-                  <DataTemplate>
+      <CollectionView ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
+         <CollectionView.ItemTemplate>
+            <DataTemplate>
 
-                     <StackLayout>
-                        <Label Text="{Binding FolderPath}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                        <ScrollView Orientation="Horizontal">
-                           <CollectionView ItemsSource="{Binding ComicFiles}" >
-                              <CollectionView.ItemTemplate>
-                                 <DataTemplate>
+               <StackLayout Padding="5,10,0,0" Spacing="5" >
+                  <Label Text="{Binding FolderPath}" 
+                         FontAttributes = "Bold"
+                         FontSize = "15" />
+                  <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
+                     <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                                    <StackLayout Padding="5" >
-                                       <Label Text="{Binding ComicFile.FullText}" FontAttributes="Bold"></Label>
-                                       <Label Text="{Binding ComicFile.FullPath}" FontSize="Micro"></Label>
-                                    </StackLayout>
+                           <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
+                              <StackLayout BackgroundColor="Red" VerticalOptions="FillAndExpand" >
+                                 <Label Text="{Binding ComicFile.FullText}" FontAttributes="Bold"></Label>
+                                 <Label Text="{Binding ComicFile.FilePath}" FontSize="Micro" TextColor="White"></Label>
+                                 <Label Text="{Binding CoverPath}" FontSize="Micro"></Label>
+                              </StackLayout>
+                           </StackLayout>
 
-                                 </DataTemplate>
-                              </CollectionView.ItemTemplate>
-                           </CollectionView>
-                        </ScrollView>
-                     </StackLayout>
+                        </DataTemplate>
+                     </CollectionView.ItemTemplate>
+                  </CollectionView>
+               </StackLayout>
 
-                  </DataTemplate>
-               </CollectionView.ItemTemplate>
-            </CollectionView>
-         </ScrollView>
-         <ActivityIndicator IsRunning="{Binding IsBusy}" />
-      </StackLayout>
+            </DataTemplate>
+         </CollectionView.ItemTemplate>
+      </CollectionView>
    </ContentPage.Content>
 
 </ContentPage>

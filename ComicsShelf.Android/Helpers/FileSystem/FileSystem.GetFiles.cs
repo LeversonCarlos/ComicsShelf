@@ -26,6 +26,9 @@ namespace ComicsShelf.Droid
                .EnumerateFiles(folder.Path, "*.cbz", System.IO.SearchOption.AllDirectories)
                .AsQueryable();
             var fileList = await Task.FromResult(fileListQuery.ToList());
+            fileList.AddRange(fileList);
+            fileList.AddRange(fileList);
+            fileList.AddRange(fileList);
 
             var fileResult = fileList
                .Select(filePath => new File
