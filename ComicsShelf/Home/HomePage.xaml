@@ -8,34 +8,42 @@
    BackgroundColor="{StaticResource colorBackground}"   
    Title="{Binding Title}">
    <ContentPage.Content>
-      <CollectionView ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
-         <CollectionView.ItemTemplate>
-            <DataTemplate>
+      <StackLayout>
+         <CollectionView ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
+            <CollectionView.ItemTemplate>
+               <DataTemplate>
 
-               <StackLayout Padding="5,10,0,5" Spacing="5" >
-                  <Label Text="{Binding FolderPath}" 
+                  <StackLayout Padding="5,10,0,5" Spacing="5" >
+                     <Label Text="{Binding FolderPath}" 
                          FontAttributes = "Bold"
                          FontSize = "15" />
-                  <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
-                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
+                        <CollectionView.EmptyView >
+                           <StackLayout HeightRequest="222">
+                              <Label HorizontalOptions="Center"  VerticalOptions="Center">Nada por Aqui</Label>
+                           </StackLayout>
+                        </CollectionView.EmptyView>
 
-                           <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
-                              <constrols:CoverView 
+                        <CollectionView.ItemTemplate>
+                           <DataTemplate>
+
+                              <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
+                                 <constrols:CoverView 
                                  ImageSource="{Binding CoverPath}" 
                                  Progress="{Binding ReadingPercent}" 
                                  HasCache="{Binding HasCache}" 
                                  OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
-                              </constrols:CoverView>
-                           </StackLayout>
+                                 </constrols:CoverView>
+                              </StackLayout>
 
-                        </DataTemplate>
-                     </CollectionView.ItemTemplate>
-                  </CollectionView>
-               </StackLayout>
+                           </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                     </CollectionView>
+                  </StackLayout>
 
-            </DataTemplate>
-         </CollectionView.ItemTemplate>
-      </CollectionView>
+               </DataTemplate>
+            </CollectionView.ItemTemplate>
+         </CollectionView>
+      </StackLayout>
    </ContentPage.Content>
 </ContentPage>

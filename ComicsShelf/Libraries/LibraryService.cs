@@ -139,6 +139,8 @@ namespace ComicsShelf.Libraries
             // RECENT FILES
             var recentFiles = this.Statistics_GetRecentFiles(library);
             if (recentFiles == null) { return false; }
+            for (int i = 0; i < 5; i++)
+            { recentFiles.AddRange(recentFiles); }
             await this.Notify(library, "OnRefreshingRecentFilesList", recentFiles);
 
             return true;
@@ -219,7 +221,7 @@ namespace ComicsShelf.Libraries
                .ToList();
 
             return readingFiles;
-;
+            ;
          }
          catch (Exception) { throw; }
       }
