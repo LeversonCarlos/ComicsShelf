@@ -22,21 +22,27 @@ namespace ComicsShelf.Libraries
 
       public void OnAppearing()
       {
-         this.IsBusy = true;
-         var service = DependencyService.Get<LibraryService>();
-         this.ComicFolders.AddRange(this.GetFolderList(service.ComicFiles[this.Library.ID]));
-
-         Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
-         Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
-
-         this.IsBusy = false;
+         try
+         {
+            this.IsBusy = true;
+            var service = DependencyService.Get<LibraryService>();
+            this.ComicFolders.AddRange(this.GetFolderList(service.ComicFiles[this.Library.ID]));
+            Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
+            Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
+            this.IsBusy = false;
+         }
+         catch { }
       }
 
       public void OnDisappearing()
       {
-         Messaging.Unsubscribe("OnRefreshingList", this.Library.ID);
-         Messaging.Unsubscribe("OnRefreshingItem", this.Library.ID);
-         this.ComicFolders.Clear();
+         try
+         {
+            Messaging.Unsubscribe("OnRefreshingList", this.Library.ID);
+            Messaging.Unsubscribe("OnRefreshingItem", this.Library.ID);
+            this.ComicFolders.Clear();
+         }
+         catch { }
       }
 
       private List<ComicFolderVM> GetFolderList(List<ComicFileVM> comicFiles)

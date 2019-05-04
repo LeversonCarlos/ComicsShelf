@@ -41,8 +41,15 @@ namespace ComicsShelf.ComicFiles
          set
          {
             this.SetProperty(ref this._CachePath, value);
-            this.ComicFile.CachePath = value;
+            this.HasCache = (!string.IsNullOrEmpty(value));
          }
+      }
+
+      bool _HasCache;
+      public bool HasCache
+      {
+         get { return this._HasCache; }
+         set { this.SetProperty(ref this._HasCache, value); }
       }
 
       short _Rating;

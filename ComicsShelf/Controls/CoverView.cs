@@ -17,7 +17,6 @@ namespace ComicsShelf.Controls
             VerticalOptions = LayoutOptions.Start,
             Aspect = Aspect.AspectFill
          };
-         // this.Children.Add(this.Image);
          var imageContainer = new Grid { Children = { this.Image } };
          this.Children.Add(imageContainer);
          AbsoluteLayout.SetLayoutBounds(imageContainer, new Rectangle(0, 0, 1, 1));
@@ -30,7 +29,6 @@ namespace ComicsShelf.Controls
             HeightRequest = 5,
             Opacity = 0.75
          };
-         // this.Children.Add(this.ProgressBar);
          var overlayContainer = new StackLayout
          {
             VerticalOptions = LayoutOptions.FillAndExpand,
@@ -40,9 +38,6 @@ namespace ComicsShelf.Controls
          this.Children.Add(overlayContainer);
          AbsoluteLayout.SetLayoutBounds(overlayContainer, new Rectangle(0, 0, 1, 1));
          AbsoluteLayout.SetLayoutFlags(overlayContainer, AbsoluteLayoutFlags.All);
-
-         AbsoluteLayout.SetLayoutBounds(this.ProgressBar, new Rectangle(1, 1, 1, 1));
-         AbsoluteLayout.SetLayoutFlags(this.ProgressBar, AbsoluteLayoutFlags.YProportional);
 
       }
 
@@ -71,6 +66,28 @@ namespace ComicsShelf.Controls
       }
       private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as CoverView).ProgressBar.Progress = (double)newValue; }
+
+      public static readonly BindableProperty HasCacheProperty =
+         BindableProperty.Create("HasCache", typeof(bool), typeof(CoverView), null,
+            propertyChanged: OnHasCacheChanged);
+      public bool HasCache
+      {
+         get { return (bool)GetValue(HasCacheProperty); }
+         set { SetValue(HasCacheProperty, value); }
+      }
+      private static void OnHasCacheChanged(BindableObject bindable, object oldValue, object newValue)
+      {
+         var coverView = (bindable as CoverView);
+         if ((bool)newValue) {
+            coverView.Padding = 0;
+            coverView.FadeTo(1);
+         }
+         else 
+         {
+            coverView.Padding = new Thickness(10);
+            coverView.FadeTo(0.75);
+         }
+      }
 
    }
 }
