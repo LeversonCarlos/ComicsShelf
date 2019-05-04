@@ -2,6 +2,8 @@
 
 namespace ComicsShelf.ComicFiles
 {
+   public enum HasCacheEnum : short { Unknown = -1, No = 0, Yes = 1 }
+
    public class ComicFileVM : Helpers.Observables.ObservableObject
    {
 
@@ -41,12 +43,12 @@ namespace ComicsShelf.ComicFiles
          set
          {
             this.SetProperty(ref this._CachePath, value);
-            this.HasCache = (!string.IsNullOrEmpty(value));
+            this.HasCache = (string.IsNullOrEmpty(value) ? HasCacheEnum.No : HasCacheEnum.Yes);
          }
       }
 
-      bool _HasCache;
-      public bool HasCache
+      HasCacheEnum _HasCache;
+      public HasCacheEnum HasCache
       {
          get { return this._HasCache; }
          set { this.SetProperty(ref this._HasCache, value); }

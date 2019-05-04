@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using ComicsShelf.ComicFiles;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
@@ -10,7 +11,6 @@ namespace ComicsShelf.Controls
          this.Margin = 0;
          this.Padding = 0;
          this.VerticalOptions = LayoutOptions.FillAndExpand;
-         // this.BackgroundColor = Color.White;
 
          this.Image = new Image
          {
@@ -68,25 +68,17 @@ namespace ComicsShelf.Controls
       { (bindable as CoverView).ProgressBar.Progress = (double)newValue; }
 
       public static readonly BindableProperty HasCacheProperty =
-         BindableProperty.Create("HasCache", typeof(bool), typeof(CoverView), null,
+         BindableProperty.Create("HasCache", typeof(HasCacheEnum), typeof(CoverView), HasCacheEnum.Unknown,
             propertyChanged: OnHasCacheChanged);
-      public bool HasCache
+      public HasCacheEnum HasCache
       {
-         get { return (bool)GetValue(HasCacheProperty); }
+         get { return (HasCacheEnum)GetValue(HasCacheProperty); }
          set { SetValue(HasCacheProperty, value); }
       }
       private static void OnHasCacheChanged(BindableObject bindable, object oldValue, object newValue)
       {
-         var coverView = (bindable as CoverView);
-         if ((bool)newValue) {
-            coverView.Padding = 0;
-            coverView.FadeTo(1);
-         }
-         else 
-         {
-            coverView.Padding = new Thickness(10);
-            coverView.FadeTo(0.75);
-         }
+         var opacity = ((HasCacheEnum)newValue == HasCacheEnum.Yes ? 1 : 0.7);
+         (bindable as CoverView).FadeTo(opacity);
       }
 
    }

@@ -25,14 +25,7 @@
                         <DataTemplate>
 
                            <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
-                              <constrols:CoverView ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" HasCache="False" ></constrols:CoverView>
-                              <!-- 
-                              <StackLayout BackgroundColor="Red" VerticalOptions="FillAndExpand" >
-                                 <Label Text="{Binding ComicFile.FullText}" FontAttributes="Bold"></Label>
-                                 <Label Text="{Binding ComicFile.FilePath}" FontSize="Micro" TextColor="White"></Label>
-                                 <Label Text="{Binding CoverPath}" FontSize="Micro"></Label>
-                              </StackLayout>
-                              -->
+                              <constrols:CoverView ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" HasCache="{Binding HasCache}" ></constrols:CoverView>
                            </StackLayout>
 
                         </DataTemplate>
