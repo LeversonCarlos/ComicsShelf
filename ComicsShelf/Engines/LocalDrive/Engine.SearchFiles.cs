@@ -22,7 +22,8 @@ namespace ComicsShelf.Engines.LocalDrive
                FilePath = file.FilePath,
                FolderPath = file.FolderPath.Replace($"{library.LibraryKey}{this.FileSystem.PathSeparator}", ""),
                FullText = file.Text,
-               SmallText = file.Text.Replace(System.IO.Path.GetFileNameWithoutExtension(file.FolderPath), "")
+               SmallText = file.Text.Replace(System.IO.Path.GetFileNameWithoutExtension(file.FolderPath), ""),
+               CachePath = $"{Libraries.LibraryConstants.FilesCachePath}{file.FileKey}"
             })
             .ToArray();
 

@@ -68,7 +68,6 @@ namespace ComicsShelf.Libraries
                if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
                { comicFile.CachePath = comicFile.ComicFile.CachePath; }
                else { comicFile.CachePath = string.Empty; }
-
             }
 
             this.ComicFiles[library.ID].AddRange(comicFiles);

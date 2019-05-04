@@ -13,5 +13,10 @@
          get { return $"{Xamarin.Essentials.FileSystem.AppDataDirectory}/Database.json"; }
       }
 
+      public static string FilesCachePath
+      {
+         get { return $"{Xamarin.Essentials.FileSystem.CacheDirectory}/FilesCache/"; }
+      }
+
    }
 }
