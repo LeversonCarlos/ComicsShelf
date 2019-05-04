@@ -43,7 +43,7 @@ namespace ComicsShelf.Controls
 
          this.GestureRecognizers.Add(new TapGestureRecognizer
          {
-            Command = this.OpenTransition,
+            Command = this.OpenTransition,            
             NumberOfTapsRequired = 1
          });
 
@@ -106,12 +106,8 @@ namespace ComicsShelf.Controls
          {
             return new Command(async () =>
             {
-               await Task.WhenAll(
-                  this.ScaleTo(0.85, 150, Easing.SpringIn)
-               );
-               await Task.WhenAll(
-                  this.ScaleTo(1.00, 100, Easing.SpringOut)
-               );
+               await this.ScaleTo(0.85, 150, Easing.SpringIn);
+               await this.ScaleTo(1.00, 100, Easing.SpringOut);
                Device.BeginInvokeOnMainThread(() => this.OpenCommand?.Execute(this.BindingContext));
             });
          }
