@@ -9,9 +9,11 @@ namespace ComicsShelf.Libraries
    internal class LibraryService
    {
 
+      private readonly Notify.NotifyVM Notify;
       public readonly Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles;
       public LibraryService()
       {
+         this.Notify = new Notify.NotifyVM("LibraryService");
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
       }
 
@@ -31,6 +33,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+            service.Notify.Send(R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE);
             service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>());
             if (!System.IO.Directory.Exists(LibraryConstants.CoversCachePath))
             { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
@@ -38,16 +41,17 @@ namespace ComicsShelf.Libraries
             { System.IO.Directory.CreateDirectory(LibraryConstants.FilesCachePath); }
 
             if (!await service.LoadData(library)) { return; }
-            if (!await service.Notify(library)) { return; }
+            if (!await service.NotifyData(library)) { return; }
             if (!await service.LoadSyncData(library)) { return; }
-            if (!await service.Notify(library)) { return; }
+            if (!await service.NotifyData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
             if (!await service.SearchData(library)) { return; }
-            if (!await service.Notify(library)) { return; }
+            if (!await service.NotifyData(library)) { return; }
             if (!await service.ExtractData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
             if (!await service.SaveSyncData(library)) { return; }
             if (!await service.SaveData(library)) { return; }
+            service.Notify.Send(false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -57,6 +61,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+            this.Notify.Send(R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE);
 
             var files = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(LibraryConstants.DatabaseFile);
             if (files == null) { return true; }
@@ -81,24 +86,24 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.LoadData", ex); return false; }
       }
 
-      private async Task<bool> Notify(LibraryModel library)
+      private async Task<bool> NotifyData(LibraryModel library)
       {
          try
          {
             await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]));
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Notify", ex); return false; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.NotifyData", ex); return false; }
       }
 
-      private async Task<bool> Notify(LibraryModel library, string prefix, List<ComicFiles.ComicFileVM> comicFiles)
+      private async Task<bool> NotifyData(LibraryModel library, string prefix, List<ComicFiles.ComicFileVM> comicFiles)
       {
          try
          {
             await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>(prefix, comicFiles));
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Notify", ex); return false; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.NotifyData", ex); return false; }
       }
 
       private async Task<bool> LoadSyncData(LibraryModel library)
@@ -134,14 +139,14 @@ namespace ComicsShelf.Libraries
             // READING FILES
             var readingFiles = this.Statistics_GetReadingFiles(library);
             if (readingFiles == null) { return false; }
-            await this.Notify(library, "OnRefreshingReadingFilesList", readingFiles);
+            await this.NotifyData(library, "OnRefreshingReadingFilesList", readingFiles);
 
             // RECENT FILES
             var recentFiles = this.Statistics_GetRecentFiles(library);
             if (recentFiles == null) { return false; }
             for (int i = 0; i < 5; i++)
             { recentFiles.AddRange(recentFiles); }
-            await this.Notify(library, "OnRefreshingRecentFilesList", recentFiles);
+            await this.NotifyData(library, "OnRefreshingRecentFilesList", recentFiles);
 
             return true;
          }
@@ -262,6 +267,8 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+            this.Notify.Send(R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE);
+
             var engine = Engines.Engine.Get(library.Type);
             if (engine == null) { return false; }
             var libraryFiles = this.ComicFiles[library.ID];
@@ -289,6 +296,7 @@ namespace ComicsShelf.Libraries
          {
 
             // FEATURED FILES
+            this.Notify.Send(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
             var featuredFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .GroupBy(file => file.ComicFile.FolderPath)
@@ -302,6 +310,7 @@ namespace ComicsShelf.Libraries
             if (!await this.ExtractData(library, featuredFiles)) { return false; }
 
             // REMAINING FILES
+            this.Notify.Send(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
             var remainingFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .Where(file => string.IsNullOrEmpty(file.CoverPath) || file.CoverPath == LibraryConstants.DefaultCover)
@@ -333,7 +342,7 @@ namespace ComicsShelf.Libraries
 
                   // PROGRESS
                   var progress = ((double)fileIndex / (double)filesQuantity);
-                  // this.Notify(fileData.FullText, progress);
+                  this.Notify.Send(comicFile.ComicFile.FullText, progress);
 
                   // CHECK IF THE COVER FILE ALREADY EXISTS
                   if (!string.IsNullOrEmpty(comicFile.CoverPath) && comicFile.CoverPath != LibraryConstants.DefaultCover)

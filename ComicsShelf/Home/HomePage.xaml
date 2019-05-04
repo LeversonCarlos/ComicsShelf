@@ -4,11 +4,12 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    x:Class="ComicsShelf.Home.HomePage"
    x:Name="libraryPage"
-   xmlns:constrols="clr-namespace:ComicsShelf.Controls"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    BackgroundColor="{StaticResource colorBackground}"   
    Title="{Binding Title}">
    <ContentPage.Content>
       <StackLayout>
+         
          <CollectionView ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
             <CollectionView.ItemTemplate>
                <DataTemplate>
@@ -28,12 +29,12 @@
                            <DataTemplate>
 
                               <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
-                                 <constrols:CoverView 
+                                 <controls:CoverView
                                  ImageSource="{Binding CoverPath}" 
                                  Progress="{Binding ReadingPercent}" 
                                  HasCache="{Binding HasCache}" 
                                  OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
-                                 </constrols:CoverView>
+                                 </controls:CoverView>
                               </StackLayout>
 
                            </DataTemplate>
@@ -44,6 +45,14 @@
                </DataTemplate>
             </CollectionView.ItemTemplate>
          </CollectionView>
+
+         <controls:NotifyView
+            IsVisible="{Binding Notify.IsRunning}" 
+            Text="{Binding Notify.Text}" 
+            Progress="{Binding Notify.Progress}" 
+            Details="{Binding Notify.Details}" >
+         </controls:NotifyView>
+
       </StackLayout>
    </ContentPage.Content>
 </ContentPage>

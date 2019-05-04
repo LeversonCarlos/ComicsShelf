@@ -9,10 +9,12 @@ namespace ComicsShelf.Home
    public class HomeVM : BaseVM
    {
 
+      public Notify.NotifyVM Notify { get; private set; }
       public ObservableList<ComicFolderVM> ComicFolders { get; private set; }
       public HomeVM()
       {
          this.Title = "Home";
+         this.Notify = new Notify.NotifyVM("LibraryService");
          this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_READING_FILES_SECTION_TITLE });
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_RECENT_FILES_SECTION_TITLE });
