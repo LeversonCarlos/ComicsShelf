@@ -16,7 +16,7 @@ namespace ComicsShelf.Controls
 
          this.Image = new Image
          {
-            VerticalOptions = LayoutOptions.Start,
+            VerticalOptions = LayoutOptions.Fill,
             Aspect = Aspect.AspectFill
          };
          var imageContainer = new Grid { Children = { this.Image } };
@@ -28,13 +28,14 @@ namespace ComicsShelf.Controls
          {
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.EndAndExpand,
-            HeightRequest = 5,
-            Opacity = 0.75
+            BackgroundColor = Color.White,
+            HeightRequest = 5
          };
          var overlayContainer = new StackLayout
          {
-            VerticalOptions = LayoutOptions.FillAndExpand,
+            VerticalOptions = LayoutOptions.EndAndExpand,
             Children = { this.ProgressBar },
+            Opacity = 0.75,
             InputTransparent = true
          };
          this.Children.Add(overlayContainer);
@@ -43,7 +44,7 @@ namespace ComicsShelf.Controls
 
          this.GestureRecognizers.Add(new TapGestureRecognizer
          {
-            Command = this.OpenTransition,            
+            Command = this.OpenTransition,
             NumberOfTapsRequired = 1
          });
 
