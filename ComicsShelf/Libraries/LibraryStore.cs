@@ -132,7 +132,7 @@ namespace ComicsShelf.Libraries
                   {
                      var library = Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON);
                      this.AddShell(library);
-                     LibraryService.StartupLibrary(library);
+                     await LibraryService.StartupLibrary(library);
                   }
                }
                catch { }

@@ -2,10 +2,10 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:versionCode="10107" android:versionName="1.7"
-    package="com.friendship.ComicsShelf" android:installLocation="auto">
+    package="com.friendship.ComicsShelf2" android:installLocation="auto">
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <application android:label="Comics Shelf">
+    <application android:label="Comics Shelf vTwo">
     </application>
 </manifest>

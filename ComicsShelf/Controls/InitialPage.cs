@@ -1,16 +1,19 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.Controls
+namespace ComicsShelf.Controls
 {
 
    public class NavPage : NavigationPage
    {
       public NavPage() : base(new InitialPage())
       {
+
          this.BarTextColor = Color.White;
-         this.BarBackgroundColor = Colors.Primary;
-         this.SizeChanged += this.OnSizeChanged;
+         this.BarBackgroundColor = Color.Default;
+         // this.SizeChanged += this.OnSizeChanged;
       }
+      /*
       internal Size ScreenSize { get; set; }
       private void OnSizeChanged(object sender, System.EventArgs e) {
          if (this.ScreenSize != Size.Zero &&
@@ -20,6 +23,7 @@ namespace ComicsShelf.Helpers.Controls
          this.ScreenSize = new Size(this.Width, this.Height);
          Messaging.Send(Messaging.Keys.ScreenSizeChanged, this.ScreenSize);
       }
+      */
    }
 
    public class InitialPage : ContentPage

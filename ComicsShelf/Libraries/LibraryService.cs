@@ -66,7 +66,7 @@ namespace ComicsShelf.Libraries
             var files = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(LibraryConstants.DatabaseFile);
             if (files == null) { return true; }
 
-            var comicFiles = files.Select(x => new ComicFiles.ComicFileVM(x)).ToList();
+            var comicFiles = files.Where(x => x.LibraryKey == library.ID).Select(x => new ComicFiles.ComicFileVM(x)).ToList();
             foreach (var comicFile in comicFiles)
             {
                if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))

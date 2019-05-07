@@ -26,6 +26,7 @@ namespace ComicsShelf.Libraries
          {
             this.IsBusy = true;
             var service = DependencyService.Get<LibraryService>();
+            this.ComicFolders.Clear();
             this.ComicFolders.AddRange(this.GetFolderList(service.ComicFiles[this.Library.ID]));
             Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
             Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
