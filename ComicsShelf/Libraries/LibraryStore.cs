@@ -34,8 +34,8 @@ namespace ComicsShelf.Libraries
 
             // UPDATE SHELL
             var shellItem = this.AddShell(library);
-            Shell.CurrentShell.CurrentItem = shellItem;
-            Shell.CurrentShell.FlyoutIsPresented = false;
+            Shell.Current.CurrentItem = shellItem;
+            Shell.Current.FlyoutIsPresented = false;
 
             // STARTUP LIBRARY
             LibraryService.StartupLibrary(library);
@@ -64,7 +64,7 @@ namespace ComicsShelf.Libraries
             var shellItem = new ShellItem { Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
             shellItem.Items.Add(shellSection);
 
-            Shell.CurrentShell.Items.Add(shellItem);
+            Shell.Current.Items.Add(shellItem);
             return shellItem;
 
          }
@@ -110,8 +110,8 @@ namespace ComicsShelf.Libraries
             this.SetLibraryIDs(libraryIDs);
 
             // UPDATE SHELL
-            Shell.CurrentShell.CurrentItem = Shell.CurrentShell.Items[0];
-            Shell.CurrentShell.Items.Remove(libraryShell);
+            Shell.Current.CurrentItem = Shell.Current.Items[0];
+            Shell.Current.Items.Remove(libraryShell);
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); }

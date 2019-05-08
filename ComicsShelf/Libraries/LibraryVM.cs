@@ -83,8 +83,8 @@ namespace ComicsShelf.Libraries
       {
          var comicFile = item as ComicFileVM;
 
-         var t = Shell.CurrentShell.Route;
-         await Shell.CurrentShell.GoToAsync($"////splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
+         var t = Shell.Current.Route;
+         await Shell.Current.GoToAsync($"splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
 
          /*
          var splashView = new SplashView();
