@@ -55,6 +55,7 @@ namespace ComicsShelf.Droid
          catch (Exception) { throw; }
       }
 
+      private static Object SaveThumbnailLock = new Object();
       private async Task SaveThumbnail(Stream imageStream, string imagePath)
       {
          try
@@ -72,17 +73,20 @@ namespace ComicsShelf.Droid
                imageWidth = originalBitmap.Width * scaleFactor;
 
                // INITIALIZE THUMBNAIL STREAM
-               using (var thumbnailFileStream = new FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
+               lock (SaveThumbnailLock)
                {
-
-                  // SCALE BITMAP
-                  using (var thumbnailBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(originalBitmap, (int)imageWidth, (int)imageHeight, false))
+                  using (var thumbnailFileStream = new FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
                   {
-                     await thumbnailBitmap.CompressAsync(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
-                     await thumbnailFileStream.FlushAsync();
-                  }
-                  thumbnailFileStream.Close();
 
+                     // SCALE BITMAP
+                     using (var thumbnailBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(originalBitmap, (int)imageWidth, (int)imageHeight, false))
+                     {
+                        thumbnailBitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
+                        thumbnailFileStream.Flush();
+                     }
+                     thumbnailFileStream.Close();
+
+                  }
                }
 
             }

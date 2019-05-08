@@ -40,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="ComicFiles\SplashView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Helpers\FolderDialog\FolderDialogPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

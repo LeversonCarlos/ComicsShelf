@@ -82,10 +82,22 @@ namespace ComicsShelf.Libraries
       private async Task Open(object item)
       {
          var comicFile = item as ComicFileVM;
+
+         var t = Shell.CurrentShell.Route;
+         await Shell.CurrentShell.GoToAsync($"////splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
+
+         /*
+         var splashView = new SplashView();
+         splashView.BindingContext = comicFile;
+         await Shell.CurrentShell.Navigation.PushAsync(splashView);
+         */
+
+         /*
          if (string.IsNullOrEmpty(comicFile.CachePath))
          { comicFile.CachePath = this.Library.LibraryKey; }
          else { comicFile.CachePath = string.Empty; }
-         // await PushAsync<File.FileVM>((File.FileData)item);
+         */
+
       }
 
    }

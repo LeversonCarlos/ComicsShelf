@@ -7,6 +7,7 @@
       {
          InitializeComponent();
          this.BindingContext = new ShellVM();
+         Xamarin.Forms.Routing.RegisterRoute("splash", typeof(ComicFiles.SplashView));
       }
 
       private void NewLocalLibrary_Clicked(object sender, System.EventArgs e)
