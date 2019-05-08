@@ -19,7 +19,7 @@ namespace ComicsShelf.ComicFiles
       public string LibraryID
       {
          get { return this._LibraryID; }
-         set { this.LibraryID = Uri.UnescapeDataString(value); this.LoadBindingContext(); }
+         set { this._LibraryID = Uri.UnescapeDataString(value); this.LoadBindingContext(); }
       }
 
       string _ComicKey;
