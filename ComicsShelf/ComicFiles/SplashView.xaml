@@ -3,16 +3,38 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
-   x:Class="ComicsShelf.ComicFiles.SplashView">
+   x:Class="ComicsShelf.ComicFiles.SplashView"
+   Title="{Binding CurrentFile.ComicFile.FullText}" 
+   x:Name="splashPage">
    <ContentPage.Content>
       <AbsoluteLayout VerticalOptions="FillAndExpand">
 
          <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
-            <Image Source="{Binding CoverPath}" Aspect="AspectFill" Opacity="0.4" />
+            <Image Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.4" />
          </Grid>
+
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="5,0,5,5">
+            <CollectionView 
+               VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="222" SelectionMode="Single"
+               ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" SelectedItem="{Binding CurrentFile}" >
+               <CollectionView.ItemTemplate>
+                  <DataTemplate>
+                     <StackLayout Padding="5,5,5,5" WidthRequest="145" HeightRequest="222" >
+                        <controls:CoverView 
+                           ImageSource="{Binding CoverPath}" 
+                           Progress="{Binding ReadingPercent}" 
+                           HasCache="{Binding HasCache}"
+                           OpenCommand="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference splashPage}}">
+                        </controls:CoverView>
+                     </StackLayout>
+                  </DataTemplate>
+               </CollectionView.ItemTemplate>
+            </CollectionView>
+         </StackLayout>
 
          <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
 
+         <!-- 
          <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0" >
             <ProgressBar Progress="{Binding ReadingPercent}" VerticalOptions="EndAndExpand" InputTransparent="True" />
             <ContentView Padding="2" Opacity="0.85"
@@ -31,7 +53,7 @@
                </FlexLayout>
             </ContentView>
          </StackLayout>
-
+         -->
 
       </AbsoluteLayout>
    </ContentPage.Content>

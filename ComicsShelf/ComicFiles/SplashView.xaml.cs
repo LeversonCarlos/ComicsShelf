@@ -33,9 +33,9 @@ namespace ComicsShelf.ComicFiles
       {
          if (string.IsNullOrEmpty(this.LibraryID) || string.IsNullOrEmpty(this.ComicKey)) { return; }
          var libraryService = DependencyService.Get<Libraries.LibraryService>();
-         this.BindingContext = libraryService.ComicFiles[this.LibraryID]
+         this.BindingContext = new SplashVM(libraryService.ComicFiles[this.LibraryID]
             .Where(x => x.ComicFile.Available && x.ComicFile.Key == this.ComicKey)
-            .FirstOrDefault();
+            .FirstOrDefault());
 
       }
 
