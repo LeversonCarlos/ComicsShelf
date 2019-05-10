@@ -88,24 +88,6 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already Readed.
-        /// </summary>
-        public static string FILE_COMIC_ALREADY_READED_LABEL {
-            get {
-                return ResourceManager.GetString("FILE_COMIC_ALREADY_READED_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open.
-        /// </summary>
-        public static string FILE_OPEN_COMIC_LABEL {
-            get {
-                return ResourceManager.GetString("FILE_OPEN_COMIC_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to page {0} of {1}.
         /// </summary>
         public static string FILE_PAGESTATS_TEXT {
@@ -309,6 +291,33 @@ namespace ComicsShelf.R {
         public static string SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE {
             get {
                 return ResourceManager.GetString("SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark all Folder as Readed.
+        /// </summary>
+        public static string SPLASH_FILE_MARK_ALL_AS_READED_LABEL {
+            get {
+                return ResourceManager.GetString("SPLASH_FILE_MARK_ALL_AS_READED_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark as Readed.
+        /// </summary>
+        public static string SPLASH_FILE_MARK_AS_READED_LABEL {
+            get {
+                return ResourceManager.GetString("SPLASH_FILE_MARK_AS_READED_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Comic File.
+        /// </summary>
+        public static string SPLASH_FILE_OPEN_COMIC_LABEL {
+            get {
+                return ResourceManager.GetString("SPLASH_FILE_OPEN_COMIC_LABEL", resourceCulture);
             }
         }
         

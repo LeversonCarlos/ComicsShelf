@@ -10,26 +10,59 @@
       <AbsoluteLayout VerticalOptions="FillAndExpand">
 
          <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
-            <Image Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.4" />
+            <Image Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.2" />
          </Grid>
 
-         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="5,0,5,5">
-            <CollectionView 
-               VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="222" SelectionMode="Single"
-               ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" SelectedItem="{Binding CurrentFile}" >
-               <CollectionView.ItemTemplate>
-                  <DataTemplate>
-                     <StackLayout Padding="5,5,5,5" WidthRequest="145" HeightRequest="222" >
-                        <controls:CoverView 
-                           ImageSource="{Binding CoverPath}" 
-                           Progress="{Binding ReadingPercent}" 
-                           HasCache="{Binding HasCache}"
-                           OpenCommand="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference splashPage}}">
-                        </controls:CoverView>
-                     </StackLayout>
-                  </DataTemplate>
-               </CollectionView.ItemTemplate>
-            </CollectionView>
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+
+            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" VerticalOptions="FillAndExpand" >
+               <Button 
+                  BackgroundColor="{StaticResource colorPrimary}" TextColor="White"
+                  FontSize="Large" Padding="60,20"
+                  Text="{controls:Translate Text=SPLASH_FILE_OPEN_COMIC_LABEL}"  >
+               </Button>
+            </FlexLayout>
+
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Padding="20,10">
+               <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                  <Switch VerticalOptions="Center" IsToggled="{Binding CurrentFile.Readed}" />
+                  <Label VerticalOptions="Center" FontSize="Medium"
+                         Text="{controls:Translate Text=SPLASH_FILE_MARK_AS_READED_LABEL}" />
+               </StackLayout>
+            </FlexLayout>
+
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Padding="20,10">
+               <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                  <Switch VerticalOptions="Center" IsToggled="{Binding IsAllReaded}" />
+                  <Label VerticalOptions="Center" FontSize="Medium"
+                         Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
+               </StackLayout>
+               <Button IsEnabled="{Binding CurrentFile.HasCache}" 
+                       BackgroundColor="{StaticResource colorPrimary}"
+                       TextColor="White" Padding="20,10" FontSize="Medium"
+                       Text="Limpar Cache"></Button>
+            </FlexLayout>
+
+            <StackLayout Padding="5,0,5,5" VerticalOptions="End">
+               <CollectionView VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" 
+                               HeightRequest="222" SelectionMode="Single" 
+                               ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
+                               SelectedItem="{Binding CurrentFile}" >
+                  <CollectionView.ItemTemplate>
+                     <DataTemplate>
+                        <StackLayout Padding="5,5,5,5" WidthRequest="145" HeightRequest="222" >
+                           <controls:CoverView 
+                              ImageSource="{Binding CoverPath}" 
+                              Progress="{Binding ReadingPercent}" 
+                              HasCache="{Binding HasCache}"
+                              OpenCommand="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference splashPage}}">
+                           </controls:CoverView>
+                        </StackLayout>
+                     </DataTemplate>
+                  </CollectionView.ItemTemplate>
+               </CollectionView>
+            </StackLayout>
+
          </StackLayout>
 
          <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
@@ -42,13 +75,6 @@
                          BackgroundColor="{StaticResource colorLightGray}" >
                <FlexLayout  Direction="Row" JustifyContent="SpaceBetween">
 
-                  <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
-                     <Switch VerticalOptions="Center" IsToggled="{Binding Readed}" />
-                     <Label VerticalOptions="Center" Text="{controls:Translate Text=FILE_COMIC_ALREADY_READED_LABEL}" />
-                  </StackLayout>
-                  <Button Text="{controls:Translate Text=FILE_OPEN_COMIC_LABEL}" 
-                          BackgroundColor="Default" TextColor="White" >
-                  </Button>
 
                </FlexLayout>
             </ContentView>

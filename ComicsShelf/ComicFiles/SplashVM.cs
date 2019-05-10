@@ -19,6 +19,7 @@ namespace ComicsShelf.ComicFiles
             .Where(x => x.ComicFile.Available && x.ComicFile.FolderPath == CurrentFile.ComicFile.FolderPath)
             .OrderBy(x => x.ComicFile.FilePath)
             .ToList();
+         this._IsAllReaded = comicFiles.Count(x => !x.Readed) == 0;
          this.ComicFiles = comicFiles;
          this.ItemSelectedCommand = new Command(async (item) => await this.ItemSelected(item));
       }
@@ -30,6 +31,15 @@ namespace ComicsShelf.ComicFiles
          set { this.SetProperty(ref this._CurrentFile, value); }
       }
 
+      bool _IsAllReaded;
+      public bool IsAllReaded
+      {
+         get { return this._IsAllReaded; }
+         set {
+            this.ComicFiles.ForEach(x => x.Readed = true);
+            this.SetProperty(ref this._IsAllReaded, value);
+         }
+      }
 
       public Command ItemSelectedCommand { get; set; }
       private async Task ItemSelected(object item)

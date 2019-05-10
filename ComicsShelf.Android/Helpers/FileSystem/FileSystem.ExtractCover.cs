@@ -60,37 +60,38 @@ namespace ComicsShelf.Droid
       {
          try
          {
-
-            // LOAD IMAGE
-            using (var originalBitmap = await Android.Graphics.BitmapFactory.DecodeStreamAsync(imageStream))
+            lock (SaveThumbnailLock)
             {
-               if (originalBitmap == null) { return; }
-
-               // DEFINE SIZE
-               double imageHeight = 450; double imageWidth = 150;
-               double scaleFactor = (double)imageHeight / (double)originalBitmap.Height;
-               imageHeight = originalBitmap.Height * scaleFactor;
-               imageWidth = originalBitmap.Width * scaleFactor;
-
-               // INITIALIZE THUMBNAIL STREAM
-               lock (SaveThumbnailLock)
+               // LOAD IMAGE
+               using (var originalBitmap = Android.Graphics.BitmapFactory.DecodeStream(imageStream))
                {
-                  using (var thumbnailFileStream = new FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
+                  if (originalBitmap == null) { return; }
+
+                  // DEFINE SIZE
+                  double imageHeight = 450; double imageWidth = 150;
+                  double scaleFactor = (double)imageHeight / (double)originalBitmap.Height;
+                  imageHeight = originalBitmap.Height * scaleFactor;
+                  imageWidth = originalBitmap.Width * scaleFactor;
+
+                  // INITIALIZE THUMBNAIL STREAM
+
                   {
-
-                     // SCALE BITMAP
-                     using (var thumbnailBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(originalBitmap, (int)imageWidth, (int)imageHeight, false))
+                     using (var thumbnailFileStream = new FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
                      {
-                        thumbnailBitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
-                        thumbnailFileStream.Flush();
+
+                        // SCALE BITMAP
+                        using (var thumbnailBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(originalBitmap, (int)imageWidth, (int)imageHeight, false))
+                        {
+                           thumbnailBitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
+                           thumbnailFileStream.Flush();
+                        }
+                        thumbnailFileStream.Close();
+
                      }
-                     thumbnailFileStream.Close();
-
                   }
+
                }
-
             }
-
          }
          catch (Exception ex) { throw; }
       }

@@ -126,12 +126,6 @@
   <data name="BASE_OK_COMMAND" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="FILE_COMIC_ALREADY_READED_LABEL" xml:space="preserve">
-    <value>Já Lido</value>
-  </data>
-  <data name="FILE_OPEN_COMIC_LABEL" xml:space="preserve">
-    <value>Abrir</value>
-  </data>
   <data name="FILE_PAGESTATS_TEXT" xml:space="preserve">
     <value>página {0} de {1}</value>
   </data>
@@ -200,6 +194,15 @@
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Procurando quadrinhos em suas bibliotecas</value>
+  </data>
+  <data name="SPLASH_FILE_MARK_ALL_AS_READED_LABEL" xml:space="preserve">
+    <value>Marcar toda a Pasta como Lida</value>
+  </data>
+  <data name="SPLASH_FILE_MARK_AS_READED_LABEL" xml:space="preserve">
+    <value>Marcar como Lido</value>
+  </data>
+  <data name="SPLASH_FILE_OPEN_COMIC_LABEL" xml:space="preserve">
+    <value>Abrir Quadrinho</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
     <value>Carregando capas dos quadrinhos em Destaque</value>
