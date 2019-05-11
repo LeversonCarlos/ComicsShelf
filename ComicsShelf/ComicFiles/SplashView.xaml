@@ -13,37 +13,54 @@
             <Image Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.2" />
          </Grid>
 
-         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
 
-            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" VerticalOptions="FillAndExpand" >
-               <Button 
-                  BackgroundColor="{StaticResource colorPrimary}" TextColor="White"
-                  FontSize="Large" Padding="60,20"
-                  Text="{controls:Translate Text=SPLASH_FILE_OPEN_COMIC_LABEL}"  >
-               </Button>
+            <FlexLayout VerticalOptions="FillAndExpand" AlignItems="Center" JustifyContent="Center" >
+
+               <Frame HasShadow="True" Padding="0" >
+                  <StackLayout Padding="10" Spacing="10">
+
+                     <AbsoluteLayout WidthRequest="350" HeightRequest="190" Margin="0,0,0,20">
+
+                        <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill"/>
+                        
+                        <ImageButton 
+                           AbsoluteLayout.LayoutBounds="0,0" AbsoluteLayout.LayoutFlags="PositionProportional" 
+                           Source="icon_Delete.png" HeightRequest="32" WidthRequest="32" BackgroundColor="White" CornerRadius="24" >
+                        </ImageButton>
+
+                        <ProgressBar
+                           AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="All" 
+                           HeightRequest="5" HorizontalOptions="Fill" VerticalOptions="End" InputTransparent="True"
+                           BackgroundColor="White" Opacity="0.75"
+                           Progress="0.4">
+                           <!-- {Binding CurrentFile.ReadingPercent} -->
+                        </ProgressBar>
+                        
+                     </AbsoluteLayout>
+
+                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                        <Switch VerticalOptions="Center" IsToggled="{Binding CurrentFile.Readed}" />
+                        <Label VerticalOptions="Center" Text="{controls:Translate Text=SPLASH_FILE_MARK_AS_READED_LABEL}" />
+                     </StackLayout>
+
+                     <StackLayout>
+                        <Button 
+                           BackgroundColor="{StaticResource colorPrimary}" TextColor="White"
+                           Text="{controls:Translate Text=SPLASH_FILE_OPEN_COMIC_LABEL}"  >
+                        </Button>
+                     </StackLayout>
+
+                  </StackLayout>
+               </Frame>
+
             </FlexLayout>
 
-            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Padding="20,10">
-               <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
-                  <Switch VerticalOptions="Center" IsToggled="{Binding CurrentFile.Readed}" />
-                  <Label VerticalOptions="Center" FontSize="Medium"
-                         Text="{controls:Translate Text=SPLASH_FILE_MARK_AS_READED_LABEL}" />
-               </StackLayout>
-            </FlexLayout>
-
-            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Padding="20,10">
+            <StackLayout VerticalOptions="End" Padding="5" >
                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
                   <Switch VerticalOptions="Center" IsToggled="{Binding IsAllReaded}" />
-                  <Label VerticalOptions="Center" FontSize="Medium"
-                         Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
+                  <Label VerticalOptions="Center" FontSize="Medium" Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
                </StackLayout>
-               <Button IsEnabled="{Binding CurrentFile.HasCache}" 
-                       BackgroundColor="{StaticResource colorPrimary}"
-                       TextColor="White" Padding="20,10" FontSize="Medium"
-                       Text="Limpar Cache"></Button>
-            </FlexLayout>
-
-            <StackLayout Padding="5,0,5,5" VerticalOptions="End">
                <CollectionView VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" 
                                HeightRequest="222" SelectionMode="Single" 
                                ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
@@ -64,6 +81,18 @@
             </StackLayout>
 
          </StackLayout>
+
+         <!-- 
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" VerticalOptions="FillAndExpand" >
+               <Button 
+                  BackgroundColor="{StaticResource colorPrimary}" TextColor="White"
+                  FontSize="Large" Padding="60,20"
+                  Text="{controls:Translate Text=SPLASH_FILE_OPEN_COMIC_LABEL}"  >
+               </Button>
+            </FlexLayout>
+         </StackLayout>
+         -->
 
          <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
 
