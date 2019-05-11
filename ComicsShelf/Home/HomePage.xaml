@@ -3,18 +3,18 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    x:Class="ComicsShelf.Home.HomePage"
-   x:Name="libraryPage"
+   x:Name="homePage"
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    BackgroundColor="{StaticResource colorBackground}"   
    Title="{Binding Title}">
    <ContentPage.Content>
       <StackLayout>
-         
+
          <CollectionView ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
             <CollectionView.ItemTemplate>
                <DataTemplate>
 
-                  <StackLayout Padding="5,10,0,5" Spacing="5" >
+                  <StackLayout Padding="5,10,0,5" Spacing="5" IsVisible="{Binding HasComicFiles}" >
                      <Label Text="{Binding FolderPath}" 
                          FontAttributes = "Bold"
                          FontSize = "15" />
@@ -30,10 +30,10 @@
 
                               <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
                                  <controls:CoverView
-                                 ImageSource="{Binding CoverPath}" 
-                                 Progress="{Binding ReadingPercent}"
-                                 CacheStatus="{Binding CacheStatus}" 
-                                 OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
+                                    ImageSource="{Binding CoverPath}" 
+                                    Progress="{Binding ReadingPercent}"
+                                    CacheStatus="{Binding CacheStatus}" 
+                                    OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
                                  </controls:CoverView>
                               </StackLayout>
 

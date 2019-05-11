@@ -38,7 +38,7 @@ namespace ComicsShelf.Libraries
             Shell.Current.FlyoutIsPresented = false;
 
             // STARTUP LIBRARY
-            LibraryService.StartupLibrary(library);
+            await LibraryService.StartupLibrary(library);
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -122,23 +122,28 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+
+            var libraries = new List<LibraryModel>();
             var libraryIDs = this.GetLibraryIDs();
             foreach (var libraryID in libraryIDs)
             {
-               try
-               {
-                  var libraryJSON = Xamarin.Essentials.Preferences.Get(libraryID, "");
-                  if (!string.IsNullOrEmpty(libraryJSON))
-                  {
-                     var library = Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON);
-                     this.AddShell(library);
-                     await LibraryService.StartupLibrary(library);
-                  }
-               }
-               catch { }
+               var libraryJSON = Xamarin.Essentials.Preferences.Get(libraryID, "");
+               if (!string.IsNullOrEmpty(libraryJSON))
+               { libraries.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON)); }
             }
+
+            foreach (var library in libraries) { this.AddShell(library); }
+
+            Task.Run(async () => await this.LoadLibraries(libraries));
+
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+      private async Task LoadLibraries(List<LibraryModel> libraries)
+      {
+         foreach (var library in libraries)
+         { await LibraryService.StartupLibrary(library); }
       }
 
 

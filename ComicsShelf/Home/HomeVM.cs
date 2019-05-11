@@ -3,6 +3,8 @@ using ComicsShelf.Helpers;
 using ComicsShelf.Helpers.Observables;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Home
 {
@@ -20,6 +22,7 @@ namespace ComicsShelf.Home
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_RECENT_FILES_SECTION_TITLE });
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingReadingFilesList", this.OnRefreshingReadingFilesList);
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingRecentFilesList", this.OnRefreshingRecentFilesList);
+         this.OpenCommand = new Command(async (item) => await this.Open(item));
       }
 
       private void OnRefreshingReadingFilesList(List<ComicFileVM> comicFiles)
@@ -38,6 +41,12 @@ namespace ComicsShelf.Home
          oldItems.ReplaceRange(newItems);
       }
 
+      public Command OpenCommand { get; set; }
+      private async Task Open(object item)
+      {
+         var comicFile = item as ComicFileVM;
+         await Shell.Current.GoToAsync($"splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
+      }
 
    }
 }
