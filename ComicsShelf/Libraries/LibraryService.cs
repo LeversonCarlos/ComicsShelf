@@ -10,10 +10,12 @@ namespace ComicsShelf.Libraries
    {
 
       private readonly Notify.NotifyVM Notify;
+      public readonly Dictionary<string, LibraryModel> Libraries;
       public readonly Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles;
       public LibraryService()
       {
          this.Notify = new Notify.NotifyVM("LibraryService");
+         this.Libraries = new Dictionary<string, LibraryModel>();
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
       }
 
@@ -39,6 +41,7 @@ namespace ComicsShelf.Libraries
             { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
             if (!System.IO.Directory.Exists(LibraryConstants.FilesCachePath))
             { System.IO.Directory.CreateDirectory(LibraryConstants.FilesCachePath); }
+            service.Libraries.Add(library.ID, library);
 
             if (!await service.LoadData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
@@ -52,6 +55,19 @@ namespace ComicsShelf.Libraries
             if (!await service.SaveSyncData(library)) { return; }
             if (!await service.SaveData(library)) { return; }
             service.Notify.Send(false);
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+      public async Task UpdateLibrary(LibraryModel library)
+      {
+         try
+         {
+            var service = DependencyService.Get<LibraryService>();
+            if (service == null) { return; }           
+            if (!await service.Statistics(library)) { return; }
+            //  if (!await service.SaveSyncData(library)) { return; }
+            // if (!await service.SaveData(library)) { return; }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -144,8 +160,6 @@ namespace ComicsShelf.Libraries
             // RECENT FILES
             var recentFiles = this.Statistics_GetRecentFiles(library);
             if (recentFiles == null) { return false; }
-            for (int i = 0; i < 5; i++)
-            { recentFiles.AddRange(recentFiles); }
             await this.NotifyData(library, "OnRefreshingRecentFilesList", recentFiles);
 
             return true;

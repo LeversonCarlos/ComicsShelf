@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.ComicFiles
 {
@@ -74,6 +76,7 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._Rating, value);
             this.ComicFile.Rating = value;
+            this.Save();
          }
       }
 
@@ -120,7 +123,20 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._ReadingPercent, value);
             this.ComicFile.ReadingPercent = value;
+            this.Save();
          }
+      }
+
+      private async Task Save() {
+         try
+         {
+            var service = DependencyService.Get<Libraries.LibraryService>();
+            if (service == null) { return; }
+            var library = service.Libraries[this.ComicFile.LibraryKey];
+            if (library == null) { return; }
+            await service.UpdateLibrary(library);
+         }
+         catch { }
       }
 
    }
