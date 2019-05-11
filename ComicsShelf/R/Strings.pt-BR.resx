@@ -195,8 +195,11 @@
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Procurando quadrinhos em suas bibliotecas</value>
   </data>
+  <data name="SPLASH_FILE_CLEAR_COMIC_CACHE_MESSAGE" xml:space="preserve">
+    <value>Apagar cache local do quadrinho em seu dispositivo</value>
+  </data>
   <data name="SPLASH_FILE_MARK_ALL_AS_READED_LABEL" xml:space="preserve">
-    <value>Marcar toda a Pasta como Lida</value>
+    <value>Marcar todos como Lido</value>
   </data>
   <data name="SPLASH_FILE_MARK_AS_READED_LABEL" xml:space="preserve">
     <value>Marcar como Lido</value>

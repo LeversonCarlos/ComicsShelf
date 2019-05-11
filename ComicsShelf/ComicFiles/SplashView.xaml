@@ -35,7 +35,7 @@
 
                         <ImageButton 
                            AbsoluteLayout.LayoutBounds="0,0" AbsoluteLayout.LayoutFlags="PositionProportional" 
-                           Source="icon_Delete.png" HeightRequest="32" WidthRequest="32" BackgroundColor="White" CornerRadius="48" 
+                           Source="icon_Delete.png" HeightRequest="32" WidthRequest="32" BackgroundColor="White" CornerRadius="32" 
                            IsVisible="{Binding CurrentFile.HasCache}" Command="{Binding ClearCacheCommand}">
                         </ImageButton>
 

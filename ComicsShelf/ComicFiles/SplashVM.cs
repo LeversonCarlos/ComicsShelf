@@ -37,7 +37,8 @@ namespace ComicsShelf.ComicFiles
       public bool IsAllReaded
       {
          get { return this._IsAllReaded; }
-         set {
+         set
+         {
             this.ComicFiles.ForEach(x => x.Readed = true);
             this.SetProperty(ref this._IsAllReaded, value);
          }
@@ -58,7 +59,8 @@ namespace ComicsShelf.ComicFiles
       {
          try
          {
-            this.CurrentFile.CacheStatus = CacheStatusEnum.No;
+            if (!await App.ConfirmMessage(R.Strings.SPLASH_FILE_CLEAR_COMIC_CACHE_MESSAGE)) { return; }
+            this.CurrentFile.CachePath = string.Empty;
          }
          catch (Exception) { throw; }
       }
@@ -68,8 +70,9 @@ namespace ComicsShelf.ComicFiles
       {
          try
          {
-            //this.CurrentFile;
             this.IsBusy = true;
+            this.CurrentFile.CachePath = "string.Empty";
+            this.IsBusy = false;
          }
          catch (Exception) { throw; }
       }

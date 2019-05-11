@@ -195,8 +195,11 @@
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Searching for comic files on your libraries</value>
   </data>
+  <data name="SPLASH_FILE_CLEAR_COMIC_CACHE_MESSAGE" xml:space="preserve">
+    <value>Clear current comic local cache from your device</value>
+  </data>
   <data name="SPLASH_FILE_MARK_ALL_AS_READED_LABEL" xml:space="preserve">
-    <value>Mark all Folder as Readed</value>
+    <value>Mark all as Readed</value>
   </data>
   <data name="SPLASH_FILE_MARK_AS_READED_LABEL" xml:space="preserve">
     <value>Mark as Readed</value>

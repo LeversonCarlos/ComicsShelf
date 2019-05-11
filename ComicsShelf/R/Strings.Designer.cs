@@ -295,7 +295,16 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mark all Folder as Readed.
+        ///   Looks up a localized string similar to Clear current comic local cache from your device.
+        /// </summary>
+        public static string SPLASH_FILE_CLEAR_COMIC_CACHE_MESSAGE {
+            get {
+                return ResourceManager.GetString("SPLASH_FILE_CLEAR_COMIC_CACHE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark all as Readed.
         /// </summary>
         public static string SPLASH_FILE_MARK_ALL_AS_READED_LABEL {
             get {
