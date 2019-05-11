@@ -73,7 +73,7 @@ namespace ComicsShelf.Droid
                // INITIALIZE THUMBNAIL STREAM
 
                {
-                  using (var thumbnailFileStream = new FileStream(imagePath, FileMode.CreateNew, FileAccess.Write))
+                  using (var thumbnailFileStream = new FileStream(imagePath, FileMode.Create, FileAccess.Write))
                   {
 
                      // SCALE BITMAP

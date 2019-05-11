@@ -142,8 +142,12 @@ namespace ComicsShelf.Libraries
 
       private async Task LoadLibraries(List<LibraryModel> libraries)
       {
-         foreach (var library in libraries)
-         { await LibraryService.StartupLibrary(library); }
+         try
+         {
+            foreach (var library in libraries)
+            { await LibraryService.StartupLibrary(library); }
+         }
+         catch(Exception ex) { Helpers.AppCenter.TrackEvent("LoadLibraries", ex); }
       }
 
 
