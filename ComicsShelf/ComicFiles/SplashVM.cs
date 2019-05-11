@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.ComicFiles
 {
-   public class SplashVM : Helpers.Observables.ObservableObject
+   public class SplashVM : Helpers.BaseVM
    {
 
       public List<ComicFileVM> ComicFiles { get; private set; }

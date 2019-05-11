@@ -4,7 +4,7 @@ namespace ComicsShelf.ComicFiles
 {
    public enum HasCacheEnum : short { Unknown = -1, No = 0, Yes = 1 }
 
-   public class ComicFileVM : Helpers.Observables.ObservableObject
+   public class ComicFileVM : Helpers.BaseVM
    {
 
       public ComicFile ComicFile { get; private set; }

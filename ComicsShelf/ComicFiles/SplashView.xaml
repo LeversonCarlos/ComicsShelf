@@ -23,7 +23,7 @@
                      <AbsoluteLayout WidthRequest="350" HeightRequest="190" Margin="0,0,0,20">
 
                         <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill"/>
-                        
+
                         <ImageButton 
                            AbsoluteLayout.LayoutBounds="0,0" AbsoluteLayout.LayoutFlags="PositionProportional" 
                            Source="icon_Delete.png" HeightRequest="32" WidthRequest="32" BackgroundColor="White" CornerRadius="24" >
@@ -33,10 +33,9 @@
                            AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="All" 
                            HeightRequest="5" HorizontalOptions="Fill" VerticalOptions="End" InputTransparent="True"
                            BackgroundColor="White" Opacity="0.75"
-                           Progress="0.4">
-                           <!-- {Binding CurrentFile.ReadingPercent} -->
+                           Progress="{Binding CurrentFile.ReadingPercent}">
                         </ProgressBar>
-                        
+
                      </AbsoluteLayout>
 
                      <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
@@ -82,19 +81,12 @@
 
          </StackLayout>
 
-         <!-- 
-         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
-            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" VerticalOptions="FillAndExpand" >
-               <Button 
-                  BackgroundColor="{StaticResource colorPrimary}" TextColor="White"
-                  FontSize="Large" Padding="60,20"
-                  Text="{controls:Translate Text=SPLASH_FILE_OPEN_COMIC_LABEL}"  >
-               </Button>
-            </FlexLayout>
-         </StackLayout>
-         -->
-
-         <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" />
+         <FlexLayout 
+            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+            BackgroundColor="White"  Opacity="0.5" AlignItems="Center" JustifyContent="Center"
+            IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="True" />
+         </FlexLayout>
 
          <!-- 
          <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0" >
