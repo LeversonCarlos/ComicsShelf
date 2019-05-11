@@ -15,12 +15,22 @@
 
          <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
 
-            <FlexLayout VerticalOptions="FillAndExpand" AlignItems="Center" JustifyContent="Center" >
+            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+               <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="10*"></ColumnDefinition>
+                  <ColumnDefinition Width="80*"></ColumnDefinition>
+                  <ColumnDefinition Width="10*"></ColumnDefinition>
+               </Grid.ColumnDefinitions>
+               <Grid.RowDefinitions>
+                  <RowDefinition Height="15*"></RowDefinition>
+                  <RowDefinition Height="60*"></RowDefinition>
+                  <RowDefinition Height="15*"></RowDefinition>
+               </Grid.RowDefinitions>
 
-               <Frame HasShadow="True" Padding="0" >
+               <Frame HasShadow="True" Padding="0" Grid.Column="1" Grid.Row="1" VerticalOptions="Fill"  HorizontalOptions="Fill">
                   <StackLayout Padding="10" Spacing="10">
 
-                     <AbsoluteLayout WidthRequest="350" HeightRequest="190" Margin="0,0,0,20">
+                     <AbsoluteLayout Margin="0,0,0,20" VerticalOptions="FillAndExpand">
 
                         <Image 
                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
@@ -28,7 +38,7 @@
                            Source="{Binding CurrentFile.CoverPath}" />
 
                         <ImageButton 
-                           AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                           AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" 
                            Source="icon_Open.png" BackgroundColor="Transparent" Opacity="0.5" 
                            Command="{Binding ItemOpenCommand}">
                         </ImageButton>
@@ -41,8 +51,8 @@
 
                         <ProgressBar
                            AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="All" 
-                           HeightRequest="5" HorizontalOptions="Fill" VerticalOptions="End" InputTransparent="True"
-                           BackgroundColor="White" Opacity="0.75"
+                           HeightRequest="6" HorizontalOptions="Fill" VerticalOptions="End" InputTransparent="True"
+                           BackgroundColor="White" Opacity="0.75" Margin="6,0"
                            Progress="{Binding CurrentFile.ReadingPercent}">
                         </ProgressBar>
 
@@ -65,7 +75,7 @@
                   </StackLayout>
                </Frame>
 
-            </FlexLayout>
+            </Grid>
 
             <StackLayout VerticalOptions="End" Padding="5" >
                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
