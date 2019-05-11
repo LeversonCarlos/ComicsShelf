@@ -21,7 +21,9 @@ namespace ComicsShelf.ComicFiles
             .ToList();
          this._IsAllReaded = comicFiles.Count(x => !x.Readed) == 0;
          this.ComicFiles = comicFiles;
-         this.ItemSelectedCommand = new Command(async (item) => await this.ItemSelected(item));
+         this.ItemSelectedCommand = new Command((item) => this.ItemSelected(item));
+         this.ItemOpenCommand = new Command(async () => await this.ItemOpen());
+         this.ClearCacheCommand = new Command(async () => await this.ClearCache());
       }
 
       ComicFileVM _CurrentFile;
@@ -42,11 +44,32 @@ namespace ComicsShelf.ComicFiles
       }
 
       public Command ItemSelectedCommand { get; set; }
-      private async Task ItemSelected(object item)
+      private void ItemSelected(object item)
       {
          try
          {
             this.CurrentFile = item as ComicFileVM;
+         }
+         catch (Exception) { throw; }
+      }
+
+      public Command ClearCacheCommand { get; set; }
+      private async Task ClearCache()
+      {
+         try
+         {
+            this.CurrentFile.CacheStatus = CacheStatusEnum.No;
+         }
+         catch (Exception) { throw; }
+      }
+
+      public Command ItemOpenCommand { get; set; }
+      private async Task ItemOpen()
+      {
+         try
+         {
+            //this.CurrentFile;
+            this.IsBusy = true;
          }
          catch (Exception) { throw; }
       }

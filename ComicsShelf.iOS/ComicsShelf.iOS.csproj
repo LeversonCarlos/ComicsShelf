@@ -199,4 +199,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_ArrowRight%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_Open.png" />
+  </ItemGroup>
 </Project>

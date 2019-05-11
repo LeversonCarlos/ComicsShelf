@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
+<ContentPage
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    x:Class="ComicsShelf.Libraries.LibraryPage"
@@ -18,18 +18,18 @@
             <DataTemplate>
 
                <StackLayout Padding="5,10,0,5" Spacing="5" >
-                  <Label Text="{Binding FolderPath}" 
+                  <Label Text="{Binding FolderPath}"
                          FontAttributes = "Bold"
-                         FontSize = "15" />
+                         FontSize="15" />
                   <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
                      <CollectionView.ItemTemplate>
                         <DataTemplate>
 
                            <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
                               <controls:CoverView
-                                 ImageSource="{Binding CoverPath}" 
-                                 Progress="{Binding ReadingPercent}" 
-                                 HasCache="{Binding HasCache}" 
+                                 ImageSource="{Binding CoverPath}"
+                                 Progress="{Binding ReadingPercent}"
+                                 CacheStatus="{Binding CacheStatus}"
                                  OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
                               </controls:CoverView>
                            </StackLayout>

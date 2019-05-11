@@ -22,11 +22,21 @@
 
                      <AbsoluteLayout WidthRequest="350" HeightRequest="190" Margin="0,0,0,20">
 
-                        <Image AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill"/>
+                        <Image 
+                           AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+                           Aspect="AspectFill" Margin="5"
+                           Source="{Binding CurrentFile.CoverPath}" />
+
+                        <ImageButton 
+                           AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                           Source="icon_Open.png" BackgroundColor="Transparent" Opacity="0.5" 
+                           Command="{Binding ItemOpenCommand}">
+                        </ImageButton>
 
                         <ImageButton 
                            AbsoluteLayout.LayoutBounds="0,0" AbsoluteLayout.LayoutFlags="PositionProportional" 
-                           Source="icon_Delete.png" HeightRequest="32" WidthRequest="32" BackgroundColor="White" CornerRadius="24" >
+                           Source="icon_Delete.png" HeightRequest="32" WidthRequest="32" BackgroundColor="White" CornerRadius="48" 
+                           IsVisible="{Binding CurrentFile.HasCache}" Command="{Binding ClearCacheCommand}">
                         </ImageButton>
 
                         <ProgressBar
@@ -43,12 +53,14 @@
                         <Label VerticalOptions="Center" Text="{controls:Translate Text=SPLASH_FILE_MARK_AS_READED_LABEL}" />
                      </StackLayout>
 
+                     <!-- 
                      <StackLayout>
                         <Button 
                            BackgroundColor="{StaticResource colorPrimary}" TextColor="White"
                            Text="{controls:Translate Text=SPLASH_FILE_OPEN_COMIC_LABEL}"  >
                         </Button>
                      </StackLayout>
+                     -->
 
                   </StackLayout>
                </Frame>
@@ -70,7 +82,7 @@
                            <controls:CoverView 
                               ImageSource="{Binding CoverPath}" 
                               Progress="{Binding ReadingPercent}" 
-                              HasCache="{Binding HasCache}"
+                              CacheStatus="{Binding CacheStatus}"
                               OpenCommand="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference splashPage}}">
                            </controls:CoverView>
                         </StackLayout>
@@ -87,20 +99,6 @@
             IsVisible="{Binding IsBusy}">
             <ActivityIndicator IsRunning="True" />
          </FlexLayout>
-
-         <!-- 
-         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Spacing="0" >
-            <ProgressBar Progress="{Binding ReadingPercent}" VerticalOptions="EndAndExpand" InputTransparent="True" />
-            <ContentView Padding="2" Opacity="0.85"
-                         HorizontalOptions="Fill" VerticalOptions="End"
-                         BackgroundColor="{StaticResource colorLightGray}" >
-               <FlexLayout  Direction="Row" JustifyContent="SpaceBetween">
-
-
-               </FlexLayout>
-            </ContentView>
-         </StackLayout>
-         -->
 
       </AbsoluteLayout>
    </ContentPage.Content>

@@ -77,17 +77,17 @@ namespace ComicsShelf.Controls
       { (bindable as CoverView).ProgressBar.Progress = (double)newValue; }
 
 
-      public static readonly BindableProperty HasCacheProperty =
-         BindableProperty.Create("HasCache", typeof(HasCacheEnum), typeof(CoverView), HasCacheEnum.Unknown,
-            propertyChanged: OnHasCacheChanged);
-      public HasCacheEnum HasCache
+      public static readonly BindableProperty CacheStatusProperty =
+         BindableProperty.Create("CacheStatus", typeof(CacheStatusEnum), typeof(CoverView), CacheStatusEnum.Unknown,
+            propertyChanged: OnCacheStatusChanged);
+      public CacheStatusEnum CacheStatus
       {
-         get { return (HasCacheEnum)GetValue(HasCacheProperty); }
-         set { SetValue(HasCacheProperty, value); }
+         get { return (CacheStatusEnum)GetValue(CacheStatusProperty); }
+         set { SetValue(CacheStatusProperty, value); }
       }
-      private static void OnHasCacheChanged(BindableObject bindable, object oldValue, object newValue)
+      private static void OnCacheStatusChanged(BindableObject bindable, object oldValue, object newValue)
       {
-         var opacity = ((HasCacheEnum)newValue == HasCacheEnum.Yes ? 1 : 0.7);
+         var opacity = ((CacheStatusEnum)newValue == CacheStatusEnum.Yes ? 1 : 0.7);
          (bindable as CoverView).FadeTo(opacity);
       }
 

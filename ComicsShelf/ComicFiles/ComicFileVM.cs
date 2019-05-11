@@ -2,7 +2,7 @@
 
 namespace ComicsShelf.ComicFiles
 {
-   public enum HasCacheEnum : short { Unknown = -1, No = 0, Yes = 1 }
+   public enum CacheStatusEnum : short { Unknown = -1, No = 0, Yes = 1 }
 
    public class ComicFileVM : Helpers.BaseVM
    {
@@ -46,12 +46,21 @@ namespace ComicsShelf.ComicFiles
          set
          {
             this.SetProperty(ref this._CachePath, value);
-            this.HasCache = (string.IsNullOrEmpty(value) ? HasCacheEnum.No : HasCacheEnum.Yes);
+            this.CacheStatus = (string.IsNullOrEmpty(value) ? CacheStatusEnum.No : CacheStatusEnum.Yes);
+            this.HasCache = !string.IsNullOrEmpty(value);
          }
       }
 
-      HasCacheEnum _HasCache;
-      public HasCacheEnum HasCache
+      CacheStatusEnum _CacheStatus;
+      public CacheStatusEnum CacheStatus
+      {
+         get { return this._CacheStatus; }
+         set { this.SetProperty(ref this._CacheStatus, value); }
+      }
+
+
+      bool _HasCache;
+      public bool HasCache
       {
          get { return this._HasCache; }
          set { this.SetProperty(ref this._HasCache, value); }
