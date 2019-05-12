@@ -39,6 +39,7 @@ namespace ComicsShelf.Libraries
 
             // STARTUP LIBRARY
             await LibraryService.StartupLibrary(library);
+            await LibraryService.RefreshLibrary(library);
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -146,8 +147,10 @@ namespace ComicsShelf.Libraries
          {
             foreach (var library in libraries)
             { await LibraryService.StartupLibrary(library); }
+            foreach (var library in libraries)
+            { await LibraryService.RefreshLibrary(library); }
          }
-         catch(Exception ex) { Helpers.AppCenter.TrackEvent("LoadLibraries", ex); }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LoadLibraries", ex); }
       }
 
 

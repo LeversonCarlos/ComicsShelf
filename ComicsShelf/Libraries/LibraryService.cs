@@ -19,13 +19,13 @@ namespace ComicsShelf.Libraries
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
       }
 
+
       public static async Task StartupLibrary(LibraryModel library)
       {
          try
          {
             var service = DependencyService.Get<LibraryService>();
             if (service == null) { return; }
-            // Task.Run(async () => await StartupLibrary(service, library));
             await StartupLibrary(service, library);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -48,13 +48,33 @@ namespace ComicsShelf.Libraries
             if (!await service.LoadSyncData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
+            service.Notify.Send(false);
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+
+      public static async Task RefreshLibrary(LibraryModel library)
+      {
+         try
+         {
+            var service = DependencyService.Get<LibraryService>();
+            if (service == null) { return; }
+            await RefreshLibrary(service, library);
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+      private static async Task RefreshLibrary(LibraryService service, LibraryModel library)
+      {
+         try
+         {
             if (!await service.SearchData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
             if (!await service.ExtractData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
             if (!await service.SaveSyncData(library)) { return; }
             if (!await service.SaveData(library)) { return; }
-            service.Notify.Send(false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -63,11 +83,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            var service = DependencyService.Get<LibraryService>();
-            if (service == null) { return; }
-            if (!await service.Statistics(library)) { return; }
-            //  if (!await service.SaveSyncData(library)) { return; }
-            // if (!await service.SaveData(library)) { return; }
+            if (!await this.Statistics(library)) { return; }
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
