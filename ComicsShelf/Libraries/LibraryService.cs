@@ -64,7 +64,7 @@ namespace ComicsShelf.Libraries
          try
          {
             var service = DependencyService.Get<LibraryService>();
-            if (service == null) { return; }           
+            if (service == null) { return; }
             if (!await service.Statistics(library)) { return; }
             //  if (!await service.SaveSyncData(library)) { return; }
             // if (!await service.SaveData(library)) { return; }

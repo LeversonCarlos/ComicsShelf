@@ -76,7 +76,7 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._Rating, value);
             this.ComicFile.Rating = value;
-            this.Save();
+            this.UpdateLibrary();
          }
       }
 
@@ -112,6 +112,7 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._ReadingPage, value);
             this.ComicFile.ReadingPage = value;
+            this.ComicFile.ReadingPercent = Math.Round(((double)value / (double)this.ComicFile.TotalPages * (double)100), 0);
          }
       }
 
@@ -123,11 +124,12 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._ReadingPercent, value);
             this.ComicFile.ReadingPercent = value;
-            this.Save();
+            this.UpdateLibrary();
          }
       }
 
-      private async Task Save() {
+      private async Task UpdateLibrary()
+      {
          try
          {
             var service = DependencyService.Get<Libraries.LibraryService>();
