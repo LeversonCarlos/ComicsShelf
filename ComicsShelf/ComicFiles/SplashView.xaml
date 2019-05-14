@@ -30,7 +30,7 @@
                <Frame HasShadow="True" Padding="0" Grid.Column="1" Grid.Row="1" VerticalOptions="Fill"  HorizontalOptions="Fill">
                   <StackLayout Padding="10" Spacing="10">
 
-                     <AbsoluteLayout Margin="0,0,0,20" VerticalOptions="FillAndExpand">
+                     <AbsoluteLayout Margin="0,0,0,0" VerticalOptions="FillAndExpand">
 
                         <Image 
                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
@@ -57,6 +57,10 @@
                         </ProgressBar>
 
                      </AbsoluteLayout>
+
+                     <StackLayout HorizontalOptions="CenterAndExpand">
+                        <controls:RatingView Rating="{Binding CurrentFile.Rating}"></controls:RatingView>
+                     </StackLayout>
 
                      <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
                         <Switch VerticalOptions="Center" IsToggled="{Binding CurrentFile.Readed}" />
@@ -89,7 +93,7 @@
                   <CollectionView.ItemTemplate>
                      <DataTemplate>
                         <StackLayout Padding="5,5,5,5" WidthRequest="145" HeightRequest="222" >
-                           <controls:CoverView 
+                           <controls:CoverView                               
                               ImageSource="{Binding CoverPath}" 
                               Progress="{Binding ReadingPercent}" 
                               CacheStatus="{Binding CacheStatus}"
