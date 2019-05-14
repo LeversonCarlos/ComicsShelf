@@ -35,7 +35,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            service.Notify.Send(R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE);
+            service.Notify.Send($"{library.Description}: {R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE}");
             service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>());
             if (!System.IO.Directory.Exists(LibraryConstants.CoversCachePath))
             { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
@@ -75,6 +75,7 @@ namespace ComicsShelf.Libraries
             if (!await service.Statistics(library)) { return; }
             if (!await service.SaveSyncData(library)) { return; }
             if (!await service.SaveData(library)) { return; }
+            service.Notify.Send(false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -84,6 +85,9 @@ namespace ComicsShelf.Libraries
          try
          {
             if (!await this.Statistics(library)) { return; }
+            if (!await this.SaveSyncData(library)) { return; }
+            if (!await this.SaveData(library)) { return; }
+            this.Notify.Send(false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -93,7 +97,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            this.Notify.Send(R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE);
+            this.Notify.Send($"{library.Description}: {R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE}");
 
             var files = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(LibraryConstants.DatabaseFile);
             if (files == null) { return true; }
@@ -297,7 +301,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            this.Notify.Send(R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE);
+            this.Notify.Send($"{library.Description}: {R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE}");
 
             var engine = Engines.Engine.Get(library.Type);
             if (engine == null) { return false; }
@@ -326,7 +330,7 @@ namespace ComicsShelf.Libraries
          {
 
             // FEATURED FILES
-            this.Notify.Send(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE);
+            this.Notify.Send($"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE}");
             var featuredFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .GroupBy(file => file.ComicFile.FolderPath)
@@ -340,7 +344,7 @@ namespace ComicsShelf.Libraries
             if (!await this.ExtractData(library, featuredFiles)) { return false; }
 
             // REMAINING FILES
-            this.Notify.Send(R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE);
+            this.Notify.Send($"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE}");
             var remainingFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .Where(file => string.IsNullOrEmpty(file.CoverPath) || file.CoverPath == LibraryConstants.DefaultCover)
