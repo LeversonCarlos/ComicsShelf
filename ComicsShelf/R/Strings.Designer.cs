@@ -169,15 +169,6 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start to read some comics to see your progress here.
-        /// </summary>
-        public static string HOME_READING_FILES_SECTION_EMPTY_MESSAGE {
-            get {
-                return ResourceManager.GetString("HOME_READING_FILES_SECTION_EMPTY_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Continue Reading.
         /// </summary>
         public static string HOME_READING_FILES_SECTION_TITLE {

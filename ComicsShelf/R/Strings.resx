@@ -153,9 +153,6 @@
   <data name="HOME_LIBRARY_MENU" xml:space="preserve">
     <value>Library</value>
   </data>
-  <data name="HOME_READING_FILES_SECTION_EMPTY_MESSAGE" xml:space="preserve">
-    <value>Start to read some comics to see your progress here</value>
-  </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Reading</value>
   </data>

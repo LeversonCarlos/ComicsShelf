@@ -31,12 +31,5 @@ namespace ComicsShelf.ComicFiles
          set { this.SetProperty(ref this._FolderPath, value); }
       }
 
-      string _EmptyMessage;
-      public string EmptyMessage
-      {
-         get { return this._EmptyMessage; }
-         set { this.SetProperty(ref this._EmptyMessage, value); }
-      }
-
    }
 }

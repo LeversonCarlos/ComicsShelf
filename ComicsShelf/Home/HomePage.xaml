@@ -14,17 +14,11 @@
             <CollectionView.ItemTemplate>
                <DataTemplate>
 
-                  <StackLayout Padding="5,10,0,5" Spacing="5" >
-                     <Label Text="{Binding FolderPath}" 
+                  <StackLayout Padding="5,10,0,5" Spacing="5" IsVisible="{Binding HasComicFiles}" >
+                     <Label Text="{Binding FolderPath}" IsVisible="{Binding HasComicFiles}" 
                          FontAttributes = "Bold"
                          FontSize = "15" />
-                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
-                        <CollectionView.EmptyView >
-                           <StackLayout HeightRequest="222" >
-                              <Label HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Text="{Binding EmptyMessage}"></Label>
-                           </StackLayout>
-                        </CollectionView.EmptyView>
-
+                     <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
                         <CollectionView.ItemTemplate>
                            <DataTemplate>
 

@@ -18,7 +18,7 @@ namespace ComicsShelf.Home
          this.Title = "Home";
          this.Notify = new Notify.NotifyVM("LibraryService");
          this.ComicFolders = new ObservableList<ComicFolderVM>();
-         this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_READING_FILES_SECTION_TITLE, EmptyMessage = R.Strings.HOME_READING_FILES_SECTION_EMPTY_MESSAGE });
+         this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_READING_FILES_SECTION_TITLE });
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_RECENT_FILES_SECTION_TITLE });
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingReadingFilesList", this.OnRefreshingReadingFilesList);
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingRecentFilesList", this.OnRefreshingRecentFilesList);
