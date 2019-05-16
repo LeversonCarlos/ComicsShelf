@@ -18,7 +18,7 @@ namespace ComicsShelf.Home
          this.Title = "Home";
          this.Notify = new Notify.NotifyVM("LibraryService");
          this.ComicFolders = new ObservableList<ComicFolderVM>();
-         this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_READING_FILES_SECTION_TITLE });
+         this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_READING_FILES_SECTION_TITLE, EmptyMessage = R.Strings.HOME_READING_FILES_SECTION_EMPTY_MESSAGE });
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_RECENT_FILES_SECTION_TITLE });
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingReadingFilesList", this.OnRefreshingReadingFilesList);
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingRecentFilesList", this.OnRefreshingRecentFilesList);
@@ -33,12 +33,11 @@ namespace ComicsShelf.Home
 
       private void OnRefreshingList(ObservableList<ComicFileVM> oldItems, List<ComicFileVM> newItems)
       {
-         var oldArray = oldItems.Select(x => x.ComicFile.FilePath).ToList();
-         var oldText = ""; oldArray.ForEach(x => oldText += $"{x}|");
-         var newArray = newItems.Select(x => x.ComicFile.FilePath).ToList();
-         var newText = ""; newArray.ForEach(x => newText += $"{x}|");
-         if (oldText == newText) { return; }
+         var oldHash = string.Join("|", oldItems.Select(x => x.ComicFile.Key));
+         var newHash = string.Join("|", newItems.Select(x => x.ComicFile.Key));
+         if (oldHash == newHash) { return; }
          oldItems.ReplaceRange(newItems);
+         this.HasComicFiles = this.ComicFolders.SelectMany(x => x.ComicFiles).Count() > 0;
       }
 
       public Command OpenCommand { get; set; }
@@ -46,6 +45,13 @@ namespace ComicsShelf.Home
       {
          var comicFile = item as ComicFileVM;
          await Shell.Current.GoToAsync($"splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
+      }
+
+      bool _HasComicFiles;
+      public bool HasComicFiles
+      {
+         get { return this._HasComicFiles; }
+         set { this.SetProperty(ref this._HasComicFiles, value); }
       }
 
    }

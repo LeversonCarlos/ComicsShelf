@@ -113,6 +113,7 @@ namespace ComicsShelf.Libraries
             // UPDATE SHELL
             Shell.Current.CurrentItem = Shell.Current.Items[0];
             Shell.Current.Items.Remove(libraryShell);
+            await LibraryService.RemoveLibrary(library);
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); }

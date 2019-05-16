@@ -10,18 +10,18 @@
    <ContentPage.Content>
       <StackLayout>
 
-         <CollectionView ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
+         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
             <CollectionView.ItemTemplate>
                <DataTemplate>
 
-                  <StackLayout Padding="5,10,0,5" Spacing="5" IsVisible="{Binding HasComicFiles}" >
+                  <StackLayout Padding="5,10,0,5" Spacing="5" >
                      <Label Text="{Binding FolderPath}" 
                          FontAttributes = "Bold"
                          FontSize = "15" />
                      <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
                         <CollectionView.EmptyView >
                            <StackLayout HeightRequest="222" >
-                              <Label HorizontalOptions="Center" VerticalOptions="CenterAndExpand">Nenhuma recomendaçao a ser feita</Label>
+                              <Label HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Text="{Binding EmptyMessage}"></Label>
                            </StackLayout>
                         </CollectionView.EmptyView>
 
@@ -45,6 +45,16 @@
                </DataTemplate>
             </CollectionView.ItemTemplate>
          </CollectionView>
+
+         <FlexLayout VerticalOptions="FillAndExpand" JustifyContent="Center" AlignItems="Center" Direction="Column" 
+                     IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" >
+            <Label FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource colorPrimary}"
+                   Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE_TITLE}">
+            </Label>
+            <Label TextColor="{StaticResource colorPrimary}"
+                   Text="{controls:Translate Text=HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS}">
+            </Label>
+         </FlexLayout>
 
          <controls:NotifyView
             IsVisible="{Binding Notify.IsRunning}" 

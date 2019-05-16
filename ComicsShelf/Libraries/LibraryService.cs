@@ -92,6 +92,20 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
+      public static async Task RemoveLibrary(LibraryModel library)
+      {
+         try
+         {
+            var service = DependencyService.Get<LibraryService>();
+            if (service == null) { return; }
+            service.ComicFiles[library.ID] = new List<ComicFiles.ComicFileVM>();
+            await service.Statistics(library);
+            service.ComicFiles.Remove(library.ID);
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+
 
       private async Task<bool> LoadData(LibraryModel library)
       {
@@ -202,9 +216,8 @@ namespace ComicsShelf.Libraries
                .Take(10)
                .ToList();
 
-            var recentFilesKeys = recentFiles.Select(x => x.ComicFile.Key).ToList();
             var generalFiles = this.ComicFiles[generalKey]
-               .Where(x => !recentFilesKeys.Contains(x.ComicFile.Key))
+               .Where(x => x.ComicFile.LibraryKey != library.ID)
                .ToList();
             recentFiles = recentFiles
                .Union(generalFiles)
@@ -280,9 +293,8 @@ namespace ComicsShelf.Libraries
                .ToList();
 
             // ATTACH GENERAL
-            var readingFilesKeys = readingFiles.Select(x => x.ComicFile.Key).ToList();
             var generalFiles = this.ComicFiles[generalKey]
-               .Where(x => !readingFilesKeys.Contains(x.ComicFile.Key))
+               .Where(x => x.ComicFile.LibraryKey != library.ID)
                .ToList();
             readingFiles = readingFiles
                .Union(generalFiles)
@@ -378,9 +390,21 @@ namespace ComicsShelf.Libraries
                   var progress = ((double)fileIndex / (double)filesQuantity);
                   this.Notify.Send(comicFile.ComicFile.FullText, progress);
 
+                  // CACHE PATH
+                  if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
+                  { comicFile.CachePath = comicFile.ComicFile.CachePath; }
+                  else { comicFile.CachePath = string.Empty; }
+
                   // CHECK IF THE COVER FILE ALREADY EXISTS
                   if (!string.IsNullOrEmpty(comicFile.CoverPath) && comicFile.CoverPath != LibraryConstants.DefaultCover)
                   { continue; }
+                  if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
+                  {
+                     comicFile.CoverPath = comicFile.ComicFile.CoverPath;
+                     if (comicFile.ComicFile.ReleaseDate == DateTime.MinValue)
+                     { comicFile.ComicFile.ReleaseDate = System.IO.File.GetLastWriteTime(comicFile.CoverPath); }
+                     continue;
+                  }
 
                   // COVER EXTRACT
                   if (await engine.ExtractCover(library, comicFile.ComicFile))

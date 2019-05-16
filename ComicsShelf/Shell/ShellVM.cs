@@ -25,6 +25,7 @@ namespace ComicsShelf
       public Command DeleteLibraryCommand { get; set; }
       private async Task DeleteLibrary(ShellItem shellItem)
       {
+         if (!await App.ConfirmMessage(R.Strings.LIBRARY_REMOVE_CONFIRM_MESSAGE)) { return; }
          this.IsBusy = true;
          var libraryStore = DependencyService.Get<Libraries.LibraryStore>();
          await libraryStore.DeleteLibrary(shellItem);

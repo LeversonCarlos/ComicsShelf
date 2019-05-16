@@ -169,6 +169,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start to read some comics to see your progress here.
+        /// </summary>
+        public static string HOME_READING_FILES_SECTION_EMPTY_MESSAGE {
+            get {
+                return ResourceManager.GetString("HOME_READING_FILES_SECTION_EMPTY_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue Reading.
         /// </summary>
         public static string HOME_READING_FILES_SECTION_TITLE {
@@ -255,6 +264,15 @@ namespace ComicsShelf.R {
         public static string LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND {
             get {
                 return ResourceManager.GetString("LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm removing this library ? (the comic files itself won&apos;t be touched).
+        /// </summary>
+        public static string LIBRARY_REMOVE_CONFIRM_MESSAGE {
+            get {
+                return ResourceManager.GetString("LIBRARY_REMOVE_CONFIRM_MESSAGE", resourceCulture);
             }
         }
         

@@ -153,6 +153,9 @@
   <data name="HOME_LIBRARY_MENU" xml:space="preserve">
     <value>Biblioteca</value>
   </data>
+  <data name="HOME_READING_FILES_SECTION_EMPTY_MESSAGE" xml:space="preserve">
+    <value>Comece a ler alguns quadrinhos para ver seu progresso aqui</value>
+  </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Lendo</value>
   </data>
@@ -182,6 +185,9 @@
   </data>
   <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
     <value>Pasta do OneDrive</value>
+  </data>
+  <data name="LIBRARY_REMOVE_CONFIRM_MESSAGE" xml:space="preserve">
+    <value>Confirme a remoção desta biblioteca? (os arquivos em quadrinhos em si não serão tocados)</value>
   </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remover</value>

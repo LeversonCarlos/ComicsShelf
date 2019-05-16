@@ -153,6 +153,9 @@
   <data name="HOME_LIBRARY_MENU" xml:space="preserve">
     <value>Library</value>
   </data>
+  <data name="HOME_READING_FILES_SECTION_EMPTY_MESSAGE" xml:space="preserve">
+    <value>Start to read some comics to see your progress here</value>
+  </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Reading</value>
   </data>
@@ -182,6 +185,9 @@
   </data>
   <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
     <value>OneDrive Folder</value>
+  </data>
+  <data name="LIBRARY_REMOVE_CONFIRM_MESSAGE" xml:space="preserve">
+    <value>Confirm removing this library ? (the comic files itself won't be touched)</value>
   </data>
   <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Remove</value>

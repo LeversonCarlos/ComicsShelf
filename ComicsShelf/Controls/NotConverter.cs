@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.Controls
+namespace ComicsShelf.Controls
 {
    public class NotConverter : IValueConverter
    {
