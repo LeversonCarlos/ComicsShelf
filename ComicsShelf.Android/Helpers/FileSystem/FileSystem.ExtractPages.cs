@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ComicFiles;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace ComicsShelf.Droid
    partial class FileSystem
    {
 
-      public async Task<ComicFiles.ComicPagesVM> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile)
+      public async Task<List<ComicPageVM>> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile)
       {
-         var result = new ComicFiles.ComicPagesVM();
+         var pages = new List<ComicPageVM>();
          try
          {
 
-            if (!File.Exists(comicFile.FilePath)) { return result; }
+            if (!File.Exists(comicFile.FilePath)) { return pages; }
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
             // OPEN ZIP ARCHIVE
@@ -34,7 +35,7 @@ namespace ComicsShelf.Droid
                         x.Name.ToLower().EndsWith(".png"))
                      .OrderBy(x => x.Name)
                      .ToList();
-                  if (zipEntries == null) { return result; }
+                  if (zipEntries == null) { return pages; }
 
                   // LOOP THROUGH ZIP ENTRIES
                   foreach (var zipEntry in zipEntries)
@@ -48,7 +49,7 @@ namespace ComicsShelf.Droid
                         IsVisible = false
                      };
                      page.Path = $"{comicFile.CachePath}{this.PathSeparator}P{page.Text}.jpg";
-                     result.Pages.Add(page);
+                     pages.Add(page);
                      pageIndex++;
 
                      // EXTRACT PAGE FILE 
@@ -82,7 +83,7 @@ namespace ComicsShelf.Droid
                zipArchiveStream.Dispose();
             }
 
-            return result;
+            return pages;
          }
          catch (Exception) { throw; }
       }

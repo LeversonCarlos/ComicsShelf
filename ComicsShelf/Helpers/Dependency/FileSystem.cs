@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ComicFiles;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Helpers
@@ -33,7 +34,7 @@ namespace ComicsShelf.Helpers
       Task<bool> SaveData(Libraries.LibraryModel library, byte[] serializedData);
 
       Task ExtractCover(Libraries.LibraryModel library, ComicFile comicFile);
-      Task<ComicPagesVM> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
+      Task<List<ComicPageVM>> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
 
    }
 }

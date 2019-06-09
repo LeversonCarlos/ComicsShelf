@@ -1,20 +1,12 @@
-﻿using Xamarin.Forms;
-
-namespace ComicsShelf.ComicFiles
+﻿namespace ComicsShelf.ComicFiles
 {
    public class ReadingVM : Helpers.BaseVM
    {
 
-      public ReadingVM(ComicFileVM currentFile)
+      public ComicFileVM ComicFile { get; set; }
+      public ReadingVM(ComicFileVM comicFile)
       {
-         this.CurrentFile = currentFile;
-      }
-
-      ComicFileVM _CurrentFile;
-      public ComicFileVM CurrentFile
-      {
-         get { return this._CurrentFile; }
-         set { this.SetProperty(ref this._CurrentFile, value); }
+         this.ComicFile = comicFile;
       }
 
    }

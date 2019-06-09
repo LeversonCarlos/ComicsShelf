@@ -78,12 +78,14 @@ namespace ComicsShelf.ComicFiles
             var engine = Engines.Engine.Get(library.Type);
             if (engine == null) { return; }
 
-            var pagesVM = await engine.ExtractPages(library, this.CurrentFile.ComicFile);
+            var pages = await engine.ExtractPages(library, this.CurrentFile.ComicFile);
             if (System.IO.Directory.Exists(this.CurrentFile.ComicFile.CachePath))
             {
-               if (pagesVM != null && pagesVM.Pages.Count != 0)
+               if (pages != null && pages.Count != 0)
                {
                   this.CurrentFile.CachePath = this.CurrentFile.ComicFile.CachePath;
+                  this.CurrentFile.Pages = new Helpers.Observables.ObservableList<ComicPageVM>(pages);
+                  await Shell.Current.GoToAsync($"reading?libraryID={this.CurrentFile.ComicFile.LibraryKey}&comicKey={this.CurrentFile.ComicFile.Key}");
                }
             }
 

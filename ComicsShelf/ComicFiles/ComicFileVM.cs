@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.Helpers.Observables;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -127,6 +128,10 @@ namespace ComicsShelf.ComicFiles
             this.UpdateLibrary();
          }
       }
+
+
+      public ObservableList<ComicPageVM> Pages { get; internal set; }
+
 
       private async Task UpdateLibrary()
       {

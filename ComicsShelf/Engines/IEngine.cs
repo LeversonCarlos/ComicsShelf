@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ComicFiles;
 using ComicsShelf.Helpers;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -17,7 +18,7 @@ namespace ComicsShelf.Engines
       Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library);
 
       Task<bool> ExtractCover(Libraries.LibraryModel library, ComicFile comicFile);
-      Task<ComicPagesVM> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
+      Task<List<ComicPageVM>> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
 
    }
 
