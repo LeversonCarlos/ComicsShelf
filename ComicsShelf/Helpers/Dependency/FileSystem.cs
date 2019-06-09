@@ -33,22 +33,7 @@ namespace ComicsShelf.Helpers
       Task<bool> SaveData(Libraries.LibraryModel library, byte[] serializedData);
 
       Task ExtractCover(Libraries.LibraryModel library, ComicFile comicFile);
-
-
-      /*
-      
-
-      string GetCachePath();
-      string GetDataPath();
-
-      Task<string> GetLibraryPath();      
-
-      Task PagesExtract(Views.File.FileData fileData);
-      Task PageSize(Views.File.PageData pageData);
-
-      Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);      
-      
-      */
+      Task<ComicPagesVM> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
 
    }
 }

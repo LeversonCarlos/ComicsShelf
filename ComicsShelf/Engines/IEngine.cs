@@ -17,6 +17,7 @@ namespace ComicsShelf.Engines
       Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library);
 
       Task<bool> ExtractCover(Libraries.LibraryModel library, ComicFile comicFile);
+      Task<ComicPagesVM> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
 
    }
 

@@ -71,7 +71,22 @@ namespace ComicsShelf.ComicFiles
          try
          {
             this.IsBusy = true;
-            this.CurrentFile.CachePath = "string.Empty";
+
+            var libraryService = DependencyService.Get<Libraries.LibraryService>();
+            var library = libraryService.Libraries[this.CurrentFile.ComicFile.LibraryKey];
+            if (library == null) { return; }
+            var engine = Engines.Engine.Get(library.Type);
+            if (engine == null) { return; }
+
+            var pagesVM = await engine.ExtractPages(library, this.CurrentFile.ComicFile);
+            if (System.IO.Directory.Exists(this.CurrentFile.ComicFile.CachePath))
+            {
+               if (pagesVM != null && pagesVM.Pages.Count != 0)
+               {
+                  this.CurrentFile.CachePath = this.CurrentFile.ComicFile.CachePath;
+               }
+            }
+
             this.IsBusy = false;
          }
          catch (Exception) { throw; }

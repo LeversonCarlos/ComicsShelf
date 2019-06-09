@@ -2,9 +2,6 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
        xmlns:home="clr-namespace:ComicsShelf.Home"
-       RouteHost="friendship.com"
-       RouteScheme="app"
-       Route="ComicsShelf"
        FlyoutBehavior="Flyout"
        Title="ComicsShelf"
        x:Class="ComicsShelf.AppShell">
@@ -34,24 +31,22 @@
    <Shell.Resources>
       <ResourceDictionary>
          <Style x:Key="BaseStyle" TargetType="Element">
-            <Setter Property="Shell.ShellBackgroundColor" Value="{StaticResource colorPrimary}" />
-            <Setter Property="Shell.ShellForegroundColor" Value="White" />
-            <Setter Property="Shell.ShellTitleColor" Value="White" />
-            <Setter Property="Shell.ShellDisabledColor" Value="#B4FFFFFF" />
-            <Setter Property="Shell.ShellUnselectedColor" Value="#95FFFFFF" />
-            <Setter Property="Shell.ShellTabBarBackgroundColor" Value="{StaticResource colorPrimary}" />
-            <Setter Property="Shell.ShellTabBarForegroundColor" Value="White"/>
-            <Setter Property="Shell.ShellTabBarUnselectedColor" Value="#95FFFFFF"/>
-            <Setter Property="Shell.ShellTabBarTitleColor" Value="White"/>
+            <Setter Property="Shell.BackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="Shell.ForegroundColor" Value="White" />
+            <Setter Property="Shell.TitleColor" Value="White" />
+            <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+            <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+            <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+            <Setter Property="Shell.TabBarTitleColor" Value="White"/>
          </Style>
          <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
       </ResourceDictionary>
    </Shell.Resources>
 
-   <Shell.MenuItems>
-      <MenuItem Icon="icon_LocalDrive_New.png" Text="New Local Library" Clicked="NewLocalLibrary_Clicked"></MenuItem>
-      <MenuItem Icon="icon_OneDrive_New.png" Text="New OneDrive Library" Clicked="NewOneDriveLibrary_Clicked"></MenuItem>
-   </Shell.MenuItems>
+   <MenuItem Icon="icon_LocalDrive_New.png" Text="New Local Library" Clicked="NewLocalLibrary_Clicked"></MenuItem>
+   <MenuItem Icon="icon_OneDrive_New.png" Text="New OneDrive Library" Clicked="NewOneDriveLibrary_Clicked"></MenuItem>
 
    <!-- Your Pages -->
    <ShellItem FlyoutIcon="icon_home.png" Title="Home">
