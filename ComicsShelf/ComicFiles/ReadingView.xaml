@@ -5,12 +5,34 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
+   Title="{Binding CurrentFile.ComicFile.FullText}" 
+   Shell.NavBarIsVisible="False"
    x:Class="ComicsShelf.ComicFiles.ReadingView">
    <ContentPage.Content>
-      <StackLayout>
-         <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-      </StackLayout>
+
+      <CollectionView 
+         VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" 
+         ItemsSource="{Binding ComicFile.Pages}" >
+         <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="5">
+            </GridItemsLayout>
+         </CollectionView.ItemsLayout>
+         <CollectionView.ItemTemplate>
+            <DataTemplate>
+               <Grid ColumnSpacing="5" RowSpacing="5">
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="145"></RowDefinition>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="222"></ColumnDefinition>
+                  </Grid.ColumnDefinitions>
+                  <Image Grid.RowSpan="2"
+                         Source="{Binding Path}"
+                         Aspect="AspectFit"/>
+               </Grid>
+            </DataTemplate>
+         </CollectionView.ItemTemplate>
+      </CollectionView>
+
    </ContentPage.Content>
 </ContentPage>
