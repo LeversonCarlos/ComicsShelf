@@ -67,6 +67,12 @@ namespace ComicsShelf.Droid
                         }
                      }
 
+                     // PAGE SIZE
+                     using (var bitmap = await Android.Graphics.BitmapFactory.DecodeFileAsync(page.Path))
+                     {
+                        page.PageSize = new ComicPageSize(bitmap.Width, bitmap.Height);
+                     }
+
                   }
 
                   zipArchive.Dispose();

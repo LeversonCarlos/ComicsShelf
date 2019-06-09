@@ -4,30 +4,12 @@
    public class ComicPageVM : Helpers.BaseVM
    {
 
-      public ComicPageVM()
-      {
-      }
+      public ComicPageVM() { }
 
-      short _Index;
-      public short Index
-      {
-         get { return this._Index; }
-         set { this.SetProperty(ref this._Index, value); }
-      }
-
-      string _Text;
-      public string Text
-      {
-         get { return this._Text; }
-         set { this.SetProperty(ref this._Text, value); }
-      }
-
-      string _Path;
-      public string Path
-      {
-         get { return this._Path; }
-         set { this.SetProperty(ref this._Path, value); }
-      }
+      public short Index { get; set; }
+      public string Text { get; set; }
+      public string Path { get; set; }
+      public ComicPageSize PageSize { get; set; }
 
       bool _IsVisible;
       public bool IsVisible
@@ -37,4 +19,28 @@
       }
 
    }
+
+   public class ComicPageSize
+   {
+
+      public ComicPageSize(double width, double height)
+      {
+         this.Width = width;
+         this.Height = height;
+         this.Orientation = (width > height ? OrientationEnum.Landscape : OrientationEnum.Portrait);
+      }
+
+      public double Height { get; set; }
+      public double Width { get; set; }
+
+      public enum OrientationEnum { Landscape, Portrait }
+      public OrientationEnum Orientation { get; set; }
+
+      public static ComicPageSize Zero
+      { get { return new ComicPageSize(0, 0); } }
+      public bool IsZero()
+      { return this.Height == 0 && this.Width == 0; }
+
+   }
+
 }
