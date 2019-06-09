@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace ComicsShelf.ComicFiles
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class PagesView : ContentPage
+   public partial class ReadingView : ContentPage
    {
-      public PagesView()
+      public ReadingView()
       {
          InitializeComponent();
       }

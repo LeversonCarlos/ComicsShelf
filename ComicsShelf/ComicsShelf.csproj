@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ComicFiles\PagesView.xaml">
+    <EmbeddedResource Update="ComicFiles\ReadingView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ComicFiles\SplashView.xaml">

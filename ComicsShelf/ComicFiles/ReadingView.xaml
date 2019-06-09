@@ -5,7 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
-   x:Class="ComicsShelf.ComicFiles.PagesView">
+   x:Class="ComicsShelf.ComicFiles.ReadingView">
    <ContentPage.Content>
       <StackLayout>
          <Label Text="Welcome to Xamarin.Forms!"
