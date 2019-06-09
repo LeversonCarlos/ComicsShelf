@@ -13,11 +13,14 @@ namespace ComicsShelf.Droid.CustomRenderers
       public ReadingView(Context context) : base(context)
       {
          ((Activity)context).Window.AddFlags(WindowManagerFlags.Fullscreen);
+         // ((Activity)context).Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+         // ((Activity)context).Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
+         // ((Activity)context).Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
       }
 
       protected override void Dispose(bool disposing)
       {
-         ((Activity)this.Context).Window.ClearFlags(WindowManagerFlags.Fullscreen);
+         ((Activity)this.Context).Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
          base.Dispose(disposing);
       }
 

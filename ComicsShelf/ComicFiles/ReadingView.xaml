@@ -5,17 +5,17 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
-   Title="{Binding CurrentFile.ComicFile.FullText}" 
+   Title="{Binding ComicFile.ComicFile.FullText}" 
    Shell.NavBarIsVisible="False"
    x:Class="ComicsShelf.ComicFiles.ReadingView">
    <ContentPage.Content>
 
+      <!--
       <CollectionView 
          VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" 
          ItemsSource="{Binding ComicFile.Pages}" >
          <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical" Span="5">
-            </GridItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="5" />
          </CollectionView.ItemsLayout>
          <CollectionView.ItemTemplate>
             <DataTemplate>
@@ -26,13 +26,28 @@
                   <Grid.ColumnDefinitions>
                      <ColumnDefinition Width="222"></ColumnDefinition>
                   </Grid.ColumnDefinitions>
-                  <Image Grid.RowSpan="2"
-                         Source="{Binding Path}"
-                         Aspect="AspectFit"/>
+                  <Image Source="{Binding Path}" Aspect="AspectFit"/>
                </Grid>
             </DataTemplate>
          </CollectionView.ItemTemplate>
       </CollectionView>
+      -->
+
+      <CarouselView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Yellow"
+                    ItemsSource="{Binding ComicFile.Pages}">
+         <CarouselView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" SnapPointsType="Mandatory"/>
+         </CarouselView.ItemsLayout>
+         <CarouselView.ItemTemplate>
+            <DataTemplate>
+               <Grid ColumnSpacing="5" RowSpacing="5">
+                  <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Green">
+                     <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Path}"></Label>
+                  </Frame>
+               </Grid>
+            </DataTemplate>
+         </CarouselView.ItemTemplate>
+      </CarouselView>
 
    </ContentPage.Content>
 </ContentPage>
