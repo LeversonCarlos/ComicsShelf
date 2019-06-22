@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.Controls
+namespace ComicsShelf.Controls
 {
-   public class PageImageView : ScrollView
+   public class PageView : ScrollView
    {
 
-      #region New
-      public PageImageView()
+      public PageView()
       {
          this.Content = new Image
          {
@@ -23,41 +22,32 @@ namespace ComicsShelf.Helpers.Controls
             NumberOfTapsRequired = 2
          });
 
-         Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
-         this.OnScreenSizeChanged(((NavPage)App.Current.MainPage).ScreenSize);
+         // Xamarin.Essentials.DeviceDisplay.KeepScreenOn
+         // Xamarin.Essentials
+
+         // Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
+         this.OnScreenSizeChanged();
       }
-      #endregion
 
 
-      #region ScreenSize
+      private double ImageZoom { get; set; } = 1;
       public Size ScreenSize { get; set; }
-      private void OnScreenSizeChanged(Size screenSize)
+      private void OnScreenSizeChanged()
       {
-         this.ScreenSize = screenSize;
+         this.ScreenSize = new Size(Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width, Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height);
          this.OnImageResize();
       }
-      #endregion
 
-      #region ImageZoom
-      double _ImageZoom = 1;
-      public double ImageZoom
-      {
-         get { return this._ImageZoom; }
-         set { this._ImageZoom = value; }
-      }
-      #endregion
 
-      #region ImageSource
       public ImageSource ImageSource
       {
          get { return (this.Content as Image).Source; }
          set { (this.Content as Image).Source = value; }
       }
-      #endregion
 
-      #region ImagePath
+
       public static readonly BindableProperty ImagePathProperty =
-         BindableProperty.Create("ImagePath", typeof(string), typeof(PageImageView), string.Empty,
+         BindableProperty.Create("ImagePath", typeof(string), typeof(PageView), string.Empty,
          propertyChanged: OnImagePathChanged, defaultBindingMode: BindingMode.TwoWay);
       public string ImagePath
       {
@@ -65,12 +55,11 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ImagePathProperty, value); }
       }
       private static void OnImagePathChanged(BindableObject bindable, object oldValue, object newValue)
-      { /*(bindable as ImageView).Redraw();*/ }
-      #endregion
+      { (bindable as PageView).OnImageRefresh(); }
 
-      #region ImageLoaded
+
       public static readonly BindableProperty ImageLoadedProperty =
-         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageImageView), false,
+         BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageView), false,
          propertyChanged: OnImageLoadedChanged, defaultBindingMode: BindingMode.TwoWay);
       public bool ImageLoaded
       {
@@ -78,24 +67,21 @@ namespace ComicsShelf.Helpers.Controls
          set { SetValue(ImageLoadedProperty, value); }
       }
       private static void OnImageLoadedChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImageView).OnImageRefresh(); }
-      #endregion
+      { (bindable as PageView).OnImageRefresh(); }
 
-      #region ImageSize
+
       public static readonly BindableProperty ImageSizeProperty =
-         BindableProperty.Create("ImageSize", typeof(PageSize), typeof(PageImageView), PageSize.Zero,
+         BindableProperty.Create("ImageSize", typeof(ComicFiles.ComicPageSize), typeof(PageView), ComicFiles.ComicPageSize.Zero,
          propertyChanged: OnImageSizeChanged, defaultBindingMode: BindingMode.TwoWay);
-      public PageSize ImageSize
+      public ComicFiles.ComicPageSize ImageSize
       {
-         get { return (PageSize)GetValue(ImageSizeProperty); }
+         get { return (ComicFiles.ComicPageSize)GetValue(ImageSizeProperty); }
          set { SetValue(ImageSizeProperty, value); }
       }
       private static void OnImageSizeChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as PageImageView).OnImageResize(); }
-      #endregion
+      { (bindable as PageView).OnImageResize(); }
 
 
-      #region OnImageRefresh
       private void OnImageRefresh()
       {
          try
@@ -103,12 +89,12 @@ namespace ComicsShelf.Helpers.Controls
             this.ImageZoom = 1.0;
             if (!this.ImageLoaded && this.ImageSource != null)
             { this.ImageSource = null; }
-            if (this.ImageLoaded && this.ImageSource == null && ! string.IsNullOrEmpty( this.ImagePath ))
+            if (this.ImageLoaded && this.ImageSource == null && !string.IsNullOrEmpty(this.ImagePath))
             { this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
          }
          catch { }
       }
-      #endregion
+
 
       #region OnImageResize
       private void OnImageResize()
@@ -118,12 +104,12 @@ namespace ComicsShelf.Helpers.Controls
             if (this.ImageSize == null || this.ImageSize.IsZero()) { return; }
             if (this.ScreenSize.Height >= this.ScreenSize.Width)
             {
-               if (this.ImageSize.Orientation == PageSize.OrientationEnum.Portrait)
+               if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
                   this.HeightRequest = this.ScreenSize.Height * this.ImageZoom;
                   this.WidthRequest = this.ScreenSize.Width * this.ImageZoom;
                }
-               else if (this.ImageSize.Orientation == PageSize.OrientationEnum.Landscape)
+               else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
                   this.HeightRequest = this.ScreenSize.Height * this.ImageZoom;
                   this.WidthRequest = this.ScreenSize.Height * this.ImageZoom * (this.ImageSize.Width / this.ImageSize.Height);
@@ -132,12 +118,12 @@ namespace ComicsShelf.Helpers.Controls
             }
             else if (this.ScreenSize.Height < this.ScreenSize.Width)
             {
-               if (this.ImageSize.Orientation == PageSize.OrientationEnum.Landscape)
+               if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
                   this.WidthRequest = this.ScreenSize.Width * this.ImageZoom;
                   this.HeightRequest = this.ScreenSize.Height * this.ImageZoom;
                }
-               else if (this.ImageSize.Orientation == PageSize.OrientationEnum.Portrait)
+               else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
                   this.WidthRequest = this.ScreenSize.Width * this.ImageZoom;
                   this.HeightRequest = this.ScreenSize.Width * this.ImageZoom * (this.ImageSize.Height / this.ImageSize.Width);

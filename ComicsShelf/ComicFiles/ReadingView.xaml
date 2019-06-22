@@ -4,6 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    mc:Ignorable="d"
    Title="{Binding ComicFile.ComicFile.FullText}" 
    Shell.NavBarIsVisible="False"
@@ -33,18 +34,13 @@
       </CollectionView>
       -->
 
-      <CarouselView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Yellow"
-                    ItemsSource="{Binding ComicFile.Pages}">
+      <CarouselView HorizontalOptions="Fill" VerticalOptions="Fill" ItemsSource="{Binding ComicFile.Pages}">
          <CarouselView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical" SnapPointsType="Mandatory"/>
+            <GridItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
          </CarouselView.ItemsLayout>
          <CarouselView.ItemTemplate>
             <DataTemplate>
-               <Grid ColumnSpacing="5" RowSpacing="5">
-                  <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Green">
-                     <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Path}"></Label>
-                  </Frame>
-               </Grid>
+               <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="True" ></controls:PageView>
             </DataTemplate>
          </CarouselView.ItemTemplate>
       </CarouselView>
