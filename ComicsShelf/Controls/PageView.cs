@@ -3,49 +3,50 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
-   public class PageView : ScrollView
+   public class PageView : ContentView
    {
 
       public PageView()
       {
-         this.Content = new Image
+
+         this.ImageView = new Image
          {
+            BackgroundColor = Color.Yellow,
             Aspect = Aspect.AspectFit,
             InputTransparent = false
          };
-         this.Orientation = ScrollOrientation.Horizontal;
-
-         ((Image)this.Content).GestureRecognizers.Add(new TapGestureRecognizer
+         this.ImageView.GestureRecognizers.Add(new TapGestureRecognizer
          {
             Command = new Command((param) =>
             { this.ImageZoom = (this.ImageZoom == 1.0 ? 2.0 : 1.0); this.OnImageResize(); }),
             NumberOfTapsRequired = 2
          });
 
+         this.ScrollView = new ScrollView
+         {
+            Orientation = ScrollOrientation.Horizontal,
+            Content = this.ImageView
+         };
+
          // Xamarin.Essentials.DeviceDisplay.KeepScreenOn
          // Xamarin.Essentials
-
          // Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
-         this.OnScreenSizeChanged();
-      }
-
-
-      private double ImageZoom { get; set; } = 1;
-      public Size ScreenSize { get; set; }
-      private void OnScreenSizeChanged()
-      {
-         this.ScreenSize = new Size(Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width, Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height);
          this.OnImageResize();
       }
 
+      #region Components
 
-      public ImageSource ImageSource
+      public ScrollView ScrollView
       {
-         get { return (this.Content as Image).Source; }
-         set { (this.Content as Image).Source = value; }
+         get { return this.Content as ScrollView; }
+         set { this.Content = value; }
       }
+      private double ImageZoom { get; set; } = 1;
+      public Image ImageView { get; set; }
 
+      #endregion
 
+      #region ImagePath
       public static readonly BindableProperty ImagePathProperty =
          BindableProperty.Create("ImagePath", typeof(string), typeof(PageView), string.Empty,
          propertyChanged: OnImagePathChanged, defaultBindingMode: BindingMode.TwoWay);
@@ -56,8 +57,9 @@ namespace ComicsShelf.Controls
       }
       private static void OnImagePathChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as PageView).OnImageRefresh(); }
+      #endregion
 
-
+      #region ImageLoaded
       public static readonly BindableProperty ImageLoadedProperty =
          BindableProperty.Create("ImageLoaded", typeof(bool), typeof(PageView), false,
          propertyChanged: OnImageLoadedChanged, defaultBindingMode: BindingMode.TwoWay);
@@ -68,8 +70,9 @@ namespace ComicsShelf.Controls
       }
       private static void OnImageLoadedChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as PageView).OnImageRefresh(); }
+      #endregion
 
-
+      #region ImageSize
       public static readonly BindableProperty ImageSizeProperty =
          BindableProperty.Create("ImageSize", typeof(ComicFiles.ComicPageSize), typeof(PageView), ComicFiles.ComicPageSize.Zero,
          propertyChanged: OnImageSizeChanged, defaultBindingMode: BindingMode.TwoWay);
@@ -80,21 +83,22 @@ namespace ComicsShelf.Controls
       }
       private static void OnImageSizeChanged(BindableObject bindable, object oldValue, object newValue)
       { (bindable as PageView).OnImageResize(); }
+      #endregion
 
-
+      #region OnImageRefresh
       private void OnImageRefresh()
       {
          try
          {
             this.ImageZoom = 1.0;
-            if (!this.ImageLoaded && this.ImageSource != null)
-            { this.ImageSource = null; }
-            if (this.ImageLoaded && this.ImageSource == null && !string.IsNullOrEmpty(this.ImagePath))
-            { this.ImageSource = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
+            if (!this.ImageLoaded && this.ImageView.Source != null)
+            { this.ImageView.Source = null; }
+            if (this.ImageLoaded && this.ImageView.Source == null && !string.IsNullOrEmpty(this.ImagePath))
+            { this.ImageView.Source = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
          }
          catch { }
       }
-
+      #endregion
 
       #region OnImageResize
       private void OnImageResize()
@@ -102,38 +106,45 @@ namespace ComicsShelf.Controls
          try
          {
             if (this.ImageSize == null || this.ImageSize.IsZero()) { return; }
-            if (this.ScreenSize.Height >= this.ScreenSize.Width)
+            var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
+            this.HeightRequest = displayInfo.Height;
+            this.WidthRequest = displayInfo.Width;
+
+            // PORTRAIT SCREEN
+            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait)
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
-                  this.HeightRequest = this.ScreenSize.Height * this.ImageZoom;
-                  this.WidthRequest = this.ScreenSize.Width * this.ImageZoom;
+                  this.ScrollView.HeightRequest = displayInfo.Height * this.ImageZoom;
+                  this.ScrollView.WidthRequest = displayInfo.Width * this.ImageZoom;
                }
                else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
-                  this.HeightRequest = this.ScreenSize.Height * this.ImageZoom;
-                  this.WidthRequest = this.ScreenSize.Height * this.ImageZoom * (this.ImageSize.Width / this.ImageSize.Height);
+                  this.ScrollView.HeightRequest = displayInfo.Height * this.ImageZoom;
+                  this.ScrollView.WidthRequest = displayInfo.Height * this.ImageZoom * (this.ImageSize.Width / this.ImageSize.Height);
                }
-               this.Orientation = ScrollOrientation.Horizontal;
+               this.ScrollView.Orientation = ScrollOrientation.Horizontal;
             }
-            else if (this.ScreenSize.Height < this.ScreenSize.Width)
+
+            // LANDSCAPE SCREEN
+            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Landscape)
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
-                  this.WidthRequest = this.ScreenSize.Width * this.ImageZoom;
-                  this.HeightRequest = this.ScreenSize.Height * this.ImageZoom;
+                  this.ScrollView.WidthRequest = displayInfo.Width * this.ImageZoom;
+                  this.ScrollView.HeightRequest = displayInfo.Height * this.ImageZoom;
                }
                else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
-                  this.WidthRequest = this.ScreenSize.Width * this.ImageZoom;
-                  this.HeightRequest = this.ScreenSize.Width * this.ImageZoom * (this.ImageSize.Height / this.ImageSize.Width);
+                  this.ScrollView.WidthRequest = displayInfo.Width * this.ImageZoom;
+                  this.ScrollView.HeightRequest = displayInfo.Width * this.ImageZoom * (this.ImageSize.Height / this.ImageSize.Width);
                }
-               this.Orientation = ScrollOrientation.Vertical;
+               this.ScrollView.Orientation = ScrollOrientation.Vertical;
             }
 
-            var image = (this.Content as Image);
-            image.WidthRequest = this.WidthRequest;
-            image.HeightRequest = this.HeightRequest;
+            // INNER IMAGE SIZE
+            this.ImageView.WidthRequest = this.ScrollView.WidthRequest;
+            this.ImageView.HeightRequest = this.ScrollView.HeightRequest;
 
             this.FadeTo(0.05, 100, Easing.SinOut)
                .ContinueWith(task1 =>
@@ -143,9 +154,9 @@ namespace ComicsShelf.Controls
                      {
                         if (this.ImageZoom != 1.0)
                         {
-                           this.Orientation = ScrollOrientation.Both;
+                           this.ScrollView.Orientation = ScrollOrientation.Both;
                            Device.BeginInvokeOnMainThread(async () =>
-                           { await this.ScrollToAsync((this.ScreenSize.Width / 2.0), (this.ScreenSize.Height / 2.0), false); });
+                           { await this.ScrollView.ScrollToAsync((displayInfo.Width / 2.0), (displayInfo.Height / 2.0), false); });
                         }
                      })
                      .ContinueWith(task3 =>

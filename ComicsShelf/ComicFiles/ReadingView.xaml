@@ -11,32 +11,9 @@
    x:Class="ComicsShelf.ComicFiles.ReadingView">
    <ContentPage.Content>
 
-      <!--
-      <CollectionView 
-         VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" 
-         ItemsSource="{Binding ComicFile.Pages}" >
-         <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical" Span="5" />
-         </CollectionView.ItemsLayout>
-         <CollectionView.ItemTemplate>
-            <DataTemplate>
-               <Grid ColumnSpacing="5" RowSpacing="5">
-                  <Grid.RowDefinitions>
-                     <RowDefinition Height="145"></RowDefinition>
-                  </Grid.RowDefinitions>
-                  <Grid.ColumnDefinitions>
-                     <ColumnDefinition Width="222"></ColumnDefinition>
-                  </Grid.ColumnDefinitions>
-                  <Image Source="{Binding Path}" Aspect="AspectFit"/>
-               </Grid>
-            </DataTemplate>
-         </CollectionView.ItemTemplate>
-      </CollectionView>
-      -->
-
-      <CarouselView HorizontalOptions="Fill" VerticalOptions="Fill" ItemsSource="{Binding ComicFile.Pages}">
+      <CarouselView HorizontalOptions="Fill" VerticalOptions="Fill" ItemsSource="{Binding ComicFile.Pages}" ItemSizingStrategy="MeasureAllItems" >
          <CarouselView.ItemsLayout>
-            <GridItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+            <GridItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Start" />
          </CarouselView.ItemsLayout>
          <CarouselView.ItemTemplate>
             <DataTemplate>
