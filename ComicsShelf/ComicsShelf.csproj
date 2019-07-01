@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Xamarin.Forms" Version="4.0.0.497661" />  

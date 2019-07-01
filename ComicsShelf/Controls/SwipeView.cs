@@ -1,26 +1,30 @@
 ﻿using CarouselView.FormsPlugin.Abstractions;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Helpers.Controls
+namespace ComicsShelf.Controls
 {
-   public class PagesSwipeView : CarouselViewControl
+   public class SwipeView : CarouselViewControl
    {
 
-      public PagesSwipeView()
+      public SwipeView()
       {
+         this.VerticalOptions = LayoutOptions.FillAndExpand;
+         this.HorizontalOptions = LayoutOptions.FillAndExpand;
          this.Orientation = CarouselViewOrientation.Horizontal;
          this.InterPageSpacing = 10;
          this.ShowArrows = true;
          this.LastPosition = -1;
          this.PositionSelected += this.OnPositionSelected;
-         this.ArrowsBackgroundColor = Colors.Lighter;
+         this.ArrowsBackgroundColor = Color.Accent;
 
+         /*
          this.GestureRecognizers.Add(new TapGestureRecognizer
          {
             Command = new Command((param) =>
             { Controls.Messaging.Send(Messaging.Keys.PageTapped); }),
             NumberOfTapsRequired = 1
          });
+         */
 
       }
 
@@ -35,13 +39,12 @@ namespace ComicsShelf.Helpers.Controls
                if (this.LastPosition != this.ItemsSource.GetCount()) { return; }
             }
 
-            // this.SetPositionVisibility((this.Position - 3), false);
             this.SetPositionVisibility((this.Position - 2), false);
             this.SetPositionVisibility((this.Position - 1), true);
             this.SetPositionVisibility((this.Position), true);
             this.SetPositionVisibility((this.Position + 1), true);
             this.SetPositionVisibility((this.Position + 2), false);
-            // this.SetPositionVisibility((this.Position + 3), false);
+
             this.LastPosition = this.Position;
          }
          catch { }
@@ -51,7 +54,7 @@ namespace ComicsShelf.Helpers.Controls
       {
          if (position >= 0 && position < this.ItemsSource.GetCount())
          {
-            var positionData = (Views.File.PageData)this.ItemsSource.GetItem(position);
+            var positionData = (ComicFiles.ComicPageVM)this.ItemsSource.GetItem(position);
             if (positionData.IsVisible != visibility)
             { positionData.IsVisible = visibility; }
          }

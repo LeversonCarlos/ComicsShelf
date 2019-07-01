@@ -106,22 +106,25 @@ namespace ComicsShelf.Controls
          try
          {
             if (this.ImageSize == null || this.ImageSize.IsZero()) { return; }
+
             var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
-            this.HeightRequest = displayInfo.Height;
-            this.WidthRequest = displayInfo.Width;
+            var displayHeight = displayInfo.Height / displayInfo.Density;
+            var displayWidth = displayInfo.Width / displayInfo.Density;
+            this.HeightRequest = displayHeight;
+            this.WidthRequest = displayWidth;
 
             // PORTRAIT SCREEN
             if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait)
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
-                  this.ScrollView.HeightRequest = displayInfo.Height * this.ImageZoom;
-                  this.ScrollView.WidthRequest = displayInfo.Width * this.ImageZoom;
+                  this.ScrollView.HeightRequest = displayHeight * this.ImageZoom;
+                  this.ScrollView.WidthRequest = displayWidth * this.ImageZoom;
                }
                else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
-                  this.ScrollView.HeightRequest = displayInfo.Height * this.ImageZoom;
-                  this.ScrollView.WidthRequest = displayInfo.Height * this.ImageZoom * (this.ImageSize.Width / this.ImageSize.Height);
+                  this.ScrollView.HeightRequest = displayHeight * this.ImageZoom;
+                  this.ScrollView.WidthRequest = displayHeight * this.ImageZoom * (this.ImageSize.Width / this.ImageSize.Height);
                }
                this.ScrollView.Orientation = ScrollOrientation.Horizontal;
             }
@@ -131,13 +134,13 @@ namespace ComicsShelf.Controls
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
-                  this.ScrollView.WidthRequest = displayInfo.Width * this.ImageZoom;
-                  this.ScrollView.HeightRequest = displayInfo.Height * this.ImageZoom;
+                  this.ScrollView.WidthRequest = displayWidth * this.ImageZoom;
+                  this.ScrollView.HeightRequest = displayHeight * this.ImageZoom;
                }
                else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
-                  this.ScrollView.WidthRequest = displayInfo.Width * this.ImageZoom;
-                  this.ScrollView.HeightRequest = displayInfo.Width * this.ImageZoom * (this.ImageSize.Height / this.ImageSize.Width);
+                  this.ScrollView.WidthRequest = displayWidth * this.ImageZoom;
+                  this.ScrollView.HeightRequest = displayWidth * this.ImageZoom * (this.ImageSize.Height / this.ImageSize.Width);
                }
                this.ScrollView.Orientation = ScrollOrientation.Vertical;
             }
@@ -146,6 +149,7 @@ namespace ComicsShelf.Controls
             this.ImageView.WidthRequest = this.ScrollView.WidthRequest;
             this.ImageView.HeightRequest = this.ScrollView.HeightRequest;
 
+            /*
             this.FadeTo(0.05, 100, Easing.SinOut)
                .ContinueWith(task1 =>
                {
@@ -156,7 +160,7 @@ namespace ComicsShelf.Controls
                         {
                            this.ScrollView.Orientation = ScrollOrientation.Both;
                            Device.BeginInvokeOnMainThread(async () =>
-                           { await this.ScrollView.ScrollToAsync((displayInfo.Width / 2.0), (displayInfo.Height / 2.0), false); });
+                           { await this.ScrollView.ScrollToAsync((displayWidth / 2.0), (displayHeight / 2.0), false); });
                         }
                      })
                      .ContinueWith(task3 =>
@@ -164,6 +168,7 @@ namespace ComicsShelf.Controls
                         this.FadeTo(1, 250, Easing.SinIn);
                      });
                });
+               */
 
          }
          catch { }

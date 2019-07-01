@@ -20,6 +20,7 @@ namespace ComicsShelf.Droid
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
          Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
          global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+         CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
          LoadApplication(new App());
       }
 

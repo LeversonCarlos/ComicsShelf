@@ -11,6 +11,25 @@
    x:Class="ComicsShelf.ComicFiles.ReadingView">
    <ContentPage.Content>
 
+      <controls:SwipeView ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ComicFile.ReadingPage}">
+         <controls:SwipeView.ItemTemplate>
+            <DataTemplate>
+               <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="{Binding IsVisible}" ></controls:PageView>
+            </DataTemplate>
+         </controls:SwipeView.ItemTemplate>
+      </controls:SwipeView>
+
+      <!-- 
+      <cards:CarouselView ItemsSource="{Binding ComicFile.Pages}" SelectedIndex="{Binding ComicFile.ReadingPage}">
+         <cards:CarouselView.ItemTemplate>
+            <DataTemplate>
+               <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="True" ></controls:PageView>
+            </DataTemplate>
+         </cards:CarouselView.ItemTemplate>
+      </cards:CarouselView>
+      -->
+
+      <!-- 
       <CarouselView HorizontalOptions="Fill" VerticalOptions="Fill" ItemsSource="{Binding ComicFile.Pages}" ItemSizingStrategy="MeasureAllItems" >
          <CarouselView.ItemsLayout>
             <GridItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Start" />
@@ -21,6 +40,7 @@
             </DataTemplate>
          </CarouselView.ItemTemplate>
       </CarouselView>
+      -->
 
    </ContentPage.Content>
 </ContentPage>
