@@ -85,7 +85,8 @@ namespace ComicsShelf.ComicFiles
                {
                   this.CurrentFile.CachePath = this.CurrentFile.ComicFile.CachePath;
                   this.CurrentFile.Pages = new Helpers.Observables.ObservableList<ComicPageVM>(pages.Take(7).ToList());
-                  this.CurrentFile.ComicFile.TotalPages = (short)(this.CurrentFile.Pages.Count-1);
+                  this.CurrentFile.Pages.Add(new ComicPageVM { Text = "END" });
+                  this.CurrentFile.ComicFile.TotalPages = (short)(this.CurrentFile.Pages.Count - 2); /* cover and the end one */
                   await Shell.Current.GoToAsync($"reading?libraryID={this.CurrentFile.ComicFile.LibraryKey}&comicKey={this.CurrentFile.ComicFile.Key}");
                }
             }

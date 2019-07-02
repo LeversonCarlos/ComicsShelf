@@ -13,7 +13,7 @@
             <Image Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.2" />
          </Grid>
 
-         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}">
 
             <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                <Grid.ColumnDefinitions>

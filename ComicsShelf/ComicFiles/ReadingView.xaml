@@ -12,7 +12,7 @@
    <ContentPage.Content>
       <StackLayout Margin="0" Padding="0" Spacing="0">
 
-         <controls:SwipeView ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ComicFile.ReadingPage}"
+         <controls:SwipeView ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ReadingPage}"
                              VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
             <controls:SwipeView.ItemTemplate>
                <DataTemplate>
@@ -22,16 +22,16 @@
          </controls:SwipeView>
 
          <StackLayout HorizontalOptions="Fill" VerticalOptions="End" Margin="0" Padding="0" Spacing="0">
-            <ProgressBar HeightRequest="2" Progress="{Binding ComicFile.ReadingPercent}" ></ProgressBar>
-            <ContentView HorizontalOptions="Fill" Padding="2" BackgroundColor="Gainsboro">
-               <StackLayout HorizontalOptions="FillAndExpand" Margin="10,0" Padding="0" Spacing="0" Orientation="Horizontal">
-                  <Label HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" FontSize="Default" FontAttributes="Bold"
+            <ProgressBar HeightRequest="2" Progress="{Binding ComicFile.ReadingPercent}" BackgroundColor="Gainsboro" ></ProgressBar>
+            <ContentView HorizontalOptions="Fill" Padding="1" BackgroundColor="Gainsboro">
+               <StackLayout HorizontalOptions="FillAndExpand" Margin="5,0" Padding="0" Spacing="0" Orientation="Horizontal">
+                  <Label HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" FontSize="Small"  FontAttributes="Bold"
                          Text="{Binding ComicFile.ComicFile.FullText}">
                   </Label>
-                  <Label HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End" FontSize="Default" FontAttributes="Bold">
+                  <Label HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End" FontSize="Small" FontAttributes="Bold">
                      <Label.FormattedText>
                         <FormattedString>
-                           <Span Text="{Binding ComicFile.ReadingPage}"></Span>
+                           <Span Text="{Binding ReadingPage}"></Span>
                            <Span>/</Span>
                            <Span Text="{Binding ComicFile.ComicFile.TotalPages}"></Span>
                         </FormattedString>

@@ -89,6 +89,7 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._Readed, value);
             this.ComicFile.Readed = value;
+            this.ComicFile.ReadingPage = 0;
             this.ReadingDate = (value ? DateTime.Now : DateTime.MinValue);
             this.ReadingPercent = (value ? 1 : 0);
             this.UpdateLibrary();
@@ -114,7 +115,6 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._ReadingPage, value);
             this.ComicFile.ReadingPage = value;
-            this.ReadingPercent = Math.Round(((double)value / (double)this.ComicFile.TotalPages * (double)100), 0) / 100;
          }
       }
 
