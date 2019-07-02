@@ -10,37 +10,37 @@
    Shell.NavBarIsVisible="False"
    x:Class="ComicsShelf.ComicFiles.ReadingView">
    <ContentPage.Content>
+      <StackLayout Margin="0" Padding="0" Spacing="0">
 
-      <controls:SwipeView ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ComicFile.ReadingPage}">
-         <controls:SwipeView.ItemTemplate>
-            <DataTemplate>
-               <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="{Binding IsVisible}" ></controls:PageView>
-            </DataTemplate>
-         </controls:SwipeView.ItemTemplate>
-      </controls:SwipeView>
+         <controls:SwipeView ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ComicFile.ReadingPage}"
+                             VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
+            <controls:SwipeView.ItemTemplate>
+               <DataTemplate>
+                  <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="{Binding IsVisible}" />
+               </DataTemplate>
+            </controls:SwipeView.ItemTemplate>
+         </controls:SwipeView>
 
-      <!-- 
-      <cards:CarouselView ItemsSource="{Binding ComicFile.Pages}" SelectedIndex="{Binding ComicFile.ReadingPage}">
-         <cards:CarouselView.ItemTemplate>
-            <DataTemplate>
-               <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="True" ></controls:PageView>
-            </DataTemplate>
-         </cards:CarouselView.ItemTemplate>
-      </cards:CarouselView>
-      -->
+         <StackLayout HorizontalOptions="Fill" VerticalOptions="End" Margin="0" Padding="0" Spacing="0">
+            <ProgressBar HeightRequest="2" Progress="{Binding ComicFile.ReadingPercent}" ></ProgressBar>
+            <ContentView HorizontalOptions="Fill" Padding="2" BackgroundColor="Gainsboro">
+               <StackLayout HorizontalOptions="FillAndExpand" Margin="10,0" Padding="0" Spacing="0" Orientation="Horizontal">
+                  <Label HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" FontSize="Default" FontAttributes="Bold"
+                         Text="{Binding ComicFile.ComicFile.FullText}">
+                  </Label>
+                  <Label HorizontalOptions="EndAndExpand" HorizontalTextAlignment="End" FontSize="Default" FontAttributes="Bold">
+                     <Label.FormattedText>
+                        <FormattedString>
+                           <Span Text="{Binding ComicFile.ReadingPage}"></Span>
+                           <Span>/</Span>
+                           <Span Text="{Binding ComicFile.ComicFile.TotalPages}"></Span>
+                        </FormattedString>
+                     </Label.FormattedText>
+                  </Label>
+               </StackLayout>
+            </ContentView>
+         </StackLayout>
 
-      <!-- 
-      <CarouselView HorizontalOptions="Fill" VerticalOptions="Fill" ItemsSource="{Binding ComicFile.Pages}" ItemSizingStrategy="MeasureAllItems" >
-         <CarouselView.ItemsLayout>
-            <GridItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Start" />
-         </CarouselView.ItemsLayout>
-         <CarouselView.ItemTemplate>
-            <DataTemplate>
-               <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="True" ></controls:PageView>
-            </DataTemplate>
-         </CarouselView.ItemTemplate>
-      </CarouselView>
-      -->
-
+      </StackLayout>
    </ContentPage.Content>
 </ContentPage>

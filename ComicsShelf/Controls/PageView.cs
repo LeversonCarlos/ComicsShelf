@@ -11,7 +11,6 @@ namespace ComicsShelf.Controls
 
          this.ImageView = new Image
          {
-            BackgroundColor = Color.Yellow,
             Aspect = Aspect.AspectFit,
             InputTransparent = false
          };

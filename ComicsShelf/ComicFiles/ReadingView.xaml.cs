@@ -39,5 +39,11 @@ namespace ComicsShelf.ComicFiles
             .FirstOrDefault());
       }
 
+      protected override async void OnDisappearing()
+      {
+         await (this.BindingContext as ReadingVM).ComicFile.UpdateLibrary();
+         base.OnDisappearing();
+      }
+
    }
 }

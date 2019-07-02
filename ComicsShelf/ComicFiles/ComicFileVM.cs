@@ -91,6 +91,7 @@ namespace ComicsShelf.ComicFiles
             this.ComicFile.Readed = value;
             this.ReadingDate = (value ? DateTime.Now : DateTime.MinValue);
             this.ReadingPercent = (value ? 1 : 0);
+            this.UpdateLibrary();
          }
       }
 
@@ -113,7 +114,7 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._ReadingPage, value);
             this.ComicFile.ReadingPage = value;
-            this.ComicFile.ReadingPercent = Math.Round(((double)value / (double)this.ComicFile.TotalPages * (double)100), 0);
+            this.ReadingPercent = Math.Round(((double)value / (double)this.ComicFile.TotalPages * (double)100), 0) / 100;
          }
       }
 
@@ -125,7 +126,6 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._ReadingPercent, value);
             this.ComicFile.ReadingPercent = value;
-            this.UpdateLibrary();
          }
       }
 
@@ -133,7 +133,7 @@ namespace ComicsShelf.ComicFiles
       public ObservableList<ComicPageVM> Pages { get; internal set; }
 
 
-      private async Task UpdateLibrary()
+      internal async Task UpdateLibrary()
       {
          try
          {
