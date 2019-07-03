@@ -3,11 +3,12 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
-   public class PageView : ContentView
+   public class PageView : ScrollView
    {
 
       public PageView()
       {
+         this.Orientation = ScrollOrientation.Horizontal;
 
          this.ImageView = new Image
          {
@@ -21,27 +22,21 @@ namespace ComicsShelf.Controls
             NumberOfTapsRequired = 2
          });
 
-         this.ScrollView = new ScrollView
-         {
-            Orientation = ScrollOrientation.Horizontal,
-            Content = this.ImageView
-         };
-
-         // Xamarin.Essentials.DeviceDisplay.KeepScreenOn
-         // Xamarin.Essentials
+         Xamarin.Essentials.DeviceDisplay.MainDisplayInfoChanged +=
+            (object sender, Xamarin.Essentials.DisplayInfoChangedEventArgs e) => { this.OnImageResize(); };
          // Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
+
          this.OnImageResize();
       }
 
       #region Components
 
-      public ScrollView ScrollView
+      public Image ImageView
       {
-         get { return this.Content as ScrollView; }
+         get { return this.Content as Image; }
          set { this.Content = value; }
       }
       private double ImageZoom { get; set; } = 1;
-      public Image ImageView { get; set; }
 
       #endregion
 
@@ -100,6 +95,7 @@ namespace ComicsShelf.Controls
       #endregion
 
       #region OnImageResize
+      private Xamarin.Essentials.DisplayOrientation lastOrientation = Xamarin.Essentials.DisplayOrientation.Unknown;
       private void OnImageResize()
       {
          try
@@ -109,23 +105,23 @@ namespace ComicsShelf.Controls
             var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
             var displayHeight = displayInfo.Height / displayInfo.Density;
             var displayWidth = displayInfo.Width / displayInfo.Density;
-            this.HeightRequest = displayHeight;
-            this.WidthRequest = displayWidth;
+            if (lastOrientation == displayInfo.Orientation) { return; }
+            lastOrientation = displayInfo.Orientation;
 
             // PORTRAIT SCREEN
             if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait)
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
-                  this.ScrollView.HeightRequest = displayHeight * this.ImageZoom;
-                  this.ScrollView.WidthRequest = displayWidth * this.ImageZoom;
+                  this.HeightRequest = displayHeight * this.ImageZoom;
+                  this.WidthRequest = displayWidth * this.ImageZoom;
                }
                else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
-                  this.ScrollView.HeightRequest = displayHeight * this.ImageZoom;
-                  this.ScrollView.WidthRequest = displayHeight * this.ImageZoom * (this.ImageSize.Width / this.ImageSize.Height);
+                  this.HeightRequest = displayHeight * this.ImageZoom;
+                  this.WidthRequest = displayHeight * this.ImageZoom * (this.ImageSize.Width / this.ImageSize.Height);
                }
-               this.ScrollView.Orientation = ScrollOrientation.Horizontal;
+               this.Orientation = ScrollOrientation.Horizontal;
             }
 
             // LANDSCAPE SCREEN
@@ -133,22 +129,21 @@ namespace ComicsShelf.Controls
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
-                  this.ScrollView.WidthRequest = displayWidth * this.ImageZoom;
-                  this.ScrollView.HeightRequest = displayHeight * this.ImageZoom;
+                  this.WidthRequest = displayWidth * this.ImageZoom;
+                  this.HeightRequest = displayHeight * this.ImageZoom;
                }
                else if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
-                  this.ScrollView.WidthRequest = displayWidth * this.ImageZoom;
-                  this.ScrollView.HeightRequest = displayWidth * this.ImageZoom * (this.ImageSize.Height / this.ImageSize.Width);
+                  this.WidthRequest = displayWidth * this.ImageZoom;
+                  this.HeightRequest = displayWidth * this.ImageZoom * (this.ImageSize.Height / this.ImageSize.Width);
                }
-               this.ScrollView.Orientation = ScrollOrientation.Vertical;
+               this.Orientation = ScrollOrientation.Vertical;
             }
 
             // INNER IMAGE SIZE
-            this.ImageView.WidthRequest = this.ScrollView.WidthRequest;
-            this.ImageView.HeightRequest = this.ScrollView.HeightRequest;
-
-            /*
+            this.ImageView.WidthRequest = this.WidthRequest;
+            this.ImageView.HeightRequest = this.HeightRequest;
+            
             this.FadeTo(0.05, 100, Easing.SinOut)
                .ContinueWith(task1 =>
                {
@@ -157,9 +152,9 @@ namespace ComicsShelf.Controls
                      {
                         if (this.ImageZoom != 1.0)
                         {
-                           this.ScrollView.Orientation = ScrollOrientation.Both;
+                           this.Orientation = ScrollOrientation.Both;
                            Device.BeginInvokeOnMainThread(async () =>
-                           { await this.ScrollView.ScrollToAsync((displayWidth / 2.0), (displayHeight / 2.0), false); });
+                           { await this.ScrollToAsync((displayWidth / 2.0), (displayHeight / 2.0), false); });
                         }
                      })
                      .ContinueWith(task3 =>
@@ -167,7 +162,6 @@ namespace ComicsShelf.Controls
                         this.FadeTo(1, 250, Easing.SinIn);
                      });
                });
-               */
 
          }
          catch { }
