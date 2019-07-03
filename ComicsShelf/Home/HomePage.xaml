@@ -16,9 +16,8 @@
 
                   <StackLayout Padding="5,10,0,5" Spacing="5" IsVisible="{Binding HasComicFiles}" >
                      <Label Text="{Binding FolderPath}" IsVisible="{Binding HasComicFiles}" 
-                         FontAttributes = "Bold"
-                         FontSize = "15" />
-                     <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" HeightRequest="222" >
+                            FontAttributes="Bold" FontSize="15" />
+                     <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" ItemSizingStrategy="MeasureFirstItem" HeightRequest="222" >
                         <CollectionView.ItemTemplate>
                            <DataTemplate>
 
