@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,7 +37,45 @@ namespace ComicsShelf.ComicFiles
          this.BindingContext = new SplashVM(libraryService.ComicFiles[this.LibraryID]
             .Where(x => x.ComicFile.Available && x.ComicFile.Key == this.ComicKey)
             .FirstOrDefault());
+      }
 
+      protected override void OnAppearing()
+      {
+         base.OnAppearing();
+         this.backgroundImage.Opacity = 0.2;
+         this.backgroundImage.Scale = 1;
+
+         var currentFile = (this.BindingContext as SplashVM).CurrentFile;
+         this.filesCollectionView.ScrollTo(currentFile);
+
+         Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
+         Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
+      }
+
+      private void OnComicFileOpening(ComicFileVM value)
+      {
+         Task.Run(async () =>
+         {
+            await this.backgroundImage.FadeTo(0.8, 100, Easing.SinOut);
+            await Task.WhenAll(
+               this.backgroundImage.FadeTo(0.2, 10000, Easing.SinOut),
+               this.backgroundImage.RelScaleTo(20, 10000, Easing.SinOut)
+            );
+         });
+      }
+
+      private void OnComicFileOpened(ComicFileVM value)
+      {
+         ViewExtensions.CancelAnimations(this.backgroundImage);
+         this.backgroundImage.Opacity = 0.2;
+         this.backgroundImage.Scale = 1;
+      }
+
+      protected override void OnDisappearing()
+      {
+         Messaging.Unsubscribe("", "OnComicFileOpening");
+         Messaging.Unsubscribe("", "OnComicFileOpened");
+         base.OnDisappearing();
       }
 
    }

@@ -71,6 +71,7 @@ namespace ComicsShelf.ComicFiles
          try
          {
             this.IsBusy = true;
+            Messaging.Send("OnComicFileOpening", this.CurrentFile);
 
             var libraryService = DependencyService.Get<Libraries.LibraryService>();
             var library = libraryService.Libraries[this.CurrentFile.ComicFile.LibraryKey];
@@ -84,13 +85,14 @@ namespace ComicsShelf.ComicFiles
                if (pages != null && pages.Count != 0)
                {
                   this.CurrentFile.CachePath = this.CurrentFile.ComicFile.CachePath;
-                  this.CurrentFile.Pages = new Helpers.Observables.ObservableList<ComicPageVM>(pages.Take(7).ToList());
+                  this.CurrentFile.Pages = new Helpers.Observables.ObservableList<ComicPageVM>(pages.ToList());
                   this.CurrentFile.Pages.Add(new ComicPageVM { Text = "END" });
                   this.CurrentFile.ComicFile.TotalPages = (short)(this.CurrentFile.Pages.Count - 2); /* cover and the end one */
                   await Shell.Current.GoToAsync($"reading?libraryID={this.CurrentFile.ComicFile.LibraryKey}&comicKey={this.CurrentFile.ComicFile.Key}");
                }
             }
 
+            Messaging.Send("OnComicFileOpened", this.CurrentFile);
             this.IsBusy = false;
          }
          catch (Exception) { throw; }

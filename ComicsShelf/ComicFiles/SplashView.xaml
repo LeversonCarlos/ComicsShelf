@@ -10,7 +10,7 @@
       <AbsoluteLayout VerticalOptions="FillAndExpand">
 
          <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
-            <Image Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.2" />
+            <Image x:Name="backgroundImage" Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.2" />
          </Grid>
 
          <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}">
@@ -86,7 +86,8 @@
                   <Switch VerticalOptions="Center" IsToggled="{Binding IsAllReaded}" />
                   <Label VerticalOptions="Center" FontSize="Medium" Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
                </StackLayout>
-               <CollectionView VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" 
+               <CollectionView x:Name="filesCollectionView"
+                               VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" ItemSizingStrategy="MeasureFirstItem" 
                                HeightRequest="222" SelectionMode="Single" 
                                ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
                                SelectedItem="{Binding CurrentFile}" >
