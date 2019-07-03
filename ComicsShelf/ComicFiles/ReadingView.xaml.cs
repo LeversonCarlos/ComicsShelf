@@ -14,6 +14,7 @@ namespace ComicsShelf.ComicFiles
       public ReadingView()
       {
          InitializeComponent();
+         Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default);
       }
 
       string _LibraryID;
@@ -41,6 +42,7 @@ namespace ComicsShelf.ComicFiles
 
       protected override async void OnDisappearing()
       {
+         Xamarin.Essentials.OrientationSensor.Stop();
          await (this.BindingContext as ReadingVM).ComicFile.UpdateLibrary();
          base.OnDisappearing();
       }
