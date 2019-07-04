@@ -56,10 +56,10 @@ namespace ComicsShelf.ComicFiles
       {
          Task.Run(async () =>
          {
-            await this.backgroundImage.FadeTo(0.8, 100, Easing.SinOut);
+            await this.backgroundImage.FadeTo(0.8, 250, Easing.SinOut);
             await Task.WhenAll(
-               this.backgroundImage.FadeTo(0.2, 10000, Easing.SinOut),
-               this.backgroundImage.RelScaleTo(20, 10000, Easing.SinOut)
+               this.backgroundImage.FadeTo(0.1, 15000, Easing.SinOut),
+               this.backgroundImage.RelScaleTo(20, 15000, Easing.SinOut)
             );
          });
       }
@@ -67,8 +67,13 @@ namespace ComicsShelf.ComicFiles
       private void OnComicFileOpened(ComicFileVM value)
       {
          ViewExtensions.CancelAnimations(this.backgroundImage);
-         this.backgroundImage.Opacity = 0.2;
-         this.backgroundImage.Scale = 1;
+         Task.Run(async () =>
+         {
+            await Task.WhenAll(
+               this.backgroundImage.FadeTo(0.2, 250, Easing.SinIn),
+               this.backgroundImage.RelScaleTo(1, 250, Easing.SinIn)
+            );
+         });
       }
 
       protected override void OnDisappearing()
