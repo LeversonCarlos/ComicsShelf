@@ -9,6 +9,7 @@ namespace ComicsShelf.ComicFiles
       public ReadingVM(ComicFileVM comicFile)
       {
          this.ComicFile = comicFile;
+         this._ReadingPage = this.ComicFile.ReadingPage;
       }
 
       short _ReadingPage;
