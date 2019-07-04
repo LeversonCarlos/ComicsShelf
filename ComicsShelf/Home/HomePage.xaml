@@ -8,54 +8,59 @@
    BackgroundColor="{StaticResource colorBackground}"   
    Title="{Binding Title}">
    <ContentPage.Content>
-      <StackLayout>
+      <ScrollView Orientation="Vertical">
+         <StackLayout>
 
-         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
-            <CollectionView.ItemTemplate>
-               <DataTemplate>
+            <StackLayout IsVisible="{Binding HasComicFiles}" BindableLayout.ItemsSource="{Binding ComicFolders}" Padding="5,10" Spacing="10" >
+               <BindableLayout.ItemTemplate>
+                  <DataTemplate>
 
-                  <StackLayout Padding="5,10,0,5" Spacing="5" IsVisible="{Binding HasComicFiles}" >
-                     <Label Text="{Binding FolderPath}" IsVisible="{Binding HasComicFiles}" 
-                            FontAttributes="Bold" FontSize="15" />
-                     <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" ItemSizingStrategy="MeasureFirstItem" HeightRequest="222" >
-                        <CollectionView.ItemTemplate>
-                           <DataTemplate>
+                     <StackLayout Margin="0" Padding="0" Spacing="0" IsVisible="{Binding HasComicFiles}" >
+                        <Label Text="{Binding FolderPath}" IsVisible="{Binding HasComicFiles}" 
+                            FontAttributes="Bold"  FontSize="15" />
 
-                              <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
-                                 <controls:CoverView
-                                    ImageSource="{Binding CoverPath}" 
-                                    Progress="{Binding ReadingPercent}"
-                                    CacheStatus="{Binding CacheStatus}" 
-                                    OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
-                                 </controls:CoverView>
-                              </StackLayout>
+                        <FlexLayout IsVisible="{Binding HasComicFiles}" BindableLayout.ItemsSource="{Binding ComicFiles}"
+                                 Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Start" >
+                           <BindableLayout.ItemTemplate>
+                              <DataTemplate>
 
-                           </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                     </CollectionView>
-                  </StackLayout>
+                                 <StackLayout Padding="0,0,0,5" WidthRequest="145" HeightRequest="222" >
+                                    <controls:CoverView
+                                       ImageSource="{Binding CoverPath}" 
+                                       Progress="{Binding ReadingPercent}"
+                                       CacheStatus="{Binding CacheStatus}" 
+                                       OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
+                                    </controls:CoverView>
+                                 </StackLayout>
 
-               </DataTemplate>
-            </CollectionView.ItemTemplate>
-         </CollectionView>
+                              </DataTemplate>
+                           </BindableLayout.ItemTemplate>
+                        </FlexLayout>
 
-         <FlexLayout VerticalOptions="FillAndExpand" JustifyContent="Center" AlignItems="Center" Direction="Column" 
+                     </StackLayout>
+
+                  </DataTemplate>
+               </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+            <FlexLayout VerticalOptions="FillAndExpand" JustifyContent="Center" AlignItems="Center" Direction="Column" 
                      IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" >
-            <Label FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource colorPrimary}"
+               <Label FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource colorPrimary}"
                    Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE_TITLE}">
-            </Label>
-            <Label TextColor="{StaticResource colorPrimary}"
+               </Label>
+               <Label TextColor="{StaticResource colorPrimary}"
                    Text="{controls:Translate Text=HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS}">
-            </Label>
-         </FlexLayout>
+               </Label>
+            </FlexLayout>
 
-         <controls:NotifyView
+            <controls:NotifyView
             IsVisible="{Binding Notify.IsRunning}" 
             Text="{Binding Notify.Text}" 
             Progress="{Binding Notify.Progress}" 
             Details="{Binding Notify.Details}" >
-         </controls:NotifyView>
+            </controls:NotifyView>
 
-      </StackLayout>
+         </StackLayout>
+      </ScrollView>
    </ContentPage.Content>
 </ContentPage>

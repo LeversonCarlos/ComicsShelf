@@ -225,7 +225,7 @@ namespace ComicsShelf.Libraries
                .ToList();
             this.ComicFiles[generalKey] = recentFiles;
 
-            return recentFiles.Take(10).ToList();
+            return recentFiles.Take(20).ToList();
          }
          catch (Exception) { throw; }
       }
