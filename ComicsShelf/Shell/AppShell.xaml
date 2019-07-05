@@ -6,28 +6,6 @@
        Title="ComicsShelf"
        x:Class="ComicsShelf.AppShell">
 
-   <!--
-        Shell is an all new way to quickly get started with your application. There are 3 levels to a Shell app:
-        * ShellItem: populates the Flyout menu along with special menu items
-        * ShellSection: groups of 1 or more ContentPage displayed as bottom tabs
-        * ShellContent: a ContentPage host. Multiple ShellContent within a ShellSection are navigable by top tabs
-
-        For more details about building apps with Shell, visit these resources:
-        * MSDN Article: https://aka.ms/xf-msdn
-        * Preview Documentation: https://aka.ms/xf-shell-docs
-        * Blog Introduction: https://aka.ms/xf-40-blog
-
-        PLEASE give us feedback on your experience: good, bad, and ugly.
-        https://www.surveymonkey.com/r/VTJNWTM
-
-        Thanks for trying out this preview! 
-
-        - David Ortinau, Senior Program Manager for Mobile Dev Tools [david.ortinau@microsoft.com]
-    -->
-
-   <!-- 
-        Styles and Resources 
-    -->
    <Shell.Resources>
       <ResourceDictionary>
          <Style x:Key="BaseStyle" TargetType="Element">
@@ -45,8 +23,13 @@
       </ResourceDictionary>
    </Shell.Resources>
 
-   <MenuItem Icon="icon_LocalDrive_New.png" Text="New Local Library" Clicked="NewLocalLibrary_Clicked"></MenuItem>
-   <MenuItem Icon="icon_OneDrive_New.png" Text="New OneDrive Library" Clicked="NewOneDriveLibrary_Clicked"></MenuItem>
+   <Shell.FlyoutHeader>
+      <ContentView HeightRequest="150">
+         <Grid>
+            <Image Source="banner_ComicsShelf" Aspect="AspectFill" Opacity="0.75"></Image>
+         </Grid>
+      </ContentView>
+   </Shell.FlyoutHeader>
 
    <!-- Your Pages -->
    <ShellItem FlyoutIcon="icon_home.png" Title="Home">
@@ -54,35 +37,8 @@
          <ShellContent Title="Home" ContentTemplate="{DataTemplate home:HomePage}" />
       </ShellSection>
    </ShellItem>
-
-   <!-- Optional Templates 
-    // These may be provided inline as below or as separate classes.
-
-    // This header appears at the top of the Flyout.
-    <Shell.FlyoutHeaderTemplate>
-	<DataTemplate>
-            <Grid>ContentHere</Grid>
-        </DataTemplate>
-    </Shell.FlyoutHeaderTemplate>
-
-    // ItemTemplate is for ShellItems as displayed in a Flyout
-    <Shell.ItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Title, Icon
-            </ContentView>
-        </DataTemplate>
-    </Shell.ItemTemplate>
-
-    // MenuItemTemplate is for MenuItems as displayed in a Flyout
-    <Shell.MenuItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Text, Icon
-            </ContentView>
-        </DataTemplate>
-    </Shell.MenuItemTemplate>
-
-    -->
+   
+   <MenuItem Icon="icon_LocalDrive_New.png" Text="New Local Library" Clicked="NewLocalLibrary_Clicked"></MenuItem>
+   <MenuItem Icon="icon_OneDrive_New.png" Text="New OneDrive Library" Clicked="NewOneDriveLibrary_Clicked"></MenuItem>
 
 </Shell>

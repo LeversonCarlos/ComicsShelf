@@ -23,10 +23,10 @@
                   <CollectionView ItemsSource="{Binding Data}" SelectionChangedCommand="{Binding ItemSelectCommand}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectionMode="Single" >
                      <CollectionView.ItemTemplate>
                         <DataTemplate>
-                           <StackLayout HeightRequest="20" Padding="5" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" >
+                           <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
                               <Image Source="icon_ArrowRight.png"></Image>
                               <Label Text="{Binding Name}" FontAttributes="Bold"></Label>
-                           </StackLayout>
+                           </FlexLayout>
                         </DataTemplate>
                      </CollectionView.ItemTemplate>
                   </CollectionView>

@@ -213,7 +213,7 @@ namespace ComicsShelf.Libraries
                .Where(file => file.ComicFile.Available)
                .Where(file => file.ComicFile.ReleaseDate != DateTime.MinValue)
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
-               .Take(10)
+               .Take(25)
                .ToList();
 
             var generalFiles = this.ComicFiles[generalKey]
@@ -225,7 +225,7 @@ namespace ComicsShelf.Libraries
                .ToList();
             this.ComicFiles[generalKey] = recentFiles;
 
-            return recentFiles.Take(20).ToList();
+            return recentFiles.Take(50).ToList();
          }
          catch (Exception) { throw; }
       }
@@ -379,6 +379,7 @@ namespace ComicsShelf.Libraries
             var engine = Engines.Engine.Get(library.Type);
             if (engine == null) { return false; }
 
+            var lastFolderPath = "";
             var filesQuantity = comicFiles.Count;
             for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
             {
@@ -410,6 +411,12 @@ namespace ComicsShelf.Libraries
                   if (await engine.ExtractCover(library, comicFile.ComicFile))
                   { comicFile.CoverPath = comicFile.ComicFile.CoverPath; }
                   else { return false; }
+
+                  // STATISTCS
+                  if (lastFolderPath != comicFile.ComicFile.FolderPath) {
+                     lastFolderPath = comicFile.ComicFile.FolderPath;
+                     await this.Statistics(library);
+                  }
 
                }
                catch (Exception ex) { throw new Exception($"Extracting Comic Data{Environment.NewLine}{comicFile.ComicFile.FilePath}", ex); }

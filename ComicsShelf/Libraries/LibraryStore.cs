@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -65,7 +66,7 @@ namespace ComicsShelf.Libraries
             var shellItem = new ShellItem { Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
             shellItem.Items.Add(shellSection);
 
-            Shell.Current.Items.Add(shellItem);
+            Shell.Current.Items.Insert(1, shellItem);
             return shellItem;
 
          }

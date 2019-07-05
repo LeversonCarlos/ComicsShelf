@@ -17,7 +17,9 @@
 
          <!-- BUTTON -->
          <Style x:Key="BaseButton" TargetType="Button">
-            <Setter Property="Padding" Value="5,10"></Setter>
+            <Setter Property="Padding" Value="30,10"></Setter>
+            <Setter Property="BackgroundColor" Value="{StaticResource colorLightGray}" />
+            <Setter Property="TextColor" Value="Black" />
          </Style>
          <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}" >
             <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
