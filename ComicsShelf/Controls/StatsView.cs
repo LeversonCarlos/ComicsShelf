@@ -46,7 +46,7 @@ namespace ComicsShelf.Controls
             Content = new StackLayout
             {
                HorizontalOptions = LayoutOptions.FillAndExpand,
-               Margin = new Thickness(10, 0),
+               Margin = new Thickness(10, 5),
                Padding = 0,
                Spacing = 0,
                Orientation = StackOrientation.Horizontal,
@@ -126,10 +126,10 @@ namespace ComicsShelf.Controls
          try
          {
             if (this.ReadingPage == 0) { return; }
-            await this.FadeTo(0.90, 250, Easing.SinOut)
+            await this.FadeTo(1, 250, Easing.SinOut)
                .ContinueWith((task1) =>
                {
-                  Task.Delay(1000)
+                  Task.Delay(1500)
                      .ContinueWith(async (task) =>
                      {
                         await this.FadeTo(0.0, 1000, Easing.SinIn);

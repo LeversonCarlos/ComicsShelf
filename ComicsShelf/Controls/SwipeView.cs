@@ -17,14 +17,12 @@ namespace ComicsShelf.Controls
          this.PositionSelected += this.OnPositionSelected;
          this.ArrowsBackgroundColor = Color.Accent;
 
-         /*
          this.GestureRecognizers.Add(new TapGestureRecognizer
          {
             Command = new Command((param) =>
-            { Controls.Messaging.Send(Messaging.Keys.PageTapped); }),
+            { Messaging.Send(StatsView.Messaging_ShowStatsView); }),
             NumberOfTapsRequired = 1
          });
-         */
 
       }
 
@@ -35,7 +33,8 @@ namespace ComicsShelf.Controls
          {
             if (this.Position < 0) { return; }
             if (this.Position == this.LastPosition) { return; }
-            if (this.Position == 0 && this.LastPosition != 1 && this.LastPosition != -1) {
+            if (this.Position == 0 && this.LastPosition != 1 && this.LastPosition != -1)
+            {
                if (this.LastPosition != this.ItemsSource.GetCount()) { return; }
             }
 
@@ -59,6 +58,6 @@ namespace ComicsShelf.Controls
             { positionData.IsVisible = visibility; }
          }
       }
-   
+
    }
 }
