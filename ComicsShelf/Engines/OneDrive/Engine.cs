@@ -35,11 +35,6 @@ namespace ComicsShelf.Engines.OneDrive
 
 
 
-      public Task<bool> Validate(LibraryModel library)
-      {
-         throw new System.NotImplementedException();
-      }
-
       public Task<LibraryModel> NewLibrary()
       {
          throw new System.NotImplementedException();
