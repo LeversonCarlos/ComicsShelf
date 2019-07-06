@@ -11,7 +11,7 @@ namespace ComicsShelf.Controls
       public StatsView()
       {
 
-         this.HorizontalOptions = LayoutOptions.Fill;
+         this.HorizontalOptions = LayoutOptions.FillAndExpand;
          this.VerticalOptions = LayoutOptions.End;
          this.Margin = 0;
          this.Padding = 0;
@@ -46,7 +46,7 @@ namespace ComicsShelf.Controls
             Content = new StackLayout
             {
                HorizontalOptions = LayoutOptions.FillAndExpand,
-               Margin = new Thickness(5, 0),
+               Margin = new Thickness(10, 0),
                Padding = 0,
                Spacing = 0,
                Orientation = StackOrientation.Horizontal,

@@ -10,10 +10,12 @@
    Shell.NavBarIsVisible="False"
    x:Class="ComicsShelf.ComicFiles.ReadingView">
    <ContentPage.Content>
-      <StackLayout Margin="0" Padding="0" Spacing="0">
+      <AbsoluteLayout Margin="0" Padding="0" >
 
-         <controls:SwipeView ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ReadingPage}"
-                             VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
+         <controls:SwipeView 
+            AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+            VerticalOptions="FillAndExpand" HorizontalOptions="Fill" 
+            ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ReadingPage}">
             <controls:SwipeView.ItemTemplate>
                <DataTemplate>
                   <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="{Binding IsVisible}" />
@@ -22,11 +24,12 @@
          </controls:SwipeView>
 
          <controls:StatsView 
+            AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,1" 
             FullTitle="{Binding ComicFile.ComicFile.FullText}"
             ReadingPage="{Binding ReadingPage}" TotalPages="{Binding ComicFile.ComicFile.TotalPages}"
             ReadingPercent="{Binding ComicFile.ReadingPercent}">
          </controls:StatsView>
 
-      </StackLayout>
+      </AbsoluteLayout>
    </ContentPage.Content>
 </ContentPage>
