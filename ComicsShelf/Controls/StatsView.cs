@@ -18,7 +18,7 @@ namespace ComicsShelf.Controls
          this.Spacing = 0;
          this.Opacity = 1;
 
-         this.ProgressBar = new ProgressBar { HeightRequest = 2, BackgroundColor = Color.Gainsboro };
+         this.ProgressBar = new ProgressBar { HeightRequest = 2, BackgroundColor = Color.Accent };
          this.Children.Add(this.ProgressBar);
 
          this.FullTitleLabel = new Label
@@ -26,21 +26,23 @@ namespace ComicsShelf.Controls
             HorizontalOptions = LayoutOptions.StartAndExpand,
             HorizontalTextAlignment = TextAlignment.Start,
             FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-            FontAttributes = FontAttributes.Bold
+            FontAttributes = FontAttributes.Bold,
+            TextColor = Color.White
          };
          this.PageLabel = new Label
          {
             HorizontalOptions = LayoutOptions.EndAndExpand,
             HorizontalTextAlignment = TextAlignment.End,
             FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
-            FontAttributes = FontAttributes.Bold
+            FontAttributes = FontAttributes.Bold,
+            TextColor = Color.White
          };
 
          this.Children.Add(new ContentView
          {
             HorizontalOptions = LayoutOptions.Fill,
             Padding = 1,
-            BackgroundColor = Color.Gainsboro,
+            BackgroundColor = Color.Accent,
             Content = new StackLayout
             {
                HorizontalOptions = LayoutOptions.FillAndExpand,
