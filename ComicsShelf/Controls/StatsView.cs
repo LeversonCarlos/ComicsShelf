@@ -18,7 +18,7 @@ namespace ComicsShelf.Controls
          this.Spacing = 0;
          this.Opacity = 1;
 
-         this.ProgressBar = new ProgressBar { HeightRequest = 2, BackgroundColor = Color.Accent };
+         this.ProgressBar = new ProgressBar { HeightRequest = 3, BackgroundColor = Color.White, ProgressColor = (Color)App.Current.Resources["colorPrimary"] };
          this.Children.Add(this.ProgressBar);
 
          this.FullTitleLabel = new Label

@@ -25,9 +25,8 @@
 
          <controls:StatsView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,1" 
-            FullTitle="{Binding ComicFile.ComicFile.FullText}"
-            ReadingPage="{Binding ReadingPage}" TotalPages="{Binding ComicFile.ComicFile.TotalPages}"
-            ReadingPercent="{Binding ComicFile.ReadingPercent}">
+            FullTitle="{Binding ComicFile.ComicFile.FullText}" TotalPages="{Binding ComicFile.ComicFile.TotalPages}" 
+            ReadingPage="{Binding ReadingPage}" ReadingPercent="{Binding ComicFile.ReadingPercent}">
          </controls:StatsView>
 
       </AbsoluteLayout>
