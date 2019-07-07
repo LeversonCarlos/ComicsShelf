@@ -21,6 +21,7 @@ namespace ComicsShelf.Droid
          Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
          global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
          CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
+         Xamarin.OneDrive.Connector.Init(this, "https://login.microsoftonline.com/common/oauth2/nativeclient");
          LoadApplication(new App());
       }
 
