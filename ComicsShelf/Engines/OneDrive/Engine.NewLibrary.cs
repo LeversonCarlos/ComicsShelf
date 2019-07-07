@@ -68,7 +68,8 @@ namespace ComicsShelf.Engines.OneDrive
 
       public async Task<bool> DeleteLibrary(LibraryModel library)
       {
-         try {
+         try
+         {
 
             /*
             var libraries = new List<LibraryModel>();
