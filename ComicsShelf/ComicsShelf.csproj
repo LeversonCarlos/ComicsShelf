@@ -72,6 +72,12 @@
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="ComicFiles\ReadingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="ComicFiles\SplashView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Helpers\FolderDialog\FolderDialogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
