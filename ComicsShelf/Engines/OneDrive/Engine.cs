@@ -6,43 +6,19 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Engines.OneDrive
 {
-   internal partial class OneDriveEngine : IEngine, System.IDisposable
+   internal partial class OneDriveEngine : IEngine
    {
       // public const string LibraryFileID = "LibraryFileID";
       // public const string LibraryPath = "LibraryPath";
-
-      Xamarin.OneDrive.Connector Connector { get; set; }
-      public OneDriveEngine()
-      {
-         this.Connector = new Xamarin.OneDrive.Connector(AppKeys.OneDriveApplicationID, "User.Read", "Files.ReadWrite");
-      }
 
       private Helpers.IFileSystem FileSystem
       {
          get { return DependencyService.Get<Helpers.IFileSystem>(); }
       }
 
-      public void Dispose()
+      private OneDriveConnector Connector
       {
-         if (this.Connector != null)
-         {
-            this.Connector.Dispose();
-            this.Connector = null;
-         }
-      }
-
-
-
-
-
-      public Task<LibraryModel> NewLibrary()
-      {
-         throw new System.NotImplementedException();
-      }
-
-      public Task<bool> DeleteLibrary(LibraryModel library)
-      {
-         throw new System.NotImplementedException();
+         get { return DependencyService.Get<OneDriveConnector>(); }
       }
 
       public Task<byte[]> LoadSyncData(LibraryModel library)

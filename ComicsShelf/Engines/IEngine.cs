@@ -28,7 +28,7 @@ namespace ComicsShelf.Engines
       {
          if (libraryType == Libraries.LibraryType.OneDrive)
          {
-            return null;
+            return DependencyService.Get<OneDrive.OneDriveEngine>();
          }
          else if (libraryType == Libraries.LibraryType.LocalDrive)
          {

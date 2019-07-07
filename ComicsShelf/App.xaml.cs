@@ -13,6 +13,8 @@ namespace ComicsShelf
          DependencyService.Register<Libraries.LibraryStore>();
          DependencyService.Register<Libraries.LibraryService>();
          DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
+         DependencyService.Register<Engines.OneDrive.OneDriveEngine>();
+         DependencyService.Register<Engines.OneDrive.OneDriveConnector>();
          MainPage = new AppShell();
       }
 
