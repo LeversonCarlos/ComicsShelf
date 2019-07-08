@@ -20,7 +20,7 @@ namespace ComicsShelf.Engines.OneDrive
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
             // DOWNLOAD COMIC FILE FROM REMOTE SERVER IF LOCAL CACHE DOESNT EXIST YET
-            var cacheFilePath = $"{comicFile.CachePath}_{Path.GetExtension(comicFile.FilePath)}";
+            var cacheFilePath = $"{comicFile.CachePath}.zip";
             if (!File.Exists(cacheFilePath))
             {
                var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });

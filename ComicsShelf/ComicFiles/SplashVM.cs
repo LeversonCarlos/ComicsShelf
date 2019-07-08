@@ -60,9 +60,15 @@ namespace ComicsShelf.ComicFiles
          try
          {
             if (!await App.ConfirmMessage(R.Strings.SPLASH_FILE_CLEAR_COMIC_CACHE_MESSAGE)) { return; }
+
+            if (System.IO.Directory.Exists(this.CurrentFile.CachePath))
+            { System.IO.Directory.Delete(this.CurrentFile.CachePath, true); }
+            if (System.IO.File.Exists($"{this.CurrentFile.CachePath}.zip"))
+            { System.IO.File.Delete($"{this.CurrentFile.CachePath}.zip"); }
+
             this.CurrentFile.CachePath = string.Empty;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
       public Command ItemOpenCommand { get; set; }
@@ -95,7 +101,7 @@ namespace ComicsShelf.ComicFiles
             Messaging.Send("OnComicFileOpened", this.CurrentFile);
             this.IsBusy = false;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
    }
