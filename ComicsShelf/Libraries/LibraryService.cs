@@ -70,6 +70,7 @@ namespace ComicsShelf.Libraries
          try
          {
             if (!await service.SearchData(library)) { return; }
+            if (!await service.LoadSyncData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
             if (!await service.ExtractData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
@@ -170,10 +171,15 @@ namespace ComicsShelf.Libraries
             if (syncFiles == null) { return true; }
 
             var comicFiles = this.ComicFiles[library.ID];
-            foreach (var syncFile in syncFiles)
+            if (comicFiles == null) { return true; }
+
+            if (comicFiles.Count > 0 && syncFiles.Count > 0)
             {
-               var comicFile = comicFiles.Where(x => x.ComicFile.Key == syncFile.Key).FirstOrDefault();
-               if (comicFile != null) { comicFile.Set(syncFile); }
+               foreach (var syncFile in syncFiles)
+               {
+                  var comicFile = comicFiles.Where(x => x.ComicFile.Key == syncFile.Key).FirstOrDefault();
+                  if (comicFile != null) { comicFile.Set(syncFile); }
+               }
             }
 
             return true;

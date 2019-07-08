@@ -56,21 +56,24 @@ namespace ComicsShelf.Engines.OneDrive
 
       private async Task<string> LoadDataAsync_GetFileID(Libraries.LibraryModel library)
       {
+         try
+         {
 
-         // LIBRARY FILE ALREADY DEFINED
-         var fileID = library.GetKeyValue(SYNC_FILE_ID);
-         if (!string.IsNullOrEmpty(fileID)) { return fileID; }
+            // LIBRARY FILE ALREADY DEFINED
+            var fileID = library.GetKeyValue(SYNC_FILE_ID);
+            if (!string.IsNullOrEmpty(fileID)) { return fileID; }
 
-         // TRY TO SEARCH ON FOLDER
-         var folder = new FileData { id = library.LibraryKey };
-         var fileList = await this.Connector.SearchFilesAsync(folder, Libraries.LibraryModel.SyncFile, 1);
-         if (fileList == null || fileList.Count == 0) { return string.Empty; }
-         var file = fileList.Where(x => x.parentID == library.LibraryKey).FirstOrDefault();
-         if (file == null) { return string.Empty; }
+            // TRY TO SEARCH ON FOLDER
+            var folder = new FileData { id = library.LibraryKey };
+            var fileList = await this.Connector.SearchFilesAsync(folder, Libraries.LibraryModel.SyncFile, 1);
+            if (fileList == null || fileList.Count == 0) { return string.Empty; }
+            var file = fileList.Where(x => x.parentID == library.LibraryKey).FirstOrDefault();
+            if (file == null) { return string.Empty; }
 
-         // RESULT
-         return file.id;
-
+            // RESULT
+            return file.id;
+         }
+         catch (Exception ex) { throw; }
       }
 
    }

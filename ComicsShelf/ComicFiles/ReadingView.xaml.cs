@@ -14,7 +14,6 @@ namespace ComicsShelf.ComicFiles
       public ReadingView()
       {
          InitializeComponent();
-         Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default);
       }
 
       string _LibraryID;
@@ -31,13 +30,28 @@ namespace ComicsShelf.ComicFiles
          set { this._ComicKey = Uri.UnescapeDataString(value); this.LoadBindingContext(); }
       }
 
-      private void LoadBindingContext()
+      private async void LoadBindingContext()
       {
-         if (string.IsNullOrEmpty(this.LibraryID) || string.IsNullOrEmpty(this.ComicKey)) { return; }
-         var libraryService = DependencyService.Get<Libraries.LibraryService>();
-         this.BindingContext = new ReadingVM(libraryService.ComicFiles[this.LibraryID]
-            .Where(x => x.ComicFile.Available && x.ComicFile.Key == this.ComicKey)
-            .FirstOrDefault());
+         try
+         {
+            if (string.IsNullOrEmpty(this.LibraryID) || string.IsNullOrEmpty(this.ComicKey)) { return; }
+            var libraryService = DependencyService.Get<Libraries.LibraryService>();
+            if (!libraryService.ComicFiles.ContainsKey(this.LibraryID)) { await App.ShowMessage("LibraryID wasnt found on library collection"); return; }
+
+            var comicFile = libraryService.ComicFiles[this.LibraryID]
+               .Where(x => x.ComicFile.Available && x.ComicFile.Key == this.ComicKey)
+               .FirstOrDefault();
+            if (comicFile == null) { await App.ShowMessage("ComicKey wasnt found on library collection"); return; }
+
+            this.BindingContext = new ReadingVM(comicFile);
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("ReadingView.LoadBindingContext", ex); }
+      }
+
+      protected override void OnAppearing()
+      {
+         base.OnAppearing();
+         Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default);
       }
 
       protected override async void OnDisappearing()

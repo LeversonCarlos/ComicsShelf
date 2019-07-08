@@ -30,24 +30,37 @@ namespace ComicsShelf.ComicFiles
          set { this._ComicKey = Uri.UnescapeDataString(value); this.LoadBindingContext(); }
       }
 
-      private void LoadBindingContext()
+      private async void LoadBindingContext()
       {
-         if (string.IsNullOrEmpty(this.LibraryID) || string.IsNullOrEmpty(this.ComicKey)) { return; }
-         var libraryService = DependencyService.Get<Libraries.LibraryService>();
-         this.BindingContext = new SplashVM(libraryService.ComicFiles[this.LibraryID]
-            .Where(x => x.ComicFile.Available && x.ComicFile.Key == this.ComicKey)
-            .FirstOrDefault());
+         try
+         {
+            if (string.IsNullOrEmpty(this.LibraryID) || string.IsNullOrEmpty(this.ComicKey)) { return; }
+            var libraryService = DependencyService.Get<Libraries.LibraryService>();
+            if (!libraryService.ComicFiles.ContainsKey(this.LibraryID)) { await App.ShowMessage("LibraryID wasnt found on library collection"); return; }
+
+            var currentFile = libraryService.ComicFiles[this.LibraryID]
+               .Where(x => x.ComicFile.Available && x.ComicFile.Key == this.ComicKey)
+               .FirstOrDefault();
+            if (currentFile == null) { await App.ShowMessage("ComicKey wasnt found on library collection"); return; }
+
+            this.BindingContext = new SplashVM(currentFile);
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent("SplashView.LoadBindingContext", ex); }
       }
 
       protected override void OnAppearing()
       {
-         base.OnAppearing();
+         try
+         {
+            base.OnAppearing();
 
-         var currentFile = (this.BindingContext as SplashVM).CurrentFile;
-         this.filesCollectionView.ScrollTo(currentFile);
+            var currentFile = (this.BindingContext as SplashVM).CurrentFile;
+            this.filesCollectionView.ScrollTo(currentFile);
 
-         Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
-         Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
+            Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
+            Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
+         }
+         catch { Device.BeginInvokeOnMainThread(async () => await AppShell.Current.Navigation.PopAsync()); }
       }
 
       private void OnComicFileOpening(ComicFileVM value)
@@ -56,8 +69,8 @@ namespace ComicsShelf.ComicFiles
          {
             await this.backgroundImage.FadeTo(0.8, 250, Easing.SinOut);
             await Task.WhenAll(
-               this.backgroundImage.FadeTo(0.1, 15000, Easing.Linear),
-               this.backgroundImage.RelScaleTo(30, 15000, Easing.Linear)
+               this.backgroundImage.FadeTo(0.1, 15000, Easing.SinInOut),
+               this.backgroundImage.RelScaleTo(30, 15000, Easing.SinInOut)
             );
          });
       }
