@@ -45,7 +45,7 @@ namespace ComicsShelf.ComicFiles
 
             this.BindingContext = new ReadingVM(comicFile);
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("ReadingView.LoadBindingContext", ex); }
+         catch (Exception) { }
       }
 
       protected override void OnAppearing()

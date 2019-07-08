@@ -15,7 +15,7 @@ namespace ComicsShelf.Engines.OneDrive
             if (!await this.HasStoragePermission()) { return false; }
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("OneDrive.Validate", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       public async Task<bool> HasStoragePermission()

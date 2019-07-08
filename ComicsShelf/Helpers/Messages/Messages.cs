@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -7,8 +9,12 @@ namespace ComicsShelf
    partial class App
    {
 
-      public static async Task ShowMessage(Exception ex)
-      { await ShowMessage(ex.ToString()); }
+      public static async Task ShowMessage(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
+      {
+         var trackProp = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
+         Helpers.AppCenter.TrackEvent($"{callerMemberName}.Exception", trackProp);
+         await ShowMessage(ex.Message);
+      }
 
       public static async Task ShowMessage(string message)
       {

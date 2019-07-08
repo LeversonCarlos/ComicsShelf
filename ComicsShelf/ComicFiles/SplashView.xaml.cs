@@ -45,7 +45,7 @@ namespace ComicsShelf.ComicFiles
 
             this.BindingContext = new SplashVM(currentFile);
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("SplashView.LoadBindingContext", ex); }
+         catch (Exception) { }
       }
 
       protected override void OnAppearing()

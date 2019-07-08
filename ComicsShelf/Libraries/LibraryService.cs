@@ -134,7 +134,7 @@ namespace ComicsShelf.Libraries
             this.ComicFiles[library.ID].AddRange(comicFiles);
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.LoadData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private async Task<bool> NotifyData(LibraryModel library)
@@ -144,7 +144,7 @@ namespace ComicsShelf.Libraries
             await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]));
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.NotifyData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private async Task<bool> NotifyData(LibraryModel library, string prefix, List<ComicFiles.ComicFileVM> comicFiles)
@@ -154,7 +154,7 @@ namespace ComicsShelf.Libraries
             await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>(prefix, comicFiles));
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.NotifyData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private async Task<bool> LoadSyncData(LibraryModel library)
@@ -184,7 +184,7 @@ namespace ComicsShelf.Libraries
 
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.LoadSyncData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private async Task<bool> Statistics(LibraryModel library)
@@ -204,7 +204,7 @@ namespace ComicsShelf.Libraries
 
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.Statistics", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private List<ComicFiles.ComicFileVM> Statistics_GetRecentFiles(LibraryModel library)
@@ -339,7 +339,7 @@ namespace ComicsShelf.Libraries
 
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.SearchData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private async Task<bool> ExtractData(LibraryModel library)
@@ -375,7 +375,7 @@ namespace ComicsShelf.Libraries
 
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.ExtractData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private async Task<bool> ExtractData(LibraryModel library, List<ComicFiles.ComicFileVM> comicFiles)
@@ -419,7 +419,8 @@ namespace ComicsShelf.Libraries
                   else { return false; }
 
                   // STATISTCS
-                  if (lastFolderPath != comicFile.ComicFile.FolderPath) {
+                  if (lastFolderPath != comicFile.ComicFile.FolderPath)
+                  {
                      lastFolderPath = comicFile.ComicFile.FolderPath;
                      await this.Statistics(library);
                   }
@@ -451,7 +452,7 @@ namespace ComicsShelf.Libraries
             return true;
 
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.SaveSyncData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
       private async Task<bool> SaveData(LibraryModel library)
@@ -465,7 +466,7 @@ namespace ComicsShelf.Libraries
             if (!await Helpers.FileStream.SaveFile(LibraryConstants.DatabaseFile, comicFiles)) { return false; }
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LibraryService.SaveData", ex); return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
 

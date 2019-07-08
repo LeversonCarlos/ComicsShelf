@@ -152,7 +152,7 @@ namespace ComicsShelf.Libraries
             foreach (var library in libraries)
             { await LibraryService.RefreshLibrary(library); }
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent("LoadLibraries", ex); }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
 
