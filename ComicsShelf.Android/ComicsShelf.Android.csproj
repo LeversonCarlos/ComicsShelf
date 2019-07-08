@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\ReadingView.cs" />
+    <Compile Include="Helpers\FileSystem\FileSystem.SaveThumbnail.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.ExtractPages.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.ExtractCover.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.SyncLibrary.cs" />

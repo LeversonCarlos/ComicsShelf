@@ -34,6 +34,7 @@ namespace ComicsShelf.Helpers
       Task<byte[]> LoadData(Libraries.LibraryModel library);
       Task<bool> SaveData(Libraries.LibraryModel library, byte[] serializedData);
 
+      Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
       Task ExtractCover(Libraries.LibraryModel library, ComicFile comicFile);
       Task<List<ComicPageVM>> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
 

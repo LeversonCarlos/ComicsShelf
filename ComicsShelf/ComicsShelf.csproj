@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -33,6 +33,7 @@
     <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.2.91" />  
     <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.2.91" />  
     <PackageReference Include="Xamarin.OneDrive.Connector.Profile" Version="0.2.91" />
+    <PackageReference Include="HttpZipStream" Version="0.2.84" />
   </ItemGroup>
 
   <ItemGroup>
