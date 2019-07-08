@@ -29,11 +29,6 @@ namespace ComicsShelf.Engines.OneDrive
          throw new System.NotImplementedException();
       }
 
-      public Task<ComicFile[]> SearchFiles(LibraryModel library)
-      {
-         throw new System.NotImplementedException();
-      }
-
       public Task<bool> ExtractCover(LibraryModel library, ComicFile comicFile)
       {
          throw new System.NotImplementedException();
