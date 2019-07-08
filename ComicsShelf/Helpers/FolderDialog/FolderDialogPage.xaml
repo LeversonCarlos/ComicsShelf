@@ -13,7 +13,7 @@
          <Frame BackgroundColor="White" Padding="10">
             <StackLayout Orientation="Vertical" Spacing="5">
                <Label Text="{controls:Translate Text=FOLDER_DIALOG_SELECTED_PATH_LABEL}" FontSize="Micro"></Label>
-               <Label Text="{Binding CurrentItem.Path}" FontAttributes="Bold"></Label>
+               <Label Text="{Binding CurrentItem.FullPath}" FontAttributes="Bold"></Label>
             </StackLayout>
          </Frame>
 
