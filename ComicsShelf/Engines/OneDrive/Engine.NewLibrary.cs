@@ -29,7 +29,17 @@ namespace ComicsShelf.Engines.OneDrive
                var folderData = new FileData { id = folder.Key, FilePath = folder.FullPath, FileName = folder.Name };
                var folderChilds = await this.Connector.GetChildFoldersAsync(folderData);
                var folderList = folderChilds
-                  .Select(x => new Helpers.Folder { Key = x.id, FullPath = x.FilePath, Name = x.FileName })
+                  .Select(x => new Helpers.Folder
+                  {
+                     Key = x.id,
+                     FullPath = x.FilePath
+                        .Trim()
+                        .Replace("/ / ", "/")
+                        .Replace("/ /", "/")
+                        .Replace("// ", "/")
+                        .Replace("//", "/"),
+                     Name = x.FileName
+                  })
                   .ToArray();
                return folderList;
             });
@@ -43,12 +53,7 @@ namespace ComicsShelf.Engines.OneDrive
                Type = LibraryType.OneDrive
             };
 
-            library.LibraryPath = library.LibraryPath
-               .Trim()
-               .Replace("/ / ", "/")
-               .Replace("/ /", "/")
-               .Replace("// ", "/")
-               .Replace("//", "/");
+            library.LibraryPath = library.LibraryPath;
             if (!string.IsNullOrEmpty(library.LibraryPath))
             { library.LibraryPath += "/"; }
 
@@ -64,17 +69,19 @@ namespace ComicsShelf.Engines.OneDrive
          {
 
             var service = Xamarin.Forms.DependencyService.Get<LibraryService>();
-            if (service != null) {
+            if (service != null)
+            {
                var hasMoreOneDriveLibraries = service.Libraries
                   .Select(x => x.Value)
                   .Where(x => x.Type == LibraryType.OneDrive)
                   .Where(x => x.LibraryKey != library.LibraryKey)
                   .Any();
-               if (!hasMoreOneDriveLibraries) {
+               if (!hasMoreOneDriveLibraries)
+               {
                   await this.Connector.DisconnectAsync();
                }
             }
-            
+
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
