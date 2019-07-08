@@ -42,7 +42,7 @@ namespace ComicsShelf.Engines.OneDrive
             var comicFiles = fileList
                .Select(file => new ComicFile
                {
-                  LibraryKey = library.LibraryKey,
+                  LibraryKey = library.ID,
                   Key = file.id,
                   FilePath = $"{file.FilePath}/{file.FileName}",
                   FolderPath = file.FilePath,
