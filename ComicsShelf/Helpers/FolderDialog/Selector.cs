@@ -27,9 +27,9 @@ namespace ComicsShelf.Helpers.FolderDialog
                vm.IsBusy = true;
                var folderChilds = await getFolderChilds(item);
                vm.Data.ReplaceRange(folderChilds);
-               if (((Folder)item).Path != initialFolder.Path)
+               if (((Folder)item).FullPath != initialFolder.FullPath)
                {
-                  var parent = new Folder { Name = "..", Path = vm.CurrentItem.Path };
+                  var parent = new Folder { Name = "..", Key = vm.CurrentItem.Key, FullPath = vm.CurrentItem.FullPath };
                   vm.Data.Insert(0, parent);
                }
                vm.CurrentItem = item;

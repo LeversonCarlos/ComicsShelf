@@ -13,6 +13,7 @@ namespace ComicsShelf.Libraries
 
       public string ID { get; set; }
       public string LibraryKey { get; set; }
+      public string LibraryPath { get; set; }
       public string Description { get; set; }
       public LibraryType Type { get; set; }
 

@@ -15,13 +15,13 @@ namespace ComicsShelf.Engines.LocalDrive
          {
             if (!await this.HasStoragePermission()) { return null; }
 
-            var fileList = await this.FileSystem.GetFiles(new Folder { Path = library.LibraryKey });
+            var fileList = await this.FileSystem.GetFiles(new Folder { Key = library.LibraryKey, FullPath = library.LibraryPath });
             var result = fileList.Select(file => new ComicFile
             {
                Key = file.FileKey,
-               LibraryKey = library.ID, 
+               LibraryKey = library.ID,
                FilePath = file.FilePath,
-               FolderPath = file.FolderPath.Replace($"{library.LibraryKey}{this.FileSystem.PathSeparator}", ""),
+               FolderPath = file.FolderPath.Replace($"{library.LibraryPath}{this.FileSystem.PathSeparator}", ""),
                FullText = file.Text,
                SmallText = file.Text.Replace(System.IO.Path.GetFileNameWithoutExtension(file.FolderPath), ""),
                CachePath = $"{Libraries.LibraryConstants.FilesCachePath}{file.FileKey}"

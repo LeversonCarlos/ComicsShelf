@@ -8,8 +8,6 @@ namespace ComicsShelf.Engines.OneDrive
 {
    internal partial class OneDriveEngine : IEngine
    {
-      // public const string LibraryFileID = "LibraryFileID";
-      // public const string LibraryPath = "LibraryPath";
 
       private Helpers.IFileSystem FileSystem
       {

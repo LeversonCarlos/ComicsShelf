@@ -12,7 +12,8 @@ namespace ComicsShelf.Droid
          var result = new Folder
          {
             Name = System.IO.Path.GetFileNameWithoutExtension(absolutePath),
-            Path = absolutePath
+            Key = absolutePath,
+            FullPath = absolutePath
          };
          return result;
       }

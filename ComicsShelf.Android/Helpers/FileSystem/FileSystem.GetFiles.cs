@@ -13,17 +13,8 @@ namespace ComicsShelf.Droid
          try
          {
 
-            /*
-            System.IO.Directory
-               .EnumerateFiles(folder.Path, "*.cbz.zip", System.IO.SearchOption.AllDirectories)
-               .ToList()
-               .ForEach(file => {
-                  System.IO.File.Move(file, file.Replace(".cbz.zip", ".cbz"));
-               });
-            */
-
             var fileListQuery = System.IO.Directory
-               .EnumerateFiles(folder.Path, "*.cbz", System.IO.SearchOption.AllDirectories)
+               .EnumerateFiles(folder.FullPath, "*.cbz", System.IO.SearchOption.AllDirectories)
                .AsQueryable();
             var fileList = await Task.FromResult(fileListQuery.ToList());
 

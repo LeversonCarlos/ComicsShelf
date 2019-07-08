@@ -9,12 +9,13 @@ namespace ComicsShelf.Droid
 
       public async Task<Folder[]> GetFolders(Folder folder)
       {
-         var folderChilds = await Task.FromResult(System.IO.Directory.GetDirectories(folder.Path));
+         var folderChilds = await Task.FromResult(System.IO.Directory.GetDirectories(folder.FullPath));
          var result = folderChilds
             .Select(path => new Folder
             {
                Name = System.IO.Path.GetFileNameWithoutExtension(path),
-               Path = path
+               Key = path,
+               FullPath = path
             })
             .ToArray();
          return result;

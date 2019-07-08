@@ -1,7 +1,6 @@
 ﻿using ComicsShelf.Helpers.FolderDialog;
 using ComicsShelf.Libraries;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.OneDrive.Files;
@@ -22,14 +21,14 @@ namespace ComicsShelf.Engines.OneDrive
             if (profile == null) { return null; }
 
             var root = await this.Connector.GetDetailsAsync();
-            var initialFolder = new Helpers.Folder { Key = root.id, Path = "/", Name = "/" };
+            var initialFolder = new Helpers.Folder { Key = root.id, FullPath = "/", Name = "/" };
 
             var selectedFolder = await Selector.GetFolder(initialFolder, async (folder) =>
             {
-               var folderData = new FileData { id = folder.Key, FilePath = folder.Path, FileName = folder.Name };
+               var folderData = new FileData { id = folder.Key, FilePath = folder.FullPath, FileName = folder.Name };
                var folderChilds = await this.Connector.GetChildFoldersAsync(folderData);
                var folderList = folderChilds
-                  .Select(x => new Helpers.Folder { Key = x.id, Path = x.FilePath, Name = x.FileName })
+                  .Select(x => new Helpers.Folder { Key = x.id, FullPath = x.FilePath, Name = x.FileName })
                   .ToArray();
                return folderList;
             });
@@ -38,6 +37,7 @@ namespace ComicsShelf.Engines.OneDrive
             var library = new LibraryModel
             {
                LibraryKey = selectedFolder.Key,
+               LibraryPath = selectedFolder.FullPath,
                Description = selectedFolder.Name,
                Type = LibraryType.OneDrive
             };

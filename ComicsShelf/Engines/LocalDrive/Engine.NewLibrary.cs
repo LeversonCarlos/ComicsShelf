@@ -23,7 +23,8 @@ namespace ComicsShelf.Engines.LocalDrive
 
             var library = new LibraryModel
             {
-               LibraryKey = selectedFolder.Path,
+               LibraryKey = selectedFolder.Key,
+               LibraryPath = selectedFolder.FullPath,
                Description = selectedFolder.Name,
                Type = LibraryType.LocalDrive
             };
