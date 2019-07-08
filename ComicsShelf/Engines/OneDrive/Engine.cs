@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using ComicsShelf.ComicFiles;
-using ComicsShelf.Libraries;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf.Engines.OneDrive
 {
@@ -17,16 +13,6 @@ namespace ComicsShelf.Engines.OneDrive
       private OneDriveConnector Connector
       {
          get { return DependencyService.Get<OneDriveConnector>(); }
-      }
-
-      public Task<byte[]> LoadSyncData(LibraryModel library)
-      {
-         throw new System.NotImplementedException();
-      }
-
-      public Task<bool> SaveSyncData(LibraryModel library, byte[] serializedValue)
-      {
-         throw new System.NotImplementedException();
       }
 
    }
