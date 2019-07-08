@@ -47,7 +47,7 @@ namespace ComicsShelf.Engines.OneDrive
                   FilePath = $"{file.FilePath}/{file.FileName}",
                   FolderPath = file.FilePath,
                   ReleaseDate = (!file.CreatedDateTime.HasValue ? DateTime.MinValue : file.CreatedDateTime.Value.ToLocalTime()),
-                  // StreamSize = (file.Size.HasValue ? file.Size.Value : 0),
+                  KeyValues = new Dictionary<string, string> { { "StreamSize", $"{(file.Size.HasValue ? file.Size.Value : 0)}" } },
                   // Available = true
                   CachePath = $"{Libraries.LibraryConstants.FilesCachePath}{file.id}"
                })

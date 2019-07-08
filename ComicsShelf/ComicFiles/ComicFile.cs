@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ComicsShelf.ComicFiles
 {
@@ -23,6 +24,23 @@ namespace ComicsShelf.ComicFiles
       public DateTime ReadingDate { get; set; }
       public short ReadingPage { get; set; }
       public double ReadingPercent { get; set; }
+
+      // KeyValues
+      public Dictionary<string, string> KeyValues { get; set; }
+      internal void SetKeyValue(string key, string value)
+      {
+         if (this.KeyValues.ContainsKey(key))
+         {
+            if (this.KeyValues[key] == value) { return; }
+            else { this.KeyValues.Remove(key); }
+         }
+         this.KeyValues.Add(key, value);
+      }
+      internal string GetKeyValue(string key)
+      {
+         if (!this.KeyValues.ContainsKey(key)) { return string.Empty; }
+         return this.KeyValues[key];
+      }
 
    }
 }

@@ -17,6 +17,7 @@ namespace ComicsShelf.Engines.OneDrive
          {
 
             if (!await this.Connector.ConnectAsync()) { return null; }
+
             var profile = await this.Connector.GetProfileAsync();
             if (profile == null) { return null; }
 
@@ -41,26 +42,17 @@ namespace ComicsShelf.Engines.OneDrive
                Description = selectedFolder.Name,
                Type = LibraryType.OneDrive
             };
+
+            library.LibraryPath = library.LibraryPath
+               .Trim()
+               .Replace("/ / ", "/")
+               .Replace("/ /", "/")
+               .Replace("// ", "/")
+               .Replace("//", "/");
+            if (!string.IsNullOrEmpty(library.LibraryPath))
+            { library.LibraryPath += "/"; }
+
             return library;
-
-            /*
-            var folder = await Service.OneDrive.FolderSelector.Selector.FolderSelect(this.Connector, library);
-            if (folder == null) { return false; }
-            folder = await this.Connector.GetDetailsAsync(folder);
-
-            var root = await this.Connector.GetDetailsAsync();
-            folder.FilePath = folder.FilePath.Replace(root.FilePath, "");
-            if (!string.IsNullOrEmpty(folder.FilePath))
-            { folder.FilePath += "/"; }
-            folder.FilePath += folder.FileName;
-            folder.FilePath += "/";
-
-            library.LibraryID = folder.id;
-            library.Description = $"{folder.FileName}";
-            library.Available = true;
-            library.SetKeyValue(LibraryPath, folder.FilePath);
-            return true;
-            */
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); return null; }
@@ -71,21 +63,18 @@ namespace ComicsShelf.Engines.OneDrive
          try
          {
 
-            /*
-            var libraries = new List<LibraryModel>();
-            var libraryIDs = this.GetLibraryIDs();
-            foreach (var libraryID in libraryIDs)
-            {
-               var libraryJSON = Xamarin.Essentials.Preferences.Get(libraryID, "");
-               if (!string.IsNullOrEmpty(libraryJSON))
-               { libraries.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON)); }
+            var service = Xamarin.Forms.DependencyService.Get<LibraryService>();
+            if (service != null) {
+               var hasMoreOneDriveLibraries = service.Libraries
+                  .Select(x => x.Value)
+                  .Where(x => x.Type == LibraryType.OneDrive)
+                  .Where(x => x.LibraryKey != library.LibraryKey)
+                  .Any();
+               if (!hasMoreOneDriveLibraries) {
+                  await this.Connector.DisconnectAsync();
+               }
             }
-
-
-            if (App.Settings.Libraries.Where(x => x.Type == TypeEnum.OneDrive).Count() <= 1)
-            { await this.Connector.DisconnectAsync(); }
-
-            */
+            
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
