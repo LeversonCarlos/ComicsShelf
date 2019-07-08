@@ -21,6 +21,7 @@ namespace ComicsShelf
       protected override async void OnStart()
       {
          await Helpers.DefaultCover.LoadDefaultCover();
+         Helpers.AppCenter.Initialize();
          await DependencyService.Get<Libraries.LibraryStore>().LoadLibraries();
       }
 
