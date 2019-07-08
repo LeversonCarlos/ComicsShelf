@@ -56,8 +56,8 @@ namespace ComicsShelf.ComicFiles
          {
             await this.backgroundImage.FadeTo(0.8, 250, Easing.SinOut);
             await Task.WhenAll(
-               this.backgroundImage.FadeTo(0.1, 15000, Easing.SinOut),
-               this.backgroundImage.RelScaleTo(30, 15000, Easing.SinOut)
+               this.backgroundImage.FadeTo(0.1, 15000, Easing.Linear),
+               this.backgroundImage.RelScaleTo(30, 15000, Easing.Linear)
             );
          });
       }
