@@ -162,24 +162,21 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            var engine = Engines.Engine.Get(library.Type);
-            if (engine == null) { return false; }
 
-            var byteArray = await engine.LoadSyncData(library);
-            if (byteArray == null) { return true; }
-
-            var syncFiles = Helpers.FileStream.Deserialize<List<ComicFiles.ComicFile>>(byteArray);
-            if (syncFiles == null) { return true; }
+            var syncData = await LibrarySync.LoadSyncData(library);
+            if (syncData == null) { return true; }
 
             var comicFiles = this.ComicFiles[library.ID];
             if (comicFiles == null) { return true; }
 
-            if (comicFiles.Count > 0 && syncFiles.Count > 0)
+            if (comicFiles.Count > 0 && syncData.Count > 0)
             {
-               foreach (var syncFile in syncFiles)
+               foreach (var syncFile in syncData)
                {
                   var comicFile = comicFiles.Where(x => x.ComicFile.Key == syncFile.Key).FirstOrDefault();
-                  if (comicFile != null) { comicFile.Set(syncFile); }
+                  if (comicFile==null)
+                  { comicFile = comicFiles.Where(x => x.ComicFile.OldKey == syncFile.Key).FirstOrDefault(); }
+                  if (comicFile != null) { comicFile.Set(syncFile.ToComicFile()); }
                }
             }
 
@@ -440,18 +437,8 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            var engine = Engines.Engine.Get(library.Type);
-            if (engine == null) { return false; }
-
             var comicFiles = this.ComicFiles[library.ID].Select(x => x.ComicFile).ToList();
-            if (comicFiles == null) { return true; }
-
-            var byteArray = Helpers.FileStream.Serialize(comicFiles);
-            if (byteArray == null) { return true; }
-
-            if (!await engine.SaveSyncData(library, byteArray)) { return false; }
-            return true;
-
+            return await LibrarySync.SaveSyncData(library, comicFiles);
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
