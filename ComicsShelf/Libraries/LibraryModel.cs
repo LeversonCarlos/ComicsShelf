@@ -6,7 +6,8 @@ namespace ComicsShelf.Libraries
 
    public class LibraryModel
    {
-      public const string SyncFile = "ComicsShef.library";
+      public const string SyncFile_OLD = "ComicsShef.library";
+      public const string SyncFile = "ComicsShef.library.tmp";
 
       public LibraryModel()
       { this.KeyValues = new Dictionary<string, string>(); }

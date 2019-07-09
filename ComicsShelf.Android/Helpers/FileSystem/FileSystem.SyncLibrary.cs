@@ -11,6 +11,9 @@ namespace ComicsShelf.Droid
          try
          {
             var libraryDataPath = $"{library.LibraryKey}{this.PathSeparator}{Libraries.LibraryModel.SyncFile}";
+            if (!System.IO.File.Exists(libraryDataPath))
+            { libraryDataPath = $"{library.LibraryKey}{this.PathSeparator}{Libraries.LibraryModel.SyncFile_OLD}"; }
+
             if (!System.IO.File.Exists(libraryDataPath)) { return null; }
 
             byte[] serializedData = null;

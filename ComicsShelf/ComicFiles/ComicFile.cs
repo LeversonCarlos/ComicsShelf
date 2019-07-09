@@ -6,6 +6,7 @@ namespace ComicsShelf.ComicFiles
    public class ComicFile
    {
       public string Key { get; set; }
+      public string OldKey { get; set; }
       public string LibraryKey { get; set; }
       public bool Available { get; set; }
 

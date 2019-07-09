@@ -16,6 +16,7 @@ namespace ComicsShelf.Helpers
    public class File
    {
       public string FileKey { get; set; }
+      public string FileOldKey { get; set; }
       public string FilePath { get; set; }
       public string FolderPath { get; set; }
       public string Text { get; set; }

@@ -66,6 +66,8 @@ namespace ComicsShelf.Engines.OneDrive
             // TRY TO SEARCH ON FOLDER
             var folder = new FileData { id = library.LibraryKey };
             var fileList = await this.Connector.SearchFilesAsync(folder, Libraries.LibraryModel.SyncFile, 1);
+            if (fileList == null || fileList.Count == 0)
+            { fileList = await this.Connector.SearchFilesAsync(folder, Libraries.LibraryModel.SyncFile_OLD, 1); }
             if (fileList == null || fileList.Count == 0) { return string.Empty; }
             var file = fileList.Where(x => x.parentID == library.LibraryKey).FirstOrDefault();
             if (file == null) { return string.Empty; }

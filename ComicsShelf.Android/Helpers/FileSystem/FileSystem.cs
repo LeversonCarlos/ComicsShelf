@@ -24,6 +24,21 @@ namespace ComicsShelf.Droid
             .Replace("__", "_");
       }
 
+      public string GetOldKey(string filePath, string libraryPath)
+      {
+         return filePath
+            .Replace($"{libraryPath}{this.PathSeparator}", "")
+            .Replace(this.PathSeparator, "_")
+            .Replace("#", "")
+            .Replace(".", "_")
+            .Replace("[", "")
+            .Replace("]", "")
+            .Replace("(", "")
+            .Replace(")", "")
+            .Replace(" ", "_")
+            .Replace("___", "_")
+            .Replace("__", "_");
+      }
 
       public void Dispose()
       {

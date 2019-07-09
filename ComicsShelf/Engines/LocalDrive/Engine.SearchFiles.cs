@@ -19,6 +19,7 @@ namespace ComicsShelf.Engines.LocalDrive
             var result = fileList.Select(file => new ComicFile
             {
                Key = file.FileKey,
+               OldKey = file.FileOldKey,
                LibraryKey = library.ID,
                FilePath = file.FilePath,
                FolderPath = file.FolderPath.Replace($"{library.LibraryPath}{this.FileSystem.PathSeparator}", ""),
