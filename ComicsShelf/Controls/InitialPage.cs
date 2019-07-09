@@ -11,19 +11,7 @@ namespace ComicsShelf.Controls
 
          this.BarTextColor = Color.White;
          this.BarBackgroundColor = Color.Default;
-         // this.SizeChanged += this.OnSizeChanged;
       }
-      /*
-      internal Size ScreenSize { get; set; }
-      private void OnSizeChanged(object sender, System.EventArgs e) {
-         if (this.ScreenSize != Size.Zero &&
-             this.ScreenSize.Width == this.Width &&
-             this.ScreenSize.Height == this.Height)
-         { return; };
-         this.ScreenSize = new Size(this.Width, this.Height);
-         Messaging.Send(Messaging.Keys.ScreenSizeChanged, this.ScreenSize);
-      }
-      */
    }
 
    public class InitialPage : ContentPage
