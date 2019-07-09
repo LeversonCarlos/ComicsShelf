@@ -69,6 +69,7 @@ namespace ComicsShelf.Libraries
       public void OnRefreshingList(List<ComicFileVM> comicFiles)
       {
          this.ComicFolders.ReplaceRange(this.GetFolderList(comicFiles));
+         this.HasComicFiles = this.ComicFolders.SelectMany(x => x.ComicFiles).Count() > 0;
       }
 
       public void OnRefreshingItem(ComicFileVM comicFile)
@@ -85,6 +86,13 @@ namespace ComicsShelf.Libraries
       {
          var comicFile = item as ComicFileVM;
          await Shell.Current.GoToAsync($"splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
+      }
+
+      bool _HasComicFiles;
+      public bool HasComicFiles
+      {
+         get { return this._HasComicFiles; }
+         set { this.SetProperty(ref this._HasComicFiles, value); }
       }
 
    }

@@ -41,6 +41,8 @@
                </BindableLayout.ItemTemplate>
             </StackLayout>
 
+            <controls:EmptyView IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" />
+
             <controls:NotifyView
                IsVisible="{Binding Notify.IsRunning}" Text="{Binding Notify.Text}" 
                Progress="{Binding Notify.Progress}" Details="{Binding Notify.Details}" >
