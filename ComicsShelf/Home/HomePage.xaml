@@ -54,10 +54,8 @@
             </FlexLayout>
 
             <controls:NotifyView
-            IsVisible="{Binding Notify.IsRunning}" 
-            Text="{Binding Notify.Text}" 
-            Progress="{Binding Notify.Progress}" 
-            Details="{Binding Notify.Details}" >
+               IsVisible="{Binding Notify.IsRunning}" Text="{Binding Notify.Text}" 
+               Progress="{Binding Notify.Progress}" Details="{Binding Notify.Details}" >
             </controls:NotifyView>
 
          </StackLayout>
