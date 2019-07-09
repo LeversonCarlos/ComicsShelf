@@ -14,7 +14,7 @@ namespace ComicsShelf.Libraries
       public readonly Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles;
       public LibraryService()
       {
-         this.Notify = new Notify.NotifyVM("LibraryService");
+         this.Notify = new Notify.NotifyVM("General");
          this.Libraries = new Dictionary<string, LibraryModel>();
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
       }
@@ -35,7 +35,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            service.Notify.Send($"{library.Description}: {R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE}");
+            service.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE}");
             service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>());
             if (!System.IO.Directory.Exists(LibraryConstants.CoversCachePath))
             { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
@@ -48,7 +48,7 @@ namespace ComicsShelf.Libraries
             if (!await service.LoadSyncData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
-            service.Notify.Send(false);
+            service.Notify.Send(library, false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -76,10 +76,11 @@ namespace ComicsShelf.Libraries
             if (!await service.Statistics(library)) { return; }
             if (!await service.SaveSyncData(library)) { return; }
             if (!await service.SaveData(library)) { return; }
-            service.Notify.Send(false);
+            service.Notify.Send(library, false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
+
 
       public async Task UpdateLibrary(LibraryModel library)
       {
@@ -88,7 +89,7 @@ namespace ComicsShelf.Libraries
             if (!await this.Statistics(library)) { return; }
             if (!await this.SaveSyncData(library)) { return; }
             if (!await this.SaveData(library)) { return; }
-            this.Notify.Send(false);
+            this.Notify.Send(library, false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
@@ -112,7 +113,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            this.Notify.Send($"{library.Description}: {R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE}");
+            this.Notify.Send(library, $"{library.Description}: {R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE}");
 
             var files = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(LibraryConstants.DatabaseFile);
             if (files == null) { return true; }
@@ -319,7 +320,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            this.Notify.Send($"{library.Description}: {R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE}");
+            this.Notify.Send(library, $"{library.Description}: {R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE}");
 
             var engine = Engines.Engine.Get(library.Type);
             if (engine == null) { return false; }
@@ -348,7 +349,7 @@ namespace ComicsShelf.Libraries
          {
 
             // FEATURED FILES
-            this.Notify.Send($"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE}");
+            this.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE}");
             var featuredFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .GroupBy(file => file.ComicFile.FolderPath)
@@ -362,7 +363,7 @@ namespace ComicsShelf.Libraries
             if (!await this.ExtractData(library, featuredFiles)) { return false; }
 
             // REMAINING FILES
-            this.Notify.Send($"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE}");
+            this.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE}");
             var remainingFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .Where(file => string.IsNullOrEmpty(file.CoverPath) || file.CoverPath == LibraryConstants.DefaultCover)
@@ -395,7 +396,7 @@ namespace ComicsShelf.Libraries
 
                   // PROGRESS
                   var progress = ((double)fileIndex / (double)filesQuantity);
-                  this.Notify.Send(comicFile.ComicFile.FullText, progress);
+                  this.Notify.Send(library, comicFile.ComicFile.FullText, progress);
 
                   // CACHE PATH
                   if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
@@ -468,7 +469,6 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
-
 
    }
 }

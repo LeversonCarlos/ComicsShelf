@@ -13,34 +13,42 @@
    </ContentPage.ToolbarItems>
 
    <ContentPage.Content>
-      <CollectionView ItemsSource="{Binding ComicFolders}" ItemsLayout="{x:Static ListItemsLayout.VerticalList}">
-         <CollectionView.ItemTemplate>
-            <DataTemplate>
 
-               <StackLayout Padding="5,10,0,5" Spacing="5" >
-                  <Label Text="{Binding FolderPath}"
-                         FontAttributes="Bold" FontSize="15" />
-                  <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" ItemSizingStrategy="MeasureFirstItem" HeightRequest="222" >
-                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+      <ScrollView Orientation="Vertical">
+         <StackLayout>
 
-                           <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
-                              <controls:CoverView
-                                 ImageSource="{Binding CoverPath}"
-                                 Progress="{Binding ReadingPercent}"
-                                 CacheStatus="{Binding CacheStatus}"
-                                 OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
-                              </controls:CoverView>
-                           </StackLayout>
+            <StackLayout BindableLayout.ItemsSource="{Binding ComicFolders}"  Margin="0" Padding="0" Spacing="0">
+               <BindableLayout.ItemTemplate>
+                  <DataTemplate>
 
-                        </DataTemplate>
-                     </CollectionView.ItemTemplate>
-                  </CollectionView>
-               </StackLayout>
+                     <StackLayout Padding="5,10,0,5" Spacing="5" >
+                        <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
+                        <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" ItemSizingStrategy="MeasureFirstItem" HeightRequest="222" >
+                           <CollectionView.ItemTemplate>
+                              <DataTemplate>
+                                 <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
+                                    <controls:CoverView 
+                                       ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}" 
+                                       OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
+                                    </controls:CoverView>
+                                 </StackLayout>
+                              </DataTemplate>
+                           </CollectionView.ItemTemplate>
+                        </CollectionView>
+                     </StackLayout>
 
-            </DataTemplate>
-         </CollectionView.ItemTemplate>
-      </CollectionView>
+                  </DataTemplate>
+               </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+            <controls:NotifyView
+               IsVisible="{Binding Notify.IsRunning}" Text="{Binding Notify.Text}" 
+               Progress="{Binding Notify.Progress}" Details="{Binding Notify.Details}" >
+            </controls:NotifyView>
+
+         </StackLayout>
+      </ScrollView>
+
    </ContentPage.Content>
 
 </ContentPage>

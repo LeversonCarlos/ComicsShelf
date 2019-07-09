@@ -10,12 +10,14 @@ namespace ComicsShelf.Libraries
    public class LibraryVM : Helpers.BaseVM
    {
 
+      public Notify.NotifyVM Notify { get; private set; }
       internal readonly LibraryModel Library;
       public ObservableList<ComicFolderVM> ComicFolders { get; private set; }
       public LibraryVM(LibraryModel value)
       {
          this.Library = value;
          this.Title = value.Description;
+         this.Notify = new Notify.NotifyVM(value.LibraryKey);
          this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.OpenCommand = new Command(async (item) => await this.Open(item));
       }

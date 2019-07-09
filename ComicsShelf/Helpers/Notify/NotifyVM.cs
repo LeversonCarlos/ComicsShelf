@@ -2,13 +2,12 @@
 {
    public class NotifyVM : Helpers.Observables.ObservableObject
    {
+      private const string NotifyKey = "LibraryChangeNotify";
 
       #region New
-      private readonly string NotifyKey;
-      public NotifyVM(string key)
+      public NotifyVM(string subscribeKey)
       {
-         this.NotifyKey = key;
-         Subscribe(this.NotifyKey, val =>
+         Subscribe($"{NotifyKey}.{subscribeKey}", val =>
          {
             this.Text = val.Text;
             this.Details = val.Details;
@@ -56,32 +55,40 @@
 
       #region Send
 
-      public void Send(string text)
+      private string[] GetNotifyKeys(Libraries.LibraryModel library)
+      {
+         return new string[] {
+            $"{NotifyKey}.General",
+            $"{NotifyKey}.{library.LibraryKey}"
+         };
+      }
+
+      public void Send(Libraries.LibraryModel library, string text)
       {
          this.Text = text;
          this.Details = string.Empty;
          this.Progress = 0;
          this.IsRunning = true;
-         Send(this.NotifyKey, this);
+         foreach (var notifyKey in this.GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
-      public void Send(string details, double progress)
+      public void Send(Libraries.LibraryModel library, string details, double progress)
       {
          this.Details = details;
          this.Progress = progress;
-         Send(this.NotifyKey, this);
+         foreach (var notifyKey in this.GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
-      public void Send(bool isRunning)
+      public void Send(Libraries.LibraryModel library, bool isRunning)
       {
          this.IsRunning = isRunning;
-         Send(this.NotifyKey, this);
+         foreach (var notifyKey in this.GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
-      public static void Send(string key, NotifyVM value)
+      private static void Send(string key, NotifyVM value)
       { Messaging.Send(key, value); }
 
-      public static void Subscribe(string key, System.Action<NotifyVM> callback)
+      private static void Subscribe(string key, System.Action<NotifyVM> callback)
       { Messaging.Subscribe<NotifyVM>(key, callback); }
 
       #endregion
