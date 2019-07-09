@@ -105,7 +105,7 @@ namespace ComicsShelf.ComicFiles
                { "ElapsedSeconds", ((int)(endTime-startTime).TotalSeconds).ToString() },
                { "WasCached", wasCached.ToString() }
             };
-            Helpers.AppCenter.TrackEvent($"Comic.{library.Type.ToString()}.Open");
+            Helpers.AppCenter.TrackEvent($"Comic.{library.Type.ToString()}.Open", trackProps);
 
 
             Messaging.Send("OnComicFileOpened", this.CurrentFile);

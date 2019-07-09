@@ -343,7 +343,7 @@ namespace ComicsShelf.Libraries
                { "LocatedFiles", searchFiles.Count().ToString() },
                { "NewFiles", newFiles.Count().ToString() }
             };
-            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search");
+            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search", trackProps);
 
             return true;
          }
