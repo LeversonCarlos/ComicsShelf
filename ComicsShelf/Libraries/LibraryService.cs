@@ -174,7 +174,7 @@ namespace ComicsShelf.Libraries
                foreach (var syncFile in syncData)
                {
                   var comicFile = comicFiles.Where(x => x.ComicFile.Key == syncFile.Key).FirstOrDefault();
-                  if (comicFile==null)
+                  if (comicFile == null)
                   { comicFile = comicFiles.Where(x => x.ComicFile.OldKey == syncFile.Key).FirstOrDefault(); }
                   if (comicFile != null) { comicFile.Set(syncFile.ToComicFile()); }
                }
@@ -317,6 +317,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+            var startTime = DateTime.Now;
             this.Notify.Send(library, $"{library.Description}: {R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE}");
 
             var engine = Engines.Engine.Get(library.Type);
@@ -330,10 +331,19 @@ namespace ComicsShelf.Libraries
                .Where(x => !searchFiles.Select(i => i.Key).ToList().Contains(x.ComicFile.Key))
                .ToList()
                .ForEach(file => file.ComicFile.Available = false);
-            libraryFiles.AddRange(searchFiles
+            var newFiles = searchFiles
                .Where(x => !libraryFiles.Select(i => i.ComicFile.Key).ToList().Contains(x.Key))
                .Select(x => new ComicFiles.ComicFileVM(x))
-               .ToList());
+               .ToList();
+            libraryFiles.AddRange(newFiles);
+
+            var endTime = DateTime.Now;
+            var trackProps = new Dictionary<string, string> {
+               { "ElapsedMinutes", ((int)(endTime-startTime).TotalMinutes).ToString() },
+               { "LocatedFiles", searchFiles.Count().ToString() },
+               { "NewFiles", newFiles.Count().ToString() }
+            };
+            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search");
 
             return true;
          }

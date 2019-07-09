@@ -78,6 +78,7 @@ namespace ComicsShelf.ComicFiles
          {
             this.IsBusy = true;
             Messaging.Send("OnComicFileOpening", this.CurrentFile);
+            var startTime = DateTime.Now;
 
             var libraryService = DependencyService.Get<Libraries.LibraryService>();
             var library = libraryService.Libraries[this.CurrentFile.ComicFile.LibraryKey];
@@ -85,6 +86,7 @@ namespace ComicsShelf.ComicFiles
             var engine = Engines.Engine.Get(library.Type);
             if (engine == null) { return; }
 
+            var wasCached = System.IO.Directory.Exists(this.CurrentFile.ComicFile.CachePath);
             var pages = await engine.ExtractPages(library, this.CurrentFile.ComicFile);
             if (System.IO.Directory.Exists(this.CurrentFile.ComicFile.CachePath))
             {
@@ -97,6 +99,14 @@ namespace ComicsShelf.ComicFiles
                   await Shell.Current.GoToAsync($"reading?libraryID={this.CurrentFile.ComicFile.LibraryKey}&comicKey={this.CurrentFile.ComicFile.Key}");
                }
             }
+
+            var endTime = DateTime.Now;
+            var trackProps = new Dictionary<string, string> {
+               { "ElapsedSeconds", ((int)(endTime-startTime).TotalSeconds).ToString() },
+               { "WasCached", wasCached.ToString() }
+            };
+            Helpers.AppCenter.TrackEvent($"Comic.{library.Type.ToString()}.Open");
+
 
             Messaging.Send("OnComicFileOpened", this.CurrentFile);
             this.IsBusy = false;
