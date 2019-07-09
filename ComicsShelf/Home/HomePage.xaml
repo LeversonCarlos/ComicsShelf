@@ -43,15 +43,7 @@
                </BindableLayout.ItemTemplate>
             </StackLayout>
 
-            <FlexLayout VerticalOptions="FillAndExpand" JustifyContent="Center" AlignItems="Center" Direction="Column" 
-                     IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" >
-               <Label FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource colorPrimary}"
-                   Text="{controls:Translate Text=LIBRARY_EMPTY_MESSAGE_TITLE}">
-               </Label>
-               <Label TextColor="{StaticResource colorPrimary}"
-                   Text="{controls:Translate Text=HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS}">
-               </Label>
-            </FlexLayout>
+            <controls:EmptyView IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" />
 
             <controls:NotifyView
                IsVisible="{Binding Notify.IsRunning}" Text="{Binding Notify.Text}" 
