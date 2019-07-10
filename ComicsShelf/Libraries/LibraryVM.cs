@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ComicFiles;
 using ComicsShelf.Helpers.Observables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,19 +23,22 @@ namespace ComicsShelf.Libraries
          this.OpenCommand = new Command(async (item) => await this.Open(item));
       }
 
-      public void OnAppearing()
+      public async void OnAppearing()
       {
          try
          {
             this.IsBusy = true;
             var service = DependencyService.Get<LibraryService>();
             this.ComicFolders.Clear();
-            this.ComicFolders.AddRange(this.GetFolderList(service.ComicFiles[this.Library.ID]));
+            var fileList = service.ComicFiles[this.Library.ID];
+            var folderList = this.GetFolderList(fileList);
+            this.ComicFolders.ReplaceRange(folderList);
+            this.HasComicFiles = this.ComicFolders.SelectMany(x => x.ComicFiles).Count() > 0;
             Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
             Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
             this.IsBusy = false;
          }
-         catch { }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
       public void OnDisappearing()
@@ -59,9 +63,10 @@ namespace ComicsShelf.Libraries
             .ToList();
          foreach (var comicFolder in comicFolders)
          {
-            comicFolder.ComicFiles.AddRange(comicFiles
+            var comicFolderFiles = comicFiles
                .Where(comicFile => comicFile.ComicFile.FolderPath == comicFolder.FolderPath)
-               .ToList());
+               .ToList();
+            comicFolder.ComicFiles.AddRange(comicFolderFiles);
          }
          return comicFolders;
       }
