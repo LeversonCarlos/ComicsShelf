@@ -359,6 +359,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+            var startTime = DateTime.Now;
 
             // FEATURED FILES
             this.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE}");
@@ -385,6 +386,12 @@ namespace ComicsShelf.Libraries
             if (remainingFiles == null) { return true; }
             if (!await this.ExtractData(library, remainingFiles)) { return false; }
 
+            var endTime = DateTime.Now;
+            var trackProps = new Dictionary<string, string> {
+               { "ElapsedMinutes", ((int)(endTime-startTime).TotalMinutes).ToString() },
+               { "FilesCount", (featuredFiles.Count()+remainingFiles.Count()).ToString() }
+            };
+            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.ExtractData", trackProps);
 
             return true;
          }
