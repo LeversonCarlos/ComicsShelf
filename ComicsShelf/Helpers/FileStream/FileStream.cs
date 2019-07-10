@@ -1,12 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Helpers
 {
    internal class FileStream
    {
+      static SemaphoreSlim fileStreamSemaphore = new SemaphoreSlim(1, 1);
 
       public static T Deserialize<T>(byte[] value) where T : class
       {
@@ -33,6 +35,7 @@ namespace ComicsShelf.Helpers
       {
          try
          {
+            await fileStreamSemaphore.WaitAsync();
             if (!System.IO.File.Exists(path)) { return null; }
 
             string serializedContent = string.Empty;
@@ -56,6 +59,7 @@ namespace ComicsShelf.Helpers
 
          }
          catch (Exception) { throw; }
+         finally { fileStreamSemaphore.Release(); }
       }
 
       public static byte[] Serialize<T>(T value)
@@ -79,6 +83,7 @@ namespace ComicsShelf.Helpers
       {
          try
          {
+            await fileStreamSemaphore.WaitAsync();
             var encodedContent = Serialize(value);
             if (encodedContent == null || encodedContent.Length == 0) { return false; }
 
@@ -91,6 +96,7 @@ namespace ComicsShelf.Helpers
             return System.IO.File.Exists(path);
          }
          catch (Exception) { throw; }
+         finally { fileStreamSemaphore.Release(); }
       }
 
    }
