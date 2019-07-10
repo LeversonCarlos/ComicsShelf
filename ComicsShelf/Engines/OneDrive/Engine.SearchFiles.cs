@@ -58,7 +58,7 @@ namespace ComicsShelf.Engines.OneDrive
             {
                comicFile.FullText = System.IO.Path.GetFileNameWithoutExtension(comicFile.FilePath).Trim();
                if (!string.IsNullOrEmpty(rootFolder.FilePath) && !string.IsNullOrEmpty(comicFile.FolderPath))
-               { comicFile.FolderPath = comicFile.FolderPath.Replace(rootFolder.FilePath, ""); }
+               { comicFile.FolderPath = comicFile.FolderPath.Replace(rootFolder.FilePath.Replace(" / ", "/"), ""); }
                var folderText = System.IO.Path.GetFileNameWithoutExtension(comicFile.FolderPath);
                if (!string.IsNullOrEmpty(folderText))
                { comicFile.SmallText = comicFile.FullText.Replace(folderText, ""); }
