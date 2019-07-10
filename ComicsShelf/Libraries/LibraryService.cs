@@ -56,6 +56,7 @@ namespace ComicsShelf.Libraries
             service.Notify.Send(library, false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+         finally { GC.Collect(); }
       }
 
 
@@ -84,6 +85,7 @@ namespace ComicsShelf.Libraries
             service.Notify.Send(library, false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+         finally { GC.Collect(); }
       }
 
 
@@ -353,6 +355,7 @@ namespace ComicsShelf.Libraries
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         finally { GC.Collect(); }
       }
 
       private async Task<bool> ExtractData(LibraryModel library)
@@ -447,6 +450,7 @@ namespace ComicsShelf.Libraries
 
                }
                catch (Exception ex) { throw new Exception($"Extracting Comic Data{Environment.NewLine}{comicFile.ComicFile.FilePath}", ex); }
+               finally { GC.Collect(); }
             }
 
             return true;
