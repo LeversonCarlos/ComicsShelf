@@ -66,6 +66,7 @@ namespace ComicsShelf.Libraries
             var comicFolderFiles = comicFiles
                .Where(comicFile => comicFile.ComicFile.FolderPath == comicFolder.FolderPath)
                .ToList();
+            // comicFolderFiles = comicFolderFiles.Take(1).ToList();
             comicFolder.ComicFiles.AddRange(comicFolderFiles);
          }
          return comicFolders;

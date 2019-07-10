@@ -13,43 +13,41 @@
    </ContentPage.ToolbarItems>
 
    <ContentPage.Content>
+      <StackLayout>
 
-      <ScrollView Orientation="Vertical">
-         <StackLayout>
+         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}">
+            <CollectionView.ItemTemplate>
+               <DataTemplate>
 
-            <StackLayout BindableLayout.ItemsSource="{Binding ComicFolders}"  Margin="0" Padding="0" Spacing="0">
-               <BindableLayout.ItemTemplate>
-                  <DataTemplate>
-
-                     <StackLayout Padding="5,10,0,5" Spacing="5" >
-                        <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
-                        <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" ItemSizingStrategy="MeasureFirstItem" HeightRequest="222" >
-                           <CollectionView.ItemTemplate>
+                  <StackLayout Padding="5,10,0,5" Spacing="5" >
+                     <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
+                     <ScrollView Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding ComicFiles}" >
+                           <BindableLayout.ItemTemplate>
                               <DataTemplate>
-                                 <StackLayout Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" >
-                                    <controls:CoverView 
+                                 <controls:CoverView 
+                                       Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" 
                                        ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}" 
                                        OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
-                                    </controls:CoverView>
-                                 </StackLayout>
+                                 </controls:CoverView>
                               </DataTemplate>
-                           </CollectionView.ItemTemplate>
-                        </CollectionView>
-                     </StackLayout>
+                           </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                     </ScrollView>
+                  </StackLayout>
 
-                  </DataTemplate>
-               </BindableLayout.ItemTemplate>
-            </StackLayout>
+               </DataTemplate>
+            </CollectionView.ItemTemplate>
+         </CollectionView>
 
-            <controls:EmptyView IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" />
+         <controls:EmptyView IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" />
 
-            <controls:NotifyView
+         <controls:NotifyView
                IsVisible="{Binding Notify.IsRunning}" Text="{Binding Notify.Text}" 
                Progress="{Binding Notify.Progress}" Details="{Binding Notify.Details}" >
-            </controls:NotifyView>
+         </controls:NotifyView>
 
-         </StackLayout>
-      </ScrollView>
+      </StackLayout>
 
    </ContentPage.Content>
 
