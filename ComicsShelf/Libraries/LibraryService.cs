@@ -36,12 +36,17 @@ namespace ComicsShelf.Libraries
          try
          {
             service.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE}");
-            service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>());
+
+            if (!service.ComicFiles.ContainsKey(library.ID))
+            { service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>()); }
+
             if (!System.IO.Directory.Exists(LibraryConstants.CoversCachePath))
             { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
             if (!System.IO.Directory.Exists(LibraryConstants.FilesCachePath))
             { System.IO.Directory.CreateDirectory(LibraryConstants.FilesCachePath); }
-            service.Libraries.Add(library.ID, library);
+
+            if (!service.Libraries.ContainsKey(library.ID))
+            { service.Libraries.Add(library.ID, library); }
 
             if (!await service.LoadData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
@@ -166,6 +171,7 @@ namespace ComicsShelf.Libraries
             var syncData = await LibrarySync.LoadSyncData(library);
             if (syncData == null) { return true; }
 
+            if (!this.ComicFiles.ContainsKey(library.ID)) { return true; }
             var comicFiles = this.ComicFiles[library.ID];
             if (comicFiles == null) { return true; }
 
@@ -339,8 +345,7 @@ namespace ComicsShelf.Libraries
 
             var endTime = DateTime.Now;
             var trackProps = new Dictionary<string, string> {
-               { "ElapsedMinutes", ((int)(endTime-startTime).TotalMinutes).ToString() },
-               { "LocatedFiles", searchFiles.Count().ToString() },
+               { "ElapsedSeconds", ((int)(endTime-startTime).TotalSeconds).ToString() },
                { "NewFiles", newFiles.Count().ToString() }
             };
             Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search", trackProps);
