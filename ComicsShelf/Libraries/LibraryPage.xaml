@@ -15,24 +15,22 @@
    <ContentPage.Content>
       <StackLayout>
 
-         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}">
+         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}" ItemSizingStrategy="MeasureFirstItem">
             <CollectionView.ItemTemplate>
                <DataTemplate>
 
                   <StackLayout Padding="5,10,0,5" Spacing="5" >
                      <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
-                     <ScrollView Orientation="Horizontal">
-                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding ComicFiles}" >
-                           <BindableLayout.ItemTemplate>
-                              <DataTemplate>
-                                 <controls:CoverView
-                                    ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
-                                    OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
-                                 </controls:CoverView>
-                              </DataTemplate>
-                           </BindableLayout.ItemTemplate>
-                        </StackLayout>
-                     </ScrollView>
+                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" ItemSizingStrategy="MeasureFirstItem" HeightRequest="222" >
+                        <CollectionView.ItemTemplate>
+                           <DataTemplate>
+                              <controls:CoverView
+                                 ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
+                                 OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
+                              </controls:CoverView>
+                           </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                     </CollectionView>
                   </StackLayout>
 
                </DataTemplate>
