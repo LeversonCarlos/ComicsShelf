@@ -17,7 +17,7 @@ namespace ComicsShelf.ComicFiles
          var comicFiles = libraryService
             .ComicFiles[this.CurrentFile.ComicFile.LibraryKey]
             .Where(x => x.ComicFile.Available && x.ComicFile.FolderPath == CurrentFile.ComicFile.FolderPath)
-            .OrderBy(x => x.ComicFile.FilePath)
+            .OrderByDescending(x => x.ComicFile.FilePath)
             .ToList();
          this._IsAllReaded = comicFiles.Count(x => !x.Readed) == 0;
          this.ComicFiles = comicFiles;
