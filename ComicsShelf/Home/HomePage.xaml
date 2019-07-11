@@ -24,6 +24,7 @@
                            <BindableLayout.ItemTemplate>
                               <DataTemplate>
                                  <controls:CoverView
+                                    CoverHeightRequest="{Binding BindingContext.CoverHeightRequest, Source={x:Reference homePage} }"
                                     ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}" 
                                     OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
                                  </controls:CoverView>

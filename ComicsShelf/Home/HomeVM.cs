@@ -17,6 +17,13 @@ namespace ComicsShelf.Home
       {
          this.Title = "Home";
          this.Notify = new Notify.NotifyVM("General");
+
+         var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
+         var displayWidth = displayInfo.Width / displayInfo.Density;
+         var itemsPerLine = (Device.Idiom == TargetIdiom.Phone ? 3 : 5);
+         var coverWidthRequest = ((int)(displayWidth - 10) / itemsPerLine) - 5;
+         this.CoverHeightRequest = ((int)coverWidthRequest * 1.53);
+
          this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_READING_FILES_SECTION_TITLE });
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_RECENT_FILES_SECTION_TITLE });
@@ -52,6 +59,13 @@ namespace ComicsShelf.Home
       {
          get { return this._HasComicFiles; }
          set { this.SetProperty(ref this._HasComicFiles, value); }
+      }
+
+      double _CoverHeightRequest;
+      public double CoverHeightRequest
+      {
+         get { return this._CoverHeightRequest; }
+         set { this.SetProperty(ref this._CoverHeightRequest, value); }
       }
 
    }

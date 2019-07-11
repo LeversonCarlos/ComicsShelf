@@ -15,7 +15,7 @@
 
          <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}">
 
-            <Grid VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="10*"></ColumnDefinition>
                   <ColumnDefinition Width="80*"></ColumnDefinition>
@@ -77,7 +77,7 @@
                <Label VerticalOptions="Center" FontSize="Medium" Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
             </StackLayout>
 
-            <StackLayout Padding="5" >
+            <StackLayout VerticalOptions="End" Padding="5" >
                <CollectionView x:Name="filesCollectionView" 
                                HeightRequest="222" ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single" 
                                ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 

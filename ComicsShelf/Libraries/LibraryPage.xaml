@@ -15,16 +15,20 @@
    <ContentPage.Content>
       <StackLayout>
 
-         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}" ItemSizingStrategy="MeasureFirstItem">
+         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}" 
+                         ItemSizingStrategy="MeasureFirstItem" BackgroundColor="Gainsboro">
             <CollectionView.ItemTemplate>
                <DataTemplate>
 
                   <StackLayout Padding="5,10,0,5" Spacing="5" >
                      <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
-                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" ItemSizingStrategy="MeasureFirstItem" HeightRequest="222" >
+                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
+                                     HeightRequest="{Binding BindingContext.CoverHeightRequest, Source={x:Reference libraryPage} }"
+                                     ItemSizingStrategy="MeasureFirstItem" >
                         <CollectionView.ItemTemplate>
                            <DataTemplate>
                               <controls:CoverView
+                                 CoverHeightRequest="{Binding BindingContext.CoverHeightRequest, Source={x:Reference libraryPage} }"
                                  ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
                                  OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
                               </controls:CoverView>
@@ -39,7 +43,7 @@
 
          <controls:EmptyView IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" />
 
-         <controls:NotifyView
+         <controls:NotifyView BackgroundColor="White"
                IsVisible="{Binding Notify.IsRunning}" Text="{Binding Notify.Text}" 
                Progress="{Binding Notify.Progress}" Details="{Binding Notify.Details}" >
          </controls:NotifyView>

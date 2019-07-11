@@ -28,14 +28,24 @@ namespace ComicsShelf.Libraries
          try
          {
             this.IsBusy = true;
+
+            var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
+            var displayWidth = displayInfo.Width / displayInfo.Density;
+            var itemsPerLine = (Device.Idiom == TargetIdiom.Phone ? 3 : 5);
+            var coverWidthRequest = ((int)(displayWidth - 10) / itemsPerLine) - 5;
+            this.CoverHeightRequest = ((int)coverWidthRequest * 1.53);
+
             var service = DependencyService.Get<LibraryService>();
-            this.ComicFolders.Clear();
             var fileList = service.ComicFiles[this.Library.ID];
             var folderList = this.GetFolderList(fileList);
+
+            this.ComicFolders.Clear();
             this.ComicFolders.ReplaceRange(folderList);
             this.HasComicFiles = this.ComicFolders.SelectMany(x => x.ComicFiles).Count() > 0;
+
             Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
             Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
+
             this.IsBusy = false;
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
@@ -100,6 +110,13 @@ namespace ComicsShelf.Libraries
       {
          get { return this._HasComicFiles; }
          set { this.SetProperty(ref this._HasComicFiles, value); }
+      }
+
+      double _CoverHeightRequest;
+      public double CoverHeightRequest
+      {
+         get { return this._CoverHeightRequest; }
+         set { this.SetProperty(ref this._CoverHeightRequest, value); }
       }
 
    }

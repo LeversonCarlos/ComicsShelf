@@ -94,6 +94,22 @@ namespace ComicsShelf.Controls
       }
 
 
+      public static readonly BindableProperty CoverHeightRequestProperty =
+         BindableProperty.Create("CoverHeightRequest", typeof(double), typeof(CoverView), (double)0,
+            propertyChanged: OnCoverHeightRequestChanged);
+      public double CoverHeightRequest
+      {
+         get { return (double)GetValue(CoverHeightRequestProperty); }
+         set { SetValue(CoverHeightRequestProperty, value); }
+      }
+      private static void OnCoverHeightRequestChanged(BindableObject bindable, object oldValue, object newValue)
+      {
+         var self = (bindable as CoverView);
+         self.HeightRequest = (double)newValue; 
+         self.WidthRequest = ((int)self.HeightRequest / 1.53);
+      }
+
+
       public static readonly BindableProperty OpenCommandProperty =
          BindableProperty.Create("OpenCommand", typeof(ICommand), typeof(CoverView), null);
       public ICommand OpenCommand
