@@ -52,18 +52,20 @@ namespace ComicsShelf.Libraries
          {
 
             var libraryVM = new LibraryVM(library);
+            var libraryRoute = $"lib{library.ID}";
 
             var shellContent = new ShellContent
             {
+               Route = $"content", 
                Title = library.Description,
                BindingContext = libraryVM,
                ContentTemplate = new DataTemplate(typeof(LibraryPage))
             };
 
-            var shellSection = new ShellSection { Title = library.Description };
+            var shellSection = new ShellSection { Route = $"section", Title = library.Description };
             shellSection.Items.Add(shellContent);
 
-            var shellItem = new ShellItem { Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
+            var shellItem = new ShellItem { Route = libraryRoute, Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
             shellItem.Items.Add(shellSection);
 
             Shell.Current.Items.Insert(1, shellItem);

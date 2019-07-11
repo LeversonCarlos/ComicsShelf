@@ -32,9 +32,9 @@
    </Shell.FlyoutHeader>
 
    <!-- Your Pages -->
-   <ShellItem FlyoutIcon="icon_home.png" Title="Home">
-      <ShellSection Title="Home" Icon="tab_feed.png">
-         <ShellContent Title="Home" ContentTemplate="{DataTemplate home:HomePage}" />
+   <ShellItem Route="home" FlyoutIcon="icon_home.png" Title="Home">
+      <ShellSection Route="section" Title="Home" Icon="tab_feed.png">
+         <ShellContent Route="content" Title="Home" ContentTemplate="{DataTemplate home:HomePage}" />
       </ShellSection>
    </ShellItem>
    
