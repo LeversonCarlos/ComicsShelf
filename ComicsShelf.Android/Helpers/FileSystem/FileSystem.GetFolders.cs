@@ -17,6 +17,7 @@ namespace ComicsShelf.Droid
                Key = path,
                FullPath = path
             })
+            .Where(x => !string.IsNullOrEmpty(x.Name))
             .ToArray();
          return result;
       }

@@ -126,7 +126,7 @@ namespace ComicsShelf.Controls
             var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
             var displayWidth = System.Math.Min(displayInfo.Width, displayInfo.Height) / displayInfo.Density;
             var itemsPerLine = (Device.Idiom == TargetIdiom.Phone ? 3 : 5);
-            CoverView.DefaultWidth = ((int)(displayWidth - 10) / itemsPerLine) - 5;
+            CoverView.DefaultWidth = ((int)(displayWidth - 15) / itemsPerLine) - 5;
             CoverView.DefaultHeight = ((int)CoverView.DefaultWidth * 1.53);
          }
          catch (System.Exception) { throw; }
