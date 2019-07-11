@@ -50,6 +50,7 @@ namespace ComicsShelf.Libraries
 
             if (!await service.LoadData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
+            if (!await service.Statistics(library)) { return; }
             if (!await service.LoadSyncData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
@@ -149,7 +150,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]));
+            Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", library.ID, this.ComicFiles[library.ID]);
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
@@ -159,7 +160,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            await Task.Run(() => Messaging.Send<List<ComicFiles.ComicFileVM>>(prefix, comicFiles));
+            Messaging.Send<List<ComicFiles.ComicFileVM>>(prefix, comicFiles);
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
