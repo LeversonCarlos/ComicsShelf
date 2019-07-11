@@ -137,8 +137,7 @@ namespace ComicsShelf.Libraries
 
             foreach (var library in libraries) { this.AddShell(library); }
 
-            Task.Run(async () => await this.LoadLibraries(libraries));
-
+            await Task.Factory.StartNew(async () => await this.LoadLibraries(libraries), TaskCreationOptions.LongRunning);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }

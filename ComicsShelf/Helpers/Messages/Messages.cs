@@ -20,7 +20,7 @@ namespace ComicsShelf
       {
          try
          {
-            await Application.Current.MainPage.DisplayAlert("Comics Shelf", message, R.Strings.BASE_OK_COMMAND);
+            Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.DisplayAlert("Comics Shelf", message, R.Strings.BASE_OK_COMMAND));
          }
          catch { }
       }
