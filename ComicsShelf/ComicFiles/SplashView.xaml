@@ -93,7 +93,7 @@
                                SelectedItem="{Binding CurrentFile}" >
                   <CollectionView.ItemTemplate>
                      <DataTemplate>
-                        <StackLayout Padding="5,5,0,5">
+                        <StackLayout Padding="5,5,0,0">
                            <controls:CoverView                               
                               ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
                               OpenCommand="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference splashPage}}">

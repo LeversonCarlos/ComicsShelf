@@ -14,7 +14,7 @@ namespace ComicsShelf.Controls
          this.WidthRequest = 145;
          this.HeightRequest = 222;
          this.VerticalOptions = LayoutOptions.FillAndExpand;
-         this.Margin = new Thickness(0, 0, 5, 0);
+         this.Margin = new Thickness(0, 0, 5, 5);
 
          this.Image = new Image
          {
