@@ -48,20 +48,25 @@ namespace ComicsShelf.Libraries
             { syncData = Helpers.FileStream.Deserialize<List<LibrarySyncVM>>(byteArray); }
             catch
             {
-               var dynamicData = Helpers.FileStream.Deserialize<List<dynamic>>(byteArray);
-               if (dynamicData != null)
+               try
                {
-                  syncData = dynamicData.Select(x => new LibrarySyncVM(x)).ToList();
+                  var dynamicData = Helpers.FileStream.Deserialize<List<dynamic>>(byteArray);
+                  if (dynamicData != null)
+                  { syncData = dynamicData.Select(x => new LibrarySyncVM(x)).Where(x => x.Key != "").ToList(); }
                }
+               catch (Exception) { }
             }
 
-            syncData = syncData
-               .Where(x => x.Readed || x.ReadingPage > 0 || x.Rating > 0)
-               .ToList();
+            if (syncData != null)
+            {
+               syncData = syncData
+                  .Where(x => x.Readed || x.ReadingPage > 0 || x.Rating > 0)
+                  .ToList();
+            }
 
             return syncData;
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }
@@ -82,13 +87,17 @@ namespace ComicsShelf.Libraries
 
       public LibrarySyncVM(dynamic comicFile)
       {
-         this.Key = comicFile.Key;
-         try { this.ReleaseDate = DateTime.Parse((string)comicFile.ReleaseDate); } catch { this.ReleaseDate = DateTime.MinValue; }
-         try { this.Readed = comicFile.Readed; } catch { }
-         try { this.ReadingDate = DateTime.Parse((string)comicFile.ReadingDate); } catch { this.ReadingDate = DateTime.MinValue; }
-         try { this.ReadingPage = comicFile.ReadingPage; } catch { }
-         try { this.ReadingPercent = comicFile.ReadingPercent; } catch { }
-         try { this.Rating = comicFile.Rating; } catch { }
+         try
+         {
+            this.Key = comicFile.Key;
+            try { this.ReleaseDate = DateTime.Parse((string)comicFile.ReleaseDate); } catch { this.ReleaseDate = DateTime.MinValue; }
+            try { this.Readed = comicFile.Readed; } catch { }
+            try { this.ReadingDate = DateTime.Parse((string)comicFile.ReadingDate); } catch { this.ReadingDate = DateTime.MinValue; }
+            try { this.ReadingPage = comicFile.ReadingPage; } catch { }
+            try { this.ReadingPercent = comicFile.ReadingPercent; } catch { }
+            try { this.Rating = comicFile.Rating; } catch { }
+         }
+         catch { this.Key = ""; }
       }
 
       public string Key { get; set; }
