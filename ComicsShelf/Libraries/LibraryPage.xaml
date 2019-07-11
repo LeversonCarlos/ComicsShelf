@@ -23,12 +23,11 @@
                   <StackLayout Padding="5,10,0,5" Spacing="5" >
                      <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
                      <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
-                                     HeightRequest="{Binding BindingContext.CoverHeightRequest, Source={x:Reference libraryPage} }"
+                                     HeightRequest="{x:Static controls:CoverView.DefaultHeight}"
                                      ItemSizingStrategy="MeasureFirstItem" >
                         <CollectionView.ItemTemplate>
                            <DataTemplate>
                               <controls:CoverView
-                                 CoverHeightRequest="{Binding BindingContext.CoverHeightRequest, Source={x:Reference libraryPage} }"
                                  ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
                                  OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
                               </controls:CoverView>

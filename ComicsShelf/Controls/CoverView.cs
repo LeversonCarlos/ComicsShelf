@@ -11,8 +11,8 @@ namespace ComicsShelf.Controls
       {
          this.Margin = 0;
          this.Padding = 0;
-         this.WidthRequest = 145;
-         this.HeightRequest = 222;
+         this.WidthRequest = CoverView.DefaultWidth; ;
+         this.HeightRequest = CoverView.DefaultHeight;
          this.VerticalOptions = LayoutOptions.FillAndExpand;
          this.Padding = new Thickness(0, 0, 5, 5);
 
@@ -94,22 +94,6 @@ namespace ComicsShelf.Controls
       }
 
 
-      public static readonly BindableProperty CoverHeightRequestProperty =
-         BindableProperty.Create("CoverHeightRequest", typeof(double), typeof(CoverView), (double)0,
-            propertyChanged: OnCoverHeightRequestChanged);
-      public double CoverHeightRequest
-      {
-         get { return (double)GetValue(CoverHeightRequestProperty); }
-         set { SetValue(CoverHeightRequestProperty, value); }
-      }
-      private static void OnCoverHeightRequestChanged(BindableObject bindable, object oldValue, object newValue)
-      {
-         var self = (bindable as CoverView);
-         self.HeightRequest = (double)newValue; 
-         self.WidthRequest = ((int)self.HeightRequest / 1.53);
-      }
-
-
       public static readonly BindableProperty OpenCommandProperty =
          BindableProperty.Create("OpenCommand", typeof(ICommand), typeof(CoverView), null);
       public ICommand OpenCommand
@@ -132,6 +116,21 @@ namespace ComicsShelf.Controls
          }
       }
 
+
+      public static double DefaultHeight { get; set; }
+      public static double DefaultWidth { get; set; }
+      public static void InitDefaultSize()
+      {
+         try
+         {
+            var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
+            var displayWidth = System.Math.Min(displayInfo.Width, displayInfo.Height) / displayInfo.Density;
+            var itemsPerLine = (Device.Idiom == TargetIdiom.Phone ? 3 : 5);
+            CoverView.DefaultWidth = ((int)(displayWidth - 10) / itemsPerLine) - 5;
+            CoverView.DefaultHeight = ((int)CoverView.DefaultWidth * 1.53);
+         }
+         catch (System.Exception) { throw; }
+      }
 
    }
 }

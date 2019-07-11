@@ -29,12 +29,6 @@ namespace ComicsShelf.Libraries
          {
             this.IsBusy = true;
 
-            var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
-            var displayWidth = displayInfo.Width / displayInfo.Density;
-            var itemsPerLine = (Device.Idiom == TargetIdiom.Phone ? 3 : 5);
-            var coverWidthRequest = ((int)(displayWidth - 10) / itemsPerLine) - 5;
-            this.CoverHeightRequest = ((int)coverWidthRequest * 1.53);
-
             var service = DependencyService.Get<LibraryService>();
             var fileList = service.ComicFiles[this.Library.ID];
             var folderList = this.GetFolderList(fileList);
@@ -110,13 +104,6 @@ namespace ComicsShelf.Libraries
       {
          get { return this._HasComicFiles; }
          set { this.SetProperty(ref this._HasComicFiles, value); }
-      }
-
-      double _CoverHeightRequest;
-      public double CoverHeightRequest
-      {
-         get { return this._CoverHeightRequest; }
-         set { this.SetProperty(ref this._CoverHeightRequest, value); }
       }
 
    }

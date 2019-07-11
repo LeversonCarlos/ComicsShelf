@@ -79,7 +79,8 @@
 
             <StackLayout VerticalOptions="End" Padding="5" >
                <CollectionView x:Name="filesCollectionView" 
-                               HeightRequest="222" ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single" 
+                               ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single" 
+                               HeightRequest="{x:Static controls:CoverView.DefaultHeight}"
                                ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
                                ItemsSource="{Binding ComicFiles}" SelectedItem="{Binding CurrentFile}" >
                   <CollectionView.ItemTemplate>

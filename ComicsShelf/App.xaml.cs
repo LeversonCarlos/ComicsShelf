@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf
 {
@@ -20,8 +18,9 @@ namespace ComicsShelf
 
       protected override async void OnStart()
       {
-         await Helpers.DefaultCover.LoadDefaultCover();
          Helpers.AppCenter.Initialize();
+         Controls.CoverView.InitDefaultSize();
+         await Helpers.DefaultCover.LoadDefaultCover();
          await DependencyService.Get<Libraries.LibraryStore>().LoadLibraries();
       }
 
