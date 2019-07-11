@@ -23,16 +23,10 @@
                                  Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Start" >
                            <BindableLayout.ItemTemplate>
                               <DataTemplate>
-
-                                 <StackLayout Padding="0,0,0,5" WidthRequest="145" HeightRequest="222" >
-                                    <controls:CoverView
-                                       ImageSource="{Binding CoverPath}" 
-                                       Progress="{Binding ReadingPercent}"
-                                       CacheStatus="{Binding CacheStatus}" 
-                                       OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
-                                    </controls:CoverView>
-                                 </StackLayout>
-
+                                 <controls:CoverView
+                                    ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}" 
+                                    OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
+                                 </controls:CoverView>
                               </DataTemplate>
                            </BindableLayout.ItemTemplate>
                         </FlexLayout>

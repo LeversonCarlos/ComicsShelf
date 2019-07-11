@@ -25,10 +25,9 @@
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding ComicFiles}" >
                            <BindableLayout.ItemTemplate>
                               <DataTemplate>
-                                 <controls:CoverView 
-                                       Padding="0,0,5,0" WidthRequest="145" HeightRequest="222" 
-                                       ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}" 
-                                       OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
+                                 <controls:CoverView
+                                    ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
+                                    OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
                                  </controls:CoverView>
                               </DataTemplate>
                            </BindableLayout.ItemTemplate>
