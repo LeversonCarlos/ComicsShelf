@@ -141,18 +141,6 @@
   <data name="FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>Seletor de Pasta</value>
   </data>
-  <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
-    <value>Destaques</value>
-  </data>
-  <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
-    <value>Todos os Quadrinhos</value>
-  </data>
-  <data name="HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Use o botão superior direito para definir bibliotecas contendo alguns arquivos CBZ.</value>
-  </data>
-  <data name="HOME_LIBRARY_MENU" xml:space="preserve">
-    <value>Biblioteca</value>
-  </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Lendo</value>
   </data>
@@ -163,37 +151,22 @@
     <value>Melhor Qualificado</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Clique nos botões abaixo para adicionar uma pasta LOCAL ou do ONEDRIVE que contenha seus arquivos de quadrinhos (aqueles com a extensão CBZ).</value>
+    <value>Use o menu deslizante à esquerda para adicionar uma pasta LOCAL ou do ONEDRIVE que contenha seus arquivos de quadrinhos (aqueles com a extensão CBZ).</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_TITLE" xml:space="preserve">
     <value>Você não tem uma biblioteca definida ainda.</value>
   </data>
-  <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
-    <value>Essa pasta não possui arquivos CBZ. Escolha uma pasta válida que contenha alguns arquivos de quadrinhos dentro dela.</value>
-  </data>
-  <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
-    <value>Biblioteca de Quadrinhos</value>
-  </data>
-  <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
-    <value>Biblioteca</value>
-  </data>
-  <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
-    <value>Pasta Local</value>
-  </data>
-  <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
-    <value>Pasta do OneDrive</value>
-  </data>
   <data name="LIBRARY_REMOVE_CONFIRM_MESSAGE" xml:space="preserve">
     <value>Confirme a remoção desta biblioteca? (os arquivos em quadrinhos em si não serão tocados)</value>
   </data>
-  <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
-    <value>Remover</value>
+  <data name="NEW_LOCAL_LIBRARY_COMMAND" xml:space="preserve">
+    <value>Nova Biblioteca Local</value>
+  </data>
+  <data name="NEW_ONEDRIVE_LIBRARY_COMMAND" xml:space="preserve">
+    <value>Nova Biblioteca do OneDrive</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Carregando dados da base de dados</value>
-  </data>
-  <data name="SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE" xml:space="preserve">
-    <value>Organizando estruturas das prateleiras</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Procurando quadrinhos em suas bibliotecas</value>
@@ -207,25 +180,13 @@
   <data name="SPLASH_FILE_MARK_AS_READED_LABEL" xml:space="preserve">
     <value>Marcar como Lido</value>
   </data>
-  <data name="SPLASH_FILE_OPEN_COMIC_LABEL" xml:space="preserve">
-    <value>Abrir Quadrinho</value>
-  </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
     <value>Carregando capas dos quadrinhos em Destaque</value>
-  </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE" xml:space="preserve">
-    <value>Carregando capas das àstas de quadrinhos</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE" xml:space="preserve">
     <value>Carregando capas dos quadrinhos Restantes</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Carregando base de dados</value>
-  </data>
-  <data name="STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
-    <value>Carregando configurações</value>
-  </data>
-  <data name="STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE" xml:space="preserve">
-    <value>Validando a localização da biblioteca</value>
   </data>
 </root>

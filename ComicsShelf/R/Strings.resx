@@ -141,18 +141,6 @@
   <data name="FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>Folder Selector</value>
   </data>
-  <data name="HOME_FEATURED_PAGE_TITLE" xml:space="preserve">
-    <value>Featured</value>
-  </data>
-  <data name="HOME_FOLDERS_PAGE_TITLE" xml:space="preserve">
-    <value>All Comics</value>
-  </data>
-  <data name="HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Use the upper right button to define libraries containing some CBZ files.</value>
-  </data>
-  <data name="HOME_LIBRARY_MENU" xml:space="preserve">
-    <value>Library</value>
-  </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Reading</value>
   </data>
@@ -163,37 +151,22 @@
     <value>Top Rated Comics</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Click on the buttons bellow to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension).</value>
+    <value>Use the slider left menu to add a LOCAL or ONEDRIVE folder that contains your comic files (those with the CBZ extension).</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_TITLE" xml:space="preserve">
     <value>You dont have a library defined yet.</value>
   </data>
-  <data name="LIBRARY_INVALID_FOLDER_MESSAGE" xml:space="preserve">
-    <value>This folder has no CBZ files. Choose a valid folder containing some comic book files on it.</value>
-  </data>
-  <data name="LIBRARY_MAIN_LABEL" xml:space="preserve">
-    <value>Comic Books Library</value>
-  </data>
-  <data name="LIBRARY_MAIN_TITLE" xml:space="preserve">
-    <value>Library</value>
-  </data>
-  <data name="LIBRARY_NEW_LOCAL_FOLDER_COMMAND" xml:space="preserve">
-    <value>Local Folder</value>
-  </data>
-  <data name="LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND" xml:space="preserve">
-    <value>OneDrive Folder</value>
-  </data>
   <data name="LIBRARY_REMOVE_CONFIRM_MESSAGE" xml:space="preserve">
     <value>Confirm removing this library ? (the comic files itself won't be touched)</value>
   </data>
-  <data name="LIBRARY_REMOVE_LIBRARY_COMMAND" xml:space="preserve">
-    <value>Remove</value>
+  <data name="NEW_LOCAL_LIBRARY_COMMAND" xml:space="preserve">
+    <value>New Local Library</value>
+  </data>
+  <data name="NEW_ONEDRIVE_LIBRARY_COMMAND" xml:space="preserve">
+    <value>New OneDrive Library</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
     <value>Loading current database data</value>
-  </data>
-  <data name="SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE" xml:space="preserve">
-    <value>Organizing shelves structure</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
     <value>Searching for comic files on your libraries</value>
@@ -207,25 +180,13 @@
   <data name="SPLASH_FILE_MARK_AS_READED_LABEL" xml:space="preserve">
     <value>Mark as Readed</value>
   </data>
-  <data name="SPLASH_FILE_OPEN_COMIC_LABEL" xml:space="preserve">
-    <value>Open Comic File</value>
-  </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
     <value>Loading covers for Featured comic files</value>
-  </data>
-  <data name="STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE" xml:space="preserve">
-    <value>Loading covers for Folders comic files</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE" xml:space="preserve">
     <value>Loading covers for all Remaining comic files</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
     <value>Loading database</value>
-  </data>
-  <data name="STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE" xml:space="preserve">
-    <value>Loading settings</value>
-  </data>
-  <data name="STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE" xml:space="preserve">
-    <value>Validating the library location</value>
   </data>
 </root>

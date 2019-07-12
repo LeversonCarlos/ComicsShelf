@@ -133,42 +133,6 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Featured.
-        /// </summary>
-        public static string HOME_FEATURED_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_FEATURED_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to All Comics.
-        /// </summary>
-        public static string HOME_FOLDERS_PAGE_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_FOLDERS_PAGE_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use the upper right button to define libraries containing some CBZ files..
-        /// </summary>
-        public static string HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS {
-            get {
-                return ResourceManager.GetString("HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Library.
-        /// </summary>
-        public static string HOME_LIBRARY_MENU {
-            get {
-                return ResourceManager.GetString("HOME_LIBRARY_MENU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Continue Reading.
         /// </summary>
         public static string HOME_READING_FILES_SECTION_TITLE {
@@ -196,7 +160,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click on the buttons bellow to add a LOCAL or ONEDRIVE folder that contains your comic book files (those files with the CBZ extension)..
+        ///   Looks up a localized string similar to Use the slider left menu to add a LOCAL or ONEDRIVE folder that contains your comic files (those with the CBZ extension)..
         /// </summary>
         public static string LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS {
             get {
@@ -214,51 +178,6 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This folder has no CBZ files. Choose a valid folder containing some comic book files on it..
-        /// </summary>
-        public static string LIBRARY_INVALID_FOLDER_MESSAGE {
-            get {
-                return ResourceManager.GetString("LIBRARY_INVALID_FOLDER_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Comic Books Library.
-        /// </summary>
-        public static string LIBRARY_MAIN_LABEL {
-            get {
-                return ResourceManager.GetString("LIBRARY_MAIN_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Library.
-        /// </summary>
-        public static string LIBRARY_MAIN_TITLE {
-            get {
-                return ResourceManager.GetString("LIBRARY_MAIN_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Local Folder.
-        /// </summary>
-        public static string LIBRARY_NEW_LOCAL_FOLDER_COMMAND {
-            get {
-                return ResourceManager.GetString("LIBRARY_NEW_LOCAL_FOLDER_COMMAND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OneDrive Folder.
-        /// </summary>
-        public static string LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND {
-            get {
-                return ResourceManager.GetString("LIBRARY_NEW_ONEDRIVE_FOLDER_COMMAND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Confirm removing this library ? (the comic files itself won&apos;t be touched).
         /// </summary>
         public static string LIBRARY_REMOVE_CONFIRM_MESSAGE {
@@ -268,11 +187,20 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to New Local Library.
         /// </summary>
-        public static string LIBRARY_REMOVE_LIBRARY_COMMAND {
+        public static string NEW_LOCAL_LIBRARY_COMMAND {
             get {
-                return ResourceManager.GetString("LIBRARY_REMOVE_LIBRARY_COMMAND", resourceCulture);
+                return ResourceManager.GetString("NEW_LOCAL_LIBRARY_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New OneDrive Library.
+        /// </summary>
+        public static string NEW_ONEDRIVE_LIBRARY_COMMAND {
+            get {
+                return ResourceManager.GetString("NEW_ONEDRIVE_LIBRARY_COMMAND", resourceCulture);
             }
         }
         
@@ -282,15 +210,6 @@ namespace ComicsShelf.R {
         public static string SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE {
             get {
                 return ResourceManager.GetString("SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Organizing shelves structure.
-        /// </summary>
-        public static string SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE {
-            get {
-                return ResourceManager.GetString("SEARCH_ENGINE_ORGANIZING_SHELVES_STRUCTURES_MESSAGE", resourceCulture);
             }
         }
         
@@ -331,29 +250,11 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Comic File.
-        /// </summary>
-        public static string SPLASH_FILE_OPEN_COMIC_LABEL {
-            get {
-                return ResourceManager.GetString("SPLASH_FILE_OPEN_COMIC_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Loading covers for Featured comic files.
         /// </summary>
         public static string STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE {
             get {
                 return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading covers for Folders comic files.
-        /// </summary>
-        public static string STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_ENGINE_EXTRACTING_DATA_FOLDERS_FILES_MESSAGE", resourceCulture);
             }
         }
         
@@ -372,24 +273,6 @@ namespace ComicsShelf.R {
         public static string STARTUP_ENGINE_LOADING_DATABASE_MESSAGE {
             get {
                 return ResourceManager.GetString("STARTUP_ENGINE_LOADING_DATABASE_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading settings.
-        /// </summary>
-        public static string STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_ENGINE_LOADING_SETTINGS_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Validating the library location.
-        /// </summary>
-        public static string STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE {
-            get {
-                return ResourceManager.GetString("STARTUP_ENGINE_VALIDATING_LIBRARY_PATH_MESSAGE", resourceCulture);
             }
         }
     }

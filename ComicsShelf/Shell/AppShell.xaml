@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
        xmlns:home="clr-namespace:ComicsShelf.Home"
+       xmlns:controls="clr-namespace:ComicsShelf.Controls"
        FlyoutBehavior="Flyout"
        Title="ComicsShelf"
        x:Class="ComicsShelf.AppShell">
@@ -37,8 +38,8 @@
          <ShellContent Route="content" Title="Home" ContentTemplate="{DataTemplate home:HomePage}" />
       </ShellSection>
    </ShellItem>
-   
-   <MenuItem Icon="icon_LocalDrive_New.png" Text="New Local Library" Clicked="NewLocalLibrary_Clicked"></MenuItem>
-   <MenuItem Icon="icon_OneDrive_New.png" Text="New OneDrive Library" Clicked="NewOneDriveLibrary_Clicked"></MenuItem>
+
+   <MenuItem Icon="icon_LocalDrive_New.png" Text="{controls:Translate Text=NEW_LOCAL_LIBRARY_COMMAND}" Clicked="NewLocalLibrary_Clicked"></MenuItem>
+   <MenuItem Icon="icon_OneDrive_New.png" Text="{controls:Translate Text=NEW_ONEDRIVE_LIBRARY_COMMAND}" Clicked="NewOneDriveLibrary_Clicked"></MenuItem>
 
 </Shell>

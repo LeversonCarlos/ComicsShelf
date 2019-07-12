@@ -26,7 +26,7 @@ namespace ComicsShelf.Controls
          {
             HorizontalTextAlignment = TextAlignment.Center,
             TextColor = Color.Default,
-            Text = R.Strings.HOME_LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS
+            Text = R.Strings.LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS
          };
          this.Children.Add(messageLabel);
 
