@@ -11,12 +11,14 @@ namespace ComicsShelf.Controls
          this.Direction = FlexDirection.Column;
          this.JustifyContent = FlexJustify.Center;
          this.AlignItems = FlexAlignItems.Center;
+         if (Device.Idiom != TargetIdiom.Phone)
+         { this.Padding = new Thickness(80, 0); }
 
          var titleLabel = new Label
          {
             FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
             FontAttributes = FontAttributes.Bold,
-            HorizontalTextAlignment = TextAlignment.Center, 
+            HorizontalTextAlignment = TextAlignment.Center,
             TextColor = Color.Default,
             Text = R.Strings.LIBRARY_EMPTY_MESSAGE_TITLE
          };
