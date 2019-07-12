@@ -1,6 +1,8 @@
 ﻿using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace ComicsShelf.Helpers
 {
@@ -24,6 +26,13 @@ namespace ComicsShelf.Helpers
 
       public static void TrackEvent(string text, string propertyKey, string propertyValue)
       { TrackEvent(text, new Dictionary<string, string> { { propertyKey, propertyValue } }); }
+
+      public static void TrackEvent(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
+      {
+         var trackProp = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
+         if (ex.InnerException != null) { trackProp.Add("InnerException", ex.InnerException.Message); }
+         TrackEvent($"{callerMemberName}.Exception", trackProp);
+      }
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
       { Analytics.TrackEvent(text, properties); }

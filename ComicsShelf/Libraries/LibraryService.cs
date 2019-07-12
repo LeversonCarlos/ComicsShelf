@@ -79,6 +79,10 @@ namespace ComicsShelf.Libraries
             if (!await service.SearchData(library)) { return; }
             if (!await service.LoadSyncData(library)) { return; }
             if (!await service.NotifyData(library)) { return; }
+            if (!await service.Statistics(library)) { return; }
+            if (!await service.SaveSyncData(library)) { return; }
+            if (!await service.SaveData(library)) { return; }
+
             if (!await service.ExtractData(library)) { return; }
             if (!await service.Statistics(library)) { return; }
             if (!await service.SaveSyncData(library)) { return; }
@@ -450,7 +454,7 @@ namespace ComicsShelf.Libraries
                   }
 
                }
-               catch (Exception ex) { throw new Exception($"Extracting Comic Data{Environment.NewLine}{comicFile.ComicFile.FilePath}", ex); }
+               catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
                finally { GC.Collect(); }
             }
 

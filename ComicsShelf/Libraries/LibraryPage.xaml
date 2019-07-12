@@ -13,7 +13,7 @@
    </ContentPage.ToolbarItems>
 
    <ContentPage.Content>
-      <StackLayout>
+      <StackLayout Spacing="0">
 
          <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}" 
                          ItemSizingStrategy="MeasureFirstItem" BackgroundColor="Gainsboro">

@@ -11,8 +11,7 @@ namespace ComicsShelf
 
       public static async Task ShowMessage(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
       {
-         var trackProp = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
-         Helpers.AppCenter.TrackEvent($"{callerMemberName}.Exception", trackProp);
+         Helpers.AppCenter.TrackEvent(ex, callerMemberName, callerFilePath, callerLineNumber);
          await ShowMessage(ex.Message);
       }
 
