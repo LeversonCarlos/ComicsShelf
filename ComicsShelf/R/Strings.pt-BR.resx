@@ -141,6 +141,9 @@
   <data name="FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>Seletor de Pasta</value>
   </data>
+  <data name="HOME_MAIN_TITLE" xml:space="preserve">
+    <value>Quadrinhos em Destaque</value>
+  </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
     <value>Continue Lendo</value>
   </data>

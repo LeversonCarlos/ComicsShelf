@@ -133,6 +133,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Featured Comics.
+        /// </summary>
+        public static string HOME_MAIN_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_MAIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue Reading.
         /// </summary>
         public static string HOME_READING_FILES_SECTION_TITLE {

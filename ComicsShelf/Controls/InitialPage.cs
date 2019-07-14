@@ -10,7 +10,7 @@ namespace ComicsShelf.Controls
       {
 
          this.BarTextColor = Color.White;
-         this.BarBackgroundColor = Color.Default;
+         this.BarBackgroundColor = Helpers.Colors.Primary;
       }
    }
 

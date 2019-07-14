@@ -15,7 +15,7 @@ namespace ComicsShelf.Home
       public ObservableList<ComicFolderVM> ComicFolders { get; private set; }
       public HomeVM()
       {
-         this.Title = "Home";
+         this.Title = R.Strings.HOME_MAIN_TITLE;
          this.Notify = new Notify.NotifyVM("General");
          this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.ComicFolders.Add(new ComicFolderVM { FolderPath = R.Strings.HOME_READING_FILES_SECTION_TITLE });
