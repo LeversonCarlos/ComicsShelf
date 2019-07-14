@@ -42,17 +42,3 @@ then
     echo "ANDROID_MANIFEST_FILE CONTENT:"
     cat $ANDROID_MANIFEST_FILE
 fi
-
-
-# INFO PLIST FILE
-echo "INFO_PLIST_FILE:"
-INFO_PLIST_FILE=$APPCENTER_SOURCE_DIRECTORY/ComicsShelf.iOS/Info.plist
-echo $INFO_PLIST_FILE
-
-if [ -e "$INFO_PLIST_FILE" ]
-then
-   plutil -replace CFBundleURLTypes.0.CFBundleURLSchemes.0 -string 'msal'$ComicsShelfApplicationID $INFO_PLIST_FILE
-
-   echo "INFO_PLIST_FILE CONTENT:"
-   cat $INFO_PLIST_FILE
-fi

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Libraries.LibraryPage"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   BackgroundColor="{StaticResource colorBackground}"
+   Title="{Binding Title}"
+   x:Name="libraryPage">
+
+   <ContentPage.ToolbarItems>
+      <ToolbarItem Text="Remove" Icon="icon_Delete.png" Clicked="DeleteLibrary_Clicked" />
+   </ContentPage.ToolbarItems>
+
+   <ContentPage.Content>
+      <StackLayout Spacing="0">
+
+         <CollectionView IsVisible="{Binding HasComicFiles}" ItemsSource="{Binding ComicFolders}" 
+                         ItemSizingStrategy="MeasureFirstItem" BackgroundColor="Gainsboro">
+            <CollectionView.ItemTemplate>
+               <DataTemplate>
+
+                  <StackLayout Padding="5,10,0,5" Spacing="5" >
+                     <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
+                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
+                                     HeightRequest="{x:Static controls:CoverView.DefaultHeight}"
+                                     ItemSizingStrategy="MeasureFirstItem" >
+                        <CollectionView.ItemTemplate>
+                           <DataTemplate>
+                              <controls:CoverView
+                                 ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
+                                 OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
+                              </controls:CoverView>
+                           </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                     </CollectionView>
+                  </StackLayout>
+
+               </DataTemplate>
+            </CollectionView.ItemTemplate>
+         </CollectionView>
+
+         <controls:EmptyView IsVisible="{Binding HasComicFiles, Converter={StaticResource notConverter}}" />
+
+         <controls:NotifyView BackgroundColor="White"
+               IsVisible="{Binding Notify.IsRunning}" Text="{Binding Notify.Text}" 
+               Progress="{Binding Notify.Progress}" Details="{Binding Notify.Details}" >
+         </controls:NotifyView>
+
+      </StackLayout>
+
+   </ContentPage.Content>
+
+</ContentPage>

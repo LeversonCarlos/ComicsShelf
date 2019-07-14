@@ -8,13 +8,10 @@ namespace ComicsShelf.Helpers.Observables
    public class ObservableObject : INotifyPropertyChanged
    {
 
-      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null, bool AlwaysInvokePropertyChanged = false)
+      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null)
       {
          if (EqualityComparer<T>.Default.Equals(backingStore, value))
-         {
-            if (AlwaysInvokePropertyChanged) { OnPropertyChanged(propertyName); }
-            return false;
-         }
+         { return false; }
 
          backingStore = value;
          onChanged?.Invoke();

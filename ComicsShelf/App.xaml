@@ -1,45 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application 
-   xmlns="http://xamarin.com/schemas/2014/forms"
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:controls="clr-namespace:ComicsShelf.Helpers.Controls"
-   x:Class="ComicsShelf.App">
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ComicsShelf.Controls"
+             x:Class="ComicsShelf.App">
    <Application.Resources>
       <ResourceDictionary>
 
          <controls:NotConverter x:Key="notConverter" />
 
          <!-- COLORS -->
+         <Color x:Key="colorPrimary">#FF5722</Color>
+         <Color x:Key="colorPrimaryDark">#E64A19</Color>
          <Color x:Key="colorAccent">#536DFE</Color>
          <Color x:Key="colorLightGray">#BDBDBD</Color>
          <Color x:Key="colorBackground">#EEEEEE</Color>
 
-         <Style TargetType="ScrollView" x:Key="CoverListMainView">
-            <Setter Property="BackgroundColor" Value="{StaticResource colorBackground}" />
-            <Setter Property="Orientation" Value="Vertical" />
-            <Setter Property="VerticalOptions" Value="FillAndExpand" />
-         </Style>
-
-         <Style TargetType="StackLayout" x:Key="CoverListMainLayout">
-            <Setter Property="VerticalOptions" Value="FillAndExpand" />
-            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-         </Style>
-
-         <!-- SPLASH -->
-         <Style TargetType="ContentView" x:Key="SplashItemDetails" >
+         <!-- BUTTON -->
+         <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="Padding" Value="30,10"></Setter>
             <Setter Property="BackgroundColor" Value="{StaticResource colorLightGray}" />
-            <Setter Property="Padding" Value="2" />
-            <Setter Property="Opacity" Value="0.85" />
-            <Setter Property="HorizontalOptions" Value="Fill" />
-            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="TextColor" Value="Black" />
          </Style>
-
-         <!-- BASE -->
-         <Style TargetType="ProgressBar">
-            <Setter Property="HorizontalOptions" Value="Fill" />
-            <Setter Property="HeightRequest" Value="5" />
+         <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}" >
+            <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="TextColor" Value="White" />
          </Style>
-
 
       </ResourceDictionary>
    </Application.Resources>
