@@ -19,7 +19,7 @@ namespace ComicsShelf.Controls
             FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
             FontAttributes = FontAttributes.Bold,
             HorizontalTextAlignment = TextAlignment.Center,
-            TextColor = Color.Default,
+            TextColor = Helpers.Colors.Accent,
             Text = R.Strings.LIBRARY_EMPTY_MESSAGE_TITLE
          };
          this.Children.Add(titleLabel);
@@ -27,7 +27,7 @@ namespace ComicsShelf.Controls
          var messageLabel = new Label
          {
             HorizontalTextAlignment = TextAlignment.Center,
-            TextColor = Color.Default,
+            TextColor = Helpers.Colors.Accent,
             Text = R.Strings.LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS
          };
          this.Children.Add(messageLabel);

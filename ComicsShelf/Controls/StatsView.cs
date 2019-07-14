@@ -42,7 +42,7 @@ namespace ComicsShelf.Controls
          {
             HorizontalOptions = LayoutOptions.Fill,
             Padding = 1,
-            BackgroundColor = Color.Accent,
+            BackgroundColor = Helpers.Colors.Accent,
             Content = new StackLayout
             {
                HorizontalOptions = LayoutOptions.FillAndExpand,

@@ -15,7 +15,7 @@ namespace ComicsShelf.Controls
          this.ShowArrows = true;
          this.LastPosition = -1;
          this.PositionSelected += this.OnPositionSelected;
-         this.ArrowsBackgroundColor = Color.Accent;
+         this.ArrowsBackgroundColor = Helpers.Colors.Accent;
 
          this.GestureRecognizers.Add(new TapGestureRecognizer
          {
