@@ -45,7 +45,7 @@ namespace ComicsShelf.ComicFiles
 
             this.BindingContext = new ReadingVM(comicFile);
          }
-         catch (Exception) { }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
       protected override void OnAppearing()
@@ -56,9 +56,14 @@ namespace ComicsShelf.ComicFiles
 
       protected override async void OnDisappearing()
       {
-         Xamarin.Essentials.OrientationSensor.Stop();
-         await (this.BindingContext as ReadingVM).ComicFile.UpdateLibrary();
-         base.OnDisappearing();
+         try
+         {
+            Xamarin.Essentials.OrientationSensor.Stop();
+            await (this.BindingContext as ReadingVM).ComicFile.UpdateLibrary();
+            base.OnDisappearing();
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
+         finally { GC.Collect(); }
       }
 
    }

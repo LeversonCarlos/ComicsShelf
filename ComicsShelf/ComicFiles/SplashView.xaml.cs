@@ -45,7 +45,7 @@ namespace ComicsShelf.ComicFiles
 
             this.BindingContext = new SplashVM(currentFile);
          }
-         catch (Exception) { }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
       protected override void OnAppearing()
@@ -60,33 +60,45 @@ namespace ComicsShelf.ComicFiles
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
          }
-         catch { Device.BeginInvokeOnMainThread(async () => await AppShell.Current.Navigation.PopAsync()); }
+         catch (Exception ex)
+         {
+            Helpers.AppCenter.TrackEvent(ex);
+            Device.BeginInvokeOnMainThread(async () => await AppShell.Current.Navigation.PopAsync());
+         }
       }
 
       private void OnComicFileOpening(ComicFileVM value)
       {
-         Task.Run(async () =>
+         try
          {
-            await this.backgroundImage.FadeTo(0.8, 250, Easing.SinOut);
-            await Task.WhenAll(
-               this.backgroundImage.FadeTo(0.1, 30000, Easing.SinInOut),
-               this.backgroundImage.RelScaleTo(30, 30000, Easing.SinInOut)
-            );
-         });
+            Task.Run(async () =>
+            {
+               await this.backgroundImage.FadeTo(0.8, 250, Easing.SinOut);
+               await Task.WhenAll(
+                  this.backgroundImage.FadeTo(0.1, 30000, Easing.SinInOut),
+                  this.backgroundImage.RelScaleTo(30, 30000, Easing.SinInOut)
+               );
+            });
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
       private void OnComicFileOpened(ComicFileVM value)
       {
-         ViewExtensions.CancelAnimations(this.backgroundImage);
-         Task.Run(async () =>
+         try
          {
-            await Task.WhenAll(
-               this.backgroundImage.FadeTo(0.2, 250, Easing.SinIn),
-               this.backgroundImage.RelScaleTo(1, 250, Easing.SinIn)
-            );
-            this.backgroundImage.Opacity = 0.2;
-            this.backgroundImage.Scale = 1;
-         });
+            ViewExtensions.CancelAnimations(this.backgroundImage);
+            Task.Run(async () =>
+            {
+               await Task.WhenAll(
+                  this.backgroundImage.FadeTo(0.2, 250, Easing.SinIn),
+                  this.backgroundImage.RelScaleTo(1, 250, Easing.SinIn)
+               );
+               this.backgroundImage.Opacity = 0.2;
+               this.backgroundImage.Scale = 1;
+            });
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
       protected override void OnDisappearing()
