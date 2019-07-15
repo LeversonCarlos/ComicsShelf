@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
@@ -24,7 +25,6 @@ namespace ComicsShelf.Controls
 
          Xamarin.Essentials.DeviceDisplay.MainDisplayInfoChanged +=
             (object sender, Xamarin.Essentials.DisplayInfoChangedEventArgs e) => { this.OnImageResize(); };
-         // Messaging.Subscribe<Size>(Messaging.Keys.ScreenSizeChanged, this.OnScreenSizeChanged);
 
          this.OnImageResize();
       }
@@ -90,7 +90,7 @@ namespace ComicsShelf.Controls
             if (this.ImageLoaded && this.ImageView.Source == null && !string.IsNullOrEmpty(this.ImagePath))
             { this.ImageView.Source = ImageSource.FromStream(() => new MemoryStream(File.ReadAllBytes(this.ImagePath))); }
          }
-         catch { }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
       #endregion
 
@@ -143,7 +143,7 @@ namespace ComicsShelf.Controls
             // INNER IMAGE SIZE
             this.ImageView.WidthRequest = this.WidthRequest;
             this.ImageView.HeightRequest = this.HeightRequest;
-            
+
             this.FadeTo(0.05, 100, Easing.SinOut)
                .ContinueWith(task1 =>
                {
@@ -164,7 +164,7 @@ namespace ComicsShelf.Controls
                });
 
          }
-         catch { }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
       #endregion
 

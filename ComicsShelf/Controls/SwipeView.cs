@@ -1,4 +1,5 @@
 ﻿using CarouselView.FormsPlugin.Abstractions;
+using System;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
@@ -46,7 +47,7 @@ namespace ComicsShelf.Controls
 
             this.LastPosition = this.Position;
          }
-         catch { }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
       void SetPositionVisibility(int position, bool visibility)
