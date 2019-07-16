@@ -368,12 +368,29 @@ namespace ComicsShelf.Libraries
                .ToList();
             libraryFiles.AddRange(newFiles);
 
+            // CHECK FOR DUPLICITY
+            var duplicatedFiles = libraryFiles
+               .GroupBy(x => x.ComicFile.Key)
+               .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })
+               .Where(x => x.Count > 1)
+               .Select(x => x.Item.ComicFile)
+               .ToList();
+            if (duplicatedFiles != null && duplicatedFiles.Count != 0)
+            {
+               Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.FoundDuplicity", 
+                  $"NewFiles:{newFiles.Count()}", 
+                  $"DuplicatedFiles:{duplicatedFiles.Count}");
+               foreach (var duplicatedFile in duplicatedFiles)
+               {
+                  libraryFiles.RemoveAll(x => x.ComicFile.Key == duplicatedFile.Key);
+                  libraryFiles.Add(new ComicFiles.ComicFileVM(duplicatedFile));
+               }
+            }
+
             var endTime = DateTime.Now;
-            var trackProps = new Dictionary<string, string> {
-               { "ElapsedSeconds", ((int)(endTime-startTime).TotalSeconds).ToString() },
-               { "NewFiles", newFiles.Count().ToString() }
-            };
-            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search", trackProps);
+            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search", 
+               $"ElapsedSeconds:{((int)(endTime-startTime).TotalSeconds)}", 
+               $"NewFiles:{newFiles.Count()}");
 
             return true;
          }
