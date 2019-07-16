@@ -9,11 +9,13 @@ namespace ComicsShelf
 
       public ShellVM()
       {
-         this.NewLibraryCommand = new Command(async (libraryType) => await this.NewLibrary((Libraries.LibraryType)libraryType));
+         this.NewLocalLibraryCommand = new Command(async () => await this.NewLibrary(Libraries.LibraryType.LocalDrive));
+         this.NewOneDriveLibraryCommand = new Command(async () => await this.NewLibrary(Libraries.LibraryType.OneDrive));
          this.DeleteLibraryCommand = new Command(async (shellItem) => await this.DeleteLibrary((ShellItem)shellItem));
       }
 
-      public Command NewLibraryCommand { get; set; }
+      public Command NewLocalLibraryCommand { get; set; }
+      public Command NewOneDriveLibraryCommand { get; set; }
       private async Task NewLibrary(Libraries.LibraryType libraryType)
       {
          this.IsBusy = true;
