@@ -8,6 +8,8 @@ namespace ComicsShelf.Libraries
 {
    internal class LibraryService
    {
+      private const string generalRecentFilesKey = "General.RecentFiles";
+      private const string generalReadingFilesKey = "General.ReadingFiles";
 
       private readonly Notify.NotifyVM Notify;
       public readonly Dictionary<string, LibraryModel> Libraries;
@@ -222,9 +224,8 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            const string generalKey = "General.RecentFiles";
-            if (!this.ComicFiles.ContainsKey(generalKey))
-            { this.ComicFiles.Add(generalKey, new List<ComicFiles.ComicFileVM>()); }
+            if (!this.ComicFiles.ContainsKey(generalRecentFilesKey))
+            { this.ComicFiles.Add(generalRecentFilesKey, new List<ComicFiles.ComicFileVM>()); }
 
             var recentFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
@@ -233,14 +234,14 @@ namespace ComicsShelf.Libraries
                .Take(25)
                .ToList();
 
-            var generalFiles = this.ComicFiles[generalKey]
+            var generalFiles = this.ComicFiles[generalRecentFilesKey]
                .Where(x => x.ComicFile.LibraryKey != library.ID)
                .ToList();
             recentFiles = recentFiles
                .Union(generalFiles)
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .ToList();
-            this.ComicFiles[generalKey] = recentFiles;
+            this.ComicFiles[generalRecentFilesKey] = recentFiles;
 
             return recentFiles.Take(50).ToList();
          }
@@ -252,9 +253,8 @@ namespace ComicsShelf.Libraries
          try
          {
 
-            const string generalKey = "General.ReadingFiles";
-            if (!this.ComicFiles.ContainsKey(generalKey))
-            { this.ComicFiles.Add(generalKey, new List<ComicFiles.ComicFileVM>()); }
+            if (!this.ComicFiles.ContainsKey(generalReadingFilesKey))
+            { this.ComicFiles.Add(generalReadingFilesKey, new List<ComicFiles.ComicFileVM>()); }
 
             var libraryFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available);
@@ -310,14 +310,14 @@ namespace ComicsShelf.Libraries
                .ToList();
 
             // ATTACH GENERAL
-            var generalFiles = this.ComicFiles[generalKey]
+            var generalFiles = this.ComicFiles[generalReadingFilesKey]
                .Where(x => x.ComicFile.LibraryKey != library.ID)
                .ToList();
             readingFiles = readingFiles
                .Union(generalFiles)
                .OrderByDescending(x => x.ReadingDate)
                .ToList();
-            this.ComicFiles[generalKey] = readingFiles;
+            this.ComicFiles[generalReadingFilesKey] = readingFiles;
 
 
             return readingFiles.Take(10).ToList();
@@ -340,10 +340,28 @@ namespace ComicsShelf.Libraries
             var searchFiles = await engine.SearchFiles(library);
             if (searchFiles == null) { return true; }
 
+            // REMOVED FILES
             libraryFiles
                .Where(x => !searchFiles.Select(i => i.Key).ToList().Contains(x.ComicFile.Key))
                .ToList()
                .ForEach(file => file.ComicFile.Available = false);
+
+            // EXISTING FILES
+            var existingFiles = libraryFiles
+               .Where(file => file.ComicFile.Available == true);
+            foreach (var existingFile in existingFiles)
+            {
+               var searchFile = searchFiles.Where(x => x.Key == existingFile.ComicFile.Key).FirstOrDefault();
+               if (searchFile != null)
+               {
+                  existingFile.ComicFile.FolderPath = searchFile.FolderPath;
+                  existingFile.ComicFile.FilePath = searchFile.FilePath;
+                  existingFile.ComicFile.FullText = searchFile.FullText;
+                  existingFile.ComicFile.SmallText = searchFile.SmallText;
+               }
+            }
+
+            // NEW FILES
             var newFiles = searchFiles
                .Where(x => !libraryFiles.Select(i => i.ComicFile.Key).ToList().Contains(x.Key))
                .Select(x => new ComicFiles.ComicFileVM(x))
@@ -371,7 +389,29 @@ namespace ComicsShelf.Libraries
 
             // FEATURED FILES
             this.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE}");
+            var recentFiles = this.ComicFiles[generalRecentFilesKey]
+               .Where(x => x.ComicFile.LibraryKey == library.ID)
+               .ToList();
+            var readingFiles = this.ComicFiles[generalReadingFilesKey]
+               .Where(x => x.ComicFile.LibraryKey == library.ID)
+               .ToList();
+            var featuredFileIDs = recentFiles
+               .Union(readingFiles)
+               .Select(x => x.ComicFile.Key)
+               .ToList();
             var featuredFiles = this.ComicFiles[library.ID]
+               .Where(file => file.ComicFile.Available)
+               .Where(file => string.IsNullOrEmpty(file.CoverPath) || file.CoverPath == LibraryConstants.DefaultCover)
+               .Where(file => featuredFileIDs.Contains(file.ComicFile.Key))
+               .OrderBy(file => file.ComicFile.FolderPath)
+               .ThenByDescending(file => file.ComicFile.FilePath)
+               .ToList();
+            if (featuredFiles != null)
+            { if (!await this.ExtractData(library, featuredFiles)) { return false; } }
+
+            // FIRST FIVE FILES
+            this.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE}");
+            var firstFiveFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .GroupBy(file => file.ComicFile.FolderPath)
                .SelectMany(file => file
@@ -380,8 +420,8 @@ namespace ComicsShelf.Libraries
                   .ToList())
                .Where(file => string.IsNullOrEmpty(file.CoverPath) || file.CoverPath == LibraryConstants.DefaultCover)
                .ToList();
-            if (featuredFiles == null) { return true; }
-            if (!await this.ExtractData(library, featuredFiles)) { return false; }
+            if (firstFiveFiles == null) { return true; }
+            if (!await this.ExtractData(library, firstFiveFiles)) { return false; }
 
             // REMAINING FILES
             this.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE}");
@@ -397,7 +437,7 @@ namespace ComicsShelf.Libraries
             var endTime = DateTime.Now;
             var trackProps = new Dictionary<string, string> {
                { "ElapsedMinutes", ((int)(endTime-startTime).TotalMinutes).ToString() },
-               { "FilesCount", (featuredFiles.Count()+remainingFiles.Count()).ToString() }
+               { "FilesCount", (firstFiveFiles.Count()+remainingFiles.Count()).ToString() }
             };
             Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.ExtractData", trackProps);
 
