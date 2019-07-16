@@ -64,6 +64,7 @@ namespace ComicsShelf.Libraries
             {
                FolderPath = x.Key.FolderPath
             })
+            .OrderBy(x => x.FolderPath)
             .ToList();
          foreach (var comicFolder in comicFolders)
          {
@@ -71,7 +72,9 @@ namespace ComicsShelf.Libraries
                .Where(comicFile => comicFile.ComicFile.FolderPath == comicFolder.FolderPath)
                .OrderByDescending(comicFile => comicFile.ComicFile.FilePath)
                .ToList();
-            // comicFolderFiles = comicFolderFiles.Take(1).ToList();
+            comicFolder.FolderPath = comicFolder.FolderPath
+               .Replace("/", " -> ")
+               .Replace("\\", " -> ");
             comicFolder.ComicFiles.AddRange(comicFolderFiles);
          }
          return comicFolders;
