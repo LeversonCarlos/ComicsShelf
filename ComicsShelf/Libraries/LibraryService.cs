@@ -132,7 +132,12 @@ namespace ComicsShelf.Libraries
             var files = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(LibraryConstants.DatabaseFile);
             if (files == null) { return true; }
 
-            var comicFiles = files.Where(x => x.LibraryKey == library.ID).Select(x => new ComicFiles.ComicFileVM(x)).ToList();
+            var comicFiles = files
+               .Where(x => x.LibraryKey == library.ID)
+               .GroupBy(x => x.Key)
+               .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })
+               .Select(x => new ComicFiles.ComicFileVM(x.Item))
+               .ToList();
             foreach (var comicFile in comicFiles)
             {
                if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
@@ -536,7 +541,12 @@ namespace ComicsShelf.Libraries
          try
          {
 
-            var comicFiles = this.ComicFiles[library.ID].Select(x => x.ComicFile).ToList();
+            var comicFiles = this.ComicFiles[library.ID]
+               .Select(x => x.ComicFile)
+               .GroupBy(x => x.Key)
+               .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })
+               .Select(x => x.Item)
+               .ToList();
             if (comicFiles == null) { return true; }
 
             if (!await Helpers.FileStream.SaveFile(LibraryConstants.DatabaseFile, comicFiles)) { return false; }
