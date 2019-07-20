@@ -32,6 +32,7 @@ namespace ComicsShelf.Helpers
             .Where(prop => prop.Length == 2)
             .Select(prop => new { Key = prop[0], Value = prop[1] })
             .ToDictionary(k => k.Key, v => v.Value);
+         dict.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
          TrackEvent(text, dict);
       }
 
@@ -39,7 +40,7 @@ namespace ComicsShelf.Helpers
       {
          var trackProp = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerMemberName", callerMemberName }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
          if (ex.InnerException != null) { trackProp.Add("InnerException", ex.InnerException.Message); }
-         trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}-{Xamarin.Essentials.DeviceInfo.Manufacturer}-{Xamarin.Essentials.DeviceInfo.Model}");
+         trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
          Crashes.TrackError(ex, trackProp);
       }
 
