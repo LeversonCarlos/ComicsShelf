@@ -5,6 +5,7 @@
       private const string NotifyKey = "LibraryChangeNotify";
 
       #region New
+      public NotifyVM() { }
       public NotifyVM(string subscribeKey)
       {
          Subscribe($"{NotifyKey}.{subscribeKey}", val =>
@@ -55,7 +56,10 @@
 
       #region Send
 
-      private string[] GetNotifyKeys(Libraries.LibraryModel library)
+      private static string GetNotifyKey()
+      { return $"{NotifyKey}.General"; }
+
+      private static string[] GetNotifyKeys(Libraries.LibraryModel library)
       {
          return new string[] {
             $"{NotifyKey}.General",
@@ -69,23 +73,26 @@
          this.Details = string.Empty;
          this.Progress = 0;
          this.IsRunning = true;
-         foreach (var notifyKey in this.GetNotifyKeys(library)) { Send(notifyKey, this); }
+         foreach (var notifyKey in GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
       public void Send(Libraries.LibraryModel library, string details, double progress)
       {
          this.Details = details;
          this.Progress = progress;
-         foreach (var notifyKey in this.GetNotifyKeys(library)) { Send(notifyKey, this); }
+         foreach (var notifyKey in GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
       public void Send(Libraries.LibraryModel library, bool isRunning)
       {
          this.IsRunning = isRunning;
-         foreach (var notifyKey in this.GetNotifyKeys(library)) { Send(notifyKey, this); }
+         foreach (var notifyKey in GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
-      private static void Send(string key, NotifyVM value)
+      public static void Send(NotifyVM value)
+      { Messaging.Send(GetNotifyKey(), value); }
+
+      public static void Send(string key, NotifyVM value)
       { Messaging.Send(key, value); }
 
       private static void Subscribe(string key, System.Action<NotifyVM> callback)

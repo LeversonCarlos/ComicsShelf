@@ -11,7 +11,7 @@ namespace ComicsShelf.Engines.OneDrive
       {
          try
          {
-            if (!await this.Connector.ConnectAsync()) { return false; }
+            if (!await this.Connector.TryConnectAsync()) { return false; }
             if (!await this.HasStoragePermission()) { return false; }
             return true;
          }
