@@ -10,10 +10,8 @@ namespace ComicsShelf.Engines.OneDrive
       public async Task<bool> TryConnectAsync()
       {
          try
-         {
-            return await this.ConnectAsync();
-         }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
+         { return await this.ConnectAsync(); }
+         catch { return false; }
       }
 
    }

@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.OneDrive.Files;
-using Xamarin.OneDrive.Profile;
 
 namespace ComicsShelf.Engines.OneDrive
 {
@@ -17,9 +16,6 @@ namespace ComicsShelf.Engines.OneDrive
          {
 
             if (!await this.Connector.TryConnectAsync()) { resultCallback.Invoke(null); return; }
-
-            var profile = await this.Connector.GetProfileAsync();
-            if (profile == null) { resultCallback.Invoke(null); return; }
 
             var root = await this.Connector.GetDetailsAsync();
             var initialFolder = new Helpers.Folder { Key = root.id, FullPath = "/", Name = "/" };
