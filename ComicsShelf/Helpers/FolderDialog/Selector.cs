@@ -24,16 +24,20 @@ namespace ComicsShelf.Helpers.FolderDialog
             // HOOK UP EVENT FOR ITEM SELECTION
             vm.OnItemSelected += async (sender, item) =>
             {
-               vm.IsBusy = true;
-               var folderChilds = await getFolderChilds(item);
-               vm.Data.ReplaceRange(folderChilds);
-               if (((Folder)item).FullPath != initialFolder.FullPath)
+               try
                {
-                  var parent = new Folder { Name = "..", Key = vm.CurrentItem.Key, FullPath = vm.CurrentItem.FullPath };
-                  vm.Data.Insert(0, parent);
+                  vm.IsBusy = true;
+                  var folderChilds = await getFolderChilds(item);
+                  vm.Data.ReplaceRange(folderChilds);
+                  if (((Folder)item).FullPath != initialFolder.FullPath)
+                  {
+                     var parent = new Folder { Name = "..", Key = vm.CurrentItem.Key, FullPath = vm.CurrentItem.FullPath };
+                     vm.Data.Insert(0, parent);
+                  }
+                  vm.CurrentItem = item;
                }
-               vm.CurrentItem = item;
-               vm.IsBusy = false;
+               catch { }
+               finally { vm.IsBusy = false; }
             };
 
             // SHOW DIALOG
