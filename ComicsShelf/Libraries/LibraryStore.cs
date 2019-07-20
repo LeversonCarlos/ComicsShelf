@@ -16,11 +16,20 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-
-            // CREATE NEW LIBRARY THRUGH ENGINE
             var engine = Engines.Engine.Get(libraryType);
             if (engine == null) { return; }
-            var library = await engine.NewLibrary();
+
+            Notify.NotifyVM.Send(new Notify.NotifyVM { IsRunning = true, Text = R.Strings.LIBRARY_WAITING_FOR_NEW_LIBRARY_MESSAGE });
+            engine.NewLibrary(async (library) => await NewLibrary(library));
+            Shell.Current.FlyoutIsPresented = false;
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+      private async Task NewLibrary(LibraryModel library)
+      {
+         try
+         {
             if (library == null) { return; }
 
             // STORE LIBRARY MODEL
@@ -44,6 +53,7 @@ namespace ComicsShelf.Libraries
 
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
+         finally { Notify.NotifyVM.Send(new Notify.NotifyVM { IsRunning = false, Text = "" }); }
       }
 
       public ShellItem AddShell(LibraryModel library)
@@ -56,7 +66,7 @@ namespace ComicsShelf.Libraries
 
             var shellContent = new ShellContent
             {
-               Route = $"content", 
+               Route = $"content",
                Title = library.Description,
                BindingContext = libraryVM,
                ContentTemplate = new DataTemplate(typeof(LibraryPage))

@@ -196,6 +196,15 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for new library.
+        /// </summary>
+        public static string LIBRARY_WAITING_FOR_NEW_LIBRARY_MESSAGE {
+            get {
+                return ResourceManager.GetString("LIBRARY_WAITING_FOR_NEW_LIBRARY_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Local Library.
         /// </summary>
         public static string NEW_LOCAL_LIBRARY_COMMAND {

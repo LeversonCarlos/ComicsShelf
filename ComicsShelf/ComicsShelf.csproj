@@ -32,7 +32,6 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />  
     <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.2.91" />  
     <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.2.91" />  
-    <PackageReference Include="Xamarin.OneDrive.Connector.Profile" Version="0.2.91" />
     <PackageReference Include="HttpZipStream" Version="0.2.84" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />

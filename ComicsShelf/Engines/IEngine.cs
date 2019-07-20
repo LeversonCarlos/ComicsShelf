@@ -10,7 +10,7 @@ namespace ComicsShelf.Engines
    internal interface IEngine
    {
       Task<bool> Validate(Libraries.LibraryModel library);
-      Task<Libraries.LibraryModel> NewLibrary();
+      void NewLibrary(System.Action<Libraries.LibraryModel> resultCallback);
       Task<bool> DeleteLibrary(Libraries.LibraryModel library);
 
       Task<byte[]> LoadSyncData(Libraries.LibraryModel library);

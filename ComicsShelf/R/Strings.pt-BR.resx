@@ -162,6 +162,9 @@
   <data name="LIBRARY_REMOVE_CONFIRM_MESSAGE" xml:space="preserve">
     <value>Confirme a remoção desta biblioteca? (os arquivos em quadrinhos em si não serão tocados)</value>
   </data>
+  <data name="LIBRARY_WAITING_FOR_NEW_LIBRARY_MESSAGE" xml:space="preserve">
+    <value>Aguardando nova biblioteca</value>
+  </data>
   <data name="NEW_LOCAL_LIBRARY_COMMAND" xml:space="preserve">
     <value>Nova Biblioteca Local</value>
   </data>

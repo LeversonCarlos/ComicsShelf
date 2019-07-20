@@ -19,6 +19,7 @@ namespace ComicsShelf.Libraries
          this.Notify = new Notify.NotifyVM("General");
          this.Libraries = new Dictionary<string, LibraryModel>();
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
+         Messaging.Subscribe<LibraryModel>("OnRefreshLibrary", async (library) => await this.OnRefreshLibrary(library));
       }
 
 
@@ -66,11 +67,14 @@ namespace ComicsShelf.Libraries
       public static async Task RefreshLibrary(LibraryModel library)
       {
          try
-         {
-            var service = DependencyService.Get<LibraryService>();
-            if (service == null) { return; }
-            await RefreshLibrary(service, library);
-         }
+         { Messaging.Send("OnRefreshLibrary", library); }
+         catch (Exception ex) { await App.ShowMessage(ex); }
+      }
+
+      private async Task OnRefreshLibrary(LibraryModel library)
+      {
+         try
+         { await RefreshLibrary(this, library); }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
@@ -382,8 +386,8 @@ namespace ComicsShelf.Libraries
                .ToList();
             if (duplicatedFiles != null && duplicatedFiles.Count != 0)
             {
-               Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.FoundDuplicity", 
-                  $"NewFiles:{newFiles.Count()}", 
+               Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.FoundDuplicity",
+                  $"NewFiles:{newFiles.Count()}",
                   $"DuplicatedFiles:{duplicatedFiles.Count}");
                foreach (var duplicatedFile in duplicatedFiles)
                {
@@ -393,8 +397,8 @@ namespace ComicsShelf.Libraries
             }
 
             var endTime = DateTime.Now;
-            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search", 
-               $"ElapsedSeconds:{((int)(endTime-startTime).TotalSeconds)}", 
+            Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search",
+               $"ElapsedSeconds:{((int)(endTime - startTime).TotalSeconds)}",
                $"NewFiles:{newFiles.Count()}");
 
             return true;

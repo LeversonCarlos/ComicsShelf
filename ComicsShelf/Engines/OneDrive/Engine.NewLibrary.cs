@@ -4,22 +4,18 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.OneDrive.Files;
-using Xamarin.OneDrive.Profile;
 
 namespace ComicsShelf.Engines.OneDrive
 {
    partial class OneDriveEngine
    {
 
-      public async Task<LibraryModel> NewLibrary()
+      public async void NewLibrary(Action<LibraryModel> resultCallback)
       {
          try
          {
 
-            if (!await this.Connector.ConnectAsync()) { return null; }
-
-            var profile = await this.Connector.GetProfileAsync();
-            if (profile == null) { return null; }
+            if (!await this.Connector.TryConnectAsync()) { resultCallback.Invoke(null); return; }
 
             var root = await this.Connector.GetDetailsAsync();
             var initialFolder = new Helpers.Folder { Key = root.id, FullPath = "/", Name = "/" };
@@ -43,7 +39,7 @@ namespace ComicsShelf.Engines.OneDrive
                   .ToArray();
                return folderList;
             });
-            if (selectedFolder == null) { return null; }
+            if (selectedFolder == null) { resultCallback.Invoke(null); return; }
 
             var library = new LibraryModel
             {
@@ -57,10 +53,11 @@ namespace ComicsShelf.Engines.OneDrive
             if (!string.IsNullOrEmpty(library.LibraryPath))
             { library.LibraryPath += "/"; }
 
-            return library;
+            resultCallback.Invoke(library);
 
          }
-         catch (Exception ex) { await App.ShowMessage(ex); return null; }
+         catch (Exception ex) { await App.ShowMessage(ex); resultCallback.Invoke(null); }
+         finally { GC.Collect(); }
       }
 
       public async Task<bool> DeleteLibrary(LibraryModel library)
