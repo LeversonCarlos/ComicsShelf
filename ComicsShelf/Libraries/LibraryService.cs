@@ -491,26 +491,32 @@ namespace ComicsShelf.Libraries
                   var progress = ((double)fileIndex / (double)filesQuantity);
                   this.Notify.Send(library, comicFile.ComicFile.FullText, progress);
 
-                  // CACHE PATH
-                  if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
-                  { comicFile.CachePath = comicFile.ComicFile.CachePath; }
-                  else { comicFile.CachePath = string.Empty; }
-
-                  // CHECK IF THE COVER FILE ALREADY EXISTS
-                  if (!string.IsNullOrEmpty(comicFile.CoverPath) && comicFile.CoverPath != LibraryConstants.DefaultCover)
-                  { continue; }
-                  if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
+                  var coverResult = await Task.Run<bool>(async () =>
                   {
-                     comicFile.CoverPath = comicFile.ComicFile.CoverPath;
-                     if (comicFile.ComicFile.ReleaseDate == DateTime.MinValue)
-                     { comicFile.ComicFile.ReleaseDate = System.IO.File.GetLastWriteTime(comicFile.CoverPath); }
-                     continue;
-                  }
 
-                  // COVER EXTRACT
-                  if (await Task.Run<bool>(async () => await engine.ExtractCover(library, comicFile.ComicFile)))
-                  { comicFile.CoverPath = comicFile.ComicFile.CoverPath; }
-                  else { return false; }
+                     // CACHE PATH
+                     if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
+                     { comicFile.CachePath = comicFile.ComicFile.CachePath; }
+                     else { comicFile.CachePath = string.Empty; }
+
+                     // CHECK IF THE COVER FILE ALREADY EXISTS
+                     if (!string.IsNullOrEmpty(comicFile.CoverPath) && comicFile.CoverPath != LibraryConstants.DefaultCover)
+                     { return true; }
+                     if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
+                     {
+                        comicFile.CoverPath = comicFile.ComicFile.CoverPath;
+                        if (comicFile.ComicFile.ReleaseDate == DateTime.MinValue)
+                        { comicFile.ComicFile.ReleaseDate = System.IO.File.GetLastWriteTime(comicFile.CoverPath); }
+                        return true;
+                     }
+
+                     // COVER EXTRACT
+                     if (await engine.ExtractCover(library, comicFile.ComicFile))
+                     { comicFile.CoverPath = comicFile.ComicFile.CoverPath; return true; }
+                     else { return false; }
+
+                  });
+                  if (!coverResult) { return false; }
 
                   // STATISTCS
                   if (lastFolderPath != comicFile.ComicFile.FolderPath)
