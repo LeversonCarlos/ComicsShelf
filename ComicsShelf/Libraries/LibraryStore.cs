@@ -30,7 +30,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            if (library == null) { return; }
+            if (library == null) { Notify.NotifyVM.Send(new Notify.NotifyVM { IsRunning = false, Text = "" }); return; }
 
             // STORE LIBRARY MODEL
             library.ID = Guid.NewGuid().ToString();
@@ -52,8 +52,11 @@ namespace ComicsShelf.Libraries
             await LibraryService.RefreshLibrary(library);
 
          }
-         catch (Exception ex) { await App.ShowMessage(ex); }
-         finally { Notify.NotifyVM.Send(new Notify.NotifyVM { IsRunning = false, Text = "" }); }
+         catch (Exception ex)
+         {
+            await App.ShowMessage(ex);
+            Notify.NotifyVM.Send(new Notify.NotifyVM { IsRunning = false, Text = "" });
+         }
       }
 
       public ShellItem AddShell(LibraryModel library)

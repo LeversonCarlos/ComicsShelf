@@ -74,7 +74,7 @@ namespace ComicsShelf.Libraries
       private async Task OnRefreshLibrary(LibraryModel library)
       {
          try
-         { await RefreshLibrary(this, library); }
+         { await Task.Factory.StartNew(async () => await RefreshLibrary(this, library), TaskCreationOptions.LongRunning); }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
@@ -508,7 +508,7 @@ namespace ComicsShelf.Libraries
                   }
 
                   // COVER EXTRACT
-                  if (await engine.ExtractCover(library, comicFile.ComicFile))
+                  if (await Task.Run<bool>(async () => await engine.ExtractCover(library, comicFile.ComicFile)))
                   { comicFile.CoverPath = comicFile.ComicFile.CoverPath; }
                   else { return false; }
 

@@ -80,6 +80,7 @@
       {
          this.Details = details;
          this.Progress = progress;
+         this.IsRunning = true;
          foreach (var notifyKey in GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
