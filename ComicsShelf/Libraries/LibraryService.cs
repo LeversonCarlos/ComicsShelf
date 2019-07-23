@@ -11,9 +11,12 @@ namespace ComicsShelf.Libraries
       private const string generalRecentFilesKey = "General.RecentFiles";
       private const string generalReadingFilesKey = "General.ReadingFiles";
 
+      #region Constructor 
+
       private readonly Notify.NotifyVM Notify;
       public readonly Dictionary<string, LibraryModel> Libraries;
       public readonly Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles;
+
       public LibraryService()
       {
          this.Notify = new Notify.NotifyVM("General");
@@ -21,6 +24,9 @@ namespace ComicsShelf.Libraries
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
          Messaging.Subscribe<LibraryModel>("OnRefreshLibrary", async (library) => await this.OnRefreshLibrary(library));
       }
+
+      #endregion
+
 
       #region StartupLibrary
 
@@ -139,6 +145,7 @@ namespace ComicsShelf.Libraries
       #endregion
 
 
+      #region LoadAndSave
 
       private async Task<bool> LoadData(LibraryModel library)
       {
@@ -174,6 +181,30 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
+      private async Task<bool> SaveData(LibraryModel library)
+      {
+         try
+         {
+
+            var comicFiles = this.ComicFiles[library.ID]
+               .Select(x => x.ComicFile)
+               .GroupBy(x => x.Key)
+               .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })
+               .Select(x => x.Item)
+               .ToList();
+            if (comicFiles == null) { return true; }
+
+            if (!await Helpers.FileStream.SaveFile(LibraryConstants.DatabaseFile, comicFiles)) { return false; }
+            return true;
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
+      }
+
+
+      #endregion
+
+      #region NotifyData
+
       private async Task<bool> NotifyData(LibraryModel library)
       {
          try
@@ -193,6 +224,8 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
+
+      #endregion
 
       private async Task<bool> LoadSyncData(LibraryModel library)
       {
@@ -570,24 +603,6 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
-      private async Task<bool> SaveData(LibraryModel library)
-      {
-         try
-         {
-
-            var comicFiles = this.ComicFiles[library.ID]
-               .Select(x => x.ComicFile)
-               .GroupBy(x => x.Key)
-               .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })
-               .Select(x => x.Item)
-               .ToList();
-            if (comicFiles == null) { return true; }
-
-            if (!await Helpers.FileStream.SaveFile(LibraryConstants.DatabaseFile, comicFiles)) { return false; }
-            return true;
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); return false; }
-      }
 
    }
 }
