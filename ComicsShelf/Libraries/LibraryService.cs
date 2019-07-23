@@ -227,6 +227,8 @@ namespace ComicsShelf.Libraries
 
       #endregion
 
+      #region SyncData
+
       private async Task<bool> LoadSyncData(LibraryModel library)
       {
          try
@@ -254,6 +256,17 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
+
+      private async Task<bool> SaveSyncData(LibraryModel library)
+      {
+         try
+         {
+            var comicFiles = this.ComicFiles[library.ID].Select(x => x.ComicFile).ToList();
+            return await LibrarySync.SaveSyncData(library, comicFiles);
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
+      }
+      #endregion
 
       #region Statistics
 
@@ -385,6 +398,8 @@ namespace ComicsShelf.Libraries
 
       #endregion
 
+      #region SearchData
+
       private async Task<bool> SearchData(LibraryModel library)
       {
          try
@@ -456,6 +471,8 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
          finally { GC.Collect(); }
       }
+
+      #endregion
 
       #region ExtractData
 
@@ -592,17 +609,6 @@ namespace ComicsShelf.Libraries
       }
 
       #endregion
-
-      private async Task<bool> SaveSyncData(LibraryModel library)
-      {
-         try
-         {
-            var comicFiles = this.ComicFiles[library.ID].Select(x => x.ComicFile).ToList();
-            return await LibrarySync.SaveSyncData(library, comicFiles);
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); return false; }
-      }
-
 
    }
 }
