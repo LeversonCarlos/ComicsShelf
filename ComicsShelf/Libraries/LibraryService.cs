@@ -22,6 +22,7 @@ namespace ComicsShelf.Libraries
          Messaging.Subscribe<LibraryModel>("OnRefreshLibrary", async (library) => await this.OnRefreshLibrary(library));
       }
 
+      #region StartupLibrary
 
       public static async Task StartupLibrary(LibraryModel library)
       {
@@ -63,6 +64,9 @@ namespace ComicsShelf.Libraries
          finally { GC.Collect(); }
       }
 
+      #endregion
+
+      #region RefreshLibrary
 
       public static async Task RefreshLibrary(LibraryModel library)
       {
@@ -93,12 +97,15 @@ namespace ComicsShelf.Libraries
             if (!await service.Statistics(library)) { return; }
             if (!await service.SaveSyncData(library)) { return; }
             if (!await service.SaveData(library)) { return; }
-            service.Notify.Send(library, false);
+
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
-         finally { GC.Collect(); }
+         finally { service.Notify.Send(library, false); GC.Collect(); }
       }
 
+      #endregion
+
+      #region UpdateLibrary
 
       public async Task UpdateLibrary(LibraryModel library)
       {
@@ -112,6 +119,10 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
+      #endregion
+
+      #region RemoveLibrary
+
       public static async Task RemoveLibrary(LibraryModel library)
       {
          try
@@ -124,6 +135,8 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
+
+      #endregion
 
 
 
@@ -208,6 +221,8 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
+
+      #region Statistics
 
       private async Task<bool> Statistics(LibraryModel library)
       {
@@ -335,6 +350,8 @@ namespace ComicsShelf.Libraries
          catch (Exception) { throw; }
       }
 
+      #endregion
+
       private async Task<bool> SearchData(LibraryModel library)
       {
          try
@@ -406,6 +423,8 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
          finally { GC.Collect(); }
       }
+
+      #region ExtractData
 
       private async Task<bool> ExtractData(LibraryModel library)
       {
@@ -487,6 +506,9 @@ namespace ComicsShelf.Libraries
                try
                {
 
+                  // CHECK IF LIBRARY IS STILL AVAILABLED
+                  if (library.Removed) { return false; }
+
                   // PROGRESS
                   var progress = ((double)fileIndex / (double)filesQuantity);
                   this.Notify.Send(library, comicFile.ComicFile.FullText, progress);
@@ -535,6 +557,8 @@ namespace ComicsShelf.Libraries
          catch (Exception) { throw; }
          finally { GC.Collect(); }
       }
+
+      #endregion
 
       private async Task<bool> SaveSyncData(LibraryModel library)
       {
