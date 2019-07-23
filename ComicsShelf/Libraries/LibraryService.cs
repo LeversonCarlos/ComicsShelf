@@ -559,6 +559,9 @@ namespace ComicsShelf.Libraries
                   // CHECK IF LIBRARY IS STILL AVAILABLED
                   if (library.Removed) { return false; }
 
+                  // CHECK IF THE APP HAS GONE SLEEP
+                  if (this.suspended) { return true; }
+
                   // PROGRESS
                   var progress = ((double)fileIndex / (double)filesQuantity);
                   this.Notify.Send(library, comicFile.ComicFile.FullText, progress);
@@ -606,6 +609,43 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception) { throw; }
          finally { GC.Collect(); }
+      }
+
+      #endregion
+
+      #region SleepAndResume
+
+      private bool suspended = false;
+      private bool suspending = false;
+
+      public void Sleep()
+      {
+         suspending = true;
+         var timer = new System.Timers.Timer(10000);
+         timer.AutoReset = false;
+         timer.Elapsed += (object sender, System.Timers.ElapsedEventArgs e) =>
+         {
+            timer.Stop();
+            if (suspending) { suspended = true; }
+            timer.Dispose();
+            timer = null;
+         };
+         timer.Start();
+      }
+
+      public async Task Resume()
+      {
+         try
+         {
+            suspending = false;
+            if (suspended)
+            {
+               suspended = false;
+               foreach (var library in this.Libraries)
+               { await RefreshLibrary(library.Value); }
+            }
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
       #endregion

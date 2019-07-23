@@ -26,12 +26,13 @@ namespace ComicsShelf
 
       protected override void OnSleep()
       {
-         // Handle when your app sleeps
+         DependencyService.Get<Libraries.LibraryService>().Sleep();
       }
 
-      protected override void OnResume()
+      protected override async void OnResume()
       {
-         // Handle when your app resumes
+         await DependencyService.Get<Libraries.LibraryService>().Resume();
       }
+
    }
 }
