@@ -14,8 +14,7 @@
     <AssemblyName>ComicsShelf.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <BuildVersion>0</BuildVersion>
-    <Version>1.7.$(BuildVersion)</Version>
+    <Version>1.01.000</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
