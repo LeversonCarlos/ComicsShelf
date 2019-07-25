@@ -28,6 +28,28 @@ namespace ComicsShelf.Libraries
       #endregion
 
 
+      #region InitializeLibrary
+      private void InitializeLibrary(LibraryModel library)
+      {
+         try
+         {
+
+            if (!this.ComicFiles.ContainsKey(library.ID))
+            { this.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>()); }
+
+            if (!this.Libraries.ContainsKey(library.ID))
+            { this.Libraries.Add(library.ID, library); }
+
+            if (!System.IO.Directory.Exists(LibraryConstants.CoversCachePath))
+            { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
+            if (!System.IO.Directory.Exists(LibraryConstants.FilesCachePath))
+            { System.IO.Directory.CreateDirectory(LibraryConstants.FilesCachePath); }
+
+         }
+         catch { }
+      }
+      #endregion
+
       #region StartupLibrary
 
       public static async Task StartupLibrary(LibraryModel library)
@@ -46,25 +68,25 @@ namespace ComicsShelf.Libraries
          try
          {
             service.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE}");
+            var comicsCount = "0";
 
-            if (!service.ComicFiles.ContainsKey(library.ID))
-            { service.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>()); }
-
-            if (!System.IO.Directory.Exists(LibraryConstants.CoversCachePath))
-            { System.IO.Directory.CreateDirectory(LibraryConstants.CoversCachePath); }
-            if (!System.IO.Directory.Exists(LibraryConstants.FilesCachePath))
-            { System.IO.Directory.CreateDirectory(LibraryConstants.FilesCachePath); }
-
-            if (!service.Libraries.ContainsKey(library.ID))
-            { service.Libraries.Add(library.ID, library); }
-
+            service.InitializeLibrary(library);
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.LoadData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.NotifyData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.Statistics(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.LoadSyncData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.NotifyData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.Statistics(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             service.Notify.Send(library, false);
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
+            Helpers.AppCenter.TrackEvent("StartupLibrary", $"comicsCount:{comicsCount}");
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
          finally { GC.Collect(); }
@@ -92,18 +114,30 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+            var comicsCount = "0";
+            service.InitializeLibrary(library);
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.SearchData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.LoadSyncData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.NotifyData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.Statistics(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.SaveSyncData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.SaveData(library)) { return; }
-
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.ExtractData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.Statistics(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.SaveSyncData(library)) { return; }
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.SaveData(library)) { return; }
-
+            comicsCount += $"{service.ComicFiles[library.ID].Count},";
+            Helpers.AppCenter.TrackEvent("RefreshLibrary", $"comicsCount:{comicsCount}");
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
          finally { service.Notify.Send(library, false); GC.Collect(); }
