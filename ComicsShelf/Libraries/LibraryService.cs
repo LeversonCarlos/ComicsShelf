@@ -114,7 +114,7 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            var comicsCount = "0";
+            var comicsCount = "0,";
             service.InitializeLibrary(library);
             comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.SearchData(library)) { return; }
