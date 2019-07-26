@@ -68,7 +68,7 @@ namespace ComicsShelf.Libraries
          try
          {
             service.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE}");
-            var comicsCount = "0";
+            var comicsCount = "0,";
 
             service.InitializeLibrary(library);
             comicsCount += $"{service.ComicFiles[library.ID].Count},";
@@ -190,12 +190,15 @@ namespace ComicsShelf.Libraries
             var files = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(LibraryConstants.DatabaseFile);
             if (files == null) { return true; }
 
+            var existingKeys = this.ComicFiles[library.ID].Select(x => x.ComicFile.Key).ToList();
             var comicFiles = files
                .Where(x => x.LibraryKey == library.ID)
+               .Where(x => !existingKeys.Contains(x.Key))
                .GroupBy(x => x.Key)
                .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })
                .Select(x => new ComicFiles.ComicFileVM(x.Item))
                .ToList();
+
             foreach (var comicFile in comicFiles)
             {
                if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
