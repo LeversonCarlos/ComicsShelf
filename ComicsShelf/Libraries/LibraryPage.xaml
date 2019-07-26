@@ -22,7 +22,7 @@
 
                   <StackLayout Padding="5,10,0,5" Spacing="5" >
                      <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="15" />
-                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
+                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="HorizontalList" 
                                      HeightRequest="{x:Static controls:CoverView.DefaultHeight}"
                                      ItemSizingStrategy="MeasureFirstItem" >
                         <CollectionView.ItemTemplate>
