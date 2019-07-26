@@ -34,5 +34,7 @@ namespace ComicsShelf.Libraries
          return this.KeyValues[key];
       }
 
+      public bool Removed { get; set; }
+
    }
 }

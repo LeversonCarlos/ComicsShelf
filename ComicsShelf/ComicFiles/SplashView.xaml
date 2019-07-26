@@ -82,7 +82,7 @@
                <CollectionView x:Name="filesCollectionView" 
                                ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single" 
                                HeightRequest="{x:Static controls:CoverView.DefaultHeight}"
-                               ItemsLayout="{x:Static ListItemsLayout.HorizontalList}" 
+                               ItemsLayout="HorizontalList"
                                ItemsSource="{Binding ComicFiles}" SelectedItem="{Binding CurrentFile}" >
                   <CollectionView.ItemTemplate>
                      <DataTemplate>

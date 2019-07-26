@@ -9,6 +9,9 @@ namespace ComicsShelf.Controls
       {
          this.VerticalOptions = LayoutOptions.End;
          this.Padding = new Thickness(50, 10);
+         if (Device.Idiom == TargetIdiom.Phone) {
+            this.Padding = new Thickness(5, 10);
+         }
 
          this.Activity = new ActivityIndicator { IsEnabled = true, IsVisible = true, IsRunning = true };
          this.Children.Add(this.Activity);

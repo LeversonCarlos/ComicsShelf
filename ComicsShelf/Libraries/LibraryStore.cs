@@ -111,6 +111,7 @@ namespace ComicsShelf.Libraries
             // LOCATE LIBRARY MODEL
             var libraryVM = libraryShell.Items[0].Items[0].BindingContext as LibraryVM;
             var library = libraryVM.Library;
+            library.Removed = true;
 
             // DELETE LIBRARY THROUGH ENGINE
             var engine = Engines.Engine.Get(library.Type);
