@@ -178,7 +178,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You dont have a library defined yet..
+        ///   Looks up a localized string similar to You don&apos;t have a library defined yet..
         /// </summary>
         public static string LIBRARY_EMPTY_MESSAGE_TITLE {
             get {
@@ -250,7 +250,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mark all as Readed.
+        ///   Looks up a localized string similar to Mark all as Read.
         /// </summary>
         public static string SPLASH_FILE_MARK_ALL_AS_READED_LABEL {
             get {
@@ -259,7 +259,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mark as Readed.
+        ///   Looks up a localized string similar to Mark as Read.
         /// </summary>
         public static string SPLASH_FILE_MARK_AS_READED_LABEL {
             get {
@@ -268,7 +268,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading covers for Featured comic files.
+        ///   Looks up a localized string similar to Extracting covers for Featured comic files.
         /// </summary>
         public static string STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE {
             get {
@@ -277,7 +277,7 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading covers for all Remaining comic files.
+        ///   Looks up a localized string similar to Extracting covers for all Remaining comic files.
         /// </summary>
         public static string STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE {
             get {
