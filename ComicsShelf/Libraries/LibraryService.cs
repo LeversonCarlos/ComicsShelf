@@ -337,6 +337,8 @@ namespace ComicsShelf.Libraries
             var recentFiles = this.ComicFiles[library.ID]
                .Where(file => file.ComicFile.Available)
                .Where(file => file.ComicFile.ReleaseDate != DateTime.MinValue)
+               .GroupBy(file => new { file.ComicFile.FolderPath, file.ComicFile.ReleaseDate.Year, file.ComicFile.ReleaseDate.Month, file.ComicFile.ReleaseDate.Day })
+               .Select(file => file.OrderByDescending(g=> g.ComicFile.ReleaseDate).FirstOrDefault())
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .Take(25)
                .ToList();
