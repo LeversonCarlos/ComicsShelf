@@ -121,78 +121,78 @@
     <value>Comics Shelf</value>
   </data>
   <data name="BASE_CANCEL_COMMAND" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="BASE_OK_COMMAND" xml:space="preserve">
-    <value>OK</value>
+    <value>Okay</value>
   </data>
   <data name="FILE_PAGESTATS_TEXT" xml:space="preserve">
-    <value>page {0} of {1}</value>
+    <value>página {0} de {1}</value>
   </data>
   <data name="FOLDER_DIALOG_CANCEL_COMMAND" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="FOLDER_DIALOG_CONFIRM_COMMAND" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Confirmar</value>
   </data>
   <data name="FOLDER_DIALOG_SELECTED_PATH_LABEL" xml:space="preserve">
-    <value>Selected folder:</value>
+    <value>Carpeta seleccionada:</value>
   </data>
   <data name="FOLDER_DIALOG_TITLE" xml:space="preserve">
-    <value>Folder Selector</value>
+    <value>Selector de carpetas</value>
   </data>
   <data name="HOME_MAIN_TITLE" xml:space="preserve">
-    <value>Featured Comics</value>
+    <value>Cómics destacados</value>
   </data>
   <data name="HOME_READING_FILES_SECTION_TITLE" xml:space="preserve">
-    <value>Continue Reading</value>
+    <value>Sigue leyendo</value>
   </data>
   <data name="HOME_RECENT_FILES_SECTION_TITLE" xml:space="preserve">
-    <value>Recently Added Comics</value>
+    <value>Comics añadidos recientemente</value>
   </data>
   <data name="HOME_TOP_RATED_SECTION_TITLE" xml:space="preserve">
-    <value>Top Rated Comics</value>
+    <value>Cómics mejor calificados</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_INSTRUCTIONS" xml:space="preserve">
-    <value>Use the slider left menu to add a LOCAL or ONEDRIVE folder that contains your comic files (those with the CBZ extension).</value>
+    <value>Use el menú deslizante de la izquierda para agregar una carpeta LOCAL u ONEDRIVE que contenga sus archivos de historietas (aquellos con la extensión CBZ).</value>
   </data>
   <data name="LIBRARY_EMPTY_MESSAGE_TITLE" xml:space="preserve">
-    <value>You don't have a library defined yet.</value>
+    <value>Aún no tienes una biblioteca definida.</value>
   </data>
   <data name="LIBRARY_REMOVE_CONFIRM_MESSAGE" xml:space="preserve">
-    <value>Confirm removing this library ? (the comic files itself won't be touched)</value>
+    <value>Confirmar la eliminación de esta biblioteca? (los archivos de historietas en sí no serán tocados)</value>
   </data>
   <data name="LIBRARY_WAITING_FOR_NEW_LIBRARY_MESSAGE" xml:space="preserve">
-    <value>Waiting for new library</value>
+    <value>Esperando nueva biblioteca</value>
   </data>
   <data name="NEW_LOCAL_LIBRARY_COMMAND" xml:space="preserve">
-    <value>New Local Library</value>
+    <value>Nueva biblioteca local</value>
   </data>
   <data name="NEW_ONEDRIVE_LIBRARY_COMMAND" xml:space="preserve">
-    <value>New OneDrive Library</value>
+    <value>Nueva biblioteca OneDrive</value>
   </data>
   <data name="SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE" xml:space="preserve">
-    <value>Loading current database data</value>
+    <value>Cargando datos de la base de datos actual</value>
   </data>
   <data name="SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE" xml:space="preserve">
-    <value>Searching for comic files on your libraries</value>
+    <value>Buscando archivos de historietas en sus bibliotecas</value>
   </data>
   <data name="SPLASH_FILE_CLEAR_COMIC_CACHE_MESSAGE" xml:space="preserve">
-    <value>Clear current comic local cache from your device</value>
+    <value>Borre la memoria caché local actual de su dispositivo</value>
   </data>
   <data name="SPLASH_FILE_MARK_ALL_AS_READED_LABEL" xml:space="preserve">
-    <value>Mark all as Read</value>
+    <value>Marcar todo como leído</value>
   </data>
   <data name="SPLASH_FILE_MARK_AS_READED_LABEL" xml:space="preserve">
-    <value>Mark as Read</value>
+    <value>Marcar como leído</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_FEATURED_FILES_MESSAGE" xml:space="preserve">
-    <value>Extracting covers for Featured comic files</value>
+    <value>Carga de portadas para archivos de cómic destacados</value>
   </data>
   <data name="STARTUP_ENGINE_EXTRACTING_DATA_REMAINING_FILES_MESSAGE" xml:space="preserve">
-    <value>Extracting covers for all Remaining comic files</value>
+    <value>Extracción de portada para todos los archivos de historietas restantes</value>
   </data>
   <data name="STARTUP_ENGINE_LOADING_DATABASE_MESSAGE" xml:space="preserve">
-    <value>Loading database</value>
+    <value>Cargando base de datos</value>
   </data>
 </root>
