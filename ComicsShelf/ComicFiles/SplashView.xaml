@@ -70,8 +70,8 @@
 
             <StackLayout VerticalOptions="End" Padding="5" FlexLayout.Shrink="0" >
                <CollectionView x:Name="filesCollectionView" 
-                               ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single" 
-                               HeightRequest="{x:Static controls:CoverView.DefaultHeight}"
+                               ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single"
+                               HeightRequest="{x:Static controls:CoverView.DefaultSplashHeight}"
                                ItemsLayout="HorizontalList"
                                ItemsSource="{Binding ComicFiles}" SelectedItem="{Binding CurrentFile}" >
                   <CollectionView.ItemTemplate>
