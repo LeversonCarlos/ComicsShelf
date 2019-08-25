@@ -23,8 +23,12 @@ namespace ComicsShelf.Controls
             NumberOfTapsRequired = 2
          });
 
+         Xamarin.Essentials.OrientationSensor.ReadingChanged +=
+            (object sender, Xamarin.Essentials.OrientationSensorChangedEventArgs e) => { this.OnImageResize(); };
+         /*
          Xamarin.Essentials.DeviceDisplay.MainDisplayInfoChanged +=
             (object sender, Xamarin.Essentials.DisplayInfoChangedEventArgs e) => { this.OnImageResize(); };
+            */
 
          this.OnImageResize();
       }

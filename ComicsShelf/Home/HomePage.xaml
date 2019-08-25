@@ -17,7 +17,7 @@
 
                      <StackLayout Margin="0" Padding="0" Spacing="0" IsVisible="{Binding HasComicFiles}" >
                         <Label Text="{Binding FolderPath}" IsVisible="{Binding HasComicFiles}" 
-                            FontAttributes="Bold"  FontSize="15" />
+                               FontAttributes="Bold" FontSize="15" LineBreakMode="MiddleTruncation" />
 
                         <FlexLayout IsVisible="{Binding HasComicFiles}" BindableLayout.ItemsSource="{Binding ComicFiles}"
                                  Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Start" >

@@ -27,7 +27,7 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.618606" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.709244" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />  
     <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.2.91" />  
     <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.2.91" />  

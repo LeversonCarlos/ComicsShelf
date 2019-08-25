@@ -117,6 +117,7 @@ namespace ComicsShelf.Controls
       }
 
 
+      public static double DefaultSplashHeight { get; set; }
       public static double DefaultHeight { get; set; }
       public static double DefaultWidth { get; set; }
       public static void InitDefaultSize()
@@ -128,6 +129,10 @@ namespace ComicsShelf.Controls
             var itemsPerLine = (Device.Idiom == TargetIdiom.Phone ? 3 : 5);
             CoverView.DefaultWidth = ((int)(displayWidth - 15) / itemsPerLine) - 5;
             CoverView.DefaultHeight = ((int)CoverView.DefaultWidth * 1.53);
+
+            CoverView.DefaultSplashHeight = CoverView.DefaultHeight;
+            if (Device.Idiom == TargetIdiom.Phone)
+            { CoverView.DefaultSplashHeight = CoverView.DefaultHeight * 0.67; }
          }
          catch (System.Exception) { throw; }
       }

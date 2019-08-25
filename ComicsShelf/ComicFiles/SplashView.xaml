@@ -16,17 +16,7 @@
          <FlexLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Direction="Column"
                      IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}">
 
-            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" FlexLayout.Grow="1" >
-               <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="10*"></ColumnDefinition>
-                  <ColumnDefinition Width="80*"></ColumnDefinition>
-                  <ColumnDefinition Width="10*"></ColumnDefinition>
-               </Grid.ColumnDefinitions>
-               <Grid.RowDefinitions>
-                  <RowDefinition Height="15*"></RowDefinition>
-                  <RowDefinition Height="70*"></RowDefinition>
-                  <RowDefinition Height="15*"></RowDefinition>
-               </Grid.RowDefinitions>
+            <controls:SplashMainCoverGrid FlexLayout.Grow="1" >
 
                <Frame HasShadow="True" Padding="0" Grid.Column="1" Grid.Row="1" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" >
                   <FlexLayout Padding="10" Direction="Column">
@@ -71,7 +61,7 @@
                   </FlexLayout>
                </Frame>
 
-            </Grid>
+            </controls:SplashMainCoverGrid>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" FlexLayout.Shrink="0" >
                <Switch VerticalOptions="Center" IsToggled="{Binding IsAllReaded}" />
@@ -80,8 +70,8 @@
 
             <StackLayout VerticalOptions="End" Padding="5" FlexLayout.Shrink="0" >
                <CollectionView x:Name="filesCollectionView" 
-                               ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single" 
-                               HeightRequest="{x:Static controls:CoverView.DefaultHeight}"
+                               ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single"
+                               HeightRequest="{x:Static controls:CoverView.DefaultSplashHeight}"
                                ItemsLayout="HorizontalList"
                                ItemsSource="{Binding ComicFiles}" SelectedItem="{Binding CurrentFile}" >
                   <CollectionView.ItemTemplate>
