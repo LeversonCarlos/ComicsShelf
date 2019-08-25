@@ -44,14 +44,10 @@ namespace ComicsShelf.ComicFiles
             if (comicFile == null) { await App.ShowMessage("ComicKey wasnt found on library collection"); return; }
 
             this.BindingContext = new ReadingVM(comicFile);
+            if (!Xamarin.Essentials.OrientationSensor.IsMonitoring)
+            { Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default); }
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
-      }
-
-      protected override void OnAppearing()
-      {
-         base.OnAppearing();
-         Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default);
       }
 
       protected override async void OnDisappearing()

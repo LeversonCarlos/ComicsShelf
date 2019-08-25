@@ -53,6 +53,8 @@ namespace ComicsShelf.ComicFiles
          try
          {
             base.OnAppearing();
+            if (!Xamarin.Essentials.OrientationSensor.IsMonitoring)
+            { Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default); }
 
             var currentFile = (this.BindingContext as SplashVM).CurrentFile;
             this.filesCollectionView.ScrollTo(currentFile);
@@ -103,6 +105,7 @@ namespace ComicsShelf.ComicFiles
 
       protected override void OnDisappearing()
       {
+         Xamarin.Essentials.OrientationSensor.Stop();
          Messaging.Unsubscribe("", "OnComicFileOpening");
          Messaging.Unsubscribe("", "OnComicFileOpened");
          base.OnDisappearing();
