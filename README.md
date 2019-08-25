@@ -54,6 +54,7 @@ https://play.google.com/store/apps/details?id=com.friendship.ComicsShelf
 ## Authors
 
 * [Leverson Carlos](https://github.com/LeversonCarlos)
+* [François-Joseph du Fou](https://github.com/FJduFou) (french translation)
 
 ## License
 
