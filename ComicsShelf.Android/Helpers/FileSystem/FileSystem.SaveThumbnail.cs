@@ -41,7 +41,7 @@ namespace ComicsShelf.Droid
 
             }
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }
