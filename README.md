@@ -25,13 +25,13 @@ Happy reading.
 ## Some screenshots
 
 <p align="center">
-  <img src="./resources/Screenshots/Phone/05.PNG" 
+  <img src="./metadata/en-US/images/phoneScreenshots/2.png" 
      title="Comics Shelf on Phone" width="108" height="192" />
-  <img src="./resources/Screenshots/Phone/06.PNG" 
+  <img src="./metadata/en-US/images/phoneScreenshots/1.png" 
      title="Opened Comic on Phone" width="108" height="192" />  
-  <img src="./resources/Screenshots/Phone/01.PNG" 
-     title="Empty Library on Phone" width="108" height="192" />  
-  <img src="./resources/Screenshots/Tablet10/05.PNG" 
+  <img src="./metadata/en-US/images/phoneScreenshots/3.png" 
+     title="Multiple Libraries" width="108" height="192" />  
+  <img src="./metadata/en-US/images/tenInchScreenshots/2.png" 
      title="Opened Comic on Tablet" width="314" height="192" />    
 </p>
 
@@ -54,7 +54,7 @@ https://play.google.com/store/apps/details?id=com.friendship.ComicsShelf
 ## Authors
 
 * [Leverson Carlos](https://github.com/LeversonCarlos)
-* [François-Joseph du Fou](https://github.com/FJduFou) (french translation)
+* [other contributors](https://github.com/LeversonCarlos/ComicsShelf/graphs/contributors)
 
 ## License
 
