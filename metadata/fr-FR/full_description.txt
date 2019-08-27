@@ -1,0 +1,15 @@
+Dites bonjour à votre dernier lecteur de bande dessinée.
+
+L'histoire de cette application est très intéressante.
+Je suis un lecteur de bandes dessinées (et collectionneur) depuis longtemps. Et, en tant que développeur, je voulais étudier et apprendre un nouveau langage de programmation (dans ce cas, Xamarin). J'ai donc décidé de créer un lecteur de fichiers CBZ qui répondrait à mes besoins.
+Le résultat me satisfaisant déjà, j'ai décidé de publier l'application dans le magasin pour faciliter la distribution aux amis qui ont commencé à me demander de l'installer sur leurs appareils.
+En fait, c’est le résultat d’un travail d’apprentissage réalisé avec amour et dévouement. Tous les critiques et suggestions seront les bienvenus.
+
+C'est vraiment simple.
+Sélectionnez et le dossier sur votre appareil où vous mettez vos bandes dessinées (ces fichiers CBZ).
+L'application recherchera en permanence dans votre dossier les fichiers récemment ajoutés.
+Extrayez ensuite les couvercles et affichez-les comme une étagère pour les yeux.
+Vous cliquez sur celui que vous voulez lire et commencez à feuilleter les pages.
+L'application apprendra de vos habitudes de lecture et vous suggérera d'autres bandes dessinées de votre bibliothèque.
+
+Bonne lecture.
