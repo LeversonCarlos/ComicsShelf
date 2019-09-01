@@ -19,7 +19,7 @@ namespace ComicsShelf.Helpers
             "ios={Your iOS App secret here}" +
             */
             "",
-            typeof(Analytics), typeof(Crashes));
+            typeof(Analytics), typeof(Crashes));         
       }
 
       public static void TrackEvent(string text)

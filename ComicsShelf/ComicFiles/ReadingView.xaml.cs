@@ -35,6 +35,7 @@ namespace ComicsShelf.ComicFiles
          try
          {
             if (string.IsNullOrEmpty(this.LibraryID) || string.IsNullOrEmpty(this.ComicKey)) { return; }
+            if (this.BindingContext != null) { return; }
             var libraryService = DependencyService.Get<Libraries.LibraryService>();
             if (!libraryService.ComicFiles.ContainsKey(this.LibraryID)) { await App.ShowMessage("LibraryID wasnt found on library collection"); return; }
 
@@ -56,6 +57,7 @@ namespace ComicsShelf.ComicFiles
          {
             Xamarin.Essentials.OrientationSensor.Stop();
             await (this.BindingContext as ReadingVM).ComicFile.UpdateLibrary();
+            this.BindingContext = null;
             base.OnDisappearing();
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
