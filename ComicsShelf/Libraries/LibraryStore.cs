@@ -43,7 +43,7 @@ namespace ComicsShelf.Libraries
             this.SetLibraryIDs(libraryIDs);
 
             // UPDATE SHELL
-            var shellItem = this.AddShell(library);
+            var shellItem = this.AddShell(library, false);
             Shell.Current.CurrentItem = shellItem;
             Shell.Current.FlyoutIsPresented = false;
 
@@ -59,7 +59,7 @@ namespace ComicsShelf.Libraries
          }
       }
 
-      public ShellItem AddShell(LibraryModel library)
+      public ShellItem AddShell(LibraryModel library, bool log)
       {
          var libraryLogs = new List<string>();
          try
@@ -77,7 +77,7 @@ namespace ComicsShelf.Libraries
                BindingContext = libraryVM,
                ContentTemplate = new DataTemplate(typeof(LibraryPage))
             };
-            if (shellContent != null) { libraryLogs.Add($"shellContent:{shellContent.ContentTemplate}"); }
+            if (shellContent != null) { libraryLogs.Add($"shellContent:{shellContent.BindingContext}"); }
 
             var shellSection = new ShellSection { Route = $"section", Title = library.Description };
             shellSection.Items.Add(shellContent);
@@ -93,7 +93,7 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception) { throw; }
          finally
-         { Helpers.AppCenter.TrackEvent("Libraries.AddShell", libraryLogs.ToArray()); }
+         { if (log) Helpers.AppCenter.TrackEvent("Libraries.AddShell", libraryLogs.ToArray()); }
       }
 
 
@@ -155,12 +155,11 @@ namespace ComicsShelf.Libraries
             foreach (var libraryID in libraryIDs)
             {
                var libraryJSON = Xamarin.Essentials.Preferences.Get(libraryID, "");
-               Helpers.AppCenter.TrackEvent("LoadLibraries.libraryID", libraryID, libraryJSON);
                if (!string.IsNullOrEmpty(libraryJSON))
                { libraries.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON)); }
             }
 
-            foreach (var library in libraries) { this.AddShell(library); }
+            foreach (var library in libraries) { this.AddShell(library, true); }
 
             await Task.Factory.StartNew(async () => await this.LoadLibraries(libraries), TaskCreationOptions.LongRunning);
          }
