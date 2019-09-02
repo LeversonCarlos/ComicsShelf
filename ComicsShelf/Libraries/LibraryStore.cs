@@ -61,10 +61,13 @@ namespace ComicsShelf.Libraries
 
       public ShellItem AddShell(LibraryModel library)
       {
+         var libraryLogs = new List<string>();
          try
          {
+            if (library != null) { libraryLogs.Add($"ID:{library.ID}"); }
 
             var libraryVM = new LibraryVM(library);
+            if (libraryVM != null) { libraryLogs.Add($"libraryVM:{libraryVM.Title}"); }
             var libraryRoute = $"lib{library.ID}";
 
             var shellContent = new ShellContent
@@ -74,18 +77,23 @@ namespace ComicsShelf.Libraries
                BindingContext = libraryVM,
                ContentTemplate = new DataTemplate(typeof(LibraryPage))
             };
+            if (shellContent != null) { libraryLogs.Add($"shellContent:{shellContent.ContentTemplate}"); }
 
             var shellSection = new ShellSection { Route = $"section", Title = library.Description };
             shellSection.Items.Add(shellContent);
+            if (shellSection != null) { libraryLogs.Add($"shellSection:{shellSection.Items.Count}"); }
 
             var shellItem = new ShellItem { Route = libraryRoute, Title = library.Description, Icon = $"icon_{library.Type.ToString()}.png" };
             shellItem.Items.Add(shellSection);
+            if (shellItem != null) { libraryLogs.Add($"shellItem:{shellItem.Items.Count}"); }
 
             Shell.Current.Items.Insert(1, shellItem);
             return shellItem;
 
          }
          catch (Exception) { throw; }
+         finally
+         { Helpers.AppCenter.TrackEvent("Libraries.AddShell", libraryLogs.ToArray()); }
       }
 
 
@@ -147,6 +155,7 @@ namespace ComicsShelf.Libraries
             foreach (var libraryID in libraryIDs)
             {
                var libraryJSON = Xamarin.Essentials.Preferences.Get(libraryID, "");
+               Helpers.AppCenter.TrackEvent("LoadLibraries.libraryID", libraryID, libraryJSON);
                if (!string.IsNullOrEmpty(libraryJSON))
                { libraries.Add(Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON)); }
             }
