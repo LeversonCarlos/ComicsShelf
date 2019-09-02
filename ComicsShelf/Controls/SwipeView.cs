@@ -17,7 +17,6 @@ namespace ComicsShelf.Controls
          this.LastPosition = -1;
          this.PositionSelected += this.OnPositionSelected;
          this.ArrowsBackgroundColor = Helpers.Colors.Accent;
-
          this.GestureRecognizers.Add(new TapGestureRecognizer
          {
             Command = new Command((param) =>
