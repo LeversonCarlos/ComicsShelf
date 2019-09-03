@@ -624,7 +624,7 @@ namespace ComicsShelf.Libraries
                         else { return false; }
 
                      }
-                     catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
+                     catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
                      finally { GC.Collect(); }
                   });
                   if (!coverResult) { return false; }
