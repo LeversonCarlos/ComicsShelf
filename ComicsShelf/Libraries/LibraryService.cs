@@ -312,10 +312,8 @@ namespace ComicsShelf.Libraries
          try
          {
 
+            // SKIP IF USER IS READING 
             var currentState = Shell.Current.CurrentState.Location.ToString();
-            var currentRoute = Shell.Current.CurrentItem.Route;
-            Helpers.AppCenter.TrackEvent("Statistics.Start", $"currentRoute:{currentRoute}", $"currentState:{currentState}");
-            if (currentState.Contains("splash")) { return true; }
             if (currentState.Contains("reading")) { return true; }
 
             // READING FILES
