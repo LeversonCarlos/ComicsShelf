@@ -237,7 +237,6 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
-
       #endregion
 
       #region NotifyData
@@ -303,6 +302,7 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
+
       #endregion
 
       #region Statistics
@@ -311,6 +311,11 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+
+            var currentRoute = Shell.Current.CurrentItem.Route;
+            Helpers.AppCenter.TrackEvent("Statistics.Start", $"currentRoute:{currentRoute}");
+            if (currentRoute.StartsWith("splash")) { return true; }
+            if (currentRoute.StartsWith("reading")) { return true; }
 
             // READING FILES
             var readingFiles = this.Statistics_GetReadingFiles(library);
@@ -338,7 +343,7 @@ namespace ComicsShelf.Libraries
                .Where(file => file.ComicFile.Available)
                .Where(file => file.ComicFile.ReleaseDate != DateTime.MinValue)
                .GroupBy(file => new { file.ComicFile.FolderPath, file.ComicFile.ReleaseDate.Year, file.ComicFile.ReleaseDate.Month, file.ComicFile.ReleaseDate.Day })
-               .Select(file => file.OrderByDescending(g=> g.ComicFile.ReleaseDate).FirstOrDefault())
+               .Select(file => file.OrderByDescending(g => g.ComicFile.ReleaseDate).FirstOrDefault())
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .Take(25)
                .ToList();
