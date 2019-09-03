@@ -13,6 +13,7 @@ namespace ComicsShelf.Engines.OneDrive
       {
          try
          {
+            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return false; }
 
             var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
             if (string.IsNullOrEmpty(downloadUrl)) { return false; }
