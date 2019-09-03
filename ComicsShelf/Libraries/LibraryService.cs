@@ -312,10 +312,11 @@ namespace ComicsShelf.Libraries
          try
          {
 
+            var currentState = Shell.Current.CurrentState.Location.ToString();
             var currentRoute = Shell.Current.CurrentItem.Route;
-            Helpers.AppCenter.TrackEvent("Statistics.Start", $"currentRoute:{currentRoute}");
-            if (currentRoute.StartsWith("splash")) { return true; }
-            if (currentRoute.StartsWith("reading")) { return true; }
+            Helpers.AppCenter.TrackEvent("Statistics.Start", $"currentRoute:{currentRoute}", $"currentState:{currentState}");
+            if (currentState.Contains("splash")) { return true; }
+            if (currentState.Contains("reading")) { return true; }
 
             // READING FILES
             var readingFiles = this.Statistics_GetReadingFiles(library);
