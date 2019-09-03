@@ -59,7 +59,7 @@ namespace ComicsShelf.Engines.OneDrive
 
             return (System.IO.File.Exists(comicFile.CoverPath));
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
       }
 
    }
