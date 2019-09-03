@@ -33,7 +33,8 @@ namespace ComicsShelf.Helpers
             .Select(prop => new { Key = prop[0], Value = prop[1] })
             .ToDictionary(k => k.Key, v => v.Value);
          dict.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
-         TrackEvent(text, dict);
+         if (Xamarin.Essentials.DeviceInfo.Name == "MI PAD 3")
+         { TrackEvent(text, dict); }
       }
 
       public static void TrackEvent(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
