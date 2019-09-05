@@ -6,6 +6,7 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Main.MenuPage"
+   x:Name="menuPage"
    Title="Menu">
    <ContentPage.Content>
       <StackLayout VerticalOptions="FillAndExpand" >
@@ -19,6 +20,9 @@
                <DataTemplate>
                   <StackLayout>
                      <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                        <FlexLayout.GestureRecognizers>
+                           <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.ItemSelectCommand, Source={x:Reference menuPage} }" CommandParameter="{Binding .}" ></TapGestureRecognizer>
+                        </FlexLayout.GestureRecognizers>
                         <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
                         <Label Text="{Binding Text}" FontSize="Default" ></Label>
                      </FlexLayout>
@@ -34,6 +38,9 @@
                   <StackLayout>
                      <BoxView Color="Silver" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
                      <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                        <FlexLayout.GestureRecognizers>
+                           <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.ItemSelectCommand, Source={x:Reference menuPage} }" CommandParameter="{Binding .}" ></TapGestureRecognizer>
+                        </FlexLayout.GestureRecognizers>
                         <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
                         <Label Text="{Binding Text}" FontSize="Default" ></Label>
                      </FlexLayout>
