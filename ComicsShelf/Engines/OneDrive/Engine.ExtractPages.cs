@@ -23,6 +23,7 @@ namespace ComicsShelf.Engines.OneDrive
             var cacheFilePath = $"{comicFile.CachePath}.zip";
             if (!File.Exists(cacheFilePath))
             {
+               if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
                var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
                if (string.IsNullOrEmpty(downloadUrl)) { return null; }
                using (var downloadClient = new System.Net.Http.HttpClient())

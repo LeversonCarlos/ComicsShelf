@@ -68,25 +68,15 @@ namespace ComicsShelf.Libraries
          try
          {
             service.Notify.Send(library, $"{library.Description}: {R.Strings.STARTUP_ENGINE_LOADING_DATABASE_MESSAGE}");
-            var comicsCount = "0,";
 
             service.InitializeLibrary(library);
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.LoadData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.NotifyData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.Statistics(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.LoadSyncData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.NotifyData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             if (!await service.Statistics(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
             service.Notify.Send(library, false);
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            Helpers.AppCenter.TrackEvent("StartupLibrary", $"comicsCount:{comicsCount}");
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
          finally { GC.Collect(); }
@@ -106,40 +96,38 @@ namespace ComicsShelf.Libraries
       private async Task OnRefreshLibrary(LibraryModel library)
       {
          try
-         { await Task.Factory.StartNew(async () => await RefreshLibrary(this, library), TaskCreationOptions.LongRunning); }
+         {
+            await Task.Factory.StartNew(async () =>
+            {
+               var result = await RefreshLibrary(this, library);
+               if (!result)
+               {
+                  await Task.Delay(15000);
+                  await RefreshLibrary(library);
+               }
+            }, TaskCreationOptions.LongRunning);
+         }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
-      private static async Task RefreshLibrary(LibraryService service, LibraryModel library)
+      private static async Task<bool> RefreshLibrary(LibraryService service, LibraryModel library)
       {
          try
          {
-            var comicsCount = "0,";
             service.InitializeLibrary(library);
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.SearchData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.LoadSyncData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.NotifyData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.Statistics(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.SaveSyncData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.SaveData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.ExtractData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.Statistics(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.SaveSyncData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            if (!await service.SaveData(library)) { return; }
-            comicsCount += $"{service.ComicFiles[library.ID].Count},";
-            Helpers.AppCenter.TrackEvent("RefreshLibrary", $"comicsCount:{comicsCount}");
+            if (!await service.SearchData(library)) { return false; }
+            if (!await service.LoadSyncData(library)) { return false; }
+            if (!await service.NotifyData(library)) { return false; }
+            if (!await service.Statistics(library)) { return false; }
+            if (!await service.SaveSyncData(library)) { return false; }
+            if (!await service.SaveData(library)) { return false; }
+            if (!await service.ExtractData(library)) { return false; }
+            if (!await service.Statistics(library)) { return false; }
+            if (!await service.SaveSyncData(library)) { return false; }
+            if (!await service.SaveData(library)) { return false; }
+            return true;
          }
-         catch (Exception ex) { await App.ShowMessage(ex); }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
          finally { service.Notify.Send(library, false); GC.Collect(); }
       }
 
@@ -237,7 +225,6 @@ namespace ComicsShelf.Libraries
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
-
       #endregion
 
       #region NotifyData
@@ -303,6 +290,7 @@ namespace ComicsShelf.Libraries
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
+
       #endregion
 
       #region Statistics
@@ -311,6 +299,10 @@ namespace ComicsShelf.Libraries
       {
          try
          {
+
+            // SKIP IF USER IS READING 
+            var currentState = Shell.Current.CurrentState.Location.ToString();
+            if (currentState.Contains("reading")) { return true; }
 
             // READING FILES
             var readingFiles = this.Statistics_GetReadingFiles(library);
@@ -338,7 +330,7 @@ namespace ComicsShelf.Libraries
                .Where(file => file.ComicFile.Available)
                .Where(file => file.ComicFile.ReleaseDate != DateTime.MinValue)
                .GroupBy(file => new { file.ComicFile.FolderPath, file.ComicFile.ReleaseDate.Year, file.ComicFile.ReleaseDate.Month, file.ComicFile.ReleaseDate.Day })
-               .Select(file => file.OrderByDescending(g=> g.ComicFile.ReleaseDate).FirstOrDefault())
+               .Select(file => file.OrderByDescending(g => g.ComicFile.ReleaseDate).FirstOrDefault())
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .Take(25)
                .ToList();
@@ -607,28 +599,33 @@ namespace ComicsShelf.Libraries
 
                   var coverResult = await Task.Run<bool>(async () =>
                   {
-
-                     // CACHE PATH
-                     if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
-                     { comicFile.CachePath = comicFile.ComicFile.CachePath; }
-                     else { comicFile.CachePath = string.Empty; }
-
-                     // CHECK IF THE COVER FILE ALREADY EXISTS
-                     if (!string.IsNullOrEmpty(comicFile.CoverPath) && comicFile.CoverPath != LibraryConstants.DefaultCover)
-                     { return true; }
-                     if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
+                     try
                      {
-                        comicFile.CoverPath = comicFile.ComicFile.CoverPath;
-                        if (comicFile.ComicFile.ReleaseDate == DateTime.MinValue)
-                        { comicFile.ComicFile.ReleaseDate = System.IO.File.GetLastWriteTime(comicFile.CoverPath); }
-                        return true;
+
+                        // CACHE PATH
+                        if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
+                        { comicFile.CachePath = comicFile.ComicFile.CachePath; }
+                        else { comicFile.CachePath = string.Empty; }
+
+                        // CHECK IF THE COVER FILE ALREADY EXISTS
+                        if (!string.IsNullOrEmpty(comicFile.CoverPath) && comicFile.CoverPath != LibraryConstants.DefaultCover)
+                        { return true; }
+                        if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
+                        {
+                           comicFile.CoverPath = comicFile.ComicFile.CoverPath;
+                           if (comicFile.ComicFile.ReleaseDate == DateTime.MinValue)
+                           { comicFile.ComicFile.ReleaseDate = System.IO.File.GetLastWriteTime(comicFile.CoverPath); }
+                           return true;
+                        }
+
+                        // COVER EXTRACT
+                        if (await engine.ExtractCover(library, comicFile.ComicFile))
+                        { comicFile.CoverPath = comicFile.ComicFile.CoverPath; return true; }
+                        else { return false; }
+
                      }
-
-                     // COVER EXTRACT
-                     if (await engine.ExtractCover(library, comicFile.ComicFile))
-                     { comicFile.CoverPath = comicFile.ComicFile.CoverPath; return true; }
-                     else { return false; }
-
+                     catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
+                     finally { GC.Collect(); }
                   });
                   if (!coverResult) { return false; }
 
