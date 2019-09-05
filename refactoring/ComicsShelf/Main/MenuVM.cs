@@ -12,7 +12,7 @@ namespace ComicsShelf.Main
       {
 
          this.ScreenItems = new ObservableList<MenuItem> {
-            new MenuItem { Type=enumMenuItemType.Home, Text=R.Strings.HOME_MAIN_TITLE, Image="tab_feed.png" },
+            new MenuItem { Type=enumMenuItemType.Home, Text=R.Strings.HOME_MAIN_TITLE, Image="icon_home.png" },
             new MenuItem { Type=enumMenuItemType.Library, Text="Meus Quadrinhos", Image="icon_OneDrive", Key="LibraryOne" },
             new MenuItem { Type=enumMenuItemType.Library, Text="Meus Outros Quadrinhos", Image="icon_LocalDrive", Key="LibraryTwo" }
          };
