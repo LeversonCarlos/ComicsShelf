@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -19,4 +19,17 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
+
+   <ItemGroup>
+      <Compile Update="R\Strings.Designer.cs">
+         <DesignTime>True</DesignTime>
+         <AutoGen>True</AutoGen>
+         <DependentUpon>Strings.resx</DependentUpon>
+      </Compile>
+      <EmbeddedResource Update="R\Strings.resx">
+         <Generator>PublicResXFileCodeGenerator</Generator>
+         <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+   </ItemGroup>
+  
 </Project>
