@@ -27,6 +27,9 @@
       <EmbeddedResource Update="Main\MenuPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
+      <EmbeddedResource Update="Main\MainPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <Compile Update="R\Strings.Designer.cs">
          <DesignTime>True</DesignTime>
          <AutoGen>True</AutoGen>
