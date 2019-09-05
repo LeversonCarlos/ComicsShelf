@@ -7,7 +7,7 @@ namespace ComicsShelf
 
       public static void Send(string key)
       {
-         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+         Device.BeginInvokeOnMainThread(() =>
          {
             MessagingCenter.Send<Application>(Application.Current, key);
          });
@@ -18,7 +18,7 @@ namespace ComicsShelf
 
       public static void Send<T>(string prefix, string key, T data)
       {
-         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+         Device.BeginInvokeOnMainThread(() =>
          {
             MessagingCenter.Send<Application, T>(Application.Current, $"{prefix}{key}", data);
          });
@@ -36,7 +36,6 @@ namespace ComicsShelf
 
       public static void Unsubscribe(string prefix, string key)
       { MessagingCenter.Unsubscribe<Application>(Application.Current, $"{prefix}{key}"); }
-
 
    }
 }
