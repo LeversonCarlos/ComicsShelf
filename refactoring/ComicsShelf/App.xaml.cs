@@ -22,16 +22,21 @@ namespace ComicsShelf
          this.MainPage = new Main.InitialPage();
 
          if (UseMockDataStore)
+         {
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<Store.ILibraryStore, Store.Mock.LibraryStore>();
+         }
          else
+         {
             DependencyService.Register<AzureDataStore>();
+         }
 
          this.MainPage = new Main.MainPage();
       }
 
-      protected override void OnStart()
+      protected async override void OnStart()
       {
-         // Handle when your app starts
+         await DependencyService.Get<Store.ILibraryStore>().LoadLibrariesAsync();
       }
 
       protected override void OnSleep()

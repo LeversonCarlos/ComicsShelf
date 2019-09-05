@@ -10,15 +10,17 @@ namespace ComicsShelf.Store.Mock
 
       public List<LibraryModel> Libraries { get; set; }
       public LibraryStore()
+      { this.Libraries = new List<LibraryModel>(); }
+
+      public async Task LoadLibrariesAsync()
       {
-         this.Libraries = new List<LibraryModel> {
-            new LibraryModel {
-               ID = Guid.NewGuid().ToString(),
-               Key = DateTime.Now.ToString("HHmmss"),
-               Description = $"Library {DateTime.Now.ToString("ssfff")}",
-               Type = LibraryType.LocalDrive
-            }
-         };
+         await this.AddLibraryAsync(new LibraryModel
+         {
+            ID = Guid.NewGuid().ToString(),
+            Key = DateTime.Now.ToString("HHmmss"),
+            Description = $"Library {DateTime.Now.ToString("ssfff")}",
+            Type = LibraryType.LocalDrive
+         });
       }
 
       public async Task<bool> NewLibraryAsync(LibraryType libraryType)

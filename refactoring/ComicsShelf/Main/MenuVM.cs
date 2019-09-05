@@ -1,6 +1,7 @@
 ﻿using ComicsShelf.Helpers.Observables;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Main
@@ -19,7 +20,7 @@ namespace ComicsShelf.Main
             new MenuItem { Type=enumMenuItemType.Command, Text=R.Strings.NEW_LOCAL_LIBRARY_COMMAND, Image="icon_LocalDrive_New", Key="LocalDrive" },
             new MenuItem { Type=enumMenuItemType.Command, Text=R.Strings.NEW_ONEDRIVE_LIBRARY_COMMAND, Image="icon_OneDrive_New", Key="OneDrive" },
          };
-         this.ItemSelectCommand = new Command((item) => this.ItemSelect(item as MenuItem));
+         this.ItemSelectCommand = new Command(async (item) => await this.ItemSelect(item as MenuItem));
 
          Messaging.Subscribe<Store.LibraryModel>(Messaging.enMessages.LibraryAdded.ToString(), (library) =>
          {
@@ -45,7 +46,7 @@ namespace ComicsShelf.Main
       public ObservableList<MenuItem> CommandItems { get; private set; }
 
       public Command ItemSelectCommand { get; set; }
-      private void ItemSelect(MenuItem item)
+      private async Task ItemSelect(MenuItem item)
       {
          try
          {
@@ -54,6 +55,8 @@ namespace ComicsShelf.Main
                case enumMenuItemType.Home:
                   return;
                case enumMenuItemType.Command:
+                  var libraryType = (item.Key == "OneDrive" ? Store.LibraryType.OneDrive : Store.LibraryType.LocalDrive);
+                  await DependencyService.Get<Store.ILibraryStore>().NewLibraryAsync(libraryType);
                   return;
                case enumMenuItemType.Library:
                   return;
