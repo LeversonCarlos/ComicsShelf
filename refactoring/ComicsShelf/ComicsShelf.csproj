@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Product>Comics Shelf</Product>
+    <Company>Friendship Solutions</Company>
+    <Copyright>Copyright © Friendship Solutions 2018</Copyright>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Version>1.1.000</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
