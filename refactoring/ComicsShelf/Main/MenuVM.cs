@@ -22,7 +22,7 @@ namespace ComicsShelf.Main
          };
          this.ItemSelectCommand = new Command(async (item) => await this.ItemSelect(item as MenuItem));
 
-         Messaging.Subscribe<Store.LibraryModel>(Messaging.enMessages.LibraryAdded.ToString(), (library) =>
+         Messaging.Subscribe<Store.LibraryModel>(Messaging.enMessages.LibraryAdded.ToString(), async (library) =>
          {
             this.ScreenItems.Add(new MenuItem
             {
@@ -33,11 +33,14 @@ namespace ComicsShelf.Main
             });
          });
 
-         Messaging.Subscribe<Store.LibraryModel>(Messaging.enMessages.LibraryRemoved.ToString(), (library) =>
+         Messaging.Subscribe<Store.LibraryModel>(Messaging.enMessages.LibraryRemoved.ToString(), async (library) =>
          {
             var screenItem = this.ScreenItems.Where(x => x.Type == enumMenuItemType.Library && x.Key == library.ID).FirstOrDefault();
             if (screenItem != null)
-            { this.ScreenItems.Remove(screenItem); }
+            {
+               this.ScreenItems.Remove(screenItem);
+               await App.NavigationPopToRootAsync();
+            }
          });
 
       }
@@ -54,16 +57,18 @@ namespace ComicsShelf.Main
             {
                case enumMenuItemType.Home:
                   await App.NavigationPopToRootAsync();
+                  App.NavigationHide();
                   return;
                case enumMenuItemType.Command:
                   var libraryType = (item.Key == "OneDrive" ? Store.LibraryType.OneDrive : Store.LibraryType.LocalDrive);
-                  await DependencyService.Get<Store.ILibraryStore>().NewLibraryAsync(libraryType);
+                  await DependencyService.Get<Store.ILibraryStore>().NewLibraryAsync(libraryType);                  
                   return;
                case enumMenuItemType.Library:
                   var library = await DependencyService.Get<Store.ILibraryStore>().GetLibraryAsync(item.Key);
                   var vm = new Library.LibraryVM(library);
                   var page = new Library.LibraryPage { BindingContext = vm };
                   await App.NavigationPushAsync(page);
+                  App.NavigationHide();
                   return;
             }
          }

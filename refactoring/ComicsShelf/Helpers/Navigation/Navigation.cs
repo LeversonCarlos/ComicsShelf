@@ -6,11 +6,17 @@ namespace ComicsShelf
    partial class App
    {
 
+      public static void NavigationHide()
+      {
+         var mainPage = Application.Current.MainPage as Main.MainPage;
+         mainPage.IsPresented = false;
+      }
+
       public static async Task NavigationPopToRootAsync()
       {
          var mainPage = Application.Current.MainPage as Main.MainPage;
          var navigationPage = mainPage.Detail as NavigationPage;
-         await navigationPage.Navigation.PopToRootAsync();
+         await navigationPage.Navigation.PopToRootAsync();         
       }
 
       public static async Task NavigationPushAsync(Page page)
