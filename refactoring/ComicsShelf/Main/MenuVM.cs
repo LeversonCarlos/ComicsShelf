@@ -53,12 +53,17 @@ namespace ComicsShelf.Main
             switch (item.Type)
             {
                case enumMenuItemType.Home:
+                  await App.NavigationPopToRootAsync();
                   return;
                case enumMenuItemType.Command:
                   var libraryType = (item.Key == "OneDrive" ? Store.LibraryType.OneDrive : Store.LibraryType.LocalDrive);
                   await DependencyService.Get<Store.ILibraryStore>().NewLibraryAsync(libraryType);
                   return;
                case enumMenuItemType.Library:
+                  var library = await DependencyService.Get<Store.ILibraryStore>().GetLibraryAsync(item.Key);
+                  var vm = new Library.LibraryVM(library);
+                  var page = new Library.LibraryPage { BindingContext = vm };
+                  await App.NavigationPushAsync(page);
                   return;
             }
          }

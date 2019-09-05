@@ -9,6 +9,7 @@ namespace ComicsShelf.Library
       public LibraryVM(Store.LibraryModel Library)
       {
          this.Library = Library;
+         this.Title = Library.Description;
       }
 
    }

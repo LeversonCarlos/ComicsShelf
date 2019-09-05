@@ -5,6 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:main="clr-namespace:ComicsShelf.Main"
+   xmlns:featured="clr-namespace:ComicsShelf.Featured"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Main.MainPage">
 
@@ -20,7 +21,7 @@
             </OnPlatform>
          </NavigationPage.Icon>
          <x:Arguments>
-            <main:InitialPage />
+            <featured:FeaturedPage />
          </x:Arguments>
       </NavigationPage>
    </MasterDetailPage.Detail>

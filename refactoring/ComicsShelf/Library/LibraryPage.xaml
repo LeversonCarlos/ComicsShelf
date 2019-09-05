@@ -10,7 +10,7 @@
    <ContentPage.Content>
 
       <FlexLayout VerticalOptions="FillAndExpand" Direction="Column" JustifyContent="Center" AlignItems="Center">
-         <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold" TextColor="Accent"></Label>
+         <Label Text="{Binding Library.Description}" FontSize="Title" TextColor="Accent"></Label>
       </FlexLayout>
 
    </ContentPage.Content>

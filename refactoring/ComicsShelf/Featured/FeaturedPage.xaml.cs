@@ -9,6 +9,7 @@ namespace ComicsShelf.Featured
       public FeaturedPage()
       {
          InitializeComponent();
+         this.BindingContext = new FeaturedVM();
       }
    }
 }
