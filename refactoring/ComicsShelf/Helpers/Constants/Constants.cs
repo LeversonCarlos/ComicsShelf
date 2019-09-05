@@ -1,6 +1,6 @@
-﻿namespace ComicsShelf.Libraries
+﻿namespace ComicsShelf.Helpers
 {
-   internal class LibraryConstants
+   internal class Constants
    {
 
       public static string DefaultCover

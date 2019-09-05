@@ -10,7 +10,7 @@ namespace ComicsShelf.Helpers
       {
          try
          {
-            if (System.IO.File.Exists(Libraries.LibraryConstants.DefaultCover)) { return; }
+            if (System.IO.File.Exists(Constants.DefaultCover)) { return; }
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             byte[] bytes = null;
@@ -21,7 +21,7 @@ namespace ComicsShelf.Helpers
             }
             if (bytes == null || bytes.Length == 0) { return; }
 
-            using (var streamWriter = new System.IO.FileStream(Libraries.LibraryConstants.DefaultCover, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            using (var streamWriter = new System.IO.FileStream(Constants.DefaultCover, System.IO.FileMode.Create, System.IO.FileAccess.Write))
             {
                await streamWriter.WriteAsync(bytes, 0, bytes.Length);
             }
