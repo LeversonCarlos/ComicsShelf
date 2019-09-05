@@ -24,20 +24,16 @@ namespace ComicsShelf.Engines.OneDrive
             if (!File.Exists(cacheFilePath))
             {
                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
-               using (var connector = new OneDriveConnector())
+               var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
+               if (string.IsNullOrEmpty(downloadUrl)) { return null; }
+               using (var downloadClient = new System.Net.Http.HttpClient())
                {
-                  if (! await connector.TryConnectAsync()) { return null; }
-                  var downloadUrl = await connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
-                  if (string.IsNullOrEmpty(downloadUrl)) { return null; }
-                  using (var downloadClient = new System.Net.Http.HttpClient())
+                  using (var downloadStream = await downloadClient.GetStreamAsync(downloadUrl))
                   {
-                     using (var downloadStream = await downloadClient.GetStreamAsync(downloadUrl))
+                     using (var fileStream = new FileStream(cacheFilePath, FileMode.CreateNew, FileAccess.ReadWrite))
                      {
-                        using (var fileStream = new FileStream(cacheFilePath, FileMode.CreateNew, FileAccess.ReadWrite))
-                        {
-                           await downloadStream.CopyToAsync(fileStream);
-                           await fileStream.FlushAsync();
-                        }
+                        await downloadStream.CopyToAsync(fileStream);
+                        await fileStream.FlushAsync();
                      }
                   }
                }

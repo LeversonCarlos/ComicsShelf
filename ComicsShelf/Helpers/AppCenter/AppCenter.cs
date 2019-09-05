@@ -35,8 +35,7 @@ namespace ComicsShelf.Helpers
             .ToDictionary(k => k.Key, v => v.Value);
          trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
          try { trackProp.Add("Route", $"{Xamarin.Forms.Shell.Current.CurrentState.Location.ToString()}"); } catch { }
-         if (Xamarin.Essentials.DeviceInfo.Name == "MI PAD 3")
-         { TrackEvent(text, trackProp); }
+         TrackEvent(text, trackProp);
       }
 
       public static void TrackEvent(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
