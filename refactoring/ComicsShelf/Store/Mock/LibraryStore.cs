@@ -36,13 +36,16 @@ namespace ComicsShelf.Store.Mock
       public async Task<bool> AddLibraryAsync(LibraryModel libraryModel)
       {
          this.Libraries.Add(libraryModel);
+         Messaging.Send(Messaging.enMessages.LibraryAdded.ToString(), libraryModel);
          return await Task.FromResult(true);
       }
 
       public async Task<bool> DeleteLibraryAsync(string id)
       {
-         var removed = this.Libraries.RemoveAll(x => x.ID == id);
-         return await Task.FromResult(removed > 0);
+         var libraryModel = this.Libraries.Where(x => x.ID == id).FirstOrDefault();
+         Messaging.Send(Messaging.enMessages.LibraryRemoved.ToString(), libraryModel);
+         var removed = this.Libraries.Remove(libraryModel);
+         return await Task.FromResult(removed);
       }
 
       public async Task<LibraryModel> GetLibraryAsync(string id)

@@ -4,6 +4,7 @@ namespace ComicsShelf
 {
    internal class Messaging
    {
+      public enum enMessages { LibraryAdded, LibraryRemoved }
 
       public static void Send(string key)
       {
