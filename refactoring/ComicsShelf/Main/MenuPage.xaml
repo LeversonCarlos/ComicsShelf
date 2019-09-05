@@ -8,30 +8,40 @@
    x:Class="ComicsShelf.Main.MenuPage"
    Title="Menu">
    <ContentPage.Content>
-      <FlexLayout VerticalOptions="FillAndExpand" Direction="Column" >
+      <StackLayout VerticalOptions="FillAndExpand" >
 
-         <ContentView HeightRequest="150" FlexLayout.Shrink="0">
-            <Grid>
-               <Image Aspect="AspectFill" Opacity="0.75" Source="banner_ComicsShelf"></Image>
-            </Grid>
-         </ContentView>
+         <Grid MinimumHeightRequest="150" VerticalOptions="Start">
+            <Image Aspect="AspectFill" Opacity="0.75" Source="banner_ComicsShelf"></Image>
+         </Grid>
 
-         <ListView HasUnevenRows="True" FlexLayout.Grow="1" ItemsSource="{Binding ScreenItems}">
-            <ListView.ItemTemplate>
+         <StackLayout VerticalOptions="FillAndExpand" BindableLayout.ItemsSource="{Binding ScreenItems}" >
+            <BindableLayout.ItemTemplate>
                <DataTemplate>
-                  <ImageCell ImageSource="{Binding Image}" Text="{Binding Text}" Command="{Binding ItemSelectCommand}" CommandParameter="{Binding .}"></ImageCell>
+                  <StackLayout>
+                     <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                        <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
+                        <Label Text="{Binding Text}" FontSize="Default" ></Label>
+                     </FlexLayout>
+                     <BoxView Color="Silver" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
+                  </StackLayout>
                </DataTemplate>
-            </ListView.ItemTemplate>
-         </ListView>
+            </BindableLayout.ItemTemplate>
+         </StackLayout>
 
-         <ListView HasUnevenRows="True" FlexLayout.Grow="0" ItemsSource="{Binding CommandItems}">
-            <ListView.ItemTemplate>
+         <StackLayout VerticalOptions="End" BindableLayout.ItemsSource="{Binding CommandItems}" >
+            <BindableLayout.ItemTemplate>
                <DataTemplate>
-                  <ImageCell ImageSource="{Binding Image}" Text="{Binding Text}" Command="{Binding ItemSelectCommand}" CommandParameter="{Binding .}"></ImageCell>
+                  <StackLayout>
+                     <BoxView Color="Silver" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
+                     <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                        <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
+                        <Label Text="{Binding Text}" FontSize="Default" ></Label>
+                     </FlexLayout>
+                  </StackLayout>
                </DataTemplate>
-            </ListView.ItemTemplate>
-         </ListView>
+            </BindableLayout.ItemTemplate>
+         </StackLayout>
 
-      </FlexLayout>
+      </StackLayout>
    </ContentPage.Content>
 </ContentPage>

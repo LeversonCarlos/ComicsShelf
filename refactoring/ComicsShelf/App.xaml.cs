@@ -19,12 +19,14 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
+         this.MainPage = new Main.InitialPage();
 
          if (UseMockDataStore)
             DependencyService.Register<MockDataStore>();
          else
             DependencyService.Register<AzureDataStore>();
-         MainPage = new MainPage();
+
+         this.MainPage = new Main.MainPage();
       }
 
       protected override void OnStart()
