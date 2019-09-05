@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace ComicsShelf.Main
 {
 
-   public class MenuVM : ObservableObject
+   public class MenuVM : BaseVM
    {
 
       public MenuVM()

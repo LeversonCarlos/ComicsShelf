@@ -5,12 +5,13 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
-   x:Class="ComicsShelf.Featured.FeaturedPage">
+   x:Class="ComicsShelf.Featured.FeaturedPage"
+   Title="{Binding Title}">
    <ContentPage.Content>
-      <StackLayout>
-         <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-      </StackLayout>
+
+      <FlexLayout VerticalOptions="FillAndExpand" Direction="Column" JustifyContent="Center" AlignItems="Center">
+         <Label Text="{Binding Library.Description}" FontSize="Title" FontAttributes="Bold" TextColor="Accent"></Label>
+      </FlexLayout>
+      
    </ContentPage.Content>
 </ContentPage>
