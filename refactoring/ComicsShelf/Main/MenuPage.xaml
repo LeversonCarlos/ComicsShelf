@@ -11,7 +11,7 @@
    <ContentPage.Content>
       <StackLayout VerticalOptions="FillAndExpand" >
 
-         <Grid MinimumHeightRequest="150" VerticalOptions="Start">
+         <Grid MinimumHeightRequest="200" VerticalOptions="Start">
             <Image Aspect="AspectFill" Opacity="0.75" Source="banner_ComicsShelf"></Image>
          </Grid>
 

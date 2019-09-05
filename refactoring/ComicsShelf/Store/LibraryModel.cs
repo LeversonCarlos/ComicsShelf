@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 
-namespace ComicsShelf.Libraries
+namespace ComicsShelf.Store
 {
    public enum LibraryType : short { LocalDrive = 0, OneDrive = 1 }
 
    public class LibraryModel
    {
-      public const string SyncFile_OLD = "ComicsShef.library";
       public const string SyncFile = "ComicsShelf.library";
 
       public LibraryModel()
       { this.KeyValues = new Dictionary<string, string>(); }
 
       public string ID { get; set; }
-      public string LibraryKey { get; set; }
-      public string LibraryPath { get; set; }
+      public string Key { get; set; }
+      public string Path { get; set; }
       public string Description { get; set; }
       public LibraryType Type { get; set; }
 
