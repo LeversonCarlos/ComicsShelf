@@ -11,20 +11,20 @@
    <ContentPage.Content>
       <StackLayout VerticalOptions="FillAndExpand" >
 
-         <Grid MinimumHeightRequest="200" VerticalOptions="Start">
-            <Image Aspect="AspectFill" Opacity="0.75" Source="banner_ComicsShelf"></Image>
+         <Grid HeightRequest="200" VerticalOptions="Start" HorizontalOptions="Fill" >
+            <Image Aspect="AspectFill" Source="banner_ComicsShelf"></Image>
          </Grid>
 
          <StackLayout VerticalOptions="FillAndExpand" BindableLayout.ItemsSource="{Binding ScreenItems}" >
             <BindableLayout.ItemTemplate>
                <DataTemplate>
                   <StackLayout>
-                     <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                     <FlexLayout AlignItems="Center" JustifyContent="Start">
                         <FlexLayout.GestureRecognizers>
                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.ItemSelectCommand, Source={x:Reference menuPage} }" CommandParameter="{Binding .}" ></TapGestureRecognizer>
                         </FlexLayout.GestureRecognizers>
                         <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
-                        <Label Text="{Binding Text}" FontSize="Default" ></Label>
+                        <Label Text="{Binding Text}" FontSize="Medium" ></Label>
                      </FlexLayout>
                      <BoxView Color="Silver" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
                   </StackLayout>
@@ -42,7 +42,7 @@
                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.ItemSelectCommand, Source={x:Reference menuPage} }" CommandParameter="{Binding .}" ></TapGestureRecognizer>
                         </FlexLayout.GestureRecognizers>
                         <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
-                        <Label Text="{Binding Text}" FontSize="Default" ></Label>
+                        <Label Text="{Binding Text}" FontSize="Medium" ></Label>
                      </FlexLayout>
                   </StackLayout>
                </DataTemplate>

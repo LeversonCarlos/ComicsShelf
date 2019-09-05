@@ -28,7 +28,7 @@ namespace ComicsShelf.Main
             {
                Key = library.ID,
                Type = enumMenuItemType.Library,
-               Image = $"icon_{Store.LibraryType.LocalDrive.ToString()}",
+               Image = $"icon_{library.Type.ToString()}",
                Text = library.Description
             });
          });
