@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Store.Mock
 {
-   public class LibraryStore : ILibraryStore
+   public class MockLibraryStore : ILibraryStore
    {
 
       public List<LibraryModel> Libraries { get; set; }
       public Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles { get; set; }
 
-      public LibraryStore()
+      public MockLibraryStore()
       {
          this.Libraries = new List<LibraryModel>();
          this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();

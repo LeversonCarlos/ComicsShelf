@@ -24,7 +24,7 @@ namespace ComicsShelf
          if (UseMockDataStore)
          {
             DependencyService.Register<MockDataStore>();
-            DependencyService.Register<Store.ILibraryStore, Store.Mock.LibraryStore>();
+            DependencyService.Register<Store.ILibraryStore, Store.Mock.MockLibraryStore>();
          }
          else
          {
