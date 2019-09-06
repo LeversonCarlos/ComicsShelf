@@ -82,9 +82,9 @@ namespace ComicsShelf.Store.Mock
          return true;
       }
 
-      public async Task<LibraryModel> GetLibraryAsync(string id)
+      public LibraryModel GetLibrary(string id)
       {
-         return await Task.FromResult(this.Libraries.FirstOrDefault(x => x.ID == id));
+         return this.Libraries.FirstOrDefault(x => x.ID == id);
       }
 
       public List<ComicFiles.ComicFileVM> GetLibraryFiles(LibraryModel library)

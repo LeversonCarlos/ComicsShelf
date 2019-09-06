@@ -64,7 +64,7 @@ namespace ComicsShelf.Main
                   await DependencyService.Get<Store.ILibraryStore>().NewLibraryAsync(libraryType);                  
                   return;
                case enumMenuItemType.Library:
-                  var library = await DependencyService.Get<Store.ILibraryStore>().GetLibraryAsync(item.Key);
+                  var library = DependencyService.Get<Store.ILibraryStore>().GetLibrary(item.Key);
                   var vm = new Library.LibraryVM(library);
                   var page = new Library.LibraryPage { BindingContext = vm };
                   await App.NavigationPushAsync(page);

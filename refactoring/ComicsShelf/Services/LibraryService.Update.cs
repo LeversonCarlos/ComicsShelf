@@ -1,10 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Services
 {
    partial class LibraryService
    {
+
+      internal static async void UpdateLibrary(ComicFiles.ComicFileVM comicFile)
+      {
+         var library = DependencyService.Get<Store.ILibraryStore>().GetLibrary(comicFile.ComicFile.LibraryKey);
+         using (var service = new LibraryService(library))
+         {
+            service.ReplaceLibraryFile(comicFile.ComicFile);
+            await service.UpdateLibrary();
+         }
+      }
 
       internal async Task<bool> UpdateLibrary()
       {
