@@ -124,7 +124,7 @@ namespace ComicsShelf.Store.Mock
 
       public async Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
       {
-         return await Task.FromResult(true);
+         return await Task.FromResult(false);
       }
 
    }

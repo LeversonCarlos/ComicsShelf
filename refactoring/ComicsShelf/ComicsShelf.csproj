@@ -90,6 +90,7 @@
 
    <ItemGroup>
      <Folder Include="ComicFiles\" />
+     <Folder Include="Controls\" />
    </ItemGroup>
   
 </Project>

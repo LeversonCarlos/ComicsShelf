@@ -12,11 +12,13 @@ namespace ComicsShelf.Library
 
       public readonly Store.LibraryModel Library;
       public ObservableList<ComicFolderVM> ComicFolders { get; private set; }
+      public Notify.NotifyVM Notify { get; private set; }
 
-      public LibraryVM(Store.LibraryModel Library)
+      public LibraryVM(Store.LibraryModel library)
       {
-         this.Library = Library;
-         this.Title = Library.Description;
+         this.Library = library;
+         this.Title = library.Description;
+         this.Notify = new Notify.NotifyVM(library.Key);
          this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.OnRefreshingList(DependencyService.Get<Store.ILibraryStore>().GetLibraryFiles(this.Library));
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
