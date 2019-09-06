@@ -7,7 +7,7 @@ namespace ComicsShelf.Store
 {
    public interface ILibraryStore
    {
-      Dictionary<string, LibraryModel> Libraries { get; set; }
+      List<LibraryModel> Libraries { get; set; }
       Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles { get; set; }
       Task LoadLibrariesAsync();
       Task<bool> NewLibraryAsync(LibraryType libraryType);
