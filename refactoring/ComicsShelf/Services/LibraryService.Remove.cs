@@ -12,9 +12,7 @@ namespace ComicsShelf.Services
          {
             this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
                .RemoveAll(x => x.ComicFile.LibraryKey == this.Library.ID);
-            if (!await this.Statistics()) { return false; }
-            if (!await this.SaveSyncData()) { return false; }
-            if (!await this.SaveData()) { return false; }
+            if (!await this.UpdateLibrary()) { return false; }
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }

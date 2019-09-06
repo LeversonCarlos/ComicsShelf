@@ -56,7 +56,6 @@ namespace ComicsShelf.Store.Mock
             Type = libraryType
          };
          if (!await this.AddLibraryAsync(library)) { return false; }
-         App.NavigationHide();
          using (var services = new Services.LibraryService(library))
          { await services.InitializeLibrary(); }
          Services.LibraryService.RefreshLibrary(library);
@@ -127,6 +126,7 @@ namespace ComicsShelf.Store.Mock
 
       public async Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
       {
+         await Task.Delay(5000);
          return await Task.FromResult(false);
       }
 

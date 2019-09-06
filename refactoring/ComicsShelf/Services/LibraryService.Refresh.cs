@@ -8,7 +8,7 @@ namespace ComicsShelf.Services
 
       internal static void RefreshLibrary(Store.LibraryModel library)
       {
-         Task.Factory.StartNew(async () =>
+         Task.Run(async () =>
          {
             using (var service = new LibraryService(library))
             {
