@@ -88,5 +88,10 @@ namespace ComicsShelf.Store.Mock
          return comicFiles;
       }
 
+      public async Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
+      {
+         return true;
+      }
+
    }
 }
