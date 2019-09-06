@@ -11,7 +11,7 @@ namespace ComicsShelf.Services
       {
          try
          {
-            Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", this.Library.ID, this.LibraryFiles);
+            Messaging.Send<List<ComicFiles.ComicFileVM>>("OnRefreshingList", this.Library.ID, this.GetLibraryFiles());
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }

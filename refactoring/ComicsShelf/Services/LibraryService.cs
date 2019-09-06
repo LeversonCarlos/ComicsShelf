@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Services
 {
    public partial class LibraryService : IDisposable
    {
-      private const string generalRecentFilesKey = "General.RecentFiles";
-      private const string generalReadingFilesKey = "General.ReadingFiles";
 
       readonly Store.LibraryModel Library;
       readonly Notify.NotifyVM Notify;
       readonly Store.ILibraryStore Store;
-      List<ComicFiles.ComicFileVM> LibraryFiles => this.Store.ComicFiles[this.Library.ID];
 
       public LibraryService(Store.LibraryModel Library)
       {
@@ -22,11 +20,14 @@ namespace ComicsShelf.Services
             this.Notify = new Notify.NotifyVM("General");
             this.Store = DependencyService.Get<Store.ILibraryStore>();
 
-            if (!this.Store.ComicFiles.ContainsKey(generalRecentFilesKey))
-            { this.Store.ComicFiles.Add(generalRecentFilesKey, new List<ComicFiles.ComicFileVM>()); }
+            if (!this.Store.LibraryFiles.ContainsKey(ComicsShelf.Store.enLibraryFilesGroup.Libraries))
+            { this.Store.LibraryFiles.Add(ComicsShelf.Store.enLibraryFilesGroup.Libraries, new List<ComicFiles.ComicFileVM>()); }
 
-            if (!this.Store.ComicFiles.ContainsKey(generalReadingFilesKey))
-            { this.Store.ComicFiles.Add(generalReadingFilesKey, new List<ComicFiles.ComicFileVM>()); }
+            if (!this.Store.LibraryFiles.ContainsKey(ComicsShelf.Store.enLibraryFilesGroup.RecentFiles))
+            { this.Store.LibraryFiles.Add(ComicsShelf.Store.enLibraryFilesGroup.RecentFiles, new List<ComicFiles.ComicFileVM>()); }
+
+            if (!this.Store.LibraryFiles.ContainsKey(ComicsShelf.Store.enLibraryFilesGroup.ReadingFiles))
+            { this.Store.LibraryFiles.Add(ComicsShelf.Store.enLibraryFilesGroup.ReadingFiles, new List<ComicFiles.ComicFileVM>()); }
 
             if (!System.IO.Directory.Exists(Helpers.Constants.CoversCachePath))
             { System.IO.Directory.CreateDirectory(Helpers.Constants.CoversCachePath); }
@@ -36,6 +37,19 @@ namespace ComicsShelf.Services
 
          }
          catch { }
+      }
+
+      private List<ComicFiles.ComicFileVM> GetLibraryFiles()
+      {
+         return this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
+            .Where(x => x.ComicFile.LibraryKey == this.Library.ID)
+            .ToList();
+      }
+
+      private void SetLibraryFiles(List<ComicFiles.ComicFileVM> files)
+      {
+         this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
+            .AddRange(files);
       }
 
       public void Dispose()

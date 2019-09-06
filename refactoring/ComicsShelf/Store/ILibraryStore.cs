@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Store
 {
+   public enum enLibraryFilesGroup : short { RecentFiles, ReadingFiles, Libraries };
    public interface ILibraryStore
    {
+
       List<LibraryModel> Libraries { get; set; }
-      Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles { get; set; }
+      Dictionary<enLibraryFilesGroup, List<ComicFiles.ComicFileVM>> LibraryFiles { get; set; }
+
       Task LoadLibrariesAsync();
       Task<bool> NewLibraryAsync(LibraryType libraryType);
       Task<bool> AddLibraryAsync(LibraryModel libraryModel);

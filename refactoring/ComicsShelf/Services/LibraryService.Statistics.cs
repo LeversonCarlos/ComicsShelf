@@ -33,7 +33,7 @@ namespace ComicsShelf.Services
          try
          {
 
-            var recentFiles = this.LibraryFiles
+            var recentFiles = this.GetLibraryFiles()
                .Where(file => file.ComicFile.Available)
                .Where(file => file.ComicFile.ReleaseDate != DateTime.MinValue)
                .GroupBy(file => new { file.ComicFile.FolderPath, file.ComicFile.ReleaseDate.Year, file.ComicFile.ReleaseDate.Month, file.ComicFile.ReleaseDate.Day })
@@ -42,7 +42,7 @@ namespace ComicsShelf.Services
                .Take(25)
                .ToList();
 
-            var generalFiles = this.Store.ComicFiles[generalRecentFilesKey]
+            var generalFiles = this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.RecentFiles]
                .Where(x => x.ComicFile.LibraryKey != this.Library.ID)
                .ToList();
 
@@ -50,9 +50,9 @@ namespace ComicsShelf.Services
                .Union(generalFiles)
                .OrderByDescending(x => x.ComicFile.ReleaseDate)
                .ToList();
-            this.Store.ComicFiles[generalRecentFilesKey] = recentFiles;
 
-            return recentFiles.OrderByDescending(x=> x.ComicFile.ReleaseDate).Take(50).ToList();
+            this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.RecentFiles] = recentFiles;
+            return recentFiles.Take(50).ToList();
          }
          catch (Exception) { throw; }
       }
@@ -62,7 +62,7 @@ namespace ComicsShelf.Services
          try
          {
 
-            var libraryFiles = this.LibraryFiles
+            var libraryFiles = this.GetLibraryFiles()
                .Where(file => file.ComicFile.Available);
 
             // GET LAST 10 OPENED FILES
@@ -116,7 +116,7 @@ namespace ComicsShelf.Services
                .ToList();
 
             // ATTACH GENERAL
-            var generalFiles = this.Store.ComicFiles[generalReadingFilesKey]
+            var generalFiles = this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.ReadingFiles]
                .Where(x => x.ComicFile.LibraryKey != this.Library.ID)
                .ToList();
             readingFiles = readingFiles
@@ -124,8 +124,8 @@ namespace ComicsShelf.Services
                .OrderByDescending(x => x.ReadingDate)
                .ToList();
 
-            this.Store.ComicFiles[generalReadingFilesKey] = readingFiles;
-            return readingFiles.OrderByDescending(x => x.ReadingDate).Take(10).ToList();            
+            this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.ReadingFiles] = readingFiles;
+            return readingFiles.Take(10).ToList();            
          }
          catch (Exception) { throw; }
       }

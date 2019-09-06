@@ -9,12 +9,12 @@ namespace ComicsShelf.Store.Mock
    {
 
       public List<LibraryModel> Libraries { get; set; }
-      public Dictionary<string, List<ComicFiles.ComicFileVM>> ComicFiles { get; set; }
+      public Dictionary<enLibraryFilesGroup, List<ComicFiles.ComicFileVM>> LibraryFiles { get; set; }
 
       public MockLibraryStore()
       {
          this.Libraries = new List<LibraryModel>();
-         this.ComicFiles = new Dictionary<string, List<ComicFiles.ComicFileVM>>();
+         this.LibraryFiles = new Dictionary<enLibraryFilesGroup, List<ComicFiles.ComicFileVM>>();
       }
 
       public async Task LoadLibrariesAsync()
@@ -44,7 +44,6 @@ namespace ComicsShelf.Store.Mock
       {
          if (this.Libraries.Any(x => x.ID == library.ID)) { return false; }
          this.Libraries.Add(library);
-         this.ComicFiles.Add(library.ID, new List<ComicFiles.ComicFileVM>());
          Messaging.Send(Messaging.enMessages.LibraryAdded.ToString(), library);
 
          var rnd = new Random((int)DateTime.Now.Ticks);

@@ -15,7 +15,7 @@ namespace ComicsShelf.Services
             this.Notify.Send(this.Library, $"{this.Library.Description}: {R.Strings.SEARCH_ENGINE_LOADING_DATABASE_DATA_MESSAGE}");
 
             // EXISTING FILES
-            var existingKeys = this.LibraryFiles.Select(x => x.ComicFile.Key).ToList();
+            var existingKeys = this.GetLibraryFiles().Select(x => x.ComicFile.Key).ToList();
 
             // DATABASE FILES
             var databaseFiles = await Helpers.FileStream.ReadFile<List<ComicFiles.ComicFile>>(Helpers.Constants.DatabaseFile);
@@ -23,7 +23,7 @@ namespace ComicsShelf.Services
 
             // NEW FILES
             var comicFiles = databaseFiles
-               .Where(x => x.LibraryKey == this.Library.Key)
+               .Where(x => x.LibraryKey == this.Library.ID)
                .Where(x => !existingKeys.Contains(x.Key))
                .GroupBy(x => x.Key)
                .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })
@@ -43,7 +43,7 @@ namespace ComicsShelf.Services
                else { comicFile.CachePath = string.Empty; }
             }
 
-            this.LibraryFiles.AddRange(comicFiles);
+            this.SetLibraryFiles(comicFiles);
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
@@ -54,7 +54,7 @@ namespace ComicsShelf.Services
          try
          {
 
-            var comicFiles = this.LibraryFiles
+            var comicFiles = this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
                .Select(x => x.ComicFile)
                .GroupBy(x => x.Key)
                .Select(x => new { Item = x.FirstOrDefault(), Count = x.Count() })

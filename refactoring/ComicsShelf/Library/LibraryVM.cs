@@ -18,7 +18,6 @@ namespace ComicsShelf.Library
          this.Library = Library;
          this.Title = Library.Description;
          this.ComicFolders = new ObservableList<ComicFolderVM>();
-         this.OnRefreshingList(DependencyService.Get<Store.ILibraryStore>().ComicFiles[this.Library.ID]);
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
          Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
       }
