@@ -72,8 +72,6 @@ namespace ComicsShelf.Store.Mock
 
       public async Task<bool> DeleteLibraryAsync(string id)
       {
-         if (!await App.ConfirmMessage(R.Strings.LIBRARY_REMOVE_CONFIRM_MESSAGE)) { return false; }
-
          var library = this.Libraries.FirstOrDefault(x => x.ID == id);
          using (var service = new Services.LibraryService(library))
          {
@@ -98,7 +96,8 @@ namespace ComicsShelf.Store.Mock
 
       public async Task<List<ComicFiles.ComicFile>> SearchFilesAsync(LibraryModel library)
       {
-         var comicFiles = new List<ComicFiles.ComicFile>();
+         var comicFiles = this.GetLibraryFiles(library).Select(x=> x.ComicFile).ToList();
+         if (comicFiles.Count != 0) { return comicFiles; }
 
          var rnd = new Random((int)DateTime.Now.Ticks);
          var folders = rnd.Next(1, 10);

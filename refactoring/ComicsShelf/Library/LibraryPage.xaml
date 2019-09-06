@@ -11,7 +11,7 @@
    BackgroundColor="{StaticResource colorBackground}"
    Title="{Binding Title}">
    <ContentPage.ToolbarItems>
-      <ToolbarItem Text="Remove" Icon="icon_Delete.png" Clicked="DeleteLibrary_Clicked" />
+      <ToolbarItem Text="Remove" Icon="icon_Delete.png" Command="{Binding RemoveCommand}"/>
    </ContentPage.ToolbarItems>
    <ContentPage.Content>
       <StackLayout Spacing="0">

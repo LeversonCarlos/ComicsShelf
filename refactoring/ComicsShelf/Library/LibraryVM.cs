@@ -22,6 +22,7 @@ namespace ComicsShelf.Library
          this.Notify = new Notify.NotifyVM(library.Key);
          this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.OpenCommand = new Command(async (item) => await this.Open(item as ComicFileVM));
+         this.RemoveCommand = new Command(async () => await this.Remove());
          this.OnRefreshingList(DependencyService.Get<Store.ILibraryStore>().GetLibraryFiles(this.Library));
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID, this.OnRefreshingList);
          Messaging.Subscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID, this.OnRefreshingItem);
@@ -39,6 +40,13 @@ namespace ComicsShelf.Library
       {
          // TODO: await Shell.Current.GoToAsync($"splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
          await App.ShowMessage($"vamos abrir o {item.ComicFile.FullText}");
+      }
+
+      public Command RemoveCommand { get; set; }
+      private async Task Remove()
+      {
+         if (!await App.ConfirmMessage(R.Strings.LIBRARY_REMOVE_CONFIRM_MESSAGE)) { return; }
+         await DependencyService.Get<Store.ILibraryStore>().DeleteLibraryAsync(this.Library.ID);
       }
 
       public void OnRefreshingList(List<ComicFileVM> comicFiles)
