@@ -36,6 +36,7 @@ namespace ComicsShelf
 
       protected async override void OnStart()
       {
+         Controls.CoverView.InitDefaultSize();
          await Helpers.DefaultCover.LoadDefaultCover();
          await DependencyService.Get<Store.ILibraryStore>().LoadLibrariesAsync();
       }

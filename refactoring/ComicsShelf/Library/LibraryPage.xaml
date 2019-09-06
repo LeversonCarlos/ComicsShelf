@@ -7,7 +7,11 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Library.LibraryPage"
-   Title="{Binding Title}">
+   Title="{Binding Title}"
+   x:Name="libraryPage">
+   <ContentPage.ToolbarItems>
+      <ToolbarItem Text="Remove" Icon="icon_Delete.png" Clicked="DeleteLibrary_Clicked" />
+   </ContentPage.ToolbarItems>
    <ContentPage.Content>
       <StackLayout Spacing="0">
 
@@ -17,13 +21,14 @@
 
                   <StackLayout Padding="5,10,0,5" Spacing="5">
                      <Label Text="{Binding FolderPath}" FontAttributes="Bold" FontSize="Caption"  LineBreakMode="MiddleTruncation" />
-                     <!--HeightRequest="{x:Static controls:CoverView.DefaultHeight}"-->
-                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="HorizontalList" ItemSizingStrategy="MeasureFirstItem" >
+                     <CollectionView ItemsSource="{Binding ComicFiles}" ItemsLayout="HorizontalList" ItemSizingStrategy="MeasureFirstItem" 
+                                     HeightRequest="{x:Static controls:CoverView.DefaultHeight}">
                         <CollectionView.ItemTemplate>
                            <DataTemplate>
-                              <Grid HeightRequest="220">
-                                 <Image Source="{Binding CoverPath}" Aspect="AspectFit"></Image>
-                              </Grid>
+                              <controls:CoverView
+                                 ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
+                                 OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference libraryPage} }" >
+                              </controls:CoverView>
                            </DataTemplate>
                         </CollectionView.ItemTemplate>
                      </CollectionView>
