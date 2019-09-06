@@ -41,15 +41,21 @@ namespace ComicsShelf.Services
 
       private List<ComicFiles.ComicFileVM> GetLibraryFiles()
       {
-         return this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
-            .Where(x => x.ComicFile.LibraryKey == this.Library.ID)
-            .ToList();
+         return this.Store.GetLibraryFiles(this.Library);
       }
 
-      private void SetLibraryFiles(List<ComicFiles.ComicFileVM> files)
+      private void AddLibraryFiles(List<ComicFiles.ComicFileVM> files)
       {
          this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
             .AddRange(files);
+      }
+
+      private void ReplaceLibraryFile(ComicFiles.ComicFile file)
+      {
+         this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
+            .RemoveAll(x => x.ComicFile.Key == file.Key);
+         this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
+            .Add(new ComicFiles.ComicFileVM(file));
       }
 
       public void Dispose()

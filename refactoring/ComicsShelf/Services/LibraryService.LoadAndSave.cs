@@ -43,7 +43,7 @@ namespace ComicsShelf.Services
                else { comicFile.CachePath = string.Empty; }
             }
 
-            this.SetLibraryFiles(comicFiles);
+            this.AddLibraryFiles(comicFiles);
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }

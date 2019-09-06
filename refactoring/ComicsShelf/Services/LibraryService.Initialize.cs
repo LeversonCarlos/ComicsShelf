@@ -6,7 +6,7 @@ namespace ComicsShelf.Services
    partial class LibraryService
    {
 
-      private async Task InitializeLibrary()
+      internal async Task InitializeLibrary()
       {
          try
          {

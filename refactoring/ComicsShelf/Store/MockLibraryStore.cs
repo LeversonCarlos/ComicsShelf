@@ -19,13 +19,32 @@ namespace ComicsShelf.Store.Mock
 
       public async Task LoadLibrariesAsync()
       {
-         await this.AddLibraryAsync(new LibraryModel
+
+         var libraries = new List<LibraryModel>
          {
-            ID = Guid.NewGuid().ToString(),
-            Key = DateTime.Now.ToString("HHmmss"),
-            Description = $"Library {DateTime.Now.ToString("ssfff")}",
-            Type = LibraryType.LocalDrive
-         });
+            new LibraryModel {
+               ID = Guid.NewGuid().ToString(),
+               Key = DateTime.Now.ToString("HHmmss"),
+               Description = $"Library {DateTime.Now.ToString("ssfff")}",
+               Type = LibraryType.LocalDrive
+            }
+         };
+
+         foreach (var library in libraries)
+         { await this.AddLibraryAsync(library); }
+
+         foreach (var library in libraries)
+         {
+            using (var services = new Services.LibraryService(library))
+            { await services.InitializeLibrary(); }
+         }
+
+         foreach (var library in libraries)
+         {
+            using (var services = new Services.LibraryService(library))
+            { await services.RefreshLibrary(); }
+         }
+
       }
 
       public async Task<bool> NewLibraryAsync(LibraryType libraryType)
@@ -37,7 +56,14 @@ namespace ComicsShelf.Store.Mock
             Description = $"Library {DateTime.Now.ToString("ssfff")}",
             Type = libraryType
          };
-         return await this.AddLibraryAsync(library);
+         if (!await this.AddLibraryAsync(library)) { return false; }
+         App.NavigationHide();
+         using (var services = new Services.LibraryService(library))
+         {
+            await services.InitializeLibrary();
+            await services.RefreshLibrary();
+         }
+         return true;
       }
 
       public async Task<bool> AddLibraryAsync(LibraryModel library)
@@ -61,6 +87,13 @@ namespace ComicsShelf.Store.Mock
          return await Task.FromResult(this.Libraries.FirstOrDefault(x => x.ID == id));
       }
 
+      public List<ComicFiles.ComicFileVM> GetLibraryFiles(LibraryModel library)
+      {
+         return this.LibraryFiles[enLibraryFilesGroup.Libraries]
+            .Where(x => x.ComicFile.LibraryKey == library.ID)
+            .ToList();
+      }
+
       public async Task<List<ComicFiles.ComicFile>> SearchFilesAsync(LibraryModel library)
       {
          var comicFiles = new List<ComicFiles.ComicFile>();
@@ -80,17 +113,18 @@ namespace ComicsShelf.Store.Mock
                   FolderPath = folder,
                   FullText = $"{folder} #{(j + 1).ToString()}",
                   SmallText = (j + 1).ToString(),
+                  ReleaseDate = DateTime.Now,
                   Available = true
                };
                comicFiles.Add(comicFile);
             }
          }
-         return comicFiles;
+         return await Task.FromResult(comicFiles);
       }
 
       public async Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
       {
-         return true;
+         return await Task.FromResult(true);
       }
 
    }

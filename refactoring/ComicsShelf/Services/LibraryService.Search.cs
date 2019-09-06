@@ -44,7 +44,7 @@ namespace ComicsShelf.Services
                .Where(x => !libraryFiles.Select(i => i.ComicFile.Key).ToList().Contains(x.Key))
                .Select(x => new ComicFiles.ComicFileVM(x))
                .ToList();
-            libraryFiles.AddRange(newFiles);
+            this.AddLibraryFiles(newFiles);
 
             // CHECK FOR DUPLICITY
             var duplicatedFiles = libraryFiles
@@ -57,8 +57,7 @@ namespace ComicsShelf.Services
             {
                foreach (var duplicatedFile in duplicatedFiles)
                {
-                  libraryFiles.RemoveAll(x => x.ComicFile.Key == duplicatedFile.Key);
-                  libraryFiles.Add(new ComicFiles.ComicFileVM(duplicatedFile));
+                  this.ReplaceLibraryFile(duplicatedFile);
                }
             }
 
