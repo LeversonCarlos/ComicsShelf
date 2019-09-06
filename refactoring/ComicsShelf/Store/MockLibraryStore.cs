@@ -22,12 +22,14 @@ namespace ComicsShelf.Store.Mock
 
          var libraries = new List<LibraryModel>
          {
+            /*
             new LibraryModel {
                ID = Guid.NewGuid().ToString(),
                Key = DateTime.Now.ToString("HHmmss"),
                Description = $"Library {DateTime.Now.ToString("ssfff")}",
                Type = LibraryType.LocalDrive
             }
+            */
          };
 
          foreach (var library in libraries)
@@ -40,10 +42,7 @@ namespace ComicsShelf.Store.Mock
          }
 
          foreach (var library in libraries)
-         {
-            using (var services = new Services.LibraryService(library))
-            { await services.RefreshLibrary(); }
-         }
+         { Services.LibraryService.RefreshLibrary(library); }
 
       }
 
@@ -59,10 +58,8 @@ namespace ComicsShelf.Store.Mock
          if (!await this.AddLibraryAsync(library)) { return false; }
          App.NavigationHide();
          using (var services = new Services.LibraryService(library))
-         {
-            await services.InitializeLibrary();
-            await services.RefreshLibrary();
-         }
+         { await services.InitializeLibrary(); }
+         Services.LibraryService.RefreshLibrary(library);
          return true;
       }
 
@@ -76,10 +73,16 @@ namespace ComicsShelf.Store.Mock
 
       public async Task<bool> DeleteLibraryAsync(string id)
       {
-         var libraryModel = this.Libraries.FirstOrDefault(x => x.ID == id);
-         Messaging.Send(Messaging.enMessages.LibraryRemoved.ToString(), libraryModel);
-         var removed = this.Libraries.RemoveAll(x => x.ID == libraryModel.ID);
-         return await Task.FromResult(removed > 0);
+         if (!await App.ConfirmMessage(R.Strings.LIBRARY_REMOVE_CONFIRM_MESSAGE)) { return false; }
+
+         var library = this.Libraries.FirstOrDefault(x => x.ID == id);
+         using (var service = new Services.LibraryService(library))
+         {
+            if (!await service.RemoveLibrary()) { return false; }
+            Messaging.Send(Messaging.enMessages.LibraryRemoved.ToString(), library);
+            this.Libraries.RemoveAll(x => x.ID == library.ID);
+         }
+         return true;
       }
 
       public async Task<LibraryModel> GetLibraryAsync(string id)

@@ -14,9 +14,6 @@ namespace ComicsShelf.Services
             if (!await this.LoadData()) { return; }
             if (!await this.NotifyData()) { return; }
             if (!await this.Statistics()) { return; }
-            if (!await this.LoadSyncData()) { return; }
-            if (!await this.NotifyData()) { return; }
-            if (!await this.Statistics()) { return; }
             this.Notify.Send(this.Library, false);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
