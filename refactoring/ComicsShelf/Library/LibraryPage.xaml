@@ -9,23 +9,23 @@
    Title="{Binding Title}">
    <ContentPage.Content>
 
-      <FlexLayout VerticalOptions="FillAndExpand" Direction="Column" BindableLayout.ItemsSource="{Binding ComicFolders}">
+      <StackLayout VerticalOptions="FillAndExpand" BindableLayout.ItemsSource="{Binding ComicFolders}">
          <BindableLayout.ItemTemplate>
             <DataTemplate>
 
-               <FlexLayout Direction="Row" BindableLayout.ItemsSource="{Binding ComicFiles}">
+               <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding ComicFiles}">
                   <BindableLayout.ItemTemplate>
                      <DataTemplate>
-
-                        <Image Source="{Binding CoverPath}" HeightRequest="220" Aspect="AspectFit"></Image>
-                        
+                        <Grid HeightRequest="220">
+                           <Image Source="{Binding CoverPath}" Aspect="AspectFit"></Image>
+                        </Grid>
                      </DataTemplate>
                   </BindableLayout.ItemTemplate>
-               </FlexLayout>
-               
-            </DataTemplate>            
+               </StackLayout>
+
+            </DataTemplate>
          </BindableLayout.ItemTemplate>
-      </FlexLayout>
+      </StackLayout>
 
    </ContentPage.Content>
 </ContentPage>
