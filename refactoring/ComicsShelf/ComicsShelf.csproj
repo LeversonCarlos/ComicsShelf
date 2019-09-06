@@ -15,12 +15,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Helpers\DefaultCover\DefaultCover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers\DefaultCover\DefaultCover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
    <ItemGroup>
+      <EmbeddedResource Update="Featured\FeaturedPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Library\LibraryPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Main\InitialPage.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
@@ -39,6 +53,43 @@
          <Generator>PublicResXFileCodeGenerator</Generator>
          <LastGenOutput>Strings.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+   </ItemGroup>
+
+   <ItemGroup>
+     <None Update="App.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Main\InitialPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Main\MainPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Main\MenuPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Views\AboutPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Views\ItemDetailPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Views\ItemsPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Views\MainPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Views\MenuPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+     <None Update="Views\NewItemPage.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </None>
+   </ItemGroup>
+
+   <ItemGroup>
+     <Folder Include="ComicFiles\" />
    </ItemGroup>
   
 </Project>

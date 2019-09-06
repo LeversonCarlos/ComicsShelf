@@ -142,11 +142,13 @@ namespace ComicsShelf.ComicFiles
       {
          try
          {
+            /*
             var service = DependencyService.Get<Libraries.LibraryService>();
             if (service == null) { return; }
             var library = service.Libraries[this.ComicFile.LibraryKey];
             if (library == null) { return; }
             await service.UpdateLibrary(library);
+            */
          }
          catch { }
       }

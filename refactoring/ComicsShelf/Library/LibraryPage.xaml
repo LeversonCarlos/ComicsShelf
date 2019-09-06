@@ -9,8 +9,22 @@
    Title="{Binding Title}">
    <ContentPage.Content>
 
-      <FlexLayout VerticalOptions="FillAndExpand" Direction="Column" JustifyContent="Center" AlignItems="Center">
-         <Label Text="{Binding Library.Description}" FontSize="Title" TextColor="Accent"></Label>
+      <FlexLayout VerticalOptions="FillAndExpand" Direction="Column" BindableLayout.ItemsSource="{Binding ComicFolders}">
+         <BindableLayout.ItemTemplate>
+            <DataTemplate>
+
+               <FlexLayout Direction="Row" BindableLayout.ItemsSource="{Binding ComicFiles}">
+                  <BindableLayout.ItemTemplate>
+                     <DataTemplate>
+
+                        <Image Source="{Binding CoverPath}" HeightRequest="220" Aspect="AspectFit"></Image>
+                        
+                     </DataTemplate>
+                  </BindableLayout.ItemTemplate>
+               </FlexLayout>
+               
+            </DataTemplate>            
+         </BindableLayout.ItemTemplate>
       </FlexLayout>
 
    </ContentPage.Content>
