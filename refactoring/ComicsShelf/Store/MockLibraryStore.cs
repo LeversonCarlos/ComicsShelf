@@ -45,6 +45,25 @@ namespace ComicsShelf.Store.Mock
          if (this.Libraries.Any(x => x.ID == library.ID)) { return false; }
          this.Libraries.Add(library);
          Messaging.Send(Messaging.enMessages.LibraryAdded.ToString(), library);
+         return await Task.FromResult(true);
+      }
+
+      public async Task<bool> DeleteLibraryAsync(string id)
+      {
+         var libraryModel = this.Libraries.FirstOrDefault(x => x.ID == id);
+         Messaging.Send(Messaging.enMessages.LibraryRemoved.ToString(), libraryModel);
+         var removed = this.Libraries.RemoveAll(x => x.ID == libraryModel.ID);
+         return await Task.FromResult(removed > 0);
+      }
+
+      public async Task<LibraryModel> GetLibraryAsync(string id)
+      {
+         return await Task.FromResult(this.Libraries.FirstOrDefault(x => x.ID == id));
+      }
+
+      public async Task<List<ComicFiles.ComicFile>> SearchFilesAsync(LibraryModel library)
+      {
+         var comicFiles = new List<ComicFiles.ComicFile>();
 
          var rnd = new Random((int)DateTime.Now.Ticks);
          var folders = rnd.Next(1, 10);
@@ -63,23 +82,10 @@ namespace ComicsShelf.Store.Mock
                   SmallText = (j + 1).ToString(),
                   Available = true
                };
-               this.ComicFiles[library.ID].Add(new ComicFiles.ComicFileVM(comicFile));
+               comicFiles.Add(comicFile);
             }
          }
-         return await Task.FromResult(true);
-      }
-
-      public async Task<bool> DeleteLibraryAsync(string id)
-      {
-         var libraryModel = this.Libraries.FirstOrDefault(x => x.ID == id);
-         Messaging.Send(Messaging.enMessages.LibraryRemoved.ToString(), libraryModel);
-         var removed = this.Libraries.RemoveAll(x => x.ID == libraryModel.ID);
-         return await Task.FromResult(removed > 0);
-      }
-
-      public async Task<LibraryModel> GetLibraryAsync(string id)
-      {
-         return await Task.FromResult(this.Libraries.FirstOrDefault(x => x.ID == id));
+         return comicFiles;
       }
 
    }
