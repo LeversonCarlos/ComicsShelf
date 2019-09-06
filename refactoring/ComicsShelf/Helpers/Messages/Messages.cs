@@ -10,7 +10,7 @@ namespace ComicsShelf
 
       public static async Task ShowMessage(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
       {
-         // TODO: Helpers.AppCenter.TrackEvent(ex, callerMemberName, callerFilePath, callerLineNumber);
+         Helpers.AppCenter.TrackEvent(ex, callerMemberName, callerFilePath, callerLineNumber);
          await ShowMessage(ex.Message);
       }
 

@@ -13,14 +13,16 @@ namespace ComicsShelf.Helpers
 
       public static void Initialize()
       {
+         /*
          Microsoft.AppCenter.AppCenter.Start(
             "android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
-            /*
+            / *
             "uwp={Your UWP App secret here};" +
             "ios={Your iOS App secret here}" +
-            */
+            * /
             "",
             typeof(Analytics), typeof(Crashes));
+         */
       }
 
       public static void TrackEvent(string text)
@@ -44,11 +46,13 @@ namespace ComicsShelf.Helpers
          if (ex.InnerException != null) { trackProp.Add("InnerException", ex.InnerException.Message); }
          trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
          try { trackProp.Add("Route", $"{Xamarin.Forms.Shell.Current.CurrentState.Location.ToString()}"); } catch { }
-         Crashes.TrackError(ex, trackProp);
+         // TODO:  Crashes.TrackError(ex, trackProp);
       }
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
-      { Analytics.TrackEvent(text, properties); }
+      {
+         // TODO: Analytics.TrackEvent(text, properties);
+      }
 
    }
 }

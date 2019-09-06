@@ -55,7 +55,6 @@ namespace ComicsShelf.Services
                .ToList();
             if (duplicatedFiles != null && duplicatedFiles.Count != 0)
             {
-               // TODO: Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.FoundDuplicity", $"NewFiles:{newFiles.Count()}", $"DuplicatedFiles:{duplicatedFiles.Count}");
                foreach (var duplicatedFile in duplicatedFiles)
                {
                   libraryFiles.RemoveAll(x => x.ComicFile.Key == duplicatedFile.Key);
@@ -64,7 +63,7 @@ namespace ComicsShelf.Services
             }
 
             var endTime = DateTime.Now;
-            // TODO: Helpers.AppCenter.TrackEvent($"Library.{library.Type.ToString()}.Search", $"ElapsedSeconds:{((int)(endTime - startTime).TotalSeconds)}", $"NewFiles:{newFiles.Count()}");
+            Helpers.AppCenter.TrackEvent($"Library.{this.Library.Type.ToString()}.Search", $"ElapsedSeconds:{((int)(endTime - startTime).TotalSeconds)}", $"NewFiles:{newFiles.Count()}");
 
             return true;
          }
