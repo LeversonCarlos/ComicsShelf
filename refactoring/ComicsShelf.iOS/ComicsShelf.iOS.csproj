@@ -172,4 +172,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon_Delete%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_EmptyStar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_FullStar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_Open.png" />
+  </ItemGroup>
 </Project>
