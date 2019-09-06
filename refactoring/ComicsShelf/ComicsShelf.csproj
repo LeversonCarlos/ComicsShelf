@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\AzureDataStore.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Helpers\DefaultCover\DefaultCover.png" />
   </ItemGroup>
 
@@ -66,24 +70,6 @@
        <Generator>MSBuild:Compile</Generator>
      </None>
      <None Update="Main\MenuPage.xaml">
-       <Generator>MSBuild:Compile</Generator>
-     </None>
-     <None Update="Views\AboutPage.xaml">
-       <Generator>MSBuild:Compile</Generator>
-     </None>
-     <None Update="Views\ItemDetailPage.xaml">
-       <Generator>MSBuild:Compile</Generator>
-     </None>
-     <None Update="Views\ItemsPage.xaml">
-       <Generator>MSBuild:Compile</Generator>
-     </None>
-     <None Update="Views\MainPage.xaml">
-       <Generator>MSBuild:Compile</Generator>
-     </None>
-     <None Update="Views\MenuPage.xaml">
-       <Generator>MSBuild:Compile</Generator>
-     </None>
-     <None Update="Views\NewItemPage.xaml">
        <Generator>MSBuild:Compile</Generator>
      </None>
    </ItemGroup>

@@ -6465,9 +6465,6 @@ namespace ComicsShelf.Droid
 			// aapt resource value: 0x7F070141
 			public const int tooltip_frame_light = 2131165505;
 			
-			// aapt resource value: 0x7F070142
-			public const int xamarin_logo = 2131165506;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

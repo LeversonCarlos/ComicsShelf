@@ -1,14 +1,11 @@
-﻿using System;
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using ComicsShelf.Services;
-using ComicsShelf.Views;
 
 namespace ComicsShelf
 {
    public partial class App : Application
    {
+
       //TODO: Replace with *.azurewebsites.net url after deploying backend to Azure
       //To debug on Android emulators run the web backend against .NET Core not IIS
       //If using other emulators besides stock Google images you may need to adjust the IP address
@@ -22,14 +19,8 @@ namespace ComicsShelf
          this.MainPage = new Main.InitialPage();
 
          if (UseMockDataStore)
-         {
-            DependencyService.Register<MockDataStore>();
-            DependencyService.Register<Store.ILibraryStore, Store.Mock.MockLibraryStore>();
-         }
-         else
-         {
-            DependencyService.Register<AzureDataStore>();
-         }
+         { DependencyService.Register<Store.ILibraryStore, Store.Mock.MockLibraryStore>(); }
+         // else { DependencyService.Register<AzureDataStore>(); }
 
          this.MainPage = new Main.MainPage();
       }
