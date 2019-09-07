@@ -126,7 +126,19 @@ namespace ComicsShelf.Store.Mock
       public async Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
       {
          await Task.Delay(5000);
-         return await Task.FromResult(false);
+         return false;
+      }
+
+      public async Task<List<ComicFiles.ComicPageVM>> ExtractPagesAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
+      {
+         await Task.Delay(20000);
+         var result = new List<ComicFiles.ComicPageVM> {
+            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=0 },
+            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=1 },
+            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=2 }
+         };
+         return result;
+
       }
 
    }
