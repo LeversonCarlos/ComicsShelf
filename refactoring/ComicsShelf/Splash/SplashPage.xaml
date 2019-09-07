@@ -4,6 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    mc:Ignorable="d"   
    x:Class="ComicsShelf.Splash.SplashPage"
    x:Name="splashPage"
@@ -14,6 +15,16 @@
          <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
             <Image x:Name="backgroundImage" Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.2" />
          </Grid>
+
+         <FlexLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Direction="Column"
+                     IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" FlexLayout.Shrink="0" >
+               <Switch VerticalOptions="Center" IsToggled="{Binding IsAllReaded}" />
+               <Label VerticalOptions="Center" FontSize="Medium" Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
+            </StackLayout>
+
+         </FlexLayout>
 
          <FlexLayout 
             AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
