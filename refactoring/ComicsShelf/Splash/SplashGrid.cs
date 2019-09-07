@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
@@ -36,10 +33,6 @@ namespace ComicsShelf.Controls
 
          Xamarin.Essentials.OrientationSensor.ReadingChanged +=
             (object sender, Xamarin.Essentials.OrientationSensorChangedEventArgs e) => { this.OnOrientationChanged(); };
-         /*
-         Xamarin.Essentials.DeviceDisplay.MainDisplayInfoChanged +=
-            (object sender, Xamarin.Essentials.DisplayInfoChangedEventArgs e) => { this.OnOrientationChanged(); };
-         */
       }
 
       private void OnOrientationChanged()

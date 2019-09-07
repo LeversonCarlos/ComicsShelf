@@ -24,6 +24,25 @@
                <Label VerticalOptions="Center" FontSize="Medium" Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
             </StackLayout>
 
+            <StackLayout VerticalOptions="End" Padding="5" FlexLayout.Shrink="0" >
+               <CollectionView 
+                  x:Name="filesCollectionView" 
+                  ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single" ItemsLayout="HorizontalList"
+                  HeightRequest="{x:Static controls:CoverView.DefaultSplashHeight}"                               
+                  ItemsSource="{Binding FolderFiles}" SelectedItem="{Binding CurrentFile}" >
+                  <CollectionView.ItemTemplate>
+                     <DataTemplate>
+                        <StackLayout Padding="5,5,0,0">
+                           <controls:CoverView                               
+                              ImageSource="{Binding CoverPath}" Progress="{Binding ReadingPercent}" CacheStatus="{Binding CacheStatus}"
+                              OpenCommand="{Binding Path=BindingContext.ItemSelectedCommand, Source={x:Reference splashPage}}">
+                           </controls:CoverView>
+                        </StackLayout>
+                     </DataTemplate>
+                  </CollectionView.ItemTemplate>
+               </CollectionView>
+            </StackLayout>
+
          </FlexLayout>
 
          <FlexLayout 
