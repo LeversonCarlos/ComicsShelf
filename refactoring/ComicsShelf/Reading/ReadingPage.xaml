@@ -11,19 +11,16 @@
    <ContentPage.Content>
       <AbsoluteLayout Margin="0" Padding="0" >
 
-         <!-- Position="{Binding ReadingPage}" -->
-         <CollectionView 
+         <controls:SwipeView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
             VerticalOptions="FillAndExpand" HorizontalOptions="Fill" 
-            ItemsSource="{Binding ComicFile.Pages}" >
-            <CollectionView.ItemTemplate>
+            ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ReadingPage}">
+            <controls:SwipeView.ItemTemplate>
                <DataTemplate>
-                  <Grid HeightRequest="222" BackgroundColor="Maroon">
-                     <Image Source="{Binding Path}" Aspect="AspectFit" ></Image>
-                  </Grid>
+                  <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="{Binding IsVisible}" />
                </DataTemplate>
-            </CollectionView.ItemTemplate>
-         </CollectionView>
+            </controls:SwipeView.ItemTemplate>
+         </controls:SwipeView>
 
          <controls:StatsView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,1" 

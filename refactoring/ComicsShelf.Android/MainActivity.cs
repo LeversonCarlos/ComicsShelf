@@ -18,6 +18,7 @@ namespace ComicsShelf.Droid
          Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
          Xamarin.Forms.Forms.Init(this, savedInstanceState);
+         CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
          LoadApplication(new App());
       }
 

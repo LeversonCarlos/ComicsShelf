@@ -6,7 +6,7 @@ namespace ComicsShelf.Reading
    public class ReadingVM : Helpers.Observables.BaseVM
    {
 
-      internal readonly ComicFileVM ComicFile;
+      public ComicFileVM ComicFile { get; set; }
       public ReadingVM(ComicFileVM comicFile)
       {
          this.ComicFile = comicFile;

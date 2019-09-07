@@ -23,12 +23,13 @@ namespace ComicsShelf.Reading
       {
          try
          {
-            Xamarin.Essentials.OrientationSensor.Stop();
-
-            (this.BindingContext as ReadingVM).ComicFile.UpdateLibrary();
-            this.BindingContext = null;
-
             base.OnDisappearing();
+            Xamarin.Essentials.OrientationSensor.Stop();
+            if (this.BindingContext != null)
+            {
+               var libraryID = (this.BindingContext as ReadingVM).ComicFile.ComicFile.LibraryKey;
+               Services.LibraryService.UpdateLibrary(libraryID);
+            }
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
          finally { GC.Collect(); }
