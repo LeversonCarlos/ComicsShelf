@@ -57,6 +57,9 @@
          <Generator>PublicResXFileCodeGenerator</Generator>
          <LastGenOutput>Strings.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Splash\SplashPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
    </ItemGroup>
 
    <ItemGroup>
