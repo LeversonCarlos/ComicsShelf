@@ -39,7 +39,7 @@ namespace ComicsShelf.Main
             if (screenItem != null)
             {
                this.ScreenItems.Remove(screenItem);
-               await App.NavigationPopToRootAsync();
+               await App.Navigation().PopToRootAsync();
             }
          });
 
@@ -56,8 +56,8 @@ namespace ComicsShelf.Main
             switch (item.Type)
             {
                case enumMenuItemType.Home:
-                  await App.NavigationPopToRootAsync();
-                  App.NavigationHide();
+                  await App.Navigation().PopToRootAsync();
+                  App.HideNavigation();
                   return;
                case enumMenuItemType.Command:
                   var libraryType = (item.Key == "OneDrive" ? Store.LibraryType.OneDrive : Store.LibraryType.LocalDrive);
@@ -67,8 +67,8 @@ namespace ComicsShelf.Main
                   var library = DependencyService.Get<Store.ILibraryStore>().GetLibrary(item.Key);
                   var vm = new Library.LibraryVM(library);
                   var page = new Library.LibraryPage { BindingContext = vm };
-                  await App.NavigationPushAsync(page);
-                  App.NavigationHide();
+                  await App.Navigation().PushAsync(page);
+                  App.HideNavigation();
                   return;
             }
          }

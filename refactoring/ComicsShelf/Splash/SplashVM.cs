@@ -98,8 +98,9 @@ namespace ComicsShelf.Splash
                   this.CurrentFile.Pages.Add(new ComicPageVM { Text = "END" });
                   this.CurrentFile.ComicFile.TotalPages = (short)(this.CurrentFile.Pages.Count - 2); /* cover and the end one */
 
-                  await App.ShowMessage($"Vamos ler {this.CurrentFile.ComicFile.FullText}");
-                  //TODO: await Shell.Current.GoToAsync($"reading?libraryID={this.CurrentFile.ComicFile.LibraryKey}&comicKey={this.CurrentFile.ComicFile.Key}");
+                  var vm = new Reading.ReadingVM(this.CurrentFile);
+                  var page = new Reading.ReadingPage { BindingContext = vm };
+                  await App.Navigation().PushModalAsync(page);
                }
             }
 

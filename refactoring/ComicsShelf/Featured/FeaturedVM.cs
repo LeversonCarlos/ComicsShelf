@@ -42,7 +42,7 @@ namespace ComicsShelf.Featured
          {
             var vm = new Splash.SplashVM(item);
             var page = new Splash.SplashPage { BindingContext = vm };
-            await App.NavigationPushAsync(page);
+            await App.Navigation().PushAsync(page);
          }
          catch (Exception ex) { await App.ShowMessage(ex); }
       }

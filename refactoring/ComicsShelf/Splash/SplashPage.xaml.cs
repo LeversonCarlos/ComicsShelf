@@ -34,7 +34,7 @@ namespace ComicsShelf.Splash
          catch (Exception ex)
          {
             Helpers.AppCenter.TrackEvent(ex);
-            Device.BeginInvokeOnMainThread(async () => await App.NavigationPopToRootAsync());
+            Device.BeginInvokeOnMainThread(async () => await App.Navigation().PopToRootAsync());
          }
       }
 

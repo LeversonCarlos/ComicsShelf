@@ -53,6 +53,9 @@
          <AutoGen>True</AutoGen>
          <DependentUpon>Strings.resx</DependentUpon>
       </Compile>
+      <EmbeddedResource Update="Reading\ReadingPage.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="R\Strings.resx">
          <Generator>PublicResXFileCodeGenerator</Generator>
          <LastGenOutput>Strings.Designer.cs</LastGenOutput>
