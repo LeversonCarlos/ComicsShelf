@@ -19,6 +19,55 @@
          <FlexLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Direction="Column"
                      IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}">
 
+            <controls:SplashMainCoverGrid FlexLayout.Grow="1" >
+
+               <Frame HasShadow="True" Padding="0" Grid.Column="1" Grid.Row="1" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" >
+                  <FlexLayout Padding="10" Direction="Column">
+
+                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" FlexLayout.Shrink="0" >
+                        <Switch VerticalOptions="Center" IsToggled="{Binding CurrentFile.Readed}" />
+                        <Label VerticalOptions="Center" Text="{controls:Translate Text=SPLASH_FILE_MARK_AS_READED_LABEL}" />
+                     </StackLayout>
+
+                     <AbsoluteLayout Margin="0,0,0,0" HorizontalOptions="FillAndExpand" FlexLayout.Grow="1">
+
+                        <Image 
+                           AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+                           Aspect="AspectFill" Margin="5"
+                           Source="{Binding CurrentFile.CoverPath}" />
+
+                        <ImageButton 
+                           AbsoluteLayout.LayoutBounds="0.5,0.5" AbsoluteLayout.LayoutFlags="PositionProportional" 
+                           Source="icon_Open.png" BackgroundColor="Transparent" Opacity="0.75" 
+                           Command="{Binding ItemOpenCommand}">
+                        </ImageButton>
+
+                        <ImageButton 
+                           AbsoluteLayout.LayoutBounds="1,0" AbsoluteLayout.LayoutFlags="PositionProportional" 
+                           Source="icon_Delete.png" HeightRequest="32" WidthRequest="32" BackgroundColor="White" CornerRadius="32" 
+                           IsVisible="{Binding CurrentFile.HasCache}" Command="{Binding ClearCacheCommand}">
+                        </ImageButton>
+
+                        <ProgressBar
+                           AbsoluteLayout.LayoutBounds="0,1,1,1" AbsoluteLayout.LayoutFlags="All" 
+                           HeightRequest="6" HorizontalOptions="Fill" VerticalOptions="End" InputTransparent="True"
+                           BackgroundColor="White" Opacity="0.75" Margin="6,0"
+                           Progress="{Binding CurrentFile.ReadingPercent}">
+                        </ProgressBar>
+
+                     </AbsoluteLayout>
+
+                     <!-- TODO
+                     <StackLayout HorizontalOptions="CenterAndExpand" FlexLayout.Shrink="0" >
+                        <controls:RatingView HorizontalOptions="Center" Rating="{Binding CurrentFile.Rating}"></controls:RatingView>
+                     </StackLayout>
+                     -->
+
+                  </FlexLayout>
+               </Frame>
+
+            </controls:SplashMainCoverGrid>
+
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" FlexLayout.Shrink="0" >
                <Switch VerticalOptions="Center" IsToggled="{Binding IsAllReaded}" />
                <Label VerticalOptions="Center" FontSize="Medium" Text="{controls:Translate Text=SPLASH_FILE_MARK_ALL_AS_READED_LABEL}" />
