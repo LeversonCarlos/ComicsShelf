@@ -38,8 +38,13 @@ namespace ComicsShelf.Library
       public Command OpenCommand { get; set; }
       private async Task Open(ComicFileVM item)
       {
-         // TODO: await Shell.Current.GoToAsync($"splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
-         await App.ShowMessage($"vamos abrir o {item.ComicFile.FullText}");
+         try
+         {
+            var vm = new Splash.SplashVM(item);
+            var page = new Splash.SplashPage { BindingContext = vm };
+            await App.NavigationPushAsync(page);
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
       public Command RemoveCommand { get; set; }

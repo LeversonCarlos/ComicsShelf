@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ComicFiles;
 using ComicsShelf.Helpers.Observables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace ComicsShelf.Featured
          this.OpenCommand = new Command(async (item) => await this.Open(item as ComicFileVM));
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingReadingFilesList", this.OnRefreshingReadingFilesList);
          Messaging.Subscribe<List<ComicFileVM>>("OnRefreshingRecentFilesList", this.OnRefreshingRecentFilesList);
-
       }
 
       bool _HasComicFiles;
@@ -38,8 +38,13 @@ namespace ComicsShelf.Featured
       public Command OpenCommand { get; set; }
       private async Task Open(ComicFileVM item)
       {
-         // TODO: await Shell.Current.GoToAsync($"splash?libraryID={comicFile.ComicFile.LibraryKey}&comicKey={comicFile.ComicFile.Key}");
-         await App.ShowMessage($"vamos abrir o {item.ComicFile.FullText}");
+         try
+         {
+            var vm = new Splash.SplashVM(item);
+            var page = new Splash.SplashPage { BindingContext = vm };
+            await App.NavigationPushAsync(page);
+         }
+         catch (Exception ex) { await App.ShowMessage(ex); }
       }
 
       private void OnRefreshingReadingFilesList(List<ComicFileVM> comicFiles)

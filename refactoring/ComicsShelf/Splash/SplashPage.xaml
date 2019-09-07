@@ -4,13 +4,24 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   mc:Ignorable="d"
-   x:Class="ComicsShelf.Splash.SplashPage">
+   mc:Ignorable="d"   
+   x:Class="ComicsShelf.Splash.SplashPage"
+   x:Name="splashPage"
+   Title="{Binding CurrentFile.ComicFile.FullText}" >
    <ContentPage.Content>
-      <StackLayout>
-         <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-      </StackLayout>
+      <AbsoluteLayout VerticalOptions="FillAndExpand">
+
+         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" >
+            <Image x:Name="backgroundImage" Source="{Binding CurrentFile.CoverPath}" Aspect="AspectFill" Opacity="0.2" />
+         </Grid>
+
+         <FlexLayout 
+            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" 
+            BackgroundColor="White"  Opacity="0.5" AlignItems="Center" JustifyContent="Center"
+            IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="True" />
+         </FlexLayout>
+
+      </AbsoluteLayout>
    </ContentPage.Content>
 </ContentPage>
