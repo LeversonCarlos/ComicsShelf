@@ -24,11 +24,8 @@ namespace ComicsShelf.Splash
             if (!Xamarin.Essentials.OrientationSensor.IsMonitoring)
             { Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default); }
 
-            /*
-            TODO
             var currentFile = (this.BindingContext as SplashVM).CurrentFile;
             this.filesCollectionView.ScrollTo(currentFile);
-            */
 
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
