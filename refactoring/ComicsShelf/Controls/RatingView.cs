@@ -47,7 +47,8 @@ namespace ComicsShelf.Controls
             {
                Stars = stars,
                HeightRequest = this.HeightRequest,
-               RatingButtonTapped = (int val) => {
+               RatingButtonTapped = (int val) =>
+               {
                   if (this.Rating == val) { this.Rating = 0; }
                   else { this.Rating = val; }
                }

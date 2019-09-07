@@ -57,11 +57,9 @@
 
                      </AbsoluteLayout>
 
-                     <!-- TODO
                      <StackLayout HorizontalOptions="CenterAndExpand" FlexLayout.Shrink="0" >
                         <controls:RatingView HorizontalOptions="Center" Rating="{Binding CurrentFile.Rating}"></controls:RatingView>
                      </StackLayout>
-                     -->
 
                   </FlexLayout>
                </Frame>
