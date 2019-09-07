@@ -96,7 +96,7 @@ namespace ComicsShelf.Store.Mock
 
       public async Task<List<ComicFiles.ComicFile>> SearchFilesAsync(LibraryModel library)
       {
-         var comicFiles = this.GetLibraryFiles(library).Select(x=> x.ComicFile).ToList();
+         var comicFiles = this.GetLibraryFiles(library).Select(x => x.ComicFile).ToList();
          if (comicFiles.Count != 0) { return comicFiles; }
 
          var rnd = new Random((int)DateTime.Now.Ticks);
@@ -133,9 +133,9 @@ namespace ComicsShelf.Store.Mock
       {
          await Task.Delay(5000);
          var result = new List<ComicFiles.ComicPageVM> {
-            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=0 },
-            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=1 },
-            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=2 }
+            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=0, PageSize=new ComicFiles.ComicPageSize(150,220), IsVisible = true },
+            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=1, PageSize=new ComicFiles.ComicPageSize(150,220), IsVisible = true },
+            new ComicFiles.ComicPageVM{ Path= Helpers.Constants.DefaultCover, Index=2, PageSize=new ComicFiles.ComicPageSize(150,220), IsVisible = true }
          };
          if (!System.IO.Directory.Exists(comicFile.CachePath))
          { System.IO.Directory.CreateDirectory(comicFile.CachePath); }

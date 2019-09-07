@@ -9,7 +9,21 @@
    x:Class="ComicsShelf.Reading.ReadingPage"
    Title="{Binding ComicFile.ComicFile.FullText}" >
    <ContentPage.Content>
-      <AbsoluteLayout Margin="0" Padding="0">
+      <AbsoluteLayout Margin="0" Padding="0" >
+
+         <!-- Position="{Binding ReadingPage}" -->
+         <CollectionView 
+            AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+            VerticalOptions="FillAndExpand" HorizontalOptions="Fill" 
+            ItemsSource="{Binding ComicFile.Pages}" >
+            <CollectionView.ItemTemplate>
+               <DataTemplate>
+                  <Grid HeightRequest="222" BackgroundColor="Maroon">
+                     <Image Source="{Binding Path}" Aspect="AspectFit" ></Image>
+                  </Grid>
+               </DataTemplate>
+            </CollectionView.ItemTemplate>
+         </CollectionView>
 
          <controls:StatsView 
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,1" 
