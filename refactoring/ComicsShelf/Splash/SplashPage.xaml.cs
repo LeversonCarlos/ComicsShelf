@@ -38,11 +38,11 @@ namespace ComicsShelf.Splash
          }
       }
 
-      private void OnComicFileOpening(ComicFileVM value)
+      private async void OnComicFileOpening(ComicFileVM value)
       {
          try
          {
-            Task.Run(async () =>
+            await Task.Run(async () =>
             {
                await this.backgroundImage.FadeTo(0.8, 250, Easing.SinOut);
                await Task.WhenAll(
@@ -54,12 +54,12 @@ namespace ComicsShelf.Splash
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
-      private void OnComicFileOpened(ComicFileVM value)
+      private async void OnComicFileOpened(ComicFileVM value)
       {
          try
          {
             ViewExtensions.CancelAnimations(this.backgroundImage);
-            Task.Run(async () =>
+            await Task.Run(async () =>
             {
                await Task.WhenAll(
                   this.backgroundImage.FadeTo(0.2, 250, Easing.SinIn),
@@ -74,10 +74,10 @@ namespace ComicsShelf.Splash
 
       protected override void OnDisappearing()
       {
+         base.OnDisappearing();
          Xamarin.Essentials.OrientationSensor.Stop();
          Messaging.Unsubscribe("", "OnComicFileOpening");
          Messaging.Unsubscribe("", "OnComicFileOpened");
-         base.OnDisappearing();
       }
 
    }

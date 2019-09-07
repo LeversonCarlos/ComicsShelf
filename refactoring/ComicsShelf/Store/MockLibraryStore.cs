@@ -141,7 +141,6 @@ namespace ComicsShelf.Store.Mock
          if (!System.IO.Directory.Exists(comicFile.CachePath))
          { System.IO.Directory.CreateDirectory(comicFile.CachePath); }
          return result;
-
       }
 
    }

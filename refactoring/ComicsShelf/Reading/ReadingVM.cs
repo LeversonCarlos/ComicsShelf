@@ -27,6 +27,7 @@ namespace ComicsShelf.Reading
             if (this.ComicFile.ReadingPercent > (double)1)
             {
                this.ComicFile.Readed = true;
+               this.ComicFile.ReadingPage = 0;
                Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => await App.Navigation().PopModalAsync());
             }
          }
