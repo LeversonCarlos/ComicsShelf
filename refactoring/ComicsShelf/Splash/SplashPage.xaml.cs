@@ -21,11 +21,12 @@ namespace ComicsShelf.Splash
          {
             base.OnAppearing();
 
-            var currentFile = (this.BindingContext as SplashVM).CurrentFile;
-            this.filesCollectionView.ScrollTo(currentFile);
-
+            Messaging.Subscribe<ComicPageSize>(ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
+
+            var currentFile = (this.BindingContext as SplashVM).CurrentFile;
+            this.filesCollectionView.ScrollTo(currentFile);
 
          }
          catch (Exception ex)
@@ -34,6 +35,9 @@ namespace ComicsShelf.Splash
             Device.BeginInvokeOnMainThread(async () => await App.Navigation().PopToRootAsync());
          }
       }
+
+      private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
+      { (this.BindingContext as SplashVM).PageSize = pageSize; }
 
       private async void OnComicFileOpening(ComicFileVM value)
       {
@@ -72,9 +76,9 @@ namespace ComicsShelf.Splash
       protected override void OnDisappearing()
       {
          base.OnDisappearing();
+         Messaging.Unsubscribe<ComicPageSize>(ComicPageSize.PageSizeChanged);
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpening");
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpened");
-         this.splashGrid.Dispose();
          this.filesCollectionView.BindingContext = null;
       }
 

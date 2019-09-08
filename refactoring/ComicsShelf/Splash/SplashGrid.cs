@@ -1,9 +1,8 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
-   public class SplashMainCoverGrid : Grid, IDisposable
+   public class SplashMainCoverGrid : Grid
    {
 
       private readonly ColumnDefinition Column1;
@@ -32,8 +31,20 @@ namespace ComicsShelf.Controls
          this.RowDefinitions.Add(this.Row2);
          this.RowDefinitions.Add(this.Row3);
 
-         Messaging.Subscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
       }
+
+      #region PageSize
+      public static readonly BindableProperty PageSizeProperty =
+         BindableProperty.Create("PageSize", typeof(ComicFiles.ComicPageSize), typeof(SplashMainCoverGrid), ComicFiles.ComicPageSize.Zero,
+         propertyChanged: OnPageSizeChanged, defaultBindingMode: BindingMode.TwoWay);
+      public ComicFiles.ComicPageSize PageSize
+      {
+         get { return (ComicFiles.ComicPageSize)GetValue(PageSizeProperty); }
+         set { SetValue(PageSizeProperty, value); }
+      }
+      private static void OnPageSizeChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as SplashMainCoverGrid).OnOrientationChanged(newValue as ComicFiles.ComicPageSize); }
+      #endregion
 
       private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
       {
@@ -71,12 +82,6 @@ namespace ComicsShelf.Controls
 
          }
          catch { }
-      }
-
-      public void Dispose()
-      {
-         Messaging.Unsubscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged);
-         this.BindingContext = null;
       }
 
    }

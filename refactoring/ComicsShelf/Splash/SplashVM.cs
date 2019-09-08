@@ -50,6 +50,13 @@ namespace ComicsShelf.Splash
          }
       }
 
+      ComicPageSize _PageSize;
+      public ComicPageSize PageSize
+      {
+         get { return this._PageSize; }
+         set { this.SetProperty(ref this._PageSize, value); }
+      }
+
       public Command ItemSelectedCommand { get; set; }
       private async Task ItemSelected(object item)
       {
