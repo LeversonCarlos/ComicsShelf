@@ -7,17 +7,19 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Reading.ReadingPage"
+   x:Name="readingPage"
    Title="{Binding ComicFile.ComicFile.FullText}" >
    <ContentPage.Content>
       <AbsoluteLayout Margin="0" Padding="0" >
 
-         <controls:SwipeView 
+         <controls:SwipeView x:Name="swipeView"
             AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
             VerticalOptions="FillAndExpand" HorizontalOptions="Fill" 
             ItemsSource="{Binding ComicFile.Pages}" Position="{Binding ReadingPage}">
             <controls:SwipeView.ItemTemplate>
                <DataTemplate>
-                  <controls:PageView ImagePath="{Binding Path}" ImageSize="{Binding PageSize}" ImageLoaded="{Binding IsVisible}" />
+                  <controls:PageView ImagePath="{Binding Path}"  ImageSize="{Binding PageSize}" ImageLoaded="{Binding IsVisible}" 
+                                     PageSize="{Binding BindingContext.PageSize, Source={x:Reference readingPage}}"/>
                </DataTemplate>
             </controls:SwipeView.ItemTemplate>
          </controls:SwipeView>

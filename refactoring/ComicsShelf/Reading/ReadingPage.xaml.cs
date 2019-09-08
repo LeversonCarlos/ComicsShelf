@@ -15,16 +15,18 @@ namespace ComicsShelf.Reading
       protected override void OnAppearing()
       {
          base.OnAppearing();
-         if (!Xamarin.Essentials.OrientationSensor.IsMonitoring)
-         { Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default); }
+         Messaging.Subscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
       }
+
+      private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
+      { (this.BindingContext as ReadingVM).PageSize = pageSize; }
 
       protected override void OnDisappearing()
       {
          try
          {
             base.OnDisappearing();
-            Xamarin.Essentials.OrientationSensor.Stop();
+            Messaging.Unsubscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged);
             if (this.BindingContext != null)
             {
                var libraryID = (this.BindingContext as ReadingVM).ComicFile.ComicFile.LibraryKey;

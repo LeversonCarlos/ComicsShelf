@@ -33,5 +33,12 @@ namespace ComicsShelf.Reading
          }
       }
 
+      ComicPageSize _PageSize;
+      public ComicPageSize PageSize
+      {
+         get { return this._PageSize; }
+         set { this.SetProperty(ref this._PageSize, value); }
+      }
+
    }
 }
