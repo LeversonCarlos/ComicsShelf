@@ -108,8 +108,8 @@ namespace ComicsShelf.ComicFiles
       protected override void OnDisappearing()
       {
          Xamarin.Essentials.OrientationSensor.Stop();
-         Messaging.Unsubscribe("", "OnComicFileOpening");
-         Messaging.Unsubscribe("", "OnComicFileOpened");
+         Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpening");
+         Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpened");
          base.OnDisappearing();
       }
 

@@ -49,8 +49,8 @@ namespace ComicsShelf.Libraries
       {
          try
          {
-            Messaging.Unsubscribe("OnRefreshingList", this.Library.ID);
-            Messaging.Unsubscribe("OnRefreshingItem", this.Library.ID);
+            Messaging.Unsubscribe<List<ComicFileVM>>("OnRefreshingList", this.Library.ID);
+            Messaging.Unsubscribe<ComicFileVM>("OnRefreshingItem", this.Library.ID);
             this.ComicFolders.Clear();
          }
          catch { }
