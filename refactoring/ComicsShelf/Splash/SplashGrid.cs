@@ -1,8 +1,9 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
-   public class SplashMainCoverGrid : Grid
+   public class SplashMainCoverGrid : Grid, IDisposable
    {
 
       private readonly ColumnDefinition Column1;
@@ -31,17 +32,15 @@ namespace ComicsShelf.Controls
          this.RowDefinitions.Add(this.Row2);
          this.RowDefinitions.Add(this.Row3);
 
-         Xamarin.Essentials.OrientationSensor.ReadingChanged +=
-            (object sender, Xamarin.Essentials.OrientationSensorChangedEventArgs e) => { this.OnOrientationChanged(); };
+         Messaging.Subscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
       }
 
-      private void OnOrientationChanged()
+      private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
       {
          try
          {
-            var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
 
-            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait)
+            if (pageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
             {
                this.Column1.Width = new GridLength(10, GridUnitType.Star);
                this.Column2.Width = new GridLength(80, GridUnitType.Star);
@@ -51,7 +50,7 @@ namespace ComicsShelf.Controls
                this.Row3.Height = new GridLength(15, GridUnitType.Star);
             }
 
-            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Landscape)
+            if (pageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
             {
                this.Column1.Width = new GridLength(15, GridUnitType.Star);
                this.Column2.Width = new GridLength(70, GridUnitType.Star);
@@ -72,6 +71,12 @@ namespace ComicsShelf.Controls
 
          }
          catch { }
+      }
+
+      public void Dispose()
+      {
+         Messaging.Unsubscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged);
+         this.BindingContext = null;
       }
 
    }
