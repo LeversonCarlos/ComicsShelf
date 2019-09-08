@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace ComicsShelf
 {
-   public partial class AppShell : Xamarin.Forms.Shell
+   public partial class AppShell : Xamarin.Forms.Shell, IDisposable
    {
 
       public AppShell()
@@ -11,6 +12,13 @@ namespace ComicsShelf
          this.BindingContext = new ShellVM();
          Xamarin.Forms.Routing.RegisterRoute("splash", typeof(ComicFiles.SplashView));
          Xamarin.Forms.Routing.RegisterRoute("reading", typeof(ComicFiles.ReadingView));
+         this.SizeChanged += this.MainPage_SizeChanged;
+      }
+
+      private void MainPage_SizeChanged(object sender, System.EventArgs e)
+      {
+         var pageSize = new ComicFiles.ComicPageSize(this.Width, this.Height);
+         Messaging.Send(ComicFiles.ComicPageSize.PageSizeChanged, pageSize);
       }
 
       protected override bool OnBackButtonPressed()
@@ -29,6 +37,11 @@ namespace ComicsShelf
 
          this.CurrentItem = this.Items[0];
          return true; // PREVENT THE BACK BUTON
+      }
+
+      public void Dispose()
+      {
+         this.SizeChanged -= this.MainPage_SizeChanged;
       }
 
    }
