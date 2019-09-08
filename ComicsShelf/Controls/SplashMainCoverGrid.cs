@@ -33,22 +33,27 @@ namespace ComicsShelf.Controls
          this.RowDefinitions.Add(this.Row1);
          this.RowDefinitions.Add(this.Row2);
          this.RowDefinitions.Add(this.Row3);
-
-         Xamarin.Essentials.OrientationSensor.ReadingChanged +=
-            (object sender, Xamarin.Essentials.OrientationSensorChangedEventArgs e) => { this.OnOrientationChanged(); };
-         /*
-         Xamarin.Essentials.DeviceDisplay.MainDisplayInfoChanged +=
-            (object sender, Xamarin.Essentials.DisplayInfoChangedEventArgs e) => { this.OnOrientationChanged(); };
-         */
       }
 
-      private void OnOrientationChanged()
+      #region PageSize
+      public static readonly BindableProperty PageSizeProperty =
+         BindableProperty.Create("PageSize", typeof(ComicFiles.ComicPageSize), typeof(SplashMainCoverGrid), ComicFiles.ComicPageSize.Zero,
+         propertyChanged: OnPageSizeChanged, defaultBindingMode: BindingMode.TwoWay);
+      public ComicFiles.ComicPageSize PageSize
+      {
+         get { return (ComicFiles.ComicPageSize)GetValue(PageSizeProperty); }
+         set { SetValue(PageSizeProperty, value); }
+      }
+      private static void OnPageSizeChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as SplashMainCoverGrid).OnOrientationChanged(newValue as ComicFiles.ComicPageSize); }
+      #endregion
+
+      private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
       {
          try
          {
-            var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
 
-            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait)
+            if (pageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
             {
                this.Column1.Width = new GridLength(10, GridUnitType.Star);
                this.Column2.Width = new GridLength(80, GridUnitType.Star);
@@ -58,7 +63,7 @@ namespace ComicsShelf.Controls
                this.Row3.Height = new GridLength(15, GridUnitType.Star);
             }
 
-            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Landscape)
+            if (pageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
             {
                this.Column1.Width = new GridLength(15, GridUnitType.Star);
                this.Column2.Width = new GridLength(70, GridUnitType.Star);

@@ -16,7 +16,7 @@
          <FlexLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Direction="Column"
                      IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}">
 
-            <controls:SplashMainCoverGrid FlexLayout.Grow="1" >
+            <controls:SplashMainCoverGrid FlexLayout.Grow="1" PageSize="{Binding BindingContext.PageSize, Source={x:Reference splashPage}}" >
 
                <Frame HasShadow="True" Padding="0" Grid.Column="1" Grid.Row="1" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand" >
                   <FlexLayout Padding="10" Direction="Column">

@@ -55,14 +55,14 @@ namespace ComicsShelf.ComicFiles
          try
          {
             base.OnAppearing();
-            if (!Xamarin.Essentials.OrientationSensor.IsMonitoring)
-            { Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default); }
+
+            Messaging.Subscribe<ComicPageSize>(ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
+            Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
+            Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
 
             var currentFile = (this.BindingContext as SplashVM).CurrentFile;
             this.filesCollectionView.ScrollTo(currentFile);
 
-            Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
-            Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
          }
          catch (Exception ex)
          {
@@ -70,6 +70,9 @@ namespace ComicsShelf.ComicFiles
             Device.BeginInvokeOnMainThread(async () => await AppShell.Current.Navigation.PopAsync());
          }
       }
+
+      private void OnOrientationChanged(ComicPageSize pageSize)
+      { (this.BindingContext as SplashVM).PageSize = pageSize; }
 
       private void OnComicFileOpening(ComicFileVM value)
       {
@@ -107,10 +110,10 @@ namespace ComicsShelf.ComicFiles
 
       protected override void OnDisappearing()
       {
-         Xamarin.Essentials.OrientationSensor.Stop();
+         base.OnDisappearing();
+         Messaging.Unsubscribe<ComicPageSize>(ComicPageSize.PageSizeChanged);
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpening");
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpened");
-         base.OnDisappearing();
       }
 
    }
