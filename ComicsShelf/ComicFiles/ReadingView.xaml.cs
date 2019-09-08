@@ -45,20 +45,28 @@ namespace ComicsShelf.ComicFiles
             if (comicFile == null) { await App.ShowMessage("ComicKey wasnt found on library collection"); return; }
 
             this.BindingContext = new ReadingVM(comicFile);
-            if (!Xamarin.Essentials.OrientationSensor.IsMonitoring)
-            { Xamarin.Essentials.OrientationSensor.Start(Xamarin.Essentials.SensorSpeed.Default); }
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
+
+      protected override void OnAppearing()
+      {
+         base.OnAppearing();
+         Messaging.Subscribe<ComicPageSize>(ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
+      }
+
+      private void OnOrientationChanged(ComicPageSize pageSize)
+      { (this.BindingContext as ReadingVM).PageSize = pageSize; }
 
       protected override async void OnDisappearing()
       {
          try
          {
-            Xamarin.Essentials.OrientationSensor.Stop();
+            base.OnDisappearing();
+            Messaging.Unsubscribe<ComicPageSize>(ComicPageSize.PageSizeChanged);
+
             await (this.BindingContext as ReadingVM).ComicFile.UpdateLibrary();
             this.BindingContext = null;
-            base.OnDisappearing();
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
          finally { GC.Collect(); }

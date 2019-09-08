@@ -23,12 +23,6 @@ namespace ComicsShelf.Controls
             NumberOfTapsRequired = 2
          });
 
-         Xamarin.Essentials.OrientationSensor.ReadingChanged +=
-            (object sender, Xamarin.Essentials.OrientationSensorChangedEventArgs e) => { this.OnImageResize(); };
-         /*
-         Xamarin.Essentials.DeviceDisplay.MainDisplayInfoChanged +=
-            (object sender, Xamarin.Essentials.DisplayInfoChangedEventArgs e) => { this.OnImageResize(); };
-            */
 
          this.OnImageResize();
       }
@@ -83,6 +77,19 @@ namespace ComicsShelf.Controls
       { (bindable as PageView).OnImageResize(); }
       #endregion
 
+      #region PageSize
+      public static readonly BindableProperty PageSizeProperty =
+         BindableProperty.Create("PageSize", typeof(ComicFiles.ComicPageSize), typeof(PageView), ComicFiles.ComicPageSize.Zero,
+         propertyChanged: OnPageSizeChanged, defaultBindingMode: BindingMode.TwoWay);
+      public ComicFiles.ComicPageSize PageSize
+      {
+         get { return (ComicFiles.ComicPageSize)GetValue(PageSizeProperty); }
+         set { SetValue(PageSizeProperty, value); }
+      }
+      private static void OnPageSizeChanged(BindableObject bindable, object oldValue, object newValue)
+      { (bindable as PageView).OnImageResize(); }
+      #endregion
+
       #region OnImageRefresh
       private void OnImageRefresh()
       {
@@ -99,21 +106,19 @@ namespace ComicsShelf.Controls
       #endregion
 
       #region OnImageResize
-      private Xamarin.Essentials.DisplayOrientation lastOrientation = Xamarin.Essentials.DisplayOrientation.Unknown;
       private void OnImageResize()
       {
          try
          {
             if (this.ImageSize == null || this.ImageSize.IsZero()) { return; }
+            if (this.PageSize == null || this.PageSize.IsZero()) { return; }
 
             var displayInfo = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo;
             var displayHeight = displayInfo.Height / displayInfo.Density;
             var displayWidth = displayInfo.Width / displayInfo.Density;
-            if (lastOrientation == displayInfo.Orientation) { return; }
-            lastOrientation = displayInfo.Orientation;
 
             // PORTRAIT SCREEN
-            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Portrait)
+            if (this.PageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Portrait)
                {
@@ -129,7 +134,7 @@ namespace ComicsShelf.Controls
             }
 
             // LANDSCAPE SCREEN
-            if (displayInfo.Orientation == Xamarin.Essentials.DisplayOrientation.Landscape)
+            if (this.PageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
             {
                if (this.ImageSize.Orientation == ComicFiles.ComicPageSize.OrientationEnum.Landscape)
                {
