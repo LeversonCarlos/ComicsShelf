@@ -17,6 +17,7 @@ namespace ComicsShelf.Droid
 
          Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+         Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
          Xamarin.Forms.Forms.Init(this, savedInstanceState);
          CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
          LoadApplication(new App());
@@ -25,6 +26,7 @@ namespace ComicsShelf.Droid
       public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
       {
          Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+         Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
          base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
       }
 
