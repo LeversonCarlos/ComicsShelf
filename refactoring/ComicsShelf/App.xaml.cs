@@ -11,17 +11,12 @@ namespace ComicsShelf
       //If using other emulators besides stock Google images you may need to adjust the IP address
       public static string AzureBackendUrl =
           DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
-      public static bool UseMockDataStore = true;
 
       public App()
       {
          InitializeComponent();
          this.MainPage = new Main.InitialPage();
-
-         if (UseMockDataStore)
-         { DependencyService.Register<Store.ILibraryStore, Store.Mock.MockLibraryStore>(); }
-         // else { DependencyService.Register<AzureDataStore>(); }
-
+         DependencyService.Register<Store.ILibraryStore, Store.LibraryStore>();
          this.MainPage = new Main.MainPage();
       }
 
