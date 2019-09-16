@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Libraries;
+﻿using ComicsShelf.Store;
 using System;
 using System.Threading.Tasks;
 
@@ -11,15 +11,11 @@ namespace ComicsShelf.Engines.OneDrive
       {
          try
          {
-            if (!await this.Connector.TryConnectAsync()) { return false; }
-            if (!await this.HasStoragePermission()) { return false; }
+            //TODO: if (!await this.Connector.TryConnectAsync()) { return false; }
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
-
-      public async Task<bool> HasStoragePermission()
-      { return await Helpers.Permissions.HasStoragePermission(); }
 
    }
 }

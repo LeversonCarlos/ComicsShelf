@@ -14,12 +14,10 @@ namespace ComicsShelf.Engines.LocalDrive
       }
       */
 
-      /*
       private Helpers.IFileSystem FileSystem
       {
          get { return DependencyService.Get<Helpers.IFileSystem>(); }
       }
-      */
 
    }
 }
