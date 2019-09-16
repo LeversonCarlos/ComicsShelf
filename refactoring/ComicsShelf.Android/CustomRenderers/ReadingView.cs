@@ -4,7 +4,7 @@ using Android.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(ComicsShelf.ComicFiles.ReadingView), typeof(ComicsShelf.Droid.CustomRenderers.ReadingView))]
+[assembly: ExportRenderer(typeof(ComicsShelf.Reading.ReadingPage), typeof(ComicsShelf.Droid.CustomRenderers.ReadingView))]
 namespace ComicsShelf.Droid.CustomRenderers
 {
    public class ReadingView : PageRenderer
