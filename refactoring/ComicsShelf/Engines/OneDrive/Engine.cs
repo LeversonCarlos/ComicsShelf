@@ -12,12 +12,10 @@ namespace ComicsShelf.Engines.OneDrive
       }
       */
 
-      /*
       private OneDriveConnector Connector
       {
          get { return DependencyService.Get<OneDriveConnector>(); }
       }
-      */
 
    }
 }
