@@ -4,7 +4,7 @@ namespace ComicsShelf.Engines.OneDrive
 {
    public partial class OneDriveConnector : Xamarin.OneDrive.Connector
    {
-      public OneDriveConnector() : base(OneDriveConnector.OneDriveApplicationID, "User.Read", "Files.ReadWrite") { }
+      public OneDriveConnector() : base(OneDriveConnector.onedrive_applicationID, "User.Read", "Files.ReadWrite") { }
 
       public async Task<bool> TryConnectAsync()
       {

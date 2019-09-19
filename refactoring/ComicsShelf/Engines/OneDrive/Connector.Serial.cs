@@ -2,6 +2,6 @@
 {
    partial class OneDriveConnector
    {
-      private const string OneDriveApplicationID = "{YOUR_MICROSOFT_APPLICATION_ID}";
+      private const string onedrive_applicationID = "{YOUR_MICROSOFT_APPLICATION_ID}";
    }
 }
