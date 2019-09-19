@@ -87,7 +87,6 @@
    <ItemGroup>
      <Folder Include="ComicFiles\" />
      <Folder Include="Engines\LocalDrive\" />
-     <Folder Include="Engines\OneDrive\" />
    </ItemGroup>
   
 </Project>
