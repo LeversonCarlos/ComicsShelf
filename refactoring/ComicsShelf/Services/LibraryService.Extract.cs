@@ -92,7 +92,7 @@ namespace ComicsShelf.Services
                   if (this.Library.Removed) { return false; }
 
                   // CHECK IF THE APP HAS GONE SLEEP
-                  // TODO: if (this.suspended) { return true; }
+                  if (App.IsSleeping) { return true; }
 
                   // PROGRESS
                   var progress = ((double)fileIndex / (double)filesQuantity);
