@@ -22,7 +22,6 @@ namespace ComicsShelf.Droid
                .Select(filePath => new File
                {
                   FileKey = this.GetKey(filePath),
-                  FileOldKey = this.GetOldKey(filePath, folder.FullPath),
                   FilePath = filePath,
                   FolderPath = System.IO.Path.GetDirectoryName(filePath),
                   Text = System.IO.Path.GetFileNameWithoutExtension(filePath).Trim()

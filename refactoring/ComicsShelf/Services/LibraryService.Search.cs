@@ -14,7 +14,9 @@ namespace ComicsShelf.Services
             var startTime = DateTime.Now;
             this.Notify.Send(this.Library, $"{this.Library.Description}: {R.Strings.SEARCH_ENGINE_SEARCHING_COMIC_FILES_MESSAGE}");
 
-            var searchFiles = await this.Store.SearchFilesAsync(this.Library);
+            // ENGINE
+            var engine = Engines.Engine.Get(this.Library.Type);
+            var searchFiles = await engine.SearchFiles(this.Library);
             if (searchFiles == null) { return true; }
             var libraryFiles = this.GetLibraryFiles();
 

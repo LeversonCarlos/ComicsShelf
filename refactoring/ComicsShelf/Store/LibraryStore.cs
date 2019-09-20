@@ -199,46 +199,6 @@ namespace ComicsShelf.Store
       #endregion
 
 
-      #region SearchFilesAsync
-      public async Task<List<ComicFiles.ComicFile>> SearchFilesAsync(LibraryModel library)
-      {
-         try
-         {
-
-            // ENGINE
-            // TODO
-
-            var comicFiles = this.GetLibraryFiles(library).Select(x => x.ComicFile).ToList();
-            if (comicFiles.Count != 0) { return comicFiles; }
-
-            var rnd = new Random((int)DateTime.Now.Ticks);
-            var folders = rnd.Next(1, 10);
-            for (int i = 0; i < folders; i++)
-            {
-               var folder = Guid.NewGuid().ToString();
-               var files = rnd.Next(1, 7);
-               for (int j = 0; j < files; j++)
-               {
-                  var comicFile = new ComicFiles.ComicFile
-                  {
-                     LibraryKey = library.ID,
-                     Key = Guid.NewGuid().ToString(),
-                     FolderPath = folder,
-                     FullText = $"{folder} #{(j + 1).ToString()}",
-                     SmallText = (j + 1).ToString(),
-                     ReleaseDate = DateTime.Now,
-                     Available = true
-                  };
-                  comicFiles.Add(comicFile);
-               }
-            }
-            return await Task.FromResult(comicFiles);
-
-         }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
-      }
-      #endregion
-
       #region ExtractCoverAsync
       public async Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
       {

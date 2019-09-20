@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="CustomRenderers\ReadingView.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.cs" />
+    <Compile Include="Helpers\FileSystem\FileSystem.GetFiles.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetFolders.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetRootPath.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.Validate.cs" />

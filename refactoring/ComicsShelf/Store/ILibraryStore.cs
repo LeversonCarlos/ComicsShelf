@@ -17,7 +17,6 @@ namespace ComicsShelf.Store
       LibraryModel GetLibrary(string id);
 
       List<ComicFiles.ComicFileVM> GetLibraryFiles(LibraryModel library);
-      Task<List<ComicFiles.ComicFile>> SearchFilesAsync(LibraryModel library);
       Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile);
       Task<List<ComicFiles.ComicPageVM>> ExtractPagesAsync(LibraryModel library, ComicFiles.ComicFile comicFile);
 

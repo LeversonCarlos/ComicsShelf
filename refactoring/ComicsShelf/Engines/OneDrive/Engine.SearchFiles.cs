@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.ComicFiles;
+using ComicsShelf.Store;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ComicsShelf.Engines.OneDrive
    partial class OneDriveEngine
    {
 
-      public async Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library)
+      public async Task<ComicFile[]> SearchFiles(LibraryModel library)
       {
          try
          {
@@ -18,8 +19,8 @@ namespace ComicsShelf.Engines.OneDrive
             // DUMMY ROOT FOLDER
             var rootFolder = new FileData
             {
-               id = library.LibraryKey,
-               FilePath = library.LibraryPath,
+               id = library.Key,
+               FilePath = library.Path,
                FileName = library.Description
             };
 
@@ -48,8 +49,7 @@ namespace ComicsShelf.Engines.OneDrive
                   FolderPath = file.FilePath,
                   ReleaseDate = (!file.CreatedDateTime.HasValue ? DateTime.MinValue : file.CreatedDateTime.Value.ToLocalTime()),
                   KeyValues = new Dictionary<string, string> { { "StreamSize", $"{(file.Size.HasValue ? file.Size.Value : 0)}" } },
-                  // Available = true
-                  CachePath = $"{Libraries.LibraryConstants.FilesCachePath}{file.id}"
+                  CachePath = $"{Helpers.Constants.FilesCachePath}{file.id}"
                })
                .ToList();
 

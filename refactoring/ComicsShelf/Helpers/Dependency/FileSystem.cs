@@ -26,8 +26,7 @@ namespace ComicsShelf.Helpers
       Task<bool> Validate(string libraryKey);
       Task<Folder> GetRootPath();
       Task<Folder[]> GetFolders(Folder folder);
-
-      //Task<File[]> GetFiles(Folder folder);
+      Task<File[]> GetFiles(Folder folder);
 
       //Task<byte[]> LoadData(LibraryModel library);
       //Task<bool> SaveData(LibraryModel library, byte[] serializedData);
