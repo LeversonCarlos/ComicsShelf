@@ -14,10 +14,10 @@ namespace ComicsShelf.Store
       Task<bool> NewLibraryAsync(LibraryType libraryType);
       Task<bool> AddLibraryAsync(LibraryModel libraryModel);
       Task<bool> DeleteLibraryAsync(string id);
-      LibraryModel GetLibrary(string id);
 
+      LibraryModel GetLibrary(string id);
       List<ComicFiles.ComicFileVM> GetLibraryFiles(LibraryModel library);
-      Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile);
+
       Task<List<ComicFiles.ComicPageVM>> ExtractPagesAsync(LibraryModel library, ComicFiles.ComicFile comicFile);
 
    }

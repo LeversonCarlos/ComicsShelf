@@ -78,6 +78,8 @@ namespace ComicsShelf.Services
          try
          {
 
+            var engine = Engines.Engine.Get(this.Library.Type);
+
             var lastFolderPath = "";
             var filesQuantity = comicFiles.Count;
             for (int fileIndex = 0; fileIndex < filesQuantity; fileIndex++)
@@ -118,7 +120,7 @@ namespace ComicsShelf.Services
                         }
 
                         // COVER EXTRACT
-                        if (await this.Store.ExtractCoverAsync(this.Library, comicFile.ComicFile))
+                        if (await engine.ExtractCover(this.Library, comicFile.ComicFile))
                         { comicFile.CoverPath = comicFile.ComicFile.CoverPath; return true; }
                         else { return false; }
 

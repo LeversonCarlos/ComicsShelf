@@ -199,19 +199,6 @@ namespace ComicsShelf.Store
       #endregion
 
 
-      #region ExtractCoverAsync
-      public async Task<bool> ExtractCoverAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
-      {
-         try
-         {
-            await Task.Delay(500);
-            comicFile.CoverPath = Helpers.Constants.DefaultCover;
-            return true;
-         }
-         catch (Exception ex) { throw ex; }
-      }
-      #endregion
-
       #region ExtractPagesAsync
       public async Task<List<ComicFiles.ComicPageVM>> ExtractPagesAsync(LibraryModel library, ComicFiles.ComicFile comicFile)
       {

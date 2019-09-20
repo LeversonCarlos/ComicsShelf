@@ -28,11 +28,12 @@ namespace ComicsShelf.Helpers
       Task<Folder[]> GetFolders(Folder folder);
       Task<File[]> GetFiles(Folder folder);
 
+      Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
+
       //Task<byte[]> LoadData(LibraryModel library);
       //Task<bool> SaveData(LibraryModel library, byte[] serializedData);
 
       //Task<System.Drawing.Size> GetPageSize(string pagePath);
-      //Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
 
       //Task ExtractCover(LibraryModel library, ComicFile comicFile);
       //Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile);

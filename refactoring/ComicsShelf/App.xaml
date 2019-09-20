@@ -21,12 +21,23 @@
          <Color x:Key="colorBackground">#EEEEEE</Color>
          <!-- <Color x:Key="NavigationPrimary">#2196F3</Color> -->
 
+         <!-- BUTTON -->
+         <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="Padding" Value="30,10"></Setter>
+            <Setter Property="BackgroundColor" Value="{StaticResource colorLightGray}" />
+            <Setter Property="TextColor" Value="Black" />
+         </Style>
+         <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}" >
+            <Setter Property="BackgroundColor" Value="{StaticResource colorPrimary}" />
+            <Setter Property="TextColor" Value="White" />
+         </Style>
+
          <!-- NAVIGATION -->
          <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor" Value="{StaticResource colorPrimaryDark}" />
             <Setter Property="BarTextColor" Value="White" />
          </Style>
-         
+
       </ResourceDictionary>
    </Application.Resources>
 
