@@ -22,7 +22,7 @@ namespace ComicsShelf.Main
          };
          this.ItemSelectCommand = new Command(async (item) => await this.ItemSelect(item as MenuItem));
 
-         Messaging.Subscribe<Store.LibraryModel>(Messaging.enMessages.LibraryAdded.ToString(), async (library) =>
+         Messaging.Subscribe<Store.LibraryModel>(Messaging.enMessages.LibraryAdded.ToString(), (library) =>
          {
             this.ScreenItems.Add(new MenuItem
             {

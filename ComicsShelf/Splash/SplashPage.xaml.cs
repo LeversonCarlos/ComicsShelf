@@ -27,6 +27,8 @@ namespace ComicsShelf.Splash
 
             var currentFile = (this.BindingContext as SplashVM).CurrentFile;
             this.filesCollectionView.ScrollTo(currentFile);
+            this.backgroundImage.Opacity = 0.2;
+            this.backgroundImage.Scale = 1;
 
          }
          catch (Exception ex)

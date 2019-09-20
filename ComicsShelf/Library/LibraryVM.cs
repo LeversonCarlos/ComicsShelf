@@ -19,7 +19,7 @@ namespace ComicsShelf.Library
       {
          this.Library = library;
          this.Title = library.Description;
-         this.Notify = new Notify.NotifyVM(library.Key);
+         this.Notify = new Notify.NotifyVM(library.ID);
          this.ComicFolders = new ObservableList<ComicFolderVM>();
          this.OpenCommand = new Command(async (item) => await this.Open(item as ComicFileVM));
          this.RemoveCommand = new Command(async () => await this.Remove());
