@@ -1,5 +1,5 @@
 ﻿using ComicsShelf.Helpers.FolderDialog;
-using ComicsShelf.Libraries;
+using ComicsShelf.Store;
 using System;
 
 namespace ComicsShelf.Engines.LocalDrive
@@ -23,8 +23,8 @@ namespace ComicsShelf.Engines.LocalDrive
 
             var library = new LibraryModel
             {
-               LibraryKey = selectedFolder.Key,
-               LibraryPath = selectedFolder.FullPath,
+               Key = selectedFolder.Key,
+               Path = selectedFolder.FullPath,
                Description = selectedFolder.Name,
                Type = LibraryType.LocalDrive
             };

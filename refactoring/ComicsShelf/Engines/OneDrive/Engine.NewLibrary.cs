@@ -1,8 +1,7 @@
 ﻿using ComicsShelf.Helpers.FolderDialog;
-using ComicsShelf.Libraries;
+using ComicsShelf.Store;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.OneDrive.Files;
 
 namespace ComicsShelf.Engines.OneDrive
@@ -43,15 +42,15 @@ namespace ComicsShelf.Engines.OneDrive
 
             var library = new LibraryModel
             {
-               LibraryKey = selectedFolder.Key,
-               LibraryPath = selectedFolder.FullPath,
+               Key = selectedFolder.Key,
+               Path = selectedFolder.FullPath,
                Description = selectedFolder.Name,
                Type = LibraryType.OneDrive
             };
 
-            library.LibraryPath = library.LibraryPath;
-            if (!string.IsNullOrEmpty(library.LibraryPath))
-            { library.LibraryPath += "/"; }
+            // library.Path = library.Path;
+            if (!string.IsNullOrEmpty(library.Path))
+            { library.Path += "/"; }
 
             resultCallback.Invoke(library);
 
@@ -60,6 +59,7 @@ namespace ComicsShelf.Engines.OneDrive
          finally { GC.Collect(); }
       }
 
+      /*
       public async Task<bool> DeleteLibrary(LibraryModel library)
       {
          try
@@ -83,6 +83,7 @@ namespace ComicsShelf.Engines.OneDrive
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
+      */
 
    }
 }

@@ -22,11 +22,11 @@ namespace ComicsShelf.Helpers
    public interface IFileSystem : IDisposable
    {
 
-      Task<bool> Validate(string libraryKey);
       string PathSeparator { get; }
+      Task<bool> Validate(string libraryKey);
+      Task<Folder> GetRootPath();
+      Task<Folder[]> GetFolders(Folder folder);
 
-      //Task<Folder> GetRootPath();
-      //Task<Folder[]> GetFolders(Folder folder);
       //Task<File[]> GetFiles(Folder folder);
 
       //Task<byte[]> LoadData(LibraryModel library);
