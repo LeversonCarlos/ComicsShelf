@@ -351,3 +351,6 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/visualstudio
 
 ComicsShelf.Legacy
+# git update-index --skip-worktree refactoring/ComicsShelf/Engines/OneDrive/Connector.Secrets.cs
+# git update-index --skip-worktree refactoring/ComicsShelf/Helpers/AppCenter/AppCenter.Secrets.cs
+# git update-index --skip-worktree refactoring/ComicsShelf.Android/Resources/values/secrets.xml

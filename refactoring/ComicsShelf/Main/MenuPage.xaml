@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   mc:Ignorable="d"
+   x:Class="ComicsShelf.Main.MenuPage"
+   x:Name="menuPage"
+   Title="Menu">
+   <ContentPage.Content>
+      <StackLayout VerticalOptions="FillAndExpand" >
+
+         <Grid HeightRequest="200" VerticalOptions="Start" HorizontalOptions="Fill" >
+            <Image Aspect="AspectFill" Source="banner_ComicsShelf"></Image>
+         </Grid>
+
+         <StackLayout VerticalOptions="FillAndExpand" BindableLayout.ItemsSource="{Binding ScreenItems}" >
+            <BindableLayout.ItemTemplate>
+               <DataTemplate>
+                  <StackLayout>
+                     <FlexLayout AlignItems="Center" JustifyContent="Start">
+                        <FlexLayout.GestureRecognizers>
+                           <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.ItemSelectCommand, Source={x:Reference menuPage} }" CommandParameter="{Binding .}" ></TapGestureRecognizer>
+                        </FlexLayout.GestureRecognizers>
+                        <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
+                        <Label Text="{Binding Text}" FontSize="Medium" ></Label>
+                     </FlexLayout>
+                     <BoxView Color="Silver" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
+                  </StackLayout>
+               </DataTemplate>
+            </BindableLayout.ItemTemplate>
+         </StackLayout>
+
+         <StackLayout VerticalOptions="End" BindableLayout.ItemsSource="{Binding CommandItems}" >
+            <BindableLayout.ItemTemplate>
+               <DataTemplate>
+                  <StackLayout>
+                     <BoxView Color="Silver" HorizontalOptions="FillAndExpand" HeightRequest="1"></BoxView>
+                     <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                        <FlexLayout.GestureRecognizers>
+                           <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.ItemSelectCommand, Source={x:Reference menuPage} }" CommandParameter="{Binding .}" ></TapGestureRecognizer>
+                        </FlexLayout.GestureRecognizers>
+                        <Image Source="{Binding Image}" Aspect="AspectFit" HeightRequest="30" Margin="10" ></Image>
+                        <Label Text="{Binding Text}" FontSize="Medium" ></Label>
+                     </FlexLayout>
+                  </StackLayout>
+               </DataTemplate>
+            </BindableLayout.ItemTemplate>
+         </StackLayout>
+
+      </StackLayout>
+   </ContentPage.Content>
+</ContentPage>
