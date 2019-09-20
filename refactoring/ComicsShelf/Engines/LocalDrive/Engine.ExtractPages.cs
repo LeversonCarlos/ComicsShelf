@@ -1,47 +1,29 @@
 ﻿using ComicsShelf.ComicFiles;
+using ComicsShelf.Store;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.OneDrive.Files;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.LocalDrive
 {
-   partial class OneDriveEngine
+   partial class LocalDriveEngine
    {
 
-      public async Task<List<ComicPageVM>> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile)
+      public async Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile)
       {
          try
          {
+
+            // INITIALIZE
             var pages = new List<ComicPageVM>();
+            if (!File.Exists(comicFile.FilePath)) { return null; }
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
-            // DOWNLOAD COMIC FILE FROM REMOTE SERVER IF LOCAL CACHE DOESNT EXIST YET
-            var cacheFilePath = $"{comicFile.CachePath}.zip";
-            if (!File.Exists(cacheFilePath))
-            {
-               if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
-               var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
-               if (string.IsNullOrEmpty(downloadUrl)) { return null; }
-               using (var downloadClient = new System.Net.Http.HttpClient())
-               {
-                  using (var downloadStream = await downloadClient.GetStreamAsync(downloadUrl))
-                  {
-                     using (var fileStream = new FileStream(cacheFilePath, FileMode.CreateNew, FileAccess.ReadWrite))
-                     {
-                        await downloadStream.CopyToAsync(fileStream);
-                        await fileStream.FlushAsync();
-                     }
-                  }
-               }
-            }
-            if (!File.Exists(cacheFilePath)) { return null; }
-
-            // OPEN ZIP ARCHIVE FROM LOCAL CACHE
-            using (var zipArchiveStream = new FileStream(cacheFilePath, FileMode.Open, FileAccess.Read))
+            // OPEN ZIP ARCHIVE
+            using (var zipArchiveStream = new FileStream(comicFile.FilePath, FileMode.Open, FileAccess.Read))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
                {
@@ -84,7 +66,6 @@ namespace ComicsShelf.Engines.OneDrive
                               pageStream.Close();
                            }
                            zipEntryStream.Close();
-                           zipEntryStream.Dispose();
                         }
                      }
 
@@ -94,16 +75,13 @@ namespace ComicsShelf.Engines.OneDrive
 
                   }
 
-                  zipArchive.Dispose();
                }
-
                zipArchiveStream.Close();
-               zipArchiveStream.Dispose();
             }
 
             return pages;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
       }
 
    }

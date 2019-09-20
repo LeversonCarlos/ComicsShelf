@@ -94,7 +94,8 @@ namespace ComicsShelf.Splash
             var startTime = DateTime.Now;
 
             var wasCached = System.IO.Directory.Exists(this.CurrentFile.ComicFile.CachePath);
-            var pages = await this.Store.ExtractPagesAsync(this.Library, this.CurrentFile.ComicFile);
+            var engine = Engines.Engine.Get(this.Library.Type);
+            var pages = await engine.ExtractPages(this.Library, this.CurrentFile.ComicFile);
 
             if (System.IO.Directory.Exists(this.CurrentFile.ComicFile.CachePath))
             {
