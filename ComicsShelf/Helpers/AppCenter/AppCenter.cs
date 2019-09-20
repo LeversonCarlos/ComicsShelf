@@ -47,9 +47,7 @@ namespace ComicsShelf.Helpers
       }
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
-      {
-         Analytics.TrackEvent(text, properties);
-      }
+      { Analytics.TrackEvent(text, properties); }
 
    }
 }

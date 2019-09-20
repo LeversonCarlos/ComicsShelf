@@ -30,13 +30,6 @@ namespace ComicsShelf.Helpers
 
       Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
       Task<System.Drawing.Size> GetPageSize(string pagePath);
-
-      //Task<byte[]> LoadData(LibraryModel library);
-      //Task<bool> SaveData(LibraryModel library, byte[] serializedData);
-
-
-      //Task ExtractCover(LibraryModel library, ComicFile comicFile);
-      //Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile);
-
+      
    }
 }

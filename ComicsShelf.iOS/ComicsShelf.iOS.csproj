@@ -129,7 +129,6 @@
       <Version>3.0.0.12</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.709244" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
     <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.2.91" />
   </ItemGroup>
@@ -139,9 +138,6 @@
       <Project>{63289AC1-1B67-44DF-9AF2-59DD2D24981D}</Project>
       <Name>ComicsShelf</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\banner_ComicsShelf.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_home.png" />
@@ -162,15 +158,6 @@
     <BundleResource Include="Resources\icon_LocalDrive_New%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_OneDrive.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon_OneDrive%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon_OneDrive%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\icon_Delete.png" />
   </ItemGroup>
   <ItemGroup>
@@ -180,12 +167,24 @@
     <BundleResource Include="Resources\icon_Delete%403x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\icon_OneDrive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_OneDrive%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_OneDrive%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_Open.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\icon_EmptyStar.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_FullStar.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\icon_Open.png" />
+    <BundleResource Include="Resources\banner_ComicsShelf.png" />
   </ItemGroup>
 </Project>
