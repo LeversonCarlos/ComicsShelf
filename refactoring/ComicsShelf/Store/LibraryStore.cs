@@ -100,13 +100,9 @@ namespace ComicsShelf.Store
             App.HideNavigation();
 
             // ENGINE
-            // TODO
-            var library = new LibraryModel
-            {
-               Key = DateTime.Now.ToString("HHmmss"),
-               Description = $"Library {DateTime.Now.ToString("ssfff")}",
-               Type = libraryType
-            };
+            var engine = Engines.Engine.Get(libraryType);
+            var library = await engine.NewLibrary();
+            if (library == null) { return false; }
 
             // ADD LIBRARY
             library.ID = Guid.NewGuid().ToString();
@@ -134,7 +130,7 @@ namespace ComicsShelf.Store
          {
 
             // VALIDATE
-            if (this.Libraries.Any(x => x.ID == library.ID)) { return false; }
+            if (this.Libraries.Any(x => x.Type == library.Type && x.Key == library.Key)) { return false; }
 
             // ADD
             this.Libraries.Add(library);
@@ -172,6 +168,10 @@ namespace ComicsShelf.Store
                this.SaveLibraries();
 
             }
+
+            // ENGINE
+            var engine = Engines.Engine.Get(library.Type);
+            await engine.DeleteLibrary(library);
 
             return true;
          }

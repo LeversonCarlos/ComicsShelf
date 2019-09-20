@@ -2,6 +2,7 @@
 using ComicsShelf.Store;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.OneDrive.Files;
 
 namespace ComicsShelf.Engines.OneDrive
@@ -9,12 +10,12 @@ namespace ComicsShelf.Engines.OneDrive
    partial class OneDriveEngine
    {
 
-      public async void NewLibrary(Action<LibraryModel> resultCallback)
+      public async Task<LibraryModel> NewLibrary()
       {
          try
          {
 
-            if (!await this.Connector.TryConnectAsync()) { resultCallback.Invoke(null); return; }
+            if (!await this.Connector.TryConnectAsync()) { return null; }
 
             var root = await this.Connector.GetDetailsAsync();
             var initialFolder = new Helpers.Folder { Key = root.id, FullPath = "/", Name = "/" };
@@ -38,7 +39,7 @@ namespace ComicsShelf.Engines.OneDrive
                   .ToArray();
                return folderList;
             });
-            if (selectedFolder == null) { resultCallback.Invoke(null); return; }
+            if (selectedFolder == null) { return null; }
 
             var library = new LibraryModel
             {
@@ -52,38 +53,11 @@ namespace ComicsShelf.Engines.OneDrive
             if (!string.IsNullOrEmpty(library.Path))
             { library.Path += "/"; }
 
-            resultCallback.Invoke(library);
+            return library;
 
          }
-         catch (Exception ex) { await App.ShowMessage(ex); resultCallback.Invoke(null); }
-         finally { GC.Collect(); }
-      }
-
-      /*
-      public async Task<bool> DeleteLibrary(LibraryModel library)
-      {
-         try
-         {
-
-            var service = Xamarin.Forms.DependencyService.Get<LibraryService>();
-            if (service != null)
-            {
-               var hasMoreOneDriveLibraries = service.Libraries
-                  .Select(x => x.Value)
-                  .Where(x => x.Type == LibraryType.OneDrive)
-                  .Where(x => x.LibraryKey != library.LibraryKey)
-                  .Any();
-               if (!hasMoreOneDriveLibraries)
-               {
-                  await this.Connector.DisconnectAsync();
-               }
-            }
-
-            return true;
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); return false; }
-      }
-      */
+         catch (Exception ex) { await App.ShowMessage(ex); return null; }
+      }     
 
    }
 }

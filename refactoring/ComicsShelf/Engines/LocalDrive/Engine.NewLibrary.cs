@@ -1,25 +1,26 @@
 ﻿using ComicsShelf.Helpers.FolderDialog;
 using ComicsShelf.Store;
 using System;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Engines.LocalDrive
 {
    partial class LocalDriveEngine
    {
 
-      public async void NewLibrary(Action<LibraryModel> resultCallback)
+      public async Task<LibraryModel> NewLibrary()
       {
          try
          {
 
-            if (!await this.HasStoragePermission()) { resultCallback.Invoke(null); return; }
+            if (!await this.HasStoragePermission()) { return null; }
 
             var initialFolder = await this.FileSystem.GetRootPath();
             var selectedFolder = await Selector.GetFolder(initialFolder, async (folder) =>
             {
                return await this.FileSystem.GetFolders(folder);
             });
-            if (selectedFolder == null) { resultCallback.Invoke(null); return; }
+            if (selectedFolder == null) { return null; }
 
             var library = new LibraryModel
             {
@@ -28,11 +29,10 @@ namespace ComicsShelf.Engines.LocalDrive
                Description = selectedFolder.Name,
                Type = LibraryType.LocalDrive
             };
-            resultCallback.Invoke(library);
+            return library;
 
          }
-         catch (Exception ex) { await App.ShowMessage(ex); resultCallback.Invoke(null); }
-         finally { GC.Collect(); }
+         catch (Exception ex) { await App.ShowMessage(ex); return null; }
       }
 
    }
