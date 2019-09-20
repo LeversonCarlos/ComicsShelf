@@ -1,25 +1,25 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace ComicsShelf.Helpers
 {
-   internal class AppCenter
+   internal partial class AppCenter
    {
 
       public static void Initialize()
       {
-         /*
          Microsoft.AppCenter.AppCenter.Start(
-            "android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
-            / *
+            $"android={AppCenter_androidSecret};" +
+            /*
             "uwp={Your UWP App secret here};" +
             "ios={Your iOS App secret here}" +
-            * /
+            */
             "",
             typeof(Analytics), typeof(Crashes));
-         */
       }
 
       public static void TrackEvent(string text)
@@ -43,12 +43,12 @@ namespace ComicsShelf.Helpers
          if (ex.InnerException != null) { trackProp.Add("InnerException", ex.InnerException.Message); }
          trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
          try { trackProp.Add("Route", $"{Xamarin.Forms.Shell.Current.CurrentState.Location.ToString()}"); } catch { }
-         // TODO:  Crashes.TrackError(ex, trackProp);
+         Crashes.TrackError(ex, trackProp);
       }
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
       {
-         // TODO: Analytics.TrackEvent(text, properties);
+         Analytics.TrackEvent(text, properties);
       }
 
    }
