@@ -16,7 +16,7 @@ namespace ComicsShelf
          this.MainPage = new Main.MainPage();
       }
 
-      protected async override void OnStart()
+      protected override async void OnStart()
       {
          Helpers.AppCenter.Initialize();
          Controls.CoverView.InitDefaultSize();

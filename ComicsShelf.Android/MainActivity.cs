@@ -20,8 +20,8 @@ namespace ComicsShelf.Droid
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
          Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
          Xamarin.Forms.Forms.Init(this, savedInstanceState);
-         Xamarin.OneDrive.Connector.Init(this, "https://login.microsoftonline.com/common/oauth2/nativeclient");
          CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
+         Xamarin.OneDrive.Connector.Init(this, "https://login.microsoftonline.com/common/oauth2/nativeclient");
          LoadApplication(new App());
       }
 
