@@ -27,8 +27,6 @@ namespace ComicsShelf.Splash
 
             var currentFile = (this.BindingContext as SplashVM).CurrentFile;
             this.filesCollectionView.ScrollTo(currentFile);
-            this.backgroundImage.Opacity = 0.2;
-            this.backgroundImage.Scale = 1;
 
          }
          catch (Exception ex)
@@ -81,6 +79,9 @@ namespace ComicsShelf.Splash
          Messaging.Unsubscribe<ComicPageSize>(ComicPageSize.PageSizeChanged);
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpening");
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpened");
+         ViewExtensions.CancelAnimations(this.backgroundImage);
+         this.backgroundImage.Opacity = 0.2;
+         this.backgroundImage.Scale = 1;
          this.filesCollectionView.BindingContext = null;
       }
 
