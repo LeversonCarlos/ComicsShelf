@@ -52,17 +52,15 @@ namespace ComicsShelf.Helpers.FolderDialog
 
       public async Task<Folder> OpenPage()
       {
-         var mainPage = Application.Current.MainPage as Page;
          var view = new FolderDialogPage { BindingContext = this };
-         await mainPage.Navigation.PushModalAsync(view, true);
+         await App.Navigation().PushModalAsync(view, true);
          return await this.tcs.Task;
       }
 
       async Task ClosePage()
       {
          this.IsBusy = true;
-         var mainPage = Application.Current.MainPage as Page;
-         await mainPage.Navigation.PopModalAsync(true);
+         await App.Navigation().PopModalAsync(true);
          this.IsBusy = false;
       }
 

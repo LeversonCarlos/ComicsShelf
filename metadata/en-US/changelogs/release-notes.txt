@@ -1,5 +1,0 @@
-Providing Spanish and French translations
-Upgrade inner libraries, enhance visuals and user experience
-OneDrive integration for remote libraries with folder selection
-Overall memory usage improvement and load time
-Implementing a custom folder selector

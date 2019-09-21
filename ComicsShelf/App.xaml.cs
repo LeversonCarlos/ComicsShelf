@@ -8,12 +8,12 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
-         DependencyService.Register<Libraries.LibraryStore>();
-         DependencyService.Register<Libraries.LibraryService>();
+         this.MainPage = new Main.InitialPage();
          DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
-         DependencyService.Register<Engines.OneDrive.OneDriveEngine>();
          DependencyService.Register<Engines.OneDrive.OneDriveConnector>();
-         MainPage = new AppShell();
+         DependencyService.Register<Engines.OneDrive.OneDriveEngine>();
+         DependencyService.Register<Store.ILibraryStore, Store.LibraryStore>();
+         this.MainPage = new Main.MainPage();
       }
 
       protected override async void OnStart()
@@ -21,18 +21,14 @@ namespace ComicsShelf
          Helpers.AppCenter.Initialize();
          Controls.CoverView.InitDefaultSize();
          await Helpers.DefaultCover.LoadDefaultCover();
-         await DependencyService.Get<Libraries.LibraryStore>().LoadLibraries();
+         await DependencyService.Get<Store.ILibraryStore>().LoadLibrariesAsync();
       }
 
       protected override void OnSleep()
-      {
-         DependencyService.Get<Libraries.LibraryService>().Sleep();
-      }
+      { this.DoSleep(); }
 
-      protected override async void OnResume()
-      {
-         await DependencyService.Get<Libraries.LibraryService>().Resume();
-      }
+      protected override void OnResume()
+      { this.DoResume(); }
 
    }
 }

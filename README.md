@@ -4,7 +4,7 @@ Mobile viewer for comic book [cbz] files, done as a learning path to Xamarin fra
 
 ## A litle history first
 
-<img src="./resources/AppIcon/Android icon.png" 
+<img src="./resources/raw/AppIcon/Android icon.png" 
    title="Logo" width="192" height="192" align="right"/>
 
 I'm a comic book reader (and collector) for a long time. And, as a developer, i wanted to study and learn a new programing language (in this case, Xamarin). So i put this things togheter and decided to make a CBZ file reader that would meet my needs.  
@@ -15,7 +15,7 @@ In fact, this is the result of a learning work, but done with love and dedicatio
 
 The definitive lightweight viewer for your comic book files.  
 It's really straightforward.  
-Select and folder on your device (or your OneDrive account) where you put yor comic books (those CBZ files).  
+Select a folder on your device (or your OneDrive account) where you put your comic books (those CBZ files).  
 The app will continually search your folder for newly added files.  
 Then extract covers and display it as a eye candy shelf.  
 You click the one you want to read, and start fliping the pages.  
@@ -25,13 +25,13 @@ Happy reading.
 ## Some screenshots
 
 <p align="center">
-  <img src="./metadata/en-US/images/phoneScreenshots/2.png" 
+  <img src="./resources/metadata/en-US/images/phoneScreenshots/2.png" 
      title="Comics Shelf on Phone" width="108" height="192" />
-  <img src="./metadata/en-US/images/phoneScreenshots/1.png" 
+  <img src="./resources/metadata/en-US/images/phoneScreenshots/1.png" 
      title="Opened Comic on Phone" width="108" height="192" />  
-  <img src="./metadata/en-US/images/phoneScreenshots/3.png" 
+  <img src="./resources/metadata/en-US/images/phoneScreenshots/3.png" 
      title="Multiple Libraries" width="108" height="192" />  
-  <img src="./metadata/en-US/images/tenInchScreenshots/2.png" 
+  <img src="./resources/metadata/en-US/images/tenInchScreenshots/2.png" 
      title="Opened Comic on Tablet" width="314" height="192" />    
 </p>
 

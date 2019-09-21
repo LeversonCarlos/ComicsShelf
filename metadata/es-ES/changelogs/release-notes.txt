@@ -1,5 +1,0 @@
-Proporcionar traducción al español y francés
-Actualice las bibliotecas internas, mejore las imágenes y la experiencia del usuario
-Integración de OneDrive para bibliotecas remotas con selección de carpeta
-Mejora general del uso de memoria y tiempo de carga
-Implementar un selector de carpeta personalizado

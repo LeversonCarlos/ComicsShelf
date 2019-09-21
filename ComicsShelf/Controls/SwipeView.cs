@@ -17,6 +17,7 @@ namespace ComicsShelf.Controls
          this.LastPosition = -1;
          this.PositionSelected += this.OnPositionSelected;
          this.ArrowsBackgroundColor = Helpers.Colors.Accent;
+
          this.GestureRecognizers.Add(new TapGestureRecognizer
          {
             Command = new Command((param) =>
@@ -27,6 +28,7 @@ namespace ComicsShelf.Controls
       }
 
       int LastPosition { get; set; }
+
       void OnPositionSelected(object sender, PositionSelectedEventArgs e)
       {
          try

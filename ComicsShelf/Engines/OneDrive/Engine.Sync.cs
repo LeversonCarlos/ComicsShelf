@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.Store;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.OneDrive.Files;
@@ -9,20 +10,20 @@ namespace ComicsShelf.Engines.OneDrive
    {
       private const string SYNC_FILE_ID = "SyncFileID";
 
-      public async Task<bool> SaveSyncData(Libraries.LibraryModel library, byte[] serializedValue)
+      public async Task<bool> SaveSyncData(LibraryModel library, byte[] serializedValue)
       {
          try
          {
             using (var serializedStream = new System.IO.MemoryStream(serializedValue))
             {
-               var syncFile = new FileData { FileName = Libraries.LibraryModel.SyncFile };
+               var syncFile = new FileData { FileName = LibraryModel.SyncFile };
 
                // SYNC FILE PREVIOUSLY SAVED
                syncFile.id = library.GetKeyValue(SYNC_FILE_ID);
 
                // SET THE MAIN FOLDER WHERE THE FILE MUST BE CREATED
                if (string.IsNullOrEmpty(syncFile.id))
-               { syncFile.parentID = library.LibraryKey; }
+               { syncFile.parentID = library.Key; }
 
                // UPLOAD CONTENT
                syncFile = await this.Connector.UploadAsync(syncFile, serializedStream);
@@ -33,10 +34,10 @@ namespace ComicsShelf.Engines.OneDrive
                return true;
             }
          }
-         catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
       }
 
-      public async Task<byte[]> LoadSyncData(Libraries.LibraryModel library)
+      public async Task<byte[]> LoadSyncData(LibraryModel library)
       {
          try
          {
@@ -51,10 +52,10 @@ namespace ComicsShelf.Engines.OneDrive
 
             return serializedValue;
          }
-         catch (Exception ex) { await App.ShowMessage(ex); return null; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
       }
 
-      private async Task<string> LoadDataAsync_GetFileID(Libraries.LibraryModel library)
+      private async Task<string> LoadDataAsync_GetFileID(LibraryModel library)
       {
          try
          {
@@ -64,12 +65,10 @@ namespace ComicsShelf.Engines.OneDrive
             if (!string.IsNullOrEmpty(fileID)) { return fileID; }
 
             // TRY TO SEARCH ON FOLDER
-            var folder = new FileData { id = library.LibraryKey };
-            var fileList = await this.Connector.SearchFilesAsync(folder, Libraries.LibraryModel.SyncFile, 100);
-            if (fileList == null || fileList.Count == 0)
-            { fileList = await this.Connector.SearchFilesAsync(folder, Libraries.LibraryModel.SyncFile_OLD, 100); }
+            var folder = new FileData { id = library.Key };
+            var fileList = await this.Connector.SearchFilesAsync(folder, LibraryModel.SyncFile, 100);
             if (fileList == null || fileList.Count == 0) { return string.Empty; }
-            var file = fileList.Where(x => x.parentID == library.LibraryKey).FirstOrDefault();
+            var file = fileList.Where(x => x.parentID == library.Key).FirstOrDefault();
             if (file == null) { return string.Empty; }
 
             // RESULT

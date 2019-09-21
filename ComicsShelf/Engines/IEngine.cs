@@ -1,5 +1,5 @@
 ﻿using ComicsShelf.ComicFiles;
-using ComicsShelf.Helpers;
+using ComicsShelf.Store;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -9,28 +9,28 @@ namespace ComicsShelf.Engines
 
    internal interface IEngine
    {
-      Task<bool> Validate(Libraries.LibraryModel library);
-      void NewLibrary(System.Action<Libraries.LibraryModel> resultCallback);
-      Task<bool> DeleteLibrary(Libraries.LibraryModel library);
+      Task<bool> Validate(LibraryModel library);
+      Task<LibraryModel> NewLibrary();
+      Task<bool> DeleteLibrary(LibraryModel library);
 
-      Task<byte[]> LoadSyncData(Libraries.LibraryModel library);
-      Task<bool> SaveSyncData(Libraries.LibraryModel library, byte[] serializedValue);
-      Task<ComicFile[]> SearchFiles(Libraries.LibraryModel library);
+      Task<ComicFile[]> SearchFiles(LibraryModel library);
+      Task<bool> ExtractCover(LibraryModel library, ComicFile comicFile);
+      Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile);
 
-      Task<bool> ExtractCover(Libraries.LibraryModel library, ComicFile comicFile);
-      Task<List<ComicPageVM>> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile);
+      Task<byte[]> LoadSyncData(LibraryModel library);
+      Task<bool> SaveSyncData(LibraryModel library, byte[] serializedValue);
 
    }
 
    internal class Engine
    {
-      public static IEngine Get(Libraries.LibraryType libraryType)
+      public static IEngine Get(LibraryType libraryType)
       {
-         if (libraryType == Libraries.LibraryType.OneDrive)
+         if (libraryType == LibraryType.OneDrive)
          {
             return DependencyService.Get<OneDrive.OneDriveEngine>();
          }
-         else if (libraryType == Libraries.LibraryType.LocalDrive)
+         else if (libraryType == LibraryType.LocalDrive)
          {
             return DependencyService.Get<LocalDrive.LocalDriveEngine>();
          }

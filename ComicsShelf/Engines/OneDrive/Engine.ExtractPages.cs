@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.ComicFiles;
+using ComicsShelf.Store;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,10 +13,12 @@ namespace ComicsShelf.Engines.OneDrive
    partial class OneDriveEngine
    {
 
-      public async Task<List<ComicPageVM>> ExtractPages(Libraries.LibraryModel library, ComicFile comicFile)
+      public async Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile)
       {
          try
          {
+
+            // INITIALIZE
             var pages = new List<ComicPageVM>();
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
@@ -84,7 +87,6 @@ namespace ComicsShelf.Engines.OneDrive
                               pageStream.Close();
                            }
                            zipEntryStream.Close();
-                           zipEntryStream.Dispose();
                         }
                      }
 
@@ -94,16 +96,13 @@ namespace ComicsShelf.Engines.OneDrive
 
                   }
 
-                  zipArchive.Dispose();
                }
-
                zipArchiveStream.Close();
-               zipArchiveStream.Dispose();
             }
 
             return pages;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
       }
 
    }

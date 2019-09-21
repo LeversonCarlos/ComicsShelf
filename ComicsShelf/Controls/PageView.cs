@@ -23,7 +23,6 @@ namespace ComicsShelf.Controls
             NumberOfTapsRequired = 2
          });
 
-
          this.OnImageResize();
       }
 

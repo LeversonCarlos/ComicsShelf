@@ -1,13 +1,12 @@
 ﻿using ComicsShelf.Helpers.Observables;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.ComicFiles
 {
    public enum CacheStatusEnum : short { Unknown = -1, No = 0, Yes = 1 }
 
-   public class ComicFileVM : Helpers.BaseVM
+   public class ComicFileVM : ObservableObject
    {
 
       public ComicFile ComicFile { get; private set; }
@@ -15,10 +14,10 @@ namespace ComicsShelf.ComicFiles
       {
          this.ComicFile = comicFile;
          this.ComicFile.Available = true;
-         this.ComicFile.CoverPath = $"{Libraries.LibraryConstants.CoversCachePath}{comicFile.Key}.jpg";
-         this.ComicFile.CachePath = $"{Libraries.LibraryConstants.FilesCachePath}{comicFile.Key}";
+         this.ComicFile.CoverPath = $"{Helpers.Constants.CoversCachePath}{comicFile.Key}.jpg";
+         this.ComicFile.CachePath = $"{Helpers.Constants.FilesCachePath}{comicFile.Key}";
          this.Set(comicFile);
-         this._CoverPath = Libraries.LibraryConstants.DefaultCover;
+         this._CoverPath = Helpers.Constants.DefaultCover;
          this._CachePath = string.Empty;
       }
 
@@ -139,18 +138,8 @@ namespace ComicsShelf.ComicFiles
       public ObservableList<ComicPageVM> Pages { get; internal set; }
 
 
-      internal async Task UpdateLibrary()
-      {
-         try
-         {
-            var service = DependencyService.Get<Libraries.LibraryService>();
-            if (service == null) { return; }
-            var library = service.Libraries[this.ComicFile.LibraryKey];
-            if (library == null) { return; }
-            await service.UpdateLibrary(library);
-         }
-         catch { }
-      }
+      private void UpdateLibrary()
+      { Services.LibraryService.UpdateLibrary(this.ComicFile.LibraryKey); }
 
    }
 }

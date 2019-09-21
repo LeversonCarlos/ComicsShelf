@@ -4,17 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace ComicsShelf.Helpers
 {
-   internal class AppCenter
+   internal partial class AppCenter
    {
 
       public static void Initialize()
       {
          Microsoft.AppCenter.AppCenter.Start(
-            "android=4ebe7891-1962-4e2a-96c4-c37a7c06c104;" +
+            $"android={AppCenter_androidSecret};" +
             /*
             "uwp={Your UWP App secret here};" +
             "ios={Your iOS App secret here}" +

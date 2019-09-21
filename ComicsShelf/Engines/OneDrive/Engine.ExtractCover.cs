@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.ComicFiles;
+using ComicsShelf.Store;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,15 +10,19 @@ namespace ComicsShelf.Engines.OneDrive
    partial class OneDriveEngine
    {
 
-      public async Task<bool> ExtractCover(Libraries.LibraryModel library, ComicFile comicFile)
+      public async Task<bool> ExtractCover(LibraryModel library, ComicFile comicFile)
       {
          try
          {
+
+            // VALIDATE
             if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return false; }
 
+            // RETRIEVE THE DOWNLOAD URL
             var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
             if (string.IsNullOrEmpty(downloadUrl)) { return false; }
 
+            // OPEN REMOTE STREAM
             using (var zipStream = new System.IO.Compression.HttpZipStream(downloadUrl))
             {
 

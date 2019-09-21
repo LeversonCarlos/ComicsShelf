@@ -59,15 +59,15 @@
       private static string GetNotifyKey()
       { return $"{NotifyKey}.General"; }
 
-      private static string[] GetNotifyKeys(Libraries.LibraryModel library)
+      private static string[] GetNotifyKeys(Store.LibraryModel library)
       {
          return new string[] {
             $"{NotifyKey}.General",
-            $"{NotifyKey}.{library.LibraryKey}"
+            $"{NotifyKey}.{library.ID}"
          };
       }
 
-      public void Send(Libraries.LibraryModel library, string text)
+      public void Send(Store.LibraryModel library, string text)
       {
          this.Text = text;
          this.Details = string.Empty;
@@ -76,7 +76,7 @@
          foreach (var notifyKey in GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
-      public void Send(Libraries.LibraryModel library, string details, double progress)
+      public void Send(Store.LibraryModel library, string details, double progress)
       {
          this.Details = details;
          this.Progress = progress;
@@ -84,7 +84,7 @@
          foreach (var notifyKey in GetNotifyKeys(library)) { Send(notifyKey, this); }
       }
 
-      public void Send(Libraries.LibraryModel library, bool isRunning)
+      public void Send(Store.LibraryModel library, bool isRunning)
       {
          this.IsRunning = isRunning;
          foreach (var notifyKey in GetNotifyKeys(library)) { Send(notifyKey, this); }

@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Libraries;
+﻿using ComicsShelf.Store;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engines.LocalDrive
@@ -9,7 +9,7 @@ namespace ComicsShelf.Engines.LocalDrive
       public async Task<bool> Validate(LibraryModel library)
       {
          if (!await this.HasStoragePermission()) { return false; }
-         if (!await this.FileSystem.Validate(library.LibraryKey)) { return false; }
+         if (!await this.FileSystem.Validate(library.Key)) { return false; }
          return true;
       }
 

@@ -1,5 +1,0 @@
-Disponibilizando tradução para espanhol e francês
-Atualizar bibliotecas internas, melhorar visuais e a experiência do usuário
-Integração com OneDrive para bibliotecas remotas com seleção de pasta
-Melhoria geral do uso de memória e tempo de carregamento
-Implementando um seletor de pasta personalizado 

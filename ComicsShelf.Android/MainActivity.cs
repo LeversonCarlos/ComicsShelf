@@ -1,14 +1,14 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.OS;
 using Android.Runtime;
+using Android.OS;
+using Android.Content;
 
 namespace ComicsShelf.Droid
 {
    [Activity(Label = "Comics Shelf", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
    {
-
       protected override void OnCreate(Bundle savedInstanceState)
       {
          TabLayoutResource = Resource.Layout.Tabbar;
@@ -16,10 +16,10 @@ namespace ComicsShelf.Droid
 
          base.OnCreate(savedInstanceState);
 
-         global::Xamarin.Forms.Forms.SetFlags("Shell_Experimental", "Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
+         Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
          Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
-         global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+         Xamarin.Forms.Forms.Init(this, savedInstanceState);
          CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
          Xamarin.OneDrive.Connector.Init(this, "https://login.microsoftonline.com/common/oauth2/nativeclient");
          LoadApplication(new App());
@@ -32,7 +32,7 @@ namespace ComicsShelf.Droid
          base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
       }
 
-      protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
+      protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
       {
          base.OnActivityResult(requestCode, resultCode, data);
          Xamarin.OneDrive.Connector.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);

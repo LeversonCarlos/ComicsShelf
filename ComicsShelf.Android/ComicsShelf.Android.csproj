@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C6AD9621-5589-4C66-94B9-2BF02C5BC91F}</ProjectGuid>
+    <ProjectGuid>{E532B6DA-B18E-429E-A4DC-E8A05F1D0F4C}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
+    <TemplateGuid>{9AA2D3C6-3393-45F1-8E7C-5A9901728795}</TemplateGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>ComicsShelf.Droid</RootNamespace>
     <AssemblyName>ComicsShelf.Android</AssemblyName>
@@ -39,7 +39,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -49,16 +49,16 @@
     <EnableLLVM>true</EnableLLVM>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <BundleAssemblies>false</BundleAssemblies>
+    <BundleAssemblies>true</BundleAssemblies>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
+    <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
+    <AndroidVersionCodePattern>{versionCode}{abi}</AndroidVersionCodePattern>
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
     <Reference Include="System.Xml.Linq" />
@@ -72,7 +72,6 @@
       <Version>3.0.0.12</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.709244" />
-    <PackageReference Include="Xamarin.Android.Support.ViewPager" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
@@ -81,34 +80,29 @@
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.1.1" />
+    <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.2.91" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\ReadingView.cs" />
+    <Compile Include="Helpers\FileSystem\FileSystem.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetPageSize.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.SaveThumbnail.cs" />
-    <Compile Include="Helpers\FileSystem\FileSystem.ExtractPages.cs" />
-    <Compile Include="Helpers\FileSystem\FileSystem.ExtractCover.cs" />
-    <Compile Include="Helpers\FileSystem\FileSystem.SyncLibrary.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetFiles.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetFolders.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetRootPath.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.Validate.cs" />
-    <Compile Include="Helpers\FileSystem\FileSystem.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="appcenter-pre-build.sh" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Tabbar.axml" />
-    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\layout\Tabbar.xml" />
+    <AndroidResource Include="Resources\layout\Toolbar.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
@@ -123,9 +117,6 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
-    <AndroidResource Include="Resources\drawable\tab_about.png" />
-    <AndroidResource Include="Resources\drawable\tab_feed.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
@@ -135,7 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj">
-      <Project>{5DDE269D-D153-423B-9A45-C5751FA00191}</Project>
+      <Project>{63289AC1-1B67-44DF-9AF2-59DD2D24981D}</Project>
       <Name>ComicsShelf</Name>
     </ProjectReference>
   </ItemGroup>
@@ -170,16 +161,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_ArrowRight.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_ArrowLeft.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_Open.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
@@ -197,6 +178,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\banner_ComicsShelf.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\secrets.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -1,7 +1,7 @@
 ﻿namespace ComicsShelf.ComicFiles
 {
 
-   public class ComicPageVM : Helpers.BaseVM
+   public class ComicPageVM : Helpers.Observables.BaseVM
    {
 
       public ComicPageVM() { }
