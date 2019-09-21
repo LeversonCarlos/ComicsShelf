@@ -15,7 +15,7 @@ In fact, this is the result of a learning work, but done with love and dedicatio
 
 The definitive lightweight viewer for your comic book files.  
 It's really straightforward.  
-Select a folder on your device (or your OneDrive account) where you put yor comic books (those CBZ files).  
+Select a folder on your device (or your OneDrive account) where you put your comic books (those CBZ files).  
 The app will continually search your folder for newly added files.  
 Then extract covers and display it as a eye candy shelf.  
 You click the one you want to read, and start fliping the pages.  

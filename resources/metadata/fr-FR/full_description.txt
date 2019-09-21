@@ -6,7 +6,7 @@ Le résultat me satisfaisant déjà, j'ai décidé de publier l'application dans
 En fait, c’est le résultat d’un travail d’apprentissage réalisé avec amour et dévouement. Tous les critiques et suggestions seront les bienvenus.
 
 C'est vraiment simple.
-Sélectionnez et le dossier sur votre appareil où vous mettez vos bandes dessinées (ces fichiers CBZ).
+Sélectionnez un dossier sur votre appareil (ou votre compte OneDrive) dans lequel vous avez placé vos bandes dessinées (ces fichiers CBZ).
 L'application recherchera en permanence dans votre dossier les fichiers récemment ajoutés.
 Extrayez ensuite les couvercles et affichez-les comme une étagère pour les yeux.
 Vous cliquez sur celui que vous voulez lire et commencez à feuilleter les pages.

@@ -6,7 +6,7 @@ Con el resultado ya satisfecho, decidí publicar la aplicación en la tienda par
 De hecho, este es el resultado de un trabajo de aprendizaje, pero hecho con amor y dedicación. Todas las críticas y sugerencias serán bienvenidas.
 
 Es realmente simple
-Seleccione y cree una carpeta en su dispositivo donde coloque sus libros de historietas (esos archivos CBZ).
+Seleccione una carpeta en su dispositivo (o su cuenta de OneDrive) donde coloque sus libros de historietas (esos archivos CBZ).
 La aplicación buscará continuamente sus archivos recién agregados en su carpeta.
 Luego retire las cubiertas y muéstrela como un estante para los ojos.
 Haga clic en el que desea leer y comience a pasar las páginas.
