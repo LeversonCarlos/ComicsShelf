@@ -27,7 +27,6 @@ namespace ComicsShelf.Engines.OneDrive
             if (!File.Exists(cacheFilePath))
             {
                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
-
                var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
                if (string.IsNullOrEmpty(downloadUrl)) { return null; }
 
@@ -44,7 +43,8 @@ namespace ComicsShelf.Engines.OneDrive
                   }
                }
                var downloadFinish = DateTime.Now;
-               Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"DownloadInSeconds:{(downloadFinish-downloadStart).TotalSeconds}");
+               Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"Seconds for Download:{(downloadFinish-downloadStart).TotalSeconds}");
+
             }
             if (!File.Exists(cacheFilePath)) { return null; }
 
@@ -64,10 +64,9 @@ namespace ComicsShelf.Engines.OneDrive
                      .OrderBy(x => x.Name)
                      .ToList();
                   if (zipEntries == null) { return null; }
-                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"ZipEntriesCount:{zipEntries.Count}");
+                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"Zip Entries:{zipEntries.Count}");
 
                   // LOOP THROUGH ZIP ENTRIES
-                  var zipEntriesProps = new Dictionary<string, string>();
                   foreach (var zipEntry in zipEntries)
                   {
 
@@ -100,10 +99,8 @@ namespace ComicsShelf.Engines.OneDrive
                      // PAGE SIZE
                      var pageSize = await this.FileSystem.GetPageSize(page.Path);
                      page.PageSize = new ComicPageSize(pageSize.Width, pageSize.Height);
-                     zipEntriesProps.Add($"Page{pageIndex.ToString("00")}Size", $"{page.PageSize.Height}x{page.PageSize.Width}");
 
                   }
-                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractPages", zipEntriesProps);
 
                }
                zipArchiveStream.Close();

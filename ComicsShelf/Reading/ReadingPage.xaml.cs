@@ -19,9 +19,7 @@ namespace ComicsShelf.Reading
       }
 
       private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
-      {
-         (this.BindingContext as ReadingVM).PageSize = pageSize;
-      }
+      { (this.BindingContext as ReadingVM).PageSize = pageSize; }
 
       protected override void OnDisappearing()
       {
