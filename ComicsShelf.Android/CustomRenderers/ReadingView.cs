@@ -17,21 +17,15 @@ namespace ComicsShelf.Droid.CustomRenderers
          try
          {
             var window = ((Activity)context).Window;
-            /*
-            window.AddFlags(WindowManagerFlags.Fullscreen);
-            // window.AddFlags(WindowManagerFlags.KeepScreenOn);
-            window.AddFlags(WindowManagerFlags.TranslucentNavigation);
-            window.AddFlags(WindowManagerFlags.TranslucentStatus);
-            */
 
             this.originalVisibility = (int)window.DecorView.SystemUiVisibility;
             int newVisibility = (int)window.DecorView.SystemUiVisibility;
             newVisibility |= (int)SystemUiFlags.Fullscreen;
-            // newVisibility |= (int)SystemUiFlags.HideNavigation;
-            newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
-            newVisibility |= (int)SystemUiFlags.LightStatusBar;
-            newVisibility |= (int)SystemUiFlags.LightNavigationBar;
             window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
+
+            // window.AddFlags(WindowManagerFlags.Fullscreen);
+            window.AddFlags(WindowManagerFlags.TranslucentNavigation);
+            window.AddFlags(WindowManagerFlags.TranslucentStatus);
 
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
@@ -41,12 +35,9 @@ namespace ComicsShelf.Droid.CustomRenderers
       {
          var window = ((Activity)this.Context).Window;
 
-         /*
-         window.ClearFlags(WindowManagerFlags.Fullscreen);
          // window.ClearFlags(WindowManagerFlags.KeepScreenOn);
          window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
          window.ClearFlags(WindowManagerFlags.TranslucentStatus);
-         */
 
          window.DecorView.SystemUiVisibility = (StatusBarVisibility)this.originalVisibility;
 
