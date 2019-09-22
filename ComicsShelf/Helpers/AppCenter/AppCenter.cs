@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace ComicsShelf.Helpers
 {
-   internal partial class AppCenter
+   public partial class AppCenter
    {
 
       public static void Initialize()

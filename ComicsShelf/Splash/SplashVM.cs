@@ -108,7 +108,8 @@ namespace ComicsShelf.Splash
 
                   var vm = new Reading.ReadingVM(this.CurrentFile);
                   var page = new Reading.ReadingPage { BindingContext = vm };
-                  await App.Navigation().PushModalAsync(page);
+                  await (App.Current.MainPage).Navigation.PushModalAsync(page);
+                  // await App.Navigation().PushModalAsync(page);
                }
             }
 
