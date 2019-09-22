@@ -15,8 +15,10 @@ namespace ComicsShelf.Droid.CustomRenderers
       {
          var window = ((Activity)context).Window;
 
-         // window.AddFlags(WindowManagerFlags.Fullscreen);
-         // window.AddFlags(WindowManagerFlags.TurnScreenOn);
+         window.AddFlags(WindowManagerFlags.Fullscreen);
+         window.AddFlags(WindowManagerFlags.KeepScreenOn);
+         window.AddFlags(WindowManagerFlags.TranslucentNavigation);
+         window.AddFlags(WindowManagerFlags.TranslucentStatus);
 
          /*
          this.originalVisibility = (int)window.DecorView.SystemUiVisibility;
@@ -27,9 +29,6 @@ namespace ComicsShelf.Droid.CustomRenderers
          window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
          */
 
-         // ((Activity)context).Window.AddFlags(WindowManagerFlags.TranslucentStatus);
-         // ((Activity)context).Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
-         // ((Activity)context).Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
       }
 
       protected override void Dispose(bool disposing)
@@ -37,7 +36,10 @@ namespace ComicsShelf.Droid.CustomRenderers
          var window = ((Activity)this.Context).Window;
 
          // window.ClearFlags(WindowManagerFlags.TranslucentStatus);
-         // window.ClearFlags(WindowManagerFlags.TurnScreenOn);
+         window.ClearFlags(WindowManagerFlags.Fullscreen);
+         window.ClearFlags(WindowManagerFlags.KeepScreenOn);
+         window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
+         window.ClearFlags(WindowManagerFlags.TranslucentStatus);
 
          /*
          window.DecorView.SystemUiVisibility = (StatusBarVisibility)this.originalVisibility;
