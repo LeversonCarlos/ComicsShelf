@@ -16,32 +16,21 @@ namespace ComicsShelf.Droid.CustomRenderers
       {
          try
          {
-            try
-            {
-               var activity = (Activity)context;
-               activity.Immersive = true;
-               Helpers.AppCenter.TrackEvent("ReadingView", $"activity:{Newtonsoft.Json.JsonConvert.SerializeObject(activity)}");
-            }
-            catch { }
-
             var window = ((Activity)context).Window;
-
             /*
             window.AddFlags(WindowManagerFlags.Fullscreen);
-            */
             // window.AddFlags(WindowManagerFlags.KeepScreenOn);
             window.AddFlags(WindowManagerFlags.TranslucentNavigation);
             window.AddFlags(WindowManagerFlags.TranslucentStatus);
+            */
 
-            /*
             this.originalVisibility = (int)window.DecorView.SystemUiVisibility;
             int newVisibility = (int)window.DecorView.SystemUiVisibility;
             newVisibility |= (int)SystemUiFlags.Fullscreen;
-            newVisibility |= (int)SystemUiFlags.HideNavigation;
-            newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
-            newVisibility |= (int)SystemUiFlags.LightStatusBar;
+            // newVisibility |= (int)SystemUiFlags.HideNavigation;
+            // newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
+            // newVisibility |= (int)SystemUiFlags.LightStatusBar;
             window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
-            */
 
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
@@ -53,12 +42,12 @@ namespace ComicsShelf.Droid.CustomRenderers
 
          /*
          window.ClearFlags(WindowManagerFlags.Fullscreen);
-         */
          // window.ClearFlags(WindowManagerFlags.KeepScreenOn);
          window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
          window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+         */
 
-         // window.DecorView.SystemUiVisibility = (StatusBarVisibility)this.originalVisibility;
+         window.DecorView.SystemUiVisibility = (StatusBarVisibility)this.originalVisibility;
 
          base.Dispose(disposing);
       }
