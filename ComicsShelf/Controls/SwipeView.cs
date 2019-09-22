@@ -61,5 +61,17 @@ namespace ComicsShelf.Controls
          }
       }
 
+      protected override void OnBindingContextChanged()
+      {
+         base.OnBindingContextChanged();
+         Helpers.AppCenter.TrackEvent("SwipeView.OnBindingContextChanged");
+      }
+
+      protected override void OnChildAdded(Element child)
+      {
+         base.OnChildAdded(child);
+         Helpers.AppCenter.TrackEvent("SwipeView.OnChildAdded");
+      }
+
    }
 }

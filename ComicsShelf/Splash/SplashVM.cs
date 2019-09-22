@@ -115,6 +115,7 @@ namespace ComicsShelf.Splash
             var endTime = DateTime.Now;
             var trackProps = new Dictionary<string, string> {
                { "ElapsedSeconds", ((int)(endTime-startTime).TotalSeconds).ToString() },
+               { "PagesCount", pages.Count.ToString() },
                { "WasCached", wasCached.ToString() }
             };
             Helpers.AppCenter.TrackEvent($"Comic.{this.Library.Type.ToString()}.Open", trackProps);
