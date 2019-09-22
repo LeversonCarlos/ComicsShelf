@@ -28,7 +28,7 @@ namespace ComicsShelf.Droid.CustomRenderers
             int newVisibility = (int)window.DecorView.SystemUiVisibility;
             newVisibility |= (int)SystemUiFlags.Fullscreen;
             // newVisibility |= (int)SystemUiFlags.HideNavigation;
-            // newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
+            newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
             // newVisibility |= (int)SystemUiFlags.LightStatusBar;
             window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
 
