@@ -17,7 +17,6 @@ namespace ComicsShelf.Engines.OneDrive
       {
          try
          {
-            var trackProps = new Dictionary<string, string>();
 
             // INITIALIZE
             var pages = new List<ComicPageVM>();
@@ -25,16 +24,14 @@ namespace ComicsShelf.Engines.OneDrive
 
             // DOWNLOAD COMIC FILE FROM REMOTE SERVER IF LOCAL CACHE DOESNT EXIST YET
             var cacheFilePath = $"{comicFile.CachePath}.zip";
-            trackProps.Add("CacheFilePathExists", File.Exists(cacheFilePath).ToString());
             if (!File.Exists(cacheFilePath))
             {
-               trackProps.Add("NetworkAccess", Xamarin.Essentials.Connectivity.NetworkAccess.ToString());
                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
 
                var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
                if (string.IsNullOrEmpty(downloadUrl)) { return null; }
 
-               trackProps.Add("DownloadStart", DateTime.Now.ToString("MMssfff"));
+               var downloadStart = DateTime.Now;
                using (var downloadClient = new System.Net.Http.HttpClient())
                {
                   using (var downloadStream = await downloadClient.GetStreamAsync(downloadUrl))
@@ -43,16 +40,15 @@ namespace ComicsShelf.Engines.OneDrive
                      {
                         await downloadStream.CopyToAsync(fileStream);
                         await fileStream.FlushAsync();
-                        trackProps.Add("DownloadFinish", DateTime.Now.ToString("MMssfff"));
                      }
                   }
                }
+               var downloadFinish = DateTime.Now;
+               Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"DownloadInSeconds:{(downloadFinish-downloadStart).TotalSeconds}");
             }
-            trackProps.Add("CacheFilePathExistsNow", File.Exists(cacheFilePath).ToString());
             if (!File.Exists(cacheFilePath)) { return null; }
 
             // OPEN ZIP ARCHIVE FROM LOCAL CACHE
-            trackProps.Add("ZipStart", DateTime.Now.ToString("MMssfff"));
             using (var zipArchiveStream = new FileStream(cacheFilePath, FileMode.Open, FileAccess.Read))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
@@ -68,9 +64,10 @@ namespace ComicsShelf.Engines.OneDrive
                      .OrderBy(x => x.Name)
                      .ToList();
                   if (zipEntries == null) { return null; }
-                  trackProps.Add("ZipEntriesCount", zipEntries.Count.ToString());
+                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"ZipEntriesCount:{zipEntries.Count}");
 
                   // LOOP THROUGH ZIP ENTRIES
+                  var zipEntriesProps = new Dictionary<string, string>();
                   foreach (var zipEntry in zipEntries)
                   {
 
@@ -86,7 +83,6 @@ namespace ComicsShelf.Engines.OneDrive
                      pageIndex++;
 
                      // EXTRACT PAGE FILE 
-                     trackProps.Add($"ZipPage{pageIndex}Found", File.Exists(page.Path).ToString());
                      if (!File.Exists(page.Path))
                      {
                         using (var zipEntryStream = zipEntry.Open())
@@ -99,21 +95,19 @@ namespace ComicsShelf.Engines.OneDrive
                            }
                            zipEntryStream.Close();
                         }
-                        trackProps.Add($"ZipPage{pageIndex}FoundNow", File.Exists(page.Path).ToString());
                      }
 
                      // PAGE SIZE
                      var pageSize = await this.FileSystem.GetPageSize(page.Path);
                      page.PageSize = new ComicPageSize(pageSize.Width, pageSize.Height);
-                     trackProps.Add($"ZipPage{pageIndex}Size", $"{page.PageSize.Height}x{page.PageSize.Width}");
+                     zipEntriesProps.Add($"Page{pageIndex.ToString("00")}Size", $"{page.PageSize.Height}x{page.PageSize.Width}");
 
                   }
+                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractPages", zipEntriesProps);
 
                }
                zipArchiveStream.Close();
             }
-            trackProps.Add("ZipFinish", DateTime.Now.ToString("MMssfff"));
-            Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractPages", trackProps);
 
             return pages;
          }
