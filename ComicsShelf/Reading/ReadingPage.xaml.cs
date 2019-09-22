@@ -16,13 +16,11 @@ namespace ComicsShelf.Reading
       {
          base.OnAppearing();
          Messaging.Subscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
-         Helpers.AppCenter.TrackEvent("ReadingPage.OnAppearing", $"Time:{DateTime.Now.ToString("ssff")}");
       }
 
       private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
       {
          (this.BindingContext as ReadingVM).PageSize = pageSize;
-         Helpers.AppCenter.TrackEvent("ReadingPage.OrientationChanged", $"PageSize:{pageSize.Height}x{pageSize.Width}");
       }
 
       protected override void OnDisappearing()

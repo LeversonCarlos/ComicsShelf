@@ -64,7 +64,7 @@ namespace ComicsShelf.Controls
       protected override void OnBindingContextChanged()
       {
          base.OnBindingContextChanged();
-         Helpers.AppCenter.TrackEvent("SwipeView.OnBindingContextChanged");
+         Helpers.AppCenter.TrackEvent("SwipeView.OnBindingContextChanged", $"ItemsSource:{((ComicFiles.ComicFileVM)this.ItemsSource).Pages.Count}");
       }
 
       protected override void OnChildAdded(Element child)

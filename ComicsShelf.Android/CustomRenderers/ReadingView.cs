@@ -18,12 +18,14 @@ namespace ComicsShelf.Droid.CustomRenderers
          // window.AddFlags(WindowManagerFlags.Fullscreen);
          // window.AddFlags(WindowManagerFlags.TurnScreenOn);
 
+         /*
          this.originalVisibility = (int)window.DecorView.SystemUiVisibility;
          int newVisibility = (int)window.DecorView.SystemUiVisibility;
          newVisibility |= (int)SystemUiFlags.Fullscreen;
          newVisibility |= (int)SystemUiFlags.HideNavigation;
          newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
          window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
+         */
 
          // ((Activity)context).Window.AddFlags(WindowManagerFlags.TranslucentStatus);
          // ((Activity)context).Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
@@ -37,7 +39,9 @@ namespace ComicsShelf.Droid.CustomRenderers
          // window.ClearFlags(WindowManagerFlags.TranslucentStatus);
          // window.ClearFlags(WindowManagerFlags.TurnScreenOn);
 
+         /*
          window.DecorView.SystemUiVisibility = (StatusBarVisibility)this.originalVisibility;
+         */
 
          base.Dispose(disposing);
       }
