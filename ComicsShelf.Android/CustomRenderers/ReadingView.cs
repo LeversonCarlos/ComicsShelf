@@ -16,12 +16,20 @@ namespace ComicsShelf.Droid.CustomRenderers
       {
          try
          {
+            try
+            {
+               var activity = (Activity)context;
+               activity.Immersive = true;
+               Helpers.AppCenter.TrackEvent("ReadingView", $"activity:{Newtonsoft.Json.JsonConvert.SerializeObject(activity)}");
+            }
+            catch { }
+
             var window = ((Activity)context).Window;
 
             /*
             window.AddFlags(WindowManagerFlags.Fullscreen);
             */
-            window.AddFlags(WindowManagerFlags.KeepScreenOn);
+            // window.AddFlags(WindowManagerFlags.KeepScreenOn);
             window.AddFlags(WindowManagerFlags.TranslucentNavigation);
             window.AddFlags(WindowManagerFlags.TranslucentStatus);
 
@@ -46,7 +54,7 @@ namespace ComicsShelf.Droid.CustomRenderers
          /*
          window.ClearFlags(WindowManagerFlags.Fullscreen);
          */
-         window.ClearFlags(WindowManagerFlags.KeepScreenOn);
+         // window.ClearFlags(WindowManagerFlags.KeepScreenOn);
          window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
          window.ClearFlags(WindowManagerFlags.TranslucentStatus);
 
