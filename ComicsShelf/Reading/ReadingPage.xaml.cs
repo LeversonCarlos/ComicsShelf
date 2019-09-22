@@ -15,6 +15,7 @@ namespace ComicsShelf.Reading
       protected override void OnAppearing()
       {
          base.OnAppearing();
+         NavigationPage.SetHasNavigationBar(this, false);
          Messaging.Subscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
       }
 
@@ -26,6 +27,7 @@ namespace ComicsShelf.Reading
          try
          {
             base.OnDisappearing();
+            NavigationPage.SetHasNavigationBar(this, true);
             Messaging.Unsubscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged);
             if (this.BindingContext != null)
             {

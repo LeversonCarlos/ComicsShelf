@@ -20,6 +20,9 @@ namespace ComicsShelf.Splash
          try
          {
             base.OnAppearing();
+            NavigationPage.SetHasNavigationBar(this, true);
+            this.backgroundImage.Opacity = 0.2;
+            this.backgroundImage.Scale = 1;
 
             Messaging.Subscribe<ComicPageSize>(ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
@@ -43,6 +46,7 @@ namespace ComicsShelf.Splash
       {
          try
          {
+            NavigationPage.SetHasNavigationBar(this, false);
             await Task.Run(async () =>
             {
                await this.backgroundImage.FadeTo(0.8, 250, Easing.SinOut);
@@ -66,8 +70,6 @@ namespace ComicsShelf.Splash
                   this.backgroundImage.FadeTo(0.2, 250, Easing.SinIn),
                   this.backgroundImage.RelScaleTo(1, 250, Easing.SinIn)
                );
-               this.backgroundImage.Opacity = 0.2;
-               this.backgroundImage.Scale = 1;
             });
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
@@ -76,13 +78,12 @@ namespace ComicsShelf.Splash
       protected override void OnDisappearing()
       {
          base.OnDisappearing();
+         ViewExtensions.CancelAnimations(this.backgroundImage);
+         this.filesCollectionView.BindingContext = null;
+
          Messaging.Unsubscribe<ComicPageSize>(ComicPageSize.PageSizeChanged);
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpening");
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpened");
-         ViewExtensions.CancelAnimations(this.backgroundImage);
-         this.backgroundImage.Opacity = 0.2;
-         this.backgroundImage.Scale = 1;
-         this.filesCollectionView.BindingContext = null;
       }
 
    }

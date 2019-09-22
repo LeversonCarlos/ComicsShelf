@@ -108,13 +108,14 @@ namespace ComicsShelf.Splash
 
                   var vm = new Reading.ReadingVM(this.CurrentFile);
                   var page = new Reading.ReadingPage { BindingContext = vm };
-                  await App.Navigation().PushModalAsync(page);
+                  await App.Navigation().PushAsync(page);
                }
             }
 
             var endTime = DateTime.Now;
             var trackProps = new Dictionary<string, string> {
                { "ElapsedSeconds", ((int)(endTime-startTime).TotalSeconds).ToString() },
+               { "PagesCount", pages.Count.ToString() },
                { "WasCached", wasCached.ToString() }
             };
             Helpers.AppCenter.TrackEvent($"Comic.{this.Library.Type.ToString()}.Open", trackProps);

@@ -29,6 +29,8 @@ namespace ComicsShelf.Engines.OneDrive
                if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
                var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
                if (string.IsNullOrEmpty(downloadUrl)) { return null; }
+
+               var downloadStart = DateTime.Now;
                using (var downloadClient = new System.Net.Http.HttpClient())
                {
                   using (var downloadStream = await downloadClient.GetStreamAsync(downloadUrl))
@@ -40,6 +42,9 @@ namespace ComicsShelf.Engines.OneDrive
                      }
                   }
                }
+               var downloadFinish = DateTime.Now;
+               Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"Seconds for Download:{(downloadFinish-downloadStart).TotalSeconds}");
+
             }
             if (!File.Exists(cacheFilePath)) { return null; }
 
@@ -59,6 +64,7 @@ namespace ComicsShelf.Engines.OneDrive
                      .OrderBy(x => x.Name)
                      .ToList();
                   if (zipEntries == null) { return null; }
+                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"Zip Entries:{zipEntries.Count}");
 
                   // LOOP THROUGH ZIP ENTRIES
                   foreach (var zipEntry in zipEntries)
