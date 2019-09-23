@@ -28,7 +28,7 @@ namespace ComicsShelf.Reading
             {
                this.ComicFile.Readed = true;
                this.ComicFile.ReadingPage = 0;
-               Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => await App.Navigation().PopModalAsync());
+               Xamarin.Forms.Device.BeginInvokeOnMainThread(async () => await App.Navigation().PopAsync());
             }
          }
       }
