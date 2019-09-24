@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Services
 {
-   partial class LibraryService 
+   partial class LibraryService
    {
 
       private async Task<bool> LoadData()
@@ -32,13 +32,13 @@ namespace ComicsShelf.Services
 
             foreach (var comicFile in comicFiles)
             {
-               if (System.IO.File.Exists(comicFile.ComicFile.CoverPath))
+               if (await Task.FromResult(System.IO.File.Exists(comicFile.ComicFile.CoverPath)))
                {
                   comicFile.CoverPath = comicFile.ComicFile.CoverPath;
                   if (comicFile.ComicFile.ReleaseDate == DateTime.MinValue)
-                  { comicFile.ComicFile.ReleaseDate = System.IO.File.GetLastWriteTime(comicFile.CoverPath); }
+                  { comicFile.ComicFile.ReleaseDate = await Task.FromResult(System.IO.File.GetLastWriteTime(comicFile.CoverPath)); }
                }
-               if (System.IO.Directory.Exists(comicFile.ComicFile.CachePath))
+               if (await Task.FromResult(System.IO.Directory.Exists(comicFile.ComicFile.CachePath)))
                { comicFile.CachePath = comicFile.ComicFile.CachePath; }
                else { comicFile.CachePath = string.Empty; }
             }
