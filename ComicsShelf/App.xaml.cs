@@ -8,12 +8,11 @@ namespace ComicsShelf
       public App()
       {
          InitializeComponent();
-         this.MainPage = new Main.InitialPage();
+         this.MainPage = new Main.MainPage();
          DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
          DependencyService.Register<Engines.OneDrive.OneDriveConnector>();
          DependencyService.Register<Engines.OneDrive.OneDriveEngine>();
-         DependencyService.Register<Store.ILibraryStore, Store.LibraryStore>();
-         this.MainPage = new Main.MainPage();
+         DependencyService.Register<Store.ILibraryStore, Store.LibraryStore>();         
       }
 
       protected override async void OnStart()
