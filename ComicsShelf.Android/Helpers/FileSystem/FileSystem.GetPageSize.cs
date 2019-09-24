@@ -16,6 +16,7 @@ namespace ComicsShelf.Droid
             }
          }
          catch (Exception) { throw; }
+         finally { GC.Collect(); }
       }
 
    }
