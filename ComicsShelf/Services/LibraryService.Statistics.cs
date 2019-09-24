@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Services
 {
-   partial class LibraryService 
+   partial class LibraryService
    {
 
       private async Task<bool> Statistics()
@@ -125,7 +125,7 @@ namespace ComicsShelf.Services
                .ToList();
 
             this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.ReadingFiles] = readingFiles;
-            return readingFiles.Take(10).ToList();            
+            return readingFiles.OrderByDescending(x => x.ReadingDate).Take(10).ToList();
          }
          catch (Exception) { throw; }
       }
