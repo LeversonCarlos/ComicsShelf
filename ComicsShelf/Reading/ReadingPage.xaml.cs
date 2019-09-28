@@ -38,7 +38,6 @@ namespace ComicsShelf.Reading
 
                foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
                comicFileVM.Pages.Clear();
-               this.swipeView.Dispose();
 
                var libraryID = comicFileVM.ComicFile.LibraryKey;
                Services.LibraryService.UpdateLibrary(libraryID);
