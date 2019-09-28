@@ -36,11 +36,11 @@ namespace ComicsShelf.Reading
             {
                var comicFileVM = this.ReadingVM().ComicFile;
 
-               foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
-               comicFileVM.Pages.Clear();
-
                var libraryID = comicFileVM.ComicFile.LibraryKey;
                Services.LibraryService.UpdateLibrary(libraryID);
+
+               foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
+               comicFileVM.Pages.Clear();
             }
 
             Helpers.AppCenter.TrackEvent("ReadingPage.OnDisappearing");
