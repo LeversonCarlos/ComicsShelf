@@ -20,6 +20,8 @@ namespace ComicsShelf.Splash
          try
          {
             base.OnAppearing();
+            Helpers.AppCenter.TrackEvent("SplashPage.OnAppearing");
+
             NavigationPage.SetHasNavigationBar(this, true);
             this.backgroundImage.Opacity = 0.2;
             this.backgroundImage.Scale = 1;
@@ -77,13 +79,15 @@ namespace ComicsShelf.Splash
 
       protected override void OnDisappearing()
       {
-         base.OnDisappearing();
          ViewExtensions.CancelAnimations(this.backgroundImage);
          this.filesCollectionView.BindingContext = null;
 
          Messaging.Unsubscribe<ComicPageSize>(ComicPageSize.PageSizeChanged);
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpening");
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpened");
+
+         Helpers.AppCenter.TrackEvent("SplashPage.OnDisappearing");
+         base.OnDisappearing();
       }
 
    }

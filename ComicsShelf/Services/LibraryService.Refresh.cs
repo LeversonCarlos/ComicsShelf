@@ -25,6 +25,7 @@ namespace ComicsShelf.Services
       {
          try
          {
+            Helpers.AppCenter.TrackEvent("Library.OnRefreshing", $"LibraryType:{this.Library.Type.ToString()}");
             if (!await this.LoadSyncData()) { return false; }
             if (!await this.NotifyData()) { return false; }
             if (!await this.Statistics()) { return false; }
@@ -42,6 +43,7 @@ namespace ComicsShelf.Services
 
             if (!await this.SaveSyncData()) { return false; }
             if (!await this.SaveData()) { return false; }
+            Helpers.AppCenter.TrackEvent("Library.OnRefreshed", $"LibraryType:{this.Library.Type.ToString()}");
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }

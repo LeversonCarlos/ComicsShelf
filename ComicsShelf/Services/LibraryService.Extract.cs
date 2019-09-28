@@ -63,10 +63,11 @@ namespace ComicsShelf.Services
 
             var endTime = DateTime.Now;
             var trackProps = new Dictionary<string, string> {
+               { "LibraryType", this.Library.Type.ToString() },
                { "ElapsedMinutes", ((int)(endTime-startTime).TotalMinutes).ToString() },
                { "FilesCount", (firstSixFiles.Count()+remainingFiles.Count()).ToString() }
             };
-            Helpers.AppCenter.TrackEvent($"Library.{this.Library.Type.ToString()}.ExtractData", trackProps);
+            Helpers.AppCenter.TrackEvent($"Library.OnExtractData", trackProps);
 
             return true;
          }

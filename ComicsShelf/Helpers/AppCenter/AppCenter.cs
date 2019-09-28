@@ -23,7 +23,7 @@ namespace ComicsShelf.Helpers
       }
 
       public static void TrackEvent(string text)
-      { TrackEvent(text, new Dictionary<string, string> { }); }
+      { TrackEvent(text, new string[] { }); }
 
       public static void TrackEvent(string text, params string[] properties)
       {
@@ -32,8 +32,7 @@ namespace ComicsShelf.Helpers
             .Where(prop => prop.Length == 2)
             .Select(prop => new { Key = prop[0], Value = prop[1] })
             .ToDictionary(k => k.Key, v => v.Value);
-         trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
-         try { trackProp.Add("Route", $"{Xamarin.Forms.Shell.Current.CurrentState.Location.ToString()}"); } catch { }
+         AddMetrics(trackProp);
          TrackEvent(text, trackProp);
       }
 
@@ -41,13 +40,29 @@ namespace ComicsShelf.Helpers
       {
          var trackProp = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerMemberName", callerMemberName }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
          if (ex.InnerException != null) { trackProp.Add("InnerException", ex.InnerException.Message); }
-         trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
-         try { trackProp.Add("Route", $"{Xamarin.Forms.Shell.Current.CurrentState.Location.ToString()}"); } catch { }
+         AddMetrics(trackProp);
          Crashes.TrackError(ex, trackProp);
       }
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
       { Analytics.TrackEvent(text, properties); }
+
+      private static void AddMetrics(Dictionary<string, string> properties)
+      {
+         try
+         {
+            var currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+            properties.Add("WorkingSet (in bytes)", $"{currentProcess.WorkingSet64}");
+            properties.Add("PrivateMemorySize (in bytes)", $"{currentProcess.PrivateMemorySize64}");
+            properties.Add("PagedMemorySize (in bytes)", $"{currentProcess.PagedMemorySize64}");
+            properties.Add("PagedSystemMemorySize (in bytes)", $"{currentProcess.PagedSystemMemorySize64}");
+            properties.Add("UserProcessorTime (in seconds)", $"{currentProcess.UserProcessorTime.TotalSeconds}");
+            properties.Add("TotalProcessorTime (in seconds)", $"{currentProcess.TotalProcessorTime.TotalSeconds}");
+         }
+         catch { }
+         finally
+         { properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}"); }
+      }
 
    }
 }

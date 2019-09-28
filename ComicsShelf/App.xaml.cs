@@ -18,16 +18,17 @@ namespace ComicsShelf
       protected override async void OnStart()
       {
          Helpers.AppCenter.Initialize();
+         Helpers.AppCenter.TrackEvent("App.OnStart");
          Controls.CoverView.InitDefaultSize();
          await Helpers.DefaultCover.LoadDefaultCover();
          await DependencyService.Get<Store.ILibraryStore>().LoadLibrariesAsync();
       }
 
       protected override void OnSleep()
-      { this.DoSleep(); }
+      { Helpers.AppCenter.TrackEvent("App.OnSleep"); this.DoSleep(); }
 
       protected override void OnResume()
-      { this.DoResume(); }
+      { Helpers.AppCenter.TrackEvent("App.OnResume"); this.DoResume(); }
 
    }
 }

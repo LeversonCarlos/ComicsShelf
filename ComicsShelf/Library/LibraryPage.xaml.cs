@@ -12,5 +12,17 @@ namespace ComicsShelf.Library
          InitializeComponent();
       }
 
+      protected override void OnAppearing()
+      {
+         base.OnAppearing();
+         Helpers.AppCenter.TrackEvent("LibraryPage.OnAppearing");
+      }
+
+      protected override void OnDisappearing()
+      {
+         Helpers.AppCenter.TrackEvent("LibraryPage.OnDisappearing");
+         base.OnDisappearing();
+      }
+
    }
 }
