@@ -24,6 +24,7 @@ namespace ComicsShelf.Reading
             this.ComicFile.ReadingDate = DateTime.Now;
             var totalPagesIncludingTheCover = (double)(this.ComicFile.ComicFile.TotalPages + 0);
             this.ComicFile.ReadingPercent = Math.Round(((double)value / totalPagesIncludingTheCover * (double)100), 0) / 100;
+            Helpers.AppCenter.TrackEvent("ReadingPage.OnPageSplit", $"Page:{value}");
             if (this.ComicFile.ReadingPercent > (double)1)
             {
                this.ComicFile.Readed = true;
