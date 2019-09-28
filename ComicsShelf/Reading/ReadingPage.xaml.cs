@@ -7,33 +7,45 @@ namespace ComicsShelf.Reading
    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class ReadingPage : ContentPage
    {
+
       public ReadingPage()
       {
          InitializeComponent();
       }
+      private ReadingVM ReadingVM() => (this.BindingContext as ReadingVM);
 
       protected override void OnAppearing()
       {
          base.OnAppearing();
+         Helpers.AppCenter.TrackEvent("ReadingPage.OnAppearing");
          NavigationPage.SetHasNavigationBar(this, false);
          Messaging.Subscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged, this.OnOrientationChanged);
       }
 
       private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
-      { (this.BindingContext as ReadingVM).PageSize = pageSize; }
+      { this.ReadingVM().PageSize = pageSize; }
 
       protected override void OnDisappearing()
       {
          try
          {
-            base.OnDisappearing();
             NavigationPage.SetHasNavigationBar(this, true);
             Messaging.Unsubscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged);
+
             if (this.BindingContext != null)
             {
-               var libraryID = (this.BindingContext as ReadingVM).ComicFile.ComicFile.LibraryKey;
+               var comicFileVM = this.ReadingVM().ComicFile;
+
+               foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
+               comicFileVM.Pages.Clear();
+               this.swipeView.Dispose();
+
+               var libraryID = comicFileVM.ComicFile.LibraryKey;
                Services.LibraryService.UpdateLibrary(libraryID);
             }
+
+            Helpers.AppCenter.TrackEvent("ReadingPage.OnDisappearing");
+            base.OnDisappearing();
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
          finally { GC.Collect(); }
