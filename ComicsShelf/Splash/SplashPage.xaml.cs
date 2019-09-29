@@ -79,7 +79,6 @@ namespace ComicsShelf.Splash
 
       protected override void OnDisappearing()
       {
-         base.OnDisappearing();
          ViewExtensions.CancelAnimations(this.backgroundImage);
          this.filesCollectionView.BindingContext = null;
 
@@ -88,6 +87,7 @@ namespace ComicsShelf.Splash
          Messaging.Unsubscribe<ComicFileVM>("OnComicFileOpened");
 
          Helpers.AppCenter.TrackEvent("SplashPage.OnDisappearing");
+         base.OnDisappearing();
       }
 
    }

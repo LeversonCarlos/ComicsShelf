@@ -67,7 +67,6 @@ namespace ComicsShelf.Controls
          {
             this.GestureRecognizers.Clear();
             this.ItemsSource = null;
-            this.BindingContext = null;
          }
          catch(Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }

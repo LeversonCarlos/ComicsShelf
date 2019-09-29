@@ -29,7 +29,6 @@ namespace ComicsShelf.Reading
       {
          try
          {
-            base.OnDisappearing();
             NavigationPage.SetHasNavigationBar(this, true);
             Messaging.Unsubscribe<ComicFiles.ComicPageSize>(ComicFiles.ComicPageSize.PageSizeChanged);
 
@@ -45,6 +44,7 @@ namespace ComicsShelf.Reading
             }
 
             Helpers.AppCenter.TrackEvent("ReadingPage.OnDisappearing");
+            base.OnDisappearing();
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
          finally { GC.Collect(); }

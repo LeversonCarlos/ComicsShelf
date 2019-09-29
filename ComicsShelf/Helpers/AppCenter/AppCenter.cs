@@ -10,8 +10,10 @@ namespace ComicsShelf.Helpers
    public partial class AppCenter
    {
 
+      static string sessionID;
       public static void Initialize()
       {
+         sessionID = new Guid().ToString();
          Microsoft.AppCenter.AppCenter.Start(
             $"android={AppCenter_androidSecret};" +
             /*
@@ -31,7 +33,7 @@ namespace ComicsShelf.Helpers
             .Select(prop => prop.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries))
             .Where(prop => prop.Length == 2)
             .Select(prop => new { Key = prop[0], Value = prop[1] })
-            .ToDictionary(k => k.Key, v => v.Value);         
+            .ToDictionary(k => k.Key, v => v.Value);
          TrackEvent(text, properties);
       }
 
@@ -63,7 +65,10 @@ namespace ComicsShelf.Helpers
          }
          catch { }
          finally
-         { properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}"); }
+         {
+            properties.Add("SessionID", sessionID);
+            properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
+         }
       }
 
    }

@@ -21,8 +21,8 @@ namespace ComicsShelf.Featured
 
       protected override void OnDisappearing()
       {
-         base.OnDisappearing();
          Helpers.AppCenter.TrackEvent("FeaturedPage.OnDisappearing");
+         base.OnDisappearing();
       }
 
    }

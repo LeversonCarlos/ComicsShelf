@@ -20,8 +20,8 @@ namespace ComicsShelf.Library
 
       protected override void OnDisappearing()
       {
-         base.OnDisappearing();
          Helpers.AppCenter.TrackEvent("LibraryPage.OnDisappearing");
+         base.OnDisappearing();
       }
 
    }
