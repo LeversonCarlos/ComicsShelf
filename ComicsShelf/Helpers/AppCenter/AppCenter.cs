@@ -56,17 +56,13 @@ namespace ComicsShelf.Helpers
          try
          {
             var currentProcess = System.Diagnostics.Process.GetCurrentProcess();
-            properties.Add("WorkingSet (in kbytes)", $"{(int)(currentProcess.WorkingSet64 * 0.001)}");
-            properties.Add("PrivateMemorySize (in kbytes)", $"{(int)(currentProcess.PrivateMemorySize64 * 0.001)}");
-            properties.Add("PagedMemorySize (in kbytes)", $"{(int)(currentProcess.PagedMemorySize64 * 0.001)}");
-            properties.Add("PagedSystemMemorySize (in kbytes)", $"{(int)(currentProcess.PagedSystemMemorySize64 * 0.001)}");
-            properties.Add("UserProcessorTime (in seconds)", $"{currentProcess.UserProcessorTime.TotalSeconds}");
-            properties.Add("TotalProcessorTime (in seconds)", $"{currentProcess.TotalProcessorTime.TotalSeconds}");
+            properties.Add("Memory", $"{(int)(currentProcess.WorkingSet64 * 0.001)} KB");
+            properties.Add("CPU", $"{Math.Round((double)currentProcess.UserProcessorTime.Ticks / (double)currentProcess.TotalProcessorTime.Ticks * (double)100, 1)} %");
          }
          catch { }
          finally
          {
-            properties.Add("SessionID", sessionID);
+            properties.Add("Session", sessionID);
             properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
          }
       }

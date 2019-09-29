@@ -39,8 +39,8 @@ namespace ComicsShelf.Reading
                var libraryID = comicFileVM.ComicFile.LibraryKey;
                await Services.LibraryService.UpdateLibrary(libraryID);
 
-               foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
-               comicFileVM.Pages.Clear();
+               //foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
+               //comicFileVM.Pages.Clear();
             }
 
             Helpers.AppCenter.TrackEvent("ReadingPage.OnDisappearing");
