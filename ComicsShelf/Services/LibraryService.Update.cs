@@ -7,7 +7,7 @@ namespace ComicsShelf.Services
    partial class LibraryService
    {
 
-      internal static async void UpdateLibrary(string libraryID)
+      internal static async Task UpdateLibrary(string libraryID)
       {
          Helpers.AppCenter.TrackEvent("Library.OnUpdating");
          var library = DependencyService.Get<Store.ILibraryStore>().GetLibrary(libraryID);

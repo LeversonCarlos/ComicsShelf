@@ -13,7 +13,7 @@ namespace ComicsShelf.Helpers
       static string sessionID;
       public static void Initialize()
       {
-         sessionID = new Guid().ToString();
+         sessionID = Guid.NewGuid().ToString();
          Microsoft.AppCenter.AppCenter.Start(
             $"android={AppCenter_androidSecret};" +
             /*

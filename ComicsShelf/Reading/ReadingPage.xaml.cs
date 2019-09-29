@@ -25,7 +25,7 @@ namespace ComicsShelf.Reading
       private void OnOrientationChanged(ComicFiles.ComicPageSize pageSize)
       { this.ReadingVM().PageSize = pageSize; }
 
-      protected override void OnDisappearing()
+      protected override async void OnDisappearing()
       {
          try
          {
@@ -37,7 +37,7 @@ namespace ComicsShelf.Reading
                var comicFileVM = this.ReadingVM().ComicFile;
 
                var libraryID = comicFileVM.ComicFile.LibraryKey;
-               Services.LibraryService.UpdateLibrary(libraryID);
+               await Services.LibraryService.UpdateLibrary(libraryID);
 
                foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
                comicFileVM.Pages.Clear();
