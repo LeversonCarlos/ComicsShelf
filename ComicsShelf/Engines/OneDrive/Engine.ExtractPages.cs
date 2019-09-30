@@ -45,7 +45,7 @@ namespace ComicsShelf.Engines.OneDrive
                      }
                   }
                   var downloadFinish = DateTime.Now;
-                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"Seconds for Download:{(downloadFinish - downloadStart).TotalSeconds}");
+                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.DownloadingPages", $"ElapsedSeconds:{(downloadFinish - downloadStart).TotalSeconds}");
 
                }
             }
@@ -68,7 +68,7 @@ namespace ComicsShelf.Engines.OneDrive
                      .OrderBy(x => x.Name)
                      .ToList();
                   if (zipEntries == null) { return null; }
-                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractsPages", $"Zip Entries:{zipEntries.Count}");
+                  Helpers.AppCenter.TrackEvent($"Comic.OneDrive.ExtractingPages", $"Pages:{zipEntries.Count}");
 
                   // LOOP THROUGH ZIP ENTRIES
                   foreach (var zipEntry in zipEntries)
