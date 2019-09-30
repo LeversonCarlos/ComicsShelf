@@ -10,10 +10,8 @@ namespace ComicsShelf.Helpers
    public partial class AppCenter
    {
 
-      static string sessionID;
       public static void Initialize()
       {
-         sessionID = Guid.NewGuid().ToString();
          Microsoft.AppCenter.AppCenter.Start(
             $"android={AppCenter_androidSecret};" +
             /*
@@ -56,15 +54,12 @@ namespace ComicsShelf.Helpers
          try
          {
             var currentProcess = System.Diagnostics.Process.GetCurrentProcess();
-            properties.Add("Memory", $"{(int)(currentProcess.WorkingSet64 * 0.001)} KB");
-            properties.Add("CPU", $"{Math.Round((double)currentProcess.UserProcessorTime.Ticks / (double)currentProcess.TotalProcessorTime.Ticks * (double)100, 1)} %");
+            properties.Add("Memory KB", $"{(int)(currentProcess.WorkingSet64 * 0.001)}");
+            properties.Add("CPU %", $"{Math.Round((double)currentProcess.UserProcessorTime.Ticks / (double)currentProcess.TotalProcessorTime.Ticks * (double)100, 1)}");
          }
          catch { }
          finally
-         {
-            properties.Add("Session", sessionID);
-            properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
-         }
+         { properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}"); }
       }
 
    }
