@@ -138,8 +138,8 @@ namespace ComicsShelf.ComicFiles
       public ObservableList<ComicPageVM> Pages { get; internal set; }
 
 
-      private void UpdateLibrary()
-      { Services.LibraryService.UpdateLibrary(this.ComicFile.LibraryKey); }
+      private async void UpdateLibrary()
+      { await Services.LibraryService.UpdateLibrary(this.ComicFile.LibraryKey); }
 
    }
 }

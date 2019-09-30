@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
-   public class SwipeView : CarouselViewControl
+   public class SwipeView : CarouselViewControl, IDisposable
    {
 
       public SwipeView()
@@ -24,7 +24,7 @@ namespace ComicsShelf.Controls
             { Messaging.Send(StatsView.Messaging_ShowStatsView); }),
             NumberOfTapsRequired = 1
          });
-
+         Helpers.AppCenter.TrackEvent("SwipeView.OnInitialize");
       }
 
       int LastPosition { get; set; }
@@ -59,6 +59,23 @@ namespace ComicsShelf.Controls
             if (positionData.IsVisible != visibility)
             { positionData.IsVisible = visibility; }
          }
+      }
+
+      public void Dispose()
+      {
+         try
+         {
+            Helpers.AppCenter.TrackEvent("SwipeView.OnDispose");
+            this.GestureRecognizers.Clear();
+            if (this.ItemsSource != null)
+            {
+               var comicFileVM = (this.ItemsSource as ComicFiles.ComicFileVM);
+               foreach (var page in comicFileVM.Pages) { page.IsVisible = false; }
+               comicFileVM.Pages.Clear();
+            }
+            this.ItemsSource = null;
+         }
+         catch(Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
    }

@@ -23,31 +23,44 @@ namespace ComicsShelf.Helpers
       }
 
       public static void TrackEvent(string text)
-      { TrackEvent(text, new Dictionary<string, string> { }); }
+      { TrackEvent(text, new string[] { }); }
 
-      public static void TrackEvent(string text, params string[] properties)
+      public static void TrackEvent(string text, params string[] propertyList)
       {
-         var trackProp = properties
+         var properties = propertyList
             .Select(prop => prop.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries))
             .Where(prop => prop.Length == 2)
             .Select(prop => new { Key = prop[0], Value = prop[1] })
             .ToDictionary(k => k.Key, v => v.Value);
-         trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
-         try { trackProp.Add("Route", $"{Xamarin.Forms.Shell.Current.CurrentState.Location.ToString()}"); } catch { }
-         TrackEvent(text, trackProp);
+         TrackEvent(text, properties);
       }
 
       public static void TrackEvent(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
       {
-         var trackProp = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerMemberName", callerMemberName }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
-         if (ex.InnerException != null) { trackProp.Add("InnerException", ex.InnerException.Message); }
-         trackProp.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}");
-         try { trackProp.Add("Route", $"{Xamarin.Forms.Shell.Current.CurrentState.Location.ToString()}"); } catch { }
-         Crashes.TrackError(ex, trackProp);
+         var properties = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerMemberName", callerMemberName }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
+         if (ex.InnerException != null) { properties.Add("InnerException", ex.InnerException.Message); }
+         AddMetrics(properties);
+         Crashes.TrackError(ex, properties);
       }
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
-      { Analytics.TrackEvent(text, properties); }
+      {
+         AddMetrics(properties);
+         Analytics.TrackEvent(text, properties);
+      }
+
+      private static void AddMetrics(Dictionary<string, string> properties)
+      {
+         try
+         {
+            var currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+            properties.Add("Memory KB", $"{(int)(currentProcess.WorkingSet64 * 0.001)}");
+            properties.Add("CPU %", $"{Math.Round((double)currentProcess.UserProcessorTime.Ticks / (double)currentProcess.TotalProcessorTime.Ticks * (double)100, 1)}");
+         }
+         catch { }
+         finally
+         { properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}"); }
+      }
 
    }
 }

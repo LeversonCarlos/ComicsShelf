@@ -64,7 +64,7 @@ namespace ComicsShelf.Services
             }
 
             var endTime = DateTime.Now;
-            Helpers.AppCenter.TrackEvent($"Library.{this.Library.Type.ToString()}.Search", $"ElapsedSeconds:{((int)(endTime - startTime).TotalSeconds)}", $"NewFiles:{newFiles.Count()}");
+            Helpers.AppCenter.TrackEvent($"Library.OnSearch", $"ElapsedSeconds:{((int)(endTime - startTime).TotalSeconds)}", $"NewFiles:{newFiles.Count()}", $"LibraryType:{this.Library.Type.ToString()}");
 
             return true;
          }

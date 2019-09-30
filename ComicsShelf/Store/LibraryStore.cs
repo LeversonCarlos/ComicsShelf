@@ -30,7 +30,7 @@ namespace ComicsShelf.Store
          {
 
             // LIBRARY IDs
-            var libraryIDsJSON = Xamarin.Essentials.Preferences.Get(LibraryIDs, "[]");
+            var libraryIDsJSON = await Task.FromResult(Xamarin.Essentials.Preferences.Get(LibraryIDs, "[]"));
             var libraryIDs = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(libraryIDsJSON);
 
             // LIBRARY CONTENT
@@ -97,7 +97,7 @@ namespace ComicsShelf.Store
       {
          try
          {
-            App.HideNavigation();
+            App.HideNavigation();            
 
             // ENGINE
             var engine = Engines.Engine.Get(libraryType);
