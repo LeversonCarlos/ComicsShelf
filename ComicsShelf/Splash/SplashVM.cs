@@ -90,6 +90,7 @@ namespace ComicsShelf.Splash
          try
          {
             this.IsBusy = true;
+            if (this.CurrentFile == null || this.CurrentFile.ComicFile == null) { throw new NullReferenceException("The CurrentFile variable is not defined"); }
             Messaging.Send("OnComicFileOpening", this.CurrentFile);
             var startTime = DateTime.Now;
 

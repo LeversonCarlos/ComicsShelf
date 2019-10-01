@@ -37,10 +37,14 @@ namespace ComicsShelf.Helpers
 
       public static void TrackEvent(Exception ex, [CallerMemberName]string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber]int callerLineNumber = 0)
       {
-         var properties = new Dictionary<string, string> { { "Exception", ex.Message }, { "CallerMemberName", callerMemberName }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }, { "ExceptionDetails", ex.ToString() } };
+         var properties = new Dictionary<string, string> {
+            { "Exception", ex.Message },
+            { "CallerMemberName", callerMemberName }, { "CallerFilePath", callerFilePath }, { "CallerLineNumber", callerLineNumber.ToString() }
+         };
          if (ex.InnerException != null) { properties.Add("InnerException", ex.InnerException.Message); }
          AddMetrics(properties);
          Crashes.TrackError(ex, properties);
+         Analytics.TrackEvent("Tracked Exception", properties);
       }
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)

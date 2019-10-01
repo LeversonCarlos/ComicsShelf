@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Services
@@ -8,11 +9,13 @@ namespace ComicsShelf.Services
 
    partial class LibraryService
    {
+      SemaphoreSlim fileSyncSemaphore = new SemaphoreSlim(1, 1);
 
       private async Task<bool> LoadSyncData()
       {
          try
          {
+            await fileSyncSemaphore.WaitAsync();
 
             var engine = Engines.Engine.Get(this.Library.Type);
             var byteArray = await engine.LoadSyncData(this.Library);
@@ -37,12 +40,14 @@ namespace ComicsShelf.Services
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         finally { fileSyncSemaphore.Release(); }
       }
 
       private async Task<bool> SaveSyncData()
       {
          try
          {
+            await fileSyncSemaphore.WaitAsync();
 
             var comicFiles = this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries].Where(x => x.ComicFile.LibraryKey == this.Library.ID);
             if (comicFiles == null) { return true; }
@@ -61,6 +66,7 @@ namespace ComicsShelf.Services
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         finally { fileSyncSemaphore.Release(); }
       }
 
    }

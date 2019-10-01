@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,10 +19,12 @@ namespace ComicsShelf.Services
          Helpers.AppCenter.TrackEvent("Library.OnUpdated");
       }
 
+      SemaphoreSlim updateLibrarySemaphore = new SemaphoreSlim(1, 1);
       internal async Task<bool> UpdateLibrary()
       {
          try
          {
+            await updateLibrarySemaphore.WaitAsync();
             if (!await this.Statistics()) { return false; }
             if (!await this.SaveSyncData()) { return false; }
             if (!await this.SaveData()) { return false; }
@@ -29,6 +32,7 @@ namespace ComicsShelf.Services
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         finally { updateLibrarySemaphore.Release(); }
       }
 
    }
