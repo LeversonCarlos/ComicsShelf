@@ -26,8 +26,6 @@ namespace ComicsShelf.Splash
                x.ComicFile.Available == true)
             .OrderByDescending(x => x.ComicFile.FilePath)
             .ToList();
-         this._CurrentFileReaded = this.CurrentFile.Readed;
-         this._CurrentFileRating = this.CurrentFile.Rating;
          this._IsAllReaded = this.FolderFiles.Count(x => !x.Readed) == 0;
          this.ItemSelectedCommand = new Command(async (item) => await this.ItemSelected(item));
          this.ItemOpenCommand = new Command(async () => await this.ItemOpen());
@@ -38,31 +36,34 @@ namespace ComicsShelf.Splash
       public ComicFileVM CurrentFile
       {
          get { return this._CurrentFile; }
-         set { this.SetProperty(ref this._CurrentFile, value); }
+         set
+         {
+            this.SetProperty(ref this._CurrentFile, value);
+            this.OnPropertyChanged("CurrentFileRating");
+            this.OnPropertyChanged("CurrentFileReaded");
+         }
       }
 
-      short _CurrentFileRating;
       public short CurrentFileRating
       {
-         get { return this._CurrentFileRating; }
+         get { return this.CurrentFile.Rating; }
          set
          {
             Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"Rating:{value}");
             this.CurrentFile.Rating = value;
-            this.SetProperty(ref this._CurrentFileRating, value);
+            this.OnPropertyChanged("CurrentFileRating");
             this.UpdateLibrary();
          }
       }
 
-      bool _CurrentFileReaded;
       public bool CurrentFileReaded
       {
-         get { return this._CurrentFileReaded; }
+         get { return this.CurrentFile.Readed; }
          set
          {
             Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"Readed:{value}");
             this.CurrentFile.Readed = value;
-            this.SetProperty(ref this._CurrentFileReaded, value);
+            this.OnPropertyChanged("CurrentFileReaded");
             this.UpdateLibrary();
          }
       }
