@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Services
@@ -8,10 +9,12 @@ namespace ComicsShelf.Services
    partial class LibraryService
    {
 
+      SemaphoreSlim statisticsSemaphore = new SemaphoreSlim(1, 1);
       private async Task<bool> Statistics()
       {
          try
          {
+            await statisticsSemaphore.WaitAsync();
 
             // READING FILES
             var readingFiles = this.Statistics_GetReadingFiles();
@@ -26,6 +29,7 @@ namespace ComicsShelf.Services
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         finally { statisticsSemaphore.Release(); }
       }
 
       private List<ComicFiles.ComicFileVM> Statistics_GetRecentFiles()

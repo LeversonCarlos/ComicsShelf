@@ -23,7 +23,7 @@
                   <FlexLayout Padding="10" Direction="Column">
 
                      <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" FlexLayout.Shrink="0" >
-                        <Switch VerticalOptions="Center" IsToggled="{Binding CurrentFile.Readed}" />
+                        <Switch VerticalOptions="Center" IsToggled="{Binding CurrentFileReaded}" />
                         <Label VerticalOptions="Center" Text="{controls:Translate Text=SPLASH_FILE_MARK_AS_READED_LABEL}" />
                      </StackLayout>
 
@@ -56,7 +56,7 @@
                      </AbsoluteLayout>
 
                      <StackLayout HorizontalOptions="CenterAndExpand" FlexLayout.Shrink="0" >
-                        <controls:RatingView HorizontalOptions="Center" Rating="{Binding CurrentFile.Rating}"></controls:RatingView>
+                        <controls:RatingView HorizontalOptions="Center" Rating="{Binding CurrentFileRating}"></controls:RatingView>
                      </StackLayout>
 
                   </FlexLayout>

@@ -82,7 +82,6 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._Rating, value);
             this.ComicFile.Rating = value;
-            this.UpdateLibrary();
          }
       }
 
@@ -94,10 +93,9 @@ namespace ComicsShelf.ComicFiles
          {
             this.SetProperty(ref this._Readed, value);
             this.ComicFile.Readed = value;
-            this.ComicFile.ReadingPage = 0;
+            this.ReadingPage = 0;
             this.ReadingDate = (value ? DateTime.Now : DateTime.MinValue);
             this.ReadingPercent = (value ? 1 : 0);
-            this.UpdateLibrary();
          }
       }
 
@@ -136,10 +134,6 @@ namespace ComicsShelf.ComicFiles
 
 
       public ObservableList<ComicPageVM> Pages { get; internal set; }
-
-
-      private async void UpdateLibrary()
-      { await Services.LibraryService.UpdateLibrary(this.ComicFile.LibraryKey); }
 
    }
 }

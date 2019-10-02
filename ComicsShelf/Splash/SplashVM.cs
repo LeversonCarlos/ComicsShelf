@@ -39,16 +39,44 @@ namespace ComicsShelf.Splash
          set { this.SetProperty(ref this._CurrentFile, value); }
       }
 
+      short _CurrentFileRating;
+      public short CurrentFileRating
+      {
+         get { return this._CurrentFileRating; }
+         set
+         {
+            this.CurrentFile.Rating = value;
+            this.SetProperty(ref this._CurrentFileRating, value);
+            this.UpdateLibrary();
+         }
+      }
+
+      bool _CurrentFileReaded;
+      public bool CurrentFileReaded
+      {
+         get { return this._CurrentFileReaded; }
+         set
+         {
+            this.CurrentFile.Readed = value;
+            this.SetProperty(ref this._CurrentFileReaded, value);
+            this.UpdateLibrary();
+         }
+      }
+
       bool _IsAllReaded;
       public bool IsAllReaded
       {
          get { return this._IsAllReaded; }
          set
          {
-            this.FolderFiles.ForEach(x => x.Readed = true);
             this.SetProperty(ref this._IsAllReaded, value);
+            this.FolderFiles.ForEach(x => x.Readed = true);
+            this.UpdateLibrary();
          }
       }
+
+      private async void UpdateLibrary()
+      { await Services.LibraryService.UpdateLibrary(this.CurrentFile.ComicFile.LibraryKey); }
 
       ComicPageSize _PageSize;
       public ComicPageSize PageSize
