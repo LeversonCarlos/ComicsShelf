@@ -26,6 +26,8 @@ namespace ComicsShelf.Splash
                x.ComicFile.Available == true)
             .OrderByDescending(x => x.ComicFile.FilePath)
             .ToList();
+         this._CurrentFileReaded = this.CurrentFile.Readed;
+         this._CurrentFileRating = this.CurrentFile.Rating;
          this._IsAllReaded = this.FolderFiles.Count(x => !x.Readed) == 0;
          this.ItemSelectedCommand = new Command(async (item) => await this.ItemSelected(item));
          this.ItemOpenCommand = new Command(async () => await this.ItemOpen());
