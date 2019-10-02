@@ -19,6 +19,7 @@ namespace ComicsShelf.Splash
          this.CurrentFile = file;
          this.Store = DependencyService.Get<ComicsShelf.Store.ILibraryStore>();
          this.Library = this.Store.GetLibrary(file.ComicFile.LibraryKey);
+
          this.FolderFiles = this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
             .Where(x =>
                x.ComicFile.LibraryKey == file.ComicFile.LibraryKey &&
@@ -26,29 +27,73 @@ namespace ComicsShelf.Splash
                x.ComicFile.Available == true)
             .OrderByDescending(x => x.ComicFile.FilePath)
             .ToList();
-         this._IsAllReaded = this.FolderFiles.Count(x => !x.Readed) == 0;
+
          this.ItemSelectedCommand = new Command(async (item) => await this.ItemSelected(item));
          this.ItemOpenCommand = new Command(async () => await this.ItemOpen());
          this.ClearCacheCommand = new Command(async () => await this.ClearCache());
+      }
+
+      public void OnAppearing()
+      {
+         try
+         {
+            this.OnPropertyChanged("CurrentFileRating");
+            this.OnPropertyChanged("CurrentFileReaded");
+            this.OnPropertyChanged("IsAllReaded");
+         }
+         catch { }
       }
 
       ComicFileVM _CurrentFile;
       public ComicFileVM CurrentFile
       {
          get { return this._CurrentFile; }
-         set { this.SetProperty(ref this._CurrentFile, value); }
-      }
-
-      bool _IsAllReaded;
-      public bool IsAllReaded
-      {
-         get { return this._IsAllReaded; }
          set
          {
-            this.FolderFiles.ForEach(x => x.Readed = true);
-            this.SetProperty(ref this._IsAllReaded, value);
+            this.SetProperty(ref this._CurrentFile, value);
+            this.OnPropertyChanged("CurrentFileRating");
+            this.OnPropertyChanged("CurrentFileReaded");
          }
       }
+
+      public short CurrentFileRating
+      {
+         get { return this.CurrentFile.Rating; }
+         set
+         {
+            Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"Rating:{value}");
+            this.CurrentFile.Rating = value;
+            this.OnPropertyChanged("CurrentFileRating");
+            this.UpdateLibrary();
+         }
+      }
+
+      public bool CurrentFileReaded
+      {
+         get { return this.CurrentFile.Readed; }
+         set
+         {
+            Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"Readed:{value}");
+            this.CurrentFile.Readed = value;
+            this.OnPropertyChanged("CurrentFileReaded");
+            this.UpdateLibrary();
+         }
+      }
+
+      public bool IsAllReaded
+      {
+         get { return (this.FolderFiles.Count(x => !x.Readed) == 0); }
+         set
+         {
+            Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"IsAllReaded:{value}");
+            this.FolderFiles.ForEach(x => x.Readed = value);
+            this.OnPropertyChanged("IsAllReaded");
+            this.UpdateLibrary();
+         }
+      }
+
+      private async void UpdateLibrary()
+      { await Services.LibraryService.UpdateLibrary(this.CurrentFile.ComicFile.LibraryKey); }
 
       ComicPageSize _PageSize;
       public ComicPageSize PageSize
@@ -90,6 +135,7 @@ namespace ComicsShelf.Splash
          try
          {
             this.IsBusy = true;
+            if (this.CurrentFile == null || this.CurrentFile.ComicFile == null) { throw new NullReferenceException("The CurrentFile variable is not defined"); }
             Messaging.Send("OnComicFileOpening", this.CurrentFile);
             var startTime = DateTime.Now;
 

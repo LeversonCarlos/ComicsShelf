@@ -30,8 +30,9 @@ namespace ComicsShelf.Splash
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpening", this.OnComicFileOpening);
             Messaging.Subscribe<ComicFileVM>("OnComicFileOpened", this.OnComicFileOpened);
 
-            var currentFile = (this.BindingContext as SplashVM).CurrentFile;
-            this.filesCollectionView.ScrollTo(currentFile);
+            var splashVM = (this.BindingContext as SplashVM);
+            splashVM.OnAppearing();
+            this.filesCollectionView.ScrollTo(splashVM.CurrentFile);
 
          }
          catch (Exception ex)
