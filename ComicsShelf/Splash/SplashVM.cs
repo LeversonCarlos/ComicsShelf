@@ -47,6 +47,7 @@ namespace ComicsShelf.Splash
          get { return this._CurrentFileRating; }
          set
          {
+            Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"Rating:{value}");
             this.CurrentFile.Rating = value;
             this.SetProperty(ref this._CurrentFileRating, value);
             this.UpdateLibrary();
@@ -59,6 +60,7 @@ namespace ComicsShelf.Splash
          get { return this._CurrentFileReaded; }
          set
          {
+            Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"Readed:{value}");
             this.CurrentFile.Readed = value;
             this.SetProperty(ref this._CurrentFileReaded, value);
             this.UpdateLibrary();
@@ -71,8 +73,9 @@ namespace ComicsShelf.Splash
          get { return this._IsAllReaded; }
          set
          {
+            Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"IsAllReaded:{value}");
+            this.FolderFiles.ForEach(x => x.Readed = value);
             this.SetProperty(ref this._IsAllReaded, value);
-            this.FolderFiles.ForEach(x => x.Readed = true);
             this.UpdateLibrary();
          }
       }

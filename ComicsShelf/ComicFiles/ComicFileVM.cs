@@ -80,8 +80,8 @@ namespace ComicsShelf.ComicFiles
          get { return this._Rating; }
          set
          {
-            this.SetProperty(ref this._Rating, value);
             this.ComicFile.Rating = value;
+            this.SetProperty(ref this._Rating, value);
          }
       }
 
@@ -91,11 +91,11 @@ namespace ComicsShelf.ComicFiles
          get { return this._Readed; }
          set
          {
-            this.SetProperty(ref this._Readed, value);
             this.ComicFile.Readed = value;
             this.ReadingPage = 0;
             this.ReadingDate = (value ? DateTime.Now : DateTime.MinValue);
             this.ReadingPercent = (value ? 1 : 0);
+            this.SetProperty(ref this._Readed, value);
          }
       }
 
@@ -105,8 +105,8 @@ namespace ComicsShelf.ComicFiles
          get { return this._ReadingDate; }
          set
          {
-            this.SetProperty(ref this._ReadingDate, value);
             this.ComicFile.ReadingDate = value;
+            this.SetProperty(ref this._ReadingDate, value);
          }
       }
 
@@ -116,8 +116,8 @@ namespace ComicsShelf.ComicFiles
          get { return this._ReadingPage; }
          set
          {
-            this.SetProperty(ref this._ReadingPage, value);
             this.ComicFile.ReadingPage = value;
+            this.SetProperty(ref this._ReadingPage, value);
          }
       }
 
@@ -127,11 +127,10 @@ namespace ComicsShelf.ComicFiles
          get { return this._ReadingPercent; }
          set
          {
-            this.SetProperty(ref this._ReadingPercent, value);
             this.ComicFile.ReadingPercent = value;
+            this.SetProperty(ref this._ReadingPercent, value);
          }
       }
-
 
       public ObservableList<ComicPageVM> Pages { get; internal set; }
 
