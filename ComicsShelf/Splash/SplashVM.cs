@@ -19,6 +19,7 @@ namespace ComicsShelf.Splash
          this.CurrentFile = file;
          this.Store = DependencyService.Get<ComicsShelf.Store.ILibraryStore>();
          this.Library = this.Store.GetLibrary(file.ComicFile.LibraryKey);
+
          this.FolderFiles = this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
             .Where(x =>
                x.ComicFile.LibraryKey == file.ComicFile.LibraryKey &&
@@ -26,10 +27,21 @@ namespace ComicsShelf.Splash
                x.ComicFile.Available == true)
             .OrderByDescending(x => x.ComicFile.FilePath)
             .ToList();
-         this._IsAllReaded = this.FolderFiles.Count(x => !x.Readed) == 0;
+
          this.ItemSelectedCommand = new Command(async (item) => await this.ItemSelected(item));
          this.ItemOpenCommand = new Command(async () => await this.ItemOpen());
          this.ClearCacheCommand = new Command(async () => await this.ClearCache());
+      }
+
+      public void OnAppearing()
+      {
+         try
+         {
+            this.OnPropertyChanged("CurrentFileRating");
+            this.OnPropertyChanged("CurrentFileReaded");
+            this.OnPropertyChanged("IsAllReaded");
+         }
+         catch { }
       }
 
       ComicFileVM _CurrentFile;
@@ -68,15 +80,14 @@ namespace ComicsShelf.Splash
          }
       }
 
-      bool _IsAllReaded;
       public bool IsAllReaded
       {
-         get { return this._IsAllReaded; }
+         get { return (this.FolderFiles.Count(x => !x.Readed) == 0); }
          set
          {
             Helpers.AppCenter.TrackEvent("SplashPage.OnPropertyChanged", $"IsAllReaded:{value}");
             this.FolderFiles.ForEach(x => x.Readed = value);
-            this.SetProperty(ref this._IsAllReaded, value);
+            this.OnPropertyChanged("IsAllReaded");
             this.UpdateLibrary();
          }
       }
