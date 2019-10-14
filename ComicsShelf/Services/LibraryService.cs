@@ -50,6 +50,13 @@ namespace ComicsShelf.Services
             .AddRange(files);
       }
 
+      private void RemoveLibraryFiles(List<ComicFiles.ComicFileVM> files)
+      {
+         var fileKeys = files.Select(x => x.ComicFile.Key).ToList();
+         this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]
+            .RemoveAll(x => fileKeys.Contains(x.ComicFile.Key));
+      }
+
       private void ReplaceLibraryFile(ComicFiles.ComicFile file)
       {
          this.Store.LibraryFiles[ComicsShelf.Store.enLibraryFilesGroup.Libraries]

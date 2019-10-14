@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Services
 {
-   partial class LibraryService 
+   partial class LibraryService
    {
 
       private async Task<bool> SearchData()
@@ -25,6 +25,7 @@ namespace ComicsShelf.Services
                .Where(x => !searchFiles.Select(i => i.Key).ToList().Contains(x.ComicFile.Key))
                .ToList()
                .ForEach(file => file.ComicFile.Available = false);
+            this.RemoveLibraryFiles(libraryFiles.Where(file => file.ComicFile.Available == false).ToList());
 
             // EXISTING FILES
             var existingFiles = libraryFiles
