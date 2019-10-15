@@ -128,7 +128,7 @@ namespace ComicsShelf.Services
                      }
                      catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
                   });
-                  if (!coverResult) { return false; }
+                  if (!coverResult) { continue; }
 
                   // STATISTCS
                   if (lastFolderPath != comicFile.ComicFile.FolderPath)
