@@ -1,4 +1,3 @@
+Pesquisa de arquivos do OneDrive em uma pasta por vez, porque a pesquisa interna nem sempre encontra todos os arquivos
 Melhoria geral no uso da memória, tempo de carregamento e pequenas correções
-Disponibilizando tradução para espanhol e francês
 Atualizar bibliotecas internas, melhorar visuais e a experiência do usuário
-Integração com OneDrive para bibliotecas remotas com seleção de pasta

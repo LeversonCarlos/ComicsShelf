@@ -1,4 +1,3 @@
+Searching OneDrive files a folder at time cause the built in search doesn't always find all files
 Overall memory usage improvement, load time and minor bugfix
-Providing Spanish and French translations
 Upgrade inner libraries, enhance visuals and user experience
-OneDrive integration for remote libraries with folder selection

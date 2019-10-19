@@ -1,4 +1,3 @@
+Buscar archivos de OneDrive en una carpeta a la vez porque la búsqueda integrada no siempre encuentra todos los archivos
 Mejora general del uso de memoria, tiempo de carga y corrección de errores menores
-Proporcionar traducción al español y francés
 Actualice las bibliotecas internas, mejore las imágenes y la experiencia del usuario
-Integración de OneDrive para bibliotecas remotas con selección de carpeta
