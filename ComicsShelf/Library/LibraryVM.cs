@@ -83,6 +83,7 @@ namespace ComicsShelf.Library
                .OrderByDescending(comicFile => comicFile.ComicFile.FilePath)
                .ToList();
             comicFolder.FolderPath = comicFolder.FolderPath
+               .Replace("//", " -> ")
                .Replace("/", " -> ")
                .Replace("\\", " -> ");
             comicFolder.ComicFiles.AddRange(comicFolderFiles);
