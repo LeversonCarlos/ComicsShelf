@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Product>Comics Shelf</Product>
     <Company>Friendship Solutions</Company>
     <Copyright>Copyright © Friendship Solutions 2018</Copyright>
@@ -26,11 +26,11 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.2.270" />
-    <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.2.270" />
-    <PackageReference Include="HttpZipStream" Version="0.2.84" />
+    <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.4.5" />
+    <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.4.5" />
+    <PackageReference Include="HttpZipStream" Version="0.4.2" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.1.1" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.1.1" />
   </ItemGroup>
