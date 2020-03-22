@@ -21,7 +21,7 @@ namespace ComicsShelf.Droid
          Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
          Xamarin.Forms.Forms.Init(this, savedInstanceState);
          CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
-         Xamarin.OneDrive.Connector.Init(this, "https://login.microsoftonline.com/common/oauth2/nativeclient");
+         Xamarin.OneDrive.Connector.Init(this);
          LoadApplication(new App());
       }
 
@@ -34,8 +34,8 @@ namespace ComicsShelf.Droid
 
       protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
       {
-         base.OnActivityResult(requestCode, resultCode, data);
          Xamarin.OneDrive.Connector.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
+         base.OnActivityResult(requestCode, resultCode, data);
       }
 
    }
