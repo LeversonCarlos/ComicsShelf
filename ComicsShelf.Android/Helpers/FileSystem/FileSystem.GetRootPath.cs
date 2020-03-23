@@ -25,6 +25,7 @@ namespace ComicsShelf.Droid
             FullPath = absolutePath
          };
          */
+         await Task.CompletedTask;
          return result;
       }
 
