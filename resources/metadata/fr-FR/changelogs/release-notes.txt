@@ -1,3 +1,3 @@
+Solution de contournement pour identifier les cartes de stockage externes non émulées
 La recherche de fichiers OneDrive dans un dossier à un moment donné, car la recherche intégrée ne trouve pas toujours tous les fichiers
 Amélioration globale de l'utilisation de la mémoire, temps de chargement et correction de bug mineure
-Mettez à niveau les bibliothèques internes, améliorez les visuels et l'expérience utilisateur
