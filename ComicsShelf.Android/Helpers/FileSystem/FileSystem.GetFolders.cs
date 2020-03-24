@@ -13,7 +13,12 @@ namespace ComicsShelf.Droid
          {
 
             string[] folderChilds = null;
-            if (folder.FullPath == "/storage") { folderChilds = await Task.FromResult(ExternalStorage.GetExternalStorages()); }
+            if (folder.FullPath == "/")
+            {
+               folderChilds = await Task.FromResult(ExternalStorage.GetExternalStorages());
+               var i = 0;
+               Helpers.AppCenter.TrackEvent("External Storages", folderChilds.Select(x => $"Storage {++i}:{x}").ToArray());
+            }
             else { folderChilds = await Task.FromResult(System.IO.Directory.GetDirectories(folder.FullPath)); }
 
             var result = folderChilds

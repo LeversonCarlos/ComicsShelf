@@ -51,7 +51,7 @@ namespace ComicsShelf.Droid
 
             return procMountsResult.ToArray();
          }
-         catch (Exception) { return new string[] { }; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return new string[] { }; }
       }
 
    }
