@@ -28,8 +28,8 @@
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.910310" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
-    <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.4.6" />
-    <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.4.6" />
+    <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.4.7" />
+    <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.4.7" />
     <PackageReference Include="HttpZipStream" Version="0.4.3" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.6.4" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.6.4" />
