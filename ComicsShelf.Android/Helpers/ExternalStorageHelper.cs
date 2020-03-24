@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ComicsShelf.Droid
@@ -12,22 +13,29 @@ namespace ComicsShelf.Droid
          {
 
             var externalStorages = GetExternalStorages_FromMounts();
-            if (externalStorages?.Length != 0) { return externalStorages; }
+            if (externalStorages == null) { externalStorages = new List<string>(); }
 
-            return new string[] { Android.OS.Environment.ExternalStorageDirectory.AbsolutePath };
+            externalStorages.Add(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
+            externalStorages = externalStorages
+               .GroupBy(x => x)
+               .Select(x => x.Key)
+               .OrderBy(x => x)
+               .ToList();
+
+            return externalStorages.ToArray(); ;
 
          }
          catch (Exception) { throw; }
       }
 
-      private static string[] GetExternalStorages_FromMounts()
+      private static List<string> GetExternalStorages_FromMounts()
       {
          try
          {
 
             // ATTEMPTING TO READ '/proc/mounts' TO SEE IF THERE'S AN EXTERNAL SD CARD REFERENCE
             string procMountsContent = System.IO.File.ReadAllText("/proc/mounts");
-            if (string.IsNullOrEmpty(procMountsContent)) { return new string[] { }; }
+            if (string.IsNullOrEmpty(procMountsContent)) { return null; }
 
             var procMountsStorages = procMountsContent
                .Split('\n', '\r')
@@ -49,9 +57,9 @@ namespace ComicsShelf.Droid
                .Select(x => x.Key)
                .ToList();
 
-            return procMountsResult.ToArray();
+            return procMountsResult;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return new string[] { }; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
       }
 
    }
