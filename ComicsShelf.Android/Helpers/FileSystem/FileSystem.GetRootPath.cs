@@ -8,6 +8,14 @@ namespace ComicsShelf.Droid
 
       public async Task<Folder> GetRootPath()
       {
+
+         var result = new Folder
+         {
+            Name = "/",
+            Key = "/",
+            FullPath = "/"
+         };
+         /*
          var absolutePath = await Task.FromResult(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath);
          var result = new Folder
          {
@@ -15,6 +23,8 @@ namespace ComicsShelf.Droid
             Key = absolutePath,
             FullPath = absolutePath
          };
+         */
+         await Task.CompletedTask;
          return result;
       }
 

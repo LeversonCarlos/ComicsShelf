@@ -34,6 +34,7 @@ namespace ComicsShelf.Helpers.FolderDialog
       async Task ItemSelect(object item)
       {
          this.OnItemSelected?.Invoke(this, this.SelectedItem);
+         await Task.CompletedTask;
       }
 
       public Command ConfirmCommand { get; set; }
