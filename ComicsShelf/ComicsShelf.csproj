@@ -25,11 +25,8 @@
   <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.910310" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
-    <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.4.7" />
-    <PackageReference Include="Xamarin.OneDrive.Connector.Files" Version="0.4.7" />
     <PackageReference Include="HttpZipStream" Version="0.4.3" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.6.4" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.6.4" />
@@ -85,6 +82,12 @@
 
    <ItemGroup>
      <Folder Include="ComicFiles\" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.Common\CloudDrive.Connector.Common.csproj" />
+     <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.LocalDrive\CloudDrive.Connector.LocalDrive.csproj" />
+     <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.OneDrive\CloudDrive.Connector.OneDrive.csproj" />
    </ItemGroup>
   
 </Project>
