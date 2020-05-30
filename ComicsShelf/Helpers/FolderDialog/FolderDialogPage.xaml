@@ -4,7 +4,8 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    x:Class="ComicsShelf.Helpers.FolderDialog.FolderDialogPage" 
-   BackgroundColor="{StaticResource colorBackground}">
+   BackgroundColor="{StaticResource colorBackground}"
+   Title="{Binding Title}">
    <ContentPage.Content>
       <StackLayout Padding="20" Spacing="20">
 
@@ -13,7 +14,7 @@
          <Frame BackgroundColor="White" Padding="10">
             <StackLayout Orientation="Vertical" Spacing="5">
                <Label Text="{controls:Translate Text=FOLDER_DIALOG_SELECTED_PATH_LABEL}" FontSize="Micro"></Label>
-               <Label Text="{Binding CurrentItem.FullPath}" FontAttributes="Bold"></Label>
+               <Label Text="{Binding CurrentItem.Path}" FontAttributes="Bold"></Label>
             </StackLayout>
          </Frame>
 
@@ -37,7 +38,7 @@
 
          <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
             <Button Text="{controls:Translate Text=FOLDER_DIALOG_CANCEL_COMMAND}" Command="{Binding CancelCommand}" Style="{StaticResource BaseButton}"></Button>
-            <Button Text="{controls:Translate Text=FOLDER_DIALOG_CONFIRM_COMMAND}" Command="{Binding ConfirmCommand}" Style="{StaticResource PrimaryButton}" ></Button>
+            <Button Text="{controls:Translate Text=FOLDER_DIALOG_CONFIRM_COMMAND}" Command="{Binding ConfirmCommand}" Style="{StaticResource PrimaryButton}"></Button>
          </StackLayout>
 
       </StackLayout>
