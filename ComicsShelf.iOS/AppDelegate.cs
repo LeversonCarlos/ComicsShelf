@@ -26,11 +26,13 @@ namespace ComicsShelf.iOS
          return base.FinishedLaunching(app, options);
       }
 
+      /*
       public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
       {
-         Xamarin.OneDrive.Connector.SetAuthenticationContinuationEventArgs(url);
+         Xamarin.CloudDrive.Connector.OneDrive.SetAuthenticationContinuationEventArgs(url);
          return true;
       }
+      */
 
    }
 }
