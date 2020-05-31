@@ -16,7 +16,7 @@ namespace ComicsShelf.Engines.OneDrive
             var store = Xamarin.Forms.DependencyService.Get<Store.ILibraryStore>();
             if (!store.Libraries.Any(x => x.Type == LibraryType.OneDrive && x.ID != library.ID))
             {
-               await this.Connector.DisconnectAsync();
+               await this.Connector.Service.DisconnectAsync();
             }
 
             return true;

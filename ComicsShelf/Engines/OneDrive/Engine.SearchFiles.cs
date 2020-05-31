@@ -1,10 +1,9 @@
 ﻿using ComicsShelf.ComicFiles;
 using ComicsShelf.Store;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.OneDrive.Files;
+using Xamarin.CloudDrive.Connector.Common;
 
 namespace ComicsShelf.Engines.OneDrive
 {
@@ -16,29 +15,29 @@ namespace ComicsShelf.Engines.OneDrive
          try
          {
 
-            // DEFINE ROOT FOLDER
-            var rootFolder = new FileData
+            // DEFINE ROOT DIRECTORY
+            var rootDirectory = new DirectoryVM
             {
-               id = library.Key,
-               FilePath = library.Path,
-               FileName = library.Description
+               ID = library.Key,
+               Path = library.Path,
+               Name = library.Description
             };
 
             // LOCATE ALL CHILDREN FILES 
             // var fileList = await this.Connector.SearchFilesAsync(rootFolder, "*.cbz", 10000);
-            var fileList = await this.SearchFiles(rootFolder);
+            var fileList = await this.Connector.Service.SearchFiles(rootDirectory, "*.cbz", 10000);
 
             // CONVERT
             var comicFiles = fileList
                .Select(file => new ComicFile
                {
                   LibraryKey = library.ID,
-                  Key = file.id,
-                  FilePath = $"{file.FilePath.Replace("/ /", "/")}/{file.FileName}",
-                  FolderPath = file.FilePath.Replace("/ /", "/"),
+                  Key = file.ID,
+                  FilePath = $"{file.Path.Replace("/ /", "/")}/{file.Name}",
+                  FolderPath = file.Path.Replace("/ /", "/"),
                   ReleaseDate = (!file.CreatedDateTime.HasValue ? DateTime.MinValue : file.CreatedDateTime.Value.ToLocalTime()),
-                  KeyValues = new Dictionary<string, string> { { "StreamSize", $"{(file.Size.HasValue ? file.Size.Value : 0)}" } },
-                  CachePath = $"{Helpers.Constants.FilesCachePath}{file.id}"
+                  KeyValues = file.KeyValues,
+                  CachePath = $"{Helpers.Constants.FilesCachePath}{file.ID}"
                })
                .ToList();
 
@@ -46,8 +45,8 @@ namespace ComicsShelf.Engines.OneDrive
             foreach (var comicFile in comicFiles)
             {
                comicFile.FullText = System.IO.Path.GetFileNameWithoutExtension(comicFile.FilePath).Trim();
-               if (!string.IsNullOrEmpty(rootFolder.FilePath) && !string.IsNullOrEmpty(comicFile.FolderPath))
-               { comicFile.FolderPath = comicFile.FolderPath.Replace(rootFolder.FilePath.Replace("/ / ", "/"), "").Trim(); }
+               if (!string.IsNullOrEmpty(rootDirectory.Path) && !string.IsNullOrEmpty(comicFile.FolderPath))
+               { comicFile.FolderPath = comicFile.FolderPath.Replace(rootDirectory.Path.Replace("/ / ", "/"), "").Trim(); }
                var folderText = System.IO.Path.GetFileNameWithoutExtension(comicFile.FolderPath);
                if (!string.IsNullOrEmpty(folderText))
                { comicFile.SmallText = comicFile.FullText.Replace(folderText, ""); }
@@ -58,30 +57,6 @@ namespace ComicsShelf.Engines.OneDrive
             return comicFiles.ToArray();
          }
          catch (Exception ex) { await App.ShowMessage(ex); return null; }
-      }
-
-      private async Task<List<FileData>> SearchFiles(FileData folder)
-      {
-         try
-         {
-            var files = await this.Connector.GetChildFilesAsync(folder);
-            files.RemoveAll(x => !x.FileName.ToLower().EndsWith("cbz"));
-
-            var childFolders = await this.Connector.GetChildFoldersAsync(folder);
-            if (childFolders != null && childFolders.Count > 0)
-            {
-               var childTasks = new List<Task<List<FileData>>>();
-               foreach (var childFolder in childFolders)
-               {
-                  childTasks.Add(SearchFiles(childFolder));
-               }
-               var childs = await Task.WhenAll(childTasks.ToArray());
-               files.AddRange(childs.SelectMany(x => x).ToArray());
-            }
-
-            return files;
-         }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); throw; }
       }
 
    }

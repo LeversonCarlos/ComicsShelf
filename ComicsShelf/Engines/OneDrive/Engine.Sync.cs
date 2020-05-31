@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.OneDrive.Files;
+using Xamarin.CloudDrive.Connector.Common;
 
 namespace ComicsShelf.Engines.OneDrive
 {
@@ -14,25 +14,28 @@ namespace ComicsShelf.Engines.OneDrive
       {
          try
          {
-            using (var serializedStream = new System.IO.MemoryStream(serializedValue))
+            FileVM syncFile = null;
+
+            // SYNC FILE ID PREVIOUSLY SAVED
+            var syncFileID = library.GetKeyValue(SYNC_FILE_ID);
+
+            // IF NO FILE WAS PREVISIOLLY CREATED, WE CREATE IT NOW ON THE PARENT FOLDER 
+            if (string.IsNullOrEmpty(syncFileID))
             {
-               var syncFile = new FileData { FileName = LibraryModel.SyncFile };
-
-               // SYNC FILE PREVIOUSLY SAVED
-               syncFile.id = library.GetKeyValue(SYNC_FILE_ID);
-
-               // SET THE MAIN FOLDER WHERE THE FILE MUST BE CREATED
-               if (string.IsNullOrEmpty(syncFile.id))
-               { syncFile.parentID = library.Key; }
-
-               // UPLOAD CONTENT
-               syncFile = await this.Connector.UploadAsync(syncFile, serializedStream);
-               if (string.IsNullOrEmpty(syncFile.id)) { return false; }
-
-               // STORE THE LIBRARY FILE ID
-               library.SetKeyValue(SYNC_FILE_ID, syncFile.id);
-               return true;
+               var syncFileParentID = library.Key;
+               syncFile = await this.Connector.Service.Upload(syncFileParentID, SYNC_FILE_ID, serializedValue);
             }
+
+            // IF THE FILE WAS PREVISIOLLY CREATED, WE WILL OVERRIDE IT NOW
+            if (!string.IsNullOrEmpty(syncFileID))
+            {
+               syncFile = await this.Connector.Service.Upload(syncFileID, serializedValue);
+            }
+
+            // STORE THE LIBRARY FILE ID
+            if (string.IsNullOrEmpty(syncFile?.ID)) { return false; }
+            library.SetKeyValue(SYNC_FILE_ID, syncFile.ID);
+            return true;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
       }
@@ -47,8 +50,7 @@ namespace ComicsShelf.Engines.OneDrive
             if (string.IsNullOrEmpty(fileID)) { return null; }
 
             // LOAD CONTENT
-            var httpUrl = $"me/drive/items/{fileID}/content";
-            var serializedValue = await this.Connector.GetByteArrayAsync(httpUrl);
+            var serializedValue = await this.Connector.Service.Download(fileID);
 
             return serializedValue;
          }
@@ -65,14 +67,16 @@ namespace ComicsShelf.Engines.OneDrive
             if (!string.IsNullOrEmpty(fileID)) { return fileID; }
 
             // TRY TO SEARCH ON FOLDER
-            var folder = new FileData { id = library.Key };
-            var fileList = await this.Connector.SearchFilesAsync(folder, LibraryModel.SyncFile, 100);
-            if (fileList == null || fileList.Count == 0) { return string.Empty; }
-            var file = fileList.Where(x => x.parentID == library.Key).FirstOrDefault();
+            var directory = new DirectoryVM { ID = library.Key };
+            var fileList = await this.Connector.Service.SearchFiles(directory, LibraryModel.SyncFile, 100);
+
+            if (fileList?.Length == 0) { return string.Empty; }
+
+            var file = fileList.Where(x => x.ParentID == library.Key).FirstOrDefault();
             if (file == null) { return string.Empty; }
 
             // RESULT
-            return file.id;
+            return file.ID;
          }
          catch (Exception) { throw; }
       }

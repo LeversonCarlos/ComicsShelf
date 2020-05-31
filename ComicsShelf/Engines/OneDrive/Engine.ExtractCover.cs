@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.OneDrive.Files;
 
 namespace ComicsShelf.Engines.OneDrive
 {
@@ -23,9 +22,9 @@ namespace ComicsShelf.Engines.OneDrive
             log.Add($"Has Network Access:{hasNetworkAccess}");
             if (!hasNetworkAccess) { return false; }
 
-            // RETRIEVE THE DOWNLOAD URL
-            var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
-            log.Add($"Download Url:{downloadUrl}");
+            // REFRESH FILE DETAILS
+            var fileVM = await this.Connector.Service.GetDetails(comicFile.Key);
+            if (!fileVM.KeyValues.TryGetValue("downloadUrl", out string downloadUrl)) { return false; }
             if (string.IsNullOrEmpty(downloadUrl)) { return false; }
 
             // OPEN REMOTE STREAM
@@ -33,14 +32,8 @@ namespace ComicsShelf.Engines.OneDrive
             {
 
                // STREAM SIZE
-               var streamSizeValue = comicFile.GetKeyValue("StreamSize");
-               log.Add($"Stream Size Value:{streamSizeValue}");
-               if (!string.IsNullOrEmpty(streamSizeValue))
-               {
-                  long streamSize;
-                  if (long.TryParse(streamSizeValue, out streamSize))
-                  { zipStream.SetContentLength(streamSize); }
-               }
+               if (fileVM.SizeInBytes.HasValue)
+                  zipStream.SetContentLength(fileVM.SizeInBytes.Value);
 
                // FIRST ENTRY
                var entryList = await zipStream.GetEntriesAsync();
