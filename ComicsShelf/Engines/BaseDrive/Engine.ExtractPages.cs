@@ -7,9 +7,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.BaseDrive
 {
-   partial class OneDriveEngine
+   partial class BaseDriveEngine<T>
    {
 
       public async Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile)
@@ -29,7 +29,7 @@ namespace ComicsShelf.Engines.OneDrive
                   if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
 
                   // REFRESH FILE DETAILS
-                  var fileVM = await this.Connector.Service.GetDetails(comicFile.Key);
+                  var fileVM = await this.Service.GetDetails(comicFile.Key);
                   if (!fileVM.KeyValues.TryGetValue("downloadUrl", out string downloadUrl)) { return null; }
                   if (string.IsNullOrEmpty(downloadUrl)) { return null; }
 

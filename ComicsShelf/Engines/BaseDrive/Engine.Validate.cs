@@ -2,16 +2,16 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.BaseDrive
 {
-   partial class OneDriveEngine
+   partial class BaseDriveEngine<T>
    {
 
       public async Task<bool> Validate(LibraryModel library)
       {
          try
          {
-            if (!await this.Connector.TryConnectAsync()) { return false; }
+            if (!await this.TryConnectAsync()) { return false; }
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }

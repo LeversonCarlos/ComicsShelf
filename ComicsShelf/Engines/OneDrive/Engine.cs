@@ -1,19 +1,9 @@
-﻿using Xamarin.Forms;
+﻿using Xamarin.CloudDrive.Connector.OneDrive;
 
 namespace ComicsShelf.Engines.OneDrive
 {
-   internal partial class OneDriveEngine : IEngine
+   internal partial class OneDriveEngine : BaseDrive.BaseDriveEngine<OneDriveService>
    {
-
-      private Helpers.IFileSystem FileSystem
-      {
-         get { return DependencyService.Get<Helpers.IFileSystem>(); }
-      }
-
-      private OneDriveConnector Connector
-      {
-         get { return DependencyService.Get<OneDriveConnector>(); }
-      }
 
    }
 }

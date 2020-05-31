@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.BaseDrive
 {
-   partial class OneDriveEngine
+   partial class BaseDriveEngine<T>
    {
 
       public async Task<bool> ExtractCover(LibraryModel library, ComicFile comicFile)
@@ -23,7 +23,7 @@ namespace ComicsShelf.Engines.OneDrive
             if (!hasNetworkAccess) { return false; }
 
             // REFRESH FILE DETAILS
-            var fileVM = await this.Connector.Service.GetDetails(comicFile.Key);
+            var fileVM = await this.Service.GetDetails(comicFile.Key);
             if (!fileVM.KeyValues.TryGetValue("downloadUrl", out string downloadUrl)) { return false; }
             if (string.IsNullOrEmpty(downloadUrl)) { return false; }
 

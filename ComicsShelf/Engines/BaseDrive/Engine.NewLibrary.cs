@@ -3,9 +3,9 @@ using ComicsShelf.Store;
 using System;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.BaseDrive
 {
-   partial class OneDriveEngine
+   partial class BaseDriveEngine<T>
    {
 
       public async Task<LibraryModel> NewLibrary()
@@ -13,9 +13,9 @@ namespace ComicsShelf.Engines.OneDrive
          try
          {
 
-            if (!await this.Connector.TryConnectAsync()) { return null; }
+            if (!await this.TryConnectAsync()) { return null; }
 
-            var selectedFolder = await Selector.GetFolder(this.Connector.Service, new Helpers.Folder());
+            var selectedFolder = await Selector.GetFolder(this.Service, new Helpers.Folder());
             if (selectedFolder == null) { return null; }
 
             var library = new LibraryModel

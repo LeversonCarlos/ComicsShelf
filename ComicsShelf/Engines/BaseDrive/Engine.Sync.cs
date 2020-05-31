@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.BaseDrive
 {
-   partial class OneDriveEngine
+   partial class BaseDriveEngine<T>
    {
       private const string SYNC_FILE_ID = "SyncFileID";
 
@@ -21,19 +21,16 @@ namespace ComicsShelf.Engines.OneDrive
 
             // IF NO FILE WAS PREVISIOLLY CREATED, WE CREATE IT NOW ON THE PARENT FOLDER 
             if (string.IsNullOrEmpty(syncFileID))
-            {
-               var syncFileParentID = library.Key;
-               syncFile = await this.Connector.Service.Upload(syncFileParentID, SYNC_FILE_ID, serializedValue);
-            }
+               syncFile = await this.Service.Upload(library.Key, SYNC_FILE_ID, serializedValue);
 
             // IF THE FILE WAS PREVISIOLLY CREATED, WE WILL OVERRIDE IT NOW
             if (!string.IsNullOrEmpty(syncFileID))
-            {
-               syncFile = await this.Connector.Service.Upload(syncFileID, serializedValue);
-            }
+               syncFile = await this.Service.Upload(syncFileID, serializedValue);
 
-            // STORE THE LIBRARY FILE ID
-            if (string.IsNullOrEmpty(syncFile?.ID)) { return false; }
+            // IF NO FILE WAS STORED THEN JUST RETURN
+            if (string.IsNullOrEmpty(syncFile?.ID)) return false;
+
+            // STORE THE LIBRARY FILE ID AND RETURN
             library.SetKeyValue(SYNC_FILE_ID, syncFile.ID);
             return true;
          }
@@ -50,7 +47,7 @@ namespace ComicsShelf.Engines.OneDrive
             if (string.IsNullOrEmpty(fileID)) { return null; }
 
             // LOAD CONTENT
-            var serializedValue = await this.Connector.Service.Download(fileID);
+            var serializedValue = await this.Service.Download(fileID);
 
             return serializedValue;
          }
@@ -68,7 +65,7 @@ namespace ComicsShelf.Engines.OneDrive
 
             // TRY TO SEARCH ON FOLDER
             var directory = new DirectoryVM { ID = library.Key };
-            var fileList = await this.Connector.Service.SearchFiles(directory, LibraryModel.SyncFile, 100);
+            var fileList = await this.Service.SearchFiles(directory, LibraryModel.SyncFile, 100);
 
             if (fileList?.Length == 0) { return string.Empty; }
 

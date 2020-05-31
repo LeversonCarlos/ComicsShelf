@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.BaseDrive
 {
-   partial class OneDriveEngine
+   partial class BaseDriveEngine<T>
    {
 
       public async Task<ComicFile[]> SearchFiles(LibraryModel library)
@@ -24,8 +24,7 @@ namespace ComicsShelf.Engines.OneDrive
             };
 
             // LOCATE ALL CHILDREN FILES 
-            // var fileList = await this.Connector.SearchFilesAsync(rootFolder, "*.cbz", 10000);
-            var fileList = await this.Connector.Service.SearchFiles(rootDirectory, "*.cbz", 10000);
+            var fileList = await this.Service.SearchFiles(rootDirectory, "*.cbz", 10000);
 
             // CONVERT
             var comicFiles = fileList
