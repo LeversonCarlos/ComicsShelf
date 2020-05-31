@@ -13,7 +13,7 @@ namespace ComicsShelf.Engines.BaseDrive
          try
          {
 
-            if (!await this.TryConnectAsync()) { return null; }
+            if (!await this.NewLibrary_TryConnection()) { return null; }
 
             var selectedFolder = await Selector.GetFolder(this.Service, new Helpers.Folder());
             if (selectedFolder == null) { return null; }
@@ -23,14 +23,22 @@ namespace ComicsShelf.Engines.BaseDrive
                Key = selectedFolder.Key,
                Path = selectedFolder.FullPath,
                Description = selectedFolder.Name,
-               Type = LibraryType.OneDrive
+               Type = this.LibraryType
             };
 
-            if (!string.IsNullOrEmpty(library.Path)) { library.Path += "/"; }
+            if (this.LibraryType == LibraryType.OneDrive)
+            { if (!string.IsNullOrEmpty(library.Path)) { library.Path += "/"; } }
 
             return library;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return null; }
+      }
+
+      private async Task<bool> NewLibrary_TryConnection()
+      {
+         try
+         { return await this.Service.ConnectAsync(); }
+         catch { return false; }
       }
 
    }

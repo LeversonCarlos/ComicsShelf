@@ -8,17 +8,16 @@ namespace ComicsShelf.Engines.BaseDrive
    {
 
       public ICloudDriveService Service { get { return DependencyProvider.Get<T>(); } }
+      readonly Store.LibraryType LibraryType;
 
-      private Helpers.IFileSystem FileSystem
-      {
-         get { return DependencyService.Get<Helpers.IFileSystem>(); }
+      public BaseDriveEngine(Store.LibraryType libraryType)
+      { 
+         this.LibraryType = libraryType; 
       }
 
-      public async Task<bool> TryConnectAsync()
+      protected Helpers.IFileSystem FileSystem
       {
-         try
-         { return await this.Service.ConnectAsync(); }
-         catch { return false; }
+         get { return DependencyService.Get<Helpers.IFileSystem>(); }
       }
 
    }

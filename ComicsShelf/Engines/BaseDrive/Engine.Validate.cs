@@ -7,7 +7,7 @@ namespace ComicsShelf.Engines.BaseDrive
    partial class BaseDriveEngine<T>
    {
 
-      public async Task<bool> Validate(LibraryModel library)
+      public async virtual Task<bool> Validate(LibraryModel library)
       {
          try
          {
