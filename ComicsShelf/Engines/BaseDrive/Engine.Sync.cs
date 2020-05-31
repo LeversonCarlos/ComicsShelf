@@ -8,7 +8,7 @@ namespace ComicsShelf.Engines.BaseDrive
 {
    partial class BaseDriveEngine<T>
    {
-      private const string SYNC_FILE_ID = "SyncFileID";
+      private const string SyncFileName = "ComicsShelf.library";
 
       public async Task<bool> SaveSyncData(LibraryModel library, byte[] serializedValue)
       {
@@ -17,11 +17,11 @@ namespace ComicsShelf.Engines.BaseDrive
             FileVM syncFile = null;
 
             // SYNC FILE ID PREVIOUSLY SAVED
-            var syncFileID = library.GetKeyValue(SYNC_FILE_ID);
+            var syncFileID = library.GetKeyValue(SyncFileName);
 
             // IF NO FILE WAS PREVISIOLLY CREATED, WE CREATE IT NOW ON THE PARENT FOLDER 
             if (string.IsNullOrEmpty(syncFileID))
-               syncFile = await this.Service.Upload(library.Key, SYNC_FILE_ID, serializedValue);
+               syncFile = await this.Service.Upload(library.Key, SyncFileName, serializedValue);
 
             // IF THE FILE WAS PREVISIOLLY CREATED, WE WILL OVERRIDE IT NOW
             if (!string.IsNullOrEmpty(syncFileID))
@@ -31,7 +31,7 @@ namespace ComicsShelf.Engines.BaseDrive
             if (string.IsNullOrEmpty(syncFile?.ID)) return false;
 
             // STORE THE LIBRARY FILE ID AND RETURN
-            library.SetKeyValue(SYNC_FILE_ID, syncFile.ID);
+            library.SetKeyValue(SyncFileName, syncFile.ID);
             return true;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
@@ -60,12 +60,12 @@ namespace ComicsShelf.Engines.BaseDrive
          {
 
             // LIBRARY FILE ALREADY DEFINED
-            var fileID = library.GetKeyValue(SYNC_FILE_ID);
+            var fileID = library.GetKeyValue(SyncFileName);
             if (!string.IsNullOrEmpty(fileID)) { return fileID; }
 
             // TRY TO SEARCH ON FOLDER
             var directory = new DirectoryVM { ID = library.Key };
-            var fileList = await this.Service.SearchFiles(directory, LibraryModel.SyncFile, 100);
+            var fileList = await this.Service.SearchFiles(directory, SyncFileName, 1);
 
             if (fileList?.Length == 0) { return string.Empty; }
 
