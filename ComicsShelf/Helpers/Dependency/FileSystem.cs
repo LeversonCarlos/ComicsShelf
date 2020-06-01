@@ -23,7 +23,6 @@ namespace ComicsShelf.Helpers
    {
 
       string PathSeparator { get; }
-      Task<Folder[]> GetFolders(Folder folder);
       Task<File[]> GetFiles(Folder folder);
 
       Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
