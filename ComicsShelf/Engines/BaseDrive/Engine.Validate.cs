@@ -7,15 +7,7 @@ namespace ComicsShelf.Engines.BaseDrive
    partial class BaseDriveEngine<T>
    {
 
-      public async virtual Task<bool> Validate(LibraryModel library)
-      {
-         try
-         {
-            if (!await this.TryConnectAsync()) { return false; }
-            return true;
-         }
-         catch (Exception ex) { await App.ShowMessage(ex); return false; }
-      }
+      public virtual Task<bool> Validate(LibraryModel library) => throw new NotImplementedException();
 
    }
 }
