@@ -20,15 +20,15 @@ namespace ComicsShelf.Droid
 
          Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+         global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
          Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
-         Xamarin.Forms.Forms.Init(this, savedInstanceState);
          CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
          this.AddLocalDriveConnector(savedInstanceState);
          this.AddOneDriveConnector(Resources.GetString(Resource.String.onedrive_applicationID), Resources.GetString(Resource.String.onedrive_scopeList));
          LoadApplication(new App());
       }
 
-      public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+      public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
       {
          Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
          this.SetLocalDrivePermissionsResult(requestCode, permissions, grantResults);
@@ -37,8 +37,8 @@ namespace ComicsShelf.Droid
 
       protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
       {
-         this.SetOneDriveAuthenticationResult(requestCode, resultCode, data);
          base.OnActivityResult(requestCode, resultCode, data);
+         this.SetOneDriveAuthenticationResult(requestCode, resultCode, data);
       }
 
    }
