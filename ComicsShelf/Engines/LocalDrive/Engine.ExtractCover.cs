@@ -40,7 +40,6 @@ namespace ComicsShelf.Engines.LocalDrive
                   using (var zipEntryStream = zipEntry.Open())
                   {
                      await this.FileSystem.SaveThumbnail(zipEntryStream, comicFile.CoverPath);
-                     zipEntryStream.Close();
                   }
 
                   // RELEASE DATE
