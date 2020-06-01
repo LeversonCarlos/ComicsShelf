@@ -23,8 +23,6 @@ namespace ComicsShelf.Helpers
    {
 
       string PathSeparator { get; }
-      Task<File[]> GetFiles(Folder folder);
-
       Task SaveThumbnail(System.IO.Stream imageStream, string imagePath);
       Task<System.Drawing.Size> GetPageSize(string pagePath);
       

@@ -82,7 +82,6 @@
     <Compile Include="Helpers\FileSystem\FileSystem.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.GetPageSize.cs" />
     <Compile Include="Helpers\FileSystem\FileSystem.SaveThumbnail.cs" />
-    <Compile Include="Helpers\FileSystem\FileSystem.GetFiles.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
