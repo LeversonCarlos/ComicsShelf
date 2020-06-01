@@ -23,7 +23,6 @@ namespace ComicsShelf.Helpers
    {
 
       string PathSeparator { get; }
-      Task<bool> Validate(string libraryKey);
       Task<Folder[]> GetFolders(Folder folder);
       Task<File[]> GetFiles(Folder folder);
 

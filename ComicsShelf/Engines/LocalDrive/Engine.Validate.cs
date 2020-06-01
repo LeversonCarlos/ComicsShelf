@@ -12,7 +12,8 @@ namespace ComicsShelf.Engines.LocalDrive
          try
          {
             if (!await this.Service.CheckConnectionAsync()) { return false; }
-            if (!await this.FileSystem.Validate(library.Key)) { return false; }
+            if (string.IsNullOrEmpty(library.Key)) { return false; }
+            if (!await Task.FromResult(System.IO.Directory.Exists(library.Key))) { return false; }
             return true;
          }
          catch (Exception ex) { await App.ShowMessage(ex); return false; }
