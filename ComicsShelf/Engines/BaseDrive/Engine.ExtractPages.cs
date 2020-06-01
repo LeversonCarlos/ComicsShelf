@@ -51,18 +51,18 @@ namespace ComicsShelf.Engines.BaseDrive
                .ToList();
 
             // TRY TO LOCATE PREVIOUS PAGES SETTINGS
-            var pageSettingsKey = $"{cachePath}{this.FileSystem.PathSeparator}PagesSize.json";
-            var pageSettings = new ComicPageVM[] { };
+            var pageSizesKey = $"{cachePath}{this.FileSystem.PathSeparator}PagesSize.json";
+            var pageSizes = new ComicPageVM[] { };
             try
             {
-               var pageSettingsContent = await Xamarin.Essentials.SecureStorage.GetAsync(pageSettingsKey);
-               if (!string.IsNullOrEmpty(pageSettingsContent))
-               { pageSettings = Newtonsoft.Json.JsonConvert.DeserializeObject<ComicPageVM[]>(pageSettingsContent); }
+               var pageSizesContent = await Xamarin.Essentials.SecureStorage.GetAsync(pageSizesKey);
+               if (!string.IsNullOrEmpty(pageSizesContent))
+               { pageSizes = Newtonsoft.Json.JsonConvert.DeserializeObject<ComicPageVM[]>(pageSizesContent); }
             }
-            catch (Exception pageSettingsException)
+            catch (Exception pageSizesException)
             {
-               Helpers.AppCenter.TrackEvent(pageSettingsException);
-               pageSettings = new ComicPageVM[] { };
+               Helpers.AppCenter.TrackEvent(pageSizesException);
+               pageSizes = new ComicPageVM[] { };
             }
 
             // LOOP THROUGH PAGES
@@ -71,7 +71,7 @@ namespace ComicsShelf.Engines.BaseDrive
             {
                page.Index = pageIndex++;
                page.Text = page.Text.Substring(1);
-               page.PageSize = pageSettings.Where(p => p.Index == page.Index).Select(p => p.PageSize).FirstOrDefault();
+               page.PageSize = pageSizes.Where(p => p.Index == page.Index).Select(p => p.PageSize).FirstOrDefault();
                if (page.PageSize == null)
                {
                   var pageSize = await this.FileSystem.GetPageSize(page.Path);
@@ -82,20 +82,20 @@ namespace ComicsShelf.Engines.BaseDrive
             // STORE PAGE SETTINGS FOR FUTURE USE
             try
             {
-               pageSettings = pages
+               pageSizes = pages
                   .Select(p => new ComicPageVM
                   {
                      Index = p.Index,
                      PageSize = p.PageSize
                   })
                   .ToArray();
-               var pageSettingsContent = Newtonsoft.Json.JsonConvert.SerializeObject(pageSettings);
-               await Xamarin.Essentials.SecureStorage.SetAsync(pageSettingsKey, pageSettingsContent);
+               var pageSizesContent = Newtonsoft.Json.JsonConvert.SerializeObject(pageSizes);
+               await Xamarin.Essentials.SecureStorage.SetAsync(pageSizesKey, pageSizesContent);
             }
-            catch (Exception pageSettingsException)
+            catch (Exception pageSizesException)
             {
-               Helpers.AppCenter.TrackEvent(pageSettingsException);
-               pageSettings = new ComicPageVM[] { };
+               Helpers.AppCenter.TrackEvent(pageSizesException);
+               pageSizes = new ComicPageVM[] { };
             }
 
             // RESULT
