@@ -17873,28 +17873,31 @@ namespace ComicsShelf.Droid
 			public const int onedrive_applicationID = 2131558472;
 			
 			// aapt resource value: 0x7F0D0049
-			public const int onedrive_scopeList = 2131558473;
+			public const int onedrive_redirectUri = 2131558473;
 			
 			// aapt resource value: 0x7F0D004A
-			public const int password_toggle_content_description = 2131558474;
+			public const int onedrive_scopeList = 2131558474;
 			
 			// aapt resource value: 0x7F0D004B
-			public const int path_password_eye = 2131558475;
+			public const int password_toggle_content_description = 2131558475;
 			
 			// aapt resource value: 0x7F0D004C
-			public const int path_password_eye_mask_strike_through = 2131558476;
+			public const int path_password_eye = 2131558476;
 			
 			// aapt resource value: 0x7F0D004D
-			public const int path_password_eye_mask_visible = 2131558477;
+			public const int path_password_eye_mask_strike_through = 2131558477;
 			
 			// aapt resource value: 0x7F0D004E
-			public const int path_password_strike_through = 2131558478;
+			public const int path_password_eye_mask_visible = 2131558478;
 			
 			// aapt resource value: 0x7F0D004F
-			public const int search_menu_title = 2131558479;
+			public const int path_password_strike_through = 2131558479;
 			
 			// aapt resource value: 0x7F0D0050
-			public const int status_bar_notification_info_overflow = 2131558480;
+			public const int search_menu_title = 2131558480;
+			
+			// aapt resource value: 0x7F0D0051
+			public const int status_bar_notification_info_overflow = 2131558481;
 			
 			static String()
 			{

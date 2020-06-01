@@ -12,7 +12,7 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="@string/onedrive_applicationID" android:host="auth" />
+            <data android:scheme="@string/onedrive_redirectUri" android:host="auth" />
          </intent-filter>
       </activity>
    </application>
