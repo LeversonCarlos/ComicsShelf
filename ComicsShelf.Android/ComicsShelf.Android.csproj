@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ComicsShelf.Droid</RootNamespace>
     <AssemblyName>ComicsShelf.Android</AssemblyName>
+    <Deterministic>True</Deterministic>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -18,6 +19,7 @@
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -66,7 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.910310" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
@@ -74,7 +77,6 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\ReadingView.cs" />
