@@ -12,7 +12,7 @@ namespace ComicsShelf.Engines.LocalDrive
    partial class LocalDriveEngine
    {
 
-      public async Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile)
+      public async override Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile)
       {
          try
          {
@@ -23,7 +23,7 @@ namespace ComicsShelf.Engines.LocalDrive
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
             // OPEN ZIP ARCHIVE
-            using (var zipArchiveStream = new FileStream(comicFile.FilePath, FileMode.Open, FileAccess.Read))
+            using (var zipArchiveStream = await this.Service.Download(comicFile.Key))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
                {

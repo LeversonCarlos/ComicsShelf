@@ -1,14 +1,13 @@
-﻿using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using Xamarin.CloudDrive.Connector.LocalDrive;
 
 namespace ComicsShelf.Engines.LocalDrive
 {
-   internal partial class LocalDriveEngine : IEngine
+   internal partial class LocalDriveEngine : BaseDrive.BaseDriveEngine<LocalDriveService>
    {
 
-      private Helpers.IFileSystem FileSystem
-      {
-         get { return DependencyService.Get<Helpers.IFileSystem>(); }
-      }
+      public LocalDriveEngine() : base(Store.LibraryType.LocalDrive)
+      { }
 
    }
 }
