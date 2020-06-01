@@ -38,7 +38,7 @@ namespace ComicsShelf.Engines.BaseDrive
       {
          try
          { return await this.Service.ConnectAsync(); }
-         catch { return false; }
+         catch (Exception ex) { await App.ShowMessage(ex); return false; }
       }
 
    }
