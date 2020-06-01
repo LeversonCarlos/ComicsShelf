@@ -49,7 +49,18 @@ namespace ComicsShelf.Engines.BaseDrive
             // LOAD CONTENT
             var serializedValue = await this.Service.Download(fileID);
 
-            return serializedValue;
+            // CONVERT TO BYTE ARRAY
+            var byteArray = new byte[16 * 1024];
+            using (var mStream = new System.IO.MemoryStream())
+            {
+               int bit;
+               while ((bit = serializedValue.Read(byteArray, 0, byteArray.Length)) > 0)
+               {
+                  mStream.Write(byteArray, 0, bit);
+               }
+               return mStream.ToArray();
+            }
+
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
       }

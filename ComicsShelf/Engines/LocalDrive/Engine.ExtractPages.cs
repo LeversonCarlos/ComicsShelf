@@ -18,70 +18,98 @@ namespace ComicsShelf.Engines.LocalDrive
          {
 
             // INITIALIZE
-            var pages = new List<ComicPageVM>();
+            short pageIndex = 0;
             if (!File.Exists(comicFile.FilePath)) { return null; }
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
             // OPEN ZIP ARCHIVE
-            using (var zipArchiveStream = await this.Service.Download(comicFile.Key))
+            try
             {
-               using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
+               if (Directory.GetFiles(comicFile.CachePath).Count() == 0)
                {
 
-                  // LOCATE PAGE ENTRIES
-                  short pageIndex = 0;
-                  var zipEntries = zipArchive.Entries
-                     .Where(x =>
-                        x.Name.ToLower().EndsWith(".jpg") ||
-                        x.Name.ToLower().EndsWith(".jpeg") ||
-                        x.Name.ToLower().EndsWith(".png"))
-                     .OrderBy(x => x.Name)
-                     .ToList();
-                  if (zipEntries == null) { return null; }
-
-                  // LOOP THROUGH ZIP ENTRIES
-                  foreach (var zipEntry in zipEntries)
+                  var downloadStart = DateTime.Now;
+                  using (var zipArchiveStream = await this.Service.Download(comicFile.Key))
                   {
-
-                     // PAGE DATA
-                     var page = new ComicPageVM
+                     using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
                      {
-                        Index = pageIndex,
-                        Text = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]),
-                        IsVisible = false
-                     };
-                     page.Path = $"{comicFile.CachePath}{this.FileSystem.PathSeparator}P{page.Text}.jpg";
-                     pages.Add(page);
-                     pageIndex++;
 
-                     // EXTRACT PAGE FILE 
-                     if (!File.Exists(page.Path))
-                     {
-                        using (var zipEntryStream = zipEntry.Open())
-                        {
-                           using (var pageStream = new FileStream(page.Path, FileMode.CreateNew, FileAccess.Write))
-                           {
-                              await zipEntryStream.CopyToAsync(pageStream);
-                              await pageStream.FlushAsync();
-                              pageStream.Close();
-                           }
-                           zipEntryStream.Close();
-                        }
+                        // LOCATE PAGE ENTRIES
+                        var zipEntries = zipArchive.Entries
+                           .Where(x =>
+                              x.Name.ToLower().EndsWith(".jpg") ||
+                              x.Name.ToLower().EndsWith(".jpeg") ||
+                              x.Name.ToLower().EndsWith(".png"))
+                           .OrderBy(x => x.Name)
+                           .ToList();
+                        if (zipEntries == null) { return null; }
+
+                        // RETRIEVE IMAGE PAGES CONTENT
+                        var tasks = new List<Task>();
+                        pageIndex = 0;
+                        foreach (var zipEntry in zipEntries)
+                        { tasks.Add(this.ExtractPage(zipEntry, comicFile.CachePath, pageIndex++)); }
+                        await Task.WhenAll(tasks.ToArray());
+
                      }
-
-                     // PAGE SIZE
-                     var pageSize = await this.FileSystem.GetPageSize(page.Path);
-                     page.PageSize = new ComicPageSize(pageSize.Width, pageSize.Height);
-
                   }
 
+                  var downloadFinish = DateTime.Now;
+                  Helpers.AppCenter.TrackEvent($"Comic.LocalDrive.DownloadingPages", $"ElapsedSeconds:{(downloadFinish - downloadStart).TotalSeconds}");
+
                }
-               zipArchiveStream.Close();
+            }
+            catch (Exception exDownload) { Helpers.AppCenter.TrackEvent(exDownload); throw; }
+            if (Directory.GetFiles(comicFile.CachePath).Count() == 0) { return null; }
+
+            // LOCATE PAGE IMAGES FROM PATH
+            var pages = Directory.GetFiles(comicFile.CachePath)
+               .Where(x =>
+                  x.ToLower().EndsWith(".jpg") ||
+                  x.ToLower().EndsWith(".jpeg") ||
+                  x.ToLower().EndsWith(".png"))
+               .OrderBy(x => x)
+               .Select(pagePath => new ComicPageVM
+               {
+                  Text = Path.GetFileNameWithoutExtension(pagePath),
+                  Path = pagePath,
+                  IsVisible = false
+               })
+               .ToList();
+
+            // LOOP THROUGH PAGES
+            pageIndex = 0;
+            foreach (var page in pages)
+            {
+               page.Index = pageIndex++;
+               page.Text = page.Text.Substring(1);
+               var pageSize = await this.FileSystem.GetPageSize(page.Path);
+               page.PageSize = new ComicPageSize(pageSize.Width, pageSize.Height);
             }
 
             return pages;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
+      }
+
+      private async Task ExtractPage(ZipArchiveEntry entry, string cachePath, short pageIndex)
+      {
+         try
+         {
+
+            // PAGE DATA
+            var pagetText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
+            var pagePath = $"{cachePath}{this.FileSystem.PathSeparator}P{pagetText}.jpg";
+            if (File.Exists(pagePath)) { return; }
+
+            // EXTRACT PAGE FILE             
+            using (var zipEntryStream = entry.Open())
+            {
+               await this.ExtractPage(zipEntryStream, pagePath);
+            }
+
+         }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
    }

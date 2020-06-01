@@ -53,13 +53,11 @@ namespace ComicsShelf.Engines.OneDrive
                         .ToList();
                      if (entries == null) { return null; }
 
-                     // RETRIEVE REMOTE IMAGE CONTENT
+                     // RETRIEVE IMAGE PAGES CONTENT
                      var tasks = new List<Task>();
                      pageIndex = 0;
                      foreach (var entry in entryList)
-                     {
-                        tasks.Add(this.ExtractPage(zipStream, entry, comicFile.CachePath, pageIndex++));
-                     }
+                     { tasks.Add(this.ExtractPage(zipStream, entry, comicFile.CachePath, pageIndex++)); }
                      await Task.WhenAll(tasks.ToArray());
 
                   }
@@ -107,29 +105,21 @@ namespace ComicsShelf.Engines.OneDrive
          try
          {
 
+            // PAGE DATA
             var pagetText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
             var pagePath = $"{cachePath}{this.FileSystem.PathSeparator}P{pagetText}.jpg";
+            if (File.Exists(pagePath)) { return; }
 
-            if (!File.Exists(pagePath))
+            // EXTRACT PAGE FILE 
+            var pageByteArray = await zipStream.ExtractAsync(entry);
+            if (pageByteArray != null && pageByteArray.Length != 0)
             {
 
-               var pageByteArray = await zipStream.ExtractAsync(entry);
-               if (pageByteArray != null && pageByteArray.Length != 0)
+               using (var pageMemoryStream = new MemoryStream(pageByteArray))
                {
-
-                  using (var pageMemoryStream = new MemoryStream(pageByteArray))
-                  {
-                     await pageMemoryStream.FlushAsync();
-                     pageMemoryStream.Position = 0;
-                     using (var pageStream = new FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
-                     {
-                        await pageMemoryStream.CopyToAsync(pageStream);
-                        await pageStream.FlushAsync();
-                        pageStream.Close();
-                     }
-                     pageMemoryStream.Close();
-                  }
-
+                  await pageMemoryStream.FlushAsync();
+                  pageMemoryStream.Position = 0;
+                  await this.ExtractPage(pageMemoryStream, pagePath);
                }
 
             }
