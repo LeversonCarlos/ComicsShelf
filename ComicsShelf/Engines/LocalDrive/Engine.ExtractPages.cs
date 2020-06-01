@@ -18,7 +18,6 @@ namespace ComicsShelf.Engines.LocalDrive
          {
 
             // INITIALIZE
-            short pageIndex = 0;
             if (!File.Exists(comicFile.FilePath)) { return null; }
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
@@ -46,7 +45,7 @@ namespace ComicsShelf.Engines.LocalDrive
 
                         // RETRIEVE IMAGE PAGES CONTENT
                         var tasks = new List<Task>();
-                        pageIndex = 0;
+                        short pageIndex = 0;
                         foreach (var zipEntry in zipEntries)
                         { tasks.Add(this.ExtractPage(zipEntry, comicFile.CachePath, pageIndex++)); }
                         await Task.WhenAll(tasks.ToArray());
@@ -63,30 +62,7 @@ namespace ComicsShelf.Engines.LocalDrive
             if (Directory.GetFiles(comicFile.CachePath).Count() == 0) { return null; }
 
             // LOCATE PAGE IMAGES FROM PATH
-            var pages = Directory.GetFiles(comicFile.CachePath)
-               .Where(x =>
-                  x.ToLower().EndsWith(".jpg") ||
-                  x.ToLower().EndsWith(".jpeg") ||
-                  x.ToLower().EndsWith(".png"))
-               .OrderBy(x => x)
-               .Select(pagePath => new ComicPageVM
-               {
-                  Text = Path.GetFileNameWithoutExtension(pagePath),
-                  Path = pagePath,
-                  IsVisible = false
-               })
-               .ToList();
-
-            // LOOP THROUGH PAGES
-            pageIndex = 0;
-            foreach (var page in pages)
-            {
-               page.Index = pageIndex++;
-               page.Text = page.Text.Substring(1);
-               var pageSize = await this.FileSystem.GetPageSize(page.Path);
-               page.PageSize = new ComicPageSize(pageSize.Width, pageSize.Height);
-            }
-
+            var pages = await this.GetExtractedPagesData(comicFile.CachePath);
             return pages;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
