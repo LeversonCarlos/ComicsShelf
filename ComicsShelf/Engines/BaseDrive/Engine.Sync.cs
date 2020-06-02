@@ -34,7 +34,7 @@ namespace ComicsShelf.Engines.BaseDrive
             library.SetKeyValue(SyncFileName, syncFile.ID);
             return true;
          }
-         catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return false; }
+         catch (Exception ex) { Helpers.AppCenter.TrackEvent(new Exception("Write on storage failed.", ex)); return true; }
       }
 
       public async Task<byte[]> LoadSyncData(LibraryModel library)
