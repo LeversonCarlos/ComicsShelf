@@ -57,7 +57,7 @@ namespace ComicsShelf.Engines.BaseDrive
             {
                var pageSizesContent = await Xamarin.Essentials.SecureStorage.GetAsync(pageSizesKey);
                if (!string.IsNullOrEmpty(pageSizesContent))
-               { pageSizes = Newtonsoft.Json.JsonConvert.DeserializeObject<ComicPageVM[]>(pageSizesContent); }
+               { pageSizes = await Helpers.Json.Deserialize<ComicPageVM[]>(pageSizesContent); }
             }
             catch (Exception pageSizesException)
             {
@@ -82,14 +82,14 @@ namespace ComicsShelf.Engines.BaseDrive
             // STORE PAGE SETTINGS FOR FUTURE USE
             try
             {
-               pageSizes = pages
-                  .Select(p => new ComicPageVM
+               var pageSizesObject = pages
+                  .Select(p => new 
                   {
-                     Index = p.Index,
-                     PageSize = p.PageSize
+                     p.Index,
+                     p.PageSize
                   })
                   .ToArray();
-               var pageSizesContent = Newtonsoft.Json.JsonConvert.SerializeObject(pageSizes);
+               var pageSizesContent = await Helpers.Json.Serialize(pageSizesObject);
                await Xamarin.Essentials.SecureStorage.SetAsync(pageSizesKey, pageSizesContent);
             }
             catch (Exception pageSizesException)

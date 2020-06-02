@@ -10,22 +10,22 @@ namespace ComicsShelf.Helpers
    {
       static SemaphoreSlim fileStreamSemaphore = new SemaphoreSlim(1, 1);
 
-      public static T Deserialize<T>(byte[] value) where T : class
+      public static async Task<T> Deserialize<T>(byte[] value) where T : class
       {
          try
          {
             var serializedContent = System.Text.Encoding.Unicode.GetString(value);
-            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(serializedContent);
+            var result = await Helpers.Json.Deserialize<T>(serializedContent);
             return result;
          }
          catch (Exception) { throw; }
       }
 
-      public static T Deserialize<T>(string value) where T : class
+      public static async Task<T> Deserialize<T>(string value) where T : class
       {
          try
          {
-            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(value);
+            var result = await Helpers.Json.Deserialize<T>(value);
             return result;
          }
          catch (Exception) { throw; }
@@ -54,7 +54,7 @@ namespace ComicsShelf.Helpers
             }
             if (string.IsNullOrEmpty(serializedContent)) { return null; }
 
-            var value = Deserialize<T>(serializedContent);
+            var value = await Deserialize<T>(serializedContent);
             return value;
 
          }
@@ -62,13 +62,13 @@ namespace ComicsShelf.Helpers
          finally { fileStreamSemaphore.Release(); }
       }
 
-      public static byte[] Serialize<T>(T value)
+      public static async Task<byte[]> Serialize<T>(T value)
       {
          try
          {
             if (value == null) { return null; }
 
-            var serializedContent = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            var serializedContent = await Helpers.Json.Serialize(value);
             if (string.IsNullOrEmpty(serializedContent)) { return null; }
 
             byte[] encodedContent = System.Text.Encoding.Unicode.GetBytes(serializedContent);
@@ -84,7 +84,7 @@ namespace ComicsShelf.Helpers
          try
          {
             await fileStreamSemaphore.WaitAsync();
-            var encodedContent = Serialize(value);
+            var encodedContent = await Serialize(value);
             if (encodedContent == null || encodedContent.Length == 0) { return false; }
 
             using (var fileStream = new System.IO.FileStream(path,

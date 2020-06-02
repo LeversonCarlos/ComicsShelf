@@ -21,7 +21,7 @@ namespace ComicsShelf.Services
             var byteArray = await engine.LoadSyncData(this.Library);
             if (byteArray == null) { return true; }
 
-            var syncData = Helpers.FileStream.Deserialize<List<LibrarySyncVM>>(byteArray);
+            var syncData = await Helpers.FileStream.Deserialize<List<LibrarySyncVM>>(byteArray);
             if (syncData == null) { return true; }
             syncData = syncData.Where(x => x.Readed || x.ReadingPage > 0 || x.Rating > 0).ToList();
 
@@ -57,7 +57,7 @@ namespace ComicsShelf.Services
                .Select(comicFile => LibrarySyncVM.FromComicFile(comicFile.ComicFile))
                .ToList();
 
-            var byteArray = Helpers.FileStream.Serialize(syncData);
+            var byteArray = await Helpers.FileStream.Serialize(syncData);
             if (byteArray == null) { return true; }
 
             var engine = Engines.Engine.Get(this.Library.Type);
