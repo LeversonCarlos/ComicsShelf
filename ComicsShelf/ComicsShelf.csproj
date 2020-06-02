@@ -29,6 +29,9 @@
     <PackageReference Include="HttpZipStream" Version="0.4.3" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.6.4" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.6.4" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.5-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.5-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.5-alpha" />
   </ItemGroup>
 
    <ItemGroup>
@@ -81,12 +84,6 @@
 
    <ItemGroup>
      <Folder Include="ComicFiles\" />
-   </ItemGroup>
-
-   <ItemGroup>
-     <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.Common\CloudDrive.Connector.Common.csproj" />
-     <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.LocalDrive\CloudDrive.Connector.LocalDrive.csproj" />
-     <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.OneDrive\CloudDrive.Connector.OneDrive.csproj" />
    </ItemGroup>
   
 </Project>

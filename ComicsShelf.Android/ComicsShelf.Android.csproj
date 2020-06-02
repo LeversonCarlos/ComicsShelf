@@ -77,6 +77,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.5-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.5-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.5-alpha" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\ReadingView.cs" />
@@ -118,18 +121,6 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.Common\CloudDrive.Connector.Common.csproj">
-      <Project>{eede2150-802c-4a51-a00b-106f02147581}</Project>
-      <Name>CloudDrive.Connector.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.LocalDrive\CloudDrive.Connector.LocalDrive.csproj">
-      <Project>{61059e40-85f6-4de9-99f0-380eec88be2d}</Project>
-      <Name>CloudDrive.Connector.LocalDrive</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.OneDrive.Connector\sources\CloudDrive.Connector.OneDrive\CloudDrive.Connector.OneDrive.csproj">
-      <Project>{825d2960-4820-4ffb-9b69-0e7591ff6210}</Project>
-      <Name>CloudDrive.Connector.OneDrive</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj">
       <Project>{63289AC1-1B67-44DF-9AF2-59DD2D24981D}</Project>
       <Name>ComicsShelf</Name>
