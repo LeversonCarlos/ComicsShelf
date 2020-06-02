@@ -21,7 +21,6 @@ namespace ComicsShelf.Droid
          Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
          global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-         Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
          CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
          this.AddLocalDriveConnector(savedInstanceState);
          this.AddOneDriveConnector(Resources.GetString(Resource.String.onedrive_applicationID), Resources.GetString(Resource.String.onedrive_scopeList));

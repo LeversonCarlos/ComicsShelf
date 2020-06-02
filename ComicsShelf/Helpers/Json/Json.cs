@@ -42,7 +42,7 @@ namespace ComicsShelf.Helpers
                return result;
             }
          }
-         catch (Exception ex) { throw; }
+         catch (Exception) { throw; }
       }
 
    }
