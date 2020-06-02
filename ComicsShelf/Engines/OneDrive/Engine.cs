@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Xamarin.CloudDrive.Connector.OneDrive;
+﻿using Xamarin.CloudDrive.Connector.OneDrive;
 
 namespace ComicsShelf.Engines.OneDrive
 {
@@ -8,6 +7,8 @@ namespace ComicsShelf.Engines.OneDrive
 
       public OneDriveEngine() : base(Store.LibraryType.OneDrive)
       { }
+
+      public override string EscapeFileID(string fileID) => fileID;
 
    }
 }

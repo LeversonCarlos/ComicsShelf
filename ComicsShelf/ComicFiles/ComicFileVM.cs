@@ -14,8 +14,9 @@ namespace ComicsShelf.ComicFiles
       {
          this.ComicFile = comicFile;
          this.ComicFile.Available = true;
-         this.ComicFile.CoverPath = $"{Helpers.Constants.CoversCachePath}{comicFile.Key}.jpg";
-         this.ComicFile.CachePath = $"{Helpers.Constants.FilesCachePath}{comicFile.Key}";
+         var engine = Engines.BaseDrive.BaseDriveEngine.GetEngine(comicFile.LibraryKey);
+         this.ComicFile.CoverPath = $"{Helpers.Constants.CoversCachePath}{engine.EscapeFileID(comicFile.Key)}.jpg";
+         this.ComicFile.CachePath = $"{Helpers.Constants.FilesCachePath}{engine.EscapeFileID(comicFile.Key)}";
          this.Set(comicFile);
          this._CoverPath = Helpers.Constants.DefaultCover;
          this._CachePath = string.Empty;

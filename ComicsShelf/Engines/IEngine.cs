@@ -20,6 +20,7 @@ namespace ComicsShelf.Engines
       Task<byte[]> LoadSyncData(LibraryModel library);
       Task<bool> SaveSyncData(LibraryModel library, byte[] serializedValue);
 
+      string EscapeFileID(string fileID);
    }
 
    internal class Engine

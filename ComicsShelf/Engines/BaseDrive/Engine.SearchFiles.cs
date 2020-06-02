@@ -36,7 +36,7 @@ namespace ComicsShelf.Engines.BaseDrive
                   FolderPath = file.Path.Replace("/ /", "/"),
                   ReleaseDate = (!file.CreatedDateTime.HasValue ? DateTime.MinValue : file.CreatedDateTime.Value.ToLocalTime()),
                   KeyValues = file.KeyValues,
-                  CachePath = $"{Helpers.Constants.FilesCachePath}{file.ID}"
+                  CachePath = $"{Helpers.Constants.FilesCachePath}{this.EscapeFileID(file.ID)}"
                })
                .ToList();
 

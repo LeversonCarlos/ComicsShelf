@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using ComicsShelf.Store;
+using System;
 using Xamarin.CloudDrive.Connector.Common;
 using Xamarin.Forms;
 
@@ -11,8 +12,8 @@ namespace ComicsShelf.Engines.BaseDrive
       readonly Store.LibraryType LibraryType;
 
       public BaseDriveEngine(Store.LibraryType libraryType)
-      { 
-         this.LibraryType = libraryType; 
+      {
+         this.LibraryType = libraryType;
       }
 
       protected Helpers.IFileSystem FileSystem
@@ -20,5 +21,25 @@ namespace ComicsShelf.Engines.BaseDrive
          get { return DependencyService.Get<Helpers.IFileSystem>(); }
       }
 
+      public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
+
    }
+
+   internal class BaseDriveEngine
+   {
+      public static IEngine GetEngine(string libraryKey)
+      {
+         var libraryStore = DependencyService.Get<Store.ILibraryStore>();
+         var library = libraryStore.GetLibrary(libraryKey);
+         return GetEngine(library.Type);
+      }
+      public static IEngine GetEngine(LibraryType libraryType)
+      {
+         if (libraryType == LibraryType.OneDrive)
+         { return DependencyService.Get<Engines.OneDrive.OneDriveEngine>(); }
+         else
+         { return DependencyService.Get<Engines.LocalDrive.LocalDriveEngine>(); }
+      }
+   }
+
 }

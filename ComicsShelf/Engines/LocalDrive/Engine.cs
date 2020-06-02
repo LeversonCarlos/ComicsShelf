@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Xamarin.CloudDrive.Connector.LocalDrive;
+﻿using Xamarin.CloudDrive.Connector.LocalDrive;
 
 namespace ComicsShelf.Engines.LocalDrive
 {
@@ -8,6 +7,18 @@ namespace ComicsShelf.Engines.LocalDrive
 
       public LocalDriveEngine() : base(Store.LibraryType.LocalDrive)
       { }
+
+      public override string EscapeFileID(string fileID) => fileID
+         .Replace("#", "")
+            .Replace(".", "")
+            .Replace("[", "")
+            .Replace("]", "")
+            .Replace("(", "")
+            .Replace(")", "")
+            .Replace(" ", "")
+            .Replace("/", "_")
+            .Replace("___", "_")
+            .Replace("__", "_");
 
    }
 }
