@@ -101,7 +101,7 @@ namespace ComicsShelf.Engines.BaseDrive
             // RESULT
             return pages;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { throw new Exception($"Error extracting pages data on directory [{cachePath}].", ex); }
       }
 
    }

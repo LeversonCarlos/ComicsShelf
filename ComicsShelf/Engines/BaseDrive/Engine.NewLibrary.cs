@@ -1,6 +1,7 @@
 ﻿using ComicsShelf.Helpers.FolderDialog;
 using ComicsShelf.Store;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Engines.BaseDrive
@@ -36,9 +37,16 @@ namespace ComicsShelf.Engines.BaseDrive
 
       private async Task<bool> NewLibrary_TryConnection()
       {
+         var logs = new List<string>();
          try
-         { return await this.Service.ConnectAsync(); }
-         catch (Exception ex) { await App.ShowMessage(ex); return false; }
+         {
+            logs.Add($"LibraryType:{this.LibraryType}");
+            var result = await this.Service.ConnectAsync();
+            logs.Add($"Result:{result}");
+            return result;
+         }
+         catch (Exception ex) { logs.Add($"Exception:{ex.Message}"); await App.ShowMessage(ex); return false; }
+         finally { Helpers.AppCenter.TrackEvent("Try to connect with cloud service", logs.ToArray()); }
       }
 
    }
