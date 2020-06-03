@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.Store;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
@@ -41,6 +42,7 @@ namespace ComicsShelf.Engines.BaseDrive
       {
          try
          {
+            byte[] byteArray = null;
 
             // LIBRARY FILE ALREADY DEFINED
             var fileID = await this.LoadDataAsync_GetFileID(library);
@@ -48,19 +50,18 @@ namespace ComicsShelf.Engines.BaseDrive
 
             // LOAD CONTENT
             var serializedValue = await this.Service.Download(fileID);
+            if (serializedValue == null) { return null; }
 
             // CONVERT TO BYTE ARRAY
-            var byteArray = new byte[16 * 1024];
-            using (var mStream = new System.IO.MemoryStream())
+            using (var memoryStream = new System.IO.MemoryStream())
             {
-               int bit;
-               while ((bit = serializedValue.Read(byteArray, 0, byteArray.Length)) > 0)
-               {
-                  mStream.Write(byteArray, 0, bit);
-               }
-               return mStream.ToArray();
+               await serializedValue.CopyToAsync(memoryStream);
+               await memoryStream.FlushAsync();
+               memoryStream.Position = 0;
+               byteArray = memoryStream.ToArray();
             }
 
+            return byteArray;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
       }
