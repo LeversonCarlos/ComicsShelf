@@ -42,7 +42,7 @@ namespace ComicsShelf.Helpers
                return result;
             }
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { throw new Exception($"Error deserializing the following content: {Environment.NewLine}{value}", ex); }
       }
 
    }
