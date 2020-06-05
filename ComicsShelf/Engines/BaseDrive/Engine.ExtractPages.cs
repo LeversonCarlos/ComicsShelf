@@ -65,25 +65,35 @@ namespace ComicsShelf.Engines.BaseDrive
                pageSizes = new ComicPageVM[] { };
             }
 
+            var getPageSize = new Func<ComicPageVM, Task<ComicPageSize>>(async page =>
+            {
+               try
+               {
+                  var pageSize = pageSizes.Where(p => p.Index == page.Index).Select(p => p.PageSize).FirstOrDefault();
+                  if (pageSize == null)
+                  {
+                     var size = await this.FileSystem.GetPageSize(page.Path);
+                     pageSize = new ComicPageSize(size.Width, size.Height);
+                  }
+                  return pageSize;
+               }
+               catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
+            });
+
             // LOOP THROUGH PAGES
             short pageIndex = 0;
             foreach (var page in pages)
             {
                page.Index = pageIndex++;
                page.Text = page.Text.Substring(1);
-               page.PageSize = pageSizes.Where(p => p.Index == page.Index).Select(p => p.PageSize).FirstOrDefault();
-               if (page.PageSize == null)
-               {
-                  var pageSize = await this.FileSystem.GetPageSize(page.Path);
-                  page.PageSize = new ComicPageSize(pageSize.Width, pageSize.Height);
-               }
+               page.PageSize = await getPageSize(page);
             }
 
             // STORE PAGE SETTINGS FOR FUTURE USE
             try
             {
                var pageSizesObject = pages
-                  .Select(p => new 
+                  .Select(p => new
                   {
                      p.Index,
                      p.PageSize
