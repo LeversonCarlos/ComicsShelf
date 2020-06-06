@@ -29,16 +29,24 @@ namespace ComicsShelf.Engines.BaseDrive
    {
       public static IEngine GetEngine(string libraryKey)
       {
-         var libraryStore = DependencyService.Get<Store.ILibraryStore>();
-         var library = libraryStore.GetLibrary(libraryKey);
-         return GetEngine(library.Type);
+         try
+         {
+            var libraryStore = DependencyService.Get<Store.ILibraryStore>();
+            var library = libraryStore.GetLibrary(libraryKey);
+            return GetEngine(library.Type);
+         }
+         catch (Exception) { throw; }
       }
       public static IEngine GetEngine(LibraryType libraryType)
       {
-         if (libraryType == LibraryType.OneDrive)
-         { return DependencyService.Get<Engines.OneDrive.OneDriveEngine>(); }
-         else
-         { return DependencyService.Get<Engines.LocalDrive.LocalDriveEngine>(); }
+         try
+         {
+            if (libraryType == LibraryType.OneDrive)
+            { return DependencyService.Get<Engines.OneDrive.OneDriveEngine>(); }
+            else
+            { return DependencyService.Get<Engines.LocalDrive.LocalDriveEngine>(); }
+         }
+         catch (Exception) { throw; }
       }
    }
 
