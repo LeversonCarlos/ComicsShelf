@@ -4,6 +4,7 @@
    {
       public const string PageSizeChanged = "PageSizeChanged";
 
+      public ComicPageSize() { }
       public ComicPageSize(double width, double height)
       {
          this.Width = width;

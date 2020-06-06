@@ -11,7 +11,7 @@ namespace ComicsShelf.Engines.LocalDrive
    partial class LocalDriveEngine
    {
 
-      public async Task<bool> ExtractCover(LibraryModel library, ComicFile comicFile)
+      public async override Task<bool> ExtractCover(LibraryModel library, ComicFile comicFile)
       {
          try
          {
@@ -20,7 +20,7 @@ namespace ComicsShelf.Engines.LocalDrive
             if (!File.Exists(comicFile.FilePath)) { return false; }
 
             // OPEN STREAM
-            using (var zipArchiveStream = new FileStream(comicFile.FilePath, FileMode.Open, FileAccess.Read))
+            using (var zipArchiveStream = await this.Service.Download(comicFile.Key))
             {
                using (var zipArchive = new ZipArchive(zipArchiveStream, ZipArchiveMode.Read))
                {
@@ -40,7 +40,6 @@ namespace ComicsShelf.Engines.LocalDrive
                   using (var zipEntryStream = zipEntry.Open())
                   {
                      await this.FileSystem.SaveThumbnail(zipEntryStream, comicFile.CoverPath);
-                     zipEntryStream.Close();
                   }
 
                   // RELEASE DATE

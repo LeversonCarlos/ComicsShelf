@@ -6,20 +6,18 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.OneDrive.Files;
 
 namespace ComicsShelf.Engines.OneDrive
 {
    partial class OneDriveEngine
    {
 
-      public async Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile)
+      public async override Task<List<ComicPageVM>> ExtractPages(LibraryModel library, ComicFile comicFile)
       {
          try
          {
 
             // INITIALIZE
-            short pageIndex = 0;
             if (!Directory.Exists(comicFile.CachePath)) { Directory.CreateDirectory(comicFile.CachePath); }
 
             // DOWNLOAD COMIC FILE FROM REMOTE SERVER IF LOCAL CACHE DOESNT EXIST YET
@@ -28,7 +26,10 @@ namespace ComicsShelf.Engines.OneDrive
                if (Directory.GetFiles(comicFile.CachePath).Count() == 0)
                {
                   if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet) { return null; }
-                  var downloadUrl = await this.Connector.GetDownloadUrlAsync(new FileData { id = comicFile.Key });
+
+                  // REFRESH FILE DETAILS
+                  var fileVM = await this.Service.GetDetails(comicFile.Key);
+                  if (!fileVM.KeyValues.TryGetValue("downloadUrl", out string downloadUrl)) { return null; }
                   if (string.IsNullOrEmpty(downloadUrl)) { return null; }
 
                   // OPEN REMOTE STREAM
@@ -37,13 +38,8 @@ namespace ComicsShelf.Engines.OneDrive
                   {
 
                      // STREAM SIZE
-                     var streamSizeValue = comicFile.GetKeyValue("StreamSize");
-                     if (!string.IsNullOrEmpty(streamSizeValue))
-                     {
-                        long streamSize;
-                        if (long.TryParse(streamSizeValue, out streamSize))
-                        { zipStream.SetContentLength(streamSize); }
-                     }
+                     if (fileVM.SizeInBytes.HasValue)
+                        zipStream.SetContentLength(fileVM.SizeInBytes.Value);
 
                      // FIRST ENTRY
                      var entryList = await zipStream.GetEntriesAsync();
@@ -56,13 +52,11 @@ namespace ComicsShelf.Engines.OneDrive
                         .ToList();
                      if (entries == null) { return null; }
 
-                     // RETRIEVE REMOTE IMAGE CONTENT
+                     // RETRIEVE IMAGE PAGES CONTENT
                      var tasks = new List<Task>();
-                     pageIndex = 0;
+                     short pageIndex = 0;
                      foreach (var entry in entryList)
-                     {
-                        tasks.Add(this.ExtractPage(zipStream, entry, comicFile.CachePath, pageIndex++));
-                     }
+                     { tasks.Add(this.ExtractPage(zipStream, entry, comicFile.CachePath, pageIndex++)); }
                      await Task.WhenAll(tasks.ToArray());
 
                   }
@@ -75,30 +69,7 @@ namespace ComicsShelf.Engines.OneDrive
             if (Directory.GetFiles(comicFile.CachePath).Count() == 0) { return null; }
 
             // LOCATE PAGE IMAGES FROM PATH
-            var pages = Directory.GetFiles(comicFile.CachePath)
-               .Where(x =>
-                  x.ToLower().EndsWith(".jpg") ||
-                  x.ToLower().EndsWith(".jpeg") ||
-                  x.ToLower().EndsWith(".png"))
-               .OrderBy(x => x)
-               .Select(pagePath => new ComicPageVM
-               {
-                  Text = Path.GetFileNameWithoutExtension(pagePath),
-                  Path = pagePath,
-                  IsVisible = false
-               })
-               .ToList();
-
-            // LOOP THROUGH PAGES
-            pageIndex = 0;
-            foreach (var page in pages)
-            {
-               page.Index = pageIndex++;
-               page.Text = page.Text.Substring(1);
-               var pageSize = await this.FileSystem.GetPageSize(page.Path);
-               page.PageSize = new ComicPageSize(pageSize.Width, pageSize.Height);
-            }
-
+            var pages = await this.GetExtractedPagesData(comicFile.CachePath);
             return pages;
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); return null; }
@@ -110,29 +81,21 @@ namespace ComicsShelf.Engines.OneDrive
          try
          {
 
+            // PAGE DATA
             var pagetText = pageIndex.ToString().PadLeft(3, "0".ToCharArray()[0]);
             var pagePath = $"{cachePath}{this.FileSystem.PathSeparator}P{pagetText}.jpg";
+            if (File.Exists(pagePath)) { return; }
 
-            if (!File.Exists(pagePath))
+            // EXTRACT PAGE FILE 
+            var pageByteArray = await zipStream.ExtractAsync(entry);
+            if (pageByteArray != null && pageByteArray.Length != 0)
             {
 
-               var pageByteArray = await zipStream.ExtractAsync(entry);
-               if (pageByteArray != null && pageByteArray.Length != 0)
+               using (var pageMemoryStream = new MemoryStream(pageByteArray))
                {
-
-                  using (var pageMemoryStream = new MemoryStream(pageByteArray))
-                  {
-                     await pageMemoryStream.FlushAsync();
-                     pageMemoryStream.Position = 0;
-                     using (var pageStream = new FileStream(pagePath, FileMode.CreateNew, FileAccess.Write))
-                     {
-                        await pageMemoryStream.CopyToAsync(pageStream);
-                        await pageStream.FlushAsync();
-                        pageStream.Close();
-                     }
-                     pageMemoryStream.Close();
-                  }
-
+                  await pageMemoryStream.FlushAsync();
+                  pageMemoryStream.Position = 0;
+                  await this.ExtractPage(pageMemoryStream, pagePath);
                }
 
             }

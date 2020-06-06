@@ -8,30 +8,30 @@ namespace ComicsShelf.Helpers.FolderDialog
    internal class FolderDialogVM : BaseVM
    {
 
-      private readonly TaskCompletionSource<Folder> tcs;
+      private readonly TaskCompletionSource<SelectorItem> tcs;
       public FolderDialogVM()
       {
          this.Title = R.Strings.FOLDER_DIALOG_TITLE;
-         this.Data = new ObservableList<Folder>();
+         this.Data = new ObservableList<SelectorItem>();
          this.ConfirmCommand = new Command(async () => await this.Confirm());
          this.CancelCommand = new Command(async () => await this.Cancel());
          this.ItemSelectCommand = new Command(async (item) => await this.ItemSelect(item));
-         this.tcs = new TaskCompletionSource<Folder>();
+         this.tcs = new TaskCompletionSource<SelectorItem>();
       }
 
-      public ObservableList<Folder> Data { get; private set; }
-      public Folder SelectedItem { get; set; }
+      public ObservableList<SelectorItem> Data { get; private set; }
+      public SelectorItem SelectedItem { get; set; }
 
-      Folder _CurrentItem;
-      public Folder CurrentItem
+      SelectorItem _CurrentItem;
+      public SelectorItem CurrentItem
       {
          get { return this._CurrentItem; }
          set { this.SetProperty(ref this._CurrentItem, value); }
       }
 
-      public EventHandler<Folder> OnItemSelected;
+      public EventHandler<SelectorItem> OnItemSelected;
       public Command ItemSelectCommand { get; set; }
-      async Task ItemSelect(object item)
+      internal async Task ItemSelect(object item)
       {
          this.OnItemSelected?.Invoke(this, this.SelectedItem);
          await Task.CompletedTask;
@@ -51,7 +51,7 @@ namespace ComicsShelf.Helpers.FolderDialog
          tcs.SetResult(null);
       }
 
-      public async Task<Folder> OpenPage()
+      public async Task<SelectorItem> OpenPage()
       {
          var view = new FolderDialogPage { BindingContext = this };
          await App.Navigation().PushModalAsync(view, true);

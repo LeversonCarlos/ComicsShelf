@@ -15,7 +15,7 @@ namespace ComicsShelf.Droid
                return new System.Drawing.Size(bitmap.Width, bitmap.Height);
             }
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { throw new Exception($"Error identifying the image size for file. {ex.Message}.", new Exception(pagePath)); }
          finally { GC.Collect(); }
       }
 

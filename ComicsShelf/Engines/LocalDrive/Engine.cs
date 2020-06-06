@@ -1,14 +1,24 @@
-﻿using Xamarin.Forms;
+﻿using Xamarin.CloudDrive.Connector.LocalDrive;
 
 namespace ComicsShelf.Engines.LocalDrive
 {
-   internal partial class LocalDriveEngine : IEngine
+   internal partial class LocalDriveEngine : BaseDrive.BaseDriveEngine<LocalDriveService>
    {
 
-      private Helpers.IFileSystem FileSystem
-      {
-         get { return DependencyService.Get<Helpers.IFileSystem>(); }
-      }
+      public LocalDriveEngine() : base(Store.LibraryType.LocalDrive)
+      { }
+
+      public override string EscapeFileID(string fileID) => fileID
+         .Replace("#", "")
+            .Replace(".", "")
+            .Replace("[", "")
+            .Replace("]", "")
+            .Replace("(", "")
+            .Replace(")", "")
+            .Replace(" ", "")
+            .Replace("/", "_")
+            .Replace("___", "_")
+            .Replace("__", "_");
 
    }
 }

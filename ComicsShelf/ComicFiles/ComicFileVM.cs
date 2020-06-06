@@ -14,8 +14,15 @@ namespace ComicsShelf.ComicFiles
       {
          this.ComicFile = comicFile;
          this.ComicFile.Available = true;
-         this.ComicFile.CoverPath = $"{Helpers.Constants.CoversCachePath}{comicFile.Key}.jpg";
-         this.ComicFile.CachePath = $"{Helpers.Constants.FilesCachePath}{comicFile.Key}";
+         try
+         {
+            if (string.IsNullOrEmpty(comicFile.LibraryKey)) { throw new Exception("The comicFile argument has an invalid libraryKey that is required to identify the engine"); }
+            var engine = Engines.BaseDrive.BaseDriveEngine.GetEngine(comicFile.LibraryKey);
+            if (engine == null) { throw new Exception($"Could not identify the engine for libraryKey: {comicFile.LibraryKey}", new Exception($"ComicFileKey: {comicFile.Key}")); }
+            this.ComicFile.CoverPath = $"{Helpers.Constants.CoversCachePath}{engine.EscapeFileID(comicFile.Key)}.jpg";
+            this.ComicFile.CachePath = $"{Helpers.Constants.FilesCachePath}{engine.EscapeFileID(comicFile.Key)}";
+         }
+         catch(Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
          this.Set(comicFile);
          this._CoverPath = Helpers.Constants.DefaultCover;
          this._CachePath = string.Empty;

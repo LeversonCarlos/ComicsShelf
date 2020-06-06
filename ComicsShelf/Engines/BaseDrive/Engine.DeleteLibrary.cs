@@ -3,9 +3,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Engines.OneDrive
+namespace ComicsShelf.Engines.BaseDrive
 {
-   partial class OneDriveEngine
+   partial class BaseDriveEngine<T>
    {
 
       public async Task<bool> DeleteLibrary(LibraryModel library)
@@ -16,7 +16,7 @@ namespace ComicsShelf.Engines.OneDrive
             var store = Xamarin.Forms.DependencyService.Get<Store.ILibraryStore>();
             if (!store.Libraries.Any(x => x.Type == LibraryType.OneDrive && x.ID != library.ID))
             {
-               await this.Connector.DisconnectAsync();
+               await this.Service.DisconnectAsync();
             }
 
             return true;

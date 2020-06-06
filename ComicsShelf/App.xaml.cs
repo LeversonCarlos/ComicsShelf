@@ -10,7 +10,6 @@ namespace ComicsShelf
          InitializeComponent();
          this.MainPage = new Main.MainPage();
          DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
-         DependencyService.Register<Engines.OneDrive.OneDriveConnector>();
          DependencyService.Register<Engines.OneDrive.OneDriveEngine>();
          DependencyService.Register<Store.ILibraryStore, Store.LibraryStore>();         
       }

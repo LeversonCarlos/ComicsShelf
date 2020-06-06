@@ -31,7 +31,7 @@ namespace ComicsShelf.Store
 
             // LIBRARY IDs
             var libraryIDsJSON = await Task.FromResult(Xamarin.Essentials.Preferences.Get(LibraryIDs, "[]"));
-            var libraryIDs = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(libraryIDsJSON);
+            var libraryIDs = await Helpers.Json.Deserialize<List<string>>(libraryIDsJSON);
 
             // LIBRARY CONTENT
             foreach (var libraryID in libraryIDs)
@@ -39,7 +39,7 @@ namespace ComicsShelf.Store
                var libraryJSON = Xamarin.Essentials.Preferences.Get($"{LibraryIDs}.{libraryID}", "");
                if (!string.IsNullOrEmpty(libraryJSON))
                {
-                  var library = Newtonsoft.Json.JsonConvert.DeserializeObject<LibraryModel>(libraryJSON);
+                  var library = await Helpers.Json.Deserialize<LibraryModel>(libraryJSON);
                   await this.AddLibraryAsync(library);
                }
             }
@@ -57,11 +57,11 @@ namespace ComicsShelf.Store
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
-      private void SaveLibrary(LibraryModel library)
+      private async Task SaveLibrary(LibraryModel library)
       {
          try
          {
-            var libraryJSON = Newtonsoft.Json.JsonConvert.SerializeObject(library);
+            var libraryJSON = await Helpers.Json.Serialize(library);
             var libraryID = $"{LibraryIDs}.{library.ID}";
             Xamarin.Essentials.Preferences.Set(libraryID, libraryJSON);
          }
@@ -78,12 +78,12 @@ namespace ComicsShelf.Store
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
       }
 
-      public void SaveLibraries()
+      public async Task SaveLibraries()
       {
          try
          {
             var libraryIDs = this.Libraries.Select(x => x.ID).ToList();
-            var libraryIDsJSON = Newtonsoft.Json.JsonConvert.SerializeObject(libraryIDs);
+            var libraryIDsJSON = await Helpers.Json.Serialize(libraryIDs);
             Xamarin.Essentials.Preferences.Set(LibraryIDs, libraryIDsJSON);
          }
          catch (Exception ex) { Helpers.AppCenter.TrackEvent(ex); }
@@ -109,8 +109,8 @@ namespace ComicsShelf.Store
             if (!await this.AddLibraryAsync(library)) { return false; }
 
             // STORE LIBRARY
-            this.SaveLibrary(library);
-            this.SaveLibraries();
+            await this.SaveLibrary(library);
+            await this.SaveLibraries();
 
             // LIBRARY SERVICE
             using (var services = new Services.LibraryService(library))
@@ -165,7 +165,7 @@ namespace ComicsShelf.Store
                // STORE LIBRARY
                this.Libraries.RemoveAll(x => x.ID == library.ID);
                this.RemoveLibrary(library);
-               this.SaveLibraries();
+               await this.SaveLibraries();
 
             }
 

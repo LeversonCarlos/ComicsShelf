@@ -122,15 +122,12 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CarouselView.FormsPlugin">
-      <Version>5.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="Plugin.Permissions">
-      <Version>3.0.0.12</Version>
-    </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.910310" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
-    <PackageReference Include="Xamarin.OneDrive.Connector" Version="0.4.7" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.17-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.17-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.17-alpha" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
