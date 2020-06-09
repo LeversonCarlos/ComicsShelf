@@ -13,8 +13,18 @@ namespace ComicsShelf.Base.Helpers
          );
       }
 
+      public static void Send<T>(string key, T data)
+      {
+         Xamarin.Essentials.MainThread.BeginInvokeOnMainThread(() =>
+            MessagingCenter.Send<Application, T>(Application.Current, key, data)
+         );
+      }
+
       public static void Subscribe(string key, Action<Application> callback) =>
          MessagingCenter.Subscribe<Application>(Application.Current, key, callback);
+
+      public static void Subscribe<T>(string key, Action<T> callback) =>
+         MessagingCenter.Subscribe<Application, T>(Application.Current, key, (app, data) => { callback(data); });
 
    }
 }
