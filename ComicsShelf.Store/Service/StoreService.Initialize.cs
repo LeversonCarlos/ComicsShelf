@@ -14,10 +14,10 @@ namespace ComicsShelf.Store
          try
          {
 
-            var libraryIDs = await this.LoadStoreIDs();
+            var libraryIDs = await this.GetSyncedIDs();
 
             var storeLibraryTasks = libraryIDs
-               .Select(libraryID => this.LoadStoreLibrary(libraryID))
+               .Select(libraryID => this.GetSyncedLibrary(libraryID))
                .ToArray();
             this.LibraryList = await Task.WhenAll(storeLibraryTasks);
 
