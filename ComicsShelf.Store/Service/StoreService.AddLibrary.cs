@@ -21,7 +21,7 @@ namespace ComicsShelf.Store
 
             return true;
          }
-         catch (Exception) { throw; }
+         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
       }
 
    }
