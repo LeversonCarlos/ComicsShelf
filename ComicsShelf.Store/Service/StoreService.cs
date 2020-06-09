@@ -3,10 +3,8 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Store
 {
-   public class StoreService : IStoreService
+   public partial class StoreService : IStoreService
    {
-
-      public Task<bool> InitializeAsync() => throw new NotImplementedException();
 
       public LibraryStoreVM[] GetLibraries() => throw new NotImplementedException();
       public LibraryStoreVM GetLibrary(string libraryID) => throw new NotImplementedException();
