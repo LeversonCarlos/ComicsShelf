@@ -7,8 +7,6 @@ namespace ComicsShelf.Store
    partial class StoreService
    {
 
-      LibraryStoreVM[] LibraryList { get; set; }
-
       public async Task<bool> InitializeAsync()
       {
          try
