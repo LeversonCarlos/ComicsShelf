@@ -19,10 +19,16 @@ namespace ComicsShelf.Store
                .Union(new[] { library })
                .ToArray();
 
+            this.NotifyLibraryAdd(library);
+
             return true;
          }
          catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
       }
+
+      public const string AddLibraryMessage = "Library.AddLibrary.Message";
+      public void NotifyLibraryAdd(LibraryStoreVM library) =>
+         Base.Helpers.Messaging.Send(AddLibraryMessage, library.ID);
 
    }
 }

@@ -7,7 +7,6 @@ namespace ComicsShelf.Store
 {
    partial class StoreService
    {
-      public const string InitializeMessage = "Library.Initialize.Message";
 
       const string LibraryIDs = "ComicsShelf.LibraryIDs";
       LibraryStoreVM[] LibraryList { get; set; }
@@ -36,7 +35,7 @@ namespace ComicsShelf.Store
 
             // NOTIFY LIBRARY INITIALIZATION
             var taskList = this.LibraryList
-               .Select(x => new Task(() => Base.Helpers.Messaging.Send(InitializeMessage, x.ID)))
+               .Select(x => new Task(() => this.NotifyLibraryAdd(x)))
                .ToArray();
             await Task.WhenAll(taskList);
 
