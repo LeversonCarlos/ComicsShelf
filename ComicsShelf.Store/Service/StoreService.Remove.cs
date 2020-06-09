@@ -26,9 +26,5 @@ namespace ComicsShelf.Store
          catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
       }
 
-      public const string RemoveLibraryMessage = "Library.RemoveLibrary.Message";
-      public void NotifyLibraryRemove(LibraryStoreVM library) =>
-         Base.Helpers.Messaging.Send(RemoveLibraryMessage, library.ID);
-
    }
 }
