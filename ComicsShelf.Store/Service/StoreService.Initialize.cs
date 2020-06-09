@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +7,6 @@ namespace ComicsShelf.Store
    partial class StoreService
    {
 
-      const string LibraryIDs = "ComicsShelf.LibraryIDs";
       LibraryStoreVM[] LibraryList { get; set; }
 
       public async Task<bool> InitializeAsync()
@@ -16,28 +14,17 @@ namespace ComicsShelf.Store
          try
          {
 
-            // LIBRARY IDs
-            var libraryIDsJSON = Xamarin.Essentials.Preferences.Get(LibraryIDs, "[]");
-            var libraryIDs = await Base.Helpers.Json.Deserialize<string[]>(libraryIDsJSON);
+            var libraryIDs = await this.LoadStoreIDs();
 
-            // LIBRARY CONTENT
-            var libraryList = new List<LibraryStoreVM>();
-            foreach (var libraryID in libraryIDs)
-            {
-               var libraryJSON = Xamarin.Essentials.Preferences.Get($"{LibraryIDs}.{libraryID}", "");
-               if (!string.IsNullOrEmpty(libraryJSON))
-               {
-                  var library = await Base.Helpers.Json.Deserialize<LibraryStoreVM>(libraryJSON);
-                  libraryList.Add(library);
-               }
-            }
-            this.LibraryList = libraryList.ToArray();
+            var storeLibraryTasks = libraryIDs
+               .Select(libraryID => this.LoadStoreLibrary(libraryID))
+               .ToArray();
+            this.LibraryList = await Task.WhenAll(storeLibraryTasks);
 
-            // NOTIFY LIBRARY INITIALIZATION
-            var taskList = this.LibraryList
+            var notifyTasks = this.LibraryList
                .Select(x => new Task(() => this.NotifyLibraryAdd(x)))
                .ToArray();
-            await Task.WhenAll(taskList);
+            await Task.WhenAll(notifyTasks);
 
             return true;
          }

@@ -12,12 +12,12 @@ namespace ComicsShelf.Store
          try
          {
 
-            var libraryJson = await Base.Helpers.Json.Serialize(library);
-            Xamarin.Essentials.Preferences.Set($"{LibraryIDs}.{library.ID}", libraryJson);
+            if (!await this.SaveLibraryAsync(library)) { return false; }
 
             this.LibraryList = this.LibraryList
                .Union(new[] { library })
                .ToArray();
+            if (!await this.SaveLibrariesAsync()) { return false; }
 
             this.NotifyLibraryAdd(library);
 

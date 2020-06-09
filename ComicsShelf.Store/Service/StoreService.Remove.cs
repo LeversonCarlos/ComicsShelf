@@ -12,15 +12,15 @@ namespace ComicsShelf.Store
          try
          {
 
-            Xamarin.Essentials.Preferences.Remove($"{LibraryIDs}.{library.ID}");
+            if (!await this.RemoveLibraryFromStore(library)) { return false; }
 
             this.LibraryList = this.LibraryList
-               .Where(x=> x.ID != library.ID)
+               .Where(x => x.ID != library.ID)
                .ToArray();
+            if (!await this.SaveLibrariesAsync()) { return false; }
 
             this.NotifyLibraryRemove(library);
 
-            await Task.CompletedTask;
             return true;
          }
          catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
