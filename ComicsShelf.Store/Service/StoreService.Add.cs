@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,11 @@ namespace ComicsShelf.Store
          try
          {
 
+            // VALIDATE
+            // TODO
+
             if (!await Sync.SetLibrary(library)) { return false; }
+            this.ItemList.Add(library.ID, new List<ItemStoreVM>());
 
             this.LibraryList = this.LibraryList
                .Union(new[] { library })

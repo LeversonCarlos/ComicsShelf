@@ -31,7 +31,7 @@ namespace ComicsShelf.Store
             }
 
             var notifyTasks = this.LibraryList
-               .Select(x => new Task(() => Notify.LibraryAdd(x)))
+               .Select(library => new Task(() => Notify.LibraryAdd(library)))
                .ToArray();
             await Task.WhenAll(notifyTasks);
 
