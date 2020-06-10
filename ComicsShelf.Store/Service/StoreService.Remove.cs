@@ -12,7 +12,7 @@ namespace ComicsShelf.Store
          try
          {
 
-            if (!await this.RemoveSyncLibrary(library)) { return false; }
+            if (!await Sync.RemoveLibrary(library)) { return false; }
 
             this.LibraryList = this.LibraryList
                .Where(x => x.ID != library.ID)

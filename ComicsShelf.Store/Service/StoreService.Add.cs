@@ -12,7 +12,7 @@ namespace ComicsShelf.Store
          try
          {
 
-            if (!await this.SetSyncLibrary(library)) { return false; }
+            if (!await Sync.SetLibrary(library)) { return false; }
 
             this.LibraryList = this.LibraryList
                .Union(new[] { library })
