@@ -22,7 +22,7 @@ namespace ComicsShelf.Store
 
             foreach (var library in this.LibraryList)
             {
-               var libraryItemIDs = await this.GetSyncLibraryItemsIDs(library.ID);
+               var libraryItemIDs = await Sync.GetItems(library.ID);
                var libraryItemTasks = libraryItemIDs
                   .Select(itemID => this.GetSyncLibraryItem(itemID))
                   .ToArray();
