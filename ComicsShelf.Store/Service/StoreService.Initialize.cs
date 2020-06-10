@@ -24,7 +24,7 @@ namespace ComicsShelf.Store
             {
                var libraryItemIDs = await Sync.GetItems(library.ID);
                var libraryItemTasks = libraryItemIDs
-                  .Select(itemID => this.GetSyncLibraryItem(itemID))
+                  .Select(itemID => Sync.GetItem(itemID))
                   .ToArray();
                var libraryItems = await Task.WhenAll(libraryItemTasks);
                this.LibraryItems.Add(library.ID, libraryItems.ToList());

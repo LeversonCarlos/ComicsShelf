@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Store
 {
-   partial class StoreService
+   partial class Sync
    {
-      string LibraryItemSyncKey(string ItemID) => $"{SyncKey()}.Item.{ItemID}";
+      static string item_sync(string ItemID) => $"{base_sync()}.Item.{ItemID}";
 
-      private async Task<ItemStoreVM> GetSyncLibraryItem(string itemID)
+      public static async Task<ItemStoreVM> GetItem(string itemID)
       {
          try
          {
-            var libraryItemJson = Xamarin.Essentials.Preferences.Get(LibraryItemSyncKey(itemID), "");
+            var libraryItemJson = Xamarin.Essentials.Preferences.Get(item_sync(itemID), "");
             if (string.IsNullOrEmpty(libraryItemJson)) { return null; }
 
             var libraryItem = await Base.Helpers.Json.Deserialize<ItemStoreVM>(libraryItemJson);
@@ -22,12 +21,12 @@ namespace ComicsShelf.Store
          catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return null; }
       }
 
-      private async Task<bool> SetSyncLibraryItem(ItemStoreVM libraryItem)
+      public static async Task<bool> SetItem(ItemStoreVM libraryItem)
       {
          try
          {
             var libraryItemJson = await Base.Helpers.Json.Serialize(libraryItem);
-            Xamarin.Essentials.Preferences.Set(LibrarySyncKey(libraryItem.ID), libraryItemJson);
+            Xamarin.Essentials.Preferences.Set(item_sync(libraryItem.ID), libraryItemJson);
             return true;
          }
          catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
