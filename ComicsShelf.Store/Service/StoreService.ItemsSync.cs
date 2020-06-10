@@ -26,7 +26,8 @@ namespace ComicsShelf.Store
          {
             var libraryItemIDs = this.LibraryItems[libraryID].Select(x=> x.ID).ToArray();
             var libraryItemIDsJson = await Base.Helpers.Json.Serialize(libraryItemIDs);
-            Xamarin.Essentials.Preferences.Set(LibrariesSyncKey(), libraryItemIDsJson);
+            Xamarin.Essentials.Preferences.Set(LibraryItemsSyncKey(libraryID), libraryItemIDsJson);
+
             return true;
          }
          catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }

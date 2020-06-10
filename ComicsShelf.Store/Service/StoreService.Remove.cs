@@ -17,7 +17,7 @@ namespace ComicsShelf.Store
             this.LibraryList = this.LibraryList
                .Where(x => x.ID != library.ID)
                .ToArray();
-            if (!await this.SetSyncLibraryIDs()) { return false; }
+            if (!await Sync.SetLibraries(this.LibraryList)) { return false; }
 
             this.NotifyLibraryRemove(library);
 

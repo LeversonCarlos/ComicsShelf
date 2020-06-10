@@ -6,32 +6,6 @@ namespace ComicsShelf.Store
 {
    partial class StoreService
    {
-      string SyncKey() => "ComicsShelf";
-      string LibrariesSyncKey() => $"{SyncKey()}.Libraries";
-      string LibrarySyncKey(string libraryID) => $"{SyncKey()}.Library.{libraryID}";
-
-      private async Task<string[]> GetSyncLibraryIDs()
-      {
-         try
-         {
-            var libraryIDsJSON = Xamarin.Essentials.Preferences.Get(LibrariesSyncKey(), "[]");
-            var libraryIDs = await Base.Helpers.Json.Deserialize<string[]>(libraryIDsJSON);
-            return libraryIDs;
-         }
-         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return new string[] { }; }
-      }
-
-      private async Task<bool> SetSyncLibraryIDs()
-      {
-         try
-         {
-            var libraryIDs = this.LibraryList.Select(x => x.ID).ToArray();
-            var libraryIDsJson = await Base.Helpers.Json.Serialize(libraryIDs);
-            Xamarin.Essentials.Preferences.Set(LibrariesSyncKey(), libraryIDsJson);
-            return true;
-         }
-         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
-      }
 
       private async Task<LibraryStoreVM> GetSyncLibrary(string libraryID)
       {

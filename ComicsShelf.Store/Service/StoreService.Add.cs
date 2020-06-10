@@ -17,7 +17,7 @@ namespace ComicsShelf.Store
             this.LibraryList = this.LibraryList
                .Union(new[] { library })
                .ToArray();
-            if (!await this.SetSyncLibraryIDs()) { return false; }
+            if (!await Sync.SetLibraries(this.LibraryList)) { return false; }
 
             this.NotifyLibraryAdd(library);
 
