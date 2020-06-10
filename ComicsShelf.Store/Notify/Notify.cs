@@ -1,14 +1,14 @@
 ﻿namespace ComicsShelf.Store
 {
-   partial class StoreService
+   public class Notify
    {
 
       public const string add_library_message = "store.add.library.message";
-      public void NotifyLibraryAdd(LibraryStoreVM library) =>
+      internal static void LibraryAdd(LibraryStoreVM library) =>
          Base.Helpers.Messaging.Send(add_library_message, library.ID);
 
       public const string remove_library_message = "store.remove.library.message";
-      public void NotifyLibraryRemove(LibraryStoreVM library) =>
+      internal static void LibraryRemove(LibraryStoreVM library) =>
          Base.Helpers.Messaging.Send(remove_library_message, library.ID);
 
    }

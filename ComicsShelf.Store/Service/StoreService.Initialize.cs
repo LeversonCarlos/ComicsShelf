@@ -15,23 +15,23 @@ namespace ComicsShelf.Store
 
             var libraryIDs = await Sync.GetLibraries();
 
-            var storeLibraryTasks = libraryIDs
+            var dataTasks = libraryIDs
                .Select(libraryID => Sync.GetLibrary(libraryID))
                .ToArray();
-            this.LibraryList = await Task.WhenAll(storeLibraryTasks);
+            this.LibraryList = await Task.WhenAll(dataTasks);
 
             foreach (var library in this.LibraryList)
             {
-               var libraryItemIDs = await Sync.GetItems(library.ID);
-               var libraryItemTasks = libraryItemIDs
+               var itemIDs = await Sync.GetItems(library.ID);
+               var itemTasks = itemIDs
                   .Select(itemID => Sync.GetItem(itemID))
                   .ToArray();
-               var libraryItems = await Task.WhenAll(libraryItemTasks);
-               this.LibraryItems.Add(library.ID, libraryItems.ToList());
+               var itemList = await Task.WhenAll(itemTasks);
+               this.ItemList.Add(library.ID, itemList.ToList());
             }
 
             var notifyTasks = this.LibraryList
-               .Select(x => new Task(() => this.NotifyLibraryAdd(x)))
+               .Select(x => new Task(() => Notify.LibraryAdd(x)))
                .ToArray();
             await Task.WhenAll(notifyTasks);
 
