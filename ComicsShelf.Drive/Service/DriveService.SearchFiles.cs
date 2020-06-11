@@ -13,6 +13,7 @@ namespace ComicsShelf.Drive
          {
 
             // NOTIFY START MESSAGE
+            Notify.SearchStart(library, "drive_search_progress_start");
 
             // SEARCH FILES THROUGH THE LIBRARY's ENGINE
 
@@ -27,8 +28,10 @@ namespace ComicsShelf.Drive
             // CHECK FOR POSSIBLE DUPLICITY
 
             // NOTIFY FINISH MESSAGE
+            Notify.SearchStart(library, "drive_search_progress_finish");
 
             // NOTIFY THAT LIBRARY FILES WAS UPDATED (IF SO)
+
 
             await Task.CompletedTask;
             return true;
