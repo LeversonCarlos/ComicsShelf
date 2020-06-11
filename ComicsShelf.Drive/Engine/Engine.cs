@@ -5,9 +5,8 @@ using Xamarin.CloudDrive.Connector.Common;
 
 namespace ComicsShelf.Drive
 {
-   internal abstract partial class Engine<T> : IEngine where T : ICloudDriveService
+   public abstract partial class Engine<T> : IEngine where T : ICloudDriveService
    {
-
       public ICloudDriveService DriveService { get { return DependencyProvider.Get<T>(); } }
 
       public Task<bool> ValidateLibrary(LibraryStoreVM library) => throw new NotImplementedException();
