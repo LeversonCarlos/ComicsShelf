@@ -9,8 +9,6 @@ namespace ComicsShelf.Drive
    {
       public ICloudDriveService DriveService { get { return DependencyProvider.Get<T>(); } }
 
-      public virtual Task<bool> ValidateLibrary(LibraryStoreVM library) => throw new NotImplementedException();
-
       public Task<LibraryStoreVM> AddLibrary() => throw new NotImplementedException();
 
       public Task<ItemStoreVM[]> SearchFiles(LibraryStoreVM library) => throw new NotImplementedException();
