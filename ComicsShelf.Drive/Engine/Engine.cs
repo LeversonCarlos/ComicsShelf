@@ -13,8 +13,6 @@ namespace ComicsShelf.Drive
 
       public Task<LibraryStoreVM> AddLibrary() => throw new NotImplementedException();
 
-      public Task<ItemStoreVM[]> SearchFiles(LibraryStoreVM library) => throw new NotImplementedException();
-
       public Task<bool> ExtractCover(LibraryStoreVM library, ItemStoreVM comicFile) => throw new NotImplementedException();
 
       public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
