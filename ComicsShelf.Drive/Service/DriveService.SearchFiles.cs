@@ -32,12 +32,16 @@ namespace ComicsShelf.Drive
                .ToList();
             inactiveItems.ForEach(file => file.Available = false);
             await store.UpdateItemAsync(inactiveItems.ToArray());
+            if (inactiveItems.Count > 0)
+            { Notify.SearchProgress(library, "drive_search_progress_inactivated_files", (inactiveItems.Count).ToString()); }
 
-            // UPDATE ATTRIBUTES OF ALREADY EXISTING FILES
-
-            // ADD NEW FILES TO THE LIBRARY
-
-            // CHECK FOR POSSIBLE DUPLICITY
+            // UPDATE CHANGED FILES ON THE LIBRARY
+            var newItems = searchItems
+               .Where(x => !libraryItems.Select(i => i.ID).ToList().Contains(x.ID))
+               .ToList();
+            await store.UpdateItemAsync(searchItems.ToArray());
+            if (newItems.Count > 0)
+            { Notify.SearchProgress(library, "drive_search_progress_new_files", (newItems.Count).ToString()); }
 
             // NOTIFY FINISH MESSAGE
             Notify.SearchProgress(library, "drive_search_progress_finish");
