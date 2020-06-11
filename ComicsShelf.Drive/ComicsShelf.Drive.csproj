@@ -1,7 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+   <PropertyGroup>
+      <TargetFramework>netstandard2.0</TargetFramework>
+   </PropertyGroup>
+
+   <ItemGroup>
+      <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.17-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.17-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.17-alpha" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
+     <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
+   </ItemGroup>
 
 </Project>
