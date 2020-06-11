@@ -46,12 +46,10 @@ namespace ComicsShelf.Drive
             // NOTIFY FINISH MESSAGE
             Notify.SearchProgress(library, "drive_search_progress_finish");
 
-            // NOTIFY THAT LIBRARY FILES WAS UPDATED (IF SO)
+            // NOTIFY THAT LIBRARY FILES WAS UPDATED 
+            Notify.SearchResult(library, store.GetLibraryItems(library));
 
-
-            await Task.CompletedTask;
             return true;
-
          }
          catch (Exception ex) { ComicsShelf.Base.Helpers.AppInsights.TrackException(ex); return false; }
       }
