@@ -15,13 +15,13 @@ namespace ComicsShelf.Search
          {
 
             // NOTIFY START MESSAGE
-            Notify.Progress(library, "drive_search_progress_start");
-            var engine = Engine.GetEngine(library);
+            Notify.Progress(library, "search_progress_start");
+            var drive = Drive.BaseDrive.GetDrive(library);
             var store = DependencyService.Get<IStoreService>();
 
             // SEARCH FILES THROUGH THE LIBRARY's ENGINE
-            var searchItems = await engine.SearchFiles(library);
-            Notify.Progress(library, "drive_search_progress_files_found", (searchItems?.Length ?? 0).ToString());
+            var searchItems = await drive.SearchFiles(library);
+            Notify.Progress(library, "search_progress_files_found", (searchItems?.Length ?? 0).ToString());
 
             // LOAD CURRENT LIBRARY FILES
             var libraryItems = store.GetLibraryItems(library);
@@ -33,7 +33,7 @@ namespace ComicsShelf.Search
             inactiveItems.ForEach(file => file.Available = false);
             await store.UpdateItemAsync(inactiveItems.ToArray());
             if (inactiveItems.Count > 0)
-            { Notify.Progress(library, "drive_search_progress_inactivated_files", (inactiveItems.Count).ToString()); }
+            { Notify.Progress(library, "search_progress_inactivated_files", (inactiveItems.Count).ToString()); }
 
             // UPDATE CHANGED FILES ON THE LIBRARY
             var newItems = searchItems
@@ -41,10 +41,10 @@ namespace ComicsShelf.Search
                .ToList();
             await store.UpdateItemAsync(searchItems.ToArray());
             if (newItems.Count > 0)
-            { Notify.Progress(library, "drive_search_progress_new_files", (newItems.Count).ToString()); }
+            { Notify.Progress(library, "search_progress_new_files", (newItems.Count).ToString()); }
 
             // NOTIFY FINISH MESSAGE
-            Notify.Progress(library, "drive_search_progress_finish");
+            Notify.Progress(library, "search_progress_finish");
 
             // NOTIFY THAT LIBRARY FILES WAS UPDATED 
             Notify.Result(library, store.GetLibraryItems(library));
