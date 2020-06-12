@@ -7,6 +7,7 @@ namespace ComicsShelf.Store
    {
       public string ID { get; set; }
       public string Description { get; set; }
+      public string Path { get; set; }
       public enLibraryType Type { get; set; }
       public Dictionary<string, string> KeyValues { get; set; }
    }
