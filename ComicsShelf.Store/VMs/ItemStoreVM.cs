@@ -7,12 +7,15 @@ namespace ComicsShelf.Store
    {
       public string ID { get; set; }
       public string LibraryID { get; set; }
+      public string EscapedID { get; set; }
 
-      public string FullDescription { get; set; }
-      public string ShortDescription { get; set; }
+      public string FullText { get; set; }
+      public string ShortText { get; set; }
+      public string FolderText { get; set; }
 
       public string FolderPath { get; set; }
       public string FileName { get; set; }
+      public DateTime ReleaseDate { get; set; }
 
       public short? Rating { get; set; }
       public bool Readed { get; set; }
