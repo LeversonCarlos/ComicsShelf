@@ -8,7 +8,7 @@ namespace ComicsShelf.Drive.FolderDialog
    internal class FolderDialogVM : BaseVM
    {
       readonly TaskCompletionSource<FolderVM> tcs;
-      ObservableList<FolderVM> Data { get; set; }
+      internal ObservableList<FolderVM> Data { get; set; }
 
       public FolderDialogVM()
       {

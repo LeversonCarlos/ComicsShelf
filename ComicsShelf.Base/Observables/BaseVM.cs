@@ -1,6 +1,8 @@
-﻿namespace ComicsShelf.Base.Observables
+﻿using System;
+
+namespace ComicsShelf.Base.Observables
 {
-   public class BaseVM : ObservableObject
+   public class BaseVM : ObservableObject, IDisposable
    {
 
       string _Title = string.Empty;
@@ -16,6 +18,8 @@
          get { return this._IsBusy; }
          set { this.SetProperty(ref this._IsBusy, value); }
       }
+
+      public virtual void Dispose() { }
 
    }
 }
