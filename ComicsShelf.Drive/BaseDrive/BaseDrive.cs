@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace ComicsShelf.Drive
 {
 
-   public abstract partial class BaseService<T> : BaseService, IDriveService where T : ICloudDriveService
+   public abstract partial class BaseDrive<T> : BaseDrive, IDrive where T : ICloudDriveService
    {
       public ICloudDriveService CloudService { get { return DependencyProvider.Get<T>(); } }
 
@@ -19,23 +19,23 @@ namespace ComicsShelf.Drive
 
    }
 
-   public class BaseService
+   public class BaseDrive
    {
 
-      public static IDriveService GetDriveService(string libraryID) =>
-         GetDriveService(DependencyService.Get<Store.IStoreService>().GetLibrary(libraryID));
+      public static IDrive GetDrive(string libraryID) =>
+         GetDrive(DependencyService.Get<Store.IStoreService>().GetLibrary(libraryID));
 
-      public static IDriveService GetDriveService(LibraryStoreVM library) =>
-         GetDriveService(library.Type);
+      public static IDrive GetDrive(LibraryStoreVM library) =>
+         GetDrive(library.Type);
 
-      public static IDriveService GetDriveService(enLibraryType libraryType)
+      public static IDrive GetDrive(enLibraryType libraryType)
       {
          try
          {
             if (libraryType == enLibraryType.OneDrive)
                return DependencyService.Get<OneDriveEngine>();
             else
-               return DependencyService.Get<LocalDriveEngine>();
+               return DependencyService.Get<LocalDriveService>();
          }
          catch (Exception) { throw; }
       }

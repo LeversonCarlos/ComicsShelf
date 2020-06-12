@@ -6,7 +6,7 @@ using Xamarin.CloudDrive.Connector.Common;
 
 namespace ComicsShelf.Drive
 {
-   partial class BaseService<T>
+   partial class BaseDrive<T>
    {
 
       public async Task<ItemStoreVM[]> SearchFiles(LibraryStoreVM library)
