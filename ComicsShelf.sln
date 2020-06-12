@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "refactoring", "refactoring"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicsShelf.Drive", "ComicsShelf.Drive\ComicsShelf.Drive.csproj", "{2BA626D2-32F1-4B05-AB2A-AAA5D908CEDE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicsShelf.Search", "ComicsShelf.Search\ComicsShelf.Search.csproj", "{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,18 @@ Global
 		{2BA626D2-32F1-4B05-AB2A-AAA5D908CEDE}.Release|iPhone.Build.0 = Release|Any CPU
 		{2BA626D2-32F1-4B05-AB2A-AAA5D908CEDE}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{2BA626D2-32F1-4B05-AB2A-AAA5D908CEDE}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Release|iPhone.Build.0 = Release|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +139,7 @@ Global
 		{BC4E7DF4-3D13-43AE-8EE2-6DA01A335AE2} = {043D11F7-339D-410E-91A5-F2DF12726A31}
 		{6502A392-B0CB-4306-B664-34B865261315} = {043D11F7-339D-410E-91A5-F2DF12726A31}
 		{2BA626D2-32F1-4B05-AB2A-AAA5D908CEDE} = {043D11F7-339D-410E-91A5-F2DF12726A31}
+		{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C} = {043D11F7-339D-410E-91A5-F2DF12726A31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {53AD46AF-CC3F-44DB-BBE3-961674B1FE66}
