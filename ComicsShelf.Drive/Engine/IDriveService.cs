@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
 {
-   public interface IEngine
+   public interface IDriveService
    {
 
       Task<bool> ValidateLibrary(LibraryStoreVM library);

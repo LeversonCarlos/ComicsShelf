@@ -6,7 +6,7 @@ using Xamarin.CloudDrive.Connector.Common;
 
 namespace ComicsShelf.Drive
 {
-   partial class Engine<T>
+   partial class BaseService<T>
    {
 
       public async Task<ItemStoreVM[]> SearchFiles(LibraryStoreVM library)
@@ -23,7 +23,7 @@ namespace ComicsShelf.Drive
             };
 
             // SEARCH FOR FILES ON THE DIRECTORY
-            var fileList = await this.DriveService.SearchFiles(directory, "*.cbz", 10000);
+            var fileList = await this.CloudService.SearchFiles(directory, "*.cbz", 10000);
 
             // CONVERT
             var rootPath = directory.Path.Replace("/ /", "/");

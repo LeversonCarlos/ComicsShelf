@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
 {
-   partial class Engine<T>
+   partial class BaseService<T>
    {
 
       public async Task<bool> RemoveLibrary(LibraryStoreVM library)
