@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
 {
-   partial class OneDriveEngine
+   partial class OneDrive
    {
 
       public override async Task<bool> ValidateLibrary(LibraryStoreVM library)
       {
          try
          {
-            if (!await this.DriveService.CheckConnectionAsync()) { return false; }
+            if (!await this.CloudService.CheckConnectionAsync()) { return false; }
             return true;
          }
          catch (Exception ex) { ComicsShelf.Base.Helpers.AppInsights.TrackException(ex); return false; }
