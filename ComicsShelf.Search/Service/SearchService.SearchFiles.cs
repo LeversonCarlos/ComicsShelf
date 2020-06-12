@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Drive
+namespace ComicsShelf.Search
 {
-   partial class DriveService
+   partial class SearchService
    {
 
       public async Task<bool> SearchFiles(LibraryStoreVM library)
