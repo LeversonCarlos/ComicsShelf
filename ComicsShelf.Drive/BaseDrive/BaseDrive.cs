@@ -35,7 +35,7 @@ namespace ComicsShelf.Drive
             if (libraryType == enLibraryType.OneDrive)
                return DependencyService.Get<OneDriveEngine>();
             else
-               return DependencyService.Get<LocalDriveService>();
+               return DependencyService.Get<LocalDrive>();
          }
          catch (Exception) { throw; }
       }
