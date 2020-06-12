@@ -8,6 +8,8 @@ namespace ComicsShelf.Drive.FolderDialog
    internal class Selector
    {
 
+      public static Task<DirectoryVM> GetFolder(ICloudDriveService driveService) => GetFolder(driveService, new DirectoryVM { });
+
       public static async Task<DirectoryVM> GetFolder(ICloudDriveService driveService, DirectoryVM initialFolder)
       {
          try

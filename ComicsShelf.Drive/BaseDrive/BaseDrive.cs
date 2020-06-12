@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
+using Xamarin.CloudDrive.Connector.OneDrive;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Drive
@@ -9,9 +10,16 @@ namespace ComicsShelf.Drive
 
    public abstract partial class BaseDrive<T> : BaseDrive, IDrive where T : ICloudDriveService
    {
+
       public ICloudDriveService CloudService { get { return DependencyProvider.Get<T>(); } }
 
-      public Task<LibraryStoreVM> AddLibrary() => throw new NotImplementedException();
+      public enLibraryType GetLibraryType()
+      {
+         if (this.CloudService is OneDriveService)
+            return enLibraryType.OneDrive;
+         else
+            return enLibraryType.LocalDrive;
+      }
 
       public Task<bool> ExtractCover(LibraryStoreVM library, ItemStoreVM comicFile) => throw new NotImplementedException();
 
