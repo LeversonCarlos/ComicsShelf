@@ -50,7 +50,7 @@ namespace ComicsShelf.Base.Helpers
          var eIndex = 0;
          exceptionList.ForEach(e => properties.Add($"Exception {eIndex++}", e));
 
-         AddMetrics(properties);
+         // AddMetrics(properties);
          // Crashes.TrackError(ex, properties);
          // Analytics.TrackEvent("Tracked Exception", properties);
          TrackEvent("Tracked Exception", properties);

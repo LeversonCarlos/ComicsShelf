@@ -41,7 +41,11 @@ namespace ComicsShelf.Drive.FolderDialog
 
             return selectedFolder;
          }
-         catch (Exception ex) { ComicsShelf.Base.Helpers.AppInsights.TrackException(ex); return null; }
+         catch (Exception ex)
+         {
+            ComicsShelf.Base.Helpers.AppInsights.TrackException(ex);
+            return null;
+         }
       }
 
       public static async Task<FolderVM> GetFolder(ICloudDriveService driveService, FolderVM initialFolder)
@@ -81,7 +85,11 @@ namespace ComicsShelf.Drive.FolderDialog
             }
 
          }
-         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return null; }
+         catch (Exception ex)
+         {
+            Base.Helpers.AppInsights.TrackException(ex);
+            return null;
+         }
       }
 
       static async Task<FolderVM[]> GetFolder_Children(ICloudDriveService driveService, FolderVM item)
@@ -95,44 +103,60 @@ namespace ComicsShelf.Drive.FolderDialog
 
       static async Task<FolderVM[]> GetFolder_Children_Drivers(ICloudDriveService driveService)
       {
-         var driveList = await driveService.GetDrivers();
-         var resultList = driveList
-            .Select(x => new FolderVM
-            {
-               ID = x.ID,
-               Name = x.Name,
-               Path = x.Path,
-               Type = enFolderType.Drive
-            })
-            .ToArray();
-         return resultList;
+         try
+         {
+            var driveList = await driveService.GetDrivers();
+            var resultList = driveList
+               .Select(x => new FolderVM
+               {
+                  ID = x.ID,
+                  Name = x.Name,
+                  Path = x.Path,
+                  Type = enFolderType.Drive
+               })
+               .ToArray();
+            return resultList;
+         }
+         catch (Exception ex)
+         {
+            Base.Helpers.AppInsights.TrackException(ex);
+            return new FolderVM[] { };
+         }
       }
 
       static async Task<FolderVM[]> GetFolder_Children_Directories(ICloudDriveService driveService, FolderVM item)
       {
-
-         var folder = new DirectoryVM
+         try
          {
-            ID = item.ID,
-            Name = item.Name,
-            Path = item.Path,
-            ParentID = item.Parent?.ID
-         };
-         var directoriesList = await driveService.GetDirectories(folder);
 
-         var resultList = directoriesList
-            .Select(x => new FolderVM
+            var folder = new DirectoryVM
             {
-               ID = x.ID,
-               Name = x.Name,
-               Path = x.Path,
-               Parent = item,
-               Type = enFolderType.Folder
-            })
-            .ToList();
-         resultList.Insert(0, new FolderVM { Name = "..", ID = item.Parent?.ID, Path = item.Parent?.Path, Parent = item?.Parent?.Parent });
+               ID = item.ID,
+               Name = item.Name,
+               Path = item.Path,
+               ParentID = item.Parent?.ID
+            };
+            var directoriesList = await driveService.GetDirectories(folder);
 
-         return resultList.ToArray();
+            var resultList = directoriesList
+               .Select(x => new FolderVM
+               {
+                  ID = x.ID,
+                  Name = x.Name,
+                  Path = x.Path,
+                  Parent = item,
+                  Type = enFolderType.Folder
+               })
+               .ToList();
+            resultList.Insert(0, new FolderVM { Name = "..", ID = item.Parent?.ID, Path = item.Parent?.Path, Parent = item?.Parent?.Parent });
+
+            return resultList.ToArray();
+         }
+         catch (Exception ex)
+         {
+            Base.Helpers.AppInsights.TrackException(ex);
+            return new FolderVM[] { };
+         }
       }
 
 
