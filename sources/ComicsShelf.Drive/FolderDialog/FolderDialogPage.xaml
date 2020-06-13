@@ -21,7 +21,11 @@
          </Frame>
          <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
             <ScrollView Orientation="Vertical" >
-               <CollectionView ItemsSource="{Binding Data}" SelectionChangedCommand="{Binding ItemSelectCommand}" SelectionMode="Single" VerticalOptions="Fill" >
+               <CollectionView ItemsSource="{Binding Data}" 
+                               SelectionChangedCommand="{Binding ItemSelectCommand}" 
+                               SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}" 
+                               x:Name="MyCollectionView"
+                               SelectionMode="Single" VerticalOptions="Fill" >
                   <CollectionView.ItemTemplate>
                      <DataTemplate>
                         <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
@@ -38,7 +42,7 @@
 
          <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
             <Button Text="cancel_command" Command="{Binding CancelCommand}"></Button>
-            <Button Text="confirm_command" Command="{Binding ConfirmCommand}" BackgroundColor="Orange"></Button>
+            <Button Text="confirm_command" Command="{Binding ConfirmCommand}"></Button>
          </StackLayout>
 
       </StackLayout>
