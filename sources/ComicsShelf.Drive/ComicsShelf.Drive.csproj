@@ -9,7 +9,7 @@
    </PropertyGroup>
 
    <ItemGroup>
-      <PackageReference Include="Xamarin.Forms" Version="4.2.0.910310" />
+      <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
       <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />      
       <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.17-alpha" />
       <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.17-alpha" />
