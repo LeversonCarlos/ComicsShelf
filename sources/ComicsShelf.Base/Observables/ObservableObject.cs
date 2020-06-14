@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ComicsShelf.Base.Observables
+namespace ComicsShelf.Observables
 {
    public class ObservableObject : INotifyPropertyChanged
    {

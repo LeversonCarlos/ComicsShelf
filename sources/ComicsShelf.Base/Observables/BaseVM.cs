@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ComicsShelf.Base.Observables
+namespace ComicsShelf.Observables
 {
    public class BaseVM : ObservableObject, IDisposable
    {
