@@ -1,0 +1,33 @@
+﻿using ComicsShelf.Store;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ComicsShelf.Engine
+{
+   partial class Engine
+   {
+
+      public async Task<bool> RemoveLibraryAsync(LibraryStoreVM library)
+      {
+         try
+         {
+
+            if (!await Sync.RemoveLibrary(library)) { return false; }
+            this.ItemList[library.ID].Clear();
+            this.ItemList.Remove(library.ID);
+
+            this.LibraryList = this.LibraryList
+               .Where(x => x.ID != library.ID)
+               .ToArray();
+            if (!await Sync.SetLibraries(this.LibraryList)) { return false; }
+
+            Notify.LibraryRemove(library);
+
+            return true;
+         }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return false; }
+      }
+
+   }
+}

@@ -10,6 +10,7 @@
    </PropertyGroup>
 
    <ItemGroup>
+      <ProjectReference Include="..\ComicsShelf.Drive\ComicsShelf.Drive.csproj" />
       <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
    </ItemGroup>
 
