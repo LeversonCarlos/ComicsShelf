@@ -28,12 +28,8 @@ namespace ComicsShelf.Store
                   .ToArray();
                var itemList = await Task.WhenAll(itemTasks);
                this.ItemList.Add(library.ID, itemList.ToList());
+               Notify.LibraryAdd(library);
             }
-
-            var notifyTasks = this.LibraryList
-               .Select(library => new Task(() => Notify.AddLibrary(library)))
-               .ToArray();
-            await Task.WhenAll(notifyTasks);
 
             return true;
          }
