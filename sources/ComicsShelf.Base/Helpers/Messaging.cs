@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Base.Helpers
+namespace ComicsShelf.Helpers
 {
    public class Messaging
    {

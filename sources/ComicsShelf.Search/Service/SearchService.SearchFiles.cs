@@ -47,7 +47,7 @@ namespace ComicsShelf.Search
             Notify.Progress(library, "search_progress_finish");
 
             // NOTIFY THAT LIBRARY FILES WAS UPDATED 
-            Notify.Result(library, store.GetLibraryItems(library));
+            // Notify.Result(library, store.GetLibraryItems(library));
 
             return true;
          }
