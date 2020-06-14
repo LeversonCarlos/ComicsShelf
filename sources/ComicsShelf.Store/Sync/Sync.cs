@@ -1,6 +1,6 @@
 ﻿namespace ComicsShelf.Store
 {
-   internal partial class Sync
+   public partial class Sync
    {
 
       static string base_sync() => "ComicsShelf";
