@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Base.Helpers
+namespace ComicsShelf.Helpers
 {
    public class Json
    {

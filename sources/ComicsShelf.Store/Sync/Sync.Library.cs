@@ -14,7 +14,7 @@ namespace ComicsShelf.Store
             var libraryJSON = Xamarin.Essentials.Preferences.Get(library_sync(libraryID), "");
             if (string.IsNullOrEmpty(libraryJSON)) { return null; }
 
-            var library = await Base.Helpers.Json.Deserialize<LibraryStoreVM>(libraryJSON);
+            var library = await Helpers.Json.Deserialize<LibraryStoreVM>(libraryJSON);
 
             return library;
          }
@@ -25,7 +25,7 @@ namespace ComicsShelf.Store
       {
          try
          {
-            var libraryJson = await Base.Helpers.Json.Serialize(library);
+            var libraryJson = await Helpers.Json.Serialize(library);
             Xamarin.Essentials.Preferences.Set(library_sync(library.ID), libraryJson);
             return true;
          }

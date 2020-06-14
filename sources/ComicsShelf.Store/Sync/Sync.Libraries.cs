@@ -13,7 +13,7 @@ namespace ComicsShelf.Store
          try
          {
             var libraryIDsJSON = Xamarin.Essentials.Preferences.Get(libraries_sync(), "[]");
-            var libraryIDs = await Base.Helpers.Json.Deserialize<string[]>(libraryIDsJSON);
+            var libraryIDs = await Helpers.Json.Deserialize<string[]>(libraryIDsJSON);
             return libraryIDs;
          }
          catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new string[] { }; }
@@ -24,7 +24,7 @@ namespace ComicsShelf.Store
          try
          {
             var libraryIDs = libraryList.Select(x => x.ID).ToArray();
-            var libraryIDsJson = await Base.Helpers.Json.Serialize(libraryIDs);
+            var libraryIDsJson = await Helpers.Json.Serialize(libraryIDs);
             Xamarin.Essentials.Preferences.Set(libraries_sync(), libraryIDsJson);
             return true;
          }
