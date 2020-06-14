@@ -21,7 +21,7 @@ namespace ComicsShelf.Store
                .ToArray();
             if (!await Sync.SetLibraries(this.LibraryList)) { return false; }
 
-            Notify.RemoveLibrary(library);
+            Notify.LibraryRemove(library);
 
             return true;
          }

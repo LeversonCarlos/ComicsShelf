@@ -4,7 +4,7 @@ namespace ComicsShelf.Store
 {
    partial class StoreService
    {
-      LibraryStoreVM[] LibraryList { get; set; }
+      LibraryStoreVM[] LibraryList { get; set; } = new LibraryStoreVM[] { };
 
       public LibraryStoreVM[] GetLibraries() => this.LibraryList;
       public LibraryStoreVM GetLibrary(string libraryID) =>
