@@ -32,7 +32,7 @@ namespace ComicsShelf.Drive
 
             return library;
          }
-         catch (Exception ex) { ComicsShelf.Base.Helpers.AppInsights.TrackException(ex); return null; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
       }
 
    }

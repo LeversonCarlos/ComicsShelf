@@ -16,7 +16,7 @@ namespace ComicsShelf.Drive
             if (!await Task.FromResult(System.IO.Directory.Exists(library.ID))) { return false; }
             return true;
          }
-         catch (Exception ex) { ComicsShelf.Base.Helpers.AppInsights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return false; }
       }
 
    }

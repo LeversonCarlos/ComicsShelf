@@ -16,7 +16,7 @@ namespace ComicsShelf.Store
             var libraryIDs = await Base.Helpers.Json.Deserialize<string[]>(libraryIDsJSON);
             return libraryIDs;
          }
-         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return new string[] { }; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new string[] { }; }
       }
 
       public static async Task<bool> SetLibraries(LibraryStoreVM[] libraryList)
@@ -28,7 +28,7 @@ namespace ComicsShelf.Store
             Xamarin.Essentials.Preferences.Set(libraries_sync(), libraryIDsJson);
             return true;
          }
-         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return false; }
       }
 
    }

@@ -17,7 +17,7 @@ namespace ComicsShelf.Store
             var libraryItemIDs = await Base.Helpers.Json.Deserialize<string[]>(libraryItemIDsJson);
             return libraryItemIDs;
          }
-         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return new string[] { }; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new string[] { }; }
       }
 
       public static async Task<bool> SetItems(string libraryID, List<ItemStoreVM> items)
@@ -30,7 +30,7 @@ namespace ComicsShelf.Store
 
             return true;
          }
-         catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return false; }
       }
 
    }

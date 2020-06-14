@@ -41,11 +41,7 @@ namespace ComicsShelf.Drive.FolderDialog
 
             return selectedFolder;
          }
-         catch (Exception ex)
-         {
-            ComicsShelf.Base.Helpers.AppInsights.TrackException(ex);
-            return null;
-         }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
       }
 
       public static async Task<FolderVM> GetFolder(ICloudDriveService driveService, FolderVM initialFolder)
@@ -72,7 +68,7 @@ namespace ComicsShelf.Drive.FolderDialog
                      vm.Data.ReplaceRange(folderChilds);
                      vm.CurrentItem = item;
                   }
-                  catch (Exception ex) { Base.Helpers.AppInsights.TrackException(ex); }
+                  catch (Exception ex) { Helpers.AppInsights.TrackException(ex); }
                   finally { vm.IsBusy = false; }
                };
 
@@ -85,11 +81,7 @@ namespace ComicsShelf.Drive.FolderDialog
             }
 
          }
-         catch (Exception ex)
-         {
-            Base.Helpers.AppInsights.TrackException(ex);
-            return null;
-         }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
       }
 
       static async Task<FolderVM[]> GetFolder_Children(ICloudDriveService driveService, FolderVM item)
@@ -117,11 +109,7 @@ namespace ComicsShelf.Drive.FolderDialog
                .ToArray();
             return resultList;
          }
-         catch (Exception ex)
-         {
-            Base.Helpers.AppInsights.TrackException(ex);
-            return new FolderVM[] { };
-         }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new FolderVM[] { }; }
       }
 
       static async Task<FolderVM[]> GetFolder_Children_Directories(ICloudDriveService driveService, FolderVM item)
@@ -152,11 +140,7 @@ namespace ComicsShelf.Drive.FolderDialog
 
             return resultList.ToArray();
          }
-         catch (Exception ex)
-         {
-            Base.Helpers.AppInsights.TrackException(ex);
-            return new FolderVM[] { };
-         }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new FolderVM[] { }; }
       }
 
 

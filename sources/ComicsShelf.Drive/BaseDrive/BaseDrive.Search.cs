@@ -62,7 +62,7 @@ namespace ComicsShelf.Drive
             await Task.CompletedTask;
             return itemList.ToArray();
          }
-         catch (Exception ex) { ComicsShelf.Base.Helpers.AppInsights.TrackException(ex); return new ItemStoreVM[] { }; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new ItemStoreVM[] { }; }
       }
 
    }
