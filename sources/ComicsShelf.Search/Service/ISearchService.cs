@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Store;
+﻿using ComicsShelf.ViewModels;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Search
@@ -6,7 +6,7 @@ namespace ComicsShelf.Search
    public interface ISearchService
    {
 
-      Task<bool> SearchFiles(LibraryStoreVM library);
+      Task<bool> SearchFiles(LibraryVM library);
 
    }
 }

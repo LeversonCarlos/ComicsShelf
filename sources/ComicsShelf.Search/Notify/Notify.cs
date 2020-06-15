@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Store;
+﻿using ComicsShelf.ViewModels;
 
 namespace ComicsShelf.Search
 {
@@ -7,10 +7,10 @@ namespace ComicsShelf.Search
 
       const string ProgressMessage = "search.progress.message";
 
-      internal static void Progress(LibraryStoreVM library, params string[] messages) =>
+      internal static void Progress(LibraryVM library, params string[] messages) =>
          Helpers.Messaging.Send($"{ProgressMessage}.{library.ID}", messages);
 
-      public static void Progress(LibraryStoreVM library, System.Action<string[]> callback) =>
+      public static void Progress(LibraryVM library, System.Action<string[]> callback) =>
          Helpers.Messaging.Subscribe($"{ProgressMessage}.{library.ID}", callback);
 
 

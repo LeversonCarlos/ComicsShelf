@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Store;
+﻿using ComicsShelf.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,21 +9,22 @@ namespace ComicsShelf.Search
    partial class SearchService
    {
 
-      public async Task<bool> SearchFiles(LibraryStoreVM library)
+      public async Task<bool> SearchFiles(LibraryVM library)
       {
          try
          {
 
             // NOTIFY START MESSAGE
             Notify.Progress(library, "search_progress_start");
-            var drive = Drive.BaseDrive.GetDrive(library);
-            var store = DependencyService.Get<IStoreService>();
 
             // SEARCH FILES THROUGH THE LIBRARY's ENGINE
-            var searchItems = await drive.SearchFiles(library);
+            var searchItems = await Drive.BaseDrive
+               .GetDrive(library.Type)
+               .SearchItems(library);
             Notify.Progress(library, "search_progress_files_found", (searchItems?.Length ?? 0).ToString());
 
             // LOAD CURRENT LIBRARY FILES
+            var store = DependencyService.Get<Store.IStoreService>();
             var libraryItems = store.GetLibraryItems(library);
 
             // INACTIVATE LIBRARY FILES THAT ISNT FOUND BY THE ENGINE ANYMORE
