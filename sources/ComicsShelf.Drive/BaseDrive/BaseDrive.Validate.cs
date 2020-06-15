@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
@@ -6,7 +7,7 @@ namespace ComicsShelf.Drive
    partial class BaseDrive<T> 
    {
 
-      public virtual Task<bool> ValidateLibrary(ItemVM library) => throw new NotImplementedException();
+      public virtual Task<bool> ValidateLibrary(LibraryVM library) => throw new NotImplementedException();
 
    }
 }

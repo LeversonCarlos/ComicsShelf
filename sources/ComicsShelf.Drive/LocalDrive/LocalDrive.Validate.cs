@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
@@ -6,7 +7,7 @@ namespace ComicsShelf.Drive
    partial class LocalDrive
    {
 
-      public override async Task<bool> ValidateLibrary(ItemVM library)
+      public override async Task<bool> ValidateLibrary(LibraryVM library)
       {
          try
          {

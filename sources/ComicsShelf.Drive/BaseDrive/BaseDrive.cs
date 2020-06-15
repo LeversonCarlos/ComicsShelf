@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Store;
+﻿using ComicsShelf.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
@@ -13,7 +13,7 @@ namespace ComicsShelf.Drive
 
       public ICloudDriveService CloudService { get { return DependencyProvider.Get<T>(); } }
 
-      public Task<bool> ExtractCover(ItemVM library, ItemVM libraryItem) => throw new NotImplementedException();
+      public Task<bool> ExtractCover(LibraryVM library, ItemVM libraryItem) => throw new NotImplementedException();
 
       public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
 
@@ -28,16 +28,16 @@ namespace ComicsShelf.Drive
       // public static IDrive GetDrive(LibraryStoreVM library) =>
       //    GetDrive(library.Type);
 
-      public static IDrive GetDrive(enDriveType driveType)
+      public static IDrive GetDrive(enLibraryType libraryType)
       {
          try
          {
-            if (driveType == enDriveType.OneDrive)
+            if (libraryType == enLibraryType.OneDrive)
                return DependencyService.Get<OneDrive>();
-            else if (driveType == enDriveType.LocalDrive)
+            else if (libraryType == enLibraryType.LocalDrive)
                return DependencyService.Get<LocalDrive>();
             else
-               throw new NotImplementedException($"Drive type {driveType} not implemented");
+               throw new NotImplementedException($"Drive for library type {libraryType} not implemented");
          }
          catch (Exception) { throw; }
       }

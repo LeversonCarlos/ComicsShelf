@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
@@ -6,7 +7,7 @@ namespace ComicsShelf.Drive
    partial class BaseDrive<T>
    {
 
-      public async Task<bool> RemoveLibrary(ItemVM library)
+      public async Task<bool> RemoveLibrary(LibraryVM library)
       {
          try {
 

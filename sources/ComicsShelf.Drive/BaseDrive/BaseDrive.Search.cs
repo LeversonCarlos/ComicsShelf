@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
@@ -9,7 +9,7 @@ namespace ComicsShelf.Drive
    partial class BaseDrive<T>
    {
 
-      public async Task<ItemVM[]> SearchItems(ItemVM library)
+      public async Task<ItemVM[]> SearchItems(LibraryVM library)
       {
          try
          {
@@ -19,7 +19,7 @@ namespace ComicsShelf.Drive
             {
                ID = library.ID,
                Path = library.Path,
-               Name = library.Name
+               Name = library.Description
             };
 
             // SEARCH FOR FILES ON THE DIRECTORY
@@ -31,18 +31,33 @@ namespace ComicsShelf.Drive
                .Select(x => new ItemVM
                {
                   ID = x.ID,
-                  Name = x.Name,
-                  Path = x.Path,
-                  ParentID = x.ParentID,
-                  CreatedDateTime = x.CreatedDateTime,
+                  LibraryID = library.ID,
+                  EscapedID = this.EscapeFileID(x.ID),
+                  FolderPath = x.Path,
+                  FileName = x.Name,
+                  ReleaseDate = !x.CreatedDateTime.HasValue ? DateTime.MinValue : x.CreatedDateTime.Value.ToLocalTime(),
                   SizeInBytes = x.SizeInBytes,
-                  KeyValues = x.KeyValues
+                  KeyValues = x.KeyValues,
+                  Available = true
                })
                .ToList();
             foreach (var item in itemList)
             {
-               if (item.KeyValues == null) { item.KeyValues = new Dictionary<string, string>(); }
-               item.KeyValues.Add("EscapedID", this.EscapeFileID(item.ID));
+
+               item.FolderText = System.IO.Path
+                  .GetFileNameWithoutExtension(item.FolderPath)
+                  .Replace("/ /", "/");
+               if (!string.IsNullOrEmpty(rootPath))
+               { item.FolderText = item.FolderText.Replace(rootPath, ""); }
+
+               item.FullText = System.IO.Path
+                  .GetFileNameWithoutExtension(item.FileName)
+                  .Trim();
+
+               item.ShortText = item.FullText;
+               if (!string.IsNullOrEmpty(item.FolderText))
+               { item.ShortText = item.ShortText.Replace(item.FolderText, ""); }
+
             }
 
             /*

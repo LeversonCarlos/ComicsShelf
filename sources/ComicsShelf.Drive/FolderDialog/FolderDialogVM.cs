@@ -7,31 +7,31 @@ namespace ComicsShelf.Drive.FolderDialog
 {
    internal class FolderDialogVM : BaseVM
    {
-      readonly TaskCompletionSource<ItemVM> tcs;
-      public ObservableList<ItemVM> Data { get; private set; }
+      readonly TaskCompletionSource<DriveItemVM> tcs;
+      public ObservableList<DriveItemVM> Data { get; private set; }
 
       public FolderDialogVM()
       {
          this.Title = "select_the_desired_folder";
-         this.Data = new ObservableList<ItemVM>();
-         this.tcs = new TaskCompletionSource<ItemVM>();
+         this.Data = new ObservableList<DriveItemVM>();
+         this.tcs = new TaskCompletionSource<DriveItemVM>();
          this.ItemSelectCommand = new Command(async item => await this.ItemSelect(item));
          this.ConfirmCommand = new Command(async () => await this.Confirm());
          this.CancelCommand = new Command(async () => await this.Cancel());
       }
 
-      ItemVM _CurrentItem;
-      public ItemVM CurrentItem
+      DriveItemVM _CurrentItem;
+      public DriveItemVM CurrentItem
       {
          get { return this._CurrentItem; }
          set { this.SetProperty(ref this._CurrentItem, value); }
       }
 
-      public EventHandler<ItemVM> OnItemSelected;
+      public EventHandler<DriveItemVM> OnItemSelected;
       public Command ItemSelectCommand { get; set; }
       internal async Task ItemSelect(object item)
       {
-         this.OnItemSelected?.Invoke(this, item as ItemVM);
+         this.OnItemSelected?.Invoke(this, item as DriveItemVM);
          await Task.CompletedTask;
       }
 
@@ -49,7 +49,7 @@ namespace ComicsShelf.Drive.FolderDialog
          tcs.SetResult(null);
       }
 
-      public async Task<ItemVM> OpenPage()
+      public async Task<DriveItemVM> OpenPage()
       {
          var view = new FolderDialogPage { BindingContext = this };
          await Helpers.App.Navigation.PushModalAsync(view, true);
