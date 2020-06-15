@@ -8,7 +8,7 @@
       internal static void LibraryAdd(LibraryStoreVM library) =>
          Helpers.Messaging.Send(LibraryAddMessage, library);
 
-      public static void LibraryAdded(System.Action<LibraryStoreVM> callback) =>
+      public static void LibraryAdd(System.Action<LibraryStoreVM> callback) =>
          Helpers.Messaging.Subscribe(LibraryAddMessage, callback);
 
 
@@ -17,7 +17,7 @@
       internal static void LibraryRemove(LibraryStoreVM library) =>
          Helpers.Messaging.Send(LibraryRemoveMessage, library.ID);
 
-      public static void LibraryRemoved(System.Action<LibraryStoreVM> callback) =>
+      public static void LibraryRemove(System.Action<LibraryStoreVM> callback) =>
          Helpers.Messaging.Subscribe(LibraryRemoveMessage, callback);
 
    }

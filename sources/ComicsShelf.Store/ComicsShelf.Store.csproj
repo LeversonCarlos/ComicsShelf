@@ -15,6 +15,7 @@
 
    <ItemGroup>
      <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
+     <ProjectReference Include="..\ComicsShelf.Drive\ComicsShelf.Drive.csproj" />
    </ItemGroup>
 
 </Project>

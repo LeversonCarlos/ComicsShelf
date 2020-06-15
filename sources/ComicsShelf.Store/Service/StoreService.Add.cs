@@ -8,10 +8,25 @@ namespace ComicsShelf.Store
    partial class StoreService
    {
 
-      public async Task<bool> AddLibraryAsync(LibraryStoreVM library)
+      public async Task<bool> AddLibraryAsync(enLibraryType libraryType)
       {
          try
          {
+
+            var driveType = libraryType == enLibraryType.OneDrive ? Drive.enDriveType.OneDrive : Drive.enDriveType.LocalDrive;
+            var drive = Drive.BaseDrive.GetDrive(driveType);
+            if (drive == null) { Helpers.AppInsights.TrackEvent("drive.not.defined", $"libraryType:{libraryType}"); return false; }
+
+            var driveLibrary = await drive.AddLibrary();
+            if (driveLibrary == null) { return false; }
+            var library = new LibraryStoreVM
+            {
+               ID = driveLibrary.ID,
+               Description = driveLibrary.Name,
+               Path = driveLibrary.Path,
+               KeyValues = driveLibrary.KeyValues,
+               Type = libraryType
+            };
 
             // VALIDATE
             // TODO
