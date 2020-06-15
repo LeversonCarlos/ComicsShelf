@@ -13,15 +13,7 @@ namespace ComicsShelf.Drive
 
       public ICloudDriveService CloudService { get { return DependencyProvider.Get<T>(); } }
 
-      public enLibraryType GetLibraryType()
-      {
-         if (this.CloudService is OneDriveService)
-            return enLibraryType.OneDrive;
-         else
-            return enLibraryType.LocalDrive;
-      }
-
-      public Task<bool> ExtractCover(LibraryStoreVM library, ItemStoreVM comicFile) => throw new NotImplementedException();
+      public Task<bool> ExtractCover(ItemVM library, ItemVM libraryItem) => throw new NotImplementedException();
 
       public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
 
@@ -30,20 +22,22 @@ namespace ComicsShelf.Drive
    public class BaseDrive
    {
 
-      public static IDrive GetDrive(string libraryID) =>
-         GetDrive(DependencyService.Get<Store.IStoreService>().GetLibrary(libraryID));
+      // public static IDrive GetDrive(string libraryID) =>
+      //    GetDrive(DependencyService.Get<Store.IStoreService>().GetLibrary(libraryID));
 
-      public static IDrive GetDrive(LibraryStoreVM library) =>
-         GetDrive(library.Type);
+      // public static IDrive GetDrive(LibraryStoreVM library) =>
+      //    GetDrive(library.Type);
 
-      public static IDrive GetDrive(enLibraryType libraryType)
+      public static IDrive GetDrive(enDriveType driveType)
       {
          try
          {
-            if (libraryType == enLibraryType.OneDrive)
+            if (driveType == enDriveType.OneDrive)
                return DependencyService.Get<OneDrive>();
-            else
+            else if (driveType == enDriveType.LocalDrive)
                return DependencyService.Get<LocalDrive>();
+            else
+               throw new NotImplementedException($"Drive type {driveType} not implemented");
          }
          catch (Exception) { throw; }
       }

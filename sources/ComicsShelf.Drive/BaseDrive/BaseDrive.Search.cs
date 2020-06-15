@@ -9,7 +9,7 @@ namespace ComicsShelf.Drive
    partial class BaseDrive<T>
    {
 
-      public async Task<ItemVM[]> SearchFiles(ItemVM library)
+      public async Task<ItemVM[]> SearchItems(ItemVM library)
       {
          try
          {
