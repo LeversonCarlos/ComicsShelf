@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace ComicsShelf.Store
    partial class StoreService
    {
 
-      public async Task<bool> RemoveLibraryAsync(LibraryStoreVM library)
+      public async Task<bool> RemoveLibraryAsync(LibraryVM library)
       {
          try
          {

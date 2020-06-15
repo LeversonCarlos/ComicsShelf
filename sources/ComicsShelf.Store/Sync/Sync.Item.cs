@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Store
@@ -7,21 +8,21 @@ namespace ComicsShelf.Store
    {
       static string item_sync(string ItemID) => $"{base_sync()}.Item.{ItemID}";
 
-      public static async Task<ItemStoreVM> GetItem(string itemID)
+      public static async Task<ItemVM> GetItem(string itemID)
       {
          try
          {
             var libraryItemJson = Xamarin.Essentials.Preferences.Get(item_sync(itemID), "");
             if (string.IsNullOrEmpty(libraryItemJson)) { return null; }
 
-            var libraryItem = await Helpers.Json.Deserialize<ItemStoreVM>(libraryItemJson);
+            var libraryItem = await Helpers.Json.Deserialize<ItemVM>(libraryItemJson);
 
             return libraryItem;
          }
          catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
       }
 
-      public static async Task<bool> SetItem(ItemStoreVM libraryItem)
+      public static async Task<bool> SetItem(ItemVM libraryItem)
       {
          try
          {

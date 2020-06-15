@@ -1,14 +1,15 @@
-﻿using System.Linq;
+﻿using ComicsShelf.ViewModels;
+using System.Linq;
 
 namespace ComicsShelf.Store
 {
    partial class StoreService
    {
-      LibraryStoreVM[] LibraryList { get; set; } = new LibraryStoreVM[] { };
+      LibraryVM[] LibraryList { get; set; } = new LibraryVM[] { };
 
-      public LibraryStoreVM[] GetLibraries() => this.LibraryList;
+      public LibraryVM[] GetLibraries() => this.LibraryList;
 
-      public LibraryStoreVM GetLibrary(string libraryID) =>
+      public LibraryVM GetLibrary(string libraryID) =>
          this.LibraryList
             .Where(x => x.ID == libraryID)
             .FirstOrDefault();

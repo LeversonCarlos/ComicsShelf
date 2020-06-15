@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,26 +14,16 @@ namespace ComicsShelf.Store
          try
          {
 
-            var driveType = libraryType == enLibraryType.OneDrive ? Drive.enDriveType.OneDrive : Drive.enDriveType.LocalDrive;
-            var drive = Drive.BaseDrive.GetDrive(driveType);
-            if (drive == null) { Helpers.AppInsights.TrackEvent("drive.not.defined", $"libraryType:{libraryType}"); return false; }
-
-            var driveLibrary = await drive.AddLibrary();
-            if (driveLibrary == null) { return false; }
-            var library = new LibraryStoreVM
-            {
-               ID = driveLibrary.ID,
-               Description = driveLibrary.Name,
-               Path = driveLibrary.Path,
-               KeyValues = driveLibrary.KeyValues,
-               Type = libraryType
-            };
+            var library = await Drive.BaseDrive
+               .GetDrive(libraryType)
+               .AddLibrary();
+            if (library == null) { return false; }
 
             // VALIDATE
             // TODO
 
             if (!await Sync.SetLibrary(library)) { return false; }
-            this.ItemList.Add(library.ID, new List<ItemStoreVM>());
+            this.ItemList.Add(library.ID, new List<ItemVM>());
 
             this.LibraryList = this.LibraryList
                .Union(new[] { library })

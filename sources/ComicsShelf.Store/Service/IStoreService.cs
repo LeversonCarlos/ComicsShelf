@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using ComicsShelf.ViewModels;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Store
 {
@@ -7,16 +8,16 @@ namespace ComicsShelf.Store
 
       Task<bool> InitializeAsync();
 
-      LibraryStoreVM[] GetLibraries();
-      LibraryStoreVM GetLibrary(string libraryID);
+      LibraryVM[] GetLibraries();
+      LibraryVM GetLibrary(string libraryID);
 
       Task<bool> AddLibraryAsync(enLibraryType libraryType);
-      Task<bool> RemoveLibraryAsync(LibraryStoreVM library);
+      Task<bool> RemoveLibraryAsync(LibraryVM library);
 
-      ItemStoreVM[] GetLibraryItems(LibraryStoreVM library);
+      ItemVM[] GetLibraryItems(LibraryVM library);
 
-      Task<bool> UpdateItemAsync(ItemStoreVM item);
-      Task<bool> UpdateItemAsync(ItemStoreVM[] itemList);
+      Task<bool> UpdateItemAsync(ItemVM item);
+      Task<bool> UpdateItemAsync(ItemVM[] itemList);
 
    }
 }

@@ -1,16 +1,16 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Store
 {
    partial class StoreService
    {
 
-      public Task<bool> UpdateItemAsync(ItemStoreVM item) => UpdateItemAsync(new ItemStoreVM[] { item });
+      public Task<bool> UpdateItemAsync(ItemVM item) => UpdateItemAsync(new ItemVM[] { item });
 
-      public async Task<bool> UpdateItemAsync(ItemStoreVM[] itemList)
+      public async Task<bool> UpdateItemAsync(ItemVM[] itemList)
       {
          try
          {

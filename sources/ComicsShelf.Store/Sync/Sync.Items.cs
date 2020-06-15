@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace ComicsShelf.Store
          catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new string[] { }; }
       }
 
-      public static async Task<bool> SetItems(string libraryID, List<ItemStoreVM> items)
+      public static async Task<bool> SetItems(string libraryID, List<ItemVM> items)
       {
          try
          {
