@@ -1,5 +1,4 @@
-﻿using ComicsShelf.Store;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
@@ -7,23 +6,15 @@ namespace ComicsShelf.Drive
    partial class BaseDrive<T>
    {
 
-      public async Task<LibraryStoreVM> AddLibrary()
+      public async Task<ItemVM> AddLibrary()
       {
          try
          {
 
             if (!await this.CloudService.ConnectAsync()) { return null; }
 
-            var selectedFolder = await FolderDialog.Selector.GetFolder(this.CloudService);
-            if (selectedFolder == null) { return null; }
-
-            var library = new LibraryStoreVM
-            {
-               ID = selectedFolder.ID,
-               Path = selectedFolder.Path,
-               Description = selectedFolder.Name,
-               Type = this.GetLibraryType()
-            };
+            var library = await FolderDialog.Selector.GetFolder(this.CloudService);
+            if (library == null) { return null; }
 
             /*
             if (this.LibraryType == LibraryType.OneDrive)

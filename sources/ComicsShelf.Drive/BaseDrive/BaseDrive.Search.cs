@@ -1,5 +1,5 @@
-﻿using ComicsShelf.Store;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
@@ -9,24 +9,43 @@ namespace ComicsShelf.Drive
    partial class BaseDrive<T>
    {
 
-      public async Task<ItemStoreVM[]> SearchFiles(LibraryStoreVM library)
+      public async Task<ItemVM[]> SearchFiles(ItemVM library)
       {
          try
          {
 
             // DEFINE ROOT DIRECTORY
-            var directory = new DirectoryVM
+            var root = new DirectoryVM
             {
                ID = library.ID,
                Path = library.Path,
-               Name = library.Description
+               Name = library.Name
             };
 
             // SEARCH FOR FILES ON THE DIRECTORY
-            var fileList = await this.CloudService.SearchFiles(directory, "*.cbz", 10000);
+            var fileList = await this.CloudService.SearchFiles(root, "*.cbz", 10000);
 
             // CONVERT
-            var rootPath = directory.Path.Replace("/ /", "/");
+            var rootPath = root.Path.Replace("/ /", "/");
+            var itemList = fileList?
+               .Select(x => new ItemVM
+               {
+                  ID = x.ID,
+                  Name = x.Name,
+                  Path = x.Path,
+                  ParentID = x.ParentID,
+                  CreatedDateTime = x.CreatedDateTime,
+                  SizeInBytes = x.SizeInBytes,
+                  KeyValues = x.KeyValues
+               })
+               .ToList();
+            foreach (var item in itemList)
+            {
+               if (item.KeyValues == null) { item.KeyValues = new Dictionary<string, string>(); }
+               item.KeyValues.Add("EscapedID", this.EscapeFileID(item.ID));
+            }
+
+            /*
             var itemList = fileList?
                .Select(file => new
                {
@@ -43,9 +62,9 @@ namespace ComicsShelf.Drive
                   ReleaseDate = (!x.file.CreatedDateTime.HasValue ? DateTime.MinValue : x.file.CreatedDateTime.Value.ToLocalTime()),
                   x.file.KeyValues
                })
-               .Select(file => new ItemStoreVM
+               .Select(file => new ItemVM
                {
-                  ID = file.ID,
+                  ID = file.ID, 
                   LibraryID = library.ID,
                   FullText = file.fileText,
                   ShortText = (string.IsNullOrEmpty(file.fileText) || string.IsNullOrEmpty(file.folderText) ? file.fileText : file.fileText.Replace(file.folderText, "")),
@@ -58,11 +77,11 @@ namespace ComicsShelf.Drive
                   Available = true
                })
                .ToList();
+            */
 
-            await Task.CompletedTask;
             return itemList.ToArray();
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new ItemStoreVM[] { }; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new ItemVM[] { }; }
       }
 
    }

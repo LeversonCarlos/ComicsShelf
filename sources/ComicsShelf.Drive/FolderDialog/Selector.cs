@@ -8,43 +8,9 @@ namespace ComicsShelf.Drive.FolderDialog
    internal class Selector
    {
 
-      public static Task<DirectoryVM> GetFolder(ICloudDriveService driveService) => GetFolder(driveService, new DirectoryVM { });
+      public static Task<ItemVM> GetFolder(ICloudDriveService driveService) => GetFolder(driveService, new ItemVM { });
 
-      public static async Task<DirectoryVM> GetFolder(ICloudDriveService driveService, DirectoryVM initialFolder)
-      {
-         try
-         {
-
-            FolderVM initialItem = null;
-            if (initialFolder != null)
-            {
-               initialItem = new FolderVM
-               {
-                  ID = initialFolder.ID,
-                  Path = initialFolder.Path,
-                  Name = initialFolder.Name
-               };
-            }
-
-            var selectedItem = await GetFolder(driveService, initialItem);
-
-            DirectoryVM selectedFolder = null;
-            if (selectedItem != null)
-            {
-               selectedFolder = new DirectoryVM
-               {
-                  ID = selectedItem.ID,
-                  Name = selectedItem.Name,
-                  Path = selectedItem.Path
-               };
-            }
-
-            return selectedFolder;
-         }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
-      }
-
-      public static async Task<FolderVM> GetFolder(ICloudDriveService driveService, FolderVM initialFolder)
+      public static async Task<ItemVM> GetFolder(ICloudDriveService driveService, ItemVM initialFolder)
       {
          try
          {
@@ -84,35 +50,35 @@ namespace ComicsShelf.Drive.FolderDialog
          catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
       }
 
-      static async Task<FolderVM[]> GetFolder_Children(ICloudDriveService driveService, FolderVM item)
+      static async Task<ItemVM[]> GetFolder_Children(ICloudDriveService driveService, ItemVM item)
       {
          if (item == null || string.IsNullOrEmpty(item.ID))
-         { return await GetFolder_Children_Drivers(driveService); }
-         else if (item.Type == enFolderType.Drive || item.Type == enFolderType.Folder)
+         { return await GetFolder_Children_Drives(driveService); }
+         else if (item.Type == enItemType.Drive || item.Type == enItemType.Folder)
          { return await GetFolder_Children_Directories(driveService, item); }
-         else { return new FolderVM[] { }; }
+         else { return new ItemVM[] { }; }
       }
 
-      static async Task<FolderVM[]> GetFolder_Children_Drivers(ICloudDriveService driveService)
+      static async Task<ItemVM[]> GetFolder_Children_Drives(ICloudDriveService driveService)
       {
          try
          {
             var driveList = await driveService.GetDrivers();
             var resultList = driveList
-               .Select(x => new FolderVM
+               .Select(x => new ItemVM
                {
                   ID = x.ID,
                   Name = x.Name,
                   Path = x.Path,
-                  Type = enFolderType.Drive
+                  Type = enItemType.Drive
                })
                .ToArray();
             return resultList;
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new FolderVM[] { }; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new ItemVM[] { }; }
       }
 
-      static async Task<FolderVM[]> GetFolder_Children_Directories(ICloudDriveService driveService, FolderVM item)
+      static async Task<ItemVM[]> GetFolder_Children_Directories(ICloudDriveService driveService, ItemVM item)
       {
          try
          {
@@ -127,22 +93,21 @@ namespace ComicsShelf.Drive.FolderDialog
             var directoriesList = await driveService.GetDirectories(folder);
 
             var resultList = directoriesList
-               .Select(x => new FolderVM
+               .Select(x => new ItemVM
                {
                   ID = x.ID,
                   Name = x.Name,
                   Path = x.Path,
                   Parent = item,
-                  Type = enFolderType.Folder
+                  Type = enItemType.Folder
                })
                .ToList();
-            resultList.Insert(0, new FolderVM { Name = "..", ID = item.Parent?.ID, Path = item.Parent?.Path, Parent = item?.Parent?.Parent });
+            resultList.Insert(0, new ItemVM { Name = "..", ID = item.Parent?.ID, Path = item.Parent?.Path, Parent = item?.Parent?.Parent });
 
             return resultList.ToArray();
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new FolderVM[] { }; }
+         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new ItemVM[] { }; }
       }
-
 
    }
 }

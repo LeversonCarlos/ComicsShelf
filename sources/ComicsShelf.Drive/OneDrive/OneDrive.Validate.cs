@@ -1,5 +1,4 @@
-﻿using ComicsShelf.Store;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
@@ -7,7 +6,7 @@ namespace ComicsShelf.Drive
    partial class OneDrive
    {
 
-      public override async Task<bool> ValidateLibrary(LibraryStoreVM library)
+      public override async Task<bool> ValidateLibrary(ItemVM library)
       {
          try
          {

@@ -1,20 +1,19 @@
-﻿using ComicsShelf.Store;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ComicsShelf.Drive
 {
    public interface IDrive
    {
 
-      Task<bool> ValidateLibrary(LibraryStoreVM library);
+      Task<bool> ValidateLibrary(ItemVM library);
 
-      Task<LibraryStoreVM> AddLibrary();
-      Task<bool> RemoveLibrary(LibraryStoreVM library);
+      Task<ItemVM> AddLibrary();
+      Task<bool> RemoveLibrary(ItemVM library);
 
-      Task<ItemStoreVM[]> SearchFiles(LibraryStoreVM library);
+      Task<ItemVM[]> SearchItems(ItemVM library);
 
-      Task<bool> ExtractCover(LibraryStoreVM library, ItemStoreVM comicFile);
-      // Task<List<ComicPageVM>> ExtractPages(LibraryStoreVM library, ItemStoreVM comicFile);
+      Task<bool> ExtractCover(ItemVM library, ItemVM libraryItem);
+      // Task<List<ComicPageVM>> ExtractPages(DirectoryVM library, FileVM libraryItem);
 
       string EscapeFileID(string fileID);
    }
