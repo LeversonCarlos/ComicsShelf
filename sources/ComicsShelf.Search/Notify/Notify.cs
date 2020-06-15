@@ -7,10 +7,10 @@ namespace ComicsShelf.Search
 
       const string ProgressMessage = "search.progress.message";
 
-      internal static void Progress(LibraryVM library, params string[] messages) =>
-         Helpers.Messaging.Send($"{ProgressMessage}.{library.ID}", messages);
+      internal static void Progress(LibraryVM library, string message, params string[] parameters) =>
+         Helpers.Messaging.Send($"{ProgressMessage}.{library.ID}", new { message, parameters });
 
-      public static void Progress(LibraryVM library, System.Action<string[]> callback) =>
+      public static void Progress(LibraryVM library, System.Action<(string message, string[] parameters)> callback) =>
          Helpers.Messaging.Subscribe($"{ProgressMessage}.{library.ID}", callback);
 
 

@@ -1,6 +1,6 @@
 ﻿namespace ComicsShelf.Search
 {
-   public partial class SearchService : ISearchService
+   public partial class SearchService
    {
 
    }

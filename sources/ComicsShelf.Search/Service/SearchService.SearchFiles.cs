@@ -9,7 +9,7 @@ namespace ComicsShelf.Search
    partial class SearchService
    {
 
-      public async Task<bool> SearchFiles(LibraryVM library)
+      public static async Task<bool> SearchFiles(LibraryVM library)
       {
          try
          {
