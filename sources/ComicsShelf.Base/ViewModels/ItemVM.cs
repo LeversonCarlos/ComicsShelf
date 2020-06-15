@@ -15,6 +15,8 @@ namespace ComicsShelf.ViewModels
 
       public string FolderPath { get; set; }
       public string FileName { get; set; }
+
+      public long? SizeInBytes { get; set; }
       public DateTime ReleaseDate { get; set; }
 
       public short? Rating { get; set; }
