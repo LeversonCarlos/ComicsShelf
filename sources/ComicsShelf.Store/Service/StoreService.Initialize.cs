@@ -31,7 +31,7 @@ namespace ComicsShelf.Store
 
                this.ItemList.Add(library.ID, itemList.ToList());
 
-               Notify.LibraryAdd(library);
+               Notifyers.Notify.LibraryAdd(library);
             }
 
             return true;
