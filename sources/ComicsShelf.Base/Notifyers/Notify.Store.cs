@@ -23,5 +23,16 @@ namespace ComicsShelf.Notifyers
       public static void ItemsUpdate(LibraryVM library, System.Action<ItemVM[]> callback) =>
          Helpers.Messaging.Subscribe($"{ItemsUpdateMessage}.{library.ID}", callback);
 
+      const string ProgressMessage = "store.progress.message";
+      public static void Progress(LibraryVM library, string message, params string[] parameters) =>
+         Helpers.Messaging.Send($"{ProgressMessage}.{library.ID}", new ProgressData { Message = message, Parameters = parameters });
+      public static void Progress(LibraryVM library, System.Action<ProgressData> callback) =>
+         Helpers.Messaging.Subscribe($"{ProgressMessage}.{library.ID}", callback);
+      public struct ProgressData
+      {
+         public string Message { get; set; }
+         public string[] Parameters { get; set; }
+      }
+
    }
 }
