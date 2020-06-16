@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,16 +9,14 @@ namespace ComicsShelf.Store
    partial class StoreService
    {
 
-      public Task<bool> UpdateItemAsync(ItemVM item) => UpdateItemAsync(new ItemVM[] { item });
-
       public async Task<bool> UpdateItemAsync(ItemVM[] itemList)
       {
          try
          {
-            var libraryChanged = false;
+            var changedItemIDs = new List<string>();
             var libraryID = itemList.Select(x => x.LibraryID).FirstOrDefault();
-            var libraryItems = this.ItemList[libraryID];
-            var libraryItemIDs = libraryItems.Select(x => x.ID).ToArray();
+            var library = this.GetLibrary(libraryID);
+            var libraryItemIDs = this.ItemList[libraryID].Select(x => x.ID).ToArray();
 
             // CHECK FOR CHANGED ITEMS
             var currentItems = itemList
@@ -29,7 +28,7 @@ namespace ComicsShelf.Store
                if (!Equals(currentItem, updateItem))
                {
                   if (!await Sync.SetItem(updateItem)) { return false; }
-                  libraryChanged = true;
+                  changedItemIDs.Add(updateItem.ID);
                }
             }
 
@@ -37,16 +36,22 @@ namespace ComicsShelf.Store
             var newItems = itemList
                .Where(x => !libraryItemIDs.Contains(x.ID))
                .ToArray();
-            foreach (var item in newItems)
+            foreach (var newItem in newItems)
             {
-               if (!await Sync.SetItem(item)) { return false; }
-               libraryItems.Add(item);
-               libraryChanged = true;
+               if (!await Sync.SetItem(newItem)) { return false; }
+               this.ItemList[libraryID].Add(newItem);
+               changedItemIDs.Add(newItem.ID);
             }
 
             // UPDATE THE LIBRARY's ITEM IDs
-            if (libraryChanged)
-            { await Sync.SetItems(libraryID, this.ItemList[libraryID]); }
+            if (changedItemIDs.Any())
+            {
+               await Sync.SetItems(libraryID, this.ItemList[libraryID]);
+               var notifyItems = this.ItemList[libraryID]
+                  .Where(x => changedItemIDs.Contains(x.ID))
+                  .ToArray();
+               Notifyers.Notify.ItemsUpdate(library, notifyItems);
+            }
 
             return true;
          }

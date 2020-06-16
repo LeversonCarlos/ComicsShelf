@@ -17,5 +17,11 @@ namespace ComicsShelf.Notifyers
       public static void LibraryRemove(System.Action<LibraryVM> callback) =>
          Helpers.Messaging.Subscribe(LibraryRemoveMessage, callback);
 
+      const string ItemsUpdateMessage = "store.items.update.message";
+      public static void ItemsUpdate(LibraryVM library, ItemVM[] itemList) =>
+         Helpers.Messaging.Send($"{ItemsUpdateMessage}.{library.ID}", itemList);
+      public static void ItemsUpdate(LibraryVM library, System.Action<ItemVM[]> callback) =>
+         Helpers.Messaging.Subscribe($"{ItemsUpdateMessage}.{library.ID}", callback);
+
    }
 }

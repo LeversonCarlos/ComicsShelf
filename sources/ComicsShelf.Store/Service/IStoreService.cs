@@ -16,7 +16,6 @@ namespace ComicsShelf.Store
 
       ItemVM[] GetLibraryItems(LibraryVM library);
 
-      Task<bool> UpdateItemAsync(ItemVM item);
       Task<bool> UpdateItemAsync(ItemVM[] itemList);
 
    }
