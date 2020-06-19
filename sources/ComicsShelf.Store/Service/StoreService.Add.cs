@@ -20,7 +20,7 @@ namespace ComicsShelf.Store
             if (library == null) { return false; }
 
             // VALIDATE
-            // TODO
+            if (this.ItemList.ContainsKey(library.ID)) { return false; }
 
             if (!await Sync.SetLibrary(library)) { return false; }
             this.ItemList.Add(library.ID, new List<ItemVM>());
