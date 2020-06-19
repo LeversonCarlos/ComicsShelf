@@ -14,7 +14,7 @@ namespace ComicsShelf.Drive
             if (!await this.CloudService.CheckConnectionAsync()) { return false; }
             return true;
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
       }
 
    }

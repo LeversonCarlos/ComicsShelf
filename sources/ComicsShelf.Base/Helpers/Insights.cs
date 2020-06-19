@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace ComicsShelf.Helpers
 {
-   public class AppInsights
+   public class Insights
    {
 
       public static void TrackEvent(string text) =>

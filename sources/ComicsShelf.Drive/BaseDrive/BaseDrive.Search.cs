@@ -96,7 +96,7 @@ namespace ComicsShelf.Drive
 
             return itemList.ToArray();
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return new ItemVM[] { }; }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); return new ItemVM[] { }; }
       }
 
    }

@@ -19,7 +19,7 @@ namespace ComicsShelf.Store
 
             return library;
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); return null; }
       }
 
       public static async Task<bool> SetLibrary(LibraryVM library)
@@ -30,7 +30,7 @@ namespace ComicsShelf.Store
             Xamarin.Essentials.Preferences.Set(library_sync(library.ID), libraryJson);
             return true;
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
       }
 
       public static async Task<bool> RemoveLibrary(LibraryVM library)
@@ -41,7 +41,7 @@ namespace ComicsShelf.Store
             await Task.CompletedTask;
             return true;
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
       }
 
    }

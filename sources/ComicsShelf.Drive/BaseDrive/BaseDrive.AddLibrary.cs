@@ -25,14 +25,9 @@ namespace ComicsShelf.Drive
                KeyValues = driveItem.KeyValues
             };
 
-            /*
-            if (this.LibraryType == LibraryType.OneDrive)
-            { if (!string.IsNullOrEmpty(library.Path)) { library.Path += "/"; } }
-            */
-
             return library;
          }
-         catch (Exception ex) { Helpers.AppInsights.TrackException(ex); return null; }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); return null; }
       }
 
    }

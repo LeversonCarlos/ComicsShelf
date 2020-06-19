@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers
 {
@@ -12,6 +15,28 @@ namespace ComicsShelf.Helpers
       public static INavigation Navigation => MainPage.Navigation;
 
       // public static void HideNavigation() => MainPage.IsPresented = false;
+
+
+      public static void ShowMessage(Exception ex, [CallerMemberName] string callerMemberName = "", [CallerFilePath] string callerFilePath = "", [CallerLineNumber] int callerLineNumber = 0)
+      {
+         Insights.TrackException(ex, callerMemberName, callerFilePath, callerLineNumber);
+         ShowMessage(ex.Message);
+      }
+
+      public static void ShowMessage(string message)
+      {
+         try
+         { Device.BeginInvokeOnMainThread(() => MainPage.DisplayAlert("R.Strings.AppTitle", message, "R.Strings.BASE_OK_COMMAND")); }
+         catch { }
+      }
+
+      public static async Task<bool> ConfirmMessage(string message)
+      {
+         try
+         { return await MainPage.DisplayAlert("R.Strings.AppTitle", message, "R.Strings.BASE_OK_COMMAND", "R.Strings.BASE_CANCEL_COMMAND"); }
+         catch { return false; }
+      }
+
 
    }
 }
