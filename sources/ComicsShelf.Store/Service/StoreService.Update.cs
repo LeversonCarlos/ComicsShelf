@@ -13,6 +13,7 @@ namespace ComicsShelf.Store
       {
          try
          {
+            if (itemList?.Length == 0) { return true; }
             var changedItemIDs = new List<string>();
             var libraryID = itemList.Select(x => x.LibraryID).FirstOrDefault();
             var library = this.GetLibrary(libraryID);
