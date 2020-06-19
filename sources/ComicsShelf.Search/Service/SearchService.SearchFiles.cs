@@ -21,7 +21,7 @@ namespace ComicsShelf.Search
             var searchItems = await Drive.BaseDrive
                .GetDrive(library.Type)
                .SearchItems(library);
-            Notifyers.Notify.Message(library, string.Format(R.Search.FOUND_N_FILES, (searchItems?.Length ?? 0).ToString()));
+            Notifyers.Notify.Message(library, string.Format(R.Search.FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
 
             // LOAD CURRENT LIBRARY FILES
             var store = DependencyService.Get<Store.IStoreService>();
@@ -34,7 +34,7 @@ namespace ComicsShelf.Search
             inactiveItems.ForEach(file => file.Available = false);
             await store.UpdateItemAsync(inactiveItems.ToArray());
             if (inactiveItems.Count > 0)
-            { Notifyers.Notify.Message(library, string.Format(R.Search.INACTIVATED_N_FILES, inactiveItems.Count)); }
+            { Notifyers.Notify.Message(library, string.Format(R.Search.INACTIVATED_N_FILES_MESSAGE, inactiveItems.Count)); }
 
             // UPDATE CHANGED FILES ON THE LIBRARY
             var newItems = searchItems
@@ -42,7 +42,7 @@ namespace ComicsShelf.Search
                .ToList();
             await store.UpdateItemAsync(searchItems.ToArray());
             if (newItems.Count > 0)
-            { Notifyers.Notify.Message(library, string.Format(R.Search.ADDED_N_NEW_FILES, newItems.Count)); }
+            { Notifyers.Notify.Message(library, string.Format(R.Search.ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
 
             // NOTIFY EMPTY MESSAGE
             if (inactiveItems.Count == 0 && newItems.Count == 0)

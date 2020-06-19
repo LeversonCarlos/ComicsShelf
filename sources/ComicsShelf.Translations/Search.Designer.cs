@@ -61,34 +61,34 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added {0} new Files.
+        ///   Looks up a localized string similar to Added {0} new files.
         /// </summary>
-        public static string ADDED_N_NEW_FILES {
+        public static string ADDED_N_NEW_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("ADDED_N_NEW_FILES", resourceCulture);
+                return ResourceManager.GetString("ADDED_N_NEW_FILES_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found {0} Files.
+        ///   Looks up a localized string similar to Found {0} files.
         /// </summary>
-        public static string FOUND_N_FILES {
+        public static string FOUND_N_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("FOUND_N_FILES", resourceCulture);
+                return ResourceManager.GetString("FOUND_N_FILES_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inactivated {0} Files.
+        ///   Looks up a localized string similar to Inactivated {0} files.
         /// </summary>
-        public static string INACTIVATED_N_FILES {
+        public static string INACTIVATED_N_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("INACTIVATED_N_FILES", resourceCulture);
+                return ResourceManager.GetString("INACTIVATED_N_FILES_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting Library Search.
+        ///   Looks up a localized string similar to Search library for files.
         /// </summary>
         public static string START_MESSAGE {
             get {
