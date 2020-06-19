@@ -22,12 +22,6 @@ namespace ComicsShelf.Drive
    public class BaseDrive
    {
 
-      // public static IDrive GetDrive(string libraryID) =>
-      //    GetDrive(DependencyService.Get<Store.IStoreService>().GetLibrary(libraryID));
-
-      // public static IDrive GetDrive(LibraryStoreVM library) =>
-      //    GetDrive(library.Type);
-
       public static IDrive GetDrive(enLibraryType libraryType)
       {
          try
