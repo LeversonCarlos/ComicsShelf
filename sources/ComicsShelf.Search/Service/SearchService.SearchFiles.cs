@@ -46,6 +46,7 @@ namespace ComicsShelf.Search
 
             // NOTIFY FINISH MESSAGE
             Notifyers.Notify.Progress(library, "search_progress_finish");
+            await Task.Delay(5000).ContinueWith(task => Notifyers.Notify.Progress(library, ""));
 
             // NOTIFY THAT LIBRARY FILES WAS UPDATED 
             // Notify.Result(library, store.GetLibraryItems(library));

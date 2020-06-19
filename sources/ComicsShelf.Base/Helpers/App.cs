@@ -9,7 +9,6 @@ namespace ComicsShelf.Helpers
 
       // public static NavigationPage NavigationPage => MainPage as NavigationPage;
 
-      // public static INavigation Navigation => NavigationPage.Navigation;
       public static INavigation Navigation => MainPage.Navigation;
 
       // public static void HideNavigation() => MainPage.IsPresented = false;
