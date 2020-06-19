@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.ViewModels;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Notifyers
 {
@@ -7,7 +8,7 @@ namespace ComicsShelf.Notifyers
 
       const string LibraryAddKey = "store.library.add.key";
       public static void LibraryAdd(LibraryVM library) =>
-         Helpers.Messaging.Send(LibraryAddKey, library);
+         Device.BeginInvokeOnMainThread(() => Helpers.Messaging.Send(LibraryAddKey, library));
       public static void LibraryAdd(System.Action<LibraryVM> callback) =>
          Helpers.Messaging.Subscribe(LibraryAddKey, callback);
 
@@ -33,6 +34,12 @@ namespace ComicsShelf.Notifyers
          public string Message { get; set; }
          public string[] Parameters { get; set; }
       }
+
+      const string ProgressKey = "store.progress.key";
+      public static void Progress(LibraryVM library, double progress) =>
+         Helpers.Messaging.Send($"{ProgressKey}.{library.ID}", progress);
+      public static void Progress(LibraryVM library, System.Action<double> callback) =>
+         Helpers.Messaging.Subscribe($"{ProgressKey}.{library.ID}", callback);
 
    }
 }
