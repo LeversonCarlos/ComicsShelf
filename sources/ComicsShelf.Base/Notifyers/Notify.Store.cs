@@ -25,15 +25,10 @@ namespace ComicsShelf.Notifyers
          Helpers.Messaging.Subscribe($"{ItemsUpdateKey}.{library.ID}", callback);
 
       const string MessageKey = "store.message.key";
-      public static void Message(LibraryVM library, string message, params string[] parameters) =>
-         Helpers.Messaging.Send($"{MessageKey}.{library.ID}", new MessageData { Message = message, Parameters = parameters });
-      public static void Message(LibraryVM library, System.Action<MessageData> callback) =>
+      public static void Message(LibraryVM library, string message) =>
+         Helpers.Messaging.Send($"{MessageKey}.{library.ID}", message);
+      public static void Message(LibraryVM library, System.Action<string> callback) =>
          Helpers.Messaging.Subscribe($"{MessageKey}.{library.ID}", callback);
-      public struct MessageData
-      {
-         public string Message { get; set; }
-         public string[] Parameters { get; set; }
-      }
 
       const string ProgressKey = "store.progress.key";
       public static void Progress(LibraryVM library, double progress) =>
