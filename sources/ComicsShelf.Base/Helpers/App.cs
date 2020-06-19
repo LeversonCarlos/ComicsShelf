@@ -26,14 +26,14 @@ namespace ComicsShelf.Helpers
       public static void ShowMessage(string message)
       {
          try
-         { Device.BeginInvokeOnMainThread(() => MainPage.DisplayAlert("R.Strings.AppTitle", message, "R.Strings.BASE_OK_COMMAND")); }
+         { Device.BeginInvokeOnMainThread(() => MainPage.DisplayAlert(R.Common.APP_TITLE, message, R.Common.OK_COMMAND)); }
          catch { }
       }
 
       public static async Task<bool> ConfirmMessage(string message)
       {
          try
-         { return await MainPage.DisplayAlert("R.Strings.AppTitle", message, "R.Strings.BASE_OK_COMMAND", "R.Strings.BASE_CANCEL_COMMAND"); }
+         { return await MainPage.DisplayAlert("R.Strings.AppTitle", message, R.Common.OK_COMMAND, R.Common.CANCEL_COMMAND); }
          catch { return false; }
       }
 

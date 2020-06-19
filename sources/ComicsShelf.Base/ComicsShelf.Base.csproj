@@ -14,4 +14,8 @@
       <PackageReference Include="System.Text.Json" Version="4.7.2" />
    </ItemGroup>
 
+   <ItemGroup>
+     <ProjectReference Include="..\ComicsShelf.Translations\ComicsShelf.Translations.csproj" />
+   </ItemGroup>
+
 </Project>
