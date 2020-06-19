@@ -5,30 +5,30 @@ namespace ComicsShelf.Notifyers
    partial class Notify
    {
 
-      const string LibraryAddMessage = "store.library.add.message";
+      const string LibraryAddKey = "store.library.add.key";
       public static void LibraryAdd(LibraryVM library) =>
-         Helpers.Messaging.Send(LibraryAddMessage, library);
+         Helpers.Messaging.Send(LibraryAddKey, library);
       public static void LibraryAdd(System.Action<LibraryVM> callback) =>
-         Helpers.Messaging.Subscribe(LibraryAddMessage, callback);
+         Helpers.Messaging.Subscribe(LibraryAddKey, callback);
 
-      const string LibraryRemoveMessage = "store.library.remove.message";
+      const string LibraryRemoveKey = "store.library.remove.key";
       public static void LibraryRemove(LibraryVM library) =>
-         Helpers.Messaging.Send(LibraryRemoveMessage, library);
+         Helpers.Messaging.Send(LibraryRemoveKey, library);
       public static void LibraryRemove(System.Action<LibraryVM> callback) =>
-         Helpers.Messaging.Subscribe(LibraryRemoveMessage, callback);
+         Helpers.Messaging.Subscribe(LibraryRemoveKey, callback);
 
-      const string ItemsUpdateMessage = "store.items.update.message";
+      const string ItemsUpdateKey = "store.items.update.key";
       public static void ItemsUpdate(LibraryVM library, ItemVM[] itemList) =>
-         Helpers.Messaging.Send($"{ItemsUpdateMessage}.{library.ID}", itemList);
+         Helpers.Messaging.Send($"{ItemsUpdateKey}.{library.ID}", itemList);
       public static void ItemsUpdate(LibraryVM library, System.Action<ItemVM[]> callback) =>
-         Helpers.Messaging.Subscribe($"{ItemsUpdateMessage}.{library.ID}", callback);
+         Helpers.Messaging.Subscribe($"{ItemsUpdateKey}.{library.ID}", callback);
 
-      const string ProgressMessage = "store.progress.message";
-      public static void Progress(LibraryVM library, string message, params string[] parameters) =>
-         Helpers.Messaging.Send($"{ProgressMessage}.{library.ID}", new ProgressData { Message = message, Parameters = parameters });
-      public static void Progress(LibraryVM library, System.Action<ProgressData> callback) =>
-         Helpers.Messaging.Subscribe($"{ProgressMessage}.{library.ID}", callback);
-      public struct ProgressData
+      const string MessageKey = "store.message.key";
+      public static void Message(LibraryVM library, string message, params string[] parameters) =>
+         Helpers.Messaging.Send($"{MessageKey}.{library.ID}", new MessageData { Message = message, Parameters = parameters });
+      public static void Message(LibraryVM library, System.Action<MessageData> callback) =>
+         Helpers.Messaging.Subscribe($"{MessageKey}.{library.ID}", callback);
+      public struct MessageData
       {
          public string Message { get; set; }
          public string[] Parameters { get; set; }
