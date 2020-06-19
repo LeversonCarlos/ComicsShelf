@@ -19,6 +19,11 @@
        <AutoGen>True</AutoGen>
        <DependentUpon>Common.resx</DependentUpon>
      </Compile>
+     <Compile Update="Covers.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Covers.resx</DependentUpon>
+     </Compile>
      <Compile Update="Search.Designer.cs">
        <DesignTime>True</DesignTime>
        <AutoGen>True</AutoGen>
@@ -30,6 +35,10 @@
      <EmbeddedResource Update="Common.resx">
        <Generator>PublicResXFileCodeGenerator</Generator>
        <LastGenOutput>Common.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Covers.resx">
+       <Generator>PublicResXFileCodeGenerator</Generator>
+       <LastGenOutput>Covers.Designer.cs</LastGenOutput>
      </EmbeddedResource>
      <EmbeddedResource Update="Search.resx">
        <Generator>PublicResXFileCodeGenerator</Generator>
