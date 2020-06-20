@@ -12,5 +12,8 @@ namespace ComicsShelf.Helpers
       public static void Subscribe<T>(string key, Action<T> callback) =>
          MessagingCenter.Subscribe<Application, T>(Application.Current, key, (app, data) => callback(data));
 
+      public static void Unsubscribe(string key) =>
+         MessagingCenter.Unsubscribe<Application>(Application.Current, key);
+
    }
 }

@@ -65,8 +65,8 @@ namespace ComicsShelf.Settings
 
       public void Dispose()
       {
-         // UNSUBSCRIBE MESSAGING
-         // TODO 
+         Notifyers.Notify.MessageUnsubscribe(Library);
+         Notifyers.Notify.ProgressUnsubscribe(Library);
       }
 
    }

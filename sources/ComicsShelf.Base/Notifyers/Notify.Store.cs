@@ -29,12 +29,16 @@ namespace ComicsShelf.Notifyers
          Helpers.Messaging.Send($"{MessageKey}.{library.ID}", message);
       public static void Message(LibraryVM library, System.Action<string> callback) =>
          Helpers.Messaging.Subscribe($"{MessageKey}.{library.ID}", callback);
+      public static void MessageUnsubscribe(LibraryVM library) =>
+         Helpers.Messaging.Unsubscribe($"{MessageKey}.{library.ID}");
 
       const string ProgressKey = "store.progress.key";
       public static void Progress(LibraryVM library, double progress) =>
          Helpers.Messaging.Send($"{ProgressKey}.{library.ID}", progress);
       public static void Progress(LibraryVM library, System.Action<double> callback) =>
          Helpers.Messaging.Subscribe($"{ProgressKey}.{library.ID}", callback);
+      public static void ProgressUnsubscribe(LibraryVM library) =>
+         Helpers.Messaging.Unsubscribe($"{ProgressKey}.{library.ID}");
 
    }
 }
