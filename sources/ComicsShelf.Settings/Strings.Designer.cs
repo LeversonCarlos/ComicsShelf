@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComicsShelf.R {
+namespace ComicsShelf.Settings {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace ComicsShelf.R {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Settings {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Settings() {
+        internal Strings() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.R.Settings", typeof(Settings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Settings.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace ComicsShelf.R {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,27 +61,45 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click to add a new local drive library.
+        ///   Looks up a localized string similar to Click to add a new Local Drive library.
         /// </summary>
-        public static string ADD_LOCAL_DRIVE_LIBRARY_COMMAND {
+        internal static string ADD_LOCAL_DRIVE_LIBRARY_COMMAND {
             get {
                 return ResourceManager.GetString("ADD_LOCAL_DRIVE_LIBRARY_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click to add a new One Drive library.
+        /// </summary>
+        internal static string ADD_ONE_DRIVE_LIBRARY_COMMAND {
+            get {
+                return ResourceManager.GetString("ADD_ONE_DRIVE_LIBRARY_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOCAL DRIVE LIBRARIES.
         /// </summary>
-        public static string LOCAL_DRIVE_LIBRARIES_TITLE {
+        internal static string LOCAL_DRIVE_LIBRARIES_TITLE {
             get {
                 return ResourceManager.GetString("LOCAL_DRIVE_LIBRARIES_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ONE DRIVE LIBRARIES.
+        /// </summary>
+        internal static string ONE_DRIVE_LIBRARIES_TITLE {
+            get {
+                return ResourceManager.GetString("ONE_DRIVE_LIBRARIES_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to remove the {0} library.
         /// </summary>
-        public static string REMOVE_LIBRARY_CONFIRMATION_MESSAGE {
+        internal static string REMOVE_LIBRARY_CONFIRMATION_MESSAGE {
             get {
                 return ResourceManager.GetString("REMOVE_LIBRARY_CONFIRMATION_MESSAGE", resourceCulture);
             }
@@ -90,7 +108,7 @@ namespace ComicsShelf.R {
         /// <summary>
         ///   Looks up a localized string similar to Comics Shelf Settings.
         /// </summary>
-        public static string TITLE {
+        internal static string TITLE {
             get {
                 return ResourceManager.GetString("TITLE", resourceCulture);
             }
