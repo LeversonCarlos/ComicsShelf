@@ -1,18 +1,20 @@
 ﻿using ComicsShelf.Observables;
+using System.Collections.Generic;
 
 namespace ComicsShelf.Settings
 {
    public class SettingsVM : BaseVM
    {
 
-      public LibrariesSetting LocalDrive { get; }
-      public LibrariesSetting OneDrive { get; }
+      public List<LibrariesSetting> LibraryTypes { get; }
 
       public SettingsVM()
       {
          Title = Strings.TITLE;
-         LocalDrive = new LibrariesSetting(ViewModels.enLibraryType.LocalDrive);
-         OneDrive = new LibrariesSetting(ViewModels.enLibraryType.OneDrive);
+         LibraryTypes = new List<LibrariesSetting> {
+            new LibrariesSetting(ViewModels.enLibraryType.LocalDrive),
+            new LibrariesSetting(ViewModels.enLibraryType.OneDrive)
+         };
       }
 
    }

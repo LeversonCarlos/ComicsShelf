@@ -5,12 +5,26 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
-   x:Class="ComicsShelf.Settings.SettingsPage">
+   x:Class="ComicsShelf.Settings.SettingsPage"
+   Title="{Binding Title}">
+   <ContentPage.Resources>
+      <ResourceDictionary Source="SettingsStyles.xaml" />
+   </ContentPage.Resources>
    <ContentPage.Content>
-      <StackLayout>
-         <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+      <StackLayout Style="{StaticResource MainStack}">
+
+         <StackLayout BindableLayout.ItemsSource="{Binding LibraryTypes}" >
+            <BindableLayout.ItemTemplate>
+               <DataTemplate>
+                  <StackLayout>
+
+                     <Label Text="{Binding Title}" Style="LibraryTypeTitle" />
+
+                  </StackLayout>
+               </DataTemplate>
+            </BindableLayout.ItemTemplate>
+         </StackLayout>
+
       </StackLayout>
    </ContentPage.Content>
 </ContentPage>
