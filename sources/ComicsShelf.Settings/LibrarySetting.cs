@@ -11,7 +11,35 @@ namespace ComicsShelf.Settings
 
       public LibrarySetting(LibraryVM library)
       {
-         this.Library = library;
+         Library = library;
+      }
+
+      string _Message;
+      public string Message
+      {
+         get => _Message;
+         set => SetProperty(ref _Message, value);
+      }
+
+      bool _HasMessage;
+      public bool HasMessage
+      {
+         get => _HasMessage;
+         set => SetProperty(ref _HasMessage, value);
+      }
+
+      double _Progress;
+      public double Progress
+      {
+         get => _Progress;
+         set => SetProperty(ref _Progress, value);
+      }
+
+      bool _HasProgress;
+      public bool HasProgress
+      {
+         get => _HasProgress;
+         set => SetProperty(ref _HasProgress, value);
       }
 
       public void Dispose()
