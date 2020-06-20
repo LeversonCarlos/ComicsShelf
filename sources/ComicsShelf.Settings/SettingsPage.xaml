@@ -26,7 +26,7 @@
 
                               <StackLayout Style="{StaticResource LibraryStack}">
                                  <FlexLayout Style="{StaticResource LibraryFlex}" >
-                                    <StackLayout FlexLayout.Grow="1">
+                                    <StackLayout FlexLayout.Grow="1" Spacing="0">
                                        <Label Text="{Binding Library.Description}" Style="{StaticResource LibraryTitleLabel}" ></Label>
                                        <Label Text="{Binding Library.Path}" Style="{StaticResource LibraryDetailsLabel}" ></Label>
                                        <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource LibraryMessageLabel}" ></Label>
@@ -44,11 +44,10 @@
                      <StackLayout Style="{StaticResource LibraryStack}">
                         <FlexLayout Style="{StaticResource LibraryFlex}">
                            <FlexLayout.GestureRecognizers>
-                              <TapGestureRecognizer Command="{Binding AddLocalDriveCommand}" />
+                              <TapGestureRecognizer Command="{Binding AddCommand}" />
                            </FlexLayout.GestureRecognizers>
-                           <Label Text="{Binding LocalDriveAddCommandText}" Style="{StaticResource LibraryTitleLabel}"></Label>
+                           <Label Text="{Binding AddText}" Style="{StaticResource LibraryTitleLabel}"></Label>
                         </FlexLayout>
-                        <BoxView Style="{StaticResource LibrarySeparator}" />
                      </StackLayout>
 
                   </StackLayout>

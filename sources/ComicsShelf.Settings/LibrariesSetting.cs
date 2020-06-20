@@ -38,11 +38,19 @@ namespace ComicsShelf.Settings
          DependencyService.Get<IStoreService>()
             .AddLibraryAsync(LibraryType);
 
-      void AddLibrary(LibraryVM library) =>
+      void AddLibrary(LibraryVM library)
+      {
+         if (library.Type != LibraryType) { return; }
          Libraries.Add(new LibrarySetting(library));
+      }
 
-      void RemoveLibrary(LibraryVM library) =>
-         Libraries.Remove(Libraries.Where(x => x.Library.ID == library.ID).FirstOrDefault());
+      void RemoveLibrary(LibraryVM library)
+      {
+         if (library.Type != LibraryType) { return; }
+         var libraryItem = Libraries.Where(x => x.Library.ID == library.ID).FirstOrDefault();
+         if (libraryItem == null) { return; }
+         Libraries.Remove(libraryItem);
+      }
 
    }
 }
