@@ -1,6 +1,9 @@
 ﻿using ComicsShelf.Observables;
+using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Settings
 {
@@ -12,6 +15,7 @@ namespace ComicsShelf.Settings
       public LibrarySetting(LibraryVM library)
       {
          Library = library;
+         this.RemoveCommand = new Command(async () => await this.Remove());
       }
 
       string _Message;
@@ -40,6 +44,13 @@ namespace ComicsShelf.Settings
       {
          get => _HasProgress;
          set => SetProperty(ref _HasProgress, value);
+      }
+
+      public Command RemoveCommand { get; set; }
+      async Task Remove()
+      {
+         if (!await Helpers.App.ConfirmMessage(string.Format(R.Settings.REMOVE_LIBRARY_CONFIRMATION_MESSAGE, this.Library.Description))) { return; }
+         await DependencyService.Get<IStoreService>().RemoveLibraryAsync(this.Library);
       }
 
       public void Dispose()
