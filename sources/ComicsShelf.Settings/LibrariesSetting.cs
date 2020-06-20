@@ -20,21 +20,29 @@ namespace ComicsShelf.Settings
          Title = libraryType == enLibraryType.LocalDrive ? R.Settings.LOCAL_DRIVE_LIBRARIES_TITLE : "ONE_DRIVE_LIBRARIES_TITLE";
          AddText = libraryType == enLibraryType.LocalDrive ? R.Settings.ADD_LOCAL_DRIVE_LIBRARY_COMMAND : "R.Settings.ADD_ONE_DRIVE_LIBRARY_COMMAND";
          AddCommand = new Command(async () => await Add());
-
-         var libraryList = DependencyService
-            .Get<IStoreService>()
-            .GetLibraries()
-            .Where(x => x.Type == libraryType)
-            .Select(x => new LibrarySetting(x))
-            .ToArray();
-         Libraries = new ObservableList<LibrarySetting>(libraryList);
+         Libraries = new ObservableList<LibrarySetting>(GetLibraryList());
+         Notifyers.Notify.LibraryAdd(library => AddLibrary(library));
+         Notifyers.Notify.LibraryRemove(library => RemoveLibrary(library));
       }
+
+      LibrarySetting[] GetLibraryList() => DependencyService
+         .Get<IStoreService>()
+         .GetLibraries()
+         .Where(x => x.Type == LibraryType)
+         .Select(x => new LibrarySetting(x))
+         .ToArray();
 
       public string AddText { get; }
       public Command AddCommand { get; set; }
       Task Add() =>
          DependencyService.Get<IStoreService>()
             .AddLibraryAsync(LibraryType);
+
+      void AddLibrary(LibraryVM library) =>
+         Libraries.Add(new LibrarySetting(library));
+
+      void RemoveLibrary(LibraryVM library) =>
+         Libraries.Remove(Libraries.Where(x => x.Library.ID == library.ID).FirstOrDefault());
 
    }
 }
