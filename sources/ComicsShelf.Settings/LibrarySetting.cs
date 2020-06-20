@@ -16,6 +16,16 @@ namespace ComicsShelf.Settings
       {
          Library = library;
          this.RemoveCommand = new Command(async () => await this.Remove());
+         Notifyers.Notify.Message(library, message =>
+         {
+            this.Message = message;
+            this.HasMessage = !string.IsNullOrEmpty(message);
+         });
+         Notifyers.Notify.Progress(library, progress =>
+         {
+            this.Progress = progress;
+            this.HasProgress = progress > 0 && progress < 1;
+         });
       }
 
       string _Message;
@@ -49,13 +59,14 @@ namespace ComicsShelf.Settings
       public Command RemoveCommand { get; set; }
       async Task Remove()
       {
-         if (!await Helpers.App.ConfirmMessage(string.Format(R.Settings.REMOVE_LIBRARY_CONFIRMATION_MESSAGE, this.Library.Description))) { return; }
-         await DependencyService.Get<IStoreService>().RemoveLibraryAsync(this.Library);
+         if (!await Helpers.App.ConfirmMessage(string.Format(R.Settings.REMOVE_LIBRARY_CONFIRMATION_MESSAGE, Library.Description))) { return; }
+         await DependencyService.Get<IStoreService>().RemoveLibraryAsync(Library);
       }
 
       public void Dispose()
       {
-         throw new NotImplementedException();
+         // UNSUBSCRIBE MESSAGING
+         // TODO 
       }
 
    }
