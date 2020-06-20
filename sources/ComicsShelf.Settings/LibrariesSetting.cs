@@ -12,7 +12,6 @@ namespace ComicsShelf.Settings
 
       public enLibraryType LibraryType { get; }
       public string Title { get; }
-      public ObservableList<LibrarySetting> Libraries { get; }
 
       public LibrariesSetting(enLibraryType libraryType)
       {
@@ -25,6 +24,7 @@ namespace ComicsShelf.Settings
          Notifyers.Notify.LibraryRemove(library => RemoveLibrary(library));
       }
 
+      public ObservableList<LibrarySetting> Libraries { get; }
       LibrarySetting[] GetLibraryList() => DependencyService
          .Get<IStoreService>()
          .GetLibraries()
@@ -33,7 +33,7 @@ namespace ComicsShelf.Settings
          .ToArray();
 
       public string AddText { get; }
-      public Command AddCommand { get; set; }
+      public Command AddCommand { get; }
       Task Add() =>
          DependencyService.Get<IStoreService>()
             .AddLibraryAsync(LibraryType);
