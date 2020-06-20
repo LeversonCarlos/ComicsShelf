@@ -10,8 +10,9 @@ namespace ComicsShelf.Settings
 
       public SettingsVM()
       {
-         this.LocalDrive = new LibrariesSetting(ViewModels.enLibraryType.LocalDrive);
-         this.OneDrive = new LibrariesSetting(ViewModels.enLibraryType.OneDrive);
+         Title = Strings.TITLE;
+         LocalDrive = new LibrariesSetting(ViewModels.enLibraryType.LocalDrive);
+         OneDrive = new LibrariesSetting(ViewModels.enLibraryType.OneDrive);
       }
 
    }
