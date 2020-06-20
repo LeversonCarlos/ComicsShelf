@@ -18,7 +18,38 @@
                <DataTemplate>
                   <StackLayout>
 
-                     <Label Text="{Binding Title}" Style="LibraryTypeTitle" />
+                     <Label Text="{Binding Title}" Style="{StaticResource LibraryTypeTitle}" />
+
+                     <StackLayout BindableLayout.ItemsSource="{Binding Libraries}">
+                        <BindableLayout.ItemTemplate>
+                           <DataTemplate>
+
+                              <StackLayout Style="{StaticResource LibraryStack}">
+                                 <FlexLayout Style="{StaticResource LibraryFlex}" >
+                                    <StackLayout FlexLayout.Grow="1">
+                                       <Label Text="{Binding Library.Description}" Style="{StaticResource LibraryTitleLabel}" ></Label>
+                                       <Label Text="{Binding Library.Path}" Style="{StaticResource LibraryDetailsLabel}" ></Label>
+                                       <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource LibraryMessageLabel}" ></Label>
+                                       <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource LibraryProgress}" ></ProgressBar>
+                                    </StackLayout>
+                                    <ImageButton Command="{Binding RemoveCommand}" Source="delete" />
+                                 </FlexLayout>
+                                 <BoxView Style="{StaticResource LibrarySeparator}" />
+                              </StackLayout>
+
+                           </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                     </StackLayout>
+
+                     <StackLayout Style="{StaticResource LibraryStack}">
+                        <FlexLayout Style="{StaticResource LibraryFlex}">
+                           <FlexLayout.GestureRecognizers>
+                              <TapGestureRecognizer Command="{Binding AddLocalDriveCommand}" />
+                           </FlexLayout.GestureRecognizers>
+                           <Label Text="{Binding LocalDriveAddCommandText}" Style="{StaticResource LibraryTitleLabel}"></Label>
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource LibrarySeparator}" />
+                     </StackLayout>
 
                   </StackLayout>
                </DataTemplate>
