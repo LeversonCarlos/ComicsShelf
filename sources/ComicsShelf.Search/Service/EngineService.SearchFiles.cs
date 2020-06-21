@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Search
+namespace ComicsShelf.Engine
 {
-   partial class SearchService
+   partial class EngineService
    {
 
       public static async Task<bool> SearchFiles(LibraryVM library)
