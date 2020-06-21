@@ -30,7 +30,9 @@ namespace ComicsShelf.Store
                var itemTasks = itemIDs
                   .Select(itemID => Sync.GetItem(itemID))
                   .ToArray();
-               var itemList = await Task.WhenAll(itemTasks);
+               var itemList = (await Task.WhenAll(itemTasks))
+                  .Where(x => x != null)
+                  .ToArray();
 
                this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
 

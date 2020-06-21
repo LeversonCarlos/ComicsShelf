@@ -33,5 +33,14 @@ namespace ComicsShelf.Store
          catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
       }
 
+      public static void RemoveItem(string itemID)
+      {
+         try
+         {
+            Xamarin.Essentials.Preferences.Remove(item_sync(itemID));
+         }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); }
+      }
+
    }
 }

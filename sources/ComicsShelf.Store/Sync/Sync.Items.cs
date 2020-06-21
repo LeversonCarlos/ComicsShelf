@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Store
 {
@@ -32,6 +33,16 @@ namespace ComicsShelf.Store
             return true;
          }
          catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+      }
+
+      public static void RemoveItems(string libraryID, string[] itemIDs)
+      {
+         try
+         {
+            itemIDs.ForEach(itemID => RemoveItem(itemID));
+            Xamarin.Essentials.Preferences.Remove(items_sync(libraryID));
+         }
+         catch (Exception ex) { Helpers.App.ShowMessage(ex); }
       }
 
    }

@@ -37,6 +37,7 @@ namespace ComicsShelf.Store
       {
          try
          {
+            RemoveItems(library.ID, await GetItems(library.ID));
             Xamarin.Essentials.Preferences.Remove(library_sync(library.ID));
             await Task.CompletedTask;
             return true;
