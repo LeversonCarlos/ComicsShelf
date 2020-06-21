@@ -44,6 +44,9 @@ namespace ComicsShelf.Drive
             foreach (var item in itemList)
             {
 
+               item.SectionPath = System.IO.Path
+                  .GetDirectoryName(item.FolderPath);
+
                item.FolderText = System.IO.Path
                   .GetFileNameWithoutExtension(item.FolderPath)
                   .Replace("/ /", "/");
