@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace ComicsShelf.Store
                   .ToArray();
                var itemList = await Task.WhenAll(itemTasks);
 
-               this.ItemList.Add(library.ID, itemList.ToList());
+               this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
 
                Notifyers.Notify.LibraryAdd(library);
             }

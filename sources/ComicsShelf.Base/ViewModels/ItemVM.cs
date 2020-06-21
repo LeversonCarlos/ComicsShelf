@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ComicsShelf.ViewModels
 {
+
    public class ItemVM
    {
       public string ID { get; set; }
@@ -28,4 +29,18 @@ namespace ComicsShelf.ViewModels
       public Dictionary<string, string> KeyValues { get; set; }
       public bool Available { get; set; }
    }
+
+   public static class ItemVMExtention
+   {
+      public static void SetData(this ItemVM itemVM, ItemVM data)
+      {
+         itemVM.Rating = data.Rating;
+         itemVM.Readed = data.Readed;
+         itemVM.ReadingDate = data.ReadingDate;
+         itemVM.ReadingPage = data.ReadingPage;
+         itemVM.ReadingPercent = data.ReadingPercent;
+         itemVM.Available = data.Available;
+      }
+   }
+
 }

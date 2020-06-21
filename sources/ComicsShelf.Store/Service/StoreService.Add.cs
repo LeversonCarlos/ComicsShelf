@@ -23,7 +23,7 @@ namespace ComicsShelf.Store
             if (this.ItemList.ContainsKey(library.ID)) { return false; }
 
             if (!await Sync.SetLibrary(library)) { return false; }
-            this.ItemList.Add(library.ID, new List<ItemVM>());
+            this.ItemList.Add(library.ID, new SortedList<string, ItemVM>());
 
             this.LibraryList = this.LibraryList
                .Union(new[] { library })

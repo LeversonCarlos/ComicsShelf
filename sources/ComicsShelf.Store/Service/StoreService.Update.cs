@@ -17,7 +17,7 @@ namespace ComicsShelf.Store
             var changedItemIDs = new List<string>();
             var libraryID = itemList.Select(x => x.LibraryID).FirstOrDefault();
             var library = this.GetLibrary(libraryID);
-            var libraryItemIDs = this.ItemList[libraryID].Select(x => x.ID).ToArray();
+            var libraryItemIDs = this.ItemList[libraryID].Select(x => x.Key).ToArray();
 
             // CHECK FOR CHANGED ITEMS
             var currentItems = itemList
@@ -29,6 +29,7 @@ namespace ComicsShelf.Store
                if (!Equals(currentItem, updateItem))
                {
                   if (!await Sync.SetItem(updateItem)) { return false; }
+                  this.ItemList[libraryID][updateItem.ID].SetData(updateItem);
                   changedItemIDs.Add(updateItem.ID);
                }
             }
@@ -40,16 +41,17 @@ namespace ComicsShelf.Store
             foreach (var newItem in newItems)
             {
                if (!await Sync.SetItem(newItem)) { return false; }
-               this.ItemList[libraryID].Add(newItem);
+               this.ItemList[libraryID].Add(newItem.ID, newItem);
                changedItemIDs.Add(newItem.ID);
             }
 
             // UPDATE THE LIBRARY's ITEM IDs
             if (changedItemIDs.Any())
             {
-               await Sync.SetItems(libraryID, this.ItemList[libraryID]);
+               await Sync.SetItems(libraryID, this.ItemList[libraryID].Values.ToList());
                var notifyItems = this.ItemList[libraryID]
-                  .Where(x => changedItemIDs.Contains(x.ID))
+                  .Where(x => changedItemIDs.Contains(x.Key))
+                  .Select(x => x.Value)
                   .ToArray();
                Notifyers.Notify.ItemsUpdate(library, notifyItems);
             }
