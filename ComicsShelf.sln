@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "refactoring", "refactoring"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicsShelf.Drive", "ComicsShelf.Drive\ComicsShelf.Drive.csproj", "{2BA626D2-32F1-4B05-AB2A-AAA5D908CEDE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicsShelf.Search", "ComicsShelf.Search\ComicsShelf.Search.csproj", "{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComicsShelf.Engine", "ComicsShelf.Engine\ComicsShelf.Engine.csproj", "{2928DC85-C69A-4F7C-B5B7-D0FB8BD8718C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
