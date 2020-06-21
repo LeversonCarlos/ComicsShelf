@@ -17,11 +17,13 @@ namespace ComicsShelf.Store
             var changedItemIDs = new List<string>();
             var libraryID = itemList.Select(x => x.LibraryID).FirstOrDefault();
             var library = this.GetLibrary(libraryID);
-            var libraryItemIDs = this.ItemList[libraryID].Select(x => x.Key).ToArray();
+            string[] itemIDs = null;
 
             // CHECK FOR CHANGED ITEMS
-            var currentItems = itemList
-               .Where(x => libraryItemIDs.Contains(x.ID))
+            itemIDs = itemList.Select(x => x.ID).ToArray();
+            var currentItems = this.ItemList[libraryID]
+               .Where(x => itemIDs.Contains(x.Key))
+               .Select(x => x.Value)
                .ToArray();
             foreach (var currentItem in currentItems)
             {
@@ -35,8 +37,9 @@ namespace ComicsShelf.Store
             }
 
             // CHECK FOR NEW ITEMS
+            itemIDs = this.ItemList[libraryID].Select(x => x.Key).ToArray();
             var newItems = itemList
-               .Where(x => !libraryItemIDs.Contains(x.ID))
+               .Where(x => !itemIDs.Contains(x.ID))
                .ToArray();
             foreach (var newItem in newItems)
             {
@@ -53,7 +56,7 @@ namespace ComicsShelf.Store
                   .Where(x => changedItemIDs.Contains(x.Key))
                   .Select(x => x.Value)
                   .ToArray();
-               Notifyers.Notify.ItemsUpdate(library, notifyItems);
+               Notifyers.Notify.ItemsUpdate(notifyItems);
             }
 
             return true;
