@@ -19,10 +19,16 @@ namespace ComicsShelf.Notifyers
          Helpers.Messaging.Subscribe(LibraryRemoveKey, callback);
 
       const string ItemsUpdateKey = "store.items.update.key";
-      public static void ItemsUpdate(LibraryVM library, ItemVM[] itemList) =>
-         Helpers.Messaging.Send($"{ItemsUpdateKey}.{library.ID}", itemList);
-      public static void ItemsUpdate(LibraryVM library, System.Action<ItemVM[]> callback) =>
-         Helpers.Messaging.Subscribe($"{ItemsUpdateKey}.{library.ID}", callback);
+      public static void ItemsUpdate(ItemVM[] itemList) =>
+         Helpers.Messaging.Send($"{ItemsUpdateKey}", itemList);
+      public static void ItemsUpdate(System.Action<ItemVM[]> callback) =>
+         Helpers.Messaging.Subscribe($"{ItemsUpdateKey}", callback);
+
+      const string SectionsUpdateKey = "store.sections.update.key";
+      public static void SectionsUpdate(FolderVM[] sectionsList) =>
+         Helpers.Messaging.Send($"{SectionsUpdateKey}", sectionsList);
+      public static void SectionsUpdate(System.Action<FolderVM[]> callback) =>
+         Helpers.Messaging.Subscribe($"{SectionsUpdateKey}", callback);
 
       const string MessageKey = "store.message.key";
       public static void Message(LibraryVM library, string message) =>
