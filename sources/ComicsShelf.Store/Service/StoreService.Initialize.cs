@@ -18,7 +18,9 @@ namespace ComicsShelf.Store
             var dataTasks = libraryIDs
                .Select(libraryID => Sync.GetLibrary(libraryID))
                .ToArray();
-            this.LibraryList = await Task.WhenAll(dataTasks);
+            this.LibraryList = (await Task.WhenAll(dataTasks))
+               .Where(x => x != null)
+               .ToArray();
 
             foreach (var library in this.LibraryList)
             {
@@ -33,6 +35,7 @@ namespace ComicsShelf.Store
                this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
 
                Notifyers.Notify.LibraryAdd(library);
+               Notifyers.Notify.ItemsUpdate(itemList);
             }
 
             return true;
