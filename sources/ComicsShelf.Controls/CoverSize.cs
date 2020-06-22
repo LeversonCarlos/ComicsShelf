@@ -2,13 +2,13 @@
 
 namespace ComicsShelf.Controls
 {
-   partial class CoverSize
+   public class CoverSize
    {
 
       public static double DefaultHeight { get; private set; }
       public static double DefaultWidth { get; private set; }
 
-      public static void InitDefaultSize()
+      public static void Init()
       {
          try
          {
