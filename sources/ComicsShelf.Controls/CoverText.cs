@@ -15,9 +15,6 @@ namespace ComicsShelf.Controls
          HeightRequest = 18;
          WidthRequest = CoverSize.DefaultWidth;
 
-         AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.PositionProportional);
-         AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0, 0, -1, -1));
-
          var textLabel = new Label
          {
             FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
@@ -26,6 +23,9 @@ namespace ComicsShelf.Controls
          };
          textLabel.SetBinding(Label.TextProperty, "Text");
          Children.Add(textLabel);
+
+         AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.PositionProportional);
+         AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0, 0, -1, -1));
 
       }
 
