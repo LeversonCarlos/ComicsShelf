@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ComicsShelf.ViewModels
 {
 
    public class ItemVM
    {
+
+      public ItemVM()
+      {
+         this.CoverPath = DefaultCover.DefaultCover.Path;
+      }
+
       public string ID { get; set; }
       public string LibraryID { get; set; }
       public string EscapedID { get; set; }
@@ -20,6 +27,7 @@ namespace ComicsShelf.ViewModels
 
       public long? SizeInBytes { get; set; }
       public DateTime ReleaseDate { get; set; }
+      public Dictionary<string, string> KeyValues { get; set; }
 
       public short? Rating { get; set; }
       public bool Readed { get; set; }
@@ -27,7 +35,9 @@ namespace ComicsShelf.ViewModels
       public short? ReadingPage { get; set; }
       public double ReadingPercent { get; set; }
 
-      public Dictionary<string, string> KeyValues { get; set; }
+      [JsonIgnore]
+      public string CoverPath { get; set; }
+
       public bool Available { get; set; }
    }
 

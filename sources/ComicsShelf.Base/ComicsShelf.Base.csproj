@@ -9,6 +9,14 @@
    </PropertyGroup>
 
    <ItemGroup>
+     <None Remove="DefaultCover\DefaultCover.png" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <EmbeddedResource Include="DefaultCover\DefaultCover.png" />
+   </ItemGroup>
+
+   <ItemGroup>
       <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
       <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
       <PackageReference Include="System.Text.Json" Version="4.7.2" />
