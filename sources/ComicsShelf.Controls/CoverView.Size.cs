@@ -16,9 +16,8 @@ namespace ComicsShelf.Controls
             var displayWidth = System.Math.Min(displayInfo.Width, displayInfo.Height) / displayInfo.Density;
 
             var itemsPerLine = (Device.Idiom == TargetIdiom.Phone ? 3 : 5);
-
-            CoverView.DefaultWidth = ((int)(displayWidth - 15) / itemsPerLine) - 5;
-            CoverView.DefaultHeight = ((int)CoverView.DefaultWidth * 1.53);
+            CoverView.DefaultWidth = (int)(displayWidth / itemsPerLine);
+            CoverView.DefaultHeight = ((int)CoverView.DefaultWidth * 1.50);
          }
          catch (System.Exception) { throw; }
       }
