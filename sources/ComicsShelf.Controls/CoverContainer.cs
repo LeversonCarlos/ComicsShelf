@@ -2,10 +2,10 @@
 
 namespace ComicsShelf.Controls
 {
-   public partial class CoverView : AbsoluteLayout
+   public partial class CoverContainer : AbsoluteLayout
    {
 
-      public CoverView()
+      public CoverContainer()
       {
          Margin = 0;
          Padding = new Thickness(0, 0, 10, 0);
