@@ -13,7 +13,7 @@ namespace ComicsShelf.Controls
          Opacity = 0.25;
 
          HeightRequest = 18;
-         WidthRequest = CoverView.DefaultWidth;
+         WidthRequest = CoverSize.DefaultWidth;
 
          AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.PositionProportional);
          AbsoluteLayout.SetLayoutBounds(this, new Rectangle(0, 0, -1, -1));
