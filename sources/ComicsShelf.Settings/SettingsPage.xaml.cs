@@ -9,6 +9,7 @@ namespace ComicsShelf.Settings
       public SettingsPage()
       {
          InitializeComponent();
+         BindingContext = new SettingsVM();
       }
    }
 }

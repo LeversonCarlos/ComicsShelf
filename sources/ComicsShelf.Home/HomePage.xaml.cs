@@ -12,6 +12,7 @@ namespace ComicsShelf.Home
       public HomePage()
       {
          InitializeComponent();
+         BindingContext = new HomeVM();
          CoverSliderTimer = new Timer(5000);
          CoverSliderTimer.Elapsed += this.CoverSliderTimerElapsed;
       }
