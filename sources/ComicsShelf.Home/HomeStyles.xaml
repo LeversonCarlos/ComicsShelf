@@ -5,11 +5,6 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    x:Class="ComicsShelf.Home.HomeStyles">
 
-   <Style TargetType="StackLayout" x:Key="MainStack">
-      <Setter Property="Padding" Value="10" />
-      <Setter Property="Spacing" Value="10" />
-   </Style>
-
    <Style TargetType="CollectionView" x:Key="SectionsCollection">
       <Setter Property="ItemsLayout" Value="VerticalList" />
       <Setter Property="SelectionMode" Value="None" />

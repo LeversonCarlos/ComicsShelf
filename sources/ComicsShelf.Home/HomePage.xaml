@@ -12,30 +12,34 @@
       <ResourceDictionary Source="HomeStyles.xaml" />
    </ContentPage.Resources>
    <ContentPage.Content>
-      <StackLayout Style="{StaticResource MainStack}">
 
-         <CollectionView ItemsSource="{Binding Sections}" Style="{StaticResource SectionsCollection}">
-            <CollectionView.ItemTemplate>
-               <DataTemplate>
+      <CollectionView ItemsSource="{Binding Sections}" Style="{StaticResource SectionsCollection}">
+         <CollectionView.ItemTemplate>
+            <DataTemplate>
 
-                  <StackLayout Style="{StaticResource SectionStack}">
-                     
-                     <Label Text="{Binding Text}" Style="{StaticResource SectionTitle}" />
+               <StackLayout Style="{StaticResource SectionStack}">
 
-                     <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource FoldersCollection}">
-                        <CollectionView.ItemTemplate>
-                           <DataTemplate>
+                  <Label Text="{Binding Text}" Style="{StaticResource SectionTitle}" />
 
-                           </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                     </CollectionView>
+                  <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource FoldersCollection}">
+                     <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                  </StackLayout>
+                           <controls:CoverContainer>
+                              <controls:CoverImageList ItemsSource="{Binding Items}"  />
+                              <controls:CoverText Text="{Binding Text}" />
+                              <controls:CoverProgress Progress="0.7" />
+                           </controls:CoverContainer>
 
-               </DataTemplate>
-            </CollectionView.ItemTemplate>
-         </CollectionView>
+                        </DataTemplate>
+                     </CollectionView.ItemTemplate>
+                  </CollectionView>
 
-      </StackLayout>
+               </StackLayout>
+
+            </DataTemplate>
+         </CollectionView.ItemTemplate>
+      </CollectionView>
+
    </ContentPage.Content>
 </ContentPage>
