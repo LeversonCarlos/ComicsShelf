@@ -10,7 +10,7 @@ namespace ComicsShelf.Controls
       public CoverImageList()
       {
          ItemTemplate = GetItemTemplate();
-         Device.StartTimer(TimeSpan.FromSeconds(5), ChangePosition);
+         Notifyers.Notify.TimerTicks(now => ChangePosition());
       }
 
       DataTemplate GetItemTemplate() => new DataTemplate(() =>
@@ -25,28 +25,38 @@ namespace ComicsShelf.Controls
          return imageGrid;
       });
 
-      int _PositionCount;
       int PositionCount
       {
          get
          {
             if (ItemsSource == null) { return 1; }
-            if (_PositionCount != 0) { return _PositionCount; }
-            _PositionCount = ((IList<object>)ItemsSource).Count;
-            return _PositionCount;
+            return ((IList<object>)ItemsSource).Count;
          }
       }
 
-      bool ChangePosition()
+      void ChangePosition()
       {
-         Position = (Position + 1) % PositionCount;
-         return !_Disposed;
+         int newPosition = -1;
+         try
+         {
+            newPosition = (Position + 1) % PositionCount;
+            Position = newPosition;
+         }
+         catch (Exception ex)
+         {
+            var msg = "" +
+               $"Error trying to set cover slide position. " +
+               $"{Environment.NewLine}Position Count:{PositionCount}" +
+               $"{Environment.NewLine}Current Position:{Position}" +
+               $"{Environment.NewLine}New Position:{newPosition}" +
+               "";
+            Helpers.Insights.TrackException(new Exception(msg, ex));
+         }
       }
 
-      bool _Disposed = false;
       public void Dispose()
       {
-         _Disposed = true;
+         Notifyers.Notify.TimerTicksUnsubscribe();
       }
 
    }

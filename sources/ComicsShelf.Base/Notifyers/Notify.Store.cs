@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.ViewModels;
+using System;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Notifyers
@@ -45,6 +46,14 @@ namespace ComicsShelf.Notifyers
          Helpers.Messaging.Subscribe($"{ProgressKey}.{library.ID}", callback);
       public static void ProgressUnsubscribe(LibraryVM library) =>
          Helpers.Messaging.Unsubscribe($"{ProgressKey}.{library.ID}");
+
+      const string TimerTicksKey = "timer.ticks.key";
+      public static void TimerTicks() =>
+         Helpers.Messaging.Send($"{TimerTicksKey}", DateTime.Now);
+      public static void TimerTicks(System.Action<DateTime> callback) =>
+         Helpers.Messaging.Subscribe($"{TimerTicksKey}", callback);
+      public static void TimerTicksUnsubscribe() =>
+         Helpers.Messaging.Unsubscribe($"{TimerTicksKey}");
 
    }
 }
