@@ -10,7 +10,7 @@ namespace ComicsShelf.Controls
       public CoverImageList()
       {
          ItemTemplate = GetItemTemplate();
-         Notifyers.Notify.TimerTicks(now => ChangePosition());
+         Notifyers.Notify.CoverSliderTimer(now => ChangePosition());
       }
 
       DataTemplate GetItemTemplate() => new DataTemplate(() =>
@@ -36,27 +36,16 @@ namespace ComicsShelf.Controls
 
       void ChangePosition()
       {
-         int newPosition = -1;
          try
          {
-            newPosition = (Position + 1) % PositionCount;
-            Position = newPosition;
+            Position = (Position + 1) % PositionCount;
          }
-         catch (Exception ex)
-         {
-            var msg = "" +
-               $"Error trying to set cover slide position. " +
-               $"{Environment.NewLine}Position Count:{PositionCount}" +
-               $"{Environment.NewLine}Current Position:{Position}" +
-               $"{Environment.NewLine}New Position:{newPosition}" +
-               "";
-            Helpers.Insights.TrackException(new Exception(msg, ex));
-         }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
       public void Dispose()
       {
-         Notifyers.Notify.TimerTicksUnsubscribe();
+         Notifyers.Notify.CoverSliderTimerUnsubscribe();
       }
 
    }

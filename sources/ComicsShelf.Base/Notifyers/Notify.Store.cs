@@ -47,13 +47,13 @@ namespace ComicsShelf.Notifyers
       public static void ProgressUnsubscribe(LibraryVM library) =>
          Helpers.Messaging.Unsubscribe($"{ProgressKey}.{library.ID}");
 
-      const string TimerTicksKey = "timer.ticks.key";
-      public static void TimerTicks() =>
-         Helpers.Messaging.Send($"{TimerTicksKey}", DateTime.Now);
-      public static void TimerTicks(System.Action<DateTime> callback) =>
-         Helpers.Messaging.Subscribe($"{TimerTicksKey}", callback);
-      public static void TimerTicksUnsubscribe() =>
-         Helpers.Messaging.Unsubscribe($"{TimerTicksKey}");
+      const string CoverSliderTimerKey = "cover.slider.timer.key";
+      public static void CoverSliderTimer() =>
+         Helpers.Messaging.Send($"{CoverSliderTimerKey}", DateTime.Now);
+      public static void CoverSliderTimer(System.Action<DateTime> callback) =>
+         Helpers.Messaging.Subscribe($"{CoverSliderTimerKey}", callback);
+      public static void CoverSliderTimerUnsubscribe() =>
+         Helpers.Messaging.Unsubscribe($"{CoverSliderTimerKey}");
 
    }
 }
