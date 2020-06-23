@@ -8,11 +8,20 @@
    mc:Ignorable="d"
    x:Class="ComicsShelf.Home.HomePage"
    Title="{Binding Title}">
+   <ContentPage.Resources>
+      <ResourceDictionary Source="HomeStyles.xaml" />
+   </ContentPage.Resources>
    <ContentPage.Content>
-      <StackLayout>
-         <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+      <StackLayout Style="{StaticResource MainStack}">
+
+         <CollectionView ItemsSource="{Binding Sections}" Style="{StaticResource SectionsCollection}">
+            <CollectionView.ItemTemplate>
+               <DataTemplate>
+
+               </DataTemplate>
+            </CollectionView.ItemTemplate>
+         </CollectionView>
+
       </StackLayout>
    </ContentPage.Content>
 </ContentPage>
