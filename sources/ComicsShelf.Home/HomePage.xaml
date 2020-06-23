@@ -26,7 +26,7 @@
                         <DataTemplate>
 
                            <controls:CoverContainer>
-                              <controls:CoverImageList ItemsSource="{Binding Items}"  />
+                              <controls:CoverImage ImageSource="search" />
                               <controls:CoverText Text="{Binding Text}" />
                               <controls:CoverProgress Progress="0.7" />
                            </controls:CoverContainer>
