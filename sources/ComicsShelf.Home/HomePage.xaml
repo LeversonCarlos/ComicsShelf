@@ -18,6 +18,12 @@
             <CollectionView.ItemTemplate>
                <DataTemplate>
 
+                  <StackLayout Style="{StaticResource FolderStack}">
+
+                     <Label Text="{Binding Text}" Style="{StaticResource FolderTitle}" />
+
+                  </StackLayout>
+
                </DataTemplate>
             </CollectionView.ItemTemplate>
          </CollectionView>

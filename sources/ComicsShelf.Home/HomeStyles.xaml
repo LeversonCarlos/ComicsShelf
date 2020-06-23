@@ -15,4 +15,15 @@
       <Setter Property="ItemSizingStrategy" Value="MeasureFirstItem" />
    </Style>
 
+   <Style TargetType="StackLayout" x:Key="FolderStack">
+      <Setter Property="Margin" Value="0,0,0,20" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Spacing" Value="5" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="FolderTitle">
+      <Setter Property="FontSize" Value="Medium" />
+      <Setter Property="TextColor" Value="Blue" />
+   </Style>
+
 </ResourceDictionary>
