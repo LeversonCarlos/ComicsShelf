@@ -6,7 +6,7 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Settings.SettingsPage"
-   Title="{Binding Title}">
+   Title="{Binding Title}" IconImageSource="settings">
    <ContentPage.Resources>
       <ResourceDictionary Source="SettingsStyles.xaml" />
    </ContentPage.Resources>

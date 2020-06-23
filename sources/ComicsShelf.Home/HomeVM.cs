@@ -10,9 +10,9 @@ namespace ComicsShelf.Home
 
       public HomeVM()
       {
-         this.Title = "comics shelf tester";
-         this.Sections = new ObservableList<FolderVM>();
-         Notifyers.Notify.SectionsUpdate(sections => this.Sections.ReplaceRange(sections));
+         Title = Strings.TITLE;
+         Sections = new ObservableList<FolderVM>();
+         Notifyers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
       }
 
    }

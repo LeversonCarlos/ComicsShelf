@@ -6,6 +6,7 @@
    x:Class="ComicsShelf.Home.HomeStyles">
 
    <Style TargetType="CollectionView" x:Key="SectionsCollection">
+      <Setter Property="Margin" Value="10" />
       <Setter Property="ItemsLayout" Value="VerticalList" />
       <Setter Property="SelectionMode" Value="None" />
       <Setter Property="ItemSizingStrategy" Value="MeasureFirstItem" />

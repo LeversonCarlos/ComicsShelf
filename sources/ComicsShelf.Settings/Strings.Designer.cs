@@ -106,7 +106,7 @@ namespace ComicsShelf.Settings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comics Shelf Settings.
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string TITLE {
             get {
