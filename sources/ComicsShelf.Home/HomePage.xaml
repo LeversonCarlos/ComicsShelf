@@ -10,7 +10,11 @@
    x:Name="homePage"
    Title="{Binding Title}" IconImageSource="home">
    <ContentPage.Resources>
-      <ResourceDictionary Source="HomeStyles.xaml" />
+      <ResourceDictionary Source="HomeStyles.xaml" >
+         <ResourceDictionary.MergedDictionaries>
+            <controls:CoverStyle />
+         </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
    </ContentPage.Resources>
    <ContentPage.Content>
 
@@ -28,8 +32,8 @@
 
                            <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }">
                               <controls:CoverImage ImageSource="search" />
-                              <controls:CoverText Text="{Binding Text}" />
-                              <controls:CoverProgress Progress="0.7" />
+                              <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" />
+                              <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
                            </controls:CoverContainer>
 
                         </DataTemplate>
