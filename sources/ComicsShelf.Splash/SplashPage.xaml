@@ -5,6 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated"
    x:Class="ComicsShelf.Splash.SplashPage">
@@ -18,17 +19,45 @@
    <ContentPage.Content>
       <StackLayout Style="{StaticResource MainStack}">
 
-         <Label Text="{Binding SelectedItem.FolderText}" Style="{StaticResource SectionLabel}" />
-         <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" Style="{StaticResource SplashCover}" />
-         <Label Text="{Binding SelectedItem.ShortText}" Style="{StaticResource SectionLabel}" />
+         <Grid>
+            <Grid.RowDefinitions>
+               <RowDefinition Height="{Static splash:SplashCover.DefaultHeight}" />
+            </Grid.RowDefinitions>
+            <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
+         </Grid>
 
-         <CollectionView ItemsSource="{Binding ItemsList}">
+         <StackLayout Padding="10" Spacing="5">
+            <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" TextColor="Orange"/>
+            <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
+               <StackLayout >
+                  <Label>Rating</Label>
+                  <Label Text="{Binding SelectedItem.Rating}" />
+               </StackLayout>
+               <StackLayout>
+                  <Label>Progress</Label>
+                  <Label Text="{Binding SelectedItem.ReadingPercent}" />
+               </StackLayout>
+               <StackLayout>
+                  <Label>Released</Label>
+                  <Label Text="{Binding SelectedItem.ReadingDate}" />
+               </StackLayout>
+               <StackLayout>
+                  <Button Text="Open"></Button>
+               </StackLayout>
+            </FlexLayout>
+         </StackLayout>
+
+         <StackLayout Spacing="5">
+         <Label Text="OTHER_EDITIONS_FROM_THIS_SCOLLECTION" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" />
+         <CollectionView ItemsSource="{Binding ItemsList}" ItemsLayout="HorizontalList">
             <CollectionView.ItemTemplate>
                <DataTemplate>
-                  <Label Text="{Binding FullText}" />
+                  <controls:CoverImage ImageSource="{Binding CoverPath}" Margin="0,0,5,0" />
                </DataTemplate>
             </CollectionView.ItemTemplate>
          </CollectionView>
+         </StackLayout>
+
       </StackLayout>
    </ContentPage.Content>
 </ContentPage>
