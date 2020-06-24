@@ -11,10 +11,18 @@ namespace ComicsShelf.Controls
          Padding = new Thickness(10, 0);
          Spacing = 30;
 
-         _ThumbsUpButton = new ImageButton { Command = new Command(() => this.SetRating(1)) };
+         _ThumbsUpButton = new ImageButton
+         {
+            BackgroundColor = Color.Transparent,
+            Command = new Command(() => this.SetRating(1))
+         };
          Children.Add(_ThumbsUpButton);
 
-         _ThumbsDownButton = new ImageButton { Command = new Command(() => this.SetRating(-1)) };
+         _ThumbsDownButton = new ImageButton
+         {
+            BackgroundColor = Color.Transparent,
+            Command = new Command(() => this.SetRating(-1))
+         };
          Children.Add(_ThumbsDownButton);
       }
 

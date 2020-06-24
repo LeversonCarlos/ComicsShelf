@@ -23,4 +23,10 @@
       <Setter Property="ThumbsDownUnselectedImageSource" Value="thumbsDown_unselected" />
    </Style>
 
+   <Style TargetType="CollectionView" x:Key="EditionsCollection">
+      <Setter Property="ItemsLayout" Value="HorizontalList" />
+      <Setter Property="SelectionMode" Value="None" />
+      <Setter Property="HeightRequest" Value="{x:Static controls:CoverSize.DefaultHeight}" />
+   </Style>
+
 </ResourceDictionary>

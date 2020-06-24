@@ -19,7 +19,7 @@
    <ContentPage.Content>
       <StackLayout Style="{StaticResource MainStack}" >
 
-         <Grid>
+         <Grid VerticalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
                <RowDefinition Height="{Static splash:SplashCover.DefaultHeight}" />
             </Grid.RowDefinitions>
@@ -37,28 +37,40 @@
                                        ThumbsDownSelectedImageSource="thumbsDown_selected"
                                        ThumbsDownUnselectedImageSource="thumbsDown_unselected" 
                   -->
-                  <Label FontSize="Caption">Do You Liked It</Label>
+                  <Label Text="Do You Liked It" FontSize="Caption" HorizontalOptions="Center" />
                </StackLayout>
                <StackLayout>
-                  <Switch></Switch>
-                  <Label>Completed</Label>
+                  <Switch HorizontalOptions="Center" ></Switch>
+                  <Label Text="Do You Readed It" FontSize="Caption"  HorizontalOptions="Center" />
                </StackLayout>
                <StackLayout>
-                  <Label Text="{Binding SelectedItem.ReadingDate}" />
-                  <Label>Released</Label>
+                  <Label Text="Last Read On" FontSize="Caption"  HorizontalOptions="Center" />
+                  <Label Text="24/06/2020" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold" />
                </StackLayout>
                <StackLayout>
-                  <Button Text="Open"></Button>
+                  <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="70" WidthRequest="70" />
                </StackLayout>
             </FlexLayout>
          </StackLayout>
 
          <StackLayout Spacing="3">
             <Label Text="OTHER_EDITIONS_FROM_THIS_COLLECTION" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" />
-            <CollectionView ItemsSource="{Binding ItemsList}" ItemsLayout="HorizontalList">
+            <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" >
                <CollectionView.ItemTemplate>
                   <DataTemplate>
-                     <controls:CoverImage ImageSource="{Binding CoverPath}" Margin="0,0,5,0" />
+
+                     <controls:CoverContainer >
+                        <controls:CoverImage ImageSource="{Binding CoverPath}" />
+                        <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" />
+                        <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
+                     </controls:CoverContainer>
+
+                     <!-- 
+                     <Image Source="{Binding CoverPath}" VerticalOptions="CenterAndExpand" Margin="0,0,45,0" />
+                     -->
+                     <!-- 
+                     <controls:CoverImage ImageSource="{Binding CoverPath}" HeightRequest="210" Margin="0,0,5,0" />
+                     -->
                   </DataTemplate>
                </CollectionView.ItemTemplate>
             </CollectionView>
