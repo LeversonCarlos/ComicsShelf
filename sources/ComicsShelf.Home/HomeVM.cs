@@ -18,8 +18,12 @@ namespace ComicsShelf.Home
          Notifyers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
       }
 
-      public Command OpenCommand;
-      Task Open(object folder) => Shell.Current.GoToAsync(new ShellNavigationState($"//splash?folderPath={(folder as FolderVM)?.Path}"));
+      public Command OpenCommand { get; set; }
+      Task Open(object folder) => Shell.Current
+         .GoToAsync(GetNavigationState(folder as FolderVM));
+
+      ShellNavigationState GetNavigationState(FolderVM folder) =>
+         new ShellNavigationState($"splash?folderPath={System.Uri.EscapeUriString(folder?.Path)}");
 
    }
 }
