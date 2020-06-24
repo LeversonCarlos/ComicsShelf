@@ -41,7 +41,7 @@ namespace ComicsShelf.Home
          .GoToAsync(GetNavigationState(folder as FolderVM));
 
       ShellNavigationState GetNavigationState(FolderVM folder) =>
-         new ShellNavigationState($"splash?folderPath={System.Uri.EscapeUriString(folder?.Path)}");
+         new ShellNavigationState($"splash?fileID={folder?.FirstItem?.EscapedID}");
 
       private void CoverSliderTimerElapsed(object sender, ElapsedEventArgs e) =>
          Notifyers.Notify.CoverSliderTimer();
