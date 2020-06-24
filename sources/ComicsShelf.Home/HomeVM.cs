@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.Observables;
+using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System.Threading.Tasks;
 using System.Timers;
@@ -15,15 +16,16 @@ namespace ComicsShelf.Home
       public HomeVM()
       {
          Title = Strings.TITLE;
-         OpenCommand = new Command(async folder => await Open(folder));
          Sections = new ObservableList<FolderVM>();
          Notifyers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
          CoverSliderTimer = new Timer(5000);
          CoverSliderTimer.Elapsed += this.CoverSliderTimerElapsed;
+         OpenCommand = new Command(async folder => await Open(folder));
       }
 
       public override Task OnAppearing()
       {
+         Sections.ReplaceRange(DependencyService.Get<IStoreService>().GetSections());
          CoverSliderTimer.Start();
          return base.OnAppearing();
       }

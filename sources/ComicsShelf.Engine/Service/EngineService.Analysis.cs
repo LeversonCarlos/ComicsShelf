@@ -44,7 +44,8 @@ namespace ComicsShelf.Engine
                })
                .ToArray();
 
-            ComicsShelf.Notifyers.Notify.SectionsUpdate(sections);
+            store.SetSections(sections);
+            Notifyers.Notify.SectionsUpdate(sections);
 
             await Task.CompletedTask;
             return true;
