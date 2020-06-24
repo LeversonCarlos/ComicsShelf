@@ -18,7 +18,7 @@
                <DataTemplate>
                   <StackLayout>
 
-                     <Label Text="{Binding Title}" Style="{StaticResource LibraryTypeTitle}" />
+                     <Label Text="{Binding Title}" Style="{StaticResource SectionLabel}" />
 
                      <StackLayout BindableLayout.ItemsSource="{Binding Libraries}">
                         <BindableLayout.ItemTemplate>

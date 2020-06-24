@@ -9,11 +9,6 @@
       <Setter Property="Spacing" Value="10" />
    </Style>
 
-   <Style TargetType="Label" x:Key="LibraryTypeTitle">
-      <Setter Property="FontSize" Value="Medium" />
-      <Setter Property="FontAttributes" Value="Bold" />
-   </Style>
-
    <Style TargetType="StackLayout" x:Key="LibraryStack" >
       <Setter Property="Padding" Value="10,0" />
    </Style>

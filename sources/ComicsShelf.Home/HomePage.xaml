@@ -20,7 +20,7 @@
 
                <StackLayout Style="{StaticResource SectionStack}">
 
-                  <Label Text="{Binding Text}" Style="{StaticResource SectionTitle}" />
+                  <Label Text="{Binding Text}" Style="{StaticResource SectionLabel}" />
 
                   <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource FoldersCollection}">
                      <CollectionView.ItemTemplate>

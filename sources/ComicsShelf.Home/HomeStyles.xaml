@@ -18,11 +18,6 @@
       <Setter Property="Spacing" Value="5" />
    </Style>
 
-   <Style TargetType="Label" x:Key="SectionTitle">
-      <Setter Property="FontSize" Value="Medium" />
-      <Setter Property="TextColor" Value="Blue" />
-   </Style>
-
    <Style TargetType="CollectionView" x:Key="FoldersCollection">
       <Setter Property="ItemsLayout" Value="HorizontalList" />
       <Setter Property="SelectionMode" Value="None" />
