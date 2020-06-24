@@ -1,6 +1,9 @@
-﻿using ComicsShelf.Observables;
+﻿using ComicsShelf.Controls;
+using ComicsShelf.DefaultCover;
+using ComicsShelf.Observables;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 

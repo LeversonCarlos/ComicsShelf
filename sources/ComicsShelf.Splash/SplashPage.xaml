@@ -4,12 +4,24 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated"
    x:Class="ComicsShelf.Splash.SplashPage">
+   <ContentPage.Resources>
+      <ResourceDictionary Source="SplashStyles.xaml" >
+         <ResourceDictionary.MergedDictionaries>
+            <controls:CoverStyle />
+         </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+   </ContentPage.Resources>
    <ContentPage.Content>
-      <StackLayout>
-         <Label Text="{Binding FileID}"/>
+      <StackLayout Style="{StaticResource MainStack}">
+
+         <Label Text="{Binding SelectedItem.FolderText}" Style="{StaticResource SectionLabel}" />
+         <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" Style="{StaticResource SplashCover}" />
+         <Label Text="{Binding SelectedItem.ShortText}" Style="{StaticResource SectionLabel}" />
+
          <CollectionView ItemsSource="{Binding ItemsList}">
             <CollectionView.ItemTemplate>
                <DataTemplate>
