@@ -16,20 +16,28 @@ namespace ComicsShelf.Splash
          BindingContext = new SplashVM();
       }
 
+      SplashVM Context => BindingContext as SplashVM;
+
       public string LibraryID
       {
-         set => (BindingContext as SplashVM)
-            ?.SetLibraryID(value)
-            ?.LoadLibrary()
-            ?.LoadItems();
+         set => Context?.SetLibraryID(value);
       }
 
       public string FileID
       {
-         set => (BindingContext as SplashVM)
-            ?.SetFileID(value)
-            ?.LoadLibrary()
-            ?.LoadItems();
+         set => Context?.SetFileID(value);
+      }
+
+      protected override void OnAppearing()
+      {
+         Context?.OnAppearing();
+         base.OnAppearing();
+      }
+
+      protected override void OnDisappearing()
+      {
+         Context?.OnDisappearing();
+         base.OnDisappearing();
       }
 
    }
