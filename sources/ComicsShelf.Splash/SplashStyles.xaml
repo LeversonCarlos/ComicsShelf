@@ -8,7 +8,7 @@
 
    <Style TargetType="StackLayout" x:Key="MainStack">
       <Setter Property="Padding" Value="10" />
-      <Setter Property="Spacing" Value="20" />
+      <Setter Property="Spacing" Value="30" />
    </Style>
 
    <Style TargetType="controls:CoverImage" x:Key="SplashCover">
