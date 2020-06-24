@@ -1,5 +1,4 @@
-﻿using System.Timers;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ComicsShelf.Home
@@ -7,30 +6,24 @@ namespace ComicsShelf.Home
    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class HomePage : ContentPage
    {
-      readonly Timer CoverSliderTimer;
 
       public HomePage()
       {
          InitializeComponent();
          BindingContext = new HomeVM();
-         CoverSliderTimer = new Timer(5000);
-         CoverSliderTimer.Elapsed += this.CoverSliderTimerElapsed;
       }
 
       protected override void OnAppearing()
       {
          base.OnAppearing();
-         CoverSliderTimer.Start();
+         (BindingContext as HomeVM)?.OnAppearing();
       }
 
       protected override void OnDisappearing()
       {
-         CoverSliderTimer.Stop();
+         (BindingContext as HomeVM)?.OnDisappearing();
          base.OnDisappearing();
       }
-
-      private void CoverSliderTimerElapsed(object sender, ElapsedEventArgs e) =>
-         Notifyers.Notify.CoverSliderTimer();
 
    }
 }

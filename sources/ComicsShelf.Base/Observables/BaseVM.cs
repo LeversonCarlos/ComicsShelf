@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.Observables
 {
@@ -18,6 +19,9 @@ namespace ComicsShelf.Observables
          get { return this._IsBusy; }
          set { this.SetProperty(ref this._IsBusy, value); }
       }
+
+      public virtual Task OnAppearing() => Task.CompletedTask;
+      public virtual Task OnDisappearing() => Task.CompletedTask;
 
       public virtual void Dispose() { }
 
