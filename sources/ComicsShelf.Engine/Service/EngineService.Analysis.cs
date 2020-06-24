@@ -38,6 +38,7 @@ namespace ComicsShelf.Engine
                      {
                         Items = libraryItems
                            .Where(item => item.FolderPath == folder.Key.Path)
+                           .OrderBy(item => item.FullText)
                            .ToArray()
                      })
                      .ToArray()

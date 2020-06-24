@@ -31,7 +31,7 @@
                         <DataTemplate>
 
                            <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }">
-                              <controls:CoverImage ImageSource="search" />
+                              <controls:CoverImage ImageSource="{Binding FirstItem.CoverPath}" />
                               <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" />
                               <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
                            </controls:CoverContainer>

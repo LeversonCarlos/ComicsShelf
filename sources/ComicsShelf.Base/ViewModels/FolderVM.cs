@@ -1,4 +1,6 @@
-﻿namespace ComicsShelf.ViewModels
+﻿using System.Linq;
+
+namespace ComicsShelf.ViewModels
 {
    public class FolderVM
    {
@@ -13,15 +15,6 @@
       public string Path { get; set; }
 
       public FolderVM[] Folders { get; set; }
-      public ItemVM[] Items { get; set; }
-
-      /*
-      string _CoverPath;
-      public string CoverPath
-      {
-         get => _CoverPath;
-         set => SetProperty(ref _CoverPath, value);
-      }
 
       ItemVM[] _Items;
       public ItemVM[] Items
@@ -29,11 +22,11 @@
          get => _Items;
          set
          {
-            Items = value;
-            // CoverPath = Items?.Select(item => item.CoverPath).FirstOrDefault();
+            _Items = value;
+            FirstItem = value?.FirstOrDefault();
          }
       }
-      */
+      public ItemVM FirstItem { get; set; }
 
    }
 }
