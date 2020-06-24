@@ -30,16 +30,22 @@
             <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" TextColor="Orange"/>
             <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
                <StackLayout >
-                  <Label>Rating</Label>
-                  <Label Text="{Binding SelectedItem.Rating}" />
+                  <controls:RatingView Rating="{Binding Rating}" />
+                  <!-- 
+                                       ThumbsUpSelectedImageSource="thumbsUp_selected"
+                                       ThumbsUpUnselectedImageSource="thumbsUp_unselected"
+                                       ThumbsDownSelectedImageSource="thumbsDown_selected"
+                                       ThumbsDownUnselectedImageSource="thumbsDown_unselected" 
+                  -->
+                  <Label FontSize="Caption">Do You Liked It</Label>
                </StackLayout>
                <StackLayout>
-                  <Label>Progress</Label>
-                  <Label Text="{Binding SelectedItem.ReadingPercent}" />
+                  <Switch></Switch>
+                  <Label>Completed</Label>
                </StackLayout>
                <StackLayout>
-                  <Label>Released</Label>
                   <Label Text="{Binding SelectedItem.ReadingDate}" />
+                  <Label>Released</Label>
                </StackLayout>
                <StackLayout>
                   <Button Text="Open"></Button>
@@ -48,7 +54,7 @@
          </StackLayout>
 
          <StackLayout Spacing="3">
-            <Label Text="OTHER_EDITIONS_FROM_THIS_SCOLLECTION" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" />
+            <Label Text="OTHER_EDITIONS_FROM_THIS_COLLECTION" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" />
             <CollectionView ItemsSource="{Binding ItemsList}" ItemsLayout="HorizontalList">
                <CollectionView.ItemTemplate>
                   <DataTemplate>
