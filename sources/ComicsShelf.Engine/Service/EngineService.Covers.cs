@@ -35,6 +35,24 @@ namespace ComicsShelf.Engine
                if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return false; }
             }
 
+            // LOCATE ALL REMAINING ITEMS
+            var remainingItems = sections
+               .SelectMany(x => x.Folders)
+               .SelectMany(x => x.Items)
+               .Where(x => x.CoverPath == DefaultCover.DefaultCover.Path)
+               .ToArray();
+
+            // GROUP BY LIBRARY SO WE COULD GET A NICE PROGRESS ON THE SETTINGS PAGE FOR THOSE
+            var remainingLibraryIDs = remainingItems
+               .GroupBy(x => x.LibraryID)
+               .Select(x => x.Key)
+               .ToArray();
+            foreach (var libraryID in remainingLibraryIDs)
+            {
+               var libraryfeaturedItems = remainingItems.Where(x => x.LibraryID == libraryID).ToArray();
+               if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return false; }
+            }
+
             /*
             var libraries = store.GetLibraries();
             var libraryItems = libraries
@@ -69,7 +87,7 @@ namespace ComicsShelf.Engine
                Notifyers.Notify.Message(library, item.FullText);
                Notifyers.Notify.Progress(library, progress);
 
-               await Task.Delay(50);
+               await Task.Delay(100);
             }
 
             // NOTIFY FINISH MESSAGE
