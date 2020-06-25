@@ -34,6 +34,12 @@ namespace ComicsShelf.Splash
          base.OnAppearing();
       }
 
+      protected override void OnSizeAllocated(double width, double height)
+      {
+         base.OnSizeAllocated(width, height);
+         Context?.OnSizeAllocated(width, height);
+      }
+
       protected override void OnDisappearing()
       {
          Context?.OnDisappearing();

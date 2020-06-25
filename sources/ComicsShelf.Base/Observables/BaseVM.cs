@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ComicsShelf.Observables
 {
-   public class BaseVM : ObservableObject, IDisposable
+   public partial class BaseVM : ObservableObject, IDisposable
    {
 
       string _Title = string.Empty;
