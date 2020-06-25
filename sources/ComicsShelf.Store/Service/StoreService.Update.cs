@@ -9,7 +9,11 @@ namespace ComicsShelf.Store
    partial class StoreService
    {
 
-      public async Task<bool> UpdateItemAsync(ItemVM[] itemList)
+      public Task<bool> UpdateItemAsync(ItemVM item) => UpdateItemAsync(new ItemVM[] { item }, forceUpdate: true);
+
+      public Task<bool> UpdateItemAsync(ItemVM[] itemList) => UpdateItemAsync(itemList, forceUpdate: false);
+
+      public async Task<bool> UpdateItemAsync(ItemVM[] itemList, bool forceUpdate)
       {
          try
          {
@@ -28,7 +32,7 @@ namespace ComicsShelf.Store
             foreach (var currentItem in currentItems)
             {
                var updateItem = itemList.Where(x => x.ID == currentItem.ID).FirstOrDefault();
-               if (!Equals(currentItem, updateItem))
+               if (forceUpdate || !Equals(currentItem, updateItem))
                {
                   if (!await Sync.SetItem(updateItem)) { return false; }
                   this.ItemList[libraryID][updateItem.ID].SetData(updateItem);
