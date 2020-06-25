@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   mc:Ignorable="d"
+   x:Class="ComicsShelf.Settings.SettingsPage"
+   Title="{Binding Title}" IconImageSource="settings">
+   <ContentPage.Resources>
+      <ResourceDictionary Source="SettingsStyles.xaml" />
+   </ContentPage.Resources>
+   <ContentPage.Content>
+      <StackLayout Style="{StaticResource MainStack}">
+
+         <StackLayout BindableLayout.ItemsSource="{Binding LibraryTypes}" >
+            <BindableLayout.ItemTemplate>
+               <DataTemplate>
+                  <StackLayout>
+
+                     <Label Text="{Binding Title}" Style="{StaticResource SectionLabel}" />
+
+                     <StackLayout BindableLayout.ItemsSource="{Binding Libraries}">
+                        <BindableLayout.ItemTemplate>
+                           <DataTemplate>
+
+                              <StackLayout Style="{StaticResource LibraryStack}">
+                                 <FlexLayout Style="{StaticResource LibraryFlex}" >
+                                    <StackLayout FlexLayout.Grow="1" Spacing="0">
+                                       <Label Text="{Binding Library.Description}" Style="{StaticResource LibraryTitleLabel}" ></Label>
+                                       <Label Text="{Binding Library.Path}" Style="{StaticResource LibraryDetailsLabel}" ></Label>
+                                       <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource LibraryMessageLabel}" ></Label>
+                                       <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource LibraryProgress}" ></ProgressBar>
+                                    </StackLayout>
+                                    <ImageButton Command="{Binding RemoveCommand}" Source="delete" />
+                                 </FlexLayout>
+                                 <BoxView Style="{StaticResource LibrarySeparator}" />
+                              </StackLayout>
+
+                           </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                     </StackLayout>
+
+                     <StackLayout Style="{StaticResource LibraryStack}">
+                        <FlexLayout Style="{StaticResource LibraryFlex}">
+                           <FlexLayout.GestureRecognizers>
+                              <TapGestureRecognizer Command="{Binding AddCommand}" />
+                           </FlexLayout.GestureRecognizers>
+                           <Label Text="{Binding AddText}" Style="{StaticResource LibraryTitleLabel}"></Label>
+                        </FlexLayout>
+                     </StackLayout>
+
+                  </StackLayout>
+               </DataTemplate>
+            </BindableLayout.ItemTemplate>
+         </StackLayout>
+
+      </StackLayout>
+   </ContentPage.Content>
+</ContentPage>

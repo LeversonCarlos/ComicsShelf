@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   x:Class="ComicsShelf.Controls.CoverStyle">
+
+   <Style TargetType="Label" x:Key="CoverText">
+      <Setter Property="Padding" Value="2,0" />
+      <Setter Property="HeightRequest" Value="18" />
+      <Setter Property="WidthRequest" Value="{Static controls:CoverSize.DefaultWidth}" />
+      <Setter Property="FontSize" Value="Caption" />
+      <Setter Property="TextColor" Value="White" />
+      <Setter Property="BackgroundColor" Value="{StaticResource Black}" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+      <Setter Property="Opacity" Value="0.7" />
+      <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
+      <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,1" />
+   </Style>
+
+   <Style TargetType="ProgressBar" x:Key="CoverProgress">
+      <Setter Property="HeightRequest" Value="1" />
+      <Setter Property="WidthRequest" Value="{Static controls:CoverSize.DefaultWidth}" />
+      <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
+      <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0" />
+      <Setter Property="ProgressColor" Value="Orange" />
+   </Style>
+
+</ResourceDictionary>

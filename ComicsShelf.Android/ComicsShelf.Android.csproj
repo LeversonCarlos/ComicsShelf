@@ -77,9 +77,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.17-alpha" />
-    <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.17-alpha" />
-    <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.17-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.18-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.18-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.18-alpha" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\ReadingView.cs" />

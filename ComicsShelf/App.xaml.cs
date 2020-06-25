@@ -11,7 +11,7 @@ namespace ComicsShelf
          this.MainPage = new Main.MainPage();
          DependencyService.Register<Engines.LocalDrive.LocalDriveEngine>();
          DependencyService.Register<Engines.OneDrive.OneDriveEngine>();
-         DependencyService.Register<Store.ILibraryStore, Store.LibraryStore>();         
+         DependencyService.Register<Store.ILibraryStore, Store.LibraryStore>();
       }
 
       protected override async void OnStart()

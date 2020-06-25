@@ -1,0 +1,25 @@
+﻿using ComicsShelf.ViewModels;
+using System.Threading.Tasks;
+
+namespace ComicsShelf.Store
+{
+   public interface IStoreService
+   {
+
+      Task<bool> InitializeAsync();
+
+      LibraryVM[] GetLibraries();
+      LibraryVM GetLibrary(string libraryID);
+
+      Task<bool> AddLibraryAsync(enLibraryType libraryType);
+      Task<bool> RemoveLibraryAsync(LibraryVM library);
+
+      ItemVM[] GetLibraryItems(LibraryVM library);
+      Task<bool> UpdateItemAsync(ItemVM[] itemList);
+      Task<bool> UpdateItemAsync(ItemVM item);
+
+      FolderVM[] GetSections();
+      void SetSections(FolderVM[] sections);
+
+   }
+}

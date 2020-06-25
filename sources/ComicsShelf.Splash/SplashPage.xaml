@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:splash="clr-namespace:ComicsShelf.Splash"
+   mc:Ignorable="d"
+   Shell.PresentationMode="ModalAnimated"
+   x:Class="ComicsShelf.Splash.SplashPage"
+   x:Name="splashPage">
+   <ContentPage.Resources>
+      <ResourceDictionary Source="SplashStyles.xaml" />
+   </ContentPage.Resources>
+   <ContentPage.Content>
+      <ScrollView Orientation="Vertical">
+         <StackLayout Style="{StaticResource MainStack}" >
+
+            <Grid VerticalOptions="CenterAndExpand">
+               <Grid.RowDefinitions>
+                  <RowDefinition Height="{Static splash:SplashCover.DefaultHeight}" />
+               </Grid.RowDefinitions>
+               <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
+            </Grid>
+
+            <splash:SplashPageDetails />
+
+            <StackLayout Spacing="3">
+               <Label Text="{Binding EditionsTitle}" Style="{StaticResource SectionLabel}" />
+
+               <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" >
+                  <CollectionView.ItemsLayout>
+                     <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Phone=3, Tablet=5, Desktop=7, TV=9 }" VerticalItemSpacing="0" />
+                  </CollectionView.ItemsLayout>
+                  <CollectionView.ItemTemplate>
+                     <DataTemplate>
+
+                        <controls:CoverContainer Margin="0" Padding="5" OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference splashPage} }" >
+                           <controls:CoverImage ImageSource="{Binding CoverPath}" />
+                           <ProgressBar Progress="{Binding ReadingPercent}" Style="{StaticResource CoverProgress}" />
+                           <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
+                        </controls:CoverContainer>
+
+                     </DataTemplate>
+                  </CollectionView.ItemTemplate>
+               </CollectionView>
+            </StackLayout>
+
+         </StackLayout>
+      </ScrollView>
+   </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Settings.SettingsStyles">
+
+   <Style TargetType="StackLayout" x:Key="MainStack">
+      <Setter Property="Padding" Value="10" />
+      <Setter Property="Spacing" Value="10" />
+   </Style>
+
+   <Style TargetType="StackLayout" x:Key="LibraryStack" >
+      <Setter Property="Padding" Value="10,0" />
+   </Style>
+
+   <Style TargetType="FlexLayout" x:Key="LibraryFlex">
+      <Setter Property="AlignItems" Value="Center" />
+      <Setter Property="HeightRequest" Value="60" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="LibraryTitleLabel">
+      <Setter Property="FontSize" Value="Default" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="LibraryDetailsLabel">
+      <Setter Property="FontSize" Value="Small" />
+      <Setter Property="TextColor" Value="Silver" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="LibraryMessageLabel">
+      <Setter Property="FontSize" Value="Micro" />
+      <Setter Property="TextColor" Value="Silver" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+   </Style>
+
+   <Style TargetType="ProgressBar" x:Key="LibraryProgress">
+      <Setter Property="HeightRequest" Value="1" />
+      <Setter Property="Opacity" Value="0.25" />
+   </Style>
+
+   <Style TargetType="BoxView" x:Key="LibrarySeparator">
+      <Setter Property="Margin" Value="0,1" />
+      <Setter Property="HeightRequest" Value="1" />
+      <Setter Property="BackgroundColor" Value="Gainsboro" />
+   </Style>
+
+</ResourceDictionary>

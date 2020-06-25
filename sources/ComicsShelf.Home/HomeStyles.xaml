@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   x:Class="ComicsShelf.Home.HomeStyles">
+
+   <Style TargetType="CollectionView" x:Key="SectionsCollection">
+      <Setter Property="Margin" Value="10" />
+      <Setter Property="ItemsLayout" Value="VerticalList" />
+      <Setter Property="SelectionMode" Value="None" />
+      <Setter Property="ItemSizingStrategy" Value="MeasureFirstItem" />
+   </Style>
+
+   <Style TargetType="StackLayout" x:Key="SectionStack">
+      <Setter Property="Margin" Value="0,0,0,20" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Spacing" Value="5" />
+   </Style>
+
+   <Style TargetType="CollectionView" x:Key="FoldersCollection">
+      <Setter Property="ItemsLayout" Value="HorizontalList" />
+      <Setter Property="SelectionMode" Value="None" />
+      <Setter Property="HeightRequest" Value="{x:Static controls:CoverSize.DefaultHeight}" />
+   </Style>
+
+</ResourceDictionary>

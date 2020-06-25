@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:splash="clr-namespace:ComicsShelf.Splash"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   x:Class="ComicsShelf.Splash.SplashStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <controls:CoverStyle />
+   </ResourceDictionary.MergedDictionaries>
+
+   <splash:DateFormatter x:Key="dateFormatter" />
+
+   <Style TargetType="StackLayout" x:Key="MainStack">
+      <Setter Property="Padding" Value="10" />
+      <Setter Property="Spacing" Value="30" />
+   </Style>
+
+   <Style TargetType="controls:CoverImage" x:Key="SplashCover">
+      <Setter Property="HeightRequest" Value="{Static splash:SplashCover.DefaultHeight}" />
+      <Setter Property="WidthRequest" Value="{Static splash:SplashCover.DefaultWidth}" />
+   </Style>
+
+   <Style TargetType="controls:RatingView">
+      <Setter Property="ThumbsUpSelectedImageSource" Value="thumbsUp_selected" />
+      <Setter Property="ThumbsUpUnselectedImageSource" Value="thumbsUp_unselected" />
+      <Setter Property="ThumbsDownSelectedImageSource" Value="thumbsDown_selected" />
+      <Setter Property="ThumbsDownUnselectedImageSource" Value="thumbsDown_unselected" />
+   </Style>
+
+   <Style TargetType="CollectionView" x:Key="EditionsCollection">
+      <Setter Property="SelectionMode" Value="None" />
+   </Style>
+
+</ResourceDictionary>

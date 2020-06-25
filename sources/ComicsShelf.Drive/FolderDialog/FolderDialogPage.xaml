@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   mc:Ignorable="d"
+   x:Class="ComicsShelf.Drive.FolderDialog.FolderDialogPage"
+   BackgroundColor="Gainsboro"
+   Title="{Binding Title}">
+   <ContentPage.Content>
+      <StackLayout Padding="20" Spacing="20">
+
+         <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" TextColor="Accent" ></Label>
+
+         <Frame BackgroundColor="White" Padding="10">
+            <StackLayout Orientation="Vertical" Spacing="5">
+               <Label Text="selected_path" FontSize="Micro"></Label>
+               <Label Text="{Binding CurrentItem.Path}" FontAttributes="Bold"></Label>
+            </StackLayout>
+         </Frame>
+         <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+            <ScrollView Orientation="Vertical" >
+               <CollectionView ItemsSource="{Binding Data}" 
+                               SelectionChangedCommand="{Binding ItemSelectCommand}" 
+                               SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}" 
+                               x:Name="MyCollectionView"
+                               SelectionMode="Single" VerticalOptions="Fill" >
+                  <CollectionView.ItemTemplate>
+                     <DataTemplate>
+                        <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                           <Image Source="icon_ArrowRight.png"></Image>
+                           <Label Text="{Binding Name}" FontAttributes="Bold"></Label>
+                        </FlexLayout>
+                     </DataTemplate>
+                  </CollectionView.ItemTemplate>
+               </CollectionView>
+            </ScrollView>
+         </Frame>
+
+         <ActivityIndicator IsRunning="{Binding IsBusy}" />
+
+         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Button Text="cancel_command" Command="{Binding CancelCommand}"></Button>
+            <Button Text="confirm_command" Command="{Binding ConfirmCommand}"></Button>
+         </StackLayout>
+
+      </StackLayout>
+   </ContentPage.Content>
+</ContentPage>
