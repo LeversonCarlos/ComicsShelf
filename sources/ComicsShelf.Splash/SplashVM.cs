@@ -22,12 +22,6 @@ namespace ComicsShelf.Splash
          SelectItemCommand = new Command(async item => await SelectItemAsync(item));
       }
 
-      string _LibraryID { get; set; }
-      public void SetLibraryID(string libraryID) => _LibraryID = libraryID;
-
-      string _FileID { get; set; }
-      public void SetFileID(string fileID) => _FileID = fileID;
-
       LibraryVM _Library { get; set; }
       public ObservableList<ItemVM> ItemsList { get; set; } = new ObservableList<ItemVM>();
 
