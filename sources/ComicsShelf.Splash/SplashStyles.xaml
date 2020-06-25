@@ -6,6 +6,8 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    x:Class="ComicsShelf.Splash.SplashStyles">
 
+   <splash:DateFormatter x:Key="dateFormatter" />
+
    <Style TargetType="StackLayout" x:Key="MainStack">
       <Setter Property="Padding" Value="10" />
       <Setter Property="Spacing" Value="30" />
