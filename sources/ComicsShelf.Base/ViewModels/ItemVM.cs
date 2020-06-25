@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ComicsShelf.Observables;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace ComicsShelf.ViewModels
 {
 
-   public class ItemVM
+   public class ItemVM : BaseVM
    {
 
       public ItemVM()
@@ -29,16 +30,52 @@ namespace ComicsShelf.ViewModels
       public DateTime ReleaseDate { get; set; }
       public Dictionary<string, string> KeyValues { get; set; }
 
-      public short? Rating { get; set; }
-      public bool Readed { get; set; }
-      public DateTime? ReadingDate { get; set; }
-      public short? ReadingPage { get; set; }
-      public double ReadingPercent { get; set; }
+      short? _Rating;
+      public short? Rating
+      {
+         get => _Rating;
+         set => SetProperty(ref _Rating, value);
+      }
+
+      bool _Readed;
+      public bool Readed
+      {
+         get => _Readed;
+         set
+         {
+            ReadingPage = 0;
+            ReadingPercent = (value ? 1 : 0);
+            ReadingDate = (value ? DateTime.Now : DateTime.MinValue);
+            SetProperty(ref _Readed, value);
+         }
+      }
+
+      DateTime? _ReadingDate;
+      public DateTime? ReadingDate
+      {
+         get => _ReadingDate;
+         set => SetProperty(ref _ReadingDate, value);
+      }
+
+      short? _ReadingPage;
+      public short? ReadingPage
+      {
+         get => _ReadingPage;
+         set => SetProperty(ref _ReadingPage, value);
+      }
+
+      double _ReadingPercent;
+      public double ReadingPercent
+      {
+         get => _ReadingPercent;
+         set => SetProperty(ref _ReadingPercent, value);
+      }
 
       [JsonIgnore]
       public string CoverPath { get; set; }
 
       public bool Available { get; set; }
+
    }
 
    public static class ItemVMExtention
@@ -51,6 +88,7 @@ namespace ComicsShelf.ViewModels
          itemVM.ReadingPage = data.ReadingPage;
          itemVM.ReadingPercent = data.ReadingPercent;
          itemVM.Available = data.Available;
+         itemVM.ClearDirty();
       }
    }
 
