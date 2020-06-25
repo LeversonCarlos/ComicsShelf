@@ -1,9 +1,11 @@
-﻿using System;
+﻿using ComicsShelf.Observables;
+using ComicsShelf.ViewModels;
+using System;
 using System.Linq;
 
 namespace ComicsShelf.Splash
 {
-   partial class SplashVM 
+   partial class SplashVM
    {
 
       public void InitializeData()
@@ -17,6 +19,7 @@ namespace ComicsShelf.Splash
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
+      LibraryVM _Library { get; set; }
       SplashVM InitializeLibrary()
       {
          if (string.IsNullOrEmpty(_LibraryID)) { throw new Exception($"No libraryID parameter was defined for the loading of the splash screen"); }
@@ -26,6 +29,7 @@ namespace ComicsShelf.Splash
          return this;
       }
 
+      public ObservableList<ItemVM> ItemsList { get; set; } = new ObservableList<ItemVM>();
       SplashVM InitializeItems()
       {
          if (string.IsNullOrEmpty(_FileID)) { throw new Exception($"No fileID parameter was defined for the loading of the splash screen"); }
