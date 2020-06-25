@@ -11,6 +11,12 @@ namespace ComicsShelf.Splash
    {
       IStoreService Store { get => DependencyService.Get<IStoreService>(); }
 
+      public string RatingLabel { get; private set; } = Strings.RATING_LABEL;
+      public string ReadedLabel { get; private set; } = Strings.READED_LABEL;
+      public string ReadingLabel { get; private set; } = Strings.READING_LABEL;
+      public string OpenLabel { get; private set; } = Strings.OPEN_LABEL;
+      public string EditionsTitle { get; private set; } = Strings.EDITIONS_TITLE;
+
       public SplashVM()
       {
          SelectItemCommand = new Command(async item => await SelectItemAsync(item));

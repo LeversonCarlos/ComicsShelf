@@ -32,32 +32,32 @@
             <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
                <StackLayout WidthRequest="100" >
                   <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
-                  <Label Text="Do You Liked It" FontSize="Caption" HorizontalOptions="Center" />
+                  <Label Text="{Binding RatingLabel}" FontSize="Caption" HorizontalOptions="Center" />
                </StackLayout>
                <StackLayout WidthRequest="100" >
                   <Switch IsToggled="{Binding SelectedItem.Readed}" HorizontalOptions="Center" ></Switch>
-                  <Label Text="Already Readed" FontSize="Caption"  HorizontalOptions="Center" />
+                  <Label Text="{Binding ReadedLabel}" FontSize="Caption"  HorizontalOptions="Center" />
                </StackLayout>
                <StackLayout WidthRequest="100" >
-                  <Label Text="Last Read On" FontSize="Caption"  HorizontalOptions="Center" />
+                  <Label Text="{Binding ReadingLabel}" FontSize="Caption"  HorizontalOptions="Center" />
                   <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold" />
                </StackLayout>
                <StackLayout WidthRequest="100" >
                   <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
-                  <Label Text="Open Now" FontSize="Caption"  HorizontalOptions="Center" />
+                  <Label Text="{Binding OpenLabel}" FontSize="Caption"  HorizontalOptions="Center" />
                </StackLayout>
             </FlexLayout>
          </StackLayout>
 
          <StackLayout Spacing="3">
-            <Label Text="OTHER_EDITIONS_FROM_THIS_COLLECTION" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" />
+            <Label Text="{Binding EditionsTitle}" Style="{StaticResource SectionLabel}" />
             <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" >
                <CollectionView.ItemTemplate>
                   <DataTemplate>
 
                      <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference splashPage} }">
                         <controls:CoverImage ImageSource="{Binding CoverPath}" />
-                        <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" />
+                        <ProgressBar Progress="{Binding ReadingPercent}" Style="{StaticResource CoverProgress}" />
                         <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
                      </controls:CoverContainer>
 
