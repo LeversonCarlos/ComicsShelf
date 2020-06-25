@@ -2,6 +2,7 @@
 using ComicsShelf.ViewModels;
 using System;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Splash
 {
@@ -49,6 +50,10 @@ namespace ComicsShelf.Splash
 
          ItemsList.AddRange(folderItems);
          if (ItemsList.Count == 0) { throw new Exception($"No items is loaded for the libraryID {_LibraryID} on the splash screen"); }
+
+         var editionsColumns = Device.Idiom == TargetIdiom.Phone ? 3 : Device.Idiom == TargetIdiom.Tablet ? 5 : Device.Idiom == TargetIdiom.Desktop ? 7 : 9;
+         var editionsRows = (int)Math.Ceiling((double)ItemsList.Count / (double)editionsColumns);
+         EditionsHeight = (Controls.CoverSize.DefaultHeight + 10) * editionsRows;
 
          return this;
       }

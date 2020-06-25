@@ -31,6 +31,13 @@ namespace ComicsShelf.Splash
          return Task.CompletedTask;
       }
 
+      double _EditionsHeight;
+      public double EditionsHeight
+      {
+         get => _EditionsHeight;
+         set => SetProperty(ref _EditionsHeight, value);
+      }
+
       private async void UpdateItemAsync()
       {
          if (!this.SelectedItem.IsDirty) { return; }
