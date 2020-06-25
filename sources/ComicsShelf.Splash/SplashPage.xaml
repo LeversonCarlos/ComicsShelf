@@ -8,7 +8,8 @@
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated"
-   x:Class="ComicsShelf.Splash.SplashPage">
+   x:Class="ComicsShelf.Splash.SplashPage"
+   x:Name="splashPage">
    <ContentPage.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" >
          <ResourceDictionary.MergedDictionaries>
@@ -30,25 +31,20 @@
             <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" TextColor="Orange"/>
             <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
                <StackLayout >
-                  <controls:RatingView Rating="{Binding Rating}" />
-                  <!-- 
-                                       ThumbsUpSelectedImageSource="thumbsUp_selected"
-                                       ThumbsUpUnselectedImageSource="thumbsUp_unselected"
-                                       ThumbsDownSelectedImageSource="thumbsDown_selected"
-                                       ThumbsDownUnselectedImageSource="thumbsDown_unselected" 
-                  -->
+                  <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
                   <Label Text="Do You Liked It" FontSize="Caption" HorizontalOptions="Center" />
                </StackLayout>
                <StackLayout>
-                  <Switch HorizontalOptions="Center" ></Switch>
-                  <Label Text="Do You Readed It" FontSize="Caption"  HorizontalOptions="Center" />
+                  <Switch IsToggled="{Binding SelectedItem.Readed}" HorizontalOptions="Center" ></Switch>
+                  <Label Text="Already Readed" FontSize="Caption"  HorizontalOptions="Center" />
                </StackLayout>
                <StackLayout>
                   <Label Text="Last Read On" FontSize="Caption"  HorizontalOptions="Center" />
-                  <Label Text="24/06/2020" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold" />
+                  <Label Text="{Binding SelectedItem.ReadingDate}" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold" />
                </StackLayout>
                <StackLayout>
-                  <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="70" WidthRequest="70" />
+                  <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
+                  <Label Text="Open Now" FontSize="Caption"  HorizontalOptions="Center" />
                </StackLayout>
             </FlexLayout>
          </StackLayout>
@@ -59,7 +55,7 @@
                <CollectionView.ItemTemplate>
                   <DataTemplate>
 
-                     <controls:CoverContainer >
+                     <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference splashPage} }">
                         <controls:CoverImage ImageSource="{Binding CoverPath}" />
                         <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" />
                         <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
