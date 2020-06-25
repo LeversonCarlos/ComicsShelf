@@ -8,7 +8,15 @@ namespace ComicsShelf.Observables
    public class ObservableObject : INotifyPropertyChanged
    {
 
-      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null)
+      public ObservableObject()
+      {
+         IsDirty = false;
+      }
+
+      public bool IsDirty { get; private set; }
+      public void ClearDirty() => IsDirty = false;
+
+      protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action onChanged = null)
       {
          if (EqualityComparer<T>.Default.Equals(backingStore, value))
          { return false; }
@@ -16,11 +24,12 @@ namespace ComicsShelf.Observables
          backingStore = value;
          onChanged?.Invoke();
          OnPropertyChanged(propertyName);
+         IsDirty = true;
          return true;
       }
 
       public event PropertyChangedEventHandler PropertyChanged;
-      protected void OnPropertyChanged([CallerMemberName]string propertyName = "")
+      protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
       {
          var changed = PropertyChanged;
          if (changed == null)
