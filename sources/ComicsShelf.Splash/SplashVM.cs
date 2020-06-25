@@ -54,7 +54,7 @@ namespace ComicsShelf.Splash
 
       public override Task OnAppearing()
       {
-         LoadData();
+         InitializeData();
          return base.OnAppearing();
       }
 

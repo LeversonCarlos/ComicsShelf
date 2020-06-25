@@ -6,18 +6,18 @@ namespace ComicsShelf.Splash
    partial class SplashVM 
    {
 
-      public void LoadData()
+      public void InitializeData()
       {
          try
          {
-            this.LoadLibrary()
-                .LoadItems()
-                .SetInitialItem();
+            this.InitializeLibrary()
+                .InitializeItems()
+                .InitializeSelectedItem();
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
-      SplashVM LoadLibrary()
+      SplashVM InitializeLibrary()
       {
          if (string.IsNullOrEmpty(_LibraryID)) { throw new Exception($"No libraryID parameter was defined for the loading of the splash screen"); }
          if (_Library != null) { return this; }
@@ -26,7 +26,7 @@ namespace ComicsShelf.Splash
          return this;
       }
 
-      SplashVM LoadItems()
+      SplashVM InitializeItems()
       {
          if (string.IsNullOrEmpty(_FileID)) { throw new Exception($"No fileID parameter was defined for the loading of the splash screen"); }
          if (ItemsList.Count != 0) { return this; }
@@ -49,7 +49,7 @@ namespace ComicsShelf.Splash
          return this;
       }
 
-      SplashVM SetInitialItem()
+      SplashVM InitializeSelectedItem()
       {
          if (string.IsNullOrEmpty(_FileID)) { throw new Exception($"No fileID parameter was defined for the loading of the splash screen"); }
          if (ItemsList.Count == 0) { throw new Exception($"No items is loaded for the libraryID {_LibraryID} on the splash screen"); }
