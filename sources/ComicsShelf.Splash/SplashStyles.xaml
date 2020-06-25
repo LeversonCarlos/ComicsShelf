@@ -6,6 +6,10 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    x:Class="ComicsShelf.Splash.SplashStyles">
 
+   <ResourceDictionary.MergedDictionaries>
+      <controls:CoverStyle />
+   </ResourceDictionary.MergedDictionaries>
+
    <splash:DateFormatter x:Key="dateFormatter" />
 
    <Style TargetType="StackLayout" x:Key="MainStack">

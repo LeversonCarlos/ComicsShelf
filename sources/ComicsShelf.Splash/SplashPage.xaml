@@ -11,11 +11,7 @@
    x:Class="ComicsShelf.Splash.SplashPage"
    x:Name="splashPage">
    <ContentPage.Resources>
-      <ResourceDictionary Source="SplashStyles.xaml" >
-         <ResourceDictionary.MergedDictionaries>
-            <controls:CoverStyle />
-         </ResourceDictionary.MergedDictionaries>
-      </ResourceDictionary>
+      <ResourceDictionary Source="SplashStyles.xaml" />
    </ContentPage.Resources>
    <ContentPage.Content>
       <StackLayout Style="{StaticResource MainStack}" >
@@ -27,27 +23,7 @@
             <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
          </Grid>
 
-         <StackLayout Spacing="3">
-            <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" TextColor="Orange"/>
-            <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
-               <StackLayout WidthRequest="100" >
-                  <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
-                  <Label Text="{Binding RatingLabel}" FontSize="Caption" HorizontalOptions="Center" />
-               </StackLayout>
-               <StackLayout WidthRequest="100" >
-                  <Switch IsToggled="{Binding SelectedItem.Readed}" HorizontalOptions="Center" ></Switch>
-                  <Label Text="{Binding ReadedLabel}" FontSize="Caption"  HorizontalOptions="Center" />
-               </StackLayout>
-               <StackLayout WidthRequest="100" >
-                  <Label Text="{Binding ReadingLabel}" FontSize="Caption"  HorizontalOptions="Center" />
-                  <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold" />
-               </StackLayout>
-               <StackLayout WidthRequest="100" >
-                  <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
-                  <Label Text="{Binding OpenLabel}" FontSize="Caption"  HorizontalOptions="Center" />
-               </StackLayout>
-            </FlexLayout>
-         </StackLayout>
+         <splash:SplashPageDetails />
 
          <StackLayout Spacing="3">
             <Label Text="{Binding EditionsTitle}" Style="{StaticResource SectionLabel}" />
