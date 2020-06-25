@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace ComicsShelf.ViewModels
 {
 
-   public class ItemVM : BaseVM
+   public class ItemVM : ObservableObject
    {
 
       public ItemVM()
@@ -74,7 +74,12 @@ namespace ComicsShelf.ViewModels
       [JsonIgnore]
       public string CoverPath { get; set; }
 
-      public bool Available { get; set; }
+      bool _Available;
+      public bool Available
+      {
+         get => _Available;
+         set => SetProperty(ref _Available, value);
+      }
 
    }
 

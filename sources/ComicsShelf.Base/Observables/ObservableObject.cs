@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace ComicsShelf.Observables
 {
@@ -13,6 +14,7 @@ namespace ComicsShelf.Observables
          IsDirty = false;
       }
 
+      [JsonIgnore]
       public bool IsDirty { get; private set; }
       public void ClearDirty() => IsDirty = false;
 
