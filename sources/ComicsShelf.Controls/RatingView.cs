@@ -37,7 +37,7 @@ namespace ComicsShelf.Controls
 
       short? _Rating;
       public static readonly BindableProperty RatingProperty =
-         BindableProperty.Create("Rating", typeof(short?), typeof(RatingView), null,
+         BindableProperty.Create("Rating", typeof(short?), typeof(RatingView), null, defaultBindingMode: BindingMode.TwoWay,
          propertyChanged: OnRatingChanged);
       public short? Rating
       {
