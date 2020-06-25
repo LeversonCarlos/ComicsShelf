@@ -14,34 +14,40 @@
       <ResourceDictionary Source="SplashStyles.xaml" />
    </ContentPage.Resources>
    <ContentPage.Content>
-      <StackLayout Style="{StaticResource MainStack}" >
+      <ScrollView Orientation="Vertical">
+         <StackLayout Style="{StaticResource MainStack}" >
 
-         <Grid VerticalOptions="CenterAndExpand">
-            <Grid.RowDefinitions>
-               <RowDefinition Height="{Static splash:SplashCover.DefaultHeight}" />
-            </Grid.RowDefinitions>
-            <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
-         </Grid>
+            <Grid VerticalOptions="CenterAndExpand">
+               <Grid.RowDefinitions>
+                  <RowDefinition Height="{Static splash:SplashCover.DefaultHeight}" />
+               </Grid.RowDefinitions>
+               <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
+            </Grid>
 
-         <splash:SplashPageDetails />
+            <splash:SplashPageDetails />
 
-         <StackLayout Spacing="3">
-            <Label Text="{Binding EditionsTitle}" Style="{StaticResource SectionLabel}" />
-            <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" >
-               <CollectionView.ItemTemplate>
-                  <DataTemplate>
+            <StackLayout Spacing="3">
+               <Label Text="{Binding EditionsTitle}" Style="{StaticResource SectionLabel}" />
 
-                     <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference splashPage} }">
-                        <controls:CoverImage ImageSource="{Binding CoverPath}" />
-                        <ProgressBar Progress="{Binding ReadingPercent}" Style="{StaticResource CoverProgress}" />
-                        <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
-                     </controls:CoverContainer>
+               <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" >
+                  <CollectionView.ItemsLayout>
+                     <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Phone=3, Tablet=5, Desktop=7, TV=9 }" VerticalItemSpacing="0" />
+                  </CollectionView.ItemsLayout>
+                  <CollectionView.ItemTemplate>
+                     <DataTemplate>
 
-                  </DataTemplate>
-               </CollectionView.ItemTemplate>
-            </CollectionView>
+                        <controls:CoverContainer Margin="0" Padding="5" OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference splashPage} }" >
+                           <controls:CoverImage ImageSource="{Binding CoverPath}" />
+                           <ProgressBar Progress="{Binding ReadingPercent}" Style="{StaticResource CoverProgress}" />
+                           <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
+                        </controls:CoverContainer>
+
+                     </DataTemplate>
+                  </CollectionView.ItemTemplate>
+               </CollectionView>
+            </StackLayout>
+
          </StackLayout>
-
-      </StackLayout>
+      </ScrollView>
    </ContentPage.Content>
 </ContentPage>
