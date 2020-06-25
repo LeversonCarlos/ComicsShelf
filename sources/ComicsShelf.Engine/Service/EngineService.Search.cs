@@ -37,10 +37,18 @@ namespace ComicsShelf.Engine
             { Notifyers.Notify.Message(library, string.Format(R.Search.INACTIVATED_N_FILES_MESSAGE, inactiveItems.Count)); }
 
             // UPDATE CHANGED FILES ON THE LIBRARY
+            var changedItems = searchItems
+               .Where(x => !libraryItems.Select(i => i.ID).ToList().Contains(x.ID))
+               .ToList();
+            foreach (var changedItem in changedItems)
+               changedItem.SetData(libraryItems.Where(x => x.ID == changedItem.ID).FirstOrDefault());
+            await store.UpdateItemAsync(changedItems.ToArray());
+
+            // ADD NEW FILES TO THE LIBRARY
             var newItems = searchItems
                .Where(x => !libraryItems.Select(i => i.ID).ToList().Contains(x.ID))
                .ToList();
-            await store.UpdateItemAsync(searchItems.ToArray());
+            await store.UpdateItemAsync(newItems.ToArray());
             if (newItems.Count > 0)
             { Notifyers.Notify.Message(library, string.Format(R.Search.ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
 
