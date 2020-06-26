@@ -8,8 +8,14 @@ namespace ComicsShelf.Helpers
 
       public static string DefaultCover => $"{Xamarin.Essentials.FileSystem.AppDataDirectory}/DefaultCover.png";
 
+      public static Task Init() => Task.Factory.StartNew(() => InitAsync(), TaskCreationOptions.LongRunning);
 
-      public static async Task ExtractAsync()
+      private static async Task InitAsync()
+      {
+         await ExtractDefaultCoverAsync();
+      }
+
+      private static async Task ExtractDefaultCoverAsync()
       {
          try
          {
@@ -31,7 +37,7 @@ namespace ComicsShelf.Helpers
 
             assembly = null;
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         catch (Exception ex) { Insights.TrackException(ex); }
       }
 
    }
