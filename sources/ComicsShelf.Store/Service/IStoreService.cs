@@ -18,8 +18,8 @@ namespace ComicsShelf.Store
       Task<bool> UpdateItemAsync(ItemVM[] itemList);
       Task<bool> UpdateItemAsync(ItemVM item);
 
-      FolderVM[] GetSections();
-      void SetSections(FolderVM[] sections);
+      SectionVM[] GetSections();
+      void SetSections(SectionVM[] sections);
 
    }
 }

@@ -11,12 +11,12 @@ namespace ComicsShelf.Home
    {
 
       readonly Timer CoverSliderTimer;
-      public ObservableList<FolderVM> Sections { get; }
+      public ObservableList<SectionVM> Sections { get; }
 
       public HomeVM()
       {
          Title = Strings.TITLE;
-         Sections = new ObservableList<FolderVM>();
+         Sections = new ObservableList<SectionVM>();
          Helpers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
          CoverSliderTimer = new Timer(5000);
          CoverSliderTimer.Elapsed += this.CoverSliderTimerElapsed;

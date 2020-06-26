@@ -18,50 +18,57 @@ namespace ComicsShelf.Engine.CoverExtraction
          {
             var store = DependencyService.Get<IStoreService>();
 
-            // LOCATE FIRST 6 ITEMS FROM EACH SECTION AS THOSE ARE THE ONES THAT FIRST APPEARS TO USER
+            // RETRIEVE DATA
+            var libraries = store.GetLibraries();
             var sections = store.GetSections();
+
+            // SUGGESTION ITEMS (sections without library)
+            var suggestionItems = sections
+               .Where(section => section.Library == null)
+               .SelectMany(x => x.Folders)
+               .Select(x => x.FirstItem)
+               .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
+               .ToArray();
+            var suggestionData = suggestionItems
+               .GroupBy(item => item.LibraryID)
+               .Select(grp => new
+               {
+                  LibraryID = grp.Key,
+                  Library = libraries.FirstOrDefault(x => x.ID == grp.Key),
+                  Items = grp.ToArray()
+               })
+               .ToArray();
+            foreach (var libraryData in suggestionData)
+               if (!await ExtractCovers(store, libraryData.Library, libraryData.Items)) { return; }
+
+            // FEATURED ITEMS (firstItem of the first 6 folders on each section)
             var featuredItems = sections
+               .Where(section => section.Library != null)
                .SelectMany(x => x.Folders.Take(6))
                .Select(x => x.FirstItem)
                .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
                .ToArray();
-
-            // GROUP BY LIBRARY SO WE COULD GET A NICE PROGRESS ON THE SETTINGS PAGE FOR THOSE
-            var featuredLibraryIDs = featuredItems
-               .GroupBy(x => x.LibraryID)
-               .Select(x => x.Key)
+            var featuredData = featuredItems
+               .GroupBy(item => item.LibraryID)
+               .Select(grp => new
+               {
+                  LibraryID = grp.Key,
+                  Library = libraries.FirstOrDefault(x => x.ID == grp.Key),
+                  Items = grp.ToArray()
+               })
                .ToArray();
-            foreach (var libraryID in featuredLibraryIDs)
+            foreach (var libraryData in featuredData)
+               if (!await ExtractCovers(store, libraryData.Library, libraryData.Items)) { return; }
+
+            // REMAINING ITEMS (all that is left)
+            foreach (var library in libraries)
             {
-               var libraryfeaturedItems = featuredItems.Where(x => x.LibraryID == libraryID).ToArray();
-               if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return; }
+               var remainingItems = store
+                  .GetLibraryItems(library)
+                  .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
+                  .ToArray();
+               if (!await ExtractCovers(store, library, remainingItems)) { return; }
             }
-
-            // LOCATE ALL REMAINING ITEMS
-            var remainingItems = sections
-               .SelectMany(x => x.Folders)
-               .SelectMany(x => x.Items)
-               .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
-               .ToArray();
-
-            // GROUP BY LIBRARY SO WE COULD GET A NICE PROGRESS ON THE SETTINGS PAGE FOR THOSE
-            var remainingLibraryIDs = remainingItems
-               .GroupBy(x => x.LibraryID)
-               .Select(x => x.Key)
-               .ToArray();
-            foreach (var libraryID in remainingLibraryIDs)
-            {
-               var libraryfeaturedItems = remainingItems.Where(x => x.LibraryID == libraryID).ToArray();
-               if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return; }
-            }
-
-            /*
-            var libraries = store.GetLibraries();
-            var libraryItems = libraries
-               .Select(x => store.GetLibraryItems(x))
-               .SelectMany(x => x)
-               .ToList();
-            */
 
             //store.SetSections(sections);
             //Notifyers.Notify.SectionsUpdate(sections);
@@ -70,12 +77,10 @@ namespace ComicsShelf.Engine.CoverExtraction
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
-      private static async Task<bool> ExtractCovers(IStoreService store, string libraryID, ItemVM[] itemList)
+      private static async Task<bool> ExtractCovers(IStoreService store, LibraryVM library, ItemVM[] itemList)
       {
          try
          {
-
-            var library = store.GetLibrary(libraryID);
 
             // NOTIFY START MESSAGE
             Helpers.Notify.Message(library, "Start.Covers.Extraction");
