@@ -10,10 +10,8 @@
       <controls:CoverStyle />
    </ResourceDictionary.MergedDictionaries>
 
-   <splash:DateFormatter x:Key="dateFormatter" />
-
-   <Style TargetType="StackLayout" x:Key="MainStack">
-      <Setter Property="Padding" Value="10" />
+   <Style TargetType="StackLayout" x:Key="Main">
+      <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
       <Setter Property="Spacing" Value="30" />
    </Style>
 

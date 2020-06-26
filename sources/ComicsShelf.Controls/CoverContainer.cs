@@ -8,8 +8,6 @@ namespace ComicsShelf.Controls
 
       public CoverContainer()
       {
-         Margin = 0;
-         Padding = new Thickness(0, 0, 10, 0);
          WidthRequest = Helpers.Cover.DefaultWidth; ;
          HeightRequest = Helpers.Cover.DefaultHeight;
 

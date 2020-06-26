@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Controls.Styles.BaseStyles">
+
+   <Style TargetType="ContentView">
+      <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+   </Style>
+
+   <Style TargetType="Label">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Padding" Value="0" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="Title" >
+      <Setter Property="FontSize" Value="Large" />
+      <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
+      <Setter Property="FontAttributes" Value="Bold" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="Subtitle" >
+      <Setter Property="FontSize" Value="Default" />
+      <Setter Property="TextColor" Value="{StaticResource SubtitleColor}" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="Details">
+      <Setter Property="FontSize" Value="Small" />
+      <Setter Property="TextColor" Value="{StaticResource DetailsColor}" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="Message">
+      <Setter Property="FontSize" Value="Micro" />
+      <Setter Property="TextColor" Value="{StaticResource DetailsColor}" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+   </Style>
+
+   <Style TargetType="ProgressBar" >
+      <Setter Property="HeightRequest" Value="1" />
+      <Setter Property="ProgressColor" Value="{StaticResource PrimaryColor}" />
+   </Style>
+
+   <Style TargetType="BoxView" x:Key="Separator">
+      <Setter Property="Margin" Value="0,1" />
+      <Setter Property="HeightRequest" Value="1" />
+      <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
+   </Style>
+
+</ResourceDictionary>

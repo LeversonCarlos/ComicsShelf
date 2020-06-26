@@ -5,15 +5,17 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Splash.SplashPageDetails">
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
+      <splash:DateFormatter x:Key="dateFormatter" />
    </ContentView.Resources>
    <ContentView.Content>
 
       <StackLayout Spacing="3">
-         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" TextColor="Orange"/>
+         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" HorizontalOptions="Center" />
          <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
             <StackLayout WidthRequest="100" >
                <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
