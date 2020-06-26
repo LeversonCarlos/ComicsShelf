@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Engine
+namespace ComicsShelf.Engine.AnalysisData
 {
-   partial class EngineService
+   public class Service
    {
 
-      public static async Task<bool> AnalyseFiles(ItemVM[] itemList)
+      public static Task Execute(ItemVM[] itemsList) => Task.Factory.StartNew(() => ExecuteAsync(itemsList), TaskCreationOptions.LongRunning);
+
+      private static async Task ExecuteAsync(ItemVM[] itemsList)
       {
          try
          {
@@ -48,10 +50,9 @@ namespace ComicsShelf.Engine
             store.SetSections(sections);
             Notifyers.Notify.SectionsUpdate(sections);
 
-            await Task.CompletedTask;
-            return true;
+            await Task.FromResult;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
    }
