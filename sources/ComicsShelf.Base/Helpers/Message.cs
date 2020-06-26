@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Base
+namespace ComicsShelf.Helpers
 {
    public class Message
    {

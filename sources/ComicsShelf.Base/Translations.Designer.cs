@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComicsShelf.Base {
+namespace ComicsShelf.Helpers {
     using System;
     
     

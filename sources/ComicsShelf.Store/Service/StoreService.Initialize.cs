@@ -42,7 +42,7 @@ namespace ComicsShelf.Store
 
             return true;
          }
-         catch (Exception ex) { Base.Message.Show(ex); return false; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
       }
 
    }
