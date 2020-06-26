@@ -11,14 +11,14 @@
       <ResourceDictionary Source="SettingsStyles.xaml" />
    </ContentPage.Resources>
    <ContentPage.Content>
-      <StackLayout Style="{StaticResource MainStack}">
+      <StackLayout Style="{StaticResource Main}">
 
          <StackLayout BindableLayout.ItemsSource="{Binding LibraryTypes}" >
             <BindableLayout.ItemTemplate>
                <DataTemplate>
-                  <StackLayout>
+                  <StackLayout Style="{StaticResource LibraryTypesStack}" >
 
-                     <Label Text="{Binding Title}" Style="{StaticResource SectionLabel}" />
+                     <Label Text="{Binding Title}" Style="{StaticResource Large}" />
 
                      <StackLayout BindableLayout.ItemsSource="{Binding Libraries}">
                         <BindableLayout.ItemTemplate>
@@ -27,14 +27,14 @@
                               <StackLayout Style="{StaticResource LibraryStack}">
                                  <FlexLayout Style="{StaticResource LibraryFlex}" >
                                     <StackLayout FlexLayout.Grow="1" Spacing="0">
-                                       <Label Text="{Binding Library.Description}" Style="{StaticResource LibraryTitleLabel}" ></Label>
-                                       <Label Text="{Binding Library.Path}" Style="{StaticResource LibraryDetailsLabel}" ></Label>
-                                       <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource LibraryMessageLabel}" ></Label>
-                                       <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource LibraryProgress}" ></ProgressBar>
+                                       <Label Text="{Binding Library.Description}" Style="{StaticResource Default}" ></Label>
+                                       <Label Text="{Binding Library.Path}" Style="{StaticResource Small}" ></Label>
+                                       <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource Micro}" ></Label>
+                                       <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource ProgressBar}" ></ProgressBar>
                                     </StackLayout>
                                     <ImageButton Command="{Binding RemoveCommand}" Source="delete" />
                                  </FlexLayout>
-                                 <BoxView Style="{StaticResource LibrarySeparator}" />
+                                 <BoxView Style="{StaticResource Separator}" />
                               </StackLayout>
 
                            </DataTemplate>
@@ -46,7 +46,7 @@
                            <FlexLayout.GestureRecognizers>
                               <TapGestureRecognizer Command="{Binding AddCommand}" />
                            </FlexLayout.GestureRecognizers>
-                           <Label Text="{Binding AddText}" Style="{StaticResource LibraryTitleLabel}"></Label>
+                           <Label Text="{Binding AddText}" Style="{StaticResource Default}"></Label>
                         </FlexLayout>
                      </StackLayout>
 

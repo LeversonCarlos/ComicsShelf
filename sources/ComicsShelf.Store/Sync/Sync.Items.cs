@@ -19,7 +19,7 @@ namespace ComicsShelf.Store
             var libraryItemIDs = await Helpers.Json.Deserialize<string[]>(libraryItemIDsJson);
             return libraryItemIDs;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return new string[] { }; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return new string[] { }; }
       }
 
       public static async Task<bool> SetItems(string libraryID, List<ItemVM> items)
@@ -32,7 +32,7 @@ namespace ComicsShelf.Store
 
             return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
       }
 
       public static void RemoveItems(string libraryID, string[] itemIDs)
@@ -42,7 +42,7 @@ namespace ComicsShelf.Store
             itemIDs.ForEach(itemID => RemoveItem(itemID));
             Xamarin.Essentials.Preferences.Remove(items_sync(libraryID));
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); }
+         catch (Exception ex) { Helpers.Message.Show(ex); }
       }
 
    }

@@ -30,11 +30,11 @@ namespace ComicsShelf.Store
                .ToArray();
             if (!await Sync.SetLibraries(this.LibraryList)) { return false; }
 
-            Notifyers.Notify.LibraryAdd(library);
+            Helpers.Notify.LibraryAdd(library);
 
             return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
       }
 
    }

@@ -10,9 +10,9 @@ namespace ComicsShelf.Store
       readonly Dictionary<string, SortedList<string, ItemVM>> ItemList = new Dictionary<string, SortedList<string, ItemVM>>();
       public ItemVM[] GetLibraryItems(LibraryVM library) => (this.ItemList.ContainsKey(library.ID) ? this.ItemList[library.ID]?.Values?.ToArray() : null) ?? new ItemVM[] { };
 
-      FolderVM[] SectionList { get; set; }
-      public FolderVM[] GetSections() => SectionList ?? new FolderVM[] { };
-      public void SetSections(FolderVM[] sections) => SectionList = sections;
+      SectionVM[] SectionList { get; set; }
+      public SectionVM[] GetSections() => SectionList ?? new SectionVM[] { };
+      public void SetSections(SectionVM[] sections) => SectionList = sections;
 
    }
 }

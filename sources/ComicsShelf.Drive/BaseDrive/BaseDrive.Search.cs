@@ -99,7 +99,7 @@ namespace ComicsShelf.Drive
 
             return itemList.ToArray();
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return new ItemVM[] { }; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return new ItemVM[] { }; }
       }
 
    }

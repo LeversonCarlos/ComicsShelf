@@ -11,7 +11,7 @@ namespace ComicsShelf.ViewModels
 
       public ItemVM()
       {
-         this.CoverPath = DefaultCover.DefaultCover.Path;
+         this.CoverPath = Helpers.Cover.DefaultCover;
       }
 
       public string ID { get; set; }

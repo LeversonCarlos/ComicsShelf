@@ -11,7 +11,7 @@
    <ContentPage.Content>
       <StackLayout Padding="20" Spacing="20">
 
-         <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" TextColor="Accent" ></Label>
+         <Label Text="{Binding Large}" FontSize="Medium" FontAttributes="Bold" TextColor="Accent" ></Label>
 
          <Frame BackgroundColor="White" Padding="10">
             <StackLayout Orientation="Vertical" Spacing="5">

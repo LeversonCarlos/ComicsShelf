@@ -4,22 +4,35 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    x:Class="ComicsShelf.Splash.SplashStyles">
 
-   <ResourceDictionary.MergedDictionaries>
-      <controls:CoverStyle />
-   </ResourceDictionary.MergedDictionaries>
-
-   <splash:DateFormatter x:Key="dateFormatter" />
-
-   <Style TargetType="StackLayout" x:Key="MainStack">
-      <Setter Property="Padding" Value="10" />
+   <Style TargetType="StackLayout" x:Key="Main">
+      <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
       <Setter Property="Spacing" Value="30" />
    </Style>
 
    <Style TargetType="controls:CoverImage" x:Key="SplashCover">
       <Setter Property="HeightRequest" Value="{Static splash:SplashCover.DefaultHeight}" />
       <Setter Property="WidthRequest" Value="{Static splash:SplashCover.DefaultWidth}" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="Title">
+      <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+      <Setter Property="HorizontalOptions" Value="Center" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="DetailsLabel">
+      <Setter Property="HorizontalOptions" Value="Center" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="DetailsValue">
+      <Setter Property="HorizontalOptions" Value="Center" />
+      <Setter Property="FontAttributes" Value="Bold" />
+   </Style>
+
+   <Style TargetType="Switch">
+      <Setter Property="HorizontalOptions" Value="Center" />
    </Style>
 
    <Style TargetType="controls:RatingView">

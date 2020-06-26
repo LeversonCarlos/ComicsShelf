@@ -15,7 +15,7 @@
    </ContentPage.Resources>
    <ContentPage.Content>
       <ScrollView Orientation="Vertical">
-         <StackLayout Style="{StaticResource MainStack}" >
+         <StackLayout Style="{StaticResource Main}" >
 
             <Grid VerticalOptions="CenterAndExpand">
                <Grid.RowDefinitions>
@@ -27,7 +27,7 @@
             <splash:SplashPageDetails />
 
             <StackLayout Spacing="3">
-               <Label Text="{Binding EditionsTitle}" Style="{StaticResource SectionLabel}" />
+               <Label Text="{Binding EditionsTitle}" Style="{StaticResource Large}" />
 
                <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" >
                   <CollectionView.ItemsLayout>

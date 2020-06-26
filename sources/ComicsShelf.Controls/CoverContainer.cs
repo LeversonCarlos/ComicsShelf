@@ -8,10 +8,8 @@ namespace ComicsShelf.Controls
 
       public CoverContainer()
       {
-         Margin = 0;
-         Padding = new Thickness(0, 0, 10, 0);
-         WidthRequest = CoverSize.DefaultWidth; ;
-         HeightRequest = CoverSize.DefaultHeight;
+         WidthRequest = Helpers.Cover.DefaultWidth; ;
+         HeightRequest = Helpers.Cover.DefaultHeight;
 
          GestureRecognizers.Add(new TapGestureRecognizer
          {

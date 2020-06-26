@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComicsShelf.R {
+namespace ComicsShelf.Engine.RefreshData {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace ComicsShelf.R {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Common {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Common() {
+        internal Strings() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.R.Common", typeof(Common).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Engine.RefreshData.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace ComicsShelf.R {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,29 +61,38 @@ namespace ComicsShelf.R {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comics Shelf.
+        ///   Looks up a localized string similar to Added {0} new files to the library.
         /// </summary>
-        public static string APP_TITLE {
+        internal static string ADDED_N_NEW_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("APP_TITLE", resourceCulture);
+                return ResourceManager.GetString("ADDED_N_NEW_FILES_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Connecting to drive engine to refresh the library files.
         /// </summary>
-        public static string CANCEL_COMMAND {
+        internal static string CONNECTING_MESSAGE {
             get {
-                return ResourceManager.GetString("CANCEL_COMMAND", resourceCulture);
+                return ResourceManager.GetString("CONNECTING_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OK.
+        ///   Looks up a localized string similar to Found {0} files through the drive engine.
         /// </summary>
-        public static string OK_COMMAND {
+        internal static string FOUND_N_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("OK_COMMAND", resourceCulture);
+                return ResourceManager.GetString("FOUND_N_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed {0} files from the library that are no longer availabled.
+        /// </summary>
+        internal static string REMOVED_N_FILES_MESSAGE {
+            get {
+                return ResourceManager.GetString("REMOVED_N_FILES_MESSAGE", resourceCulture);
             }
         }
     }

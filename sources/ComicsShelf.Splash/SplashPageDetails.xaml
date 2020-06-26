@@ -5,31 +5,33 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Splash.SplashPageDetails">
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
+      <splash:DateFormatter x:Key="dateFormatter" />
    </ContentView.Resources>
    <ContentView.Content>
 
       <StackLayout Spacing="3">
-         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource SectionLabel}" HorizontalOptions="Center" TextColor="Orange"/>
+         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" />
          <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
             <StackLayout WidthRequest="100" >
                <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
-               <Label Text="{Binding RatingLabel}" FontSize="Caption" HorizontalOptions="Center" />
+               <Label Text="{Binding RatingLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
-               <Switch IsToggled="{Binding SelectedItem.Readed}" HorizontalOptions="Center" ></Switch>
-               <Label Text="{Binding ReadedLabel}" FontSize="Caption"  HorizontalOptions="Center" />
+               <Switch IsToggled="{Binding SelectedItem.Readed}" ></Switch>
+               <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
-               <Label Text="{Binding ReadingLabel}" FontSize="Caption"  HorizontalOptions="Center" />
-               <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" FontSize="Subtitle" HorizontalOptions="Center" FontAttributes="Bold" />
+               <Label Text="{Binding ReadingLabel}" Style="{StaticResource DetailsLabel}" />
+               <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
                <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
-               <Label Text="{Binding OpenLabel}" FontSize="Caption"  HorizontalOptions="Center" />
+               <Label Text="{Binding OpenLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
          </FlexLayout>
       </StackLayout>

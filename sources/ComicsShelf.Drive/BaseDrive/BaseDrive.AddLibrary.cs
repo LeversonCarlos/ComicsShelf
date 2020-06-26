@@ -27,7 +27,7 @@ namespace ComicsShelf.Drive
 
             return library;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return null; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return null; }
       }
 
    }

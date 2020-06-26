@@ -20,8 +20,8 @@ namespace ComicsShelf.Settings
          AddText = libraryType == enLibraryType.LocalDrive ? Strings.ADD_LOCAL_DRIVE_LIBRARY_COMMAND : Strings.ADD_ONE_DRIVE_LIBRARY_COMMAND;
          AddCommand = new Command(async () => await Add());
          Libraries = new ObservableList<LibrarySetting>(GetLibraryList());
-         Notifyers.Notify.LibraryAdd(library => AddLibrary(library));
-         Notifyers.Notify.LibraryRemove(library => RemoveLibrary(library));
+         Helpers.Notify.LibraryAdd(library => AddLibrary(library));
+         Helpers.Notify.LibraryRemove(library => RemoveLibrary(library));
       }
 
       public ObservableList<LibrarySetting> Libraries { get; }

@@ -52,14 +52,14 @@ namespace ComicsShelf.Drive.FolderDialog
       public async Task<DriveItemVM> OpenPage()
       {
          var view = new FolderDialogPage { BindingContext = this };
-         await Helpers.App.Navigation.PushModalAsync(view, true);
+         await Helpers.Modal.Push(view);
          return await this.tcs.Task;
       }
 
       async Task ClosePage()
       {
          this.IsBusy = true;
-         await Helpers.App.Navigation.PopModalAsync(true);
+         await Helpers.Modal.Pop();
          this.IsBusy = false;
       }
 

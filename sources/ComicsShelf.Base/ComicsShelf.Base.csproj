@@ -9,11 +9,7 @@
    </PropertyGroup>
 
    <ItemGroup>
-     <None Remove="DefaultCover\DefaultCover.png" />
-   </ItemGroup>
-
-   <ItemGroup>
-     <EmbeddedResource Include="DefaultCover\DefaultCover.png" />
+     <EmbeddedResource Include="Resources\DefaultCover.png" />
    </ItemGroup>
 
    <ItemGroup>
@@ -23,7 +19,30 @@
    </ItemGroup>
 
    <ItemGroup>
-     <ProjectReference Include="..\ComicsShelf.Translations\ComicsShelf.Translations.csproj" />
+     <Compile Update="Resources\Translations.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Translations.resx</DependentUpon>
+     </Compile>
+     <Compile Update="Styles\BaseStyles.xaml.cs">
+       <DependentUpon>%(Filename)</DependentUpon>
+     </Compile>
+     <Compile Update="Styles\CoverStyles.xaml.cs">
+       <DependentUpon>%(Filename)</DependentUpon>
+     </Compile>
+     <Compile Update="Styles\LightTheme.xaml.cs">
+       <DependentUpon>%(Filename)</DependentUpon>
+     </Compile>
+   </ItemGroup>
+
+   <ItemGroup>
+     <EmbeddedResource Update="Resources\Translations.resx">
+       <Generator>ResXFileCodeGenerator</Generator>
+       <LastGenOutput>Translations.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Styles\LabelStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
    </ItemGroup>
 
 </Project>

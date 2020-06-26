@@ -1,32 +1,19 @@
-﻿using System.Linq;
-
-namespace ComicsShelf.ViewModels
+﻿namespace ComicsShelf.ViewModels
 {
    public class FolderVM
    {
 
-      public FolderVM(string path)
+      public FolderVM(string text)
       {
-         this.Path = path;
-         this.Text = System.IO.Path.GetFileNameWithoutExtension(path);
+         Text = text;
+         // ItemIDs = new List<string>();
       }
 
-      public string Text { get; set; }
-      public string Path { get; set; }
+      public string Text { get; private set; }
 
-      public FolderVM[] Folders { get; set; }
-
-      ItemVM[] _Items;
-      public ItemVM[] Items
-      {
-         get => _Items;
-         set
-         {
-            _Items = value;
-            FirstItem = value?.FirstOrDefault();
-         }
-      }
       public ItemVM FirstItem { get; set; }
+
+      // public IList<string> ItemIDs { get; private set; }
 
    }
 }

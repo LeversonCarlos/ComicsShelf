@@ -48,7 +48,7 @@ namespace ComicsShelf.Drive.FolderDialog
             }
 
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return null; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return null; }
       }
 
       static async Task<DriveItemVM[]> GetFolder_Children(ICloudDriveService driveService, DriveItemVM item)
@@ -76,7 +76,7 @@ namespace ComicsShelf.Drive.FolderDialog
                .ToArray();
             return resultList;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return new DriveItemVM[] { }; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return new DriveItemVM[] { }; }
       }
 
       static async Task<DriveItemVM[]> GetFolder_Children_Directories(ICloudDriveService driveService, DriveItemVM item)
@@ -107,7 +107,7 @@ namespace ComicsShelf.Drive.FolderDialog
 
             return resultList.ToArray();
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return new DriveItemVM[] { }; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return new DriveItemVM[] { }; }
       }
 
    }

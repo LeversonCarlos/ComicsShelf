@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="START_MESSAGE" xml:space="preserve">
-    <value>Extracting covers for comic files</value>
+  <data name="ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
+    <value>Added {0} new files to the library</value>
+  </data>
+  <data name="CONNECTING_MESSAGE" xml:space="preserve">
+    <value>Connecting to drive engine to refresh the library files</value>
+  </data>
+  <data name="FOUND_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Found {0} files through the drive engine</value>
+  </data>
+  <data name="REMOVED_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Removed {0} files from the library that are no longer availabled</value>
   </data>
 </root>

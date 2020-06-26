@@ -17,7 +17,7 @@ namespace ComicsShelf.Drive
             await Task.CompletedTask;
             return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
       }
 
    }

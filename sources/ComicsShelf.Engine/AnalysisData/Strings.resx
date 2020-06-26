@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
-    <value>Added {0} new files</value>
-  </data>
-  <data name="FOUND_N_FILES_MESSAGE" xml:space="preserve">
-    <value>Found {0} files</value>
-  </data>
-  <data name="INACTIVATED_N_FILES_MESSAGE" xml:space="preserve">
-    <value>Inactivated {0} files</value>
-  </data>
   <data name="START_MESSAGE" xml:space="preserve">
-    <value>Search library for files</value>
+    <value>Performing analysis over the library files</value>
   </data>
 </root>

@@ -4,24 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Engine
+namespace ComicsShelf.Engine.RefreshData
 {
-   partial class EngineService
+   public class Service
    {
 
-      public static async Task<bool> SearchFiles(LibraryVM library)
+      public static Task Execute(LibraryVM library) => Task.Factory.StartNew(() => ExecuteAsync(library), TaskCreationOptions.LongRunning);
+
+      private static async Task ExecuteAsync(LibraryVM library)
       {
          try
          {
 
             // NOTIFY START MESSAGE
-            Notifyers.Notify.Message(library, R.Search.START_MESSAGE);
+            Helpers.Notify.Message(library, Strings.CONNECTING_MESSAGE);
 
             // SEARCH FILES THROUGH THE LIBRARY's ENGINE
             var searchItems = await Drive.BaseDrive
                .GetDrive(library.Type)
                .SearchItems(library);
-            Notifyers.Notify.Message(library, string.Format(R.Search.FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
+            Helpers.Notify.Message(library, string.Format(Strings.FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
 
             // LOAD CURRENT LIBRARY FILES
             var store = DependencyService.Get<Store.IStoreService>();
@@ -34,7 +36,7 @@ namespace ComicsShelf.Engine
             inactiveItems.ForEach(file => file.Available = false);
             await store.UpdateItemAsync(inactiveItems.ToArray());
             if (inactiveItems.Count > 0)
-            { Notifyers.Notify.Message(library, string.Format(R.Search.INACTIVATED_N_FILES_MESSAGE, inactiveItems.Count)); }
+            { Helpers.Notify.Message(library, string.Format(Strings.REMOVED_N_FILES_MESSAGE, inactiveItems.Count)); }
 
             // UPDATE CHANGED FILES ON THE LIBRARY
             var changedItems = searchItems
@@ -50,18 +52,17 @@ namespace ComicsShelf.Engine
                .ToList();
             await store.UpdateItemAsync(newItems.ToArray());
             if (newItems.Count > 0)
-            { Notifyers.Notify.Message(library, string.Format(R.Search.ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
+            { Helpers.Notify.Message(library, string.Format(Strings.ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
 
             // NOTIFY EMPTY MESSAGE
             if (inactiveItems.Count == 0 && newItems.Count == 0)
-            { Notifyers.Notify.Message(library, ""); }
+            { Helpers.Notify.Message(library, ""); }
 
             // NOTIFY THAT LIBRARY FILES WAS UPDATED 
             // Notify.Result(library, store.GetLibraryItems(library));
 
-            return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
       }
 
    }

@@ -60,12 +60,12 @@ namespace ComicsShelf.Store
                   .Where(x => changedItemIDs.Contains(x.Key))
                   .Select(x => x.Value)
                   .ToArray();
-               Notifyers.Notify.ItemsUpdate(notifyItems);
+               Helpers.Notify.ItemsUpdate(notifyItems);
             }
 
             return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
       }
 
    }

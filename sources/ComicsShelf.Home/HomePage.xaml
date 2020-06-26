@@ -10,35 +10,36 @@
    x:Name="homePage"
    Title="{Binding Title}" IconImageSource="home">
    <ContentPage.Resources>
-      <ResourceDictionary Source="HomeStyles.xaml" >
-         <ResourceDictionary.MergedDictionaries>
-            <controls:CoverStyle />
-         </ResourceDictionary.MergedDictionaries>
-      </ResourceDictionary>
+      <ResourceDictionary Source="HomeStyles.xaml" />
    </ContentPage.Resources>
    <ContentPage.Content>
 
-      <CollectionView ItemsSource="{Binding Sections}" Style="{StaticResource SectionsCollection}">
+      <CollectionView ItemsSource="{Binding Sections}" Style="{StaticResource Sections}">
          <CollectionView.ItemTemplate>
             <DataTemplate>
 
-               <StackLayout Style="{StaticResource SectionStack}">
+               <StackLayout Style="{StaticResource Section}">
 
-                  <Label Text="{Binding Text}" Style="{StaticResource SectionLabel}" />
+                  <StackLayout Spacing="0" >
+                     <Label Text="{Binding Library.Description}" Style="{StaticResource Micro}" />
+                     <Label Text="{Binding Text}" Style="{StaticResource Large}" />
+                  </StackLayout>
 
-                  <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource FoldersCollection}">
+                  <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource Folders}">
                      <CollectionView.ItemTemplate>
                         <DataTemplate>
 
                            <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }">
                               <controls:CoverImage ImageSource="{Binding FirstItem.CoverPath}" />
-                              <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" />
+                              <!-- <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" /> -->
                               <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
                            </controls:CoverContainer>
 
                         </DataTemplate>
                      </CollectionView.ItemTemplate>
                   </CollectionView>
+
+                  <BoxView Style="{StaticResource Separator}" />
 
                </StackLayout>
 

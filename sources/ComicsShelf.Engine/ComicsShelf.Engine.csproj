@@ -6,7 +6,7 @@
       <Company>Friendship Solutions</Company>
       <Copyright>Copyright © Friendship Solutions 2020</Copyright>
       <Version>1.0.0</Version>
-      <RootNamespace>ComicsShelf</RootNamespace>
+      <RootNamespace>ComicsShelf.Engine</RootNamespace>
    </PropertyGroup>
 
    <ItemGroup>
@@ -19,7 +19,30 @@
       <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
       <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
       <ProjectReference Include="..\ComicsShelf.Drive\ComicsShelf.Drive.csproj" />
-      <ProjectReference Include="..\ComicsShelf.Translations\ComicsShelf.Translations.csproj" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <Compile Update="AnalysisData\Strings.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Strings.resx</DependentUpon>
+     </Compile>
+     <Compile Update="RefreshData\Strings.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Strings.resx</DependentUpon>
+     </Compile>
+   </ItemGroup>
+
+   <ItemGroup>
+     <EmbeddedResource Update="AnalysisData\Strings.resx">
+       <Generator>ResXFileCodeGenerator</Generator>
+       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
+     <EmbeddedResource Update="RefreshData\Strings.resx">
+       <Generator>ResXFileCodeGenerator</Generator>
+       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
    </ItemGroup>
 
 </Project>

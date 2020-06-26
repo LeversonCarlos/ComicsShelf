@@ -17,10 +17,4 @@
     <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="CoverStyle.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>
