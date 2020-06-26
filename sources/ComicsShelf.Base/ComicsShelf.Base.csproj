@@ -27,7 +27,7 @@
    </ItemGroup>
 
    <ItemGroup>
-     <Compile Update="Translations.Designer.cs">
+     <Compile Update="Resources\Translations.Designer.cs">
        <DesignTime>True</DesignTime>
        <AutoGen>True</AutoGen>
        <DependentUpon>Translations.resx</DependentUpon>
@@ -35,7 +35,7 @@
    </ItemGroup>
 
    <ItemGroup>
-     <EmbeddedResource Update="Translations.resx">
+     <EmbeddedResource Update="Resources\Translations.resx">
        <Generator>ResXFileCodeGenerator</Generator>
        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
      </EmbeddedResource>

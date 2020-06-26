@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicsShelf.Base.Resources;
+using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
