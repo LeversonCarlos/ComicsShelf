@@ -23,6 +23,11 @@
    </ItemGroup>
 
    <ItemGroup>
+     <Compile Update="AnalysisData\Strings.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Strings.resx</DependentUpon>
+     </Compile>
      <Compile Update="RefreshData\Strings.Designer.cs">
        <DesignTime>True</DesignTime>
        <AutoGen>True</AutoGen>
@@ -31,6 +36,10 @@
    </ItemGroup>
 
    <ItemGroup>
+     <EmbeddedResource Update="AnalysisData\Strings.resx">
+       <Generator>ResXFileCodeGenerator</Generator>
+       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
      <EmbeddedResource Update="RefreshData\Strings.resx">
        <Generator>ResXFileCodeGenerator</Generator>
        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
