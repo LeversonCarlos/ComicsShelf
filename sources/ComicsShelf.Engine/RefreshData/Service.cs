@@ -17,13 +17,13 @@ namespace ComicsShelf.Engine.RefreshData
          {
 
             // NOTIFY START MESSAGE
-            Notifyers.Notify.Message(library, Strings.CONNECTING_MESSAGE);
+            Helpers.Notify.Message(library, Strings.CONNECTING_MESSAGE);
 
             // SEARCH FILES THROUGH THE LIBRARY's ENGINE
             var searchItems = await Drive.BaseDrive
                .GetDrive(library.Type)
                .SearchItems(library);
-            Notifyers.Notify.Message(library, string.Format(Strings.FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
+            Helpers.Notify.Message(library, string.Format(Strings.FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
 
             // LOAD CURRENT LIBRARY FILES
             var store = DependencyService.Get<Store.IStoreService>();
@@ -36,7 +36,7 @@ namespace ComicsShelf.Engine.RefreshData
             inactiveItems.ForEach(file => file.Available = false);
             await store.UpdateItemAsync(inactiveItems.ToArray());
             if (inactiveItems.Count > 0)
-            { Notifyers.Notify.Message(library, string.Format(Strings.REMOVED_N_FILES_MESSAGE, inactiveItems.Count)); }
+            { Helpers.Notify.Message(library, string.Format(Strings.REMOVED_N_FILES_MESSAGE, inactiveItems.Count)); }
 
             // UPDATE CHANGED FILES ON THE LIBRARY
             var changedItems = searchItems
@@ -52,17 +52,17 @@ namespace ComicsShelf.Engine.RefreshData
                .ToList();
             await store.UpdateItemAsync(newItems.ToArray());
             if (newItems.Count > 0)
-            { Notifyers.Notify.Message(library, string.Format(Strings.ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
+            { Helpers.Notify.Message(library, string.Format(Strings.ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
 
             // NOTIFY EMPTY MESSAGE
             if (inactiveItems.Count == 0 && newItems.Count == 0)
-            { Notifyers.Notify.Message(library, ""); }
+            { Helpers.Notify.Message(library, ""); }
 
             // NOTIFY THAT LIBRARY FILES WAS UPDATED 
             // Notify.Result(library, store.GetLibraryItems(library));
 
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); Notifyers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
       }
 
    }

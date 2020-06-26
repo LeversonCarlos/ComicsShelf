@@ -2,9 +2,9 @@
 using System;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Notifyers
+namespace ComicsShelf.Helpers
 {
-   partial class Notify
+   public class Notify
    {
 
       const string LibraryAddKey = "store.library.add.key";

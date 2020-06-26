@@ -16,12 +16,12 @@ namespace ComicsShelf.Settings
       {
          Library = library;
          this.RemoveCommand = new Command(async () => await this.Remove());
-         Notifyers.Notify.Message(library, message =>
+         Helpers.Notify.Message(library, message =>
          {
             this.Message = message;
             this.HasMessage = !string.IsNullOrEmpty(message);
          });
-         Notifyers.Notify.Progress(library, progress =>
+         Helpers.Notify.Progress(library, progress =>
          {
             this.Progress = progress;
             this.HasProgress = progress > 0 && progress < 1;
@@ -65,8 +65,8 @@ namespace ComicsShelf.Settings
 
       public void Dispose()
       {
-         Notifyers.Notify.MessageUnsubscribe(Library);
-         Notifyers.Notify.ProgressUnsubscribe(Library);
+         Helpers.Notify.MessageUnsubscribe(Library);
+         Helpers.Notify.ProgressUnsubscribe(Library);
       }
 
    }

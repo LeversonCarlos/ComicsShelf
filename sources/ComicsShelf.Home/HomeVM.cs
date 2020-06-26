@@ -17,7 +17,7 @@ namespace ComicsShelf.Home
       {
          Title = Strings.TITLE;
          Sections = new ObservableList<FolderVM>();
-         Notifyers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
+         Helpers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
          CoverSliderTimer = new Timer(5000);
          CoverSliderTimer.Elapsed += this.CoverSliderTimerElapsed;
          OpenCommand = new Command(async folder => await Open(folder));
@@ -44,7 +44,7 @@ namespace ComicsShelf.Home
          new ShellNavigationState($"splash?libraryID={folder?.FirstItem?.LibraryID}&fileID={folder?.FirstItem?.EscapedID}");
 
       private void CoverSliderTimerElapsed(object sender, ElapsedEventArgs e) =>
-         Notifyers.Notify.CoverSliderTimer();
+         Helpers.Notify.CoverSliderTimer();
 
    }
 }

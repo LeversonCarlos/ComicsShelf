@@ -36,8 +36,8 @@ namespace ComicsShelf.Store
 
                this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
 
-               Notifyers.Notify.LibraryAdd(library);
-               Notifyers.Notify.ItemsUpdate(itemList);
+               Helpers.Notify.LibraryAdd(library);
+               Helpers.Notify.ItemsUpdate(itemList);
             }
 
             return true;

@@ -78,22 +78,22 @@ namespace ComicsShelf.Engine.CoverExtraction
             var library = store.GetLibrary(libraryID);
 
             // NOTIFY START MESSAGE
-            Notifyers.Notify.Message(library, "Start.Covers.Extraction");
+            Helpers.Notify.Message(library, "Start.Covers.Extraction");
 
             // LOOP THROUGH ITEMS
             int itemIndex = 0;
             foreach (var item in itemList)
             {
                var progress = (double)++itemIndex / (double)itemList.Length;
-               Notifyers.Notify.Message(library, item.FullText);
-               Notifyers.Notify.Progress(library, progress);
+               Helpers.Notify.Message(library, item.FullText);
+               Helpers.Notify.Progress(library, progress);
 
                await Task.Delay(100);
             }
 
             // NOTIFY FINISH MESSAGE
-            Notifyers.Notify.Progress(library, 1);
-            Notifyers.Notify.Message(library, "");
+            Helpers.Notify.Progress(library, 1);
+            Helpers.Notify.Message(library, "");
 
             return true;
          }

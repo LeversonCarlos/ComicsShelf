@@ -10,7 +10,7 @@ namespace ComicsShelf.Controls
       public CoverImageList()
       {
          ItemTemplate = GetItemTemplate();
-         Notifyers.Notify.CoverSliderTimer(now => ChangePosition());
+         Helpers.Notify.CoverSliderTimer(now => ChangePosition());
       }
 
       DataTemplate GetItemTemplate() => new DataTemplate(() =>
@@ -45,7 +45,7 @@ namespace ComicsShelf.Controls
 
       public void Dispose()
       {
-         Notifyers.Notify.CoverSliderTimerUnsubscribe();
+         Helpers.Notify.CoverSliderTimerUnsubscribe();
       }
 
    }

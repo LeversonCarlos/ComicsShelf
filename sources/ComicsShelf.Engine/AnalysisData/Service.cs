@@ -33,7 +33,7 @@ namespace ComicsShelf.Engine.AnalysisData
             foreach (var library in libraries)
             {
 
-               Notifyers.Notify.Message(library, Strings.START_MESSAGE);
+               Helpers.Notify.Message(library, Strings.START_MESSAGE);
 
                var libraryItems = store
                   .GetLibraryItems(library)
@@ -59,13 +59,13 @@ namespace ComicsShelf.Engine.AnalysisData
                   .ToArray();
                sections.AddRange(librarySections);
 
-               Notifyers.Notify.Message(library, "");
+               Helpers.Notify.Message(library, "");
 
             }
 
             var sectionsArray = sections.ToArray();
             store.SetSections(sectionsArray);
-            Notifyers.Notify.SectionsUpdate(sectionsArray);
+            Helpers.Notify.SectionsUpdate(sectionsArray);
 
             await Task.CompletedTask;
          }
