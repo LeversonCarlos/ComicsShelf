@@ -13,7 +13,7 @@
    </ItemGroup>
 
    <ItemGroup>
-     <EmbeddedResource Include="DefaultCover\DefaultCover.png" />
+     <EmbeddedResource Include="Resources\DefaultCover.png" />
    </ItemGroup>
 
    <ItemGroup>

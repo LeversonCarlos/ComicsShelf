@@ -19,7 +19,7 @@ namespace ComicsShelf.DefaultCover
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             byte[] bytes = null;
-            using (var defaultCover = assembly.GetManifestResourceStream("ComicsShelf.Base.DefaultCover.DefaultCover.png"))
+            using (var defaultCover = assembly.GetManifestResourceStream("ComicsShelf.Base.Resources.DefaultCover.png"))
             {
                bytes = new byte[defaultCover.Length];
                await defaultCover.ReadAsync(bytes, 0, bytes.Length);
