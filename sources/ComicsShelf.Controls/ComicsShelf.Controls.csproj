@@ -18,7 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CoverStyle.xaml">
+    <Compile Update="CoverStyles.xaml.cs">
+      <DependentUpon>CoverStyles.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="CoverStyles.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
