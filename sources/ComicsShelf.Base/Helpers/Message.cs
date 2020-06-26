@@ -19,14 +19,14 @@ namespace ComicsShelf.Base
       public static void Show(string message)
       {
          try
-         { Device.BeginInvokeOnMainThread(() => MainPage.DisplayAlert(AppTitle, message, MessageService.Strings.OK_COMMAND)); }
+         { Device.BeginInvokeOnMainThread(() => MainPage.DisplayAlert(AppTitle, message, Translations.OK_COMMAND)); }
          catch { }
       }
 
       public static async Task<bool> Confirm(string message)
       {
          try
-         { return await MainPage.DisplayAlert(AppTitle, message, R.Common.OK_COMMAND, MessageService.Strings.CANCEL_COMMAND); }
+         { return await MainPage.DisplayAlert(AppTitle, message, R.Common.OK_COMMAND, Translations.CANCEL_COMMAND); }
          catch { return false; }
       }
 
