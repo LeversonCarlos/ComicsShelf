@@ -13,6 +13,7 @@ namespace ComicsShelf.Engine.RefreshData
 
       private static async Task ExecuteAsync(LibraryVM library)
       {
+         var start = DateTime.Now;
          try
          {
 
@@ -63,6 +64,7 @@ namespace ComicsShelf.Engine.RefreshData
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
+         finally { Helpers.Insights.TrackEvent($"Refreshing Data", $"MilliSeconds:{Math.Round(DateTime.Now.Subtract(start).TotalMilliseconds, 0)}"); }
       }
 
    }

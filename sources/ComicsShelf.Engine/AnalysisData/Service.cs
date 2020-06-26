@@ -15,6 +15,7 @@ namespace ComicsShelf.Engine.AnalysisData
 
       private static async Task ExecuteAsync(ItemVM[] itemsList)
       {
+         var start = DateTime.Now;
          try
          {
             var store = DependencyService.Get<IStoreService>();
@@ -94,6 +95,7 @@ namespace ComicsShelf.Engine.AnalysisData
             await Task.CompletedTask;
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         finally { Helpers.Insights.TrackEvent($"Analysing Data", $"MilliSeconds:{Math.Round(DateTime.Now.Subtract(start).TotalMilliseconds, 0)}"); }
       }
 
    }
