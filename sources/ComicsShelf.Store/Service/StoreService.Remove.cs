@@ -27,7 +27,7 @@ namespace ComicsShelf.Store
 
             return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Base.Message.Show(ex); return false; }
       }
 
    }
