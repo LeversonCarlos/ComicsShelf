@@ -9,10 +9,6 @@
    </PropertyGroup>
 
    <ItemGroup>
-     <None Remove="DefaultCover\DefaultCover.png" />
-   </ItemGroup>
-
-   <ItemGroup>
      <EmbeddedResource Include="Resources\DefaultCover.png" />
    </ItemGroup>
 
