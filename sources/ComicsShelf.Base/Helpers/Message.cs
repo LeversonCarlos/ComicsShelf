@@ -27,7 +27,7 @@ namespace ComicsShelf.Helpers
       public static async Task<bool> Confirm(string message)
       {
          try
-         { return await MainPage.DisplayAlert(AppTitle, message, R.Common.OK_COMMAND, Translations.CANCEL_COMMAND); }
+         { return await MainPage.DisplayAlert(AppTitle, message, Translations.OK_COMMAND, Translations.CANCEL_COMMAND); }
          catch { return false; }
       }
 

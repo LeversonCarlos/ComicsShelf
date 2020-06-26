@@ -23,10 +23,6 @@
    </ItemGroup>
 
    <ItemGroup>
-     <ProjectReference Include="..\ComicsShelf.Translations\ComicsShelf.Translations.csproj" />
-   </ItemGroup>
-
-   <ItemGroup>
      <Compile Update="Resources\Translations.Designer.cs">
        <DesignTime>True</DesignTime>
        <AutoGen>True</AutoGen>
