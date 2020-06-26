@@ -26,9 +26,6 @@
        <AutoGen>True</AutoGen>
        <DependentUpon>Translations.resx</DependentUpon>
      </Compile>
-     <Compile Update="Styles\LightTheme.xaml.cs">
-       <DependentUpon>%(Filename)</DependentUpon>
-     </Compile>
    </ItemGroup>
 
    <ItemGroup>
@@ -43,6 +40,9 @@
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
      <EmbeddedResource Update="Styles\LabelStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Styles\LightTheme.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
    </ItemGroup>
