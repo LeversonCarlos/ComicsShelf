@@ -26,9 +26,6 @@
        <AutoGen>True</AutoGen>
        <DependentUpon>Translations.resx</DependentUpon>
      </Compile>
-     <Compile Update="Styles\BaseStyles.xaml.cs">
-       <DependentUpon>%(Filename)</DependentUpon>
-     </Compile>
      <Compile Update="Styles\CoverStyles.xaml.cs">
        <DependentUpon>%(Filename)</DependentUpon>
      </Compile>
@@ -41,6 +38,9 @@
      <EmbeddedResource Update="Resources\Translations.resx">
        <Generator>ResXFileCodeGenerator</Generator>
        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Styles\BaseStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
      <EmbeddedResource Update="Styles\LabelStyles.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
