@@ -64,13 +64,5 @@ namespace ComicsShelf.Helpers
       public static void ProgressUnsubscribe(LibraryVM library) =>
          Unsubscribe($"{ProgressKey}.{library.ID}");
 
-      const string CoverSliderTimerKey = "cover.slider.timer.key";
-      public static void CoverSliderTimer() =>
-         Send($"{CoverSliderTimerKey}", DateTime.Now);
-      public static void CoverSliderTimer(System.Action<DateTime> callback) =>
-         Subscribe($"{CoverSliderTimerKey}", callback);
-      public static void CoverSliderTimerUnsubscribe() =>
-         Unsubscribe($"{CoverSliderTimerKey}");
-
    }
 }
