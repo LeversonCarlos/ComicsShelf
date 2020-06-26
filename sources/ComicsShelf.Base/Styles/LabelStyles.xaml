@@ -2,11 +2,7 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   x:Class="ComicsShelf.Controls.Styles.BaseStyles">
-
-   <Style TargetType="ContentView">
-      <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
-   </Style>
+   x:Class="ComicsShelf.Base.Styles.LabelStyles">
 
    <Style TargetType="Label">
       <Setter Property="Margin" Value="0" />
@@ -34,17 +30,6 @@
       <Setter Property="FontSize" Value="Micro" />
       <Setter Property="TextColor" Value="{StaticResource DetailsColor}" />
       <Setter Property="LineBreakMode" Value="MiddleTruncation" />
-   </Style>
-
-   <Style TargetType="ProgressBar" >
-      <Setter Property="HeightRequest" Value="1" />
-      <Setter Property="ProgressColor" Value="{StaticResource PrimaryColor}" />
-   </Style>
-
-   <Style TargetType="BoxView" x:Key="Separator">
-      <Setter Property="Margin" Value="0,1" />
-      <Setter Property="HeightRequest" Value="1" />
-      <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
    </Style>
 
 </ResourceDictionary>
