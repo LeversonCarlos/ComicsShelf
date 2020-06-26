@@ -20,6 +20,24 @@
       <Setter Property="WidthRequest" Value="{Static splash:SplashCover.DefaultWidth}" />
    </Style>
 
+   <Style TargetType="Label" BasedOn="{StaticResource Title}" x:Key="CurrentTitle">
+      <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+      <Setter Property="HorizontalOptions" Value="Center" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Details}" x:Key="CurrentDetails">
+      <Setter Property="HorizontalOptions" Value="Center" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Subtitle}" x:Key="CurrentDetailsValue">
+      <Setter Property="HorizontalOptions" Value="Center" />
+      <Setter Property="FontAttributes" Value="Bold" />
+   </Style>
+
+   <Style TargetType="Switch">
+      <Setter Property="HorizontalOptions" Value="Center" />
+   </Style>
+
    <Style TargetType="controls:RatingView">
       <Setter Property="ThumbsUpSelectedImageSource" Value="thumbsUp_selected" />
       <Setter Property="ThumbsUpUnselectedImageSource" Value="thumbsUp_unselected" />
