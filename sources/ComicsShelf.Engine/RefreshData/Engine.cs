@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Engine
+namespace ComicsShelf.Engine.RefreshData
 {
-   partial class EngineService
+   public class Service
    {
 
-      public static async Task<bool> SearchFiles(LibraryVM library)
+      public static Task Execute(LibraryVM library) => Task.Factory.StartNew(() => ExecuteAsync(library), TaskCreationOptions.LongRunning);
+
+      private static async Task ExecuteAsync(LibraryVM library)
       {
          try
          {
@@ -59,9 +61,8 @@ namespace ComicsShelf.Engine
             // NOTIFY THAT LIBRARY FILES WAS UPDATED 
             // Notify.Result(library, store.GetLibraryItems(library));
 
-            return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); Notifyers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
       }
 
    }
