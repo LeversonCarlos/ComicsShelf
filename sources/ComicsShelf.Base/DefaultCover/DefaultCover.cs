@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.DefaultCover
+namespace ComicsShelf.Helpers
 {
-   public class DefaultCover
+   public class Cover
    {
 
-      public static string Path
-      {
-         get { return $"{Xamarin.Essentials.FileSystem.AppDataDirectory}/DefaultCover.png"; }
-      }
+      public static string DefaultCover => $"{Xamarin.Essentials.FileSystem.AppDataDirectory}/DefaultCover.png";
+
 
       public static async Task ExtractAsync()
       {
          try
          {
-            if (System.IO.File.Exists(Path)) { return; }
+            if (System.IO.File.Exists(DefaultCover)) { return; }
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             byte[] bytes = null;
@@ -26,7 +24,7 @@ namespace ComicsShelf.DefaultCover
             }
             if (bytes == null || bytes.Length == 0) { return; }
 
-            using (var streamWriter = new System.IO.FileStream(Path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            using (var streamWriter = new System.IO.FileStream(DefaultCover, System.IO.FileMode.Create, System.IO.FileAccess.Write))
             {
                await streamWriter.WriteAsync(bytes, 0, bytes.Length);
             }

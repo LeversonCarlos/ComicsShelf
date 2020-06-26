@@ -23,7 +23,7 @@ namespace ComicsShelf.Engine.CoverExtraction
             var featuredItems = sections
                .SelectMany(x => x.Folders.Take(6))
                .Select(x => x.FirstItem)
-               .Where(x => x.CoverPath == DefaultCover.DefaultCover.Path)
+               .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
                .ToArray();
 
             // GROUP BY LIBRARY SO WE COULD GET A NICE PROGRESS ON THE SETTINGS PAGE FOR THOSE
@@ -41,7 +41,7 @@ namespace ComicsShelf.Engine.CoverExtraction
             var remainingItems = sections
                .SelectMany(x => x.Folders)
                .SelectMany(x => x.Items)
-               .Where(x => x.CoverPath == DefaultCover.DefaultCover.Path)
+               .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
                .ToArray();
 
             // GROUP BY LIBRARY SO WE COULD GET A NICE PROGRESS ON THE SETTINGS PAGE FOR THOSE
