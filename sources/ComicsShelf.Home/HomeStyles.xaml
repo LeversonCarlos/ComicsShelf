@@ -2,7 +2,7 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    x:Class="ComicsShelf.Home.HomeStyles">
 
    <Style TargetType="CollectionView" x:Key="SectionsCollection">
@@ -21,7 +21,7 @@
    <Style TargetType="CollectionView" x:Key="FoldersCollection">
       <Setter Property="ItemsLayout" Value="HorizontalList" />
       <Setter Property="SelectionMode" Value="None" />
-      <Setter Property="HeightRequest" Value="{x:Static controls:CoverSize.DefaultHeight}" />
+      <Setter Property="HeightRequest" Value="{x:Static helpers:Cover.DefaultHeight}" />
    </Style>
 
 </ResourceDictionary>

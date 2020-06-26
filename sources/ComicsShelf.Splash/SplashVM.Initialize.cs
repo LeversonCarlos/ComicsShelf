@@ -53,7 +53,7 @@ namespace ComicsShelf.Splash
 
          var editionsColumns = Device.Idiom == TargetIdiom.Phone ? 3 : Device.Idiom == TargetIdiom.Tablet ? 5 : Device.Idiom == TargetIdiom.Desktop ? 7 : 9;
          var editionsRows = (int)Math.Ceiling((double)ItemsList.Count / (double)editionsColumns);
-         EditionsHeight = (Controls.CoverSize.DefaultHeight + 10) * editionsRows;
+         EditionsHeight = (Helpers.Cover.DefaultHeight + (Helpers.Cover.ItemMargin * 2)) * editionsRows;
 
          return this;
       }
