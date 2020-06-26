@@ -87,6 +87,10 @@ namespace ComicsShelf.Engine.CoverExtraction
             Helpers.Notify.Message(library, "Start.Covers.Extraction");
             var drive = Drive.BaseDrive.GetDrive(library.Type);
 
+            // SLEEP NOTIFICATION
+            var hasGoneSleep = false;
+            Notify.AppSleep(now => hasGoneSleep = true);
+
             // LOOP THROUGH ITEMS
             int itemIndex = 0;
             foreach (var item in itemList)
@@ -96,6 +100,7 @@ namespace ComicsShelf.Engine.CoverExtraction
                Helpers.Notify.Progress(library, progress);
 
                if (!await drive.ExtractCover(library, item)) { Insights.TrackEvent($"Stop extracting covers at the item [{item.FullText}]"); break; }
+               if (hasGoneSleep) { break; }
             }
 
             // NOTIFY FINISH MESSAGE
