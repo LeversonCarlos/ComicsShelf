@@ -13,24 +13,24 @@
       <Setter Property="Padding" Value="0" />
    </Style>
 
-   <Style TargetType="Label" x:Key="Title" >
+   <Style TargetType="Label" x:Key="Large" >
       <Setter Property="FontSize" Value="Large" />
       <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
       <Setter Property="FontAttributes" Value="Bold" />
    </Style>
 
-   <Style TargetType="Label" x:Key="Subtitle" >
+   <Style TargetType="Label" x:Key="Default" >
       <Setter Property="FontSize" Value="Default" />
       <Setter Property="TextColor" Value="{StaticResource SubtitleColor}" />
    </Style>
 
-   <Style TargetType="Label" x:Key="Details">
+   <Style TargetType="Label" x:Key="Small">
       <Setter Property="FontSize" Value="Small" />
       <Setter Property="TextColor" Value="{StaticResource DetailsColor}" />
       <Setter Property="LineBreakMode" Value="MiddleTruncation" />
    </Style>
 
-   <Style TargetType="Label" x:Key="Message">
+   <Style TargetType="Label" x:Key="Micro">
       <Setter Property="FontSize" Value="Micro" />
       <Setter Property="TextColor" Value="{StaticResource DetailsColor}" />
       <Setter Property="LineBreakMode" Value="MiddleTruncation" />

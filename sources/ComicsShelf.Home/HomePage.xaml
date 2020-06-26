@@ -21,8 +21,8 @@
                <StackLayout Style="{StaticResource Section}">
 
                   <StackLayout Spacing="0" >
-                     <Label Text="{Binding Library.Description}" Style="{StaticResource Message}" />
-                     <Label Text="{Binding Text}" Style="{StaticResource Title}" />
+                     <Label Text="{Binding Library.Description}" Style="{StaticResource Micro}" />
+                     <Label Text="{Binding Text}" Style="{StaticResource Large}" />
                   </StackLayout>
 
                   <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource Folders}">

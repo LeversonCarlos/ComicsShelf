@@ -15,23 +15,23 @@
    <ContentView.Content>
 
       <StackLayout Spacing="3">
-         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource CurrentTitle}" />
+         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" />
          <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
             <StackLayout WidthRequest="100" >
                <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
-               <Label Text="{Binding RatingLabel}" Style="{StaticResource CurrentDetails}" />
+               <Label Text="{Binding RatingLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
                <Switch IsToggled="{Binding SelectedItem.Readed}" ></Switch>
-               <Label Text="{Binding ReadedLabel}" Style="{StaticResource CurrentDetails}" />
+               <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
-               <Label Text="{Binding ReadingLabel}" Style="{StaticResource CurrentDetails}" />
-               <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource CurrentDetailsValue}" />
+               <Label Text="{Binding ReadingLabel}" Style="{StaticResource DetailsLabel}" />
+               <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
                <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
-               <Label Text="{Binding OpenLabel}" Style="{StaticResource CurrentDetails}" />
+               <Label Text="{Binding OpenLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
          </FlexLayout>
       </StackLayout>

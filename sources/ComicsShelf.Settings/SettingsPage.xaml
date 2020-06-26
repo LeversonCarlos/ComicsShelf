@@ -18,7 +18,7 @@
                <DataTemplate>
                   <StackLayout Style="{StaticResource LibraryTypesStack}" >
 
-                     <Label Text="{Binding Title}" Style="{StaticResource Title}" />
+                     <Label Text="{Binding Title}" Style="{StaticResource Large}" />
 
                      <StackLayout BindableLayout.ItemsSource="{Binding Libraries}">
                         <BindableLayout.ItemTemplate>
@@ -27,9 +27,9 @@
                               <StackLayout Style="{StaticResource LibraryStack}">
                                  <FlexLayout Style="{StaticResource LibraryFlex}" >
                                     <StackLayout FlexLayout.Grow="1" Spacing="0">
-                                       <Label Text="{Binding Library.Description}" Style="{StaticResource Subtitle}" ></Label>
-                                       <Label Text="{Binding Library.Path}" Style="{StaticResource Details}" ></Label>
-                                       <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource Message}" ></Label>
+                                       <Label Text="{Binding Library.Description}" Style="{StaticResource Default}" ></Label>
+                                       <Label Text="{Binding Library.Path}" Style="{StaticResource Small}" ></Label>
+                                       <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource Micro}" ></Label>
                                        <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" ></ProgressBar>
                                     </StackLayout>
                                     <ImageButton Command="{Binding RemoveCommand}" Source="delete" />
@@ -46,7 +46,7 @@
                            <FlexLayout.GestureRecognizers>
                               <TapGestureRecognizer Command="{Binding AddCommand}" />
                            </FlexLayout.GestureRecognizers>
-                           <Label Text="{Binding AddText}" Style="{StaticResource Subtitle}"></Label>
+                           <Label Text="{Binding AddText}" Style="{StaticResource Default}"></Label>
                         </FlexLayout>
                      </StackLayout>
 

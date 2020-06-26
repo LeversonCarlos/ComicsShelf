@@ -20,16 +20,16 @@
       <Setter Property="WidthRequest" Value="{Static splash:SplashCover.DefaultWidth}" />
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Title}" x:Key="CurrentTitle">
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="Title">
       <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
       <Setter Property="HorizontalOptions" Value="Center" />
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Details}" x:Key="CurrentDetails">
+   <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="DetailsLabel">
       <Setter Property="HorizontalOptions" Value="Center" />
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Subtitle}" x:Key="CurrentDetailsValue">
+   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="DetailsValue">
       <Setter Property="HorizontalOptions" Value="Center" />
       <Setter Property="FontAttributes" Value="Bold" />
    </Style>
