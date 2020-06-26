@@ -22,7 +22,8 @@ namespace ComicsShelf.Home
 
       public override Task OnAppearing()
       {
-         Sections.ReplaceRange(DependencyService.Get<IStoreService>().GetSections());
+         var sections = DependencyService.Get<IStoreService>()?.GetSections();
+         if (sections != null) Sections.ReplaceRange(sections);
          return base.OnAppearing();
       }
 
