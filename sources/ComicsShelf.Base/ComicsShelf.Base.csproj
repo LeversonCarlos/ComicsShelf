@@ -24,6 +24,9 @@
        <AutoGen>True</AutoGen>
        <DependentUpon>Translations.resx</DependentUpon>
      </Compile>
+     <Compile Update="Styles\LightTheme.xaml.cs">
+       <DependentUpon>%(Filename)</DependentUpon>
+     </Compile>
    </ItemGroup>
 
    <ItemGroup>
