@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Engine
+namespace ComicsShelf.Engine.CoverExtraction
 {
-   partial class EngineService
+   public class Service
    {
 
-      public static async Task<bool> ExtractCovers()
+      public static Task Execute() => Task.Factory.StartNew(() => ExecuteAsync(), TaskCreationOptions.LongRunning);
+
+      private static async Task ExecuteAsync()
       {
          try
          {
@@ -32,7 +34,7 @@ namespace ComicsShelf.Engine
             foreach (var libraryID in featuredLibraryIDs)
             {
                var libraryfeaturedItems = featuredItems.Where(x => x.LibraryID == libraryID).ToArray();
-               if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return false; }
+               if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return; }
             }
 
             // LOCATE ALL REMAINING ITEMS
@@ -50,7 +52,7 @@ namespace ComicsShelf.Engine
             foreach (var libraryID in remainingLibraryIDs)
             {
                var libraryfeaturedItems = remainingItems.Where(x => x.LibraryID == libraryID).ToArray();
-               if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return false; }
+               if (!await ExtractCovers(store, libraryID, libraryfeaturedItems)) { return; }
             }
 
             /*
@@ -64,9 +66,8 @@ namespace ComicsShelf.Engine
             //store.SetSections(sections);
             //Notifyers.Notify.SectionsUpdate(sections);
 
-            return true;
          }
-         catch (Exception ex) { Helpers.App.ShowMessage(ex); return false; }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
       private static async Task<bool> ExtractCovers(IStoreService store, string libraryID, ItemVM[] itemList)
