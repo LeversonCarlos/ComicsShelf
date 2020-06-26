@@ -13,8 +13,6 @@ namespace ComicsShelf.Drive
 
       public ICloudDriveService CloudService { get { return DependencyProvider.Get<T>(); } }
 
-      public Task<bool> ExtractCover(LibraryVM library, ItemVM libraryItem) => Task.Delay(100).ContinueWith(t => true);
-
       public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
 
    }
