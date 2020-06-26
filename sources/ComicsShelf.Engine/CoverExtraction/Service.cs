@@ -1,4 +1,5 @@
-﻿using ComicsShelf.Store;
+﻿using ComicsShelf.Helpers;
+using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace ComicsShelf.Engine.CoverExtraction
                })
                .ToArray();
             foreach (var libraryData in suggestionData)
-               if (!await ExtractCovers(store, libraryData.Library, libraryData.Items)) { return; }
+               if (!await ExtractCovers(libraryData.Library, libraryData.Items)) { return; }
 
             // FEATURED ITEMS (firstItem of the first 6 folders on each section)
             var featuredItems = sections
@@ -58,7 +59,7 @@ namespace ComicsShelf.Engine.CoverExtraction
                })
                .ToArray();
             foreach (var libraryData in featuredData)
-               if (!await ExtractCovers(store, libraryData.Library, libraryData.Items)) { return; }
+               if (!await ExtractCovers(libraryData.Library, libraryData.Items)) { return; }
 
             // REMAINING ITEMS (all that is left)
             foreach (var library in libraries)
@@ -67,7 +68,7 @@ namespace ComicsShelf.Engine.CoverExtraction
                   .GetLibraryItems(library)
                   .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
                   .ToArray();
-               if (!await ExtractCovers(store, library, remainingItems)) { return; }
+               if (!await ExtractCovers(library, remainingItems)) { return; }
             }
 
             //store.SetSections(sections);
@@ -77,13 +78,14 @@ namespace ComicsShelf.Engine.CoverExtraction
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
-      private static async Task<bool> ExtractCovers(IStoreService store, LibraryVM library, ItemVM[] itemList)
+      private static async Task<bool> ExtractCovers(LibraryVM library, ItemVM[] itemList)
       {
          try
          {
 
             // NOTIFY START MESSAGE
             Helpers.Notify.Message(library, "Start.Covers.Extraction");
+            var drive = Drive.BaseDrive.GetDrive(library.Type);
 
             // LOOP THROUGH ITEMS
             int itemIndex = 0;
@@ -93,7 +95,7 @@ namespace ComicsShelf.Engine.CoverExtraction
                Helpers.Notify.Message(library, item.FullText);
                Helpers.Notify.Progress(library, progress);
 
-               await Task.Delay(100);
+               if (!await drive.ExtractCover(library, item)) { Insights.TrackEvent($"Stop extracting covers at the item [{item.FullText}]"); break; }
             }
 
             // NOTIFY FINISH MESSAGE
@@ -102,7 +104,7 @@ namespace ComicsShelf.Engine.CoverExtraction
 
             return true;
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
+         catch (Exception ex) { Insights.TrackException(ex); return false; }
       }
 
    }
