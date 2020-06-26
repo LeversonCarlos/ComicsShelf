@@ -4,11 +4,8 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    x:Class="ComicsShelf.Splash.SplashStyles">
-
-   <ResourceDictionary.MergedDictionaries>
-      <controls:CoverStyle />
-   </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="StackLayout" x:Key="Main">
       <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />

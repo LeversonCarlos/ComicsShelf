@@ -6,10 +6,6 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    x:Class="ComicsShelf.Home.HomeStyles">
 
-   <ResourceDictionary.MergedDictionaries>
-      <controls:CoverStyle />
-   </ResourceDictionary.MergedDictionaries>
-
    <Style TargetType="CollectionView" x:Key="Sections">
       <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
       <Setter Property="ItemsLayout" Value="VerticalList" />

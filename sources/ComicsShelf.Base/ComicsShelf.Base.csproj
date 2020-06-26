@@ -27,6 +27,9 @@
      <Compile Update="Styles\BaseStyles.xaml.cs">
        <DependentUpon>%(Filename)</DependentUpon>
      </Compile>
+     <Compile Update="Styles\CoverStyles.xaml.cs">
+       <DependentUpon>%(Filename)</DependentUpon>
+     </Compile>
      <Compile Update="Styles\LightTheme.xaml.cs">
        <DependentUpon>%(Filename)</DependentUpon>
      </Compile>

@@ -3,7 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
-   x:Class="ComicsShelf.Controls.CoverStyle">
+   x:Class="ComicsShelf.Base.Styles.CoverStyles">
 
    <Style TargetType="Label" x:Key="CoverText">
       <Setter Property="Padding" Value="2,0" />
@@ -18,12 +18,10 @@
       <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,1" />
    </Style>
 
-   <Style TargetType="ProgressBar" x:Key="CoverProgress">
-      <Setter Property="HeightRequest" Value="1" />
+   <Style TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar}" x:Key="CoverProgress">
       <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
       <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
       <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0" />
-      <Setter Property="ProgressColor" Value="Orange" />
    </Style>
 
 </ResourceDictionary>

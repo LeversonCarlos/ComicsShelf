@@ -30,7 +30,7 @@
                                        <Label Text="{Binding Library.Description}" Style="{StaticResource Default}" ></Label>
                                        <Label Text="{Binding Library.Path}" Style="{StaticResource Small}" ></Label>
                                        <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource Micro}" ></Label>
-                                       <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" ></ProgressBar>
+                                       <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource ProgressBar}" ></ProgressBar>
                                     </StackLayout>
                                     <ImageButton Command="{Binding RemoveCommand}" Source="delete" />
                                  </FlexLayout>

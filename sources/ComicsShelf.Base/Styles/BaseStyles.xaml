@@ -8,12 +8,12 @@
       <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
    </Style>
 
-   <Style TargetType="ProgressBar" >
+   <Style TargetType="ProgressBar" x:Key="ProgressBar" >
       <Setter Property="HeightRequest" Value="1" />
       <Setter Property="ProgressColor" Value="{StaticResource PrimaryColor}" />
    </Style>
 
-   <Style TargetType="BoxView" x:Key="Separator">
+   <Style TargetType="BoxView" x:Key="Separator" >
       <Setter Property="Margin" Value="0,1" />
       <Setter Property="HeightRequest" Value="1" />
       <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
