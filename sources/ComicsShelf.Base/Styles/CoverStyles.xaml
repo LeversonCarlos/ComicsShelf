@@ -2,8 +2,14 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles"
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    x:Class="ComicsShelf.Base.Styles.CoverStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+      <styles:BaseStyles />
+   </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="Label" x:Key="CoverText">
       <Setter Property="Padding" Value="2,0" />
