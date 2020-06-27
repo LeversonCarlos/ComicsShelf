@@ -30,7 +30,6 @@ namespace ComicsShelf.Helpers
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
       {
-         AddMetrics(properties);
          Analytics.TrackEvent($"New App: {text}", properties);
 
          Console.ForegroundColor = ConsoleColor.Blue;
@@ -64,7 +63,7 @@ namespace ComicsShelf.Helpers
          var eIndex = 0;
          exceptionList.ForEach(e => properties.Add($"Exception {eIndex++}", e));
 
-         // AddMetrics(properties);
+         AddMetrics(properties);
          Crashes.TrackError(ex, properties);
          Analytics.TrackEvent("Tracked Exception", properties);
          TrackEvent("Tracked Exception", properties);

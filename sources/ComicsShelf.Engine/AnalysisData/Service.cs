@@ -95,7 +95,7 @@ namespace ComicsShelf.Engine.AnalysisData
             await Task.CompletedTask;
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
-         finally { Helpers.Insights.TrackEvent($"Analysing Data", $"MilliSeconds:{Math.Round(DateTime.Now.Subtract(start).TotalMilliseconds, 0)}"); }
+         finally { Helpers.Insights.TrackEvent($"Analysing Data", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
       }
 
    }

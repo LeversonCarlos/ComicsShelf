@@ -64,7 +64,7 @@ namespace ComicsShelf.Engine.RefreshData
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
-         finally { Helpers.Insights.TrackEvent($"Refreshing Data", $"MilliSeconds:{Math.Round(DateTime.Now.Subtract(start).TotalMilliseconds, 0)}"); }
+         finally { Helpers.Insights.TrackEvent($"Refreshing Data", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
       }
 
    }

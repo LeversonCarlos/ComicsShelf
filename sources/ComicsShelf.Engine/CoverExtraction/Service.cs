@@ -110,7 +110,7 @@ namespace ComicsShelf.Engine.CoverExtraction
                   if (!await drive.ExtractCover(library, item)) { throw new Exception($"Stop extracting covers at the item [{item.FullText}]"); }
                }
                catch (Exception exI) { Insights.TrackException(exI); break; }
-               finally { semaphore.Release(); Helpers.Insights.TrackEvent($"Cover Extracting", $"MilliSeconds:{Math.Round(DateTime.Now.Subtract(start).TotalMilliseconds, 0)}"); }
+               finally { semaphore.Release(); Helpers.Insights.TrackEvent($"Cover Extracting", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
 
          if (hasGoneSleep) { break; }
             }
