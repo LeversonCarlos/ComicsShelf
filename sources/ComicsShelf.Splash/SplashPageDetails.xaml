@@ -4,13 +4,14 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Splash.SplashPageDetails">
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
-      <splash:DateFormatter x:Key="dateFormatter" />
+      <converters:DateFormatter x:Key="dateFormatter" />
    </ContentView.Resources>
    <ContentView.Content>
 
