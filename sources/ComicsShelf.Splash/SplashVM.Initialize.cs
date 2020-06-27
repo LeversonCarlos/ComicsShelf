@@ -17,7 +17,7 @@ namespace ComicsShelf.Splash
                 .InitializeItems()
                 .InitializeSelectedItem();
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         catch (Exception ex) { Helpers.Message.Show(ex); Helpers.Modal.Pop(); }
       }
 
       LibraryVM _Library { get; set; }
