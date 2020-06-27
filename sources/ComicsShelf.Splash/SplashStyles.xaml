@@ -5,7 +5,6 @@
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
-   xmlns:splash="clr-namespace:ComicsShelf.Splash"
    x:Class="ComicsShelf.Splash.SplashStyles">
 
    <ResourceDictionary.MergedDictionaries>
@@ -20,8 +19,8 @@
    </Style>
 
    <Style TargetType="controls:CoverImage" x:Key="SplashCover">
-      <Setter Property="HeightRequest" Value="{Static splash:SplashCover.DefaultHeight}" />
-      <Setter Property="WidthRequest" Value="{Static splash:SplashCover.DefaultWidth}" />
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.SplashHeight}" />
+      <Setter Property="WidthRequest" Value="{Static helpers:Cover.SplashWidth}" />
    </Style>
 
    <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="Title">
