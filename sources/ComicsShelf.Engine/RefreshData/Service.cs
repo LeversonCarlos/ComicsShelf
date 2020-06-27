@@ -41,7 +41,7 @@ namespace ComicsShelf.Engine.RefreshData
 
             // UPDATE CHANGED FILES ON THE LIBRARY
             var changedItems = searchItems
-               .Where(x => !libraryItems.Select(i => i.ID).ToList().Contains(x.ID))
+               .Where(x => libraryItems.Select(i => i.ID).ToList().Contains(x.ID))
                .ToList();
             foreach (var changedItem in changedItems)
                changedItem.SetData(libraryItems.Where(x => x.ID == changedItem.ID).FirstOrDefault());
