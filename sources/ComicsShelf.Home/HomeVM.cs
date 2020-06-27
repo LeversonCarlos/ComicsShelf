@@ -2,7 +2,6 @@
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System.Threading.Tasks;
-using System.Timers;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Home
