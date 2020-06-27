@@ -10,14 +10,22 @@ namespace ComicsShelf.Home
    public class HomeVM : BaseVM
    {
 
-      public ObservableList<SectionVM> Sections { get; }
-
       public HomeVM()
       {
          Title = Strings.TITLE;
          Sections = new ObservableList<SectionVM>();
+         Sections.CollectionChanged += (sender, e) => { this.HasSections = this.Sections?.Count > 0; };
          Helpers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
          OpenCommand = new Command(async folder => await Open(folder));
+      }
+
+      public ObservableList<SectionVM> Sections { get; }
+
+      bool _HasSections;
+      public bool HasSections
+      {
+         get => _HasSections;
+         set => SetProperty(ref _HasSections, value);
       }
 
       public override Task OnAppearing()
