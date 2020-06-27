@@ -6,45 +6,58 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Drive.FolderDialog.FolderDialogPage"
-   BackgroundColor="Gainsboro"
    Title="{Binding Title}">
+
+   <ContentPage.Resources>
+      <ResourceDictionary Source="FolderDialogStyles.xaml" />
+   </ContentPage.Resources>
+
    <ContentPage.Content>
       <StackLayout Padding="20" Spacing="20">
 
-         <Label Text="{Binding Large}" FontSize="Medium" FontAttributes="Bold" TextColor="Accent" ></Label>
+         <Label Text="{Binding Title}" Style="{StaticResource Large}" />
 
-         <Frame BackgroundColor="White" Padding="10">
+         <Frame >
             <StackLayout Orientation="Vertical" Spacing="5">
-               <Label Text="selected_path" FontSize="Micro"></Label>
-               <Label Text="{Binding CurrentItem.Path}" FontAttributes="Bold"></Label>
+               <Label Text="selected_path" Style="{StaticResource DetailsLabel}"></Label>
+               <Label Text="{Binding CurrentItem.Path}" Style="{StaticResource DetailsValue}"></Label>
             </StackLayout>
          </Frame>
-         <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
+         
+         <!-- 
+               SelectionChangedCommand="{Binding ItemSelectCommand}" 
+               SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}" 
+         -->
+         
+         <Frame VerticalOptions="FillAndExpand">
             <ScrollView Orientation="Vertical" >
-               <CollectionView ItemsSource="{Binding Data}" 
-                               SelectionChangedCommand="{Binding ItemSelectCommand}" 
-                               SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}" 
-                               x:Name="MyCollectionView"
-                               SelectionMode="Single" VerticalOptions="Fill" >
-                  <CollectionView.ItemTemplate>
+               <StackLayout BindableLayout.ItemsSource="{Binding Data}" Spacing="0" >
+                  <BindableLayout.ItemTemplate>
                      <DataTemplate>
-                        <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
-                           <Image Source="icon_ArrowRight.png"></Image>
-                           <Label Text="{Binding Name}" FontAttributes="Bold"></Label>
-                        </FlexLayout>
+                        <StackLayout >
+                           <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                              <Image Source="icon_ArrowRight.png"></Image>
+                              <Label Text="{Binding Name}" Style="{StaticResource Default}"></Label>
+                              <FlexLayout.GestureRecognizers>
+                                 <TapGestureRecognizer Command="{Binding ItemSelectCommand}" CommandParameter="{Binding .}" />
+                              </FlexLayout.GestureRecognizers>
+                           </FlexLayout>
+                           <BoxView Style="{StaticResource Separator}" />
+                        </StackLayout>
                      </DataTemplate>
-                  </CollectionView.ItemTemplate>
-               </CollectionView>
+                  </BindableLayout.ItemTemplate>
+               </StackLayout>
             </ScrollView>
          </Frame>
 
          <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
          <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Button Text="cancel_command" Command="{Binding CancelCommand}"></Button>
-            <Button Text="confirm_command" Command="{Binding ConfirmCommand}"></Button>
+            <Button Text="cancel" Command="{Binding CancelCommand}" Style="{StaticResource BaseButton}" />
+            <Button Text="confirm" Command="{Binding ConfirmCommand}" Style="{StaticResource ConfirmButton}" />
          </StackLayout>
 
       </StackLayout>
    </ContentPage.Content>
+
 </ContentPage>

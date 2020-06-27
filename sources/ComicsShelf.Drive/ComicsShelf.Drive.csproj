@@ -24,6 +24,9 @@
      <EmbeddedResource Update="FolderDialog\FolderDialogPage.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
+     <EmbeddedResource Update="FolderDialog\FolderDialogStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
    </ItemGroup>
 
 </Project>
