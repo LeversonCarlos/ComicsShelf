@@ -9,12 +9,8 @@
       <styles:LightTheme />
    </ResourceDictionary.MergedDictionaries>
 
-   <Style TargetType="ContentView">
-      <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
-   </Style>
-
    <Style TargetType="ProgressBar" x:Key="ProgressBar">
-      <Setter Property="HeightRequest" Value="1" />
+      <Setter Property="HeightRequest" Value="2" />
       <Setter Property="ProgressColor" Value="{StaticResource PrimaryColor}" />
    </Style>
 

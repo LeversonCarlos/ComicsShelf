@@ -2,10 +2,17 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:splash="clr-namespace:ComicsShelf.Splash"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
+   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:splash="clr-namespace:ComicsShelf.Splash"
    x:Class="ComicsShelf.Splash.SplashStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+      <styles:LabelStyles />
+      <styles:CoverStyles />
+   </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="StackLayout" x:Key="Main">
       <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
