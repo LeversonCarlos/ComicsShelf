@@ -11,12 +11,15 @@ namespace ComicsShelf.Home
 
       public HomeVM()
       {
-         Title = Strings.TITLE;
+         Title = Translations.TITLE;
          Sections = new ObservableList<SectionVM>();
          Sections.CollectionChanged += (sender, e) => { this.HasSections = this.Sections?.Count > 0; };
          Helpers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
          OpenCommand = new Command(async folder => await Open(folder));
       }
+
+      public string NO_LIBRARY_MESSAGE_TITLE => Translations.NO_LIBRARY_MESSAGE_TITLE;
+      public string NO_LIBRARY_MESSAGE_DETAILS => Translations.NO_LIBRARY_MESSAGE_DETAILS;
 
       public ObservableList<SectionVM> Sections { get; }
 
