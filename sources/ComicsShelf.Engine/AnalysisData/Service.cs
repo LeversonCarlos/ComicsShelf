@@ -59,7 +59,7 @@ namespace ComicsShelf.Engine.AnalysisData
             await Task.CompletedTask;
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
-         finally { Helpers.Insights.TrackEvent($"Analysing Data", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
+         finally { Helpers.Insights.TrackMetric($"Analysing Data", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
       private static List<SectionVM> ExecuteAsync_GetLibrarySections(LibraryVM library, List<ItemVM> libraryItems)

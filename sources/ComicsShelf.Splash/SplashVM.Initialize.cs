@@ -1,4 +1,5 @@
-﻿using ComicsShelf.Observables;
+﻿using ComicsShelf.Helpers;
+using ComicsShelf.Observables;
 using ComicsShelf.ViewModels;
 using System;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace ComicsShelf.Splash
 
       public void InitializeData()
       {
+         var start = DateTime.Now;
          try
          {
             this.InitializeLibrary()
@@ -18,6 +20,7 @@ namespace ComicsShelf.Splash
                 .InitializeSelectedItem();
          }
          catch (Exception ex) { Helpers.Message.Show(ex); Helpers.Modal.Pop(); }
+         finally { Insights.TrackMetric("Splash Initializing", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
       LibraryVM _Library { get; set; }
