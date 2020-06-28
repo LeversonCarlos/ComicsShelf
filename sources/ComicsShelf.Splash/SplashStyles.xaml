@@ -15,7 +15,7 @@
 
    <Style TargetType="StackLayout" x:Key="Main">
       <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
-      <Setter Property="Spacing" Value="30" />
+      <Setter Property="Spacing" Value="10" />
    </Style>
 
    <Style TargetType="controls:CoverImage" x:Key="SplashCover">

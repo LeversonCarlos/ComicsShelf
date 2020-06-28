@@ -18,6 +18,12 @@
       <ScrollView Orientation="Vertical">
          <StackLayout Style="{StaticResource Main}" >
 
+            <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" >
+               <Label.Margin>
+                  <OnIdiom x:TypeArguments="Thickness" Default="0" Tablet="0,20,0,10" />
+               </Label.Margin>
+            </Label>
+
             <Grid VerticalOptions="CenterAndExpand">
                <Grid.RowDefinitions>
                   <RowDefinition Height="{Static helpers:Cover.SplashHeight}" />
@@ -27,7 +33,9 @@
 
             <splash:SplashPageDetails />
 
-            <StackLayout Spacing="3">
+            <BoxView Style="{StaticResource Separator }" Margin="30,20" />
+
+            <StackLayout Spacing="3" Margin="0,0,0,10">
                <Label Text="{Binding EditionsTitle}" Style="{StaticResource Large}" />
 
                <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" >
