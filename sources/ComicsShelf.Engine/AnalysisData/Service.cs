@@ -23,70 +23,30 @@ namespace ComicsShelf.Engine.AnalysisData
 
             // RETRIEVE ALL LIBRARY ITEMS
             var libraries = store.GetLibraries();
-            /*
-            var libraryItems = libraries
-               .Select(x => store.GetLibraryItems(x))
-               .SelectMany(x => x)
-               .ToList();
-            */
+            var allItems = new List<ItemVM>();
 
             // LOOP THROUGH LIBRARIES
             foreach (var library in libraries)
             {
-
                Helpers.Notify.Message(library, Strings.START_MESSAGE);
 
                // LOCATE LIBRARY ITEMS
                var libraryItems = store
                   .GetLibraryItems(library)
                   .ToList();
-               // Notifyers.Notify.Message(library, Strings.START_MESSAGE);
+               allItems.AddRange(libraryItems);
 
-               // GROUP ITEMS BY SECTION AND LOOP IT
-               var sectionsList = libraryItems
-                  .GroupBy(section => new { Path = section.SectionPath })
-                  .Select(section => new { Path = section.Key.Path, Items = section.ToArray() })
-                  .OrderBy(section => section.Path)
-                  .ToArray();
-               foreach (var sectionItem in sectionsList)
-               {
-
-                  // PREPARE A SECTION
-                  var sectionText = System.IO.Path.GetFileNameWithoutExtension(sectionItem.Path);
-                  var section = new SectionVM(sectionText, library);
-
-                  // GROUP ITEMS BY FOLDER AND LOOP IT
-                  var foldersList = sectionItem.Items
-                     .Where(folder => folder.SectionPath == sectionItem.Path)
-                     .GroupBy(folder => new { Path = folder.FolderPath })
-                     .Select(folder => new { Path = folder.Key.Path, Items = folder.ToArray() })
-                     .OrderBy(folder => folder.Path)
-                     .ToArray();
-                  foreach (var folderItem in foldersList)
-                  {
-
-                     // PREPARE A FOLDER
-                     var folderText = System.IO.Path.GetFileNameWithoutExtension(folderItem.Path);
-                     var folder = new FolderVM(folderText);
-
-                     // LOCATE THE FOLDERs FIRST ITEM
-                     folder.FirstItem = folderItem.Items
-                        ?.OrderBy(item => item.ShortText)
-                        ?.FirstOrDefault();
-
-                     // ADD FOLDER TO RESULT LIST
-                     section.Folders.Add(folder);
-
-                  }
-
-                  // ADD section TO RESULT LIST
-                  sections.Add(section);
-
-               }
+               // SECTIONS FOR THE LIBRARY
+               sections.AddRange(ExecuteAsync_GetLibrarySections(library, libraryItems));
 
                Helpers.Notify.Message(library, "");
-
             }
+
+            // SECTION FOR THE RECENTELLY ADDED ITEMS
+            // TODO
+
+            //SECTION FOR THE ONGOING READING ITEMS
+            //TODO
 
             var sectionsArray = sections.ToArray();
             store.SetSections(sectionsArray);
@@ -96,6 +56,59 @@ namespace ComicsShelf.Engine.AnalysisData
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
          finally { Helpers.Insights.TrackEvent($"Analysing Data", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
+      }
+
+      private static List<SectionVM> ExecuteAsync_GetLibrarySections(LibraryVM library, List<ItemVM> libraryItems)
+      {
+         try
+         {
+            var sections = new List<SectionVM>();
+
+            // GROUP ITEMS BY SECTION AND LOOP IT
+            var sectionsList = libraryItems
+               .GroupBy(section => new { Path = section.SectionPath })
+               .Select(section => new { Path = section.Key.Path, Items = section.ToArray() })
+               .OrderBy(section => section.Path)
+               .ToArray();
+            foreach (var sectionItem in sectionsList)
+            {
+
+               // PREPARE A SECTION
+               var sectionText = System.IO.Path.GetFileNameWithoutExtension(sectionItem.Path);
+               var section = new SectionVM(sectionText, library);
+
+               // GROUP ITEMS BY FOLDER AND LOOP IT
+               var foldersList = sectionItem.Items
+                  .Where(folder => folder.SectionPath == sectionItem.Path)
+                  .GroupBy(folder => new { Path = folder.FolderPath })
+                  .Select(folder => new { Path = folder.Key.Path, Items = folder.ToArray() })
+                  .OrderBy(folder => folder.Path)
+                  .ToArray();
+               foreach (var folderItem in foldersList)
+               {
+
+                  // PREPARE A FOLDER
+                  var folderText = System.IO.Path.GetFileNameWithoutExtension(folderItem.Path);
+                  var folder = new FolderVM(folderText);
+
+                  // LOCATE THE FOLDERs FIRST ITEM
+                  folder.FirstItem = folderItem.Items
+                     ?.OrderBy(item => item.ShortText)
+                     ?.FirstOrDefault();
+
+                  // ADD FOLDER TO RESULT LIST
+                  section.Folders.Add(folder);
+
+               }
+
+               // ADD section TO RESULT LIST
+               sections.Add(section);
+
+            }
+
+            return sections;
+         }
+         catch (Exception) { throw; }
       }
 
    }
