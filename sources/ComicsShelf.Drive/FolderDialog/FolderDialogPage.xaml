@@ -14,42 +14,35 @@
    </ContentPage.Resources>
 
    <ContentPage.Content>
-      <StackLayout Padding="20" Spacing="20">
+      <StackLayout Padding="20" Spacing="5">
 
-         <Label Text="{Binding Title}" Style="{StaticResource Large}" />
+         <Label Text="{Binding Title}" Style="{StaticResource Default}" Margin="0,0,0,20" />
 
-         <Frame >
-            <StackLayout Orientation="Vertical" Spacing="5">
-               <Label Text="{Binding SELECTED_PATH}" Style="{StaticResource DetailsLabel}"></Label>
-               <Label Text="{Binding CurrentItem.Path}" Style="{StaticResource DetailsValue}"></Label>
+         <StackLayout Orientation="Vertical" Spacing="5">
+            <Label Text="{Binding SELECTED_PATH}" Style="{StaticResource DetailsLabel}"></Label>
+            <Label Text="{Binding CurrentItem.Path}" Style="{StaticResource DetailsValue}"></Label>
+         </StackLayout>
+
+         <BoxView Style="{StaticResource Separator}" />
+
+         <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" >
+            <StackLayout BindableLayout.ItemsSource="{Binding Data}" Spacing="0" Padding="10,0" >
+               <BindableLayout.ItemTemplate>
+                  <DataTemplate>
+                     <StackLayout >
+                        <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
+                           <Image Source="icon_ArrowRight.png" />
+                           <Label Text="{Binding Name}" Style="{StaticResource Default}" />
+                           <FlexLayout.GestureRecognizers>
+                              <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectCommand, Source={x:Reference folderDialog}}" CommandParameter="{Binding .}" />
+                           </FlexLayout.GestureRecognizers>
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource Separator}" />
+                     </StackLayout>
+                  </DataTemplate>
+               </BindableLayout.ItemTemplate>
             </StackLayout>
-         </Frame>
-         
-         <!-- 
-               SelectionChangedCommand="{Binding ItemSelectCommand}" 
-               SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}" 
-         -->
-         
-         <Frame VerticalOptions="FillAndExpand">
-            <ScrollView Orientation="Vertical" >
-               <StackLayout BindableLayout.ItemsSource="{Binding Data}" Spacing="0" >
-                  <BindableLayout.ItemTemplate>
-                     <DataTemplate>
-                        <StackLayout >
-                           <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
-                              <Image Source="icon_ArrowRight.png" />
-                              <Label Text="{Binding Name}" Style="{StaticResource Default}" />
-                              <FlexLayout.GestureRecognizers>
-                                 <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectCommand, Source={x:Reference folderDialog}}" CommandParameter="{Binding .}" />
-                              </FlexLayout.GestureRecognizers>
-                           </FlexLayout>
-                           <BoxView Style="{StaticResource Separator}" />
-                        </StackLayout>
-                     </DataTemplate>
-                  </BindableLayout.ItemTemplate>
-               </StackLayout>
-            </ScrollView>
-         </Frame>
+         </ScrollView>
 
          <ActivityIndicator IsRunning="{Binding IsBusy}" />
 

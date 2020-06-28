@@ -11,11 +11,6 @@
       <styles:BaseStyles />
    </ResourceDictionary.MergedDictionaries>
 
-   <Style TargetType="Frame">
-      <Setter Property="Padding" Value="10" />
-      <Setter Property="BackgroundColor" Value="White" />
-   </Style>
-
    <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="DetailsLabel">
    </Style>
 
