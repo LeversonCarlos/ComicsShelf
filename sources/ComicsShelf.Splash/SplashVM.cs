@@ -33,11 +33,18 @@ namespace ComicsShelf.Splash
          return Task.CompletedTask;
       }
 
+      bool _IsOpening;
+      public bool IsOpening
+      {
+         get => _IsOpening;
+         set => SetProperty(ref _IsOpening, value);
+      }
+
       public Command OpenCommand { get; set; }
       async Task OpenAsync()
       {
          IsBusy = true;
-         await Task.Delay(TimeSpan.FromSeconds(5));
+         await Task.Delay(TimeSpan.FromSeconds(7));
          IsBusy = false;
       }
 
