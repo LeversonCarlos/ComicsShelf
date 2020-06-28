@@ -70,7 +70,7 @@ namespace ComicsShelf.Engine {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recently Added Comics.
+        ///   Looks up a localized string similar to Recently Added.
         /// </summary>
         internal static string RECENTLY_ADDED_TITLE {
             get {
