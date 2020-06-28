@@ -45,10 +45,10 @@ namespace ComicsShelf.Engine.CoverExtraction
             foreach (var libraryData in suggestionData)
                if (!await ExtractCovers(libraryData.Library, libraryData.Items)) { return; }
 
-            // FEATURED ITEMS (firstItem of the first 6 folders on each section)
+            // FEATURED ITEMS (firstItem of the folders on each section)
             var featuredItems = sections
                .Where(section => section.Library != null)
-               .SelectMany(x => x.Folders.Take(6))
+               .SelectMany(x => x.Folders)
                .Select(x => x.FirstItem)
                .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
                .ToArray();
