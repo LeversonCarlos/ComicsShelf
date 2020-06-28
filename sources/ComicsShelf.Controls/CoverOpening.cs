@@ -22,13 +22,18 @@ namespace ComicsShelf.Controls
 
       Task<bool[]> Start(CoverImage sender) =>
          Task.WhenAll(
-            sender.FadeTo(0.05, 50000, Easing.SinInOut),
-            sender.RelScaleTo(20, 50000, Easing.SinInOut)
-         );
+           sender.FadeTo(0.05, 50000, Easing.SinInOut),
+           sender.ScaleTo(20, 50000, Easing.SinInOut)
+        );
 
 
-      void Stop(CoverImage sender) =>
+      void Stop(CoverImage sender)
+      {
          ViewExtensions.CancelAnimations(sender);
-
+         Task.WhenAll(
+            sender.FadeTo(1, 100, Easing.SinInOut),
+            sender.ScaleTo(1, 100, Easing.SinInOut)
+         );
+      }
    }
 }
