@@ -48,7 +48,9 @@ namespace ComicsShelf.Engine.AnalysisData
                sections.Insert(0, recentlyAdded);
 
             //SECTION FOR THE ONGOING READING ITEMS
-            //TODO
+            var onGoingReading = ExecuteAsync_GetOnGoingReadingSection(allItems);
+            if (onGoingReading != null)
+               sections.Insert(0, onGoingReading);
 
             var sectionsArray = sections.ToArray();
             store.SetSections(sectionsArray);
@@ -123,10 +125,76 @@ namespace ComicsShelf.Engine.AnalysisData
                .GroupBy(item => new { item.FolderPath, item.ReleaseDate.Year, item.ReleaseDate.Month, item.ReleaseDate.Day })
                .Select(group => group.OrderByDescending(item => item.ReleaseDate).FirstOrDefault())
                .OrderByDescending(item => item.ReleaseDate)
+               .Take(10)
                .ToArray();
             if (sectionItems?.Length == 0) { return null; }
 
             var section = new SectionVM(Translations.RECENTLY_ADDED_TITLE, null);
+
+            foreach (var item in sectionItems)
+               section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item });
+
+            return section;
+         }
+         catch (Exception) { throw; }
+      }
+
+      private static SectionVM ExecuteAsync_GetOnGoingReadingSection(List<ItemVM> libraryItems)
+      {
+         try
+         {
+
+            // LOCATE ALL OPENED ITEMS
+            var openedItems = libraryItems
+               .Where(item => item.ReadingPercent > 0.0 && item.ReadingPercent < 1.0 && item.ReadingDate.HasValue)
+               .OrderByDescending(item => item.ReadingDate.Value)
+               .ToArray();
+
+            // LOCATE ALL COMPLETELY READED ITEMS
+            var readedFiles = libraryItems
+               .Where(item => item.ReadingPercent == 1.0)
+               .ToList();
+
+            // REMOVE GROUPS THAT ALREADY HAS SOME OPENED ITEMS
+            readedFiles
+               .RemoveAll(x => openedItems
+                  .Select(g => g.FolderPath)
+                  .Contains(x.FolderPath));
+
+            // GROUP ITEMS AND MANTAIN ONLY THE MOST RECENT FOR EACH GROUP
+            readedFiles = readedFiles
+               .GroupBy(item => item.FolderPath)
+               .Select(x => readedFiles
+                  .Where(g => g.FolderPath == x.Key)
+                  .OrderByDescending(g => g.FullText)
+                  .FirstOrDefault())
+               .ToList();
+
+            // FROM THAT, TAKE THE NEXT FILE FOR EACH GROUP
+            var unionFiles = readedFiles
+               .Select(x => new
+               {
+                  x.ReadingDate,
+                  Item = x,
+                  NextItem = libraryItems
+                     .Where(f => f.FolderPath == x.FolderPath)
+                     .Where(f => String.Compare(f.FullText, x.FullText) > 0)
+                     .OrderBy(f => f.FullText)
+                     .Take(1)
+                     .FirstOrDefault()
+               })
+               .ToArray();
+
+            // TAKE THE LAST 10
+            var sectionItems = unionFiles
+               .OrderByDescending(x => x.ReadingDate)
+               .Select(x => x.Item.ReadingPercent >= 1 ? x.NextItem : x.Item)
+               .Where(x => x != null)
+               .Take(10)
+               .ToArray();
+            if (sectionItems?.Length == 0) { return null; }
+
+            var section = new SectionVM(Translations.ON_GOING_READING_TITLE, null);
 
             foreach (var item in sectionItems)
                section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item });

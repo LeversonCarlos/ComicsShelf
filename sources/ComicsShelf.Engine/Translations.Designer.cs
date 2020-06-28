@@ -61,6 +61,15 @@ namespace ComicsShelf.Engine {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On Going Reading.
+        /// </summary>
+        internal static string ON_GOING_READING_TITLE {
+            get {
+                return ResourceManager.GetString("ON_GOING_READING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recently Added Comics.
         /// </summary>
         internal static string RECENTLY_ADDED_TITLE {
