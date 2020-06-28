@@ -16,6 +16,8 @@
       <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
       <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
       <PackageReference Include="System.Text.Json" Version="4.7.2" />
+      <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.6.4" />
+      <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.6.4" />
    </ItemGroup>
 
    <ItemGroup>
@@ -24,15 +26,6 @@
        <AutoGen>True</AutoGen>
        <DependentUpon>Translations.resx</DependentUpon>
      </Compile>
-     <Compile Update="Styles\BaseStyles.xaml.cs">
-       <DependentUpon>%(Filename)</DependentUpon>
-     </Compile>
-     <Compile Update="Styles\CoverStyles.xaml.cs">
-       <DependentUpon>%(Filename)</DependentUpon>
-     </Compile>
-     <Compile Update="Styles\LightTheme.xaml.cs">
-       <DependentUpon>%(Filename)</DependentUpon>
-     </Compile>
    </ItemGroup>
 
    <ItemGroup>
@@ -40,7 +33,16 @@
        <Generator>ResXFileCodeGenerator</Generator>
        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
      </EmbeddedResource>
+     <EmbeddedResource Update="Styles\BaseStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Styles\CoverStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
      <EmbeddedResource Update="Styles\LabelStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Styles\LightTheme.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
    </ItemGroup>

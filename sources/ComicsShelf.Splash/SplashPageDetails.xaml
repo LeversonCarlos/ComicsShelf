@@ -4,36 +4,57 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Splash.SplashPageDetails">
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
-      <splash:DateFormatter x:Key="dateFormatter" />
+      <converters:DateFormatter x:Key="dateFormatter" />
    </ContentView.Resources>
    <ContentView.Content>
 
       <StackLayout Spacing="3">
-         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" />
+
+         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" IsVisible="False" />
+
          <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
-            <StackLayout WidthRequest="100" >
+            <FlexLayout.IsVisible>
+               <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False" />
+            </FlexLayout.IsVisible>
+            <StackLayout >
                <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
-               <Label Text="{Binding RatingLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
-            <StackLayout WidthRequest="100" >
+            <StackLayout Spacing="0" >
                <Switch IsToggled="{Binding SelectedItem.Readed}" ></Switch>
                <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
-            <StackLayout WidthRequest="100" >
+            <StackLayout WidthRequest="100" Spacing="0" >
                <Label Text="{Binding ReadingLabel}" Style="{StaticResource DetailsLabel}" />
                <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
             </StackLayout>
-            <StackLayout WidthRequest="100" >
-               <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
-               <Label Text="{Binding OpenLabel}" Style="{StaticResource DetailsLabel}" />
+            <StackLayout Orientation="Horizontal" >
+               <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="60" WidthRequest="60" />
             </StackLayout>
          </FlexLayout>
+
+         <FlexLayout AlignItems="Center" JustifyContent="SpaceBetween"  Direction="Row" Padding="10,0" >
+            <FlexLayout.IsVisible>
+               <OnIdiom x:TypeArguments="x:Boolean" Default="False" Phone="True" />
+            </FlexLayout.IsVisible>
+            <StackLayout >
+               <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
+            </StackLayout>
+            <StackLayout Spacing="0" >
+               <Switch IsToggled="{Binding SelectedItem.Readed}" ></Switch>
+               <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" >
+               <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
+            </StackLayout>
+         </FlexLayout>
+
       </StackLayout>
 
    </ContentView.Content>

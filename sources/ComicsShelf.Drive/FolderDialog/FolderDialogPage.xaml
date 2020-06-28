@@ -6,45 +6,52 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Drive.FolderDialog.FolderDialogPage"
-   BackgroundColor="Gainsboro"
+   x:Name="folderDialog"
    Title="{Binding Title}">
+
+   <ContentPage.Resources>
+      <ResourceDictionary Source="FolderDialogStyles.xaml" />
+   </ContentPage.Resources>
+
    <ContentPage.Content>
-      <StackLayout Padding="20" Spacing="20">
+      <StackLayout Padding="20" Spacing="5">
 
-         <Label Text="{Binding Large}" FontSize="Medium" FontAttributes="Bold" TextColor="Accent" ></Label>
+         <Label Text="{Binding Title}" Style="{StaticResource Default}" Margin="0,0,0,20" />
 
-         <Frame BackgroundColor="White" Padding="10">
-            <StackLayout Orientation="Vertical" Spacing="5">
-               <Label Text="selected_path" FontSize="Micro"></Label>
-               <Label Text="{Binding CurrentItem.Path}" FontAttributes="Bold"></Label>
-            </StackLayout>
-         </Frame>
-         <Frame BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand">
-            <ScrollView Orientation="Vertical" >
-               <CollectionView ItemsSource="{Binding Data}" 
-                               SelectionChangedCommand="{Binding ItemSelectCommand}" 
-                               SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}" 
-                               x:Name="MyCollectionView"
-                               SelectionMode="Single" VerticalOptions="Fill" >
-                  <CollectionView.ItemTemplate>
-                     <DataTemplate>
+         <StackLayout Orientation="Vertical" Spacing="5">
+            <Label Text="{Binding SELECTED_PATH}" Style="{StaticResource DetailsLabel}"></Label>
+            <Label Text="{Binding CurrentItem.Path}" Style="{StaticResource DetailsValue}"></Label>
+         </StackLayout>
+
+         <BoxView Style="{StaticResource Separator}" />
+
+         <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" >
+            <StackLayout BindableLayout.ItemsSource="{Binding Data}" Spacing="0" Padding="10,0" >
+               <BindableLayout.ItemTemplate>
+                  <DataTemplate>
+                     <StackLayout >
                         <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
-                           <Image Source="icon_ArrowRight.png"></Image>
-                           <Label Text="{Binding Name}" FontAttributes="Bold"></Label>
+                           <Image Source="icon_ArrowRight.png" />
+                           <Label Text="{Binding Name}" Style="{StaticResource Default}" />
+                           <FlexLayout.GestureRecognizers>
+                              <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectCommand, Source={x:Reference folderDialog}}" CommandParameter="{Binding .}" />
+                           </FlexLayout.GestureRecognizers>
                         </FlexLayout>
-                     </DataTemplate>
-                  </CollectionView.ItemTemplate>
-               </CollectionView>
-            </ScrollView>
-         </Frame>
+                        <BoxView Style="{StaticResource Separator}" />
+                     </StackLayout>
+                  </DataTemplate>
+               </BindableLayout.ItemTemplate>
+            </StackLayout>
+         </ScrollView>
 
          <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
          <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Button Text="cancel_command" Command="{Binding CancelCommand}"></Button>
-            <Button Text="confirm_command" Command="{Binding ConfirmCommand}"></Button>
+            <Button Command="{Binding CancelCommand}" Text="{Binding CANCEL_COMMAND}" Style="{StaticResource BaseButton}" />
+            <Button Command="{Binding ConfirmCommand}" Text="{Binding CONFIRM_COMMAND}" Style="{StaticResource ConfirmButton}" />
          </StackLayout>
 
       </StackLayout>
    </ContentPage.Content>
+
 </ContentPage>

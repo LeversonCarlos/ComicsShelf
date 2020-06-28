@@ -71,8 +71,12 @@ namespace ComicsShelf.ViewModels
          set => SetProperty(ref _ReadingPercent, value);
       }
 
-      [JsonIgnore]
-      public string CoverPath { get; set; }
+      string _CoverPath;
+      public string CoverPath
+      {
+         get => _CoverPath;
+         set => SetProperty(ref _CoverPath, value);
+      }
 
       bool _Available;
       public bool Available

@@ -1,29 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
+   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
    x:Class="ComicsShelf.Settings.SettingsStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme/>
+      <styles:LabelStyles />
+      <styles:BaseStyles />
+   </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="StackLayout" x:Key="Main">
       <Setter Property="Padding" Value="{Static helpers:Cover.ScreenMargin}" />
-      <Setter Property="Spacing" Value="{Static helpers:Cover.ScreenMargin}" />
    </Style>
 
-   <Style TargetType="StackLayout" x:Key="LibraryTypesStack">
+   <Style TargetType="StackLayout" x:Key="LibraryTypeStack">
       <Setter Property="Margin" Value="0,10" />
    </Style>
 
-   <Style TargetType="StackLayout" x:Key="LibraryStack" >
-      <Setter Property="Padding" Value="10,0" />
-   </Style>
-
    <Style TargetType="FlexLayout" x:Key="LibraryFlex">
+      <Setter Property="Padding" Value="10,0" />
       <Setter Property="AlignItems" Value="Center" />
       <Setter Property="HeightRequest" Value="60" />
    </Style>
 
-   <Style TargetType="ProgressBar" >
+   <Style TargetType="ProgressBar">
       <Setter Property="Opacity" Value="0.3" />
    </Style>
 

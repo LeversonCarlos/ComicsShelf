@@ -2,19 +2,25 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:splash="clr-namespace:ComicsShelf.Splash"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
+   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    x:Class="ComicsShelf.Splash.SplashStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+      <styles:LabelStyles />
+      <styles:CoverStyles />
+   </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="StackLayout" x:Key="Main">
       <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
-      <Setter Property="Spacing" Value="30" />
+      <Setter Property="Spacing" Value="10" />
    </Style>
 
    <Style TargetType="controls:CoverImage" x:Key="SplashCover">
-      <Setter Property="HeightRequest" Value="{Static splash:SplashCover.DefaultHeight}" />
-      <Setter Property="WidthRequest" Value="{Static splash:SplashCover.DefaultWidth}" />
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.SplashHeight}" />
+      <Setter Property="WidthRequest" Value="{Static helpers:Cover.SplashWidth}" />
    </Style>
 
    <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="Title">

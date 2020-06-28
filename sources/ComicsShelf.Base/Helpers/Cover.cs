@@ -18,6 +18,9 @@ namespace ComicsShelf.Helpers
       public static double DefaultHeight { get; private set; }
       public static double DefaultWidth { get; private set; }
 
+      public static double SplashHeight => Math.Round(ScreenWidth * 0.95, 0);
+      public static double SplashWidth => Math.Round(SplashHeight / 1.5, 0);
+
       public static Task Init() => Task.Factory.StartNew(() => InitAsync(), TaskCreationOptions.LongRunning);
 
       private static async Task InitAsync()

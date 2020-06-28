@@ -2,7 +2,6 @@
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System.Threading.Tasks;
-using System.Timers;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Home
@@ -10,29 +9,36 @@ namespace ComicsShelf.Home
    public class HomeVM : BaseVM
    {
 
-      readonly Timer CoverSliderTimer;
-      public ObservableList<SectionVM> Sections { get; }
-
       public HomeVM()
       {
-         Title = Strings.TITLE;
+         Title = Translations.TITLE;
          Sections = new ObservableList<SectionVM>();
+         Sections.CollectionChanged += (sender, e) => { this.HasSections = this.Sections?.Count > 0; };
          Helpers.Notify.SectionsUpdate(sections => Sections.ReplaceRange(sections));
-         CoverSliderTimer = new Timer(5000);
-         CoverSliderTimer.Elapsed += this.CoverSliderTimerElapsed;
          OpenCommand = new Command(async folder => await Open(folder));
+      }
+
+      public string NO_LIBRARY_MESSAGE_TITLE => Translations.NO_LIBRARY_MESSAGE_TITLE;
+      public string NO_LIBRARY_MESSAGE_DETAILS => Translations.NO_LIBRARY_MESSAGE_DETAILS;
+
+      public ObservableList<SectionVM> Sections { get; }
+
+      bool _HasSections;
+      public bool HasSections
+      {
+         get => _HasSections;
+         set => SetProperty(ref _HasSections, value);
       }
 
       public override Task OnAppearing()
       {
-         Sections.ReplaceRange(DependencyService.Get<IStoreService>().GetSections());
-         CoverSliderTimer.Start();
+         var sections = DependencyService.Get<IStoreService>()?.GetSections();
+         if (sections != null) Sections.ReplaceRange(sections);
          return base.OnAppearing();
       }
 
       public override Task OnDisappearing()
       {
-         CoverSliderTimer.Stop();
          return base.OnDisappearing();
       }
 
@@ -42,9 +48,6 @@ namespace ComicsShelf.Home
 
       ShellNavigationState GetNavigationState(FolderVM folder) =>
          new ShellNavigationState($"splash?libraryID={folder?.FirstItem?.LibraryID}&fileID={folder?.FirstItem?.EscapedID}");
-
-      private void CoverSliderTimerElapsed(object sender, ElapsedEventArgs e) =>
-         Helpers.Notify.CoverSliderTimer();
 
    }
 }

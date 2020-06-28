@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Store
 {
@@ -10,6 +11,7 @@ namespace ComicsShelf.Store
 
       public async Task<bool> InitializeAsync()
       {
+         var start = DateTime.Now;
          try
          {
 
@@ -33,6 +35,7 @@ namespace ComicsShelf.Store
                var itemList = (await Task.WhenAll(itemTasks))
                   .Where(x => x != null)
                   .ToArray();
+               itemList.ForEach(item => item.CoverPath = Helpers.Cover.DefaultCover);
 
                this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
 
@@ -43,6 +46,7 @@ namespace ComicsShelf.Store
             return true;
          }
          catch (Exception ex) { Helpers.Message.Show(ex); return false; }
+         finally { Helpers.Insights.TrackEvent($"Store Initializing", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
       }
 
    }

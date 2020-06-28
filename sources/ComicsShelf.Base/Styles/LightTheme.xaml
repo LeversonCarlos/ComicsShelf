@@ -1,19 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    x:Class="ComicsShelf.Base.Styles.LightTheme">
 
    <Color x:Key="PrimaryColor">#E65100</Color>
-
-   <Color x:Key="BackgroundColor">#ECEFF1</Color>
    <Color x:Key="SeparatorColor">#CFD8DC</Color>
 
    <Color x:Key="TabBarBackgroundColor">#37474F</Color>
-   <Color x:Key="TabBarForegroundColor">#ECEFF1</Color>
+   <Color x:Key="TabBarForegroundColor">#E65100</Color>
    <Color x:Key="TabBarUnselectedColor">#B0BEC5</Color>
 
-   <Color x:Key="TitleColor">#212121</Color>
+   <Color x:Key="TitleColor">#E65100</Color>
    <Color x:Key="SubtitleColor">#616161</Color>
    <Color x:Key="DetailsColor">#9E9E9E</Color>
 

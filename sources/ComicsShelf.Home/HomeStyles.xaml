@@ -3,8 +3,15 @@
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
+   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    x:Class="ComicsShelf.Home.HomeStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+      <styles:LabelStyles />
+      <styles:CoverStyles />
+   </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="CollectionView" x:Key="Sections">
       <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
@@ -16,7 +23,12 @@
    <Style TargetType="StackLayout" x:Key="Section">
       <Setter Property="Margin" Value="0,0,0,10" />
       <Setter Property="Padding" Value="0" />
-      <Setter Property="Spacing" Value="0" />
+      <Setter Property="Spacing" Value="10" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="LibraryText">
+      <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
+      <Setter Property="Opacity" Value="0.75" />
    </Style>
 
    <Style TargetType="CollectionView" x:Key="Folders">

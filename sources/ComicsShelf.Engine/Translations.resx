@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EDITIONS_TITLE" xml:space="preserve">
-    <value>Other Editions From this Collection</value>
+  <data name="ON_GOING_READING_TITLE" xml:space="preserve">
+    <value>On Going Reading</value>
   </data>
-  <data name="OPEN_LABEL" xml:space="preserve">
-    <value>Open Now</value>
-  </data>
-  <data name="RATING_LABEL" xml:space="preserve">
-    <value>Do You Liked It</value>
-  </data>
-  <data name="READED_LABEL" xml:space="preserve">
-    <value>Already Readed</value>
-  </data>
-  <data name="READING_LABEL" xml:space="preserve">
-    <value>Last Read On</value>
+  <data name="RECENTLY_ADDED_TITLE" xml:space="preserve">
+    <value>Recently Added</value>
   </data>
 </root>

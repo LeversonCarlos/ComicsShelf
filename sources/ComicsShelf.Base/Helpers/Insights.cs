@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,6 +10,18 @@ namespace ComicsShelf.Helpers
    public class Insights
    {
 
+      public static void Init(string androidSecret)
+      {
+         Microsoft.AppCenter.AppCenter.Start(
+            $"android={androidSecret};" +
+            /*
+            "uwp={Your UWP App secret here};" +
+            "ios={Your iOS App secret here}" +
+            */
+            "",
+            typeof(Analytics), typeof(Crashes));
+      }
+
       public static void TrackEvent(string text) =>
          TrackEvent(text, new string[] { });
 
@@ -16,8 +30,7 @@ namespace ComicsShelf.Helpers
 
       public static void TrackEvent(string text, Dictionary<string, string> properties)
       {
-         AddMetrics(properties);
-         // Analytics.TrackEvent(text, properties);
+         Analytics.TrackEvent($"New App: {text}", properties);
 
          Console.ForegroundColor = ConsoleColor.Blue;
          Console.WriteLine(text);
@@ -50,9 +63,9 @@ namespace ComicsShelf.Helpers
          var eIndex = 0;
          exceptionList.ForEach(e => properties.Add($"Exception {eIndex++}", e));
 
-         // AddMetrics(properties);
-         // Crashes.TrackError(ex, properties);
-         // Analytics.TrackEvent("Tracked Exception", properties);
+         AddMetrics(properties);
+         Crashes.TrackError(ex, properties);
+         Analytics.TrackEvent("Tracked Exception", properties);
          TrackEvent("Tracked Exception", properties);
       }
 
@@ -74,7 +87,7 @@ namespace ComicsShelf.Helpers
       {
          try
          {
-            if (propertyList == null || propertyList.Length == 0) { return null; }
+            if (propertyList == null || propertyList.Length == 0) { return new Dictionary<string, string>(); }
             var properties = propertyList
                .Select(prop => prop.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries))
                .Select(prop => new

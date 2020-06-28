@@ -1,6 +1,5 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
-using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector.Common;
 using Xamarin.CloudDrive.Connector.OneDrive;
 using Xamarin.Forms;
@@ -13,9 +12,9 @@ namespace ComicsShelf.Drive
 
       public ICloudDriveService CloudService { get { return DependencyProvider.Get<T>(); } }
 
-      public Task<bool> ExtractCover(LibraryVM library, ItemVM libraryItem) => throw new NotImplementedException();
-
       public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
+
+      protected IFileSystem FileSystem => DependencyService.Get<IFileSystem>();
 
    }
 

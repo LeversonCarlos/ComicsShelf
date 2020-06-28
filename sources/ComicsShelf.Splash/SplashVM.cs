@@ -40,8 +40,10 @@ namespace ComicsShelf.Splash
 
       private async void UpdateItemAsync()
       {
-         if (!this.SelectedItem.IsDirty) { return; }
-         await Store.UpdateItemAsync(this.SelectedItem);
+         if (this.SelectedItem?.IsDirty ?? false)
+         {
+            await Store.UpdateItemAsync(this.SelectedItem);
+         }
       }
 
       public override Task OnAppearing()

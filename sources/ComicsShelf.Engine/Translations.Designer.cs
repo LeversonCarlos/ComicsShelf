@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComicsShelf.Home {
+namespace ComicsShelf.Engine {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ComicsShelf.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    internal class Translations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal Translations() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ComicsShelf.Home {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Home.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Engine.Translations", typeof(Translations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,20 @@ namespace ComicsShelf.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to On Going Reading.
         /// </summary>
-        internal static string TITLE {
+        internal static string ON_GOING_READING_TITLE {
             get {
-                return ResourceManager.GetString("TITLE", resourceCulture);
+                return ResourceManager.GetString("ON_GOING_READING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recently Added.
+        /// </summary>
+        internal static string RECENTLY_ADDED_TITLE {
+            get {
+                return ResourceManager.GetString("RECENTLY_ADDED_TITLE", resourceCulture);
             }
         }
     }

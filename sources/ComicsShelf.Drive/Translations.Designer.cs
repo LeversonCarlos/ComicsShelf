@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ComicsShelf.Splash {
+namespace ComicsShelf.Drive {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ComicsShelf.Splash {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    internal class Translations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal Translations() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ComicsShelf.Splash {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Splash.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Drive.Translations", typeof(Translations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,38 @@ namespace ComicsShelf.Splash {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other Editions From this Collection.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string EDITIONS_TITLE {
+        internal static string FOLDER_DIALOG_CANCEL_COMMAND {
             get {
-                return ResourceManager.GetString("EDITIONS_TITLE", resourceCulture);
+                return ResourceManager.GetString("FOLDER_DIALOG_CANCEL_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Now.
+        ///   Looks up a localized string similar to Confirm.
         /// </summary>
-        internal static string OPEN_LABEL {
+        internal static string FOLDER_DIALOG_CONFIRM_COMMAND {
             get {
-                return ResourceManager.GetString("OPEN_LABEL", resourceCulture);
+                return ResourceManager.GetString("FOLDER_DIALOG_CONFIRM_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do You Liked It.
+        ///   Looks up a localized string similar to Selected Path.
         /// </summary>
-        internal static string RATING_LABEL {
+        internal static string FOLDER_DIALOG_SELECTED_PATH {
             get {
-                return ResourceManager.GetString("RATING_LABEL", resourceCulture);
+                return ResourceManager.GetString("FOLDER_DIALOG_SELECTED_PATH", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already Readed.
+        ///   Looks up a localized string similar to Select a directory for your comics library.
         /// </summary>
-        internal static string READED_LABEL {
+        internal static string FOLDER_DIALOG_TITLE {
             get {
-                return ResourceManager.GetString("READED_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Last Read On.
-        /// </summary>
-        internal static string READING_LABEL {
-            get {
-                return ResourceManager.GetString("READING_LABEL", resourceCulture);
+                return ResourceManager.GetString("FOLDER_DIALOG_TITLE", resourceCulture);
             }
         }
     }

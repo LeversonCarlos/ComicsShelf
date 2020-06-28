@@ -13,6 +13,7 @@ namespace ComicsShelf.Engine.RefreshData
 
       private static async Task ExecuteAsync(LibraryVM library)
       {
+         var start = DateTime.Now;
          try
          {
 
@@ -40,7 +41,7 @@ namespace ComicsShelf.Engine.RefreshData
 
             // UPDATE CHANGED FILES ON THE LIBRARY
             var changedItems = searchItems
-               .Where(x => !libraryItems.Select(i => i.ID).ToList().Contains(x.ID))
+               .Where(x => libraryItems.Select(i => i.ID).ToList().Contains(x.ID))
                .ToList();
             foreach (var changedItem in changedItems)
                changedItem.SetData(libraryItems.Where(x => x.ID == changedItem.ID).FirstOrDefault());
@@ -63,6 +64,7 @@ namespace ComicsShelf.Engine.RefreshData
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
+         finally { Helpers.Insights.TrackEvent($"Refreshing Data", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
       }
 
    }

@@ -4,48 +4,62 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Home.HomePage"
    x:Name="homePage"
    Title="{Binding Title}" IconImageSource="home">
+
    <ContentPage.Resources>
       <ResourceDictionary Source="HomeStyles.xaml" />
+      <converters:NotConverter x:Key="notConverter" />
    </ContentPage.Resources>
+
    <ContentPage.Content>
+      <StackLayout >
 
-      <CollectionView ItemsSource="{Binding Sections}" Style="{StaticResource Sections}">
-         <CollectionView.ItemTemplate>
-            <DataTemplate>
+         <AbsoluteLayout IsVisible="{Binding HasSections, Converter={StaticResource notConverter}}" VerticalOptions="FillAndExpand">
+            <controls:CoverImage ImageSource="{Static helpers:Cover.DefaultCover}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.25" />
+            <StackLayout AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.75">
+               <Label Text="{Binding NO_LIBRARY_MESSAGE_TITLE}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+               <Label Text="{Binding NO_LIBRARY_MESSAGE_DETAILS}" HorizontalOptions="Center" />
+            </StackLayout>
+         </AbsoluteLayout>
 
-               <StackLayout Style="{StaticResource Section}">
+         <CollectionView ItemsSource="{Binding Sections}" IsVisible="{Binding HasSections}" Style="{StaticResource Sections}">
+            <CollectionView.ItemTemplate>
+               <DataTemplate>
 
-                  <StackLayout Spacing="0" >
-                     <Label Text="{Binding Library.Description}" Style="{StaticResource Micro}" />
-                     <Label Text="{Binding Text}" Style="{StaticResource Large}" />
+                  <StackLayout Style="{StaticResource Section}">
+
+                     <StackLayout Spacing="0" >
+                        <Label Text="{Binding Library.Description}" Style="{StaticResource LibraryText}" />
+                        <Label Text="{Binding Text}" Style="{StaticResource Large}" />
+                     </StackLayout>
+
+                     <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource Folders}">
+                        <CollectionView.ItemTemplate>
+                           <DataTemplate>
+
+                              <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }">
+                                 <controls:CoverImage ImageSource="{Binding FirstItem.CoverPath}" />
+                                 <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
+                              </controls:CoverContainer>
+
+                           </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                     </CollectionView>
+
+                     <BoxView Style="{StaticResource Separator}" />
+
                   </StackLayout>
 
-                  <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource Folders}">
-                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+               </DataTemplate>
+            </CollectionView.ItemTemplate>
+         </CollectionView>
 
-                           <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }">
-                              <controls:CoverImage ImageSource="{Binding FirstItem.CoverPath}" />
-                              <!-- <ProgressBar Progress="0.7" Style="{StaticResource CoverProgress}" /> -->
-                              <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
-                           </controls:CoverContainer>
-
-                        </DataTemplate>
-                     </CollectionView.ItemTemplate>
-                  </CollectionView>
-
-                  <BoxView Style="{StaticResource Separator}" />
-
-               </StackLayout>
-
-            </DataTemplate>
-         </CollectionView.ItemTemplate>
-      </CollectionView>
-
+      </StackLayout>
    </ContentPage.Content>
 </ContentPage>
