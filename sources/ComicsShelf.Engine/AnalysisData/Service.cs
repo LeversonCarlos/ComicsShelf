@@ -42,8 +42,8 @@ namespace ComicsShelf.Engine.AnalysisData
                Helpers.Notify.Message(library, "");
             }
 
-            // SECTION FOR THE RECENTELLY ADDED ITEMS
-            // TODO
+            // SECTION FOR THE RECENTELY ADDED ITEMS
+            sections.Insert(0, ExecuteAsync_GetRecentlyAddedSection(allItems));
 
             //SECTION FOR THE ONGOING READING ITEMS
             //TODO
@@ -107,6 +107,28 @@ namespace ComicsShelf.Engine.AnalysisData
             }
 
             return sections;
+         }
+         catch (Exception) { throw; }
+      }
+
+      private static SectionVM ExecuteAsync_GetRecentlyAddedSection(List<ItemVM> libraryItems)
+      {
+         try
+         {
+
+            var sectionItems = libraryItems
+               .Where(item => item.Available && item.ReleaseDate != DateTime.MinValue)
+               .GroupBy(item => new { item.FolderPath, item.ReleaseDate.Year, item.ReleaseDate.Month, item.ReleaseDate.Day })
+               .Select(group => group.OrderByDescending(item => item.ReleaseDate).FirstOrDefault())
+               .OrderByDescending(item => item.ReleaseDate)
+               .ToArray();
+
+            var section = new SectionVM(Translations.RECENTLY_ADDED_TITLE, null);
+
+            foreach (var item in sectionItems)
+               section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item });
+
+            return section;
          }
          catch (Exception) { throw; }
       }
