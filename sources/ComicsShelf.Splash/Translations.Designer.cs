@@ -22,14 +22,14 @@ namespace ComicsShelf.Splash {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    internal class Translations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal Translations() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ComicsShelf.Splash {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Splash.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Splash.Translations", typeof(Translations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,24 +66,6 @@ namespace ComicsShelf.Splash {
         internal static string EDITIONS_TITLE {
             get {
                 return ResourceManager.GetString("EDITIONS_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open Now.
-        /// </summary>
-        internal static string OPEN_LABEL {
-            get {
-                return ResourceManager.GetString("OPEN_LABEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do You Liked It.
-        /// </summary>
-        internal static string RATING_LABEL {
-            get {
-                return ResourceManager.GetString("RATING_LABEL", resourceCulture);
             }
         }
         

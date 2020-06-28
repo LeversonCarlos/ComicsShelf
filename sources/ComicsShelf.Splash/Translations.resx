@@ -120,12 +120,6 @@
   <data name="EDITIONS_TITLE" xml:space="preserve">
     <value>Other Editions From this Collection</value>
   </data>
-  <data name="OPEN_LABEL" xml:space="preserve">
-    <value>Open Now</value>
-  </data>
-  <data name="RATING_LABEL" xml:space="preserve">
-    <value>Do You Liked It</value>
-  </data>
   <data name="READED_LABEL" xml:space="preserve">
     <value>Already Readed</value>
   </data>
