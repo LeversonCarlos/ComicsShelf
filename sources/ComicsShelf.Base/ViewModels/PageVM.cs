@@ -1,6 +1,6 @@
 ﻿using ComicsShelf.Observables;
 
-namespace ComicsShelf.Base.ViewModels
+namespace ComicsShelf.ViewModels
 {
    public class PageVM : ObservableObject
    {
