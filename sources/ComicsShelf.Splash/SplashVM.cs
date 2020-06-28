@@ -43,9 +43,9 @@ namespace ComicsShelf.Splash
       public Command OpenCommand { get; set; }
       async Task OpenAsync()
       {
-         IsBusy = true;
+         IsOpening = true;
          await Task.Delay(TimeSpan.FromSeconds(7));
-         IsBusy = false;
+         IsOpening = false;
       }
 
       double _EditionsHeight;

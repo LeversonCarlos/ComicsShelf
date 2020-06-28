@@ -5,6 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
+   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
@@ -13,6 +14,7 @@
    x:Name="splashPage">
    <ContentPage.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
+      <converters:NotConverter x:Key="notConverter" />
    </ContentPage.Resources>
    <ContentPage.Content>
       <ScrollView Orientation="Vertical">
@@ -28,14 +30,27 @@
                <Grid.RowDefinitions>
                   <RowDefinition Height="{Static helpers:Cover.SplashHeight}" />
                </Grid.RowDefinitions>
-               <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
+               <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" >
+                  <controls:CoverImage.Triggers>
+                     <DataTrigger TargetType="controls:CoverImage" Binding="{Binding BindingContext.IsOpening, Source={x:Reference splashPage}}" Value="True">
+                        <DataTrigger.EnterActions>
+                           <controls:CoverOpening Action="Start" />
+                        </DataTrigger.EnterActions>
+                     </DataTrigger>
+                     <DataTrigger TargetType="controls:CoverImage" Binding="{Binding BindingContext.IsOpening, Source={x:Reference splashPage}}" Value="False">
+                        <DataTrigger.EnterActions>
+                           <controls:CoverOpening Action="Stop" />
+                        </DataTrigger.EnterActions>
+                     </DataTrigger>
+                  </controls:CoverImage.Triggers>
+               </controls:CoverImage>
             </Grid>
 
-            <splash:SplashPageDetails />
+            <splash:SplashPageDetails IsVisible="{Binding IsOpening, Converter={StaticResource notConverter}}" />
 
-            <BoxView Style="{StaticResource Separator }" Margin="30,20" />
+            <BoxView IsVisible="{Binding IsOpening, Converter={StaticResource notConverter}}" Style="{StaticResource Separator }" Margin="30,20" />
 
-            <StackLayout Spacing="3" Margin="0,0,0,10">
+            <StackLayout IsVisible="{Binding IsOpening, Converter={StaticResource notConverter}}" Spacing="3" Margin="0,0,0,10">
                <Label Text="{Binding EditionsTitle}" Style="{StaticResource Large}" />
 
                <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" >
