@@ -46,7 +46,7 @@ namespace ComicsShelf.Store
             return true;
          }
          catch (Exception ex) { Helpers.Message.Show(ex); return false; }
-         finally { Helpers.Insights.TrackEvent($"Store Initializing", $"Seconds:{Math.Round(DateTime.Now.Subtract(start).TotalSeconds, 0)}"); }
+         finally { Helpers.Insights.TrackMetric($"Store Initializing", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
    }
