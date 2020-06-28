@@ -35,7 +35,7 @@
                <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" >
-               <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="60" WidthRequest="60" />
+               <ImageButton Source="open" Command="{Binding OpenCommand}" BackgroundColor="Transparent" HeightRequest="60" WidthRequest="60" />
             </StackLayout>
          </FlexLayout>
 
@@ -51,7 +51,7 @@
                <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" >
-               <ImageButton Source="open" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
+               <ImageButton Source="open" Command="{Binding OpenCommand}" BackgroundColor="Transparent" HeightRequest="50" WidthRequest="50" />
             </StackLayout>
          </FlexLayout>
 
