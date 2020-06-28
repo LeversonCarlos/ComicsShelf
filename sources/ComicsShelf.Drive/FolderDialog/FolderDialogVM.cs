@@ -1,6 +1,7 @@
 ﻿using ComicsShelf.Observables;
 using System;
 using System.Threading.Tasks;
+using System.Transactions;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Drive.FolderDialog
@@ -10,9 +11,13 @@ namespace ComicsShelf.Drive.FolderDialog
       readonly TaskCompletionSource<DriveItemVM> tcs;
       public ObservableList<DriveItemVM> Data { get; private set; }
 
+      public string SELECTED_PATH => Translations.FOLDER_DIALOG_SELECTED_PATH;
+      public string CANCEL_COMMAND => Translations.FOLDER_DIALOG_CANCEL_COMMAND;
+      public string CONFIRM_COMMAND => Translations.FOLDER_DIALOG_CONFIRM_COMMAND;
+
       public FolderDialogVM()
       {
-         this.Title = "select_the_desired_folder";
+         this.Title = Translations.FOLDER_DIALOG_TITLE;
          this.Data = new ObservableList<DriveItemVM>();
          this.tcs = new TaskCompletionSource<DriveItemVM>();
          this.ItemSelectCommand = new Command(async item => await this.ItemSelect(item));

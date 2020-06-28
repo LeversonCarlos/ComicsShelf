@@ -6,6 +6,7 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Drive.FolderDialog.FolderDialogPage"
+   x:Name="folderDialog"
    Title="{Binding Title}">
 
    <ContentPage.Resources>
@@ -19,7 +20,7 @@
 
          <Frame >
             <StackLayout Orientation="Vertical" Spacing="5">
-               <Label Text="selected_path" Style="{StaticResource DetailsLabel}"></Label>
+               <Label Text="{Binding SELECTED_PATH}" Style="{StaticResource DetailsLabel}"></Label>
                <Label Text="{Binding CurrentItem.Path}" Style="{StaticResource DetailsValue}"></Label>
             </StackLayout>
          </Frame>
@@ -36,10 +37,10 @@
                      <DataTemplate>
                         <StackLayout >
                            <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
-                              <Image Source="icon_ArrowRight.png"></Image>
-                              <Label Text="{Binding Name}" Style="{StaticResource Default}"></Label>
+                              <Image Source="icon_ArrowRight.png" />
+                              <Label Text="{Binding Name}" Style="{StaticResource Default}" />
                               <FlexLayout.GestureRecognizers>
-                                 <TapGestureRecognizer Command="{Binding ItemSelectCommand}" CommandParameter="{Binding .}" />
+                                 <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectCommand, Source={x:Reference folderDialog}}" CommandParameter="{Binding .}" />
                               </FlexLayout.GestureRecognizers>
                            </FlexLayout>
                            <BoxView Style="{StaticResource Separator}" />
@@ -53,8 +54,8 @@
          <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
          <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Button Text="cancel" Command="{Binding CancelCommand}" Style="{StaticResource BaseButton}" />
-            <Button Text="confirm" Command="{Binding ConfirmCommand}" Style="{StaticResource ConfirmButton}" />
+            <Button Command="{Binding CancelCommand}" Text="{Binding CANCEL_COMMAND}" Style="{StaticResource BaseButton}" />
+            <Button Command="{Binding ConfirmCommand}" Text="{Binding CONFIRM_COMMAND}" Style="{StaticResource ConfirmButton}" />
          </StackLayout>
 
       </StackLayout>
