@@ -1,4 +1,5 @@
-﻿using Microsoft.AppCenter.Analytics;
+﻿using AppCenter.Analytics.Metrics;
+using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace ComicsShelf.Helpers
 {
+
    public class Insights
    {
 
@@ -19,27 +21,26 @@ namespace ComicsShelf.Helpers
             "ios={Your iOS App secret here}" +
             */
             "",
-            typeof(Analytics), typeof(Crashes));
+            typeof(Analytics), typeof(Crashes), typeof(AnalyticsMetrics));
       }
+
 
       public static void TrackEvent(string text) =>
          TrackEvent(text, new string[] { });
 
       public static void TrackEvent(string text, params string[] propertyList) =>
-         TrackEvent(text, GetDictionaryProperties(propertyList));
+         TrackEvent(text, propertyList.ToDictionaryProperties());
 
-      public static void TrackEvent(string text, Dictionary<string, string> properties)
+      public static void TrackEvent(string text, Dictionary<string, string> properties) =>
+         Analytics.TrackEvent(text, properties);
+
+
+      public static void TrackMetric(string text, double secondsDuration)
       {
-         Analytics.TrackEvent($"New App: {text}", properties);
-
-         Console.ForegroundColor = ConsoleColor.Blue;
-         Console.WriteLine(text);
-         if (properties?.Count > 0)
-         {
-            foreach (var property in properties)
-            { Console.WriteLine($"{property.Key} : {property.Value}"); }
-         }
-         Console.ResetColor();
+         var properties = new Dictionary<string, string> { { "Seconds", $"{(int)Math.Round(secondsDuration, 0)}" } };
+         properties.AddMetrics();
+         Analytics.TrackEvent(text, properties);
+         AnalyticsMetrics.TrackTimedEvent(text, properties);
       }
 
 
@@ -63,14 +64,17 @@ namespace ComicsShelf.Helpers
          var eIndex = 0;
          exceptionList.ForEach(e => properties.Add($"Exception {eIndex++}", e));
 
-         AddMetrics(properties);
+         properties.AddMetrics();
          Crashes.TrackError(ex, properties);
          Analytics.TrackEvent("Tracked Exception", properties);
-         TrackEvent("Tracked Exception", properties);
       }
 
+   }
 
-      private static void AddMetrics(Dictionary<string, string> properties)
+   internal static class InsightsExtentions
+   {
+
+      public static Dictionary<string, string> AddMetrics(this Dictionary<string, string> properties)
       {
          try
          {
@@ -81,9 +85,10 @@ namespace ComicsShelf.Helpers
          catch { }
          finally
          { properties.Add("Device", $"{Xamarin.Essentials.DeviceInfo.Name}"); }
+         return properties;
       }
 
-      private static Dictionary<string, string> GetDictionaryProperties(params string[] propertyList)
+      public static Dictionary<string, string> ToDictionaryProperties(this string[] propertyList)
       {
          try
          {
@@ -98,8 +103,9 @@ namespace ComicsShelf.Helpers
                .ToDictionary(k => k.Key, v => v.Value);
             return properties;
          }
-         catch { return null; }
+         catch { return new Dictionary<string, string>(); }
       }
 
    }
+
 }
