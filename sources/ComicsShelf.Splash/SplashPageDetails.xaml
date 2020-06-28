@@ -16,17 +16,25 @@
    <ContentView.Content>
 
       <StackLayout Spacing="3">
+
          <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" />
+
          <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
             <StackLayout WidthRequest="100" >
                <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
                <Label Text="{Binding RatingLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
+               <StackLayout.IsVisible>
+                  <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False" />
+               </StackLayout.IsVisible>
                <Switch IsToggled="{Binding SelectedItem.Readed}" ></Switch>
                <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
             <StackLayout WidthRequest="100" >
+               <StackLayout.IsVisible>
+                  <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False" />
+               </StackLayout.IsVisible>
                <Label Text="{Binding ReadingLabel}" Style="{StaticResource DetailsLabel}" />
                <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
             </StackLayout>
@@ -35,6 +43,21 @@
                <Label Text="{Binding OpenLabel}" Style="{StaticResource DetailsLabel}" />
             </StackLayout>
          </FlexLayout>
+
+         <FlexLayout AlignItems="Center" JustifyContent="SpaceEvenly"  Direction="Row" >
+            <FlexLayout.IsVisible>
+               <OnIdiom x:TypeArguments="x:Boolean" Default="False" Phone="True" />
+            </FlexLayout.IsVisible>
+            <StackLayout WidthRequest="100" >
+               <Switch IsToggled="{Binding SelectedItem.Readed}" ></Switch>
+               <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
+            </StackLayout>
+            <StackLayout WidthRequest="100" >
+               <Label Text="{Binding ReadingLabel}" Style="{StaticResource DetailsLabel}" />
+               <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
+            </StackLayout>
+         </FlexLayout>
+
       </StackLayout>
 
    </ContentView.Content>
