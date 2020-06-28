@@ -43,7 +43,9 @@ namespace ComicsShelf.Engine.AnalysisData
             }
 
             // SECTION FOR THE RECENTELY ADDED ITEMS
-            sections.Insert(0, ExecuteAsync_GetRecentlyAddedSection(allItems));
+            var recentlyAdded = ExecuteAsync_GetRecentlyAddedSection(allItems);
+            if (recentlyAdded != null)
+               sections.Insert(0, recentlyAdded);
 
             //SECTION FOR THE ONGOING READING ITEMS
             //TODO
@@ -122,6 +124,7 @@ namespace ComicsShelf.Engine.AnalysisData
                .Select(group => group.OrderByDescending(item => item.ReleaseDate).FirstOrDefault())
                .OrderByDescending(item => item.ReleaseDate)
                .ToArray();
+            if (sectionItems?.Length == 0) { return null; }
 
             var section = new SectionVM(Translations.RECENTLY_ADDED_TITLE, null);
 
