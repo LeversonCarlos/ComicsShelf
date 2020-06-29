@@ -117,7 +117,7 @@ namespace ComicsShelf.Engine.PagesExtraction
             // RESULT
             return pages;
          }
-         catch (Exception ex) { throw new Exception($"Error extracting pages data on directory [{cachePath}].", ex); }
+         catch (Exception ex) { throw new Exception($"Error extracting pages data on directory", ex); }
       }
 
    }
