@@ -4,16 +4,25 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
    x:Class="ComicsShelf.Reading.ReadingPage">
+   <ContentPage.Resources>
+      <converters:NotConverter x:Key="notConverter" />
+   </ContentPage.Resources>
    <ContentPage.Content>
-      <StackLayout BindableLayout.ItemsSource="{Binding ItemPages}">
-         <BindableLayout.ItemTemplate>
-            <DataTemplate>
-               <Label Text="{Binding Path}" />
-            </DataTemplate>
-         </BindableLayout.ItemTemplate>
-      </StackLayout>
+      <AbsoluteLayout>
+         <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5" />
+         <ScrollView Orientation="Vertical" IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <StackLayout BindableLayout.ItemsSource="{Binding ItemPages}" >
+               <BindableLayout.ItemTemplate>
+                  <DataTemplate>
+                     <Label Text="{Binding Path}" />
+                  </DataTemplate>
+               </BindableLayout.ItemTemplate>
+            </StackLayout>
+         </ScrollView>
+      </AbsoluteLayout>
    </ContentPage.Content>
 </ContentPage>
