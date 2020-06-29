@@ -13,8 +13,13 @@
       <styles:CoverStyles />
    </ResourceDictionary.MergedDictionaries>
 
-   <Style TargetType="StackLayout" x:Key="Main">
+   <Style TargetType="ContentPage">
       <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
+   </Style>
+
+   <Style TargetType="StackLayout" x:Key="Main">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Padding" Value="0" />
       <Setter Property="Spacing" Value="10" />
    </Style>
 
