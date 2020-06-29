@@ -44,9 +44,14 @@ namespace ComicsShelf.Splash
       async Task OpenAsync()
       {
          IsOpening = true;
-         var itemPages = await Engine.PagesExtraction.Service.ExecuteAsync(this.SelectedItem);
+         var pagesExtraction = await Engine.PagesExtraction.Service.ExecuteAsync(this.SelectedItem);
+         if (pagesExtraction)
+            await Shell.Current.GoToAsync(GetNavigationState(this.SelectedItem));
          IsOpening = false;
       }
+
+      ShellNavigationState GetNavigationState(ItemVM item) =>
+         new ShellNavigationState($"reading?libraryID={item?.LibraryID}&fileID={item?.EscapedID}");
 
       double _EditionsHeight;
       public double EditionsHeight
