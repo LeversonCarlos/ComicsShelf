@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary 
-   xmlns="http://xamarin.com/schemas/2014/forms"
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
-   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base" 
+   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
    x:Class="ComicsShelf.Splash.SplashStyles">
 
    <ResourceDictionary.MergedDictionaries>
@@ -13,9 +13,14 @@
       <styles:CoverStyles />
    </ResourceDictionary.MergedDictionaries>
 
+   <Style TargetType="ContentPage">
+      <Setter Property="Padding" Value="{Static helpers:Cover.ScreenMargin}" />
+   </Style>
+
    <Style TargetType="StackLayout" x:Key="Main">
-      <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
-      <Setter Property="Spacing" Value="10" />
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Spacing" Value="0" />
    </Style>
 
    <Style TargetType="controls:CoverImage" x:Key="SplashCover">

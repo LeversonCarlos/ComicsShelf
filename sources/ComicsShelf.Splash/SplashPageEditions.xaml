@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+   xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
+   mc:Ignorable="d" 
+   x:Name="editionsView" 
+   x:Class="ComicsShelf.Splash.SplashPageEditions">
+
+   <ContentView.Resources>
+      <ResourceDictionary Source="SplashStyles.xaml" />
+   </ContentView.Resources>
+
+   <ContentView.Triggers>
+      <DataTrigger TargetType="ContentView" Binding="{Binding IsOpening}" Value="True">
+         <DataTrigger.EnterActions>
+            <animations:OpacityAnimation Opacity="0" Speed="0.1" />
+         </DataTrigger.EnterActions>
+      </DataTrigger>
+      <DataTrigger TargetType="ContentView" Binding="{Binding IsOpening}" Value="False">
+         <DataTrigger.EnterActions>
+            <animations:OpacityAnimation Opacity="1" />
+         </DataTrigger.EnterActions>
+      </DataTrigger>
+   </ContentView.Triggers>
+
+   <ContentView.Content>
+      <StackLayout Style="{StaticResource Main}">
+
+         <BoxView Style="{StaticResource Separator }" Margin="30,20" />
+
+         <StackLayout Spacing="3" Margin="0,0,0,10">
+
+            <Label Text="{Binding EditionsTitle}" Style="{StaticResource Large}" />
+
+            <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}">
+               <CollectionView.ItemsLayout>
+                  <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Phone=3, Tablet=5, Desktop=7, TV=9 }" VerticalItemSpacing="0" />
+               </CollectionView.ItemsLayout>
+               <CollectionView.ItemTemplate>
+                  <DataTemplate>
+
+                     <controls:CoverContainer Margin="0" Padding="5" OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference editionsView} }">
+                        <controls:CoverImage ImageSource="{Binding CoverPath}" />
+                        <ProgressBar Progress="{Binding ReadingPercent}" Style="{StaticResource CoverProgress}" />
+                        <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
+                     </controls:CoverContainer>
+
+                  </DataTemplate>
+               </CollectionView.ItemTemplate>
+            </CollectionView>
+         </StackLayout>
+
+      </StackLayout>
+   </ContentView.Content>
+
+</ContentView>

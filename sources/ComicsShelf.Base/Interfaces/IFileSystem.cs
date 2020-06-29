@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ComicsShelf.Drive
+namespace ComicsShelf.Interfaces
 {
    public interface IFileSystem
    {

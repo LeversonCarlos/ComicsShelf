@@ -14,7 +14,7 @@ namespace ComicsShelf.Drive
 
       public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
 
-      protected IFileSystem FileSystem => DependencyService.Get<IFileSystem>();
+      protected Interfaces.IFileSystem FileSystem => DependencyService.Get<Interfaces.IFileSystem>();
 
    }
 

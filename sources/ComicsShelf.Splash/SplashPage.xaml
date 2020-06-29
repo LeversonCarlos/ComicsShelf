@@ -1,60 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
-   xmlns="http://xamarin.com/schemas/2014/forms"
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
-   xmlns:splash="clr-namespace:ComicsShelf.Splash"
-   mc:Ignorable="d"
-   Shell.PresentationMode="ModalAnimated"
-   x:Class="ComicsShelf.Splash.SplashPage"
-   x:Name="splashPage">
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+   xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
+   xmlns:splash="clr-namespace:ComicsShelf.Splash" 
+   mc:Ignorable="d" 
+   Shell.PresentationMode="ModalAnimated" 
+   x:Class="ComicsShelf.Splash.SplashPage">
    <ContentPage.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
    </ContentPage.Resources>
    <ContentPage.Content>
       <ScrollView Orientation="Vertical">
-         <StackLayout Style="{StaticResource Main}" >
+         <StackLayout Style="{StaticResource Main}">
 
-            <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" >
-               <Label.Margin>
-                  <OnIdiom x:TypeArguments="Thickness" Default="0" Tablet="0,20,0,10" />
-               </Label.Margin>
-            </Label>
+            <StackLayout.Triggers>
+               <DataTrigger TargetType="StackLayout" Binding="{Binding IsOpening}" Value="True">
+                  <DataTrigger.EnterActions>
+                     <animations:OpacityAnimation Opacity="0" Speed="0.002" />
+                  </DataTrigger.EnterActions>
+               </DataTrigger>
+               <DataTrigger TargetType="StackLayout" Binding="{Binding IsOpening}" Value="False">
+                  <DataTrigger.EnterActions>
+                     <animations:OpacityAnimation Opacity="1" />
+                  </DataTrigger.EnterActions>
+               </DataTrigger>
+            </StackLayout.Triggers>
 
-            <Grid VerticalOptions="CenterAndExpand">
-               <Grid.RowDefinitions>
-                  <RowDefinition Height="{Static helpers:Cover.SplashHeight}" />
-               </Grid.RowDefinitions>
-               <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
-            </Grid>
+            <splash:SplashPageCover />
 
             <splash:SplashPageDetails />
 
-            <BoxView Style="{StaticResource Separator }" Margin="30,20" />
-
-            <StackLayout Spacing="3" Margin="0,0,0,10">
-               <Label Text="{Binding EditionsTitle}" Style="{StaticResource Large}" />
-
-               <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" >
-                  <CollectionView.ItemsLayout>
-                     <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Phone=3, Tablet=5, Desktop=7, TV=9 }" VerticalItemSpacing="0" />
-                  </CollectionView.ItemsLayout>
-                  <CollectionView.ItemTemplate>
-                     <DataTemplate>
-
-                        <controls:CoverContainer Margin="0" Padding="5" OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference splashPage} }" >
-                           <controls:CoverImage ImageSource="{Binding CoverPath}" />
-                           <ProgressBar Progress="{Binding ReadingPercent}" Style="{StaticResource CoverProgress}" />
-                           <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
-                        </controls:CoverContainer>
-
-                     </DataTemplate>
-                  </CollectionView.ItemTemplate>
-               </CollectionView>
-            </StackLayout>
+            <splash:SplashPageEditions />
 
          </StackLayout>
       </ScrollView>

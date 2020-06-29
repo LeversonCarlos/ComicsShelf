@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+   xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
+   mc:Ignorable="d" 
+   x:Class="ComicsShelf.Splash.SplashPageCover">
+   <ContentView.Resources>
+      <ResourceDictionary Source="SplashStyles.xaml" />
+   </ContentView.Resources>
+   <ContentView.Content>
+      <StackLayout Style="{StaticResource Main}">
+
+         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}">
+            <Label.Margin>
+               <OnIdiom x:TypeArguments="Thickness" Default="0,10" Tablet="0,20" />
+            </Label.Margin>
+         </Label>
+
+         <Grid VerticalOptions="CenterAndExpand">
+            <Grid.Triggers>
+               <DataTrigger TargetType="Grid" Binding="{Binding IsOpening}" Value="True">
+                  <DataTrigger.EnterActions>
+                     <animations:ZoomAnimation Scale="20" Speed="0.002" />
+                  </DataTrigger.EnterActions>
+               </DataTrigger>
+               <DataTrigger TargetType="Grid" Binding="{Binding IsOpening}" Value="False">
+                  <DataTrigger.EnterActions>
+                     <animations:ZoomAnimation Scale="1" />
+                  </DataTrigger.EnterActions>
+               </DataTrigger>
+            </Grid.Triggers>
+            <Grid.RowDefinitions>
+               <RowDefinition Height="{Static helpers:Cover.SplashHeight}" />
+            </Grid.RowDefinitions>
+            <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
+         </Grid>
+
+      </StackLayout>
+   </ContentView.Content>
+</ContentView>

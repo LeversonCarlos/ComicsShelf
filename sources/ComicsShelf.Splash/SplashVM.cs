@@ -1,6 +1,7 @@
 ﻿using ComicsShelf.Observables;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,6 +15,7 @@ namespace ComicsShelf.Splash
       public SplashVM()
       {
          SelectItemCommand = new Command(async item => await SelectItemAsync(item));
+         OpenCommand = new Command(async item => await OpenAsync());
       }
 
       ItemVM _SelectedItem;
@@ -29,6 +31,21 @@ namespace ComicsShelf.Splash
          UpdateItemAsync();
          this.SelectedItem = (item as ItemVM);
          return Task.CompletedTask;
+      }
+
+      bool _IsOpening;
+      public bool IsOpening
+      {
+         get => _IsOpening;
+         set => SetProperty(ref _IsOpening, value);
+      }
+
+      public Command OpenCommand { get; set; }
+      async Task OpenAsync()
+      {
+         IsOpening = true;
+         var itemPages = await Engine.PagesExtraction.Service.ExecuteAsync(this.SelectedItem);
+         IsOpening = false;
       }
 
       double _EditionsHeight;

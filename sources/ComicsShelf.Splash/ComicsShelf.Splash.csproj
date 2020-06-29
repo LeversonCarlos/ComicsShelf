@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
     <ProjectReference Include="..\ComicsShelf.Controls\ComicsShelf.Controls.csproj" />
+    <ProjectReference Include="..\ComicsShelf.Engine\ComicsShelf.Engine.csproj" />
     <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
   </ItemGroup>
 
@@ -31,7 +32,13 @@
     <EmbeddedResource Update="SplashPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="SplashPageCover.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="SplashPageDetails.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SplashPageEditions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="SplashStyles.xaml">
