@@ -4,10 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base"
-   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated"
@@ -32,30 +29,7 @@
                </DataTrigger>
             </StackLayout.Triggers>
 
-            <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" >
-               <Label.Margin>
-                  <OnIdiom x:TypeArguments="Thickness" Default="0" Tablet="0,20,0,10" />
-               </Label.Margin>
-            </Label>
-
-            <Grid VerticalOptions="CenterAndExpand">
-               <Grid.Triggers>
-                  <DataTrigger TargetType="Grid" Binding="{Binding IsOpening}" Value="True">
-                     <DataTrigger.EnterActions>
-                        <animations:ZoomAnimation Scale="20" Speed="0.002" />
-                     </DataTrigger.EnterActions>
-                  </DataTrigger>
-                  <DataTrigger TargetType="Grid" Binding="{Binding IsOpening}" Value="False">
-                     <DataTrigger.EnterActions>
-                        <animations:ZoomAnimation Scale="1" />
-                     </DataTrigger.EnterActions>
-                  </DataTrigger>
-               </Grid.Triggers>
-               <Grid.RowDefinitions>
-                  <RowDefinition Height="{Static helpers:Cover.SplashHeight}" />
-               </Grid.RowDefinitions>
-               <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
-            </Grid>
+            <splash:SplashPageCover />
 
             <splash:SplashPageDetails />
 

@@ -17,7 +17,7 @@
    <ContentView.Triggers>
       <DataTrigger TargetType="ContentView" Binding="{Binding IsOpening}" Value="True">
          <DataTrigger.EnterActions>
-            <animations:OpacityAnimation Opacity="0" Speed="0.1" />
+            <animations:OpacityAnimation Opacity="0" Speed="0.3" />
          </DataTrigger.EnterActions>
       </DataTrigger>
       <DataTrigger TargetType="ContentView" Binding="{Binding IsOpening}" Value="False">
@@ -28,7 +28,7 @@
    </ContentView.Triggers>
 
    <ContentView.Content>
-      <FlexLayout AlignItems="Center" Direction="Row" >
+      <FlexLayout AlignItems="Center" Direction="Row" Margin="0,10" >
 
          <FlexLayout.JustifyContent>
             <OnIdiom x:TypeArguments="FlexJustify" Default="SpaceEvenly" Phone="SpaceBetween" />
