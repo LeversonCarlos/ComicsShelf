@@ -4,17 +4,30 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base"
    xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
-   xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Splash.SplashPageDetails">
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
       <converters:DateFormatter x:Key="dateFormatter" />
    </ContentView.Resources>
-   <ContentView.Content>
 
+   <ContentView.Triggers>
+      <DataTrigger TargetType="ContentView" Binding="{Binding IsOpening}" Value="True">
+         <DataTrigger.EnterActions>
+            <animations:OpacityAnimation Opacity="0" Speed="0.1" />
+         </DataTrigger.EnterActions>
+      </DataTrigger>
+      <DataTrigger TargetType="ContentView" Binding="{Binding IsOpening}" Value="False">
+         <DataTrigger.EnterActions>
+            <animations:OpacityAnimation Opacity="1" />
+         </DataTrigger.EnterActions>
+      </DataTrigger>
+   </ContentView.Triggers>
+
+   <ContentView.Content>
       <StackLayout Spacing="3">
 
          <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" IsVisible="False" />
@@ -56,6 +69,6 @@
          </FlexLayout>
 
       </StackLayout>
-
    </ContentView.Content>
+
 </ContentView>

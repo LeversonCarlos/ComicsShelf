@@ -20,7 +20,7 @@ namespace ComicsShelf.Animations
       async Task Animate(View sender)
       {
          // ViewExtensions.CancelAnimations(sender);
-         await sender.ScaleTo(Scale, Duration, Easing.SpringIn);
+         await sender.ScaleTo(Scale, Duration, Easing.CubicOut);
       }
 
 
