@@ -12,27 +12,25 @@ namespace ComicsShelf.Drive
    partial class LocalDrive
    {
 
-      public override async Task<PageVM[]> ExtractPages(LibraryVM library, ItemVM libraryItem)
+      public override async Task<bool> ExtractPages(LibraryVM library, ItemVM libraryItem)
       {
          try
          {
 
             // DESTINATION CACHE PATH
-            var cachePath = $"{Helpers.Paths.FilesCache}/{libraryItem.EscapedID}";
+            var cachePath = libraryItem.GetCachePath();
             if (!Directory.Exists(cachePath)) { Directory.CreateDirectory(cachePath); }
 
             // SOURCE FILE PATH
             var filePath = $"{libraryItem.FolderPath}/{libraryItem.FileName}";
-            if (!File.Exists(filePath)) { return null; }
+            if (!File.Exists(filePath)) { return false; }
 
             // EXTRACT PAGES INTO CACHE
-            if (!await this.ExtractPages(filePath, cachePath)) { return null; }
+            if (!await this.ExtractPages(filePath, cachePath)) { return false; }
 
-            // RETURN PAGES FROM CACHE
-            var pages = await this.GetExtractedPagesData(cachePath);
-            return pages;
+            return true;
          }
-         catch (Exception ex) { Insights.TrackException(ex); return null; }
+         catch (Exception ex) { Insights.TrackException(ex); return false; }
       }
 
       private async Task<bool> ExtractPages(string filePath, string cachePath)

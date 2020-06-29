@@ -14,7 +14,7 @@ namespace ComicsShelf.Drive
       Task<ItemVM[]> SearchItems(LibraryVM library);
 
       Task<bool> ExtractCover(LibraryVM library, ItemVM libraryItem);
-      Task<PageVM[]> ExtractPages(LibraryVM library, ItemVM libraryItem);
+      Task<bool> ExtractPages(LibraryVM library, ItemVM libraryItem);
 
       string EscapeFileID(string fileID);
    }
