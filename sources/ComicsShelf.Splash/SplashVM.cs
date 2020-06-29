@@ -44,7 +44,7 @@ namespace ComicsShelf.Splash
       async Task OpenAsync()
       {
          IsOpening = true;
-         await Task.Delay(TimeSpan.FromSeconds(7));
+         var itemPages = await Engine.PagesExtraction.Service.ExecuteAsync(this.SelectedItem);
          IsOpening = false;
       }
 
