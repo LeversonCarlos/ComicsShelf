@@ -11,11 +11,9 @@
    xmlns:splash="clr-namespace:ComicsShelf.Splash"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated"
-   x:Class="ComicsShelf.Splash.SplashPage"
-   x:Name="splashPage">
+   x:Class="ComicsShelf.Splash.SplashPage">
    <ContentPage.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
-      <converters:NotConverter x:Key="notConverter" />
    </ContentPage.Resources>
    <ContentPage.Content>
       <ScrollView Orientation="Vertical">
