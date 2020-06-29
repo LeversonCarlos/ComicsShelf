@@ -10,8 +10,8 @@ namespace ComicsShelf.Reading
 
       public override Task OnAppearing()
       {
-         return InitializeData()
-            .ContinueWith(t => base.OnAppearing());
+         Task.Run(() => InitializeData());
+         return base.OnAppearing();
       }
 
       async Task InitializeData()
@@ -19,12 +19,13 @@ namespace ComicsShelf.Reading
          var start = DateTime.Now;
          try
          {
+            IsBusy = true;
             this.InitializeLibrary();
             this.InitializeItem();
             await this.InitializePages();
          }
          catch (Exception ex) { Helpers.Message.Show(ex); await Helpers.Modal.Pop(); }
-         finally { Helpers.Insights.TrackMetric("Reading Initializing", DateTime.Now.Subtract(start).TotalSeconds); }
+         finally { Helpers.Insights.TrackMetric("Reading Initializing", DateTime.Now.Subtract(start).TotalSeconds); IsBusy = false; }
       }
 
       string _LibraryID { get; set; }
