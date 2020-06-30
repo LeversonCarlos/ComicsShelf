@@ -12,7 +12,7 @@ namespace ComicsShelf.Reading
          set
          {
             SetProperty(ref _ReadingPage, value);
-
+            OnReadingPage(value);
          }
       }
 
@@ -23,9 +23,9 @@ namespace ComicsShelf.Reading
 
             Item.ReadingPage = value;
             Item.ReadingDate = DateTime.UtcNow;
-            Item.ReadingPercent = (double)value / (double)(ItemPages.Count - 1);
+            Item.ReadingPercent = (double)value / (double)(PagesList.Count - 1);
 
-            foreach (var page in ItemPages)
+            foreach (var page in PagesList)
                page.IsVisible = page.Index >= (value - 1) && page.Index <= (value + 1);
 
             if (Item.ReadingPercent >= (double)1)
