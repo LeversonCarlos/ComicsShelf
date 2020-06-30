@@ -13,7 +13,7 @@
    </ItemGroup>
 
    <ItemGroup>
-      <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
+      <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
       <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
       <PackageReference Include="System.Text.Json" Version="4.7.2" />
       <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.2" />
