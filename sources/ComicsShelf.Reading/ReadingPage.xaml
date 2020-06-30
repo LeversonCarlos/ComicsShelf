@@ -16,7 +16,7 @@
          <CarouselView ItemsSource="{Binding ItemPages}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Position="{Binding ReadingPage}" >
             <CarouselView.ItemTemplate>
                <DataTemplate>
-                  <Image Source="{Binding Path}" Aspect="AspectFit" />
+                  <Image Source="{Binding Path}" Aspect="AspectFit" IsVisible="{Binding IsVisible}" />
                </DataTemplate>
             </CarouselView.ItemTemplate>
          </CarouselView>
