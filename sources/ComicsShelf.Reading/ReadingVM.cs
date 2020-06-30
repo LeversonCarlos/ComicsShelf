@@ -20,6 +20,8 @@ namespace ComicsShelf.Reading
             this.Item.ReadingPage = value;
             this.Item.ReadingDate = DateTime.UtcNow;
             this.Item.ReadingPercent = (double)value / (double)this.ItemPages.Count;
+            foreach (var page in ItemPages)
+               page.IsVisible = page.Index >= (value - 1) && page.Index <= (value + 1);
          }
       }
 

@@ -58,8 +58,7 @@ namespace ComicsShelf.Reading
          var pagesList = await Engine.PagesExtraction.Service.GetPagesAsync(Item);
          ItemPages.ReplaceRange(pagesList);
 
-         _ReadingPage = Item.ReadingPage.HasValue ? Item.ReadingPage.Value : (short)0;
-         OnPropertyChanged(nameof(ReadingPage));
+         ReadingPage = Item.ReadingPage.HasValue ? Item.ReadingPage.Value : (short)0;
       }
 
    }
