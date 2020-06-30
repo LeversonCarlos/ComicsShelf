@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.Observables;
+using ComicsShelf.Reading;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
@@ -46,7 +47,10 @@ namespace ComicsShelf.Splash
          IsOpening = true;
          var pagesExtraction = await Engine.PagesExtraction.Service.ExecuteAsync(this.SelectedItem);
          if (pagesExtraction)
-            await Shell.Current.GoToAsync(GetNavigationState(this.SelectedItem));
+         {
+            var pagesList = await Engine.PagesExtraction.Service.GetPagesAsync(this.SelectedItem);
+            await Shell.Current.GoToAsync(new ReadingVM(this.SelectedItem, pagesList));
+         }
          IsOpening = false;
       }
 
