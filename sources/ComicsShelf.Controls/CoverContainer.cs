@@ -8,7 +8,7 @@ namespace ComicsShelf.Controls
 
       public CoverContainer()
       {
-         WidthRequest = Helpers.Cover.DefaultWidth; ;
+         WidthRequest = Helpers.Cover.DefaultWidth;
          HeightRequest = Helpers.Cover.DefaultHeight;
 
          GestureRecognizers.Add(new TapGestureRecognizer
@@ -16,7 +16,6 @@ namespace ComicsShelf.Controls
             Command = OpenTransition,
             NumberOfTapsRequired = 1
          });
-
       }
 
       public static readonly BindableProperty OpenCommandProperty =
@@ -30,11 +29,11 @@ namespace ComicsShelf.Controls
       ICommand OpenTransition
       {
          get => new Command(async () =>
-             {
-                await this.ScaleTo(0.85, 150, Easing.SpringIn);
-                await this.ScaleTo(1.00, 100, Easing.SpringOut);
-                Device.BeginInvokeOnMainThread(() => this.OpenCommand?.Execute(this.BindingContext));
-             });
+            {
+               await this.ScaleTo(0.85, 200, Easing.SpringIn);
+               await this.ScaleTo(1.00, 100, Easing.SpringOut);
+               OpenCommand?.Execute(this.BindingContext);
+            });
       }
 
    }
