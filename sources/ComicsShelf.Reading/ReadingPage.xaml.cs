@@ -13,7 +13,7 @@ namespace ComicsShelf.Reading
       public ReadingPage()
       {
          InitializeComponent();
-         BindingContext = new ReadingVM();
+         BindingContext = new ReadingVM { IsBusy = true };
       }
 
       ReadingVM Context => BindingContext as ReadingVM;
