@@ -1,8 +1,6 @@
 ﻿using ComicsShelf.Observables;
 using ComicsShelf.Store;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Reading
@@ -11,6 +9,19 @@ namespace ComicsShelf.Reading
    {
 
       IStoreService Store { get => DependencyService.Get<IStoreService>(); }
+
+      short _ReadingPage;
+      public short ReadingPage
+      {
+         get => _ReadingPage;
+         set
+         {
+            SetProperty(ref _ReadingPage, value);
+            this.Item.ReadingPage = value;
+            this.Item.ReadingDate = DateTime.UtcNow;
+            this.Item.ReadingPercent = (double)value / (double)this.ItemPages.Count;
+         }
+      }
 
    }
 }

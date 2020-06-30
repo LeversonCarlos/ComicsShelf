@@ -13,7 +13,7 @@
    </ContentPage.Resources>
    <ContentPage.Content>
       <AbsoluteLayout >
-         <CarouselView ItemsSource="{Binding ItemPages}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+         <CarouselView ItemsSource="{Binding ItemPages}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Position="{Binding ReadingPage}" >
             <CarouselView.ItemTemplate>
                <DataTemplate>
                   <Image Source="{Binding Path}" Aspect="AspectFit" />
