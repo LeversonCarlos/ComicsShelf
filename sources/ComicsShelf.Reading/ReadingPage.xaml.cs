@@ -34,5 +34,11 @@ namespace ComicsShelf.Reading
          base.OnAppearing();
       }
 
+      protected override void OnDisappearing()
+      {
+         Context?.OnDisappearing();
+         base.OnDisappearing();
+      }
+
    }
 }
