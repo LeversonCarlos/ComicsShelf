@@ -5,6 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
+   xmlns:reading="clr-namespace:ComicsShelf.Reading"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
    x:Class="ComicsShelf.Reading.ReadingPage">
@@ -16,7 +17,7 @@
          <CarouselView ItemsSource="{Binding ItemPages}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Position="{Binding ReadingPage}" >
             <CarouselView.ItemTemplate>
                <DataTemplate>
-                  <Image Source="{Binding Path}" Aspect="AspectFit" IsVisible="{Binding IsVisible}" />
+                  <reading:ReadingImage ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" Aspect="AspectFit" />
                </DataTemplate>
             </CarouselView.ItemTemplate>
          </CarouselView>
