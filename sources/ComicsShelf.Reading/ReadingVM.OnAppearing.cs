@@ -56,6 +56,7 @@ namespace ComicsShelf.Reading
       async Task InitializePages()
       {
          var pagesList = await Engine.PagesExtraction.Service.GetPagesAsync(Item);
+         pagesList = pagesList.Union(new PageVM[] { new PageVM { } }).ToArray();
          ItemPages.ReplaceRange(pagesList);
 
          ReadingPage = Item.ReadingPage.HasValue ? Item.ReadingPage.Value : (short)0;

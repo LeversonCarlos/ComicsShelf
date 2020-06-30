@@ -17,11 +17,21 @@ namespace ComicsShelf.Reading
          set
          {
             SetProperty(ref _ReadingPage, value);
-            this.Item.ReadingPage = value;
-            this.Item.ReadingDate = DateTime.UtcNow;
-            this.Item.ReadingPercent = (double)value / (double)this.ItemPages.Count;
+            Item.ReadingPage = value;
+            Item.ReadingDate = DateTime.UtcNow;
+            Item.ReadingPercent = (double)value / (double)(ItemPages.Count - 1);
+
             foreach (var page in ItemPages)
                page.IsVisible = page.Index >= (value - 1) && page.Index <= (value + 1);
+
+            if (Item.ReadingPercent >= (double)1)
+            {
+               Item.Readed = true;
+               Item.ReadingPage = 0;
+               Helpers.Modal.Pop();
+               return;
+            }
+
          }
       }
 
