@@ -163,6 +163,9 @@ namespace ComicsShelf.Engine.AnalysisData
 
             // GROUP ITEMS AND MANTAIN ONLY THE MOST RECENT FOR EACH GROUP
             readedFiles = readedFiles
+               .Union(openedItems)
+               .ToList();
+            readedFiles = readedFiles
                .GroupBy(item => item.FolderPath)
                .Select(x => readedFiles
                   .Where(g => g.FolderPath == x.Key)
