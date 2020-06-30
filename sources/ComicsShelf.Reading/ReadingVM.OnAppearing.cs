@@ -53,11 +53,10 @@ namespace ComicsShelf.Reading
       }
 
       public Observables.ObservableList<PageVM> ItemPages { get; set; } = new Observables.ObservableList<PageVM>();
-      async Task<ReadingVM> InitializePages()
+      async Task InitializePages()
       {
          var pagesList = await Engine.PagesExtraction.Service.GetPagesAsync(Item);
-         ItemPages.AddRange(pagesList);
-         return this;
+         ItemPages.ReplaceRange(pagesList);
       }
 
    }

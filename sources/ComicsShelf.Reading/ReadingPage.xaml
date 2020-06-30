@@ -12,17 +12,15 @@
       <converters:NotConverter x:Key="notConverter" />
    </ContentPage.Resources>
    <ContentPage.Content>
-      <AbsoluteLayout>
+      <AbsoluteLayout >
+         <CarouselView ItemsSource="{Binding ItemPages}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+            <CarouselView.ItemTemplate>
+               <DataTemplate>
+                  <Image Source="{Binding Path}" Aspect="AspectFit" />
+               </DataTemplate>
+            </CarouselView.ItemTemplate>
+         </CarouselView>
          <ActivityIndicator IsRunning="True" IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5" />
-         <ScrollView Orientation="Vertical" IsVisible="{Binding IsBusy, Converter={StaticResource notConverter}}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-            <StackLayout BindableLayout.ItemsSource="{Binding ItemPages}" >
-               <BindableLayout.ItemTemplate>
-                  <DataTemplate>
-                     <Label Text="{Binding Path}" />
-                  </DataTemplate>
-               </BindableLayout.ItemTemplate>
-            </StackLayout>
-         </ScrollView>
       </AbsoluteLayout>
    </ContentPage.Content>
 </ContentPage>
