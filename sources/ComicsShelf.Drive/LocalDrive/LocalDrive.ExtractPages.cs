@@ -55,11 +55,9 @@ namespace ComicsShelf.Drive
                      if (fileEntries == null) { return false; }
 
                      // RETRIEVE IMAGE PAGES CONTENT
-                     var tasks = new List<Task>();
                      short pageIndex = 0;
                      foreach (var fileEntry in fileEntries)
-                        tasks.Add(this.ExtractPage(fileEntry, cachePath, pageIndex++));
-                     await Task.WhenAll(tasks.ToArray());
+                        await this.ExtractPage(fileEntry, cachePath, pageIndex++);
 
                   }
                }
