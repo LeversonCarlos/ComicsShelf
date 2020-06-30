@@ -2,6 +2,7 @@
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Reading
@@ -24,6 +25,23 @@ namespace ComicsShelf.Reading
       readonly PageVM[] PagesArray;
       public ItemVM Item { get; }
       public ObservableList<PageVM> PagesList { get; }
+
+      public override Task OnAppearing()
+      {
+         Task.Run(() =>
+         {
+            PagesList.ReplaceRange(PagesArray);
+            ReadingPage = Item.ReadingPage.HasValue ? Item.ReadingPage.Value : (short)0;
+            IsBusy = false;
+         });
+         return base.OnAppearing();
+      }
+
+      public override Task OnDisappearing()
+      {
+         return Store.UpdateItemAsync(this.Item)
+            .ContinueWith(t => base.OnDisappearing());
+      }
 
    }
 }
