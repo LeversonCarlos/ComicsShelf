@@ -13,10 +13,6 @@
       <styles:CoverStyles />
    </ResourceDictionary.MergedDictionaries>
 
-   <Style TargetType="ContentPage">
-      <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
-   </Style>
-
    <Style TargetType="CollectionView" x:Key="Sections">
       <Setter Property="Margin" Value="0,10" />
       <Setter Property="ItemsLayout" Value="VerticalList" />
