@@ -26,6 +26,13 @@ namespace ComicsShelf.Reading
       public ItemVM Item { get; }
       public ObservableList<PageVM> PagesList { get; }
 
+      PageSizeVM _ScreenSize;
+      public PageSizeVM ScreenSize
+      {
+         get => _ScreenSize;
+         set => SetProperty(ref _ScreenSize, value);
+      }
+
       public override Task OnAppearing()
       {
          Task.Run(() =>

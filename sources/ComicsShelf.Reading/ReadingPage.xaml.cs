@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using ComicsShelf.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ComicsShelf.Reading
@@ -20,6 +21,13 @@ namespace ComicsShelf.Reading
       {
          Context?.OnAppearing();
          base.OnAppearing();
+      }
+
+      protected override void OnSizeAllocated(double width, double height)
+      {
+         if (Context != null)
+            Context.ScreenSize = new PageSizeVM { Width = width, Height = height };
+         base.OnSizeAllocated(width, height);
       }
 
       protected override void OnDisappearing()
