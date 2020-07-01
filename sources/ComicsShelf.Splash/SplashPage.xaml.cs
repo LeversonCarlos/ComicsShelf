@@ -3,9 +3,6 @@ using Xamarin.Forms.Xaml;
 
 namespace ComicsShelf.Splash
 {
-
-   [QueryProperty("LibraryID", "libraryID")]
-   [QueryProperty("FileID", "fileID")]
    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class SplashPage : ContentPage
    {
@@ -13,20 +10,10 @@ namespace ComicsShelf.Splash
       public SplashPage()
       {
          InitializeComponent();
-         BindingContext = new SplashVM();
+         BindingContext = SplashExtentions.Instance;
       }
 
       SplashVM Context => BindingContext as SplashVM;
-
-      public string LibraryID
-      {
-         set => Context?.SetLibraryID(value);
-      }
-
-      public string FileID
-      {
-         set => Context?.SetFileID(value);
-      }
 
       protected override void OnAppearing()
       {
