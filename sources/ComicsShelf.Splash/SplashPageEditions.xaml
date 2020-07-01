@@ -5,6 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
    xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
    mc:Ignorable="d" 
    x:Name="editionsView" 
@@ -36,9 +37,9 @@
 
             <Label Text="{Binding EditionsTitle}" Style="{StaticResource Large}" />
 
-            <CollectionView ItemsSource="{Binding ItemsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}">
+            <CollectionView ItemsSource="{Binding EditionsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}">
                <CollectionView.ItemsLayout>
-                  <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Phone=3, Tablet=5, Desktop=7, TV=9 }" VerticalItemSpacing="0" />
+                  <GridItemsLayout Orientation="Vertical" Span="{Static helpers:Cover.ItemsPerLine}" VerticalItemSpacing="0" />
                </CollectionView.ItemsLayout>
                <CollectionView.ItemTemplate>
                   <DataTemplate>

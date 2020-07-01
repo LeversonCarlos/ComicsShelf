@@ -9,9 +9,11 @@
    mc:Ignorable="d" 
    Shell.PresentationMode="ModalAnimated" 
    x:Class="ComicsShelf.Splash.SplashPage">
+   
    <ContentPage.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
    </ContentPage.Resources>
+   
    <ContentPage.Content>
       <ScrollView Orientation="Vertical">
          <StackLayout Style="{StaticResource Main}">
@@ -38,4 +40,5 @@
          </StackLayout>
       </ScrollView>
    </ContentPage.Content>
+   
 </ContentPage>
