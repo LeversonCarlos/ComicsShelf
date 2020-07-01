@@ -99,25 +99,8 @@ namespace ComicsShelf.Reading
                }
             }
 
-            /*
-            this.FadeTo(0.05, 100, Easing.SinOut)
-               .ContinueWith(task1 =>
-               {
-                  this.LayoutTo(new Rectangle(0, 0, this.WidthRequest, this.HeightRequest), 0, null)
-                     .ContinueWith(task2 =>
-                     {
-                        if (imageZoom != 1.0)
-                        {
-                           Device.BeginInvokeOnMainThread(async () =>
-                           { await this.ScrollToAsync((this.ScreenSize.Width / 2.0), (this.ScreenSize.Height / 2.0), false); });
-                        }
-                     })
-                     .ContinueWith(task3 =>
-                     {
-                        this.FadeTo(1, 250, Easing.SinIn);
-                     });
-               });
-            */
+            this.HeightRequest = Math.Round(this.HeightRequest, 0);
+            this.HeightRequest = Math.Round(this.HeightRequest, 0);
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
