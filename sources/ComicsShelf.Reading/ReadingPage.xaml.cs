@@ -1,30 +1,25 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Splash
+namespace ComicsShelf.Reading
 {
+
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class SplashPage : ContentPage
+   public partial class ReadingPage : ContentPage
    {
 
-      public SplashPage()
+      public ReadingPage()
       {
          InitializeComponent();
-         BindingContext = SplashExtentions.Instance;
+         BindingContext = ReadingExtentions.Instance;
       }
 
-      SplashVM Context => BindingContext as SplashVM;
+      ReadingVM Context => BindingContext as ReadingVM;
 
       protected override void OnAppearing()
       {
          Context?.OnAppearing();
          base.OnAppearing();
-      }
-
-      protected override void OnSizeAllocated(double width, double height)
-      {
-         base.OnSizeAllocated(width, height);
-         Context?.OnSizeAllocated(width, height);
       }
 
       protected override void OnDisappearing()

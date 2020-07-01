@@ -16,7 +16,6 @@ namespace ComicsShelf.Drive
          {
 
             // PARAMETERS
-            var extentions = new string[] { ".jpg", ".jpeg", ".png" };
             var filePath = $"{libraryItem.FolderPath}/{libraryItem.FileName}";
             var coverPath = $"{Helpers.Paths.CoversCache}/{libraryItem.EscapedID}.jpg";
 
@@ -33,7 +32,7 @@ namespace ComicsShelf.Drive
 
                      // FIRST ENTRY [should be the cover]
                      var coverEntry = fileArchive.Entries
-                        .Where(entry => extentions.Any(ext => entry.Name.EndsWith(ext, StringComparison.CurrentCultureIgnoreCase)))
+                        .Where(entry => ImageExtentions.Any(ext => entry.Name.EndsWith(ext, StringComparison.CurrentCultureIgnoreCase)))
                         .OrderBy(entry => entry.Name)
                         .Take(1)
                         .FirstOrDefault();

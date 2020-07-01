@@ -9,14 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
     <ProjectReference Include="..\ComicsShelf.Controls\ComicsShelf.Controls.csproj" />
     <ProjectReference Include="..\ComicsShelf.Engine\ComicsShelf.Engine.csproj" />
+    <ProjectReference Include="..\ComicsShelf.Reading\ComicsShelf.Reading.csproj" />
     <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.Helpers;
 using ComicsShelf.Observables;
+using ComicsShelf.Splash;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
@@ -17,7 +18,7 @@ namespace ComicsShelf.Home
          Sections = new ObservableList<SectionVM>();
          Sections.CollectionChanged += (sender, e) => { this.HasSections = this.Sections?.Count > 0; };
          Helpers.Notify.SectionsUpdate(sections => ApplySections(sections));
-         OpenCommand = new Command(async folder => await Open(folder));
+         OpenCommand = new Command(async folder => await OpenAsync(folder));
       }
 
       public string NO_LIBRARY_MESSAGE_TITLE => Translations.NO_LIBRARY_MESSAGE_TITLE;
@@ -45,17 +46,11 @@ namespace ComicsShelf.Home
          return base.OnAppearing();
       }
 
-      public override Task OnDisappearing()
-      {
-         return base.OnDisappearing();
-      }
-
       public Command OpenCommand { get; set; }
-      Task Open(object folder) => Shell.Current
-         .GoToAsync(GetNavigationState(folder as FolderVM));
+      Task OpenAsync(object folder) =>
+            Shell.Current.GoToAsync(GetSplashVM(folder as FolderVM));
 
-      ShellNavigationState GetNavigationState(FolderVM folder) =>
-         new ShellNavigationState($"splash?libraryID={folder?.FirstItem?.LibraryID}&fileID={folder?.FirstItem?.EscapedID}");
+      SplashVM GetSplashVM(FolderVM folder) => SplashVM.Create(folder?.FirstItem);
 
    }
 }

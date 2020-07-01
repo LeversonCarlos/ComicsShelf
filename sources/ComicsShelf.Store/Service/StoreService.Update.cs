@@ -31,7 +31,7 @@ namespace ComicsShelf.Store
                .ToArray();
             foreach (var currentItem in currentItems)
             {
-               var updateItem = itemList.Where(x => x.ID == currentItem.ID).FirstOrDefault();
+               var updateItem = await Helpers.Json.Deserialize<ItemVM>(await Helpers.Json.Serialize(itemList.Where(x => x.ID == currentItem.ID).FirstOrDefault()));
                if (forceUpdate || !Equals(currentItem, updateItem))
                {
                   if (!await Sync.SetItem(updateItem)) { return false; }

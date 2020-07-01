@@ -1,6 +1,8 @@
 ﻿using ComicsShelf.Observables;
+using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace ComicsShelf.ViewModels
@@ -45,7 +47,7 @@ namespace ComicsShelf.ViewModels
          {
             ReadingPage = 0;
             ReadingPercent = (value ? 1 : 0);
-            ReadingDate = (value ? DateTime.Now : DateTime.MinValue);
+            ReadingDate = (value ? DateTime.UtcNow : DateTime.MinValue);
             SetProperty(ref _Readed, value);
          }
       }
@@ -89,6 +91,7 @@ namespace ComicsShelf.ViewModels
 
    public static class ItemVMExtention
    {
+
       public static void SetData(this ItemVM itemVM, ItemVM data)
       {
          itemVM.Rating = data.Rating;
@@ -99,6 +102,9 @@ namespace ComicsShelf.ViewModels
          itemVM.Available = data.Available;
          itemVM.ClearDirty();
       }
+
+      public static string GetCachePath(this ItemVM itemVM) => $"{Helpers.Paths.FilesCache}/{itemVM.EscapedID}";
+
    }
 
 }
