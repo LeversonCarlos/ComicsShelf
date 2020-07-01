@@ -13,7 +13,7 @@ namespace ComicsShelf.Helpers
       public static double ScreenMargin { get; private set; }
 
       public static double ItemMargin { get; private set; }
-      public static short ItemsPerLine { get; private set; }
+      public static int ItemsPerLine { get; private set; }
 
       public static double DefaultHeight { get; private set; }
       public static double DefaultWidth { get; private set; }
