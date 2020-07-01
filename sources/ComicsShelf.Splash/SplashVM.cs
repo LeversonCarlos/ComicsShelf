@@ -1,5 +1,4 @@
 ﻿using ComicsShelf.Observables;
-using ComicsShelf.Reading;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
@@ -10,78 +9,39 @@ namespace ComicsShelf.Splash
 {
    public partial class SplashVM : BaseVM
    {
-
       IStoreService Store { get => DependencyService.Get<IStoreService>(); }
 
-      public SplashVM()
+      public SplashVM(ItemVM selectedItem, ItemVM[] editionsArray)
       {
+         IsBusy = true;
+         SelectedItem = selectedItem;
+         EditionsArray = editionsArray;
+         EditionsList = new ObservableList<ItemVM>();
+
          SelectItemCommand = new Command(async item => await SelectItemAsync(item));
          OpenCommand = new Command(async item => await OpenAsync());
       }
 
-      ItemVM _SelectedItem;
-      public ItemVM SelectedItem
-      {
-         get => _SelectedItem;
-         set => SetProperty(ref _SelectedItem, value);
-      }
-
-      public Command SelectItemCommand { get; set; }
-      Task SelectItemAsync(object item)
-      {
-         UpdateItemAsync();
-         this.SelectedItem = (item as ItemVM);
-         return Task.CompletedTask;
-      }
-
-      bool _IsOpening;
-      public bool IsOpening
-      {
-         get => _IsOpening;
-         set => SetProperty(ref _IsOpening, value);
-      }
-
-      public Command OpenCommand { get; set; }
-      async Task OpenAsync()
-      {
-         IsOpening = true;
-         var pagesExtraction = await Engine.PagesExtraction.Service.ExecuteAsync(this.SelectedItem);
-         if (pagesExtraction)
-         {
-            var pagesList = await Engine.PagesExtraction.Service.GetPagesAsync(this.SelectedItem);
-            await Shell.Current.GoToAsync(new ReadingVM(this.SelectedItem, pagesList));
-         }
-         IsOpening = false;
-      }
-
-      ShellNavigationState GetNavigationState(ItemVM item) =>
-         new ShellNavigationState($"reading?libraryID={item?.LibraryID}&fileID={item?.EscapedID}");
-
-      double _EditionsHeight;
-      public double EditionsHeight
-      {
-         get => _EditionsHeight;
-         set => SetProperty(ref _EditionsHeight, value);
-      }
-
-      private async void UpdateItemAsync()
-      {
-         if (this.SelectedItem?.IsDirty ?? false)
-         {
-            await Store.UpdateItemAsync(this.SelectedItem);
-         }
-      }
-
       public override Task OnAppearing()
       {
-         InitializeData();
+         Task.Run(() =>
+         {
+            EditionsList.ReplaceRange(EditionsArray);
+
+            var itemsPerLine = Helpers.Cover.ItemsPerLine;
+            var editionsRows = (int)Math.Ceiling((double)EditionsList.Count / (double)itemsPerLine);
+            EditionsHeight = (Helpers.Cover.DefaultHeight + (Helpers.Cover.ItemMargin * 2)) * editionsRows;
+
+            IsBusy = false;
+         });
          return base.OnAppearing();
       }
 
-      public override Task OnDisappearing()
+      public override async Task OnDisappearing()
       {
-         UpdateItemAsync();
-         return base.OnDisappearing();
+         if (SelectedItem?.IsDirty ?? false)
+            await Store.UpdateItemAsync(SelectedItem);
+         await base.OnDisappearing();
       }
 
    }
