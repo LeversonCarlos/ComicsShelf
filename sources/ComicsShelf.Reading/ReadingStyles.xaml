@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
+   x:Class="ComicsShelf.Reading.ReadingStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+      <styles:LabelStyles />
+      <styles:BaseStyles />
+   </ResourceDictionary.MergedDictionaries>
+
+   <Style TargetType="Label" x:Key="StatText" BasedOn="{StaticResource Default}">
+      <Setter Property="FontAttributes" Value="Bold" />
+      <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+   </Style>
+
+   <Style TargetType="ProgressBar" x:Key="StatProgress" BasedOn="{StaticResource ProgressBar}">
+      <Setter Property="HeightRequest" Value="5" />
+      <Setter Property="Margin" Value="0" />
+   </Style>
+
+</ResourceDictionary>

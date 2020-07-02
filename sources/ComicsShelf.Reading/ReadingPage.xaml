@@ -4,9 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
-   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
-   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
+   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"   
    xmlns:reading="clr-namespace:ComicsShelf.Reading"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
@@ -15,16 +13,7 @@
 
    <ContentPage.Resources>
       <converters:NotConverter x:Key="notConverter" />
-      <ResourceDictionary>
-         <ResourceDictionary.MergedDictionaries>
-            <styles:LightTheme />
-            <styles:LabelStyles />
-         </ResourceDictionary.MergedDictionaries>
-         <Style TargetType="Label" x:Key="StatText" BasedOn="{StaticResource Default}">
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
-         </Style>
-      </ResourceDictionary>
+      <ResourceDictionary Source="ReadingStyles.xaml" />
    </ContentPage.Resources>
 
    <ContentPage.Content>
@@ -49,9 +38,9 @@
 
          <reading:ReadingStats 
                WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}"   
-               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" 
-               BackgroundColor="{StaticResource StatsBackgroundColor}" Spacing="0" >
-            <ProgressBar Progress="{Binding Item.ReadingPercent}" HeightRequest="5" Margin="0" />
+               BackgroundColor="{StaticResource StatsBackgroundColor}" 
+               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" Spacing="0" >
+            <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
             <StackLayout Orientation="Horizontal" Padding="10">
                <Label Text="{Binding Item.FullText}" Style="{StaticResource StatText}" HorizontalOptions="StartAndExpand" />
                <Label Style="{StaticResource StatText}" >
