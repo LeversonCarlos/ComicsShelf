@@ -17,7 +17,7 @@
       <Setter Property="Margin" Value="0,10" />
       <Setter Property="ItemsLayout" Value="VerticalList" />
       <Setter Property="SelectionMode" Value="None" />
-      <Setter Property="ItemSizingStrategy" Value="MeasureFirstItem" />
+      <Setter Property="ItemSizingStrategy" Value="MeasureAllItems" />
    </Style>
 
    <Style TargetType="StackLayout" x:Key="Section">
@@ -44,7 +44,6 @@
    <Style TargetType="CollectionView" x:Key="Folders">
       <Setter Property="ItemsLayout" Value="HorizontalList" />
       <Setter Property="SelectionMode" Value="None" />
-      <Setter Property="HeightRequest" Value="{x:Static helpers:Cover.DefaultHeight}" />
    </Style>
 
    <Style TargetType="controls:CoverContainer">
