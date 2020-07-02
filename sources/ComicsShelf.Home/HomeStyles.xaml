@@ -14,21 +14,31 @@
    </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="CollectionView" x:Key="Sections">
-      <Setter Property="Margin" Value="{Static helpers:Cover.ScreenMargin}" />
+      <Setter Property="Margin" Value="0,10" />
       <Setter Property="ItemsLayout" Value="VerticalList" />
       <Setter Property="SelectionMode" Value="None" />
       <Setter Property="ItemSizingStrategy" Value="MeasureFirstItem" />
    </Style>
 
    <Style TargetType="StackLayout" x:Key="Section">
-      <Setter Property="Margin" Value="0,0,0,10" />
-      <Setter Property="Padding" Value="0" />
-      <Setter Property="Spacing" Value="10" />
+      <Setter Property="Margin" Value="0,5" />
+      <Setter Property="Spacing" Value="0" />
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="LibraryText">
+   <Style TargetType="StackLayout" x:Key="SectionTitle">
+      <Setter Property="Margin" Value="10,0" />
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="5" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="SectionTitleFolder">
       <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
-      <Setter Property="Opacity" Value="0.75" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="SectionTitleLibrary">
+      <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
+      <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+      <Setter Property="Opacity" Value="0.5" />
    </Style>
 
    <Style TargetType="CollectionView" x:Key="Folders">

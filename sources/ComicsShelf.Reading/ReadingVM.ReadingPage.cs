@@ -28,6 +28,9 @@ namespace ComicsShelf.Reading
             foreach (var page in PagesList)
                page.IsVisible = page.Index >= (value - 1) && page.Index <= (value + 1);
 
+            ScrollComplete = false;
+            IsSwipeEnabled = GetSwipeEnabled();
+
             if (Item.ReadingPercent >= (double)1)
             {
                Item.Readed = true;
