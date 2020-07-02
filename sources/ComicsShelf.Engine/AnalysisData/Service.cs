@@ -198,9 +198,10 @@ namespace ComicsShelf.Engine.AnalysisData
             if (sectionItems?.Length == 0) { return null; }
 
             var section = new SectionVM(Translations.ON_GOING_READING_TITLE, null);
+            section.SizeFactor = 1.8;
 
             foreach (var item in sectionItems)
-               section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item });
+               section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item, SizeFactor = 1.8 });
 
             return section;
          }
