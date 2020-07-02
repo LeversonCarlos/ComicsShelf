@@ -4,7 +4,6 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    x:Class="ComicsShelf.Base.Styles.LightTheme">
 
-   <Color x:Key="BackgroundColor">#FFF3E0</Color>
    <Color x:Key="PrimaryColor">#E65100</Color>
    <Color x:Key="SeparatorColor">#CFD8DC</Color>
 
@@ -15,6 +14,8 @@
    <Color x:Key="TitleColor">#E65100</Color>
    <Color x:Key="SubtitleColor">#616161</Color>
    <Color x:Key="DetailsColor">#9E9E9E</Color>
+
+   <Color x:Key="StatsBackgroundColor">#FFF3E0</Color>
 
    <Color x:Key="CoverTextBackColor">#37474F</Color>
    <Color x:Key="CoverTextForeColor">#F5F5F5</Color>
