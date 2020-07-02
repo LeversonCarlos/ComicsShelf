@@ -37,13 +37,15 @@
                         <Label Text="{Binding Text}" Style="{StaticResource SectionTitleFolder}" />
                         <Label Text="{Binding Library.Description}" Style="{StaticResource SectionTitleLibrary}" />
                      </StackLayout>
-                     <CollectionView ItemsSource="{Binding Folders}" Style="{StaticResource Folders}">
+                     <CollectionView ItemsSource="{Binding Folders}" HeightRequest="{Binding SizeHeight}" Style="{StaticResource Folders}">
                         <CollectionView.ItemTemplate>
                            <DataTemplate>
 
-                              <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }">
-                                 <controls:CoverImage ImageSource="{Binding FirstItem.CoverPath}" />
-                                 <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
+                              <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
+                                 <controls:CoverImage 
+                                    ImageSource="{Binding FirstItem.CoverPath}" 
+                                    HeightRequest="{Binding SizeHeight}" WidthRequest="{Binding SizeWidth}" />
+                                 <Label Text="{Binding Text}" WidthRequest="{Binding SizeWidth}" Style="{StaticResource CoverText}" />
                               </controls:CoverContainer>
 
                            </DataTemplate>
