@@ -21,7 +21,7 @@
             </Label.Margin>
          </Label>
 
-         <Grid VerticalOptions="CenterAndExpand">
+         <Grid VerticalOptions="CenterAndExpand" WidthRequest="{Static helpers:Cover.SplashWidth}" HorizontalOptions="Center" >
             <Grid.Triggers>
                <DataTrigger TargetType="Grid" Binding="{Binding IsOpening}" Value="True">
                   <DataTrigger.EnterActions>
@@ -37,7 +37,7 @@
             <Grid.RowDefinitions>
                <RowDefinition Height="{Static helpers:Cover.SplashHeight}" />
             </Grid.RowDefinitions>
-            <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" />
+            <controls:CoverImage ImageSource="{Binding SelectedItem.CoverPath}" Style="{StaticResource SplashCover}" />
          </Grid>
 
       </StackLayout>

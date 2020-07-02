@@ -4,47 +4,60 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
+   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"   
    xmlns:reading="clr-namespace:ComicsShelf.Reading"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
    x:Name="readingPage"
    x:Class="ComicsShelf.Reading.ReadingPage">
+
    <ContentPage.Resources>
       <converters:NotConverter x:Key="notConverter" />
+      <ResourceDictionary Source="ReadingStyles.xaml" />
    </ContentPage.Resources>
+
    <ContentPage.Content>
-      <CarouselView 
-         ItemsSource="{Binding PagesList}" Position="{Binding ReadingPage}" 
-         IsScrollAnimated="{Binding IsBusy, Converter={StaticResource notConverter}}" IsSwipeEnabled="{Binding IsSwipeEnabled}" 
-         AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
-         <CarouselView.ItemTemplate>
-            <DataTemplate>
+      <AbsoluteLayout>
+         <CarouselView 
+               ItemsSource="{Binding PagesList}" Position="{Binding ReadingPage}" 
+               IsScrollAnimated="{Binding IsBusy, Converter={StaticResource notConverter}}" IsSwipeEnabled="{Binding IsSwipeEnabled}" 
+               AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+            <CarouselView.ItemTemplate>
+               <DataTemplate>
 
-               <AbsoluteLayout>
-
-                  <ScrollView Orientation="Both" Scrolled="ScrollView_Scrolled" 
-                              AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                  <ScrollView Orientation="Both" Scrolled="ScrollView_Scrolled" >
                      <reading:ReadingImage 
                         ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding PageSize}" 
                         ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference readingPage}}"
                         />
                   </ScrollView>
 
-                  <StackLayout Spacing="0" WidthRequest="{Binding BindingContext.ScreenSize.Width, Source={x:Reference readingPage}}" 
-                               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" 
-                               BackgroundColor="Gainsboro" Opacity="0.75" >
-                     <ProgressBar Progress="{Binding BindingContext.Item.ReadingPercent, Source={x:Reference readingPage}}" HeightRequest="5" Margin="0" />
-                     <StackLayout Orientation="Horizontal" Padding="10,0">
-                        <Label Text="{Binding BindingContext.Item.FullText, Source={x:Reference readingPage}}" HorizontalOptions="StartAndExpand" />
-                        <Label Text="{Binding BindingContext.ReadingPage, Source={x:Reference readingPage}}" />
-                     </StackLayout>
-                  </StackLayout>
+               </DataTemplate>
+            </CarouselView.ItemTemplate>
+         </CarouselView>
 
-               </AbsoluteLayout>
+         <reading:ReadingStats 
+               WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}"   
+               BackgroundColor="{StaticResource StatsBackgroundColor}" 
+               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" Spacing="0" >
+            <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
+            <StackLayout Orientation="Horizontal" Padding="10">
+               <Label Text="{Binding Item.FullText}" Style="{StaticResource StatText}" HorizontalOptions="StartAndExpand" />
+               <Label Style="{StaticResource StatText}" >
+                  <Label.FormattedText>
+                     <FormattedString>
+                        <FormattedString.Spans>
+                           <Span Text="{Binding ReadingPage}" />
+                           <Span>/</Span>
+                           <Span Text="{Binding PagesList.Count}"/>
+                        </FormattedString.Spans>
+                     </FormattedString>
+                  </Label.FormattedText>
+               </Label>
+            </StackLayout>
+         </reading:ReadingStats>
 
-            </DataTemplate>
-         </CarouselView.ItemTemplate>
-      </CarouselView>
+      </AbsoluteLayout>
    </ContentPage.Content>
+
 </ContentPage>

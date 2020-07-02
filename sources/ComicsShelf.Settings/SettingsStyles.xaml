@@ -26,7 +26,8 @@
       <Setter Property="HeightRequest" Value="60" />
    </Style>
 
-   <Style TargetType="ProgressBar">
+   <Style TargetType="ProgressBar" x:Key="Settings_Library_Progress" BasedOn="{StaticResource ProgressBar}">
+      <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
       <Setter Property="Opacity" Value="0.3" />
    </Style>
 

@@ -8,7 +8,7 @@ namespace ComicsShelf.Controls
       public CoverImage()
       {
 
-         Image = new Image { };
+         Image = new Image { Aspect = Aspect.Fill };
          // image.SetBinding(Image.SourceProperty, "ImageSource");
          Children.Add(Image);
 

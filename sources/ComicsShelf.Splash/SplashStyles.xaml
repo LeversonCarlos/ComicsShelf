@@ -57,4 +57,9 @@
       <Setter Property="SelectionMode" Value="None" />
    </Style>
 
+   <Style TargetType="controls:CoverImage" >
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
+      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
+   </Style>
+
 </ResourceDictionary>
