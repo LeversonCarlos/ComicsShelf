@@ -47,8 +47,11 @@ namespace ComicsShelf.Home
       }
 
       public Command OpenCommand { get; set; }
-      Task OpenAsync(object folder) =>
-            Shell.Current.GoToAsync(GetSplashVM(folder as FolderVM));
+      async Task OpenAsync(object folder)
+      {
+         if (folder == null) { return; }
+         await Shell.Current.GoToAsync(GetSplashVM(folder as FolderVM));
+      }
 
       SplashVM GetSplashVM(FolderVM folder) => SplashVM.Create(folder?.FirstItem);
 
