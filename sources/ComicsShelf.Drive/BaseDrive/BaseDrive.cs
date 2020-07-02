@@ -1,7 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
-using Xamarin.CloudDrive.Connector.Common;
-using Xamarin.CloudDrive.Connector.OneDrive;
+using Xamarin.CloudDrive.Connector;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Drive
@@ -12,7 +11,7 @@ namespace ComicsShelf.Drive
 
       protected string[] ImageExtentions => new string[] { ".jpg", ".jpeg", ".png" };
 
-      public ICloudDriveService CloudService { get { return DependencyProvider.Get<T>(); } }
+      public ICloudDriveService CloudService { get { return ImplementationProvider.Get<T>(); } }
 
       public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
 

@@ -1,4 +1,4 @@
-﻿using Xamarin.CloudDrive.Connector.LocalDrive;
+﻿using Xamarin.CloudDrive.Connector;
 
 namespace ComicsShelf.Drive
 {
