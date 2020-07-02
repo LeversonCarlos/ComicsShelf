@@ -16,8 +16,8 @@
       <Setter Property="HeightRequest" Value="18" />
       <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
       <Setter Property="FontSize" Value="Caption" />
-      <Setter Property="TextColor" Value="{StaticResource CoverTextForeColor}" />
-      <Setter Property="BackgroundColor" Value="{StaticResource CoverTextBackColor}" />
+      <Setter Property="TextColor" Value="{StaticResource CoverOverlayForeColor}" />
+      <Setter Property="BackgroundColor" Value="{StaticResource CoverOverlayBackColor}" />
       <Setter Property="LineBreakMode" Value="MiddleTruncation" />
       <Setter Property="Opacity" Value="0.9" />
       <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />

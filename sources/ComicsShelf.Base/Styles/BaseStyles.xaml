@@ -10,8 +10,10 @@
    </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="ProgressBar" x:Key="ProgressBar">
-      <Setter Property="HeightRequest" Value="2" />
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="HeightRequest" Value="5" />
       <Setter Property="ProgressColor" Value="{StaticResource PrimaryColor}" />
+      <Setter Property="BackgroundColor" Value="{StaticResource CoverOverlayBackColor}" />
    </Style>
 
    <Style TargetType="BoxView" x:Key="Separator">
