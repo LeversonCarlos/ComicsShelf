@@ -8,8 +8,6 @@ namespace ComicsShelf.Controls
 
       public CoverContainer()
       {
-         WidthRequest = Helpers.Cover.DefaultWidth;
-         HeightRequest = Helpers.Cover.DefaultHeight;
 
          GestureRecognizers.Add(new TapGestureRecognizer
          {
