@@ -9,6 +9,7 @@ namespace ComicsShelf.Reading
 {
    public partial class ReadingVM : BaseVM
    {
+      IStoreService Store { get => DependencyService.Get<IStoreService>(); }
 
       public ReadingVM(ItemVM item, PageVM[] pagesList)
       {
@@ -16,12 +17,8 @@ namespace ComicsShelf.Reading
          Item = item;
          PagesList = new ObservableList<PageVM>();
          PagesArray = pagesList.Union(new PageVM[] { new PageVM { } }).ToArray();
-
-         // pagesList = pagesList.Union(new PageVM[] { new PageVM { } }).ToArray();
-         // ReadingPage = Item.ReadingPage.HasValue ? Item.ReadingPage.Value : (short)0;
       }
 
-      IStoreService Store { get => DependencyService.Get<IStoreService>(); }
       readonly PageVM[] PagesArray;
       public ItemVM Item { get; }
       public ObservableList<PageVM> PagesList { get; }
