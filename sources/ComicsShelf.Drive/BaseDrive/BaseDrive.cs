@@ -9,6 +9,8 @@ namespace ComicsShelf.Drive
    public abstract partial class BaseDrive<T> : BaseDrive, IDrive where T : ICloudDriveService
    {
 
+      public virtual enLibraryType LibraryType => throw new NotImplementedException();
+
       protected string[] ImageExtentions => new string[] { ".jpg", ".jpeg", ".png" };
 
       public ICloudDriveService CloudService { get { return ImplementationProvider.Get<T>(); } }
