@@ -13,6 +13,7 @@
       <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.19-alpha" />
       <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.19-alpha" />
       <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.19-alpha" />
+      <PackageReference Include="HttpZipStream" Version="0.4.3" />
    </ItemGroup>
 
    <ItemGroup>
