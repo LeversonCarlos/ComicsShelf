@@ -3,12 +3,14 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Controls
 {
-   public class CoverContainer : AbsoluteLayout
+   public class CoverContainer : Grid
    {
 
       public CoverContainer()
       {
-
+         RowDefinitions.Add(new RowDefinition { Height = 4 });
+         RowDefinitions.Add(new RowDefinition { });
+         RowDefinitions.Add(new RowDefinition { Height = 18 });
          GestureRecognizers.Add(new TapGestureRecognizer
          {
             Command = OpenTransition,
