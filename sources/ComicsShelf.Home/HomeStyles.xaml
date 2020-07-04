@@ -2,7 +2,6 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
    xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
    x:Class="ComicsShelf.Home.HomeStyles">
@@ -52,7 +51,7 @@
    </Style>
 
    <Style TargetType="controls:CoverContainer">
-      <Setter Property="Margin" Value="5,0" />
+      <Setter Property="Padding" Value="5,0" />
    </Style>
 
 </ResourceDictionary>
