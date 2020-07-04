@@ -8,8 +8,7 @@ namespace ComicsShelf.Controls
       public CoverImage()
       {
 
-         Image = new Image { Aspect = Aspect.Fill };
-         // image.SetBinding(Image.SourceProperty, "ImageSource");
+         Image = new Image();
          Children.Add(Image);
 
          AbsoluteLayout.SetLayoutFlags(this, AbsoluteLayoutFlags.All);
@@ -26,8 +25,19 @@ namespace ComicsShelf.Controls
          get { return (ImageSource)GetValue(ImageSourceProperty); }
          set { SetValue(ImageSourceProperty, value); }
       }
-      private static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue)
-      { (bindable as CoverImage).Image.Source = (ImageSource)newValue; }
+      private static void OnImageSourceChanged(BindableObject bindable, object oldValue, object newValue) =>
+         (bindable as CoverImage).Image.Source = (ImageSource)newValue;
+
+      public static readonly BindableProperty ImageAspectProperty =
+         BindableProperty.Create("ImageAspect", typeof(Aspect), typeof(CoverImage), Aspect.AspectFit,
+         propertyChanged: OnImageAspectChanged);
+      public Aspect ImageAspect
+      {
+         get { return (Aspect)GetValue(ImageAspectProperty); }
+         set { SetValue(ImageAspectProperty, value); }
+      }
+      private static void OnImageAspectChanged(BindableObject bindable, object oldValue, object newValue) =>
+         (bindable as CoverImage).Image.Aspect = (Aspect)newValue;
 
    }
 }
