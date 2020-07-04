@@ -11,9 +11,9 @@
 
    <Style TargetType="ProgressBar" x:Key="ProgressBar">
       <Setter Property="Margin" Value="0" />
-      <Setter Property="HeightRequest" Value="5" />
-      <Setter Property="ProgressColor" Value="{StaticResource PrimaryColor}" />
-      <Setter Property="BackgroundColor" Value="{StaticResource CoverOverlayBackColor}" />
+      <Setter Property="HeightRequest" Value="4" />
+      <Setter Property="ProgressColor" Value="{StaticResource OverlayBackgroundColor}" />
+      <Setter Property="BackgroundColor" Value="{StaticResource OverlayForegroundColor}" />
    </Style>
 
    <Style TargetType="BoxView" x:Key="Separator">

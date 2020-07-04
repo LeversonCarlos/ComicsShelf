@@ -4,7 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base" 
    xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base" 
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
    x:Class="ComicsShelf.Splash.SplashStyles">
 
    <ResourceDictionary.MergedDictionaries>
@@ -55,11 +55,6 @@
 
    <Style TargetType="CollectionView" x:Key="EditionsCollection">
       <Setter Property="SelectionMode" Value="None" />
-   </Style>
-
-   <Style TargetType="controls:CoverImage" >
-      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
-      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
    </Style>
 
 </ResourceDictionary>

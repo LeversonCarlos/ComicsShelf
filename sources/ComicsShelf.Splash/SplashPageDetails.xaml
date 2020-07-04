@@ -6,7 +6,7 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
    xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
    xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base" 
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
    mc:Ignorable="d" 
    x:Class="ComicsShelf.Splash.SplashPageDetails">
    <ContentView.Resources>

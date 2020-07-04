@@ -8,7 +8,7 @@
    xmlns:reading="clr-namespace:ComicsShelf.Reading"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
-   x:Name="readingPage"
+   x:Name="readingPage" BackgroundColor="Black"
    x:Class="ComicsShelf.Reading.ReadingPage">
 
    <ContentPage.Resources>
@@ -26,7 +26,7 @@
                <DataTemplate>
 
                   <ScrollView Orientation="Both" Scrolled="ScrollView_Scrolled" >
-                     <reading:ReadingImage 
+                     <reading:ReadingImage BackgroundColor="Black" 
                         ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding PageSize}" 
                         ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference readingPage}}"
                         />
@@ -38,7 +38,7 @@
 
          <reading:ReadingStats 
                WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}"   
-               BackgroundColor="{StaticResource StatsBackgroundColor}" 
+               BackgroundColor="{StaticResource OverlayBackgroundColor}" 
                AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" Spacing="0" >
             <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
             <StackLayout Orientation="Horizontal" Padding="10">

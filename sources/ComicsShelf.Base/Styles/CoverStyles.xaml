@@ -3,7 +3,8 @@
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:styles="clr-namespace:ComicsShelf.Base.Styles"
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
    x:Class="ComicsShelf.Base.Styles.CoverStyles">
 
    <ResourceDictionary.MergedDictionaries>
@@ -11,23 +12,30 @@
       <styles:BaseStyles />
    </ResourceDictionary.MergedDictionaries>
 
+   <Style TargetType="controls:CoverImage">
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
+      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
+      <Setter Property="Grid.Row" Value="0" />
+      <Setter Property="Grid.RowSpan" Value="3" />
+   </Style>
+
+   <Style TargetType="BoxView" x:Key="CoverOverlay">
+      <Setter Property="BackgroundColor" Value="{StaticResource OverlayBackgroundColor}" />
+      <Setter Property="Grid.Row" Value="2" />
+      <Setter Property="Opacity" Value="0.75" />
+   </Style>
+
    <Style TargetType="Label" x:Key="CoverText">
       <Setter Property="Padding" Value="2,0" />
-      <Setter Property="HeightRequest" Value="18" />
-      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
       <Setter Property="FontSize" Value="Caption" />
-      <Setter Property="TextColor" Value="{StaticResource CoverOverlayForeColor}" />
-      <Setter Property="BackgroundColor" Value="{StaticResource CoverOverlayBackColor}" />
+      <Setter Property="FontAttributes" Value="Bold" />
+      <Setter Property="TextColor" Value="{StaticResource OverlayForegroundColor}" />
       <Setter Property="LineBreakMode" Value="MiddleTruncation" />
-      <Setter Property="Opacity" Value="0.9" />
-      <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
-      <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,1" />
+      <Setter Property="Grid.Row" Value="2" />
    </Style>
 
    <Style TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar}" x:Key="CoverProgress">
-      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
-      <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
-      <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,0" />
+      <Setter Property="Grid.Row" Value="0" />
    </Style>
 
 </ResourceDictionary>
