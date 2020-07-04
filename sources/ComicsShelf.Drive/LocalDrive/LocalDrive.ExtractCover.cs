@@ -57,7 +57,7 @@ namespace ComicsShelf.Drive
             libraryItem.CoverPath = coverPath;
             return true;
          }
-         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
       }
 
    }

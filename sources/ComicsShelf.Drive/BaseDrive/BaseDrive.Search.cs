@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.CloudDrive.Connector.Common;
+using Xamarin.CloudDrive.Connector;
 
 namespace ComicsShelf.Drive
 {
@@ -24,6 +24,7 @@ namespace ComicsShelf.Drive
 
             // SEARCH FOR FILES ON THE DIRECTORY
             var fileList = await this.CloudService.SearchFiles(root, "*.cbz", 10000);
+            if (fileList == null) return new ItemVM[] { };
 
             // CONVERT
             var rootPath = root.Path.Replace("/ /", "/");

@@ -22,7 +22,8 @@ namespace ComicsShelf.Drive
                ID = driveItem.ID,
                Description = driveItem.Name,
                Path = driveItem.Path,
-               KeyValues = driveItem.KeyValues
+               KeyValues = driveItem.KeyValues,
+               Type = this.LibraryType
             };
 
             return library;

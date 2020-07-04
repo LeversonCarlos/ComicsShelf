@@ -197,11 +197,12 @@ namespace ComicsShelf.Engine.AnalysisData
                .ToArray();
             if (sectionItems?.Length == 0) { return null; }
 
+            var sectionFactor = Device.Idiom == TargetIdiom.Phone ? 1.6 : 1.8;
             var section = new SectionVM(Translations.ON_GOING_READING_TITLE, null);
-            section.SizeFactor = 1.8;
+            section.SizeFactor = sectionFactor;
 
             foreach (var item in sectionItems)
-               section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item, SizeFactor = 1.8 });
+               section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item, SizeFactor = sectionFactor });
 
             return section;
          }
