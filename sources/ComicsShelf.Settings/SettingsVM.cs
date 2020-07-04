@@ -1,9 +1,11 @@
 ﻿using ComicsShelf.Observables;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Settings
 {
-   public class SettingsVM : BaseVM
+   public partial class SettingsVM : BaseVM
    {
 
       public List<LibrariesSetting> LibraryTypes { get; }
@@ -15,6 +17,13 @@ namespace ComicsShelf.Settings
             new LibrariesSetting(ViewModels.enLibraryType.LocalDrive),
             new LibrariesSetting(ViewModels.enLibraryType.OneDrive)
          };
+         ClearCacheCommand = new Command(async () => await ClearCache());
+      }
+
+      public override Task OnAppearing()
+      {
+         LoadCacheSize();
+         return base.OnAppearing();
       }
 
    }
