@@ -79,6 +79,42 @@ namespace ComicsShelf.Settings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click to clear your local cache.
+        /// </summary>
+        internal static string LOCAL_CACHE_CLEAR_COMMAND {
+            get {
+                return ResourceManager.GetString("LOCAL_CACHE_CLEAR_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to clear your local cache ?.
+        /// </summary>
+        internal static string LOCAL_CACHE_CLEAR_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("LOCAL_CACHE_CLEAR_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOCAL CACHE.
+        /// </summary>
+        internal static string LOCAL_CACHE_TITLE {
+            get {
+                return ResourceManager.GetString("LOCAL_CACHE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to megas.
+        /// </summary>
+        internal static string LOCAL_CACHE_UNITS {
+            get {
+                return ResourceManager.GetString("LOCAL_CACHE_UNITS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOCAL DRIVE LIBRARIES.
         /// </summary>
         internal static string LOCAL_DRIVE_LIBRARIES_TITLE {

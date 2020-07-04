@@ -1,7 +1,5 @@
 ﻿using ComicsShelf.Helpers;
-using ComicsShelf.Observables;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -42,7 +40,7 @@ namespace ComicsShelf.Settings
       {
          try
          {
-            if (!await Helpers.Message.Confirm("Clear Confirm")) { return; }
+            if (!await Helpers.Message.Confirm(Strings.LOCAL_CACHE_CLEAR_CONFIRMATION)) { return; }
             IsBusy = true;
 
             var filesList = System.IO.Directory.GetFiles(Helpers.Paths.FilesCache, "*.*", System.IO.SearchOption.AllDirectories);
