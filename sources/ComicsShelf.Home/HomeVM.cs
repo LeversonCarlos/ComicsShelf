@@ -50,10 +50,12 @@ namespace ComicsShelf.Home
       async Task OpenAsync(object folder)
       {
          if (folder == null) { return; }
-         await Shell.Current.GoToAsync(GetSplashVM(folder as FolderVM));
+         var viewModel = await GetSplashVM(folder as FolderVM);
+         await Shell.Current.GoToAsync(viewModel);
       }
 
-      SplashVM GetSplashVM(FolderVM folder) => SplashVM.Create(folder?.FirstItem);
+      Task<SplashVM> GetSplashVM(FolderVM folder) => 
+         Task.FromResult(SplashVM.Create(folder?.FirstItem));
 
    }
 }
