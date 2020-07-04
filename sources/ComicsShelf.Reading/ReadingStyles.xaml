@@ -13,12 +13,11 @@
 
    <Style TargetType="Label" x:Key="StatText" BasedOn="{StaticResource Default}">
       <Setter Property="FontAttributes" Value="Bold" />
-      <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+      <Setter Property="TextColor" Value="White" />
    </Style>
 
-   <Style TargetType="ProgressBar" x:Key="StatProgress" BasedOn="{StaticResource ProgressBar}">
+   <Style TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar}" x:Key="StatProgress" >
       <Setter Property="HeightRequest" Value="5" />
-      <Setter Property="Margin" Value="0" />
    </Style>
 
 </ResourceDictionary>

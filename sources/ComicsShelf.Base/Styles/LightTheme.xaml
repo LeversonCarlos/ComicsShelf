@@ -15,9 +15,7 @@
    <Color x:Key="SubtitleColor">#616161</Color>
    <Color x:Key="DetailsColor">#9E9E9E</Color>
 
-   <Color x:Key="StatsBackgroundColor">#FFF3E0</Color>
-
-   <Color x:Key="CoverOverlayBackColor">#78909C</Color>
-   <Color x:Key="CoverOverlayForeColor">#F5F5F5</Color>
+   <Color x:Key="OverlayForegroundColor">#FAFAFA</Color>
+   <Color x:Key="OverlayBackgroundColor">#FB8C00</Color>
 
 </ResourceDictionary>

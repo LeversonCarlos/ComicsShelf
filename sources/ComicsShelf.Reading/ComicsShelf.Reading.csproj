@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
-    <ProjectReference Include="..\ComicsShelf.Controls\ComicsShelf.Controls.csproj" />
     <ProjectReference Include="..\ComicsShelf.Engine\ComicsShelf.Engine.csproj" />
     <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
   </ItemGroup>

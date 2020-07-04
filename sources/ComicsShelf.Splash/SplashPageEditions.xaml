@@ -5,8 +5,8 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
    xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
    mc:Ignorable="d" 
    x:Name="editionsView" 
    x:Class="ComicsShelf.Splash.SplashPageEditions">
@@ -37,16 +37,17 @@
 
             <Label Text="{Binding EditionsTitle}" Style="{StaticResource Large}" />
 
-            <CollectionView ItemsSource="{Binding EditionsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}">
+            <CollectionView ItemsSource="{Binding EditionsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" Margin="5">
                <CollectionView.ItemsLayout>
-                  <GridItemsLayout Orientation="Vertical" Span="{Static helpers:Cover.ItemsPerLine}" VerticalItemSpacing="0" />
+                  <GridItemsLayout Orientation="Vertical" Span="{Static helpers:Cover.ItemsPerLine}" VerticalItemSpacing="5" HorizontalItemSpacing="5" />
                </CollectionView.ItemsLayout>
                <CollectionView.ItemTemplate>
                   <DataTemplate>
 
-                     <controls:CoverContainer Margin="0" Padding="5" OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference editionsView} }">
-                        <controls:CoverImage ImageSource="{Binding CoverPath}" />
+                     <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference editionsView} }">
+                        <controls:CoverImage ImageSource="{Binding CoverPath}" ImageAspect="AspectFill" />
                         <ProgressBar Progress="{Binding ReadingPercent}" Style="{StaticResource CoverProgress}" />
+                        <BoxView Style="{StaticResource CoverOverlay}" />
                         <Label Text="{Binding ShortText}" Style="{StaticResource CoverText}" />
                      </controls:CoverContainer>
 

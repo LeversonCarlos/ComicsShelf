@@ -6,7 +6,7 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
    xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base" 
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
    mc:Ignorable="d" 
    x:Class="ComicsShelf.Splash.SplashPageCover">
    <ContentView.Resources>
@@ -15,7 +15,7 @@
    <ContentView.Content>
       <StackLayout Style="{StaticResource Main}">
 
-         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}">
+         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" LineBreakMode="MiddleTruncation">
             <Label.Margin>
                <OnIdiom x:TypeArguments="Thickness" Default="0,10" Tablet="0,20" />
             </Label.Margin>

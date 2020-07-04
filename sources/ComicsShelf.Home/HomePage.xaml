@@ -6,7 +6,7 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Controls"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
    mc:Ignorable="d"
    x:Class="ComicsShelf.Home.HomePage"
    x:Name="homePage"
@@ -37,15 +37,19 @@
                         <Label Text="{Binding Text}" Style="{StaticResource SectionTitleFolder}" />
                         <Label Text="{Binding Library.Description}" Style="{StaticResource SectionTitleLibrary}" />
                      </StackLayout>
-                     <CollectionView ItemsSource="{Binding Folders}" HeightRequest="{Binding SizeHeight}" Style="{StaticResource Folders}">
+                     <CollectionView ItemsSource="{Binding Folders}" HeightRequest="{Binding SizeHeight}" Style="{StaticResource Folders}" >
                         <CollectionView.ItemTemplate>
                            <DataTemplate>
 
-                              <controls:CoverContainer OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" >
+                              <controls:CoverContainer 
+                                    OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homePage} }" 
+                                    WidthRequest="{Binding SizeWidth}" >
                                  <controls:CoverImage 
                                     ImageSource="{Binding FirstItem.CoverPath}" 
-                                    HeightRequest="{Binding SizeHeight}" WidthRequest="{Binding SizeWidth}" />
-                                 <Label Text="{Binding Text}" WidthRequest="{Binding SizeWidth}" Style="{StaticResource CoverText}" />
+                                    HeightRequest="{Binding SizeHeight}" WidthRequest="{Binding SizeWidth}" 
+                                    ImageAspect="Fill" />
+                                 <BoxView Style="{StaticResource CoverOverlay}" />
+                                 <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
                               </controls:CoverContainer>
 
                            </DataTemplate>
