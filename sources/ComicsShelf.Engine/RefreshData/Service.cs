@@ -59,6 +59,9 @@ namespace ComicsShelf.Engine.RefreshData
             if (inactiveItems.Count == 0 && newItems.Count == 0)
             { Helpers.Notify.Message(library, ""); }
 
+            // ANALYSE LEGACY SETTINGS
+            await LegacySettings.Service.Execute(library);
+
             // NOTIFY THAT LIBRARY FILES WAS UPDATED 
             // Notify.Result(library, store.GetLibraryItems(library));
 
