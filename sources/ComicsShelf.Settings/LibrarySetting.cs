@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Settings
 {
-   public class LibrarySetting : ObservableObject, IDisposable
+   public class LibrarySetting : ObservableObject
    {
 
       public LibraryVM Library { get; }
@@ -63,7 +63,7 @@ namespace ComicsShelf.Settings
          await DependencyService.Get<IStoreService>().RemoveLibraryAsync(Library);
       }
 
-      public void Dispose()
+      public override void Dispose()
       {
          Helpers.Notify.MessageUnsubscribe(Library);
          Helpers.Notify.ProgressUnsubscribe(Library);

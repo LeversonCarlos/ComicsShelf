@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace ComicsShelf.Observables
 {
-   public class ObservableObject : INotifyPropertyChanged
+   public class ObservableObject : INotifyPropertyChanged, IDisposable
    {
 
       public ObservableObject()
@@ -40,5 +40,6 @@ namespace ComicsShelf.Observables
          changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
 
+      public virtual void Dispose() { }
    }
 }
