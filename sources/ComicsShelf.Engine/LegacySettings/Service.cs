@@ -38,12 +38,17 @@ namespace ComicsShelf.Engine.LegacySettings
                var libraryItem = libraryItems.Where(x => x.ID == legacyItem.Key).FirstOrDefault();
                if (libraryItem == null) continue;
 
-               libraryItem.Rating = legacyItem.Rating;
-               libraryItem.Readed = legacyItem.Readed;
-               libraryItem.ReadingDate = legacyItem.ReadingDate;
-               libraryItem.ReadingPage = legacyItem.ReadingPage;
-               libraryItem.ReadingPercent = legacyItem.ReadingPercent;
-               changedIDs.Add(libraryItem.ID);
+               if (legacyItem.Rating != 0)
+                  libraryItem.Rating = (short)(legacyItem.Rating > 3 ? 1 : -1);
+               if (legacyItem.ReadingDate != DateTime.MinValue)
+               {
+                  libraryItem.Readed = legacyItem.Readed;
+                  libraryItem.ReadingDate = legacyItem.ReadingDate.ToUniversalTime();
+                  libraryItem.ReadingPage = legacyItem.ReadingPage;
+                  libraryItem.ReadingPercent = legacyItem.ReadingPercent;
+               }
+               if (libraryItem.IsDirty)
+                  changedIDs.Add(libraryItem.ID);
             }
 
             // SAVE UPDATED ITEMS
@@ -51,11 +56,12 @@ namespace ComicsShelf.Engine.LegacySettings
 
             // MARK ALREADY IMPORTED LEGACY SETTINGS
             if (library.KeyValues == null) library.KeyValues = new Dictionary<string, string>();
+            if (library.KeyValues?.ContainsKey("ImportedLegacy") ?? false) library.KeyValues.Remove("ImportedLegacy");
             library.KeyValues.Add("ImportedLegacy", DateTime.UtcNow.ToString());
             await store.UpdateLibraryAsync(library);
 
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while importing legacy settings: {ex.Message}"); }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
          finally { Helpers.Insights.TrackMetric($"Legacy Settings", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 

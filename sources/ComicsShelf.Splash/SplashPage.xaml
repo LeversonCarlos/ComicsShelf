@@ -17,8 +17,8 @@
    <ContentPage.Content>
       <AbsoluteLayout >
 
-         <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.15" BackgroundColor="{StaticResource PrimaryColor}"></BoxView>
-         <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFill" Opacity="0.10" Source="{Binding SelectedItem.CoverPath}"></Image>
+         <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.05" BackgroundColor="{StaticResource PrimaryColor}"></BoxView>
+         <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Aspect="AspectFill" Opacity="0.05" Source="{Binding SelectedItem.CoverPath}"></Image>
          <ScrollView Orientation="Vertical" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <StackLayout Style="{StaticResource Main}">
 

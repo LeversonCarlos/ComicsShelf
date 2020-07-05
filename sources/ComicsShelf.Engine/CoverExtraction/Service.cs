@@ -122,6 +122,7 @@ namespace ComicsShelf.Engine.CoverExtraction
             return true;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
+         finally { Notify.AppSleepUnsubscribe(); }
       }
 
       static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);

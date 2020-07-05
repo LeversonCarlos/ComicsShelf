@@ -57,5 +57,11 @@ namespace ComicsShelf.Home
       Task<SplashVM> GetSplashVM(FolderVM folder) => 
          Task.FromResult(SplashVM.Create(folder?.FirstItem));
 
+      public override void Dispose()
+      {
+         Notify.SectionsUpdateUnsubscribe();
+         base.Dispose();
+      }
+
    }
 }

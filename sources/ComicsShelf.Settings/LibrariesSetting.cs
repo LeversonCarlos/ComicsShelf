@@ -57,5 +57,12 @@ namespace ComicsShelf.Settings
          Libraries.Remove(libraryItem);
       }
 
+      public override void Dispose()
+      {
+         Helpers.Notify.LibraryAddUnsubscribe();
+         Helpers.Notify.LibraryRemoveUnsubscribe();
+         base.Dispose();
+      }
+
    }
 }

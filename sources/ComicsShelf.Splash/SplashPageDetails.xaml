@@ -38,13 +38,13 @@
          </FlexLayout.Padding>
 
          <StackLayout >
-            <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
+            <controls:RatingView Rating="{Binding Rating}" />
          </StackLayout>
          <StackLayout Spacing="0">
-            <Switch IsToggled="{Binding SelectedItem.Readed}"></Switch>
+            <Switch IsToggled="{Binding Readed}"></Switch>
             <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
          </StackLayout>
-         <StackLayout WidthRequest="100" Spacing="0">
+         <StackLayout Spacing="0" >
             <StackLayout.IsVisible>
                <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False" />
             </StackLayout.IsVisible>

@@ -29,12 +29,16 @@ namespace ComicsShelf.Helpers
          Device.BeginInvokeOnMainThread(() => Send(LibraryAddKey, library));
       public static void LibraryAdd(System.Action<LibraryVM> callback) =>
          Subscribe(LibraryAddKey, callback);
+      public static void LibraryAddUnsubscribe() =>
+         Unsubscribe($"{LibraryAddKey}");
 
       const string LibraryRemoveKey = "store.library.remove.key";
       public static void LibraryRemove(LibraryVM library) =>
          Send(LibraryRemoveKey, library);
       public static void LibraryRemove(System.Action<LibraryVM> callback) =>
          Subscribe(LibraryRemoveKey, callback);
+      public static void LibraryRemoveUnsubscribe() =>
+         Unsubscribe($"{LibraryRemoveKey}");
 
       const string ItemsUpdateKey = "store.items.update.key";
       public static void ItemsUpdate(ItemVM[] itemList) =>
@@ -47,6 +51,8 @@ namespace ComicsShelf.Helpers
          Send($"{SectionsUpdateKey}", sectionsList);
       public static void SectionsUpdate(Action<SectionVM[]> callback) =>
          Subscribe($"{SectionsUpdateKey}", callback);
+      public static void SectionsUpdateUnsubscribe() =>
+         Unsubscribe($"{SectionsUpdateKey}");
 
       const string MessageKey = "store.message.key";
       public static void Message(LibraryVM library, string message) =>

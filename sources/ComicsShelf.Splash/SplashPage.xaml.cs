@@ -10,6 +10,7 @@ namespace ComicsShelf.Splash
       public SplashPage()
       {
          InitializeComponent();
+         SplashExtentions.Instance.IsBusy = true;
          BindingContext = SplashExtentions.Instance;
       }
 
@@ -17,8 +18,8 @@ namespace ComicsShelf.Splash
 
       protected override void OnAppearing()
       {
-         Context?.OnAppearing();
          base.OnAppearing();
+         Context?.OnAppearing();
       }
 
       protected override void OnSizeAllocated(double width, double height)
