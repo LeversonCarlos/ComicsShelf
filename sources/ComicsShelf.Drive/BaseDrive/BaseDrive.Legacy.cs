@@ -1,11 +1,8 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector;
-using Xamarin.Forms;
 
 namespace ComicsShelf.Drive
 {
@@ -26,7 +23,7 @@ namespace ComicsShelf.Drive
             };
 
             // SEARCH FOR FILES ON THE DIRECTORY
-            var fileList = await this.CloudService.SearchFiles(root, "*.library", 10);
+            var fileList = await this.CloudService.GetFiles(root);
             if (fileList == null || fileList.Length == 0) return null;
 
             // RETRIEVE THE ID FROM THE FIRST ONE
@@ -41,8 +38,19 @@ namespace ComicsShelf.Drive
             LegacyVM[] itemsList = null;
             using (var fileStream = await this.CloudService.Download(fileID))
             {
-               itemsList = await JsonSerializer.DeserializeAsync<LegacyVM[]>(fileStream);
-               // var streamReader = new StreamReader(fileStream)
+
+               // DESERIALIZE ITS CONTENT
+               using (var memoryStream = new System.IO.MemoryStream())
+               {
+                  await fileStream.CopyToAsync(memoryStream);
+                  await memoryStream.FlushAsync();
+                  memoryStream.Position = 0;
+                  var byteArray = memoryStream.ToArray();
+                  var serializedContent = System.Text.Encoding.Unicode.GetString(byteArray);
+
+                  itemsList = await Helpers.Json.Deserialize<LegacyVM[]>(serializedContent);
+               }
+
             }
 
             return itemsList;
