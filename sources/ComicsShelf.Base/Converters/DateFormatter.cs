@@ -14,10 +14,10 @@ namespace ComicsShelf.Base.Converters
             var date = (DateTime?)value;
             if (date.HasValue && date.Value != DateTime.MinValue)
             {
-               return date.Value.ToLocalTime().ToShortDateString();
+               return date.Value.ToLocalTime().ToString("d");
             }
          }
-         return DateTime.MinValue.ToShortDateString().Replace("0", "-").Replace("1", "-");
+         return "---";
       }
 
       public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
