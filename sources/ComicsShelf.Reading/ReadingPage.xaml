@@ -26,7 +26,7 @@
                <DataTemplate>
 
                   <ScrollView Orientation="Both" Scrolled="ScrollView_Scrolled" >
-                     <reading:ReadingImage BackgroundColor="Black" 
+                     <reading:ReadingImage 
                         ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding PageSize}" 
                         ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference readingPage}}"
                         />
