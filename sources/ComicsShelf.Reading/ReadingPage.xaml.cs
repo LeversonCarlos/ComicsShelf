@@ -12,6 +12,7 @@ namespace ComicsShelf.Reading
       public ReadingPage()
       {
          InitializeComponent();
+         ReadingExtentions.Instance.IsBusy = true;
          BindingContext = ReadingExtentions.Instance;
       }
 
@@ -19,8 +20,8 @@ namespace ComicsShelf.Reading
 
       protected override void OnAppearing()
       {
-         Context?.OnAppearing();
          base.OnAppearing();
+         Context?.OnAppearing();
       }
 
       protected override void OnSizeAllocated(double width, double height)
