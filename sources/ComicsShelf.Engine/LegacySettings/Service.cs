@@ -43,7 +43,7 @@ namespace ComicsShelf.Engine.LegacySettings
                if (legacyItem.ReadingDate != DateTime.MinValue)
                {
                   libraryItem.Readed = legacyItem.Readed;
-                  libraryItem.ReadingDate = legacyItem.ReadingDate;
+                  libraryItem.ReadingDate = legacyItem.ReadingDate.ToUniversalTime();
                   libraryItem.ReadingPage = legacyItem.ReadingPage;
                   libraryItem.ReadingPercent = legacyItem.ReadingPercent;
                }
@@ -56,6 +56,7 @@ namespace ComicsShelf.Engine.LegacySettings
 
             // MARK ALREADY IMPORTED LEGACY SETTINGS
             if (library.KeyValues == null) library.KeyValues = new Dictionary<string, string>();
+            if (library.KeyValues?.ContainsKey("ImportedLegacy") ?? false) library.KeyValues.Remove("ImportedLegacy");
             library.KeyValues.Add("ImportedLegacy", DateTime.UtcNow.ToString());
             await store.UpdateLibraryAsync(library);
 
