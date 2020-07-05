@@ -38,10 +38,10 @@
          </FlexLayout.Padding>
 
          <StackLayout >
-            <controls:RatingView Rating="{Binding SelectedItem.Rating}" />
+            <controls:RatingView Rating="{Binding Rating}" />
          </StackLayout>
          <StackLayout Spacing="0">
-            <Switch IsToggled="{Binding SelectedItem.Readed}"></Switch>
+            <Switch IsToggled="{Binding Readed}"></Switch>
             <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
          </StackLayout>
          <StackLayout Spacing="0" >
