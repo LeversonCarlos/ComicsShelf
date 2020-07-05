@@ -12,6 +12,7 @@ namespace ComicsShelf.Drive
       Task<bool> RemoveLibrary(LibraryVM library);
 
       Task<ItemVM[]> SearchItems(LibraryVM library);
+      Task<LegacyVM[]> SearchLegacySettings(LibraryVM library);
 
       Task<bool> ExtractCover(LibraryVM library, ItemVM libraryItem);
       Task<bool> ExtractPages(LibraryVM library, ItemVM libraryItem);

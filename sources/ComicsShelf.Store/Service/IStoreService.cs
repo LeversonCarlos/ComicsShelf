@@ -12,6 +12,7 @@ namespace ComicsShelf.Store
       LibraryVM GetLibrary(string libraryID);
 
       Task<bool> AddLibraryAsync(enLibraryType libraryType);
+      Task<bool> UpdateLibraryAsync(LibraryVM library);
       Task<bool> RemoveLibraryAsync(LibraryVM library);
 
       ItemVM[] GetLibraryItems(LibraryVM library);

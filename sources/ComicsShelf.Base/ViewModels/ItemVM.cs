@@ -1,9 +1,6 @@
 ﻿using ComicsShelf.Observables;
-using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization;
 
 namespace ComicsShelf.ViewModels
 {
@@ -13,7 +10,8 @@ namespace ComicsShelf.ViewModels
 
       public ItemVM()
       {
-         this.CoverPath = Helpers.Cover.DefaultCover;
+         KeyValues = new Dictionary<string, string>();
+         CoverPath = Helpers.Cover.DefaultCover;
       }
 
       public string ID { get; set; }
