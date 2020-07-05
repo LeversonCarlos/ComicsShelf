@@ -37,8 +37,25 @@
             <OnIdiom x:TypeArguments="Thickness" Default="0" Phone="10,0" />
          </FlexLayout.Padding>
 
-         <StackLayout >
-            <controls:RatingView Rating="{Binding Rating}" />
+         <StackLayout Orientation="Horizontal" Spacing="30" >
+            <controls:RatingButton Rating="{Binding Rating}" Style="{StaticResource ThumbsUp}">
+               <controls:RatingButton.Triggers>
+                  <EventTrigger Event="Clicked" >
+                     <EventTrigger.Actions>
+                        <animations:TapAnimation />
+                     </EventTrigger.Actions>
+                  </EventTrigger>
+               </controls:RatingButton.Triggers>
+            </controls:RatingButton>
+            <controls:RatingButton Rating="{Binding Rating}" Style="{StaticResource ThumbsDown}" >
+               <controls:RatingButton.Triggers>
+                  <EventTrigger Event="Clicked" >
+                     <EventTrigger.Actions>
+                        <animations:TapAnimation />
+                     </EventTrigger.Actions>
+                  </EventTrigger>
+               </controls:RatingButton.Triggers>
+            </controls:RatingButton>
          </StackLayout>
          <StackLayout Spacing="0">
             <Switch IsToggled="{Binding Readed}"></Switch>
