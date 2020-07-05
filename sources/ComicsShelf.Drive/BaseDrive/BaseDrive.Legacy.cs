@@ -47,7 +47,7 @@ namespace ComicsShelf.Drive
 
             return itemsList;
          }
-         catch (Exception ex) { Helpers.Message.Show(ex); return null; }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); return null; }
       }
 
    }

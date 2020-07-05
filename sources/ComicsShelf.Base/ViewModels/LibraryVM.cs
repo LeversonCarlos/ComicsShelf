@@ -7,6 +7,7 @@ namespace ComicsShelf.ViewModels
 
    public class LibraryVM
    {
+      public LibraryVM() { KeyValues = new Dictionary<string, string>(); }
       public string ID { get; set; }
       public string Description { get; set; }
       public string Path { get; set; }

@@ -19,7 +19,7 @@ namespace ComicsShelf.Engine.LegacySettings
          {
 
             // CHECK IF ALREADY IMPORTED LEGACY SETTINGS
-            if (library.KeyValues.ContainsKey("ImportedLegacy")) return;
+            if (library.KeyValues?.ContainsKey("ImportedLegacy") ?? false) return;
             var store = DependencyService.Get<IStoreService>();
             var changedIDs = new List<string>();
 
@@ -50,6 +50,7 @@ namespace ComicsShelf.Engine.LegacySettings
             await store.UpdateItemAsync(libraryItems.Where(x => changedIDs.Contains(x.ID)).ToArray());
 
             // MARK ALREADY IMPORTED LEGACY SETTINGS
+            if (library.KeyValues == null) library.KeyValues = new Dictionary<string, string>();
             library.KeyValues.Add("ImportedLegacy", DateTime.UtcNow.ToString());
             await store.UpdateLibraryAsync(library);
 
