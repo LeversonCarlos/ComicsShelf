@@ -69,7 +69,15 @@
             <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
          </StackLayout>
          <StackLayout Orientation="Horizontal">
-            <ImageButton Source="open" Command="{Binding OpenCommand}" BackgroundColor="Transparent" HeightRequest="60" WidthRequest="60" />
+            <ImageButton Source="open" Command="{Binding OpenCommand}" BackgroundColor="Transparent" HeightRequest="60" WidthRequest="60" >
+               <ImageButton.Triggers>
+                  <EventTrigger Event="Clicked" >
+                     <EventTrigger.Actions>
+                        <animations:TapAnimation />
+                     </EventTrigger.Actions>
+                  </EventTrigger>
+               </ImageButton.Triggers>
+            </ImageButton>
          </StackLayout>
       </FlexLayout>
    </ContentView.Content>
