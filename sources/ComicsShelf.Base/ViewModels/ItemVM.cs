@@ -41,13 +41,7 @@ namespace ComicsShelf.ViewModels
       public bool Readed
       {
          get => _Readed;
-         set
-         {
-            ReadingPage = 0;
-            ReadingPercent = (value ? 1 : 0);
-            ReadingDate = (value ? DateTime.UtcNow : DateTime.MinValue);
-            SetProperty(ref _Readed, value);
-         }
+         set => SetProperty(ref _Readed, value);
       }
 
       DateTime? _ReadingDate;
