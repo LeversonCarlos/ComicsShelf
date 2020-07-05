@@ -68,5 +68,15 @@ namespace ComicsShelf.Store
          catch (Exception ex) { Helpers.Message.Show(ex); return false; }
       }
 
+      public async Task<bool> UpdateLibraryAsync(LibraryVM library)
+      {
+         try
+         {
+            if (!await Sync.SetLibrary(library)) return false;
+            return true;
+         }
+         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
+      }
+
    }
 }
