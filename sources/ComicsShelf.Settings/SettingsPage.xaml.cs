@@ -11,5 +11,12 @@ namespace ComicsShelf.Settings
          InitializeComponent();
          BindingContext = new SettingsVM();
       }
+
+      protected override void OnAppearing()
+      {
+         base.OnAppearing();
+         (BindingContext as SettingsVM).OnAppearing();
+      }
+
    }
 }

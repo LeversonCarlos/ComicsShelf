@@ -123,6 +123,18 @@
   <data name="ADD_ONE_DRIVE_LIBRARY_COMMAND" xml:space="preserve">
     <value>Click to add a new One Drive library</value>
   </data>
+  <data name="LOCAL_CACHE_CLEAR_COMMAND" xml:space="preserve">
+    <value>Click to clear your local cache</value>
+  </data>
+  <data name="LOCAL_CACHE_CLEAR_CONFIRMATION" xml:space="preserve">
+    <value>Do you want to clear your local cache ?</value>
+  </data>
+  <data name="LOCAL_CACHE_TITLE" xml:space="preserve">
+    <value>LOCAL CACHE</value>
+  </data>
+  <data name="LOCAL_CACHE_UNITS" xml:space="preserve">
+    <value>megas</value>
+  </data>
   <data name="LOCAL_DRIVE_LIBRARIES_TITLE" xml:space="preserve">
     <value>LOCAL DRIVE LIBRARIES</value>
   </data>

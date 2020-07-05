@@ -52,6 +52,36 @@
             </BindableLayout.ItemTemplate>
          </StackLayout>
 
+         <StackLayout Style="{StaticResource LibraryTypeStack}">
+
+            <Label Text="{Binding LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
+
+            <FlexLayout Style="{StaticResource LibraryFlex}" >
+               <FlexLayout.GestureRecognizers>
+                  <TapGestureRecognizer Command="{Binding ClearCacheCommand}" />
+               </FlexLayout.GestureRecognizers>
+
+               <StackLayout FlexLayout.Grow="1" Spacing="0">
+                  <Label Text="{Binding LOCAL_CACHE_CLEAR_COMMAND}" Style="{StaticResource Default}" ></Label>
+                  <Label Style="{StaticResource Small}" >
+                     <Label.FormattedText>
+                        <FormattedString>
+                           <FormattedString.Spans>
+                              <Span Text="{Binding CacheSizeInMegas}" />
+                              <Span Text=" " />
+                              <Span Text="{Binding LOCAL_CACHE_UNITS}" />
+                           </FormattedString.Spans>
+                        </FormattedString>
+                     </Label.FormattedText>
+                  </Label>
+               </StackLayout>
+
+            </FlexLayout>
+
+            <BoxView Style="{StaticResource Separator}" />
+
+         </StackLayout>
+
       </StackLayout>
    </ContentPage.Content>
 </ContentPage>
