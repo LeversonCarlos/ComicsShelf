@@ -44,7 +44,7 @@
             <Switch IsToggled="{Binding SelectedItem.Readed}"></Switch>
             <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
          </StackLayout>
-         <StackLayout WidthRequest="100" Spacing="0">
+         <StackLayout Spacing="0" >
             <StackLayout.IsVisible>
                <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False" />
             </StackLayout.IsVisible>
