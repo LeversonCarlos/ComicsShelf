@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Base.Styles
+namespace ComicsShelf.Styles
 {
    public partial class LightTheme : ResourceDictionary
    {

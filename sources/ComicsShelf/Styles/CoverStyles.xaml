@@ -2,10 +2,10 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles"
+   xmlns:styles="clr-namespace:ComicsShelf.Styles"
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
-   x:Class="ComicsShelf.Base.Styles.CoverStyles">
+   x:Class="ComicsShelf.Styles.CoverStyles">
 
    <ResourceDictionary.MergedDictionaries>
       <styles:LightTheme />

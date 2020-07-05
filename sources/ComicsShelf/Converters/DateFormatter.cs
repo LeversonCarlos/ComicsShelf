@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Base.Converters
+namespace ComicsShelf.Converters
 {
    public class DateFormatter : IValueConverter
    {
