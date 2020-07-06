@@ -28,7 +28,6 @@ namespace ComicsShelf.Engine.AnalysisData
             // LOOP THROUGH LIBRARIES
             foreach (var library in libraries)
             {
-               Helpers.Notify.Message(library, Strings.START_MESSAGE);
 
                // LOCATE LIBRARY ITEMS
                var libraryItems = store
@@ -39,7 +38,6 @@ namespace ComicsShelf.Engine.AnalysisData
                // SECTIONS FOR THE LIBRARY
                sections.AddRange(ExecuteAsync_GetLibrarySections(library, libraryItems));
 
-               Helpers.Notify.Message(library, "");
             }
 
             // SECTION FOR THE RECENTELY ADDED ITEMS
