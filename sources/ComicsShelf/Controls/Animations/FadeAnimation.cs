@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Animations
+namespace ComicsShelf.Controls.Animations
 {
-   public class TapAnimation : TriggerAction<View>
+   public class FadeAnimation : TriggerAction<View>
    {
 
       protected override async void Invoke(View sender)
@@ -15,9 +15,10 @@ namespace ComicsShelf.Animations
 
       async Task Animate(View sender)
       {
-         // ViewExtensions.CancelAnimations(sender);
-         await sender.ScaleTo(0.75, 200, Easing.CubicOut);
-         await sender.ScaleTo(1.00, 100, Easing.CubicIn);
+         ViewExtensions.CancelAnimations(sender);
+         sender.Opacity = 1;
+         await Task.Delay(3000);
+         await sender.FadeTo(0, 2000, Easing.CubicIn);
       }
 
    }

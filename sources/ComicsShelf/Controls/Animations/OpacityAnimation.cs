@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Animations
+namespace ComicsShelf.Controls.Animations
 {
    public class OpacityAnimation : TriggerAction<View>
    {

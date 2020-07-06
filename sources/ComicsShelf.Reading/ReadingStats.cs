@@ -9,7 +9,7 @@ namespace ComicsShelf.Reading
       public ReadingStats()
       {
          var eventTrigger = new EventTrigger { Event = "OnReadingPageChanged" };
-         eventTrigger.Actions.Add(new Animations.FadeAnimation());
+         eventTrigger.Actions.Add(new Controls.Animations.FadeAnimation());
          this.Triggers.Add(eventTrigger);
       }
 
