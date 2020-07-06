@@ -34,16 +34,16 @@
        <Generator>ResXFileCodeGenerator</Generator>
        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
      </EmbeddedResource>
-     <EmbeddedResource Update="Styles\BaseStyles.xaml">
+     <EmbeddedResource Update="Controls\Styles\BaseStyles.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
-     <EmbeddedResource Update="Styles\CoverStyles.xaml">
+     <EmbeddedResource Update="Controls\Styles\CoverStyles.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
-     <EmbeddedResource Update="Styles\LabelStyles.xaml">
+     <EmbeddedResource Update="Controls\Styles\LabelStyles.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
-     <EmbeddedResource Update="Styles\LightTheme.xaml">
+     <EmbeddedResource Update="Controls\Styles\LightTheme.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
    </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Styles
+namespace ComicsShelf.Controls.Styles
 {
    public partial class CoverStyles : ResourceDictionary
    {

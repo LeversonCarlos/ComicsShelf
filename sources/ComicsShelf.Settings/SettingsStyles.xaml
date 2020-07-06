@@ -3,7 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf"
-   xmlns:styles="clr-namespace:ComicsShelf.Styles;assembly=ComicsShelf"
+   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles;assembly=ComicsShelf"
    x:Class="ComicsShelf.Settings.SettingsStyles">
 
    <ResourceDictionary.MergedDictionaries>
