@@ -129,7 +129,7 @@ namespace ComicsShelf.Engine.AnalysisData
                .ToArray();
             if (sectionItems?.Length == 0) { return null; }
 
-            var section = new SectionVM(Translations.RECENTLY_ADDED_TITLE, null);
+            var section = new SectionVM(Resources.Translations.HOME_RECENTLY_ADDED_SECTION_TITLE, null);
 
             foreach (var item in sectionItems)
                section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item });
@@ -198,7 +198,7 @@ namespace ComicsShelf.Engine.AnalysisData
             if (sectionItems?.Length == 0) { return null; }
 
             var sectionFactor = Device.Idiom == TargetIdiom.Phone ? 1.6 : 1.8;
-            var section = new SectionVM(Translations.ON_GOING_READING_TITLE, null);
+            var section = new SectionVM(Resources.Translations.HOME_ON_GOING_READING_SECTION_TITLE, null);
             section.SizeFactor = sectionFactor;
 
             foreach (var item in sectionItems)

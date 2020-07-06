@@ -132,4 +132,10 @@
   <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>Select a directory for your comics library</value>
   </data>
+  <data name="HOME_ON_GOING_READING_SECTION_TITLE" xml:space="preserve">
+    <value>On Going Reading</value>
+  </data>
+  <data name="HOME_RECENTLY_ADDED_SECTION_TITLE" xml:space="preserve">
+    <value>Recently Added</value>
+  </data>
 </root>

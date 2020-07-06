@@ -104,5 +104,23 @@ namespace ComicsShelf.Resources {
                 return ResourceManager.GetString("DRIVE_FOLDER_DIALOG_TITLE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Going Reading.
+        /// </summary>
+        public static string HOME_ON_GOING_READING_SECTION_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_ON_GOING_READING_SECTION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recently Added.
+        /// </summary>
+        public static string HOME_RECENTLY_ADDED_SECTION_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_RECENTLY_ADDED_SECTION_TITLE", resourceCulture);
+            }
+        }
     }
 }
