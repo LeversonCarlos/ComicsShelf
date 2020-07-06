@@ -13,15 +13,15 @@ namespace ComicsShelf.Home
 
       public HomeVM()
       {
-         Title = Translations.TITLE;
+         Title = Resources.Translations.HOME_MAIN_TITLE;
          Sections = new ObservableList<SectionVM>();
          Sections.CollectionChanged += (sender, e) => { this.HasSections = this.Sections?.Count > 0; };
          Helpers.Notify.SectionsUpdate(sections => ApplySections(sections));
          OpenCommand = new Command(async folder => await OpenAsync(folder));
       }
 
-      public string NO_LIBRARY_MESSAGE_TITLE => Translations.NO_LIBRARY_MESSAGE_TITLE;
-      public string NO_LIBRARY_MESSAGE_DETAILS => Translations.NO_LIBRARY_MESSAGE_DETAILS;
+      public string NO_LIBRARY_TITLE => Resources.Translations.HOME_NO_LIBRARY_WARNING_TITLE;
+      public string NO_LIBRARY_MESSAGE => Resources.Translations.HOME_NO_LIBRARY_WARNING_MESSAGE;
 
       public ObservableList<SectionVM> Sections { get; }
       void ApplySections(SectionVM[] sections)

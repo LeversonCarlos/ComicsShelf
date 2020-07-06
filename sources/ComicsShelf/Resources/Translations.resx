@@ -144,6 +144,15 @@
   <data name="ENGINE_REMOVED_N_FILES_MESSAGE" xml:space="preserve">
     <value>Removed {0} files from the library that are no longer availabled</value>
   </data>
+  <data name="HOME_MAIN_TITLE" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HOME_NO_LIBRARY_WARNING_MESSAGE" xml:space="preserve">
+    <value>Add some libraries through the settings tab below</value>
+  </data>
+  <data name="HOME_NO_LIBRARY_WARNING_TITLE" xml:space="preserve">
+    <value>You don't have any library defined yet</value>
+  </data>
   <data name="HOME_ON_GOING_READING_SECTION_TITLE" xml:space="preserve">
     <value>On Going Reading</value>
   </data>

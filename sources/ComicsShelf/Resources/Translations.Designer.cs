@@ -142,6 +142,33 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string HOME_MAIN_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_MAIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add some libraries through the settings tab below.
+        /// </summary>
+        public static string HOME_NO_LIBRARY_WARNING_MESSAGE {
+            get {
+                return ResourceManager.GetString("HOME_NO_LIBRARY_WARNING_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have any library defined yet.
+        /// </summary>
+        public static string HOME_NO_LIBRARY_WARNING_TITLE {
+            get {
+                return ResourceManager.GetString("HOME_NO_LIBRARY_WARNING_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to On Going Reading.
         /// </summary>
         public static string HOME_ON_GOING_READING_SECTION_TITLE {
