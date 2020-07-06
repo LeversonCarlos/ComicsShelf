@@ -5,7 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
    xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations;assembly=ComicsShelf" 
-   xmlns:converters="clr-namespace:ComicsShelf.Converters;assembly=ComicsShelf" 
+   xmlns:converters="clr-namespace:ComicsShelf.Controls.Converters;assembly=ComicsShelf" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
    mc:Ignorable="d" 
    x:Class="ComicsShelf.Splash.SplashPageDetails">
