@@ -19,6 +19,10 @@
       <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.2" />
       <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.2.2" />
       <PackageReference Include="AppCenter.Analytics.Metrics" Version="1.1.0" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.19-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.19-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.19-alpha" />
+      <PackageReference Include="HttpZipStream" Version="0.4.3" />
    </ItemGroup>
 
    <ItemGroup>
@@ -30,6 +34,12 @@
    </ItemGroup>
 
    <ItemGroup>
+     <EmbeddedResource Update="FolderDialog\FolderDialogPage.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="FolderDialog\FolderDialogStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
      <EmbeddedResource Update="Resources\Translations.resx">
        <Generator>PublicResXFileCodeGenerator</Generator>
        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
