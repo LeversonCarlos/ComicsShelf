@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FOLDER_DIALOG_CANCEL_COMMAND" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="FOLDER_DIALOG_CONFIRM_COMMAND" xml:space="preserve">
-    <value>Confirm</value>
-  </data>
   <data name="FOLDER_DIALOG_SELECTED_PATH" xml:space="preserve">
     <value>Selected Path</value>
   </data>

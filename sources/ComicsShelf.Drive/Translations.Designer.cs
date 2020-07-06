@@ -61,24 +61,6 @@ namespace ComicsShelf.Drive {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
-        /// </summary>
-        internal static string FOLDER_DIALOG_CANCEL_COMMAND {
-            get {
-                return ResourceManager.GetString("FOLDER_DIALOG_CANCEL_COMMAND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Confirm.
-        /// </summary>
-        internal static string FOLDER_DIALOG_CONFIRM_COMMAND {
-            get {
-                return ResourceManager.GetString("FOLDER_DIALOG_CONFIRM_COMMAND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Selected Path.
         /// </summary>
         internal static string FOLDER_DIALOG_SELECTED_PATH {

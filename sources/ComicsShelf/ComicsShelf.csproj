@@ -31,7 +31,7 @@
 
    <ItemGroup>
      <EmbeddedResource Update="Resources\Translations.resx">
-       <Generator>ResXFileCodeGenerator</Generator>
+       <Generator>PublicResXFileCodeGenerator</Generator>
        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
      </EmbeddedResource>
      <EmbeddedResource Update="Controls\Styles\BaseStyles.xaml">

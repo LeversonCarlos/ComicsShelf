@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CANCEL_COMMAND" xml:space="preserve">
+  <data name="COMMON_CANCEL_COMMAND" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="OK_COMMAND" xml:space="preserve">
+  <data name="COMMON_CONFIRM_COMMAND" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="COMMON_OK_COMMAND" xml:space="preserve">
     <value>OK</value>
   </data>
 </root>

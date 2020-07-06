@@ -12,8 +12,8 @@ namespace ComicsShelf.Drive.FolderDialog
       public ObservableList<DriveItemVM> Data { get; private set; }
 
       public string SELECTED_PATH => Translations.FOLDER_DIALOG_SELECTED_PATH;
-      public string CANCEL_COMMAND => Translations.FOLDER_DIALOG_CANCEL_COMMAND;
-      public string CONFIRM_COMMAND => Translations.FOLDER_DIALOG_CONFIRM_COMMAND;
+      public string CANCEL_COMMAND => Resources.Translations.COMMON_CANCEL_COMMAND;
+      public string CONFIRM_COMMAND => Resources.Translations.COMMON_CONFIRM_COMMAND;
 
       public FolderDialogVM()
       {

@@ -22,7 +22,7 @@ namespace ComicsShelf.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Translations {
+    public class Translations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ComicsShelf.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ComicsShelf.Resources.Translations", typeof(Translations).Assembly);
@@ -51,7 +51,7 @@ namespace ComicsShelf.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,18 +63,27 @@ namespace ComicsShelf.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string CANCEL_COMMAND {
+        public static string COMMON_CANCEL_COMMAND {
             get {
-                return ResourceManager.GetString("CANCEL_COMMAND", resourceCulture);
+                return ResourceManager.GetString("COMMON_CANCEL_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string COMMON_CONFIRM_COMMAND {
+            get {
+                return ResourceManager.GetString("COMMON_CONFIRM_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
-        internal static string OK_COMMAND {
+        public static string COMMON_OK_COMMAND {
             get {
-                return ResourceManager.GetString("OK_COMMAND", resourceCulture);
+                return ResourceManager.GetString("COMMON_OK_COMMAND", resourceCulture);
             }
         }
     }
