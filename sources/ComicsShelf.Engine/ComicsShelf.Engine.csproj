@@ -16,7 +16,7 @@
    </ItemGroup>
 
    <ItemGroup>
-      <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
+      <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj" />
       <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
       <ProjectReference Include="..\ComicsShelf.Drive\ComicsShelf.Drive.csproj" />
    </ItemGroup>

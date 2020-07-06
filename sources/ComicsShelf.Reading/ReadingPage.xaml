@@ -4,7 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base"   
+   xmlns:converters="clr-namespace:ComicsShelf.Controls.Converters;assembly=ComicsShelf" 
    xmlns:reading="clr-namespace:ComicsShelf.Reading"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
@@ -26,7 +26,7 @@
                <DataTemplate>
 
                   <ScrollView Orientation="Both" Scrolled="ScrollView_Scrolled" >
-                     <reading:ReadingImage BackgroundColor="Black" 
+                     <reading:ReadingImage 
                         ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding PageSize}" 
                         ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference readingPage}}"
                         />

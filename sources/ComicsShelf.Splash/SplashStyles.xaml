@@ -2,9 +2,9 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf.Base" 
-   xmlns:styles="clr-namespace:ComicsShelf.Base.Styles;assembly=ComicsShelf.Base" 
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf" 
+   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles;assembly=ComicsShelf" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
    x:Class="ComicsShelf.Splash.SplashStyles">
 
    <ResourceDictionary.MergedDictionaries>
@@ -46,11 +46,16 @@
       <Setter Property="HorizontalOptions" Value="Center" />
    </Style>
 
-   <Style TargetType="controls:RatingView">
-      <Setter Property="ThumbsUpSelectedImageSource" Value="thumbsUp_selected" />
-      <Setter Property="ThumbsUpUnselectedImageSource" Value="thumbsUp_unselected" />
-      <Setter Property="ThumbsDownSelectedImageSource" Value="thumbsDown_selected" />
-      <Setter Property="ThumbsDownUnselectedImageSource" Value="thumbsDown_unselected" />
+   <Style TargetType="controls:RatingButton" x:Key="ThumbsUp">
+      <Setter Property="SelectedImageSource" Value="thumbsUp_selected" />
+      <Setter Property="UnselectedImageSource" Value="thumbsUp_unselected" />
+      <Setter Property="SelectedRating" Value="1" />
+   </Style>
+
+   <Style TargetType="controls:RatingButton" x:Key="ThumbsDown">
+      <Setter Property="SelectedImageSource" Value="thumbsDown_selected" />
+      <Setter Property="UnselectedImageSource" Value="thumbsDown_unselected" />
+      <Setter Property="SelectedRating" Value="-1" />
    </Style>
 
    <Style TargetType="CollectionView" x:Key="EditionsCollection">

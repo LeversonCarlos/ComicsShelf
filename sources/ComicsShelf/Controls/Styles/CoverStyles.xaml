@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
+   x:Class="ComicsShelf.Controls.Styles.CoverStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+      <styles:BaseStyles />
+   </ResourceDictionary.MergedDictionaries>
+
+   <Style TargetType="controls:CoverImage">
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
+      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
+      <Setter Property="Grid.Row" Value="0" />
+      <Setter Property="Grid.RowSpan" Value="3" />
+   </Style>
+
+   <Style TargetType="BoxView" x:Key="CoverOverlay">
+      <Setter Property="BackgroundColor" Value="{StaticResource OverlayBackgroundColor}" />
+      <Setter Property="Grid.Row" Value="2" />
+      <Setter Property="Opacity" Value="0.75" />
+   </Style>
+
+   <Style TargetType="Label" x:Key="CoverText">
+      <Setter Property="Padding" Value="2,0" />
+      <Setter Property="FontSize" Value="Caption" />
+      <Setter Property="FontAttributes" Value="Bold" />
+      <Setter Property="TextColor" Value="{StaticResource OverlayForegroundColor}" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+      <Setter Property="Grid.Row" Value="2" />
+   </Style>
+
+   <Style TargetType="ProgressBar" BasedOn="{StaticResource ProgressBar}" x:Key="CoverProgress">
+      <Setter Property="Grid.Row" Value="0" />
+   </Style>
+
+</ResourceDictionary>

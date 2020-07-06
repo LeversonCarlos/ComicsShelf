@@ -1,5 +1,4 @@
 ﻿using ComicsShelf.Helpers;
-using ComicsShelf.Observables;
 using ComicsShelf.Splash;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;

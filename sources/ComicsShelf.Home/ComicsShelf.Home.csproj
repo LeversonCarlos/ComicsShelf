@@ -13,7 +13,7 @@
    </ItemGroup>
 
    <ItemGroup>
-      <ProjectReference Include="..\ComicsShelf.Base\ComicsShelf.Base.csproj" />
+      <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj" />
       <ProjectReference Include="..\ComicsShelf.Splash\ComicsShelf.Splash.csproj" />
       <ProjectReference Include="..\ComicsShelf.Store\ComicsShelf.Store.csproj" />
    </ItemGroup>

@@ -4,9 +4,9 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-   xmlns:animations="clr-namespace:ComicsShelf.Animations;assembly=ComicsShelf.Base" 
-   xmlns:converters="clr-namespace:ComicsShelf.Base.Converters;assembly=ComicsShelf.Base" 
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf.Base"
+   xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations;assembly=ComicsShelf" 
+   xmlns:converters="clr-namespace:ComicsShelf.Controls.Converters;assembly=ComicsShelf" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
    mc:Ignorable="d" 
    x:Class="ComicsShelf.Splash.SplashPageDetails">
    <ContentView.Resources>
@@ -37,8 +37,25 @@
             <OnIdiom x:TypeArguments="Thickness" Default="0" Phone="10,0" />
          </FlexLayout.Padding>
 
-         <StackLayout >
-            <controls:RatingView Rating="{Binding Rating}" />
+         <StackLayout Orientation="Horizontal" Spacing="30" >
+            <controls:RatingButton Rating="{Binding Rating}" Style="{StaticResource ThumbsUp}">
+               <controls:RatingButton.Triggers>
+                  <EventTrigger Event="Clicked" >
+                     <EventTrigger.Actions>
+                        <animations:TapAnimation />
+                     </EventTrigger.Actions>
+                  </EventTrigger>
+               </controls:RatingButton.Triggers>
+            </controls:RatingButton>
+            <controls:RatingButton Rating="{Binding Rating}" Style="{StaticResource ThumbsDown}" >
+               <controls:RatingButton.Triggers>
+                  <EventTrigger Event="Clicked" >
+                     <EventTrigger.Actions>
+                        <animations:TapAnimation />
+                     </EventTrigger.Actions>
+                  </EventTrigger>
+               </controls:RatingButton.Triggers>
+            </controls:RatingButton>
          </StackLayout>
          <StackLayout Spacing="0">
             <Switch IsToggled="{Binding Readed}"></Switch>
@@ -52,7 +69,15 @@
             <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
          </StackLayout>
          <StackLayout Orientation="Horizontal">
-            <ImageButton Source="open" Command="{Binding OpenCommand}" BackgroundColor="Transparent" HeightRequest="60" WidthRequest="60" />
+            <ImageButton Source="open" Command="{Binding OpenCommand}" BackgroundColor="Transparent" HeightRequest="60" WidthRequest="60" >
+               <ImageButton.Triggers>
+                  <EventTrigger Event="Clicked" >
+                     <EventTrigger.Actions>
+                        <animations:TapAnimation />
+                     </EventTrigger.Actions>
+                  </EventTrigger>
+               </ImageButton.Triggers>
+            </ImageButton>
          </StackLayout>
       </FlexLayout>
    </ContentView.Content>
