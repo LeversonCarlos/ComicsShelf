@@ -132,6 +132,18 @@
   <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
     <value>Select a directory for your comics library</value>
   </data>
+  <data name="ENGINE_ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
+    <value>Added {0} new files to the library</value>
+  </data>
+  <data name="ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE" xml:space="preserve">
+    <value>Connecting to the drive service to refresh the library files</value>
+  </data>
+  <data name="ENGINE_FOUND_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Found {0} files through the drive engine</value>
+  </data>
+  <data name="ENGINE_REMOVED_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Removed {0} files from the library that are no longer availabled</value>
+  </data>
   <data name="HOME_ON_GOING_READING_SECTION_TITLE" xml:space="preserve">
     <value>On Going Reading</value>
   </data>

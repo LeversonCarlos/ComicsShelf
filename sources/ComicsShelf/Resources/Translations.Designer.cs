@@ -106,6 +106,42 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added {0} new files to the library.
+        /// </summary>
+        public static string ENGINE_ADDED_N_NEW_FILES_MESSAGE {
+            get {
+                return ResourceManager.GetString("ENGINE_ADDED_N_NEW_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting to the drive service to refresh the library files.
+        /// </summary>
+        public static string ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE {
+            get {
+                return ResourceManager.GetString("ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found {0} files through the drive engine.
+        /// </summary>
+        public static string ENGINE_FOUND_N_FILES_MESSAGE {
+            get {
+                return ResourceManager.GetString("ENGINE_FOUND_N_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed {0} files from the library that are no longer availabled.
+        /// </summary>
+        public static string ENGINE_REMOVED_N_FILES_MESSAGE {
+            get {
+                return ResourceManager.GetString("ENGINE_REMOVED_N_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to On Going Reading.
         /// </summary>
         public static string HOME_ON_GOING_READING_SECTION_TITLE {
