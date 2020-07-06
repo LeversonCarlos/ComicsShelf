@@ -126,4 +126,10 @@
   <data name="COMMON_OK_COMMAND" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL" xml:space="preserve">
+    <value>Selected Path</value>
+  </data>
+  <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
+    <value>Select a directory for your comics library</value>
+  </data>
 </root>

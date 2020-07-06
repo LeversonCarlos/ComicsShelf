@@ -1,7 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
 using System.Threading.Tasks;
-using System.Transactions;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Drive.FolderDialog
@@ -11,13 +10,13 @@ namespace ComicsShelf.Drive.FolderDialog
       readonly TaskCompletionSource<DriveItemVM> tcs;
       public ObservableList<DriveItemVM> Data { get; private set; }
 
-      public string SELECTED_PATH => Translations.FOLDER_DIALOG_SELECTED_PATH;
+      public string SELECTED_PATH => Resources.Translations.DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL;
       public string CANCEL_COMMAND => Resources.Translations.COMMON_CANCEL_COMMAND;
       public string CONFIRM_COMMAND => Resources.Translations.COMMON_CONFIRM_COMMAND;
 
       public FolderDialogVM()
       {
-         this.Title = Translations.FOLDER_DIALOG_TITLE;
+         this.Title = Resources.Translations.DRIVE_FOLDER_DIALOG_TITLE;
          this.Data = new ObservableList<DriveItemVM>();
          this.tcs = new TaskCompletionSource<DriveItemVM>();
          this.ItemSelectCommand = new Command(async item => await this.ItemSelect(item));

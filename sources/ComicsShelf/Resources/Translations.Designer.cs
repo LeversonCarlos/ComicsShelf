@@ -86,5 +86,23 @@ namespace ComicsShelf.Resources {
                 return ResourceManager.GetString("COMMON_OK_COMMAND", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected Path.
+        /// </summary>
+        public static string DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL {
+            get {
+                return ResourceManager.GetString("DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a directory for your comics library.
+        /// </summary>
+        public static string DRIVE_FOLDER_DIALOG_TITLE {
+            get {
+                return ResourceManager.GetString("DRIVE_FOLDER_DIALOG_TITLE", resourceCulture);
+            }
+        }
     }
 }
