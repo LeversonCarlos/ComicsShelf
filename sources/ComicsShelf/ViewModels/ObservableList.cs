@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace ComicsShelf.Observables
+namespace ComicsShelf.ViewModels
 {
    public class ObservableList<T> : ObservableCollection<T>, INotifyCollectionChanged
    {

@@ -1,4 +1,4 @@
-﻿namespace ComicsShelf.Observables
+﻿namespace ComicsShelf.ViewModels
 {
    partial class BaseVM
    {

@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Observables;
+﻿using ComicsShelf.ViewModels;
 using System;
 using System.Threading.Tasks;
 using System.Transactions;

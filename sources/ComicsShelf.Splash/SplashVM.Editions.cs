@@ -1,5 +1,4 @@
-﻿using ComicsShelf.Observables;
-using ComicsShelf.ViewModels;
+﻿using ComicsShelf.ViewModels;
 
 namespace ComicsShelf.Splash
 {

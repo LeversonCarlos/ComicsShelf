@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Observables
+namespace ComicsShelf.ViewModels
 {
    public partial class BaseVM : ObservableObject, IDisposable
    {
@@ -22,8 +22,6 @@ namespace ComicsShelf.Observables
 
       public virtual Task OnAppearing() => Task.CompletedTask;
       public virtual Task OnDisappearing() => Task.CompletedTask;
-
-      public virtual void Dispose() { }
 
    }
 }

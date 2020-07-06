@@ -1,4 +1,4 @@
-﻿using ComicsShelf.Observables;
+﻿using ComicsShelf.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;

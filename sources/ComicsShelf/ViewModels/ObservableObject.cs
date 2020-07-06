@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
-namespace ComicsShelf.Observables
+namespace ComicsShelf.ViewModels
 {
    public class ObservableObject : INotifyPropertyChanged, IDisposable
    {

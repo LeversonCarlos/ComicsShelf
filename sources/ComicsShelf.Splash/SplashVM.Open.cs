@@ -1,5 +1,4 @@
-﻿using ComicsShelf.Observables;
-using ComicsShelf.Reading;
+﻿using ComicsShelf.Reading;
 using ComicsShelf.ViewModels;
 using System;
 using System.Threading.Tasks;

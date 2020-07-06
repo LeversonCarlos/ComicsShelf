@@ -1,5 +1,4 @@
-﻿using ComicsShelf.Observables;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ComicsShelf.ViewModels
