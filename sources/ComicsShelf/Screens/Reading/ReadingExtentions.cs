@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Reading
+namespace ComicsShelf.Screens.Reading
 {
    public static class ReadingExtentions
    {

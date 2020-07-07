@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Reading
+namespace ComicsShelf.Screens.Reading
 {
    public partial class ReadingStyles : ResourceDictionary
    {

@@ -5,11 +5,11 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:converters="clr-namespace:ComicsShelf.Controls.Converters;assembly=ComicsShelf" 
-   xmlns:reading="clr-namespace:ComicsShelf.Reading"
+   xmlns:reading="clr-namespace:ComicsShelf.Screens.Reading"
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
    x:Name="readingPage" BackgroundColor="Black"
-   x:Class="ComicsShelf.Reading.ReadingPage">
+   x:Class="ComicsShelf.Screens.Reading.ReadingPage">
 
    <ContentPage.Resources>
       <converters:NotConverter x:Key="notConverter" />

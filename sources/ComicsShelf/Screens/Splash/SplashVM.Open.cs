@@ -1,4 +1,4 @@
-﻿// using ComicsShelf.Reading;
+﻿using ComicsShelf.Screens.Reading;
 using ComicsShelf.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ namespace ComicsShelf.Screens.Splash
             if (!pagesExtraction) return;
 
             var pagesList = await Engine.PagesExtraction.Service.GetPagesAsync(SelectedItem);
-            // await Shell.Current.GoToAsync(new ReadingVM(SelectedItem, pagesList));
+            await Shell.Current.GoToAsync(new ReadingVM(SelectedItem, pagesList));
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Reading
+namespace ComicsShelf.Screens.Reading
 {
    public class ReadingStats : StackLayout
    {

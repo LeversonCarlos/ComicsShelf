@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Reading
+namespace ComicsShelf.Screens.Reading
 {
 
    [XamlCompilation(XamlCompilationOptions.Compile)]

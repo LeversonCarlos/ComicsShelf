@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ComicsShelf.Reading
+namespace ComicsShelf.Screens.Reading
 {
    partial class ReadingVM
    {
