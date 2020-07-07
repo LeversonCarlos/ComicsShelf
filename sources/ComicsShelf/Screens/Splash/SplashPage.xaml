@@ -5,10 +5,10 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
    xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations;assembly=ComicsShelf" 
-   xmlns:splash="clr-namespace:ComicsShelf.Splash" 
+   xmlns:splash="clr-namespace:ComicsShelf.Screens.Splash" 
    mc:Ignorable="d" 
    Shell.PresentationMode="ModalAnimated" 
-   x:Class="ComicsShelf.Splash.SplashPage">
+   x:Class="ComicsShelf.Screens.Splash.SplashPage">
 
    <ContentPage.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />

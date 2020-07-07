@@ -8,7 +8,7 @@
    xmlns:converters="clr-namespace:ComicsShelf.Controls.Converters;assembly=ComicsShelf" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
    mc:Ignorable="d" 
-   x:Class="ComicsShelf.Splash.SplashPageDetails">
+   x:Class="ComicsShelf.Screens.Splash.SplashPageDetails">
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
       <converters:DateFormatter x:Key="dateFormatter" />

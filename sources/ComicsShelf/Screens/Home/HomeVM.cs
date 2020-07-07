@@ -1,4 +1,5 @@
 ﻿using ComicsShelf.Helpers;
+using ComicsShelf.Screens.Splash;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
@@ -48,14 +49,12 @@ namespace ComicsShelf.Screens.Home
       async Task OpenAsync(object folder)
       {
          if (folder == null) { return; }
-         // var viewModel = await GetSplashVM(folder as FolderVM);
-         // await Shell.Current.GoToAsync(viewModel);
+         var viewModel = await GetSplashVM(folder as FolderVM);
+         await Shell.Current.GoToAsync(viewModel);
       }
 
-      /*
       Task<SplashVM> GetSplashVM(FolderVM folder) => 
          Task.FromResult(SplashVM.Create(folder?.FirstItem));
-      */
 
       public override void Dispose()
       {

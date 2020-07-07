@@ -8,7 +8,7 @@
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
    mc:Ignorable="d" 
-   x:Class="ComicsShelf.Splash.SplashPageCover">
+   x:Class="ComicsShelf.Screens.Splash.SplashPageCover">
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />
    </ContentView.Resources>

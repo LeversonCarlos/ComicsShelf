@@ -1,6 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 
-namespace ComicsShelf.Splash
+namespace ComicsShelf.Screens.Splash
 {
    partial class SplashVM
    {

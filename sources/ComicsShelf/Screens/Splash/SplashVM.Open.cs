@@ -1,10 +1,10 @@
-﻿using ComicsShelf.Reading;
+﻿// using ComicsShelf.Reading;
 using ComicsShelf.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Splash
+namespace ComicsShelf.Screens.Splash
 {
    partial class SplashVM
    {
@@ -27,7 +27,7 @@ namespace ComicsShelf.Splash
             if (!pagesExtraction) return;
 
             var pagesList = await Engine.PagesExtraction.Service.GetPagesAsync(SelectedItem);
-            await Shell.Current.GoToAsync(new ReadingVM(SelectedItem, pagesList));
+            // await Shell.Current.GoToAsync(new ReadingVM(SelectedItem, pagesList));
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }

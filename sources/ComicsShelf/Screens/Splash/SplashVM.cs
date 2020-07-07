@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Splash
+namespace ComicsShelf.Screens.Splash
 {
    public partial class SplashVM : BaseVM
    {

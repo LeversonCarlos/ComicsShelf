@@ -9,7 +9,7 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
    mc:Ignorable="d" 
    x:Name="editionsView" 
-   x:Class="ComicsShelf.Splash.SplashPageEditions">
+   x:Class="ComicsShelf.Screens.Splash.SplashPageEditions">
 
    <ContentView.Resources>
       <ResourceDictionary Source="SplashStyles.xaml" />

@@ -5,7 +5,7 @@
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf" 
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles;assembly=ComicsShelf" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
-   x:Class="ComicsShelf.Splash.SplashStyles">
+   x:Class="ComicsShelf.Screens.Splash.SplashStyles">
 
    <ResourceDictionary.MergedDictionaries>
       <styles:LightTheme />

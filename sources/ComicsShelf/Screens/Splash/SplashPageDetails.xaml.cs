@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Splash
+namespace ComicsShelf.Screens.Splash
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class SplashPageEditions : ContentView
+   public partial class SplashPageDetails : ContentView
    {
-      public SplashPageEditions()
+      public SplashPageDetails()
       {
          InitializeComponent();
       }

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Splash
+namespace ComicsShelf.Screens.Splash
 {
    public partial class SplashStyles : ResourceDictionary
    {
