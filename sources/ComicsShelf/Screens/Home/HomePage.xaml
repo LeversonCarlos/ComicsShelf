@@ -8,7 +8,7 @@
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf"
    xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
    mc:Ignorable="d"
-   x:Class="ComicsShelf.Home.HomePage"
+   x:Class="ComicsShelf.Screens.Home.HomePage"
    x:Name="homePage"
    Title="{Binding Title}" IconImageSource="home">
 

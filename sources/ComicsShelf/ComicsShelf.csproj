@@ -34,10 +34,16 @@
    </ItemGroup>
 
    <ItemGroup>
-     <EmbeddedResource Update="FolderDialog\FolderDialogPage.xaml">
+     <EmbeddedResource Update="Screens\Home\HomePage.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
-     <EmbeddedResource Update="FolderDialog\FolderDialogStyles.xaml">
+     <EmbeddedResource Update="Screens\Home\HomeStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\FolderDialog\FolderDialogPage.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\FolderDialog\FolderDialogStyles.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
      <EmbeddedResource Update="Resources\Translations.resx">

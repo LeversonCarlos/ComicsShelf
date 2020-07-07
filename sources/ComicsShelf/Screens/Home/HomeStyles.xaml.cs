@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Home
+namespace ComicsShelf.Screens.Home
 {
    public partial class HomeStyles : ResourceDictionary
    {
