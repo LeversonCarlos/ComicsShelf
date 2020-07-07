@@ -1,4 +1,4 @@
-﻿namespace ComicsShelf.Settings
+﻿namespace ComicsShelf.Screens.Settings
 {
    partial class SettingsVM
    {

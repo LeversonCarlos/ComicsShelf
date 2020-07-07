@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Settings
+namespace ComicsShelf.Screens.Settings
 {
    public partial class SettingsStyles : ResourceDictionary
    {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Settings
+namespace ComicsShelf.Screens.Settings
 {
    public partial class SettingsVM : BaseVM
    {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Settings
+namespace ComicsShelf.Screens.Settings
 {
    public class LibrariesSetting : ObservableObject
    {

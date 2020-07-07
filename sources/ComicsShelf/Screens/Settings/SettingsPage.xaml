@@ -5,7 +5,7 @@
    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    mc:Ignorable="d"
-   x:Class="ComicsShelf.Settings.SettingsPage"
+   x:Class="ComicsShelf.Screens.Settings.SettingsPage"
    Title="{Binding Title}" IconImageSource="settings">
    <ContentPage.Resources>
       <ResourceDictionary Source="SettingsStyles.xaml" />

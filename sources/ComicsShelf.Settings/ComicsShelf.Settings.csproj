@@ -16,19 +16,4 @@
     <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="SettingsStyles.xaml.cs">
-      <DependentUpon>SettingsStyles.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="SettingsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="SettingsStyles.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>
