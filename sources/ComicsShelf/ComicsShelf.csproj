@@ -19,6 +19,10 @@
       <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.2" />
       <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.2.2" />
       <PackageReference Include="AppCenter.Analytics.Metrics" Version="1.1.0" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.19-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.19-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.19-alpha" />
+      <PackageReference Include="HttpZipStream" Version="0.4.3" />
    </ItemGroup>
 
    <ItemGroup>
@@ -30,8 +34,47 @@
    </ItemGroup>
 
    <ItemGroup>
+    <EmbeddedResource Update="Screens\Settings\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Settings\SettingsStyles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Reading\ReadingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Reading\ReadingStyles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\SplashPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\SplashPageCover.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\SplashPageDetails.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\SplashPageEditions.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\SplashStyles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+     <EmbeddedResource Update="Screens\Home\HomePage.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\Home\HomeStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\FolderDialog\FolderDialogPage.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\FolderDialog\FolderDialogStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
      <EmbeddedResource Update="Resources\Translations.resx">
-       <Generator>ResXFileCodeGenerator</Generator>
+       <Generator>PublicResXFileCodeGenerator</Generator>
        <LastGenOutput>Translations.Designer.cs</LastGenOutput>
      </EmbeddedResource>
      <EmbeddedResource Update="Controls\Styles\BaseStyles.xaml">

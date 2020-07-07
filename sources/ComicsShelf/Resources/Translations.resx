@@ -117,10 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CANCEL_COMMAND" xml:space="preserve">
+  <data name="COMMON_CANCEL_COMMAND" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="OK_COMMAND" xml:space="preserve">
+  <data name="COMMON_CONFIRM_COMMAND" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="COMMON_OK_COMMAND" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL" xml:space="preserve">
+    <value>Selected Path</value>
+  </data>
+  <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
+    <value>Select a directory for your comics library</value>
+  </data>
+  <data name="ENGINE_ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
+    <value>Added {0} new files to the library</value>
+  </data>
+  <data name="ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE" xml:space="preserve">
+    <value>Connecting to the drive service to refresh the library files</value>
+  </data>
+  <data name="ENGINE_FOUND_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Found {0} files through the drive engine</value>
+  </data>
+  <data name="ENGINE_REMOVED_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Removed {0} files from the library that are no longer availabled</value>
+  </data>
+  <data name="HOME_MAIN_TITLE" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HOME_NO_LIBRARY_WARNING_MESSAGE" xml:space="preserve">
+    <value>Add some libraries through the settings tab below</value>
+  </data>
+  <data name="HOME_NO_LIBRARY_WARNING_TITLE" xml:space="preserve">
+    <value>You don't have any library defined yet</value>
+  </data>
+  <data name="HOME_ON_GOING_READING_SECTION_TITLE" xml:space="preserve">
+    <value>On Going Reading</value>
+  </data>
+  <data name="HOME_RECENTLY_ADDED_SECTION_TITLE" xml:space="preserve">
+    <value>Recently Added</value>
+  </data>
+  <data name="SETTINGS_DRIVE_REMOVE_CONFIRMATION_MESSAGE" xml:space="preserve">
+    <value>Do you really want to remove the {0} library</value>
+  </data>
+  <data name="SETTINGS_LOCAL_CACHE_CLEAR_COMMAND" xml:space="preserve">
+    <value>Click to clear your local cache</value>
+  </data>
+  <data name="SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION" xml:space="preserve">
+    <value>Do you want to clear your local cache ?</value>
+  </data>
+  <data name="SETTINGS_LOCAL_CACHE_TITLE" xml:space="preserve">
+    <value>LOCAL CACHE</value>
+  </data>
+  <data name="SETTINGS_LOCAL_CACHE_UNITS" xml:space="preserve">
+    <value>megas</value>
+  </data>
+  <data name="SETTINGS_LOCAL_DRIVE_ADD_COMMAND" xml:space="preserve">
+    <value>Click to add a new Local Drive library</value>
+  </data>
+  <data name="SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
+    <value>LOCAL DRIVE LIBRARIES</value>
+  </data>
+  <data name="SETTINGS_MAIN_TITLE" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SETTINGS_ONE_DRIVE_ADD_COMMAND" xml:space="preserve">
+    <value>Click to add a new One Drive library</value>
+  </data>
+  <data name="SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
+    <value>ONE DRIVE LIBRARIES</value>
+  </data>
+  <data name="SPLASH_DETAILS_READED_LABEL" xml:space="preserve">
+    <value>Already Readed</value>
+  </data>
+  <data name="SPLASH_DETAILS_READING_LABEL" xml:space="preserve">
+    <value>Previously Read</value>
+  </data>
+  <data name="SPLASH_EDITIONS_TITLE" xml:space="preserve">
+    <value>Other Editions From this Collection</value>
   </data>
 </root>

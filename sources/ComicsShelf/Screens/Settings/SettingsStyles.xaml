@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf"
+   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles;assembly=ComicsShelf"
+   x:Class="ComicsShelf.Screens.Settings.SettingsStyles">
+
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme/>
+      <styles:LabelStyles />
+      <styles:BaseStyles />
+   </ResourceDictionary.MergedDictionaries>
+
+   <Style TargetType="StackLayout" x:Key="Main">
+      <Setter Property="Padding" Value="{Static helpers:Cover.ScreenMargin}" />
+   </Style>
+
+   <Style TargetType="StackLayout" x:Key="LibraryTypeStack">
+      <Setter Property="Margin" Value="0,10" />
+   </Style>
+
+   <Style TargetType="FlexLayout" x:Key="LibraryFlex">
+      <Setter Property="Padding" Value="10,0" />
+      <Setter Property="AlignItems" Value="Center" />
+      <Setter Property="HeightRequest" Value="60" />
+   </Style>
+
+   <Style TargetType="ProgressBar" x:Key="Settings_Library_Progress" BasedOn="{StaticResource ProgressBar}">
+      <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
+      <Setter Property="Opacity" Value="0.3" />
+   </Style>
+
+</ResourceDictionary>
