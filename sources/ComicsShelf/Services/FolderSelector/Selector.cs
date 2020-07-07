@@ -1,17 +1,17 @@
-﻿using ComicsShelf.ViewModels;
+﻿using ComicsShelf.Screens.FolderDialog;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector;
 
-namespace ComicsShelf.Drive.FolderDialog
+namespace ComicsShelf.FolderSelector
 {
    internal class Selector
    {
 
-      public static Task<DriveItemVM> GetFolder(ICloudDriveService driveService) => GetFolder(driveService, null);
+      public static Task<SelectorItemVM> GetFolder(ICloudDriveService driveService) => GetFolder(driveService, null);
 
-      public static async Task<DriveItemVM> GetFolder(ICloudDriveService driveService, DriveItemVM initialFolder)
+      public static async Task<SelectorItemVM> GetFolder(ICloudDriveService driveService, SelectorItemVM initialFolder)
       {
          try
          {
@@ -51,35 +51,35 @@ namespace ComicsShelf.Drive.FolderDialog
          catch (Exception ex) { Helpers.Message.Show(ex); return null; }
       }
 
-      static async Task<DriveItemVM[]> GetFolder_Children(ICloudDriveService driveService, DriveItemVM item)
+      static async Task<SelectorItemVM[]> GetFolder_Children(ICloudDriveService driveService, SelectorItemVM item)
       {
          if (item == null || string.IsNullOrEmpty(item.ID))
          { return await GetFolder_Children_Drives(driveService); }
-         else if (item.Type == enItemType.Drive || item.Type == enItemType.Folder)
+         else if (item.Type == enSelectorItemType.Drive || item.Type == enSelectorItemType.Folder)
          { return await GetFolder_Children_Directories(driveService, item); }
-         else { return new DriveItemVM[] { }; }
+         else { return new SelectorItemVM[] { }; }
       }
 
-      static async Task<DriveItemVM[]> GetFolder_Children_Drives(ICloudDriveService driveService)
+      static async Task<SelectorItemVM[]> GetFolder_Children_Drives(ICloudDriveService driveService)
       {
          try
          {
             var driveList = await driveService.GetDrivers();
             var resultList = driveList
-               .Select(x => new DriveItemVM
+               .Select(x => new SelectorItemVM
                {
                   ID = x.ID,
                   Name = x.Name,
                   Path = x.Path,
-                  Type = enItemType.Drive
+                  Type = enSelectorItemType.Drive
                })
                .ToArray();
             return resultList;
          }
-         catch (Exception ex) { Helpers.Message.Show(ex); return new DriveItemVM[] { }; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return new SelectorItemVM[] { }; }
       }
 
-      static async Task<DriveItemVM[]> GetFolder_Children_Directories(ICloudDriveService driveService, DriveItemVM item)
+      static async Task<SelectorItemVM[]> GetFolder_Children_Directories(ICloudDriveService driveService, SelectorItemVM item)
       {
          try
          {
@@ -94,20 +94,20 @@ namespace ComicsShelf.Drive.FolderDialog
             var directoriesList = await driveService.GetDirectories(folder);
 
             var resultList = directoriesList
-               .Select(x => new DriveItemVM
+               .Select(x => new SelectorItemVM
                {
                   ID = x.ID,
                   Name = x.Name,
                   Path = x.Path,
                   Parent = item,
-                  Type = enItemType.Folder
+                  Type = enSelectorItemType.Folder
                })
                .ToList();
-            resultList.Insert(0, new DriveItemVM { Name = "..", ID = item.Parent?.ID, Path = item.Parent?.Path, Parent = item?.Parent?.Parent });
+            resultList.Insert(0, new SelectorItemVM { Name = "..", ID = item.Parent?.ID, Path = item.Parent?.Path, Parent = item?.Parent?.Parent });
 
             return resultList.ToArray();
          }
-         catch (Exception ex) { Helpers.Message.Show(ex); return new DriveItemVM[] { }; }
+         catch (Exception ex) { Helpers.Message.Show(ex); return new SelectorItemVM[] { }; }
       }
 
    }

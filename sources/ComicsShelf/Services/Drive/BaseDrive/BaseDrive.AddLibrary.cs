@@ -14,7 +14,7 @@ namespace ComicsShelf.Drive
 
             if (!await this.CloudService.ConnectAsync()) { return null; }
 
-            var driveItem = await FolderDialog.Selector.GetFolder(this.CloudService);
+            var driveItem = await FolderSelector.Selector.GetFolder(this.CloudService);
             if (driveItem == null) { return null; }
 
             var library = new LibraryVM

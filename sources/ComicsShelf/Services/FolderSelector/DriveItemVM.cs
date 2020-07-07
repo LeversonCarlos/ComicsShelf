@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ComicsShelf.Drive
+namespace ComicsShelf.FolderSelector
 {
-   internal enum enItemType : short { Drive, Folder, File }
+   internal enum enSelectorItemType : short { Drive, Folder, File }
 
-   internal class DriveItemVM
+   internal class SelectorItemVM
    {
 
       public string ID { get; set; }
@@ -18,8 +18,8 @@ namespace ComicsShelf.Drive
       public long? SizeInBytes { get; set; }
       public Dictionary<string, string> KeyValues { get; set; }
 
-      internal DriveItemVM Parent { get; set; }
-      internal enItemType Type { get; set; }
+      internal SelectorItemVM Parent { get; set; }
+      internal enSelectorItemType Type { get; set; }
    }
 
 }

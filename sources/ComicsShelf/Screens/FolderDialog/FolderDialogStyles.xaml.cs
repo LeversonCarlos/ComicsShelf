@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Drive.FolderDialog
+namespace ComicsShelf.Screens.FolderDialog
 {
    public partial class FolderDialogStyles : ResourceDictionary
    {

@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ComicsShelf.Drive.FolderDialog
+namespace ComicsShelf.Screens.FolderDialog
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class FolderDialogPage : ContentPage

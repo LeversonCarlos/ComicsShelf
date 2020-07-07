@@ -1,14 +1,15 @@
-﻿using ComicsShelf.ViewModels;
+﻿using ComicsShelf.FolderSelector;
+using ComicsShelf.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ComicsShelf.Drive.FolderDialog
+namespace ComicsShelf.Screens.FolderDialog
 {
    internal class FolderDialogVM : BaseVM
    {
-      readonly TaskCompletionSource<DriveItemVM> tcs;
-      public ObservableList<DriveItemVM> Data { get; private set; }
+      readonly TaskCompletionSource<SelectorItemVM> tcs;
+      public ObservableList<SelectorItemVM> Data { get; private set; }
 
       public string SELECTED_PATH => Resources.Translations.DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL;
       public string CANCEL_COMMAND => Resources.Translations.COMMON_CANCEL_COMMAND;
@@ -17,25 +18,25 @@ namespace ComicsShelf.Drive.FolderDialog
       public FolderDialogVM()
       {
          this.Title = Resources.Translations.DRIVE_FOLDER_DIALOG_TITLE;
-         this.Data = new ObservableList<DriveItemVM>();
-         this.tcs = new TaskCompletionSource<DriveItemVM>();
+         this.Data = new ObservableList<SelectorItemVM>();
+         this.tcs = new TaskCompletionSource<SelectorItemVM>();
          this.ItemSelectCommand = new Command(async item => await this.ItemSelect(item));
          this.ConfirmCommand = new Command(async () => await this.Confirm());
          this.CancelCommand = new Command(async () => await this.Cancel());
       }
 
-      DriveItemVM _CurrentItem;
-      public DriveItemVM CurrentItem
+      SelectorItemVM _CurrentItem;
+      public SelectorItemVM CurrentItem
       {
          get { return this._CurrentItem; }
          set { this.SetProperty(ref this._CurrentItem, value); }
       }
 
-      public EventHandler<DriveItemVM> OnItemSelected;
+      public EventHandler<SelectorItemVM> OnItemSelected;
       public Command ItemSelectCommand { get; set; }
       internal async Task ItemSelect(object item)
       {
-         this.OnItemSelected?.Invoke(this, item as DriveItemVM);
+         this.OnItemSelected?.Invoke(this, item as SelectorItemVM);
          await Task.CompletedTask;
       }
 
@@ -53,7 +54,7 @@ namespace ComicsShelf.Drive.FolderDialog
          tcs.SetResult(null);
       }
 
-      public async Task<DriveItemVM> OpenPage()
+      public async Task<SelectorItemVM> OpenPage()
       {
          var view = new FolderDialogPage { BindingContext = this };
          await Helpers.Modal.Push(view);
