@@ -185,5 +185,32 @@ namespace ComicsShelf.Resources {
                 return ResourceManager.GetString("HOME_RECENTLY_ADDED_SECTION_TITLE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already Readed.
+        /// </summary>
+        public static string SPLASH_DETAILS_READED_LABEL {
+            get {
+                return ResourceManager.GetString("SPLASH_DETAILS_READED_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previously Read.
+        /// </summary>
+        public static string SPLASH_DETAILS_READING_LABEL {
+            get {
+                return ResourceManager.GetString("SPLASH_DETAILS_READING_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Editions From this Collection.
+        /// </summary>
+        public static string SPLASH_EDITIONS_TITLE {
+            get {
+                return ResourceManager.GetString("SPLASH_EDITIONS_TITLE", resourceCulture);
+            }
+        }
     }
 }

@@ -159,4 +159,13 @@
   <data name="HOME_RECENTLY_ADDED_SECTION_TITLE" xml:space="preserve">
     <value>Recently Added</value>
   </data>
+  <data name="SPLASH_DETAILS_READED_LABEL" xml:space="preserve">
+    <value>Already Readed</value>
+  </data>
+  <data name="SPLASH_DETAILS_READING_LABEL" xml:space="preserve">
+    <value>Previously Read</value>
+  </data>
+  <data name="SPLASH_EDITIONS_TITLE" xml:space="preserve">
+    <value>Other Editions From this Collection</value>
+  </data>
 </root>
