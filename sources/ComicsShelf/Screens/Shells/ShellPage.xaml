@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
+   xmlns:home="clr-namespace:ComicsShelf.Screens.Home"
+   xmlns:settings="clr-namespace:ComicsShelf.Screens.Settings"   
+   mc:Ignorable="d"
+   Shell.NavBarIsVisible="False" 
+   x:Class="ComicsShelf.Screens.Shells.ShellPage">
+
+   <Shell.Resources>
+      <ResourceDictionary>
+         <ResourceDictionary.MergedDictionaries>
+            <styles:LightTheme />
+         </ResourceDictionary.MergedDictionaries>
+         <Style x:Key="BaseElement" TargetType="Element">
+            <Setter Property="Shell.BackgroundColor"  Value="{StaticResource TabBarBackgroundColor}" />
+            <Setter Property="Shell.ForegroundColor" Value="{StaticResource TabBarForegroundColor}" />
+            <Setter Property="Shell.TitleColor" Value="{StaticResource TabBarForegroundColor}" />
+            <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+            <Setter Property="Shell.UnselectedColor" Value="{StaticResource TabBarUnselectedColor}" />
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource TabBarBackgroundColor}" />
+            <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource TabBarForegroundColor}"/>
+            <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource TabBarUnselectedColor}"/>
+            <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource TabBarForegroundColor}"/>
+         </Style>
+         <Style TargetType="TabBar" BasedOn="{StaticResource BaseElement}" />
+      </ResourceDictionary>
+   </Shell.Resources>
+
+   <!-- Your Pages -->
+   <TabBar>
+      <Tab Title="Home" Icon="home">
+         <ShellContent ContentTemplate="{DataTemplate home:HomePage}" />
+      </Tab>
+      <Tab Title="Search" Icon="search">
+         <ShellContent ContentTemplate="{DataTemplate ContentPage}" />
+      </Tab>
+      <Tab Title="Settings" Icon="settings">
+         <ShellContent ContentTemplate="{DataTemplate settings:SettingsPage}" />
+      </Tab>
+   </TabBar>
+
+   <!-- 
+   <ShellContent Route="splash" ContentTemplate="{DataTemplate store:SplashPage}" ></ShellContent>
+   -->
+
+   <!-- Optional Templates 
+    // These may be provided inline as below or as separate classes.
+
+    // This header appears at the top of the Flyout.
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid>ContentHere</Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    // ItemTemplate is for ShellItems as displayed in a Flyout
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                Bindable Properties: Title, Icon
+            </ContentView>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    // MenuItemTemplate is for MenuItems as displayed in a Flyout
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                Bindable Properties: Text, Icon
+            </ContentView>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+    -->
+
+</Shell>
