@@ -40,7 +40,7 @@ namespace ComicsShelf.Settings
       {
          try
          {
-            if (!await Helpers.Message.Confirm(Strings.LOCAL_CACHE_CLEAR_CONFIRMATION)) { return; }
+            if (!await Helpers.Message.Confirm(Resources.Translations.SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION)) { return; }
             IsBusy = true;
 
             var filesList = System.IO.Directory.GetFiles(Helpers.Paths.FilesCache, "*.*", System.IO.SearchOption.AllDirectories);

@@ -12,7 +12,7 @@ namespace ComicsShelf.Settings
 
       public SettingsVM()
       {
-         Title = Strings.TITLE;
+         Title = Resources.Translations.SETTINGS_MAIN_TITLE;
          LibraryTypes = new List<LibrariesSetting> {
             new LibrariesSetting(ViewModels.enLibraryType.LocalDrive),
             new LibrariesSetting(ViewModels.enLibraryType.OneDrive)

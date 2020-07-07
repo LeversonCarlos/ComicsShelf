@@ -187,6 +187,96 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to remove the {0} library.
+        /// </summary>
+        public static string SETTINGS_DRIVE_REMOVE_CONFIRMATION_MESSAGE {
+            get {
+                return ResourceManager.GetString("SETTINGS_DRIVE_REMOVE_CONFIRMATION_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to clear your local cache.
+        /// </summary>
+        public static string SETTINGS_LOCAL_CACHE_CLEAR_COMMAND {
+            get {
+                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_CLEAR_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to clear your local cache ?.
+        /// </summary>
+        public static string SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION {
+            get {
+                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOCAL CACHE.
+        /// </summary>
+        public static string SETTINGS_LOCAL_CACHE_TITLE {
+            get {
+                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to megas.
+        /// </summary>
+        public static string SETTINGS_LOCAL_CACHE_UNITS {
+            get {
+                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_UNITS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to add a new Local Drive library.
+        /// </summary>
+        public static string SETTINGS_LOCAL_DRIVE_ADD_COMMAND {
+            get {
+                return ResourceManager.GetString("SETTINGS_LOCAL_DRIVE_ADD_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOCAL DRIVE LIBRARIES.
+        /// </summary>
+        public static string SETTINGS_LOCAL_DRIVE_TITLE {
+            get {
+                return ResourceManager.GetString("SETTINGS_LOCAL_DRIVE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SETTINGS_MAIN_TITLE {
+            get {
+                return ResourceManager.GetString("SETTINGS_MAIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to add a new One Drive library.
+        /// </summary>
+        public static string SETTINGS_ONE_DRIVE_ADD_COMMAND {
+            get {
+                return ResourceManager.GetString("SETTINGS_ONE_DRIVE_ADD_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ONE DRIVE LIBRARIES.
+        /// </summary>
+        public static string SETTINGS_ONE_DRIVE_TITLE {
+            get {
+                return ResourceManager.GetString("SETTINGS_ONE_DRIVE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already Readed.
         /// </summary>
         public static string SPLASH_DETAILS_READED_LABEL {

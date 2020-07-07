@@ -58,7 +58,7 @@ namespace ComicsShelf.Settings
       public Command RemoveCommand { get; set; }
       async Task Remove()
       {
-         if (!await Helpers.Message.Confirm(string.Format(Strings.REMOVE_LIBRARY_CONFIRMATION_MESSAGE, Library.Description))) { return; }
+         if (!await Helpers.Message.Confirm(string.Format(Resources.Translations.SETTINGS_DRIVE_REMOVE_CONFIRMATION_MESSAGE, Library.Description))) { return; }
          await DependencyService.Get<IStoreService>().RemoveLibraryAsync(Library);
       }
 
