@@ -2,19 +2,20 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Droid
+namespace ComicsShelfStore.Droid
 {
    partial class FileSystem
    {
 
-      public async Task SaveThumbnail(Stream imageStream, string imagePath)
+      public async Task<bool> SaveThumbnail(Stream imageStream, string imagePath)
       {
          try
          {
+
             // LOAD IMAGE
             using (var originalBitmap = await Android.Graphics.BitmapFactory.DecodeStreamAsync(imageStream))
             {
-               if (originalBitmap == null) { return; }
+               if (originalBitmap == null) { return false; }
 
                // DEFINE SIZE
                double imageHeight = 450; double imageWidth = 150;
@@ -31,8 +32,9 @@ namespace ComicsShelf.Droid
                   {
                      await thumbnailBitmap.CompressAsync(Android.Graphics.Bitmap.CompressFormat.Jpeg, 70, thumbnailFileStream);
                      await thumbnailFileStream.FlushAsync();
+
+                     return true;
                   }
-                  thumbnailFileStream.Close();
 
                }
 

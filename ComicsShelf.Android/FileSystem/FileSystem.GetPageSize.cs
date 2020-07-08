@@ -1,22 +1,22 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading.Tasks;
 
-namespace ComicsShelf.Droid
+namespace ComicsShelfStore.Droid
 {
    partial class FileSystem
    {
 
-      public async Task<System.Drawing.Size> GetPageSize(string pagePath)
+      public async Task<Size> GetPageSize(string pagePath)
       {
          try
          {
             using (var bitmap = await Android.Graphics.BitmapFactory.DecodeFileAsync(pagePath))
             {
-               return new System.Drawing.Size(bitmap.Width, bitmap.Height);
+               return new Size(bitmap.Width, bitmap.Height);
             }
          }
          catch (Exception ex) { throw new Exception($"Error identifying the image size for file. {ex.Message}.", new Exception(pagePath)); }
-         finally { GC.Collect(); }
       }
 
    }
