@@ -28,7 +28,6 @@ namespace ComicsShelf.Services.Hub
             Helpers.Notify.LibraryAdd(library => Engine.RefreshData.Service.Execute(library));
             Helpers.Notify.LibraryRemove(library => Engine.AnalysisData.Service.Execute(null));
             Helpers.Notify.ItemsUpdate(itemsList => Engine.AnalysisData.Service.Execute(itemsList));
-            // Helpers.Notify.SectionsUpdate(itemList => Engine.CoverExtraction.Service.Execute());
 
             Routing.RegisterRoute(SplashExtentions.GetRoute(), SplashExtentions.GetPageType());
             Routing.RegisterRoute(ReadingExtentions.GetRoute(), ReadingExtentions.GetPageType());
