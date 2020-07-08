@@ -15491,11 +15491,11 @@ namespace ComicsShelf.Droid
 			// aapt resource value: 0x7F0D0026
 			public const int abc_toolbar_collapse_description = 2131558438;
 			
-			// aapt resource value: 0x7F0D0027
-			public const int appbar_scrolling_view_behavior = 2131558439;
-			
 			// aapt resource value: 0x7F0D0028
-			public const int appinsights_androidSecret = 2131558440;
+			public const int appbar_scrolling_view_behavior = 2131558440;
+			
+			// aapt resource value: 0x7F0D0027
+			public const int appCenter_androidSecret = 2131558439;
 			
 			// aapt resource value: 0x7F0D0029
 			public const int bottom_sheet_behavior = 2131558441;
