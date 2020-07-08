@@ -10,20 +10,9 @@ namespace ComicsShelf.Screens.Home
       public HomePage()
       {
          InitializeComponent();
-         BindingContext = new HomeVM();
+         BindingContext = Extentions.Instance;
       }
 
-      protected override void OnAppearing()
-      {
-         base.OnAppearing();
-         (BindingContext as HomeVM)?.OnAppearing();
-      }
-
-      protected override void OnDisappearing()
-      {
-         (BindingContext as HomeVM)?.OnDisappearing();
-         base.OnDisappearing();
-      }
 
    }
 }

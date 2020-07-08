@@ -11,6 +11,7 @@ namespace ComicsShelf
          InitializeComponent();
          MainPage = new Screens.Shells.ShellPage();
          DependencyService.Register<HubService>();
+         DependencyService.Get<HubService>().Register();
       }
 
       protected override void OnStart() =>

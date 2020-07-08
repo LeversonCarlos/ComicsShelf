@@ -1,4 +1,5 @@
-﻿using ComicsShelf.Store;
+﻿using ComicsShelf.Services.Hub;
+using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace ComicsShelf.Engine.AnalysisData
 
             var sectionsArray = sections.ToArray();
             store.SetSections(sectionsArray);
-            Helpers.Notify.SectionsUpdate(sectionsArray);
+            DependencyService.Get<HubService>().SectionsUpdate(sectionsArray);
 
             await Task.CompletedTask;
          }
