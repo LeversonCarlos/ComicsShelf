@@ -9,6 +9,8 @@ namespace ComicsShelf.Store
    partial class StoreService
    {
 
+      public Task Initialize() => Task.Factory.StartNew(() => InitializeAsync(), TaskCreationOptions.LongRunning);
+
       public async Task<bool> InitializeAsync()
       {
          var start = DateTime.Now;
