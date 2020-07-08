@@ -5,7 +5,14 @@
       <Product>Comics Shelf</Product>
       <Company>Friendship Solutions</Company>
       <Copyright>Copyright © Friendship Solutions 2020</Copyright>
-      <Version>1.0.0</Version>
+      <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      <Version>1.1.000</Version>
+      <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+   </PropertyGroup>
+
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DebugType>portable</DebugType>
+      <DebugSymbols>true</DebugSymbols>
    </PropertyGroup>
 
    <ItemGroup>
@@ -34,6 +41,15 @@
    </ItemGroup>
 
    <ItemGroup>
+    <EmbeddedResource Update="App.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Shells\ShellPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Startup\StartupPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Screens\Settings\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

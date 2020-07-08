@@ -3,8 +3,6 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Xamarin.CloudDrive.Connector.LocalDrive;
-using Xamarin.CloudDrive.Connector.OneDrive;
 
 namespace ComicsShelf.Droid
 {
@@ -20,24 +18,26 @@ namespace ComicsShelf.Droid
 
          Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-         global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-         CarouselView.FormsPlugin.Android.CarouselViewRenderer.Init();
-         this.AddLocalDriveConnector(savedInstanceState);
-         this.AddOneDriveConnector(Resources.GetString(Resource.String.onedrive_applicationID), Resources.GetString(Resource.String.onedrive_scopeList));
+         Xamarin.CloudDrive.Connector.LocalDriveService.Init(this, savedInstanceState);
+         Xamarin.CloudDrive.Connector.OneDriveService.Init(this,
+            Resources.GetString(Resource.String.onedrive_applicationID),
+            $"{Resources.GetString(Resource.String.onedrive_redirectUri)}://auth",
+            Resources.GetString(Resource.String.onedrive_scopeList).Split(","));
+         Helpers.Insights.Init(Resources.GetString(Resource.String.appCenter_androidSecret));
+         Xamarin.Forms.Forms.Init(this, savedInstanceState);
          LoadApplication(new App());
       }
 
       public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
       {
          Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-         this.SetLocalDrivePermissionsResult(requestCode, permissions, grantResults);
          base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
       }
 
       protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
       {
          base.OnActivityResult(requestCode, resultCode, data);
-         this.SetOneDriveAuthenticationResult(requestCode, resultCode, data);
+         Xamarin.CloudDrive.Connector.OneDriveService.SetAuthenticationResult(requestCode, resultCode, data);
       }
 
    }
