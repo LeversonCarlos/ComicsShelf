@@ -2,19 +2,12 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
-   x:Class="ComicsShelf.Screens.FolderDialog.FolderDialogStyles">
+   x:Class="ComicsShelf.Screens.FolderDialog.Styles">
 
-   <ResourceDictionary.MergedDictionaries>
-      <styles:LightTheme />
-      <styles:LabelStyles />
-      <styles:BaseStyles />
-   </ResourceDictionary.MergedDictionaries>
-
-   <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="DetailsLabel">
+   <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="DetailsLabel">
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="DetailsValue">
+   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="DetailsValue">
       <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
       <Setter Property="FontAttributes" Value="Bold" />
    </Style>

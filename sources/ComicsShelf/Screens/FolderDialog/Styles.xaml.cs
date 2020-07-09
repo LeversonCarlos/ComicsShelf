@@ -2,9 +2,9 @@
 
 namespace ComicsShelf.Screens.FolderDialog
 {
-   public partial class FolderDialogStyles : ResourceDictionary
+   public partial class Styles : ResourceDictionary
    {
-      public FolderDialogStyles()
+      public Styles()
       {
          InitializeComponent();
       }
