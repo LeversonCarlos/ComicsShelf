@@ -40,13 +40,11 @@ namespace ComicsShelf.Helpers
       public static void LibraryRemoveUnsubscribe() =>
          Unsubscribe($"{LibraryRemoveKey}");
 
-
       const string ItemsUpdateKey = "store.items.update.key";
       public static void ItemsUpdate(ItemVM[] itemList) =>
          Send($"{ItemsUpdateKey}", itemList);
       public static void ItemsUpdate(System.Action<ItemVM[]> callback) =>
          Subscribe($"{ItemsUpdateKey}", callback);
-
 
       const string SectionsUpdateKey = "store.sections.update.key";
       public static void SectionsUpdate(SectionVM[] sectionsList) =>
@@ -55,7 +53,6 @@ namespace ComicsShelf.Helpers
          Subscribe($"{SectionsUpdateKey}", callback);
       public static void SectionsUpdateUnsubscribe() =>
          Unsubscribe($"{SectionsUpdateKey}");
-
 
       const string MessageKey = "store.message.key";
       public static void Message(LibraryVM library, string message) =>
