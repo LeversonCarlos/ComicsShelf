@@ -3,15 +3,14 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:home="clr-namespace:ComicsShelf.Screens.Home"
-   x:Class="ComicsShelf.Screens.Home.HomePage"
-   Title="{Binding Title}" >
+   x:Class="ComicsShelf.Screens.Home.Page">
 
    <ContentPage.Content>
       <StackLayout>
 
-         <home:HomePage_Empty VerticalOptions="FillAndExpand" IsVisible="{Binding HasSections, Converter={StaticResource notConverter}}" />
+         <home:Page_Empty VerticalOptions="FillAndExpand" IsVisible="{Binding HasSections, Converter={StaticResource notConverter}}" />
 
-         <home:HomePage_Sections IsVisible="{Binding HasSections}" />
+         <home:Page_Sections IsVisible="{Binding HasSections}" />
 
       </StackLayout>
    </ContentPage.Content>

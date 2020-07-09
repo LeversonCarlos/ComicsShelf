@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace ComicsShelf.Screens.Home
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class HomePage_Empty : ContentView
+   public partial class Page_Empty : ContentView
    {
-      public HomePage_Empty()
+      public Page_Empty()
       {
          InitializeComponent();
       }

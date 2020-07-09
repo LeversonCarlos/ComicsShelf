@@ -44,6 +44,9 @@
      <Compile Update="Screens\FolderDialog\Views\Styles.xaml.cs">
        <DependentUpon>Styles.xaml</DependentUpon>
      </Compile>
+     <Compile Update="Screens\Home\Views\Page.xaml.cs">
+       <DependentUpon>Page.xaml</DependentUpon>
+     </Compile>
      <Compile Update="Screens\Home\Views\Styles.xaml.cs">
        <DependentUpon>Styles.xaml</DependentUpon>
      </Compile>
@@ -119,7 +122,7 @@
     <EmbeddedResource Update="Screens\Splash\Views\Styles.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-     <EmbeddedResource Update="Screens\Home\Views\HomePage.xaml">
+     <EmbeddedResource Update="Screens\Home\Views\Page.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
      <EmbeddedResource Update="Screens\Home\Views\Styles.xaml">

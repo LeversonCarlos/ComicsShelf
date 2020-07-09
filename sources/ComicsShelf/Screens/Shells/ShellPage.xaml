@@ -31,7 +31,7 @@
    <!-- Your Pages -->
    <TabBar>
       <Tab Title="Home" Icon="home">
-         <ShellContent ContentTemplate="{DataTemplate home:HomePage}" />
+         <ShellContent ContentTemplate="{DataTemplate home:Page}" />
       </Tab>
       <Tab Title="Search" Icon="search">
          <ShellContent ContentTemplate="{DataTemplate ContentPage}" />

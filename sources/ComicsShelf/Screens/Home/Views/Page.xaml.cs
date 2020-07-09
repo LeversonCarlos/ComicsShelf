@@ -4,10 +4,10 @@ using Xamarin.Forms.Xaml;
 namespace ComicsShelf.Screens.Home
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class HomePage : ContentPage
+   public partial class Page : ContentPage
    {
 
-      public HomePage()
+      public Page()
       {
          InitializeComponent();
          BindingContext = new HomeVM();
