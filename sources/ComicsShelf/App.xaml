@@ -12,7 +12,7 @@
             <styles:LightTheme />
             <styles:BaseStyles />
             <styles:LabelStyles />
-            <!-- <styles:CoverStyles /> -->
+            <styles:CoverStyles />
          </ResourceDictionary.MergedDictionaries>
 
          <converters:NotConverter x:Key="notConverter" />
