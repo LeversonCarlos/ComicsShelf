@@ -80,10 +80,10 @@
     <EmbeddedResource Update="Screens\Splash\SplashStyles.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-     <EmbeddedResource Update="Screens\Home\HomePage.xaml">
+     <EmbeddedResource Update="Screens\Home\Views\HomePage.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
-     <EmbeddedResource Update="Screens\Home\HomeStyles.xaml">
+     <EmbeddedResource Update="Screens\Home\Views\HomeStyles.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
      <EmbeddedResource Update="Screens\FolderDialog\FolderDialogPage.xaml">
