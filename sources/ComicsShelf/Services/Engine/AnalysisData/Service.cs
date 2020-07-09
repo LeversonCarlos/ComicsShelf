@@ -1,5 +1,4 @@
-﻿using ComicsShelf.Services.Hub;
-using ComicsShelf.Store;
+﻿using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
 using System.Collections.Generic;

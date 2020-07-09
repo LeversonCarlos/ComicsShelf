@@ -1,9 +1,7 @@
-﻿using ComicsShelf.Services.Hub;
-using ComicsShelf.ViewModels;
+﻿using ComicsShelf.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace ComicsShelf.Store
 {
