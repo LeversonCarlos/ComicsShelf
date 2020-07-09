@@ -6,6 +6,7 @@ namespace ComicsShelf.Store
    public interface IStoreService
    {
 
+      Task Initialize();
       Task<bool> InitializeAsync();
 
       LibraryVM[] GetLibraries();

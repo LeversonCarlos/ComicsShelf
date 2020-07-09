@@ -14,20 +14,24 @@ namespace ComicsShelf.Screens.Home
       public HomeVM()
       {
          Title = Resources.Translations.HOME_MAIN_TITLE;
-         Sections = new ObservableList<SectionVM>();
-         Sections.CollectionChanged += (sender, e) => { this.HasSections = this.Sections?.Count > 0; };
-         Helpers.Notify.SectionsUpdate(sections => ApplySections(sections));
+         Sections = new ObservableList<SectionVM>(GetSections());
+         Sections.CollectionChanged += (sender, e) => { HasSections = Sections?.Count > 0; };
+         Notify.SectionsUpdate(async sections => await ApplySections(sections));
          OpenCommand = new Command(async folder => await OpenAsync(folder));
       }
 
       public string NO_LIBRARY_TITLE => Resources.Translations.HOME_NO_LIBRARY_WARNING_TITLE;
       public string NO_LIBRARY_MESSAGE => Resources.Translations.HOME_NO_LIBRARY_WARNING_MESSAGE;
 
+      SectionVM[] GetSections() =>
+         DependencyService.Get<IStoreService>()?.GetSections();
+
       public ObservableList<SectionVM> Sections { get; }
-      void ApplySections(SectionVM[] sections)
+      async Task ApplySections(SectionVM[] sections)
       {
+         if (sections == null) return;
          var start = DateTime.Now;
-         Sections.ReplaceRange(sections);
+         await Sections.ReplaceRangeAsync(sections);
          Insights.TrackMetric("Sections Updating", DateTime.Now.Subtract(start).TotalSeconds);
       }
 
@@ -38,13 +42,6 @@ namespace ComicsShelf.Screens.Home
          set => SetProperty(ref _HasSections, value);
       }
 
-      public override Task OnAppearing()
-      {
-         var sections = DependencyService.Get<IStoreService>()?.GetSections();
-         if (sections != null) Sections.ReplaceRange(sections);
-         return base.OnAppearing();
-      }
-
       public Command OpenCommand { get; set; }
       async Task OpenAsync(object folder)
       {
@@ -53,7 +50,7 @@ namespace ComicsShelf.Screens.Home
          await Shell.Current.GoToAsync(viewModel);
       }
 
-      Task<SplashVM> GetSplashVM(FolderVM folder) => 
+      Task<SplashVM> GetSplashVM(FolderVM folder) =>
          Task.FromResult(SplashVM.Create(folder?.FirstItem));
 
       public override void Dispose()

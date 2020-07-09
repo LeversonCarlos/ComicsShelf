@@ -91,8 +91,8 @@ namespace ComicsShelf.Engine.CoverExtraction
             var drive = Drive.BaseDrive.GetDrive(library.Type);
 
             // SLEEP NOTIFICATION
-            var hasGoneSleep = false;
-            Notify.AppSleep(now => hasGoneSleep = true);
+            var cancelExecution = false;
+            Notify.AppSleep(now => cancelExecution = true);
 
             // LOOP THROUGH ITEMS
             int itemIndex = 0;
@@ -112,7 +112,7 @@ namespace ComicsShelf.Engine.CoverExtraction
                catch (Exception exI) { Insights.TrackException(exI); break; }
                finally { semaphore.Release(); Insights.TrackMetric($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds); }
 
-               if (hasGoneSleep) { break; }
+               if (cancelExecution) { break; }
             }
 
             // NOTIFY FINISH MESSAGE

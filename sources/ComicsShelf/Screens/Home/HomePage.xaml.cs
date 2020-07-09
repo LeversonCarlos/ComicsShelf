@@ -13,17 +13,5 @@ namespace ComicsShelf.Screens.Home
          BindingContext = new HomeVM();
       }
 
-      protected override void OnAppearing()
-      {
-         base.OnAppearing();
-         (BindingContext as HomeVM)?.OnAppearing();
-      }
-
-      protected override void OnDisappearing()
-      {
-         (BindingContext as HomeVM)?.OnDisappearing();
-         base.OnDisappearing();
-      }
-
    }
 }

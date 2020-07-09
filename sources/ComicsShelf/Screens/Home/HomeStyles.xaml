@@ -2,8 +2,8 @@
 <ResourceDictionary 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles;assembly=ComicsShelf"
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
+   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    x:Class="ComicsShelf.Screens.Home.HomeStyles">
 
    <ResourceDictionary.MergedDictionaries>
@@ -13,7 +13,7 @@
    </ResourceDictionary.MergedDictionaries>
 
    <Style TargetType="CollectionView" x:Key="Sections">
-      <Setter Property="Margin" Value="0,10" />
+      <Setter Property="Margin" Value="0,5" />
       <Setter Property="ItemsLayout" Value="VerticalList" />
       <Setter Property="SelectionMode" Value="None" />
       <Setter Property="ItemSizingStrategy" Value="MeasureAllItems" />

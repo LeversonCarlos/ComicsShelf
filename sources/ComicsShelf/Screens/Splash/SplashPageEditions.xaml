@@ -4,9 +4,9 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-   xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations;assembly=ComicsShelf" 
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers;assembly=ComicsShelf" 
-   xmlns:controls="clr-namespace:ComicsShelf.Controls;assembly=ComicsShelf"
+   xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations" 
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers" 
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    mc:Ignorable="d" 
    x:Name="editionsView" 
    x:Class="ComicsShelf.Screens.Splash.SplashPageEditions">

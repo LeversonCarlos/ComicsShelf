@@ -23,9 +23,9 @@ namespace ComicsShelf.Screens.Splash
 
       public override Task OnAppearing()
       {
-         Task.Run(() =>
+         Task.Run(async () =>
          {
-            EditionsList.ReplaceRange(EditionsArray);
+            await EditionsList.ReplaceRangeAsync(EditionsArray);
 
             var itemsPerLine = Helpers.Cover.ItemsPerLine;
             var editionsRows = (int)Math.Ceiling((double)EditionsList.Count / (double)itemsPerLine);

@@ -1,13 +1,17 @@
-﻿using System;
+﻿using ComicsShelf.Services.Hub;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Store
 {
    partial class StoreService
    {
+
+      public Task Initialize() => Task.Factory.StartNew(() => InitializeAsync(), TaskCreationOptions.LongRunning);
 
       public async Task<bool> InitializeAsync()
       {
@@ -18,6 +22,8 @@ namespace ComicsShelf.Store
             var libraryIDs = await Sync.GetLibraries();
 
             var dataTasks = libraryIDs
+               .GroupBy(x => x)
+               .Select(x => x.Key)
                .Select(libraryID => Sync.GetLibrary(libraryID))
                .ToArray();
             this.LibraryList = (await Task.WhenAll(dataTasks))
