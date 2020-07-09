@@ -57,13 +57,13 @@
          </StackLayout>
          <StackLayout Spacing="0">
             <Switch IsToggled="{Binding Readed}"></Switch>
-            <Label Text="{Binding ReadedLabel}" Style="{StaticResource DetailsLabel}" />
+            <Label Text="{controls:Translate Text=SPLASH_DETAILS_READED_LABEL}" Style="{StaticResource DetailsLabel}" />
          </StackLayout>
          <StackLayout Spacing="0" >
             <StackLayout.IsVisible>
                <OnIdiom x:TypeArguments="x:Boolean" Default="True" Phone="False" />
             </StackLayout.IsVisible>
-            <Label Text="{Binding ReadingLabel}" Style="{StaticResource DetailsLabel}" />
+            <Label Text="{controls:Translate Text=SPLASH_DETAILS_READING_LABEL}" Style="{StaticResource DetailsLabel}" />
             <Label Text="{Binding SelectedItem.ReadingDate, Converter={StaticResource dateFormatter}}" Style="{StaticResource DetailsValue}" />
          </StackLayout>
          <StackLayout Orientation="Horizontal">
