@@ -2,9 +2,9 @@
 
 namespace ComicsShelf.Screens.Splash
 {
-   public partial class SplashStyles : ResourceDictionary
+   public partial class Styles : ResourceDictionary
    {
-      public SplashStyles()
+      public Styles()
       {
          InitializeComponent();
       }

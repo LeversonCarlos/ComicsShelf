@@ -9,9 +9,11 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    mc:Ignorable="d" 
    x:Class="ComicsShelf.Screens.Splash.SplashPageCover">
+
    <ContentView.Resources>
-      <ResourceDictionary Source="SplashStyles.xaml" />
+      <ResourceDictionary Source="Styles.xaml" />
    </ContentView.Resources>
+
    <ContentView.Content>
       <StackLayout Style="{StaticResource Main}">
 
@@ -42,4 +44,5 @@
 
       </StackLayout>
    </ContentView.Content>
+
 </ContentView>

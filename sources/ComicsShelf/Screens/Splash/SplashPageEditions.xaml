@@ -12,7 +12,7 @@
    x:Class="ComicsShelf.Screens.Splash.SplashPageEditions">
 
    <ContentView.Resources>
-      <ResourceDictionary Source="SplashStyles.xaml" />
+      <ResourceDictionary Source="Styles.xaml" />
    </ContentView.Resources>
 
    <ContentView.Triggers>

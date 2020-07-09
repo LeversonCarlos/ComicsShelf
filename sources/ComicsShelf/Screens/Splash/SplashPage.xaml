@@ -11,7 +11,7 @@
    x:Class="ComicsShelf.Screens.Splash.SplashPage">
 
    <ContentPage.Resources>
-      <ResourceDictionary Source="SplashStyles.xaml" />
+      <ResourceDictionary Source="Styles.xaml" />
    </ContentPage.Resources>
 
    <ContentPage.Content>

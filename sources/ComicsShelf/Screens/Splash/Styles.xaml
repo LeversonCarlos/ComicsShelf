@@ -3,15 +3,8 @@
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers" 
-   xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
-   x:Class="ComicsShelf.Screens.Splash.SplashStyles">
-
-   <ResourceDictionary.MergedDictionaries>
-      <styles:LightTheme />
-      <styles:LabelStyles />
-      <styles:CoverStyles />
-   </ResourceDictionary.MergedDictionaries>
+   x:Class="ComicsShelf.Screens.Splash.Styles">
 
    <Style TargetType="ContentPage">
       <Setter Property="Padding" Value="{Static helpers:Cover.ScreenMargin}" />
