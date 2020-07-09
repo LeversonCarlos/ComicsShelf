@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations" 
+   xmlns:splash="clr-namespace:ComicsShelf.Screens.Splash" 
+   Shell.PresentationMode="ModalAnimated" 
+   x:Class="ComicsShelf.Screens.Splash.Page">
+
+   <ContentPage.Resources>
+      <ResourceDictionary Source="Styles.xaml" />
+   </ContentPage.Resources>
+
+   <ContentPage.Content>
+      <AbsoluteLayout >
+
+         <splash:Page_Background AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+         
+         <ScrollView Orientation="Vertical" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <StackLayout Style="{StaticResource Main}">
+
+               <StackLayout.Triggers>
+                  <DataTrigger TargetType="StackLayout" Binding="{Binding IsOpening}" Value="True">
+                     <DataTrigger.EnterActions>
+                        <animations:OpacityAnimation Opacity="0" Speed="0.002" />
+                     </DataTrigger.EnterActions>
+                  </DataTrigger>
+                  <DataTrigger TargetType="StackLayout" Binding="{Binding IsOpening}" Value="False">
+                     <DataTrigger.EnterActions>
+                        <animations:OpacityAnimation Opacity="1" />
+                     </DataTrigger.EnterActions>
+                  </DataTrigger>
+               </StackLayout.Triggers>
+
+               <splash:Page_Cover />
+
+               <splash:Page_Details />
+
+               <splash:Page_Editions />
+
+            </StackLayout>
+         </ScrollView>
+      </AbsoluteLayout>
+   </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   x:Class="ComicsShelf.Screens.Home.Styles">
+
+   <Style TargetType="CollectionView" x:Key="Sections">
+      <Setter Property="Margin" Value="0,5" />
+      <Setter Property="ItemsLayout" Value="VerticalList" />
+      <Setter Property="SelectionMode" Value="None" />
+      <Setter Property="ItemSizingStrategy" Value="MeasureAllItems" />
+   </Style>
+
+   <Style TargetType="StackLayout" x:Key="Section">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Spacing" Value="0" />
+   </Style>
+
+   <Style TargetType="StackLayout" x:Key="SectionHeader">
+      <Setter Property="Margin" Value="10,0" />
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="5" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="SectionTitle">
+      <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
+      <Setter Property="VerticalOptions" Value="FillAndExpand" />
+      <Setter Property="VerticalTextAlignment" Value="End" />
+      <Setter Property="FontAttributes" Value="Bold" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="SectionSubtitle">
+      <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
+      <Setter Property="VerticalOptions" Value="FillAndExpand" />
+      <Setter Property="VerticalTextAlignment" Value="End" />
+      <Setter Property="Padding" Value="0,0,0,2" />
+      <Setter Property="Opacity" Value="0.4" />
+   </Style>
+
+   <Style TargetType="CollectionView" x:Key="Folders">
+      <Setter Property="ItemsLayout" Value="HorizontalList" />
+      <Setter Property="SelectionMode" Value="None" />
+   </Style>
+
+   <Style TargetType="controls:CoverContainer">
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
+   </Style>
+
+   <Style TargetType="controls:CoverImage">
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
+      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
+   </Style>
+
+</ResourceDictionary>

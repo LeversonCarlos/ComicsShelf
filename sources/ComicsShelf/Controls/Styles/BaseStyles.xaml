@@ -22,4 +22,8 @@
       <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
    </Style>
 
+   <Style TargetType="ImageButton">
+      <Setter Property="BackgroundColor" Value="Transparent" />
+   </Style>
+
 </ResourceDictionary>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   x:Class="ComicsShelf.Screens.Home.Page_Sections"
+   x:Name="homeSections">
+
+   <ContentView.Resources>
+      <ResourceDictionary Source="Styles.xaml" />
+   </ContentView.Resources>
+
+   <ContentView.Content>
+      <CollectionView ItemsSource="{Binding Sections}" Style="{StaticResource Sections}">
+         <CollectionView.ItemTemplate>
+            <DataTemplate>
+
+               <StackLayout Style="{StaticResource Section}">
+
+                  <StackLayout Style="{StaticResource SectionHeader}">
+                     <Label Text="{Binding Text}" Style="{StaticResource SectionTitle}" />
+                     <Label Text="{Binding Library.Description}" Style="{StaticResource SectionSubtitle}" />
+                  </StackLayout>
+                  
+                  <CollectionView ItemsSource="{Binding Folders}" HeightRequest="{Binding SizeHeight}" Style="{StaticResource Folders}" >
+                     <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                           <controls:CoverContainer 
+                                 OpenCommand="{Binding Path=BindingContext.OpenCommand, Source={x:Reference homeSections} }" 
+                                 WidthRequest="{Binding SizeWidth}" >
+                              <controls:CoverImage 
+                                    ImageSource="{Binding FirstItem.CoverPath}" 
+                                    HeightRequest="{Binding SizeHeight}" WidthRequest="{Binding SizeWidth}" 
+                                    ImageAspect="Fill" />
+                              <BoxView Style="{StaticResource CoverOverlay}" />
+                              <Label Text="{Binding Text}" Style="{StaticResource CoverText}" />
+                           </controls:CoverContainer>
+
+                        </DataTemplate>
+                     </CollectionView.ItemTemplate>
+                  </CollectionView>
+                  
+               </StackLayout>
+
+            </DataTemplate>
+         </CollectionView.ItemTemplate>
+      </CollectionView>
+   </ContentView.Content>
+
+</ContentView>

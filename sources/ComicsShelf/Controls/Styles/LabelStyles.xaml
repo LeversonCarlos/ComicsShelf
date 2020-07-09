@@ -16,8 +16,8 @@
 
    <Style TargetType="Label" x:Key="Large" >
       <Setter Property="FontSize" Value="Large" />
-      <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
       <Setter Property="FontAttributes" Value="Bold" />
+      <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
    </Style>
 
    <Style TargetType="Label" x:Key="Default" >

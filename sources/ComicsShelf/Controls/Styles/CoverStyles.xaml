@@ -4,7 +4,6 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
-   xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
    x:Class="ComicsShelf.Controls.Styles.CoverStyles">
 
    <ResourceDictionary.MergedDictionaries>
@@ -12,9 +11,11 @@
       <styles:BaseStyles />
    </ResourceDictionary.MergedDictionaries>
 
+   <Style TargetType="controls:CoverContainer">
+      <Setter Property="Padding" Value="5,0" />
+   </Style>
+
    <Style TargetType="controls:CoverImage">
-      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
-      <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
       <Setter Property="Grid.Row" Value="0" />
       <Setter Property="Grid.RowSpan" Value="3" />
    </Style>

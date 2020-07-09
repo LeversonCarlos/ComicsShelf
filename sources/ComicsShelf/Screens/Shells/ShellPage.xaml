@@ -2,12 +2,10 @@
 <Shell 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
    xmlns:home="clr-namespace:ComicsShelf.Screens.Home"
    xmlns:settings="clr-namespace:ComicsShelf.Screens.Settings"   
-   mc:Ignorable="d"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    Shell.NavBarIsVisible="False" 
    x:Class="ComicsShelf.Screens.Shells.ShellPage">
 
@@ -33,14 +31,14 @@
 
    <!-- Your Pages -->
    <TabBar>
-      <Tab Title="Home" Icon="home">
-         <ShellContent ContentTemplate="{DataTemplate home:HomePage}" />
+      <Tab Title="{controls:Translate Text=HOME_MAIN_TITLE}" Icon="home">
+         <ShellContent ContentTemplate="{DataTemplate home:Page}" />
       </Tab>
       <Tab Title="Search" Icon="search">
          <ShellContent ContentTemplate="{DataTemplate ContentPage}" />
       </Tab>
-      <Tab Title="Settings" Icon="settings">
-         <ShellContent ContentTemplate="{DataTemplate settings:SettingsPage}" />
+      <Tab Title="{controls:Translate Text=SETTINGS_MAIN_TITLE}" Icon="settings">
+         <ShellContent ContentTemplate="{DataTemplate settings:Page}" />
       </Tab>
    </TabBar>
 

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   x:Class="ComicsShelf.Screens.Settings.Page_Cache">
+
+   <ContentView.Resources>
+      <ResourceDictionary Source="Styles.xaml" />
+   </ContentView.Resources>
+
+   <ContentView.Content>
+
+      <StackLayout Style="{StaticResource Section}">
+
+         <Label Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
+
+         <FlexLayout Style="{StaticResource SectionItem}" >
+            <FlexLayout.GestureRecognizers>
+               <TapGestureRecognizer Command="{Binding ClearCacheCommand}" />
+            </FlexLayout.GestureRecognizers>
+
+            <StackLayout FlexLayout.Grow="1" Spacing="0">
+               <Label Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_CLEAR_COMMAND}" Style="{StaticResource Default}" ></Label>
+               <Label Style="{StaticResource Small}" >
+                  <Label.FormattedText>
+                     <FormattedString>
+                        <FormattedString.Spans>
+                           <Span Text="{Binding CacheSizeInMegas}" />
+                           <Span Text=" " />
+                           <Span Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_UNITS}" />
+                        </FormattedString.Spans>
+                     </FormattedString>
+                  </Label.FormattedText>
+               </Label>
+            </StackLayout>
+
+         </FlexLayout>
+
+         <BoxView Style="{StaticResource Separator}" />
+
+      </StackLayout>
+
+   </ContentView.Content>
+</ContentView>

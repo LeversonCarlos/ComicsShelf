@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:home="clr-namespace:ComicsShelf.Screens.Home"
+   x:Class="ComicsShelf.Screens.Home.Page">
+
+   <ContentPage.Content>
+      <StackLayout>
+
+         <home:Page_Empty VerticalOptions="FillAndExpand" IsVisible="{Binding HasSections, Converter={StaticResource notConverter}}" />
+
+         <home:Page_Sections IsVisible="{Binding HasSections}" />
+
+      </StackLayout>
+   </ContentPage.Content>
+</ContentPage>
