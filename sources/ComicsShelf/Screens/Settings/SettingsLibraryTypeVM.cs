@@ -1,6 +1,5 @@
 ﻿using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -20,8 +19,6 @@ namespace ComicsShelf.Screens.Settings
          AddText = libraryType == enLibraryType.LocalDrive ? Resources.Translations.SETTINGS_LOCAL_DRIVE_ADD_COMMAND : Resources.Translations.SETTINGS_ONE_DRIVE_ADD_COMMAND;
          AddCommand = new Command(async () => await Add());
          Libraries = new ObservableList<SettingsLibraryVM>();
-         Helpers.Notify.LibraryAdd(library => AddLibrary(library));
-         Helpers.Notify.LibraryRemove(library => RemoveLibrary(library));
       }
 
       public string AddText { get; }
@@ -29,27 +26,6 @@ namespace ComicsShelf.Screens.Settings
       Task Add() =>
          DependencyService.Get<IStoreService>()
             .AddLibraryAsync(LibraryType);
-
-      void AddLibrary(LibraryVM library)
-      {
-         if (library.Type != LibraryType) { return; }
-         Libraries.Add(new SettingsLibraryVM(library));
-      }
-
-      void RemoveLibrary(LibraryVM library)
-      {
-         if (library.Type != LibraryType) { return; }
-         var libraryItem = Libraries.Where(x => x.Library.ID == library.ID).FirstOrDefault();
-         if (libraryItem == null) { return; }
-         Libraries.Remove(libraryItem);
-      }
-
-      public override void Dispose()
-      {
-         Helpers.Notify.LibraryAddUnsubscribe();
-         Helpers.Notify.LibraryRemoveUnsubscribe();
-         base.Dispose();
-      }
 
    }
 }
