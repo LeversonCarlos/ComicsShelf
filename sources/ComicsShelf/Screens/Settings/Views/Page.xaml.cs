@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace ComicsShelf.Screens.Settings
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class SettingsPage : ContentPage
+   public partial class Page : ContentPage
    {
-      public SettingsPage()
+      public Page()
       {
          InitializeComponent();
          BindingContext = new SettingsVM();

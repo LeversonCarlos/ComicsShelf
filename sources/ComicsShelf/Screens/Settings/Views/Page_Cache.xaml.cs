@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 namespace ComicsShelf.Screens.Settings
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class SettingsPage_Cache : ContentView
+   public partial class Page_Cache : ContentView
    {
-      public SettingsPage_Cache()
+      public Page_Cache()
       {
          InitializeComponent();
       }

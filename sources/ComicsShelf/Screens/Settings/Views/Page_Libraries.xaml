@@ -2,7 +2,7 @@
 <ContentView 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   x:Class="ComicsShelf.Screens.Settings.SettingsPage_Libraries">
+   x:Class="ComicsShelf.Screens.Settings.Page_Libraries">
 
    <ContentView.Resources>
       <ResourceDictionary Source="Styles.xaml" />

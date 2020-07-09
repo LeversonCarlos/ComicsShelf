@@ -44,6 +44,12 @@
      <Compile Update="Screens\FolderDialog\Views\Styles.xaml.cs">
        <DependentUpon>Styles.xaml</DependentUpon>
      </Compile>
+     <Compile Update="Screens\Home\Views\Page_Sections.xaml.cs">
+       <DependentUpon>Page_Sections.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Home\Views\Page_Empty.xaml.cs">
+       <DependentUpon>Page_Empty.xaml</DependentUpon>
+     </Compile>
      <Compile Update="Screens\Home\Views\Page.xaml.cs">
        <DependentUpon>Page.xaml</DependentUpon>
      </Compile>
@@ -55,6 +61,15 @@
      </Compile>
      <Compile Update="Screens\Reading\Views\Styles.xaml.cs">
        <DependentUpon>Styles.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Settings\Views\Page.xaml.cs">
+       <DependentUpon>Page.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Settings\Views\Page_Cache.xaml.cs">
+       <DependentUpon>Page_Cache.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Settings\Views\Page_Libraries.xaml.cs">
+       <DependentUpon>Page_Libraries.xaml</DependentUpon>
      </Compile>
      <Compile Update="Screens\Splash\Views\Page.xaml.cs">
        <DependentUpon>Page.xaml</DependentUpon>
@@ -77,16 +92,16 @@
     <EmbeddedResource Update="App.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Home\Views\HomePage_Empty.xaml">
+    <EmbeddedResource Update="Screens\Home\Views\Page_Empty.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Home\Views\HomePage_Sections.xaml">
+    <EmbeddedResource Update="Screens\Home\Views\Page_Sections.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Settings\Views\SettingsPage_Cache.xaml">
+    <EmbeddedResource Update="Screens\Settings\Views\Page_Cache.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Settings\Views\SettingsPage_Libraries.xaml">
+    <EmbeddedResource Update="Screens\Settings\Views\Page_Libraries.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Screens\Settings\Views\Styles.xaml">
@@ -95,7 +110,7 @@
     <EmbeddedResource Update="Screens\Shells\ShellPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Settings\Views\SettingsPage.xaml">
+    <EmbeddedResource Update="Screens\Settings\Views\Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Screens\Reading\Views\Page.xaml">

@@ -2,9 +2,8 @@
 <ContentPage 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   x:Class="ComicsShelf.Screens.Settings.SettingsPage"
    xmlns:settings="clr-namespace:ComicsShelf.Screens.Settings"
-   Title="{Binding Title}" >
+   x:Class="ComicsShelf.Screens.Settings.Page">
 
    <ContentPage.Resources>
       <ResourceDictionary Source="Styles.xaml" />
@@ -12,8 +11,8 @@
 
    <ContentPage.Content>
       <StackLayout Style="{StaticResource Main}">
-         <settings:SettingsPage_Libraries />
-         <settings:SettingsPage_Cache />
+         <settings:Page_Libraries />
+         <settings:Page_Cache />
       </StackLayout>
    </ContentPage.Content>
 
