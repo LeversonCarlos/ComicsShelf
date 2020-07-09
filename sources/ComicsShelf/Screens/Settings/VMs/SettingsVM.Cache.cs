@@ -20,17 +20,16 @@ namespace ComicsShelf.Screens.Settings
       {
          try
          {
-            if (!System.IO.Directory.Exists(Helpers.Paths.FilesCache)) return;
-
-            var filesList = System.IO.Directory.GetFiles(Helpers.Paths.FilesCache, "*.*", System.IO.SearchOption.AllDirectories);
-
-            var filesInfo = filesList
-               .Select(file => new System.IO.FileInfo(file))
-               .Select(file => new { file.FullName, SizeInBytes = file.Length })
-               .ToArray();
-
-            var cacheSizeInBytes = filesInfo.Select(file => file.SizeInBytes).Sum();
-
+            long cacheSizeInBytes = 0;
+            if (System.IO.Directory.Exists(Helpers.Paths.FilesCache))
+            {
+               var filesList = System.IO.Directory.GetFiles(Helpers.Paths.FilesCache, "*.*", System.IO.SearchOption.AllDirectories);
+               var filesInfo = filesList
+                  .Select(file => new System.IO.FileInfo(file))
+                  .Select(file => new { file.FullName, SizeInBytes = file.Length })
+                  .ToArray();
+               cacheSizeInBytes = filesInfo.Select(file => file.SizeInBytes).Sum();
+            }
             CacheSizeInMegas = (long)Math.Round((double)cacheSizeInBytes / (double)1024 / (double)1024, 0);
          }
          catch (Exception ex) { Insights.TrackException(ex); }
