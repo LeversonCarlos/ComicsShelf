@@ -2,9 +2,9 @@
 
 namespace ComicsShelf.Screens.Reading
 {
-   public partial class ReadingStyles : ResourceDictionary
+   public partial class Styles : ResourceDictionary
    {
-      public ReadingStyles()
+      public Styles()
       {
          InitializeComponent();
       }

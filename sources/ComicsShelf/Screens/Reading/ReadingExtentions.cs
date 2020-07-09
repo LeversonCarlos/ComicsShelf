@@ -10,7 +10,7 @@ namespace ComicsShelf.Screens.Reading
       internal static ReadingVM Instance { get; set; }
 
       public static string GetRoute() => "reading";
-      public static Type GetPageType() => typeof(ReadingPage);
+      public static Type GetPageType() => typeof(Reading.Page);
 
       public static Task GoToAsync(this Shell shell, ReadingVM viewModel)
       {

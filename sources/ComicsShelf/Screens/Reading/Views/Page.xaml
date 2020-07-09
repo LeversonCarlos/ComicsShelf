@@ -9,11 +9,10 @@
    mc:Ignorable="d"
    Shell.PresentationMode="ModalAnimated" 
    x:Name="readingPage" BackgroundColor="Black"
-   x:Class="ComicsShelf.Screens.Reading.ReadingPage">
+   x:Class="ComicsShelf.Screens.Reading.Page">
 
    <ContentPage.Resources>
-      <converters:NotConverter x:Key="notConverter" />
-      <ResourceDictionary Source="ReadingStyles.xaml" />
+      <ResourceDictionary Source="Styles.xaml" />
    </ContentPage.Resources>
 
    <ContentPage.Content>

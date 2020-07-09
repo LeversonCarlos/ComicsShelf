@@ -6,10 +6,10 @@ namespace ComicsShelf.Screens.Reading
 {
 
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class ReadingPage : ContentPage
+   public partial class Page : ContentPage
    {
 
-      public ReadingPage()
+      public Page()
       {
          InitializeComponent();
          ReadingExtentions.Instance.IsBusy = true;

@@ -3,13 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
-   x:Class="ComicsShelf.Screens.Reading.ReadingStyles">
-
-   <ResourceDictionary.MergedDictionaries>
-      <styles:LightTheme />
-      <styles:LabelStyles />
-      <styles:BaseStyles />
-   </ResourceDictionary.MergedDictionaries>
+   x:Class="ComicsShelf.Screens.Reading.Styles">
 
    <Style TargetType="Label" x:Key="StatText" BasedOn="{StaticResource Default}">
       <Setter Property="FontAttributes" Value="Bold" />
