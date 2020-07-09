@@ -13,7 +13,7 @@
    </Style>
 
    <Style TargetType="FlexLayout" x:Key="SectionItem">
-      <Setter Property="Padding" Value="10,5" />
+      <Setter Property="Padding" Value="10,0" />
       <Setter Property="AlignItems" Value="Center" />
       <Setter Property="MinimumHeightRequest" Value="60" />
    </Style>
