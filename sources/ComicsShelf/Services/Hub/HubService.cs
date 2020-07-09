@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Services.Hub
 {
-   public partial class HubService
+   public class HubService
    {
 
       public void Register()
@@ -17,8 +17,6 @@ namespace ComicsShelf.Services.Hub
          DependencyService.Register<LocalDrive>();
          DependencyService.Register<OneDrive>();
          DependencyService.Register<IStoreService, StoreService>();
-         Screens.Home.Extentions.Initialize();
-         Screens.Settings.Extentions.Initialize();
       }
 
       public void Start()
@@ -27,6 +25,8 @@ namespace ComicsShelf.Services.Hub
          {
             Helpers.Cover.Init();
 
+            Helpers.Notify.LibraryAdd(async library => await Engine.RefreshData.Service.Execute(library));
+            Helpers.Notify.LibraryRemove(async library => await Engine.AnalysisData.Service.Execute(null));
             Helpers.Notify.ItemsUpdate(itemsList => Engine.AnalysisData.Service.Execute(itemsList));
 
             Routing.RegisterRoute(SplashExtentions.GetRoute(), SplashExtentions.GetPageType());
@@ -45,12 +45,6 @@ namespace ComicsShelf.Services.Hub
       public void Resume()
       {
          Engine.CoverExtraction.Service.Execute();
-      }
-
-      internal async Task SectionsUpdateAsync(SectionVM[] sections)
-      {
-         await Screens.Home.Extentions.Instance?.ApplySections(sections);
-         await Engine.CoverExtraction.Service.Execute();
       }
 
    }

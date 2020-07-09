@@ -1,10 +1,8 @@
-﻿using ComicsShelf.Services.Hub;
-using ComicsShelf.ViewModels;
+﻿using ComicsShelf.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace ComicsShelf.Store
 {
@@ -32,7 +30,7 @@ namespace ComicsShelf.Store
                .ToArray();
             if (!await Sync.SetLibraries(this.LibraryList)) { return false; }
 
-            DependencyService.Get<HubService>().LibraryAdd(library);
+            Helpers.Notify.LibraryAdd(library);
 
             return true;
          }

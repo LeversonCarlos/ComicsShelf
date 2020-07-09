@@ -48,6 +48,15 @@ namespace ComicsShelf.Helpers
          Subscribe($"{ItemsUpdateKey}", callback);
 
 
+      const string SectionsUpdateKey = "store.sections.update.key";
+      public static void SectionsUpdate(SectionVM[] sectionsList) =>
+         Send($"{SectionsUpdateKey}", sectionsList);
+      public static void SectionsUpdate(Action<SectionVM[]> callback) =>
+         Subscribe($"{SectionsUpdateKey}", callback);
+      public static void SectionsUpdateUnsubscribe() =>
+         Unsubscribe($"{SectionsUpdateKey}");
+
+
       const string MessageKey = "store.message.key";
       public static void Message(LibraryVM library, string message) =>
          Send($"{MessageKey}.{library.ID}", message);

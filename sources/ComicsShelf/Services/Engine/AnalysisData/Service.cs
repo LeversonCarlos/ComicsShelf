@@ -53,7 +53,7 @@ namespace ComicsShelf.Engine.AnalysisData
 
             var sectionsArray = sections.ToArray();
             store.SetSections(sectionsArray);
-            DependencyService.Get<HubService>().SectionsUpdate(sectionsArray);
+            Helpers.Notify.SectionsUpdate(sectionsArray);
 
             await Task.CompletedTask;
          }
