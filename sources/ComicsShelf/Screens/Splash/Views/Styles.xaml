@@ -4,6 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   xmlns:splash="clr-namespace:ComicsShelf.Screens.Splash"
    x:Class="ComicsShelf.Screens.Splash.Styles">
 
    <Style TargetType="ContentPage">
@@ -39,13 +40,13 @@
       <Setter Property="HorizontalOptions" Value="Center" />
    </Style>
 
-   <Style TargetType="controls:RatingButton" x:Key="ThumbsUp">
+   <Style TargetType="splash:RatingButton" x:Key="ThumbsUp">
       <Setter Property="SelectedImageSource" Value="thumbsUp_selected" />
       <Setter Property="UnselectedImageSource" Value="thumbsUp_unselected" />
       <Setter Property="SelectedRating" Value="1" />
    </Style>
 
-   <Style TargetType="controls:RatingButton" x:Key="ThumbsDown">
+   <Style TargetType="splash:RatingButton" x:Key="ThumbsDown">
       <Setter Property="SelectedImageSource" Value="thumbsDown_selected" />
       <Setter Property="UnselectedImageSource" Value="thumbsDown_unselected" />
       <Setter Property="SelectedRating" Value="-1" />

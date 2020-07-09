@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ComicsShelf.Controls
+namespace ComicsShelf.Screens.Splash
 {
    public class RatingButton : ImageButton
    {
