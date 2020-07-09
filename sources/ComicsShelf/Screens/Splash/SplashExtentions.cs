@@ -36,7 +36,7 @@ namespace ComicsShelf.Screens.Splash
       internal static SplashVM Instance { get; set; }
 
       public static string GetRoute() => "splash";
-      public static Type GetPageType() => typeof(SplashPage);
+      public static Type GetPageType() => typeof(Splash.Page);
 
       public static Task GoToAsync(this Shell shell, SplashVM viewModel)
       {

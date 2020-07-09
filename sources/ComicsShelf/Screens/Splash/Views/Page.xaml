@@ -5,7 +5,7 @@
    xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations" 
    xmlns:splash="clr-namespace:ComicsShelf.Screens.Splash" 
    Shell.PresentationMode="ModalAnimated" 
-   x:Class="ComicsShelf.Screens.Splash.SplashPage">
+   x:Class="ComicsShelf.Screens.Splash.Page">
 
    <ContentPage.Resources>
       <ResourceDictionary Source="Styles.xaml" />

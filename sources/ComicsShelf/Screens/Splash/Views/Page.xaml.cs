@@ -4,10 +4,10 @@ using Xamarin.Forms.Xaml;
 namespace ComicsShelf.Screens.Splash
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class SplashPage : ContentPage
+   public partial class Page : ContentPage
    {
 
-      public SplashPage()
+      public Page()
       {
          InitializeComponent();
          SplashExtentions.Instance.IsBusy = true;
