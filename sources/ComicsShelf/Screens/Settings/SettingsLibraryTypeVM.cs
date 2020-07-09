@@ -11,6 +11,7 @@ namespace ComicsShelf.Screens.Settings
 
       public enLibraryType LibraryType { get; }
       public string Title { get; }
+      public ObservableList<SettingsLibraryVM> Libraries { get; }
 
       public SettingsLibraryTypeVM(enLibraryType libraryType)
       {
@@ -19,21 +20,8 @@ namespace ComicsShelf.Screens.Settings
          AddText = libraryType == enLibraryType.LocalDrive ? Resources.Translations.SETTINGS_LOCAL_DRIVE_ADD_COMMAND : Resources.Translations.SETTINGS_ONE_DRIVE_ADD_COMMAND;
          AddCommand = new Command(async () => await Add());
          Libraries = new ObservableList<SettingsLibraryVM>();
-         LoadLibraryList();
          Helpers.Notify.LibraryAdd(library => AddLibrary(library));
          Helpers.Notify.LibraryRemove(library => RemoveLibrary(library));
-      }
-
-      public ObservableList<SettingsLibraryVM> Libraries { get; }
-      void LoadLibraryList()
-      {
-         var libraryList = DependencyService
-            .Get<IStoreService>()
-            ?.GetLibraries()
-            .Where(x => x.Type == LibraryType)
-            .Select(x => new SettingsLibraryVM(x))
-            .ToArray();
-         if (libraryList != null) Libraries.AddRange(libraryList);
       }
 
       public string AddText { get; }
