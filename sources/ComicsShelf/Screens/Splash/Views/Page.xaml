@@ -32,11 +32,11 @@
                   </DataTrigger>
                </StackLayout.Triggers>
 
-               <splash:SplashPageCover />
+               <splash:Page_Cover />
 
-               <splash:SplashPageDetails />
+               <splash:Page_Details />
 
-               <splash:SplashPageEditions />
+               <splash:Page_Editions />
 
             </StackLayout>
          </ScrollView>
