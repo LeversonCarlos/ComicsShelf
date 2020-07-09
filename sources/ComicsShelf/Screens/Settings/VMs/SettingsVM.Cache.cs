@@ -20,6 +20,8 @@ namespace ComicsShelf.Screens.Settings
       {
          try
          {
+            if (!System.IO.Directory.Exists(Helpers.Paths.FilesCache)) return;
+
             var filesList = System.IO.Directory.GetFiles(Helpers.Paths.FilesCache, "*.*", System.IO.SearchOption.AllDirectories);
 
             var filesInfo = filesList
