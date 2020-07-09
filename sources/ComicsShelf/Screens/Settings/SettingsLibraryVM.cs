@@ -1,37 +1,32 @@
 ﻿using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
-using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Screens.Settings
 {
-   public class LibrarySetting : ObservableObject
+   public class SettingsLibraryVM : ObservableObject
    {
 
       public LibraryVM Library { get; }
 
-      public LibrarySetting(LibraryVM library)
+      public SettingsLibraryVM(LibraryVM library)
       {
          Library = library;
-         this.RemoveCommand = new Command(async () => await this.Remove());
-         Helpers.Notify.Message(library, message =>
-         {
-            this.Message = message;
-            this.HasMessage = !string.IsNullOrEmpty(message);
-         });
-         Helpers.Notify.Progress(library, progress =>
-         {
-            this.Progress = progress;
-            this.HasProgress = progress > 0 && progress < 1;
-         });
+         RemoveCommand = new Command(async () => await Remove());
+         Helpers.Notify.Message(library, message => Message = message);
+         Helpers.Notify.Progress(library, progress => Progress = progress);
       }
 
       string _Message;
       public string Message
       {
          get => _Message;
-         set => SetProperty(ref _Message, value);
+         set
+         {
+            SetProperty(ref _Message, value);
+            HasMessage = !string.IsNullOrEmpty(value);
+         }
       }
 
       bool _HasMessage;
@@ -45,7 +40,11 @@ namespace ComicsShelf.Screens.Settings
       public double Progress
       {
          get => _Progress;
-         set => SetProperty(ref _Progress, value);
+         set
+         {
+            SetProperty(ref _Progress, value);
+            HasProgress = value > 0 && value < 1;
+         }
       }
 
       bool _HasProgress;
