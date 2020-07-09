@@ -44,8 +44,8 @@
          <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
          <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-            <Button Command="{Binding CancelCommand}" Text="{Binding CANCEL_COMMAND}" Style="{StaticResource BaseButton}" />
-            <Button Command="{Binding ConfirmCommand}" Text="{Binding CONFIRM_COMMAND}" Style="{StaticResource ConfirmButton}" />
+            <Button Command="{Binding CancelCommand}" Text="{controls:Translate Text=COMMON_CANCEL_COMMAND}" Style="{StaticResource BaseButton}" />
+            <Button Command="{Binding ConfirmCommand}" Text="{controls:Translate Text=COMMON_CONFIRM_COMMAND}" Style="{StaticResource ConfirmButton}" />
          </StackLayout>
 
       </StackLayout>

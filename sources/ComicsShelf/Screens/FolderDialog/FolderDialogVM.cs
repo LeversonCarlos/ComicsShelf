@@ -11,10 +11,6 @@ namespace ComicsShelf.Screens.FolderDialog
       readonly TaskCompletionSource<SelectorItemVM> tcs;
       public ObservableList<SelectorItemVM> Data { get; private set; }
 
-      public string SELECTED_PATH => Resources.Translations.DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL;
-      public string CANCEL_COMMAND => Resources.Translations.COMMON_CANCEL_COMMAND;
-      public string CONFIRM_COMMAND => Resources.Translations.COMMON_CONFIRM_COMMAND;
-
       public FolderDialogVM()
       {
          this.Title = Resources.Translations.DRIVE_FOLDER_DIALOG_TITLE;
