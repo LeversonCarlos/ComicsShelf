@@ -1,8 +1,10 @@
 ﻿using ComicsShelf.Helpers;
+using ComicsShelf.Services.Hub;
 using ComicsShelf.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Store
 {
@@ -23,7 +25,7 @@ namespace ComicsShelf.Store
                .ToArray();
             if (!await Sync.SetLibraries(this.LibraryList)) { return false; }
 
-            Helpers.Notify.LibraryRemove(library);
+            DependencyService.Get<HubService>().LibraryRemove(library);
 
             return true;
          }

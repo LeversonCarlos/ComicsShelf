@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Services.Hub
 {
-   public class HubService
+   public partial class HubService
    {
 
       public void Register()
@@ -17,6 +17,7 @@ namespace ComicsShelf.Services.Hub
          DependencyService.Register<OneDrive>();
          DependencyService.Register<IStoreService, StoreService>();
          Screens.Home.Extentions.Initialize();
+         Screens.Settings.Extentions.Initialize();
       }
 
       public void Start()
@@ -26,7 +27,6 @@ namespace ComicsShelf.Services.Hub
             Helpers.Cover.Init();
 
             Helpers.Notify.LibraryAdd(library => Engine.RefreshData.Service.Execute(library));
-            Helpers.Notify.LibraryRemove(library => Engine.AnalysisData.Service.Execute(null));
             Helpers.Notify.ItemsUpdate(itemsList => Engine.AnalysisData.Service.Execute(itemsList));
 
             Routing.RegisterRoute(SplashExtentions.GetRoute(), SplashExtentions.GetPageType());
