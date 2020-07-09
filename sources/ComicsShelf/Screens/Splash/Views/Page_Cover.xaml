@@ -14,7 +14,7 @@
    <ContentView.Content>
       <StackLayout Style="{StaticResource Main}">
 
-         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource Title}" LineBreakMode="MiddleTruncation">
+         <Label Text="{Binding SelectedItem.FullText}" Style="{StaticResource SplashTitle}" LineBreakMode="MiddleTruncation">
             <Label.Margin>
                <OnIdiom x:TypeArguments="Thickness" Default="0,10" Tablet="0,20" />
             </Label.Margin>

@@ -21,7 +21,7 @@
       <Setter Property="WidthRequest" Value="{Static helpers:Cover.SplashWidth}" />
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="Title">
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="SplashTitle">
       <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
       <Setter Property="HorizontalOptions" Value="Center" />
    </Style>
