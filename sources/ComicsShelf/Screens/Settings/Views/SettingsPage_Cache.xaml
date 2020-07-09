@@ -11,11 +11,11 @@
 
    <ContentView.Content>
 
-      <StackLayout Style="{StaticResource Settings_Group_Stack}">
+      <StackLayout Style="{StaticResource Section}">
 
          <Label Text="{controls:Translate Text=LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
 
-         <FlexLayout Style="{StaticResource Settings_Item_Flex}" >
+         <FlexLayout Style="{StaticResource SectionItem}" >
             <FlexLayout.GestureRecognizers>
                <TapGestureRecognizer Command="{Binding ClearCacheCommand}" />
             </FlexLayout.GestureRecognizers>

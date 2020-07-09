@@ -11,7 +11,7 @@
    </ContentPage.Resources>
 
    <ContentPage.Content>
-      <StackLayout Style="{StaticResource Settings_Main_Stack}">
+      <StackLayout Style="{StaticResource Main}">
          <settings:SettingsPage_Libraries />
          <settings:SettingsPage_Cache />
       </StackLayout>

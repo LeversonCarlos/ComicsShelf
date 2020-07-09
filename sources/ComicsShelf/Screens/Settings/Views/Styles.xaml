@@ -4,21 +4,21 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    x:Class="ComicsShelf.Screens.Settings.Styles">
 
-   <Style TargetType="StackLayout" x:Key="Settings_Main_Stack">
+   <Style TargetType="StackLayout" x:Key="Main">
       <Setter Property="Padding" Value="10" />
    </Style>
 
-   <Style TargetType="StackLayout" x:Key="Settings_Group_Stack">
+   <Style TargetType="StackLayout" x:Key="Section">
       <Setter Property="Margin" Value="0,10" />
    </Style>
 
-   <Style TargetType="FlexLayout" x:Key="Settings_Item_Flex">
+   <Style TargetType="FlexLayout" x:Key="SectionItem">
       <Setter Property="Padding" Value="10,5" />
       <Setter Property="AlignItems" Value="Center" />
       <Setter Property="MinimumHeightRequest" Value="60" />
    </Style>
 
-   <Style TargetType="ProgressBar" x:Key="Settings_Library_Progress" BasedOn="{StaticResource ProgressBar}">
+   <Style TargetType="ProgressBar" x:Key="UpdateProgress" BasedOn="{StaticResource ProgressBar}">
       <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
       <Setter Property="Opacity" Value="0.3" />
    </Style>

@@ -12,7 +12,7 @@
       <StackLayout BindableLayout.ItemsSource="{Binding LibraryTypes}" >
          <BindableLayout.ItemTemplate>
             <DataTemplate>
-               <StackLayout Style="{StaticResource Settings_Group_Stack}" >
+               <StackLayout Style="{StaticResource Section}" >
 
                   <Label Text="{Binding Title}" Style="{StaticResource Large}" />
 
@@ -20,12 +20,12 @@
                      <BindableLayout.ItemTemplate>
                         <DataTemplate>
 
-                           <FlexLayout Style="{StaticResource Settings_Item_Flex}" >
+                           <FlexLayout Style="{StaticResource SectionItem}" >
                               <StackLayout FlexLayout.Grow="1" Spacing="0">
-                                 <Label Text="{Binding Library.Description}" Style="{StaticResource Default}" ></Label>
-                                 <Label Text="{Binding Library.Path}" Style="{StaticResource Small}" ></Label>
-                                 <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource Micro}" ></Label>
-                                 <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource Settings_Library_Progress}" ></ProgressBar>
+                                 <Label Text="{Binding Library.Description}" Style="{StaticResource Default}" />
+                                 <Label Text="{Binding Library.Path}" Style="{StaticResource Small}" />
+                                 <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource Micro}" />
+                                 <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource UpdateProgress}" />
                               </StackLayout>
                               <ImageButton Command="{Binding RemoveCommand}" Source="delete" />
                            </FlexLayout>
@@ -34,11 +34,11 @@
                      </BindableLayout.ItemTemplate>
                   </StackLayout>
 
-                  <FlexLayout Style="{StaticResource Settings_Item_Flex}">
+                  <FlexLayout Style="{StaticResource SectionItem}">
                      <FlexLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding AddCommand}" />
                      </FlexLayout.GestureRecognizers>
-                     <Label Text="{Binding AddText}" Style="{StaticResource Default}"></Label>
+                     <Label Text="{Binding AddText}" Style="{StaticResource Default}" />
                   </FlexLayout>
 
                   <BoxView Style="{StaticResource Separator}" />
