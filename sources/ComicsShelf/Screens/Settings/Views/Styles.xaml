@@ -13,9 +13,10 @@
    </Style>
 
    <Style TargetType="FlexLayout" x:Key="SectionItem">
+      
       <Setter Property="Padding" Value="10,0" />
       <Setter Property="AlignItems" Value="Center" />
-      <Setter Property="MinimumHeightRequest" Value="60" />
+      <Setter Property="HeightRequest" Value="60" />
    </Style>
 
    <Style TargetType="ProgressBar" x:Key="UpdateProgress" BasedOn="{StaticResource ProgressBar}">
