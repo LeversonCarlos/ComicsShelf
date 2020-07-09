@@ -3,29 +3,11 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    x:Class="ComicsShelf.Screens.Settings.SettingsPage"
+   xmlns:settings="clr-namespace:ComicsShelf.Screens.Settings"
    Title="{Binding Title}" >
 
    <ContentPage.Resources>
-
-      <Style TargetType="StackLayout" x:Key="Settings_Main_Stack">
-         <Setter Property="Padding" Value="10" />
-      </Style>
-
-      <Style TargetType="StackLayout" x:Key="Settings_Group_Stack">
-         <Setter Property="Margin" Value="0,10" />
-      </Style>
-
-      <Style TargetType="FlexLayout" x:Key="Settings_Item_Flex">
-         <Setter Property="Padding" Value="10,5" />
-         <Setter Property="AlignItems" Value="Center" />
-         <Setter Property="MinimumHeightRequest" Value="60" />
-      </Style>
-
-      <Style TargetType="ProgressBar" x:Key="Settings_Library_Progress" BasedOn="{StaticResource ProgressBar}">
-         <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
-         <Setter Property="Opacity" Value="0.3" />
-      </Style>
-
+      <ResourceDictionary Source="Styles.xaml" />
    </ContentPage.Resources>
 
    <ContentPage.Content>
@@ -70,35 +52,7 @@
             </BindableLayout.ItemTemplate>
          </StackLayout>
 
-         <StackLayout Style="{StaticResource Settings_Group_Stack}">
-
-            <Label Text="{Binding LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
-
-            <FlexLayout Style="{StaticResource Settings_Item_Flex}" >
-               <FlexLayout.GestureRecognizers>
-                  <TapGestureRecognizer Command="{Binding ClearCacheCommand}" />
-               </FlexLayout.GestureRecognizers>
-
-               <StackLayout FlexLayout.Grow="1" Spacing="0">
-                  <Label Text="{Binding LOCAL_CACHE_CLEAR_COMMAND}" Style="{StaticResource Default}" ></Label>
-                  <Label Style="{StaticResource Small}" >
-                     <Label.FormattedText>
-                        <FormattedString>
-                           <FormattedString.Spans>
-                              <Span Text="{Binding CacheSizeInMegas}" />
-                              <Span Text=" " />
-                              <Span Text="{Binding LOCAL_CACHE_UNITS}" />
-                           </FormattedString.Spans>
-                        </FormattedString>
-                     </Label.FormattedText>
-                  </Label>
-               </StackLayout>
-
-            </FlexLayout>
-
-            <BoxView Style="{StaticResource Separator}" />
-
-         </StackLayout>
+         <settings:SettingsPage_Cache />
 
       </StackLayout>
    </ContentPage.Content>
