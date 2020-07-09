@@ -16,10 +16,10 @@ namespace ComicsShelf.Screens.Settings
       public SettingsLibraryTypeVM(enLibraryType libraryType, SettingsLibraryVM[] libraries)
       {
          LibraryType = libraryType;
+         Libraries = new ObservableList<SettingsLibraryVM>(libraries);
          Title = libraryType == enLibraryType.LocalDrive ? Resources.Translations.SETTINGS_LOCAL_DRIVE_TITLE : Resources.Translations.SETTINGS_ONE_DRIVE_TITLE;
          AddText = libraryType == enLibraryType.LocalDrive ? Resources.Translations.SETTINGS_LOCAL_DRIVE_ADD_COMMAND : Resources.Translations.SETTINGS_ONE_DRIVE_ADD_COMMAND;
          AddCommand = new Command(async () => await Add());
-         Libraries = new ObservableList<SettingsLibraryVM>(libraries);
          Helpers.Notify.LibraryAdd(library => AddLibrary(library));
          Helpers.Notify.LibraryRemove(library => RemoveLibrary(library));
       }
