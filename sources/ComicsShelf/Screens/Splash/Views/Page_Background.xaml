@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Screens.Splash.Page_Background"
+   BackgroundColor="{StaticResource PrimaryColor}" 
+   Opacity="0.15" >
+   <ContentView.Content>
+
+      <!-- <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.05" /> -->
+      <Image Aspect="AspectFill" Source="{Binding SelectedItem.CoverPath}" />
+
+   </ContentView.Content>
+</ContentView>
