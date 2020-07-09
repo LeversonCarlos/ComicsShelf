@@ -22,7 +22,7 @@ namespace ComicsShelf.FolderSelector
 
                // LOCATE ROOT CHILDS
                var rootChilds = await GetFolder_Children(driveService, initialFolder);
-               vm.Data.AddRange(rootChilds);
+               await vm.Data.AddRangeAsync(rootChilds);
                vm.CurrentItem = null;
 
                // HOOK UP EVENT FOR ITEM SELECTION
@@ -32,7 +32,7 @@ namespace ComicsShelf.FolderSelector
                   {
                      vm.IsBusy = true;
                      var folderChilds = await GetFolder_Children(driveService, item);
-                     vm.Data.ReplaceRange(folderChilds);
+                     await vm.Data.ReplaceRangeAsync(folderChilds);
                      vm.CurrentItem = item;
                   }
                   catch (Exception ex) { Helpers.Insights.TrackException(ex); }

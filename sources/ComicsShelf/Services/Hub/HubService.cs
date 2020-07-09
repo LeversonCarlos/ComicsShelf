@@ -4,6 +4,7 @@ using ComicsShelf.Screens.Splash;
 using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Services.Hub
@@ -46,10 +47,10 @@ namespace ComicsShelf.Services.Hub
          Engine.CoverExtraction.Service.Execute();
       }
 
-      internal void SectionsUpdate(SectionVM[] sections)
+      internal async Task SectionsUpdateAsync(SectionVM[] sections)
       {
-         Screens.Home.Extentions.Instance?.ApplySections(sections);
-         Engine.CoverExtraction.Service.Execute();
+         await Screens.Home.Extentions.Instance?.ApplySections(sections);
+         await Engine.CoverExtraction.Service.Execute();
       }
 
    }

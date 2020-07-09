@@ -22,11 +22,11 @@ namespace ComicsShelf.Screens.Home
       public string NO_LIBRARY_MESSAGE => Resources.Translations.HOME_NO_LIBRARY_WARNING_MESSAGE;
 
       public ObservableList<SectionVM> Sections { get; }
-      internal void ApplySections(SectionVM[] sections)
+      internal async Task ApplySections(SectionVM[] sections)
       {
          if (sections == null) return;
          var start = DateTime.Now;
-         Sections.ReplaceRange(sections);
+         await Sections.ReplaceRangeAsync(sections);
          Insights.TrackMetric("Sections Updating", DateTime.Now.Subtract(start).TotalSeconds);
       }
 

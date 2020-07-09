@@ -36,9 +36,9 @@ namespace ComicsShelf.Screens.Reading
 
       public override Task OnAppearing()
       {
-         Task.Run(() =>
+         Task.Run(async () =>
          {
-            PagesList.ReplaceRange(PagesArray);
+            await PagesList.ReplaceRangeAsync(PagesArray);
             ReadingPage = Item.ReadingPage.HasValue ? Item.ReadingPage.Value : (short)0;
             IsBusy = false;
          });
