@@ -14,6 +14,8 @@ namespace ComicsShelf.Screens.Settings
       {
          Library = library;
          RemoveCommand = new Command(async () => await Remove());
+         Helpers.Notify.Message(library, message => Message = message);
+         Helpers.Notify.Progress(library, progress => Progress = progress);
       }
 
       string _Message;
@@ -57,6 +59,12 @@ namespace ComicsShelf.Screens.Settings
       {
          if (!await Helpers.Message.Confirm(string.Format(Resources.Translations.SETTINGS_DRIVE_REMOVE_CONFIRMATION_MESSAGE, Library.Description))) { return; }
          await DependencyService.Get<IStoreService>().RemoveLibraryAsync(Library);
+      }
+
+      public override void Dispose()
+      {
+         Helpers.Notify.MessageUnsubscribe(Library);
+         Helpers.Notify.ProgressUnsubscribe(Library);
       }
 
    }
