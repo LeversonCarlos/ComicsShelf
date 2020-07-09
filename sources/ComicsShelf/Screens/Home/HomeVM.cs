@@ -27,7 +27,7 @@ namespace ComicsShelf.Screens.Home
          DependencyService.Get<IStoreService>()?.GetSections();
 
       public ObservableList<SectionVM> Sections { get; }
-      internal async Task ApplySections(SectionVM[] sections)
+      async Task ApplySections(SectionVM[] sections)
       {
          if (sections == null) return;
          var start = DateTime.Now;
