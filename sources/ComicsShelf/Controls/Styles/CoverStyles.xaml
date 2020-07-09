@@ -7,6 +7,11 @@
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
    x:Class="ComicsShelf.Controls.Styles.CoverStyles">
 
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+      <styles:BaseStyles />
+   </ResourceDictionary.MergedDictionaries>
+
    <Style TargetType="controls:CoverImage">
       <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
       <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />

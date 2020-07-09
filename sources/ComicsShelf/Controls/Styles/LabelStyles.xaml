@@ -5,6 +5,10 @@
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
    x:Class="ComicsShelf.Controls.Styles.LabelStyles">
 
+   <ResourceDictionary.MergedDictionaries>
+      <styles:LightTheme />
+   </ResourceDictionary.MergedDictionaries>
+
    <Style TargetType="Label">
       <Setter Property="Margin" Value="0" />
       <Setter Property="Padding" Value="0" />
