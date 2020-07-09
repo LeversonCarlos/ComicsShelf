@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ComicsShelf.Services.Hub;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Store
@@ -41,7 +43,7 @@ namespace ComicsShelf.Store
 
                this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
 
-               Helpers.Notify.LibraryAdd(library);
+               DependencyService.Get<HubService>().LibraryAdd(library);
                Helpers.Notify.ItemsUpdate(itemList);
             }
 

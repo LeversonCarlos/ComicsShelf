@@ -24,14 +24,6 @@ namespace ComicsShelf.Helpers
          Unsubscribe($"{AppSleepKey}");
 
 
-      const string LibraryAddKey = "store.library.add.key";
-      public static void LibraryAdd(LibraryVM library) =>
-         Device.BeginInvokeOnMainThread(() => Send(LibraryAddKey, library));
-      public static void LibraryAdd(System.Action<LibraryVM> callback) =>
-         Subscribe(LibraryAddKey, callback);
-      public static void LibraryAddUnsubscribe() =>
-         Unsubscribe($"{LibraryAddKey}");
-
       const string ItemsUpdateKey = "store.items.update.key";
       public static void ItemsUpdate(ItemVM[] itemList) =>
          Send($"{ItemsUpdateKey}", itemList);
