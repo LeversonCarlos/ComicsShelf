@@ -22,6 +22,8 @@ namespace ComicsShelf.Store
             var libraryIDs = await Sync.GetLibraries();
 
             var dataTasks = libraryIDs
+               .GroupBy(x => x)
+               .Select(x => x.Key)
                .Select(libraryID => Sync.GetLibrary(libraryID))
                .ToArray();
             this.LibraryList = (await Task.WhenAll(dataTasks))
