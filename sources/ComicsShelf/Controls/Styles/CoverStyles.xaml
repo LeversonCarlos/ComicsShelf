@@ -12,6 +12,11 @@
       <styles:BaseStyles />
    </ResourceDictionary.MergedDictionaries>
 
+   <Style TargetType="controls:CoverContainer">
+      <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
+      <Setter Property="Padding" Value="5,0" />
+   </Style>
+
    <Style TargetType="controls:CoverImage">
       <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
       <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />

@@ -6,10 +6,6 @@
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    x:Class="ComicsShelf.Screens.Home.Styles">
 
-   <ResourceDictionary.MergedDictionaries>
-      <styles:CoverStyles />
-   </ResourceDictionary.MergedDictionaries>
-
    <Style TargetType="CollectionView" x:Key="Sections">
       <Setter Property="Margin" Value="0,5" />
       <Setter Property="ItemsLayout" Value="VerticalList" />
@@ -46,10 +42,6 @@
    <Style TargetType="CollectionView" x:Key="Folders">
       <Setter Property="ItemsLayout" Value="HorizontalList" />
       <Setter Property="SelectionMode" Value="None" />
-   </Style>
-
-   <Style TargetType="controls:CoverContainer">
-      <Setter Property="Padding" Value="5,0" />
    </Style>
 
 </ResourceDictionary>
