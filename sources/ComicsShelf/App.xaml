@@ -3,6 +3,7 @@
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
+   xmlns:converters="clr-namespace:ComicsShelf.Controls.Converters"
    x:Class="ComicsShelf.App">
    <Application.Resources>
       <ResourceDictionary>
@@ -13,6 +14,8 @@
             <styles:LabelStyles />
             <!-- <styles:CoverStyles /> -->
          </ResourceDictionary.MergedDictionaries>
+
+         <converters:NotConverter x:Key="notConverter" />
 
       </ResourceDictionary>
    </Application.Resources>
