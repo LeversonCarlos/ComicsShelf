@@ -3,20 +3,34 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ComicsShelf.ViewModels
 {
    public class ObservableList<T> : ObservableCollection<T>, INotifyCollectionChanged
    {
+
+      SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
       public ObservableList() : base() { }
       public ObservableList(IEnumerable<T> collection) : base(collection) { }
 
-      public void AddRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
+      public async Task AddRangeAsync(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
+      {
+         try
+         {
+            await semaphore.WaitAsync();
+            AddRange(collection, notificationMode);
+         }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         finally { semaphore.Release(); }
+      }
+
+      void AddRange(IEnumerable<T> collection, NotifyCollectionChangedAction notificationMode = NotifyCollectionChangedAction.Add)
       {
          try
          {
             if (collection == null) throw new ArgumentNullException("collection");
-            this.CheckReentrancy();
 
             if (notificationMode == NotifyCollectionChangedAction.Reset)
             {
@@ -34,20 +48,25 @@ namespace ComicsShelf.ViewModels
             this.OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             this.OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems, startIndex));
+
          }
-         catch { }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
       }
 
+      /*
       public void RemoveRange(IEnumerable<T> collection)
       {
          try
          {
+            semaphore.Wait();
             if (collection == null) throw new ArgumentNullException("collection");
             foreach (var i in collection) { Items.Remove(i); }
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
          }
-         catch { }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         finally { semaphore.Release(); }
       }
+      */
 
       public void Replace(T item)
       {
@@ -68,11 +87,18 @@ namespace ComicsShelf.ViewModels
          }
          catch { }
       }
-      public void ReplaceRange(IEnumerable<T> collection)
+
+      public async Task ReplaceRangeAsync(IEnumerable<T> collection)
       {
-         if (collection == null) throw new ArgumentNullException("collection");
-         this.Items.Clear();
-         this.AddRange(collection, NotifyCollectionChangedAction.Reset);
+         try
+         {
+            await semaphore.WaitAsync();
+            if (collection == null) throw new ArgumentNullException("collection");
+            Items.Clear();
+            AddRange(collection, NotifyCollectionChangedAction.Reset);
+         }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         finally { semaphore.Release(); }
       }
 
    }
