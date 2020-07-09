@@ -5,10 +5,6 @@
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
    x:Class="ComicsShelf.Controls.Styles.BaseStyles">
 
-   <ResourceDictionary.MergedDictionaries>
-      <styles:LightTheme />
-   </ResourceDictionary.MergedDictionaries>
-
    <Style TargetType="ProgressBar" x:Key="ProgressBar">
       <Setter Property="Margin" Value="0" />
       <Setter Property="HeightRequest" Value="4" />
