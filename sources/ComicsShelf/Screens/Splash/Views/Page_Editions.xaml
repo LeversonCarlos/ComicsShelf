@@ -6,7 +6,7 @@
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    x:Name="editionsView" 
-   x:Class="ComicsShelf.Screens.Splash.SplashPageEditions">
+   x:Class="ComicsShelf.Screens.Splash.Page_Editions">
 
    <ContentView.Resources>
       <ResourceDictionary Source="Styles.xaml" />

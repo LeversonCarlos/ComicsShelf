@@ -5,8 +5,8 @@
    xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations" 
    xmlns:converters="clr-namespace:ComicsShelf.Controls.Converters" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
-   x:Class="ComicsShelf.Screens.Splash.SplashPageDetails">
-   
+   x:Class="ComicsShelf.Screens.Splash.Page_Details">
+
    <ContentView.Resources>
       <ResourceDictionary Source="Styles.xaml" />
       <converters:DateFormatter x:Key="dateFormatter" />

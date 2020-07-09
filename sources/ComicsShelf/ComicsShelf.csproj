@@ -50,6 +50,15 @@
      <Compile Update="Screens\Splash\Views\Page.xaml.cs">
        <DependentUpon>Page.xaml</DependentUpon>
      </Compile>
+     <Compile Update="Screens\Splash\Views\Page_Cover.xaml.cs">
+       <DependentUpon>Page_Cover.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Splash\Views\Page_Details.xaml.cs">
+       <DependentUpon>Page_Details.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Splash\Views\Page_Editions.xaml.cs">
+       <DependentUpon>Page_Editions.xaml</DependentUpon>
+     </Compile>
      <Compile Update="Screens\Splash\Views\Styles.xaml.cs">
        <DependentUpon>Styles.xaml</DependentUpon>
      </Compile>
@@ -92,13 +101,13 @@
     <EmbeddedResource Update="Screens\Splash\Views\Page_Background.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Splash\Views\SplashPageCover.xaml">
+    <EmbeddedResource Update="Screens\Splash\Views\Page_Cover.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Splash\Views\SplashPageDetails.xaml">
+    <EmbeddedResource Update="Screens\Splash\Views\Page_Details.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Screens\Splash\Views\SplashPageEditions.xaml">
+    <EmbeddedResource Update="Screens\Splash\Views\Page_Editions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Screens\Splash\Views\Styles.xaml">

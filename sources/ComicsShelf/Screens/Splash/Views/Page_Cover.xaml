@@ -5,7 +5,7 @@
    xmlns:animations="clr-namespace:ComicsShelf.Controls.Animations" 
    xmlns:helpers="clr-namespace:ComicsShelf.Helpers" 
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
-   x:Class="ComicsShelf.Screens.Splash.SplashPageCover">
+   x:Class="ComicsShelf.Screens.Splash.Page_Cover">
 
    <ContentView.Resources>
       <ResourceDictionary Source="Styles.xaml" />
