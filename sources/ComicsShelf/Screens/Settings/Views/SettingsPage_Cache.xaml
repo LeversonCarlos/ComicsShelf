@@ -2,6 +2,7 @@
 <ContentView 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
    x:Class="ComicsShelf.Screens.Settings.SettingsPage_Cache">
 
    <ContentView.Resources>
@@ -12,7 +13,7 @@
 
       <StackLayout Style="{StaticResource Settings_Group_Stack}">
 
-         <Label Text="{Binding LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
+         <Label Text="{controls:Translate Text=LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
 
          <FlexLayout Style="{StaticResource Settings_Item_Flex}" >
             <FlexLayout.GestureRecognizers>
@@ -20,14 +21,14 @@
             </FlexLayout.GestureRecognizers>
 
             <StackLayout FlexLayout.Grow="1" Spacing="0">
-               <Label Text="{Binding LOCAL_CACHE_CLEAR_COMMAND}" Style="{StaticResource Default}" ></Label>
+               <Label Text="{controls:Translate Text=LOCAL_CACHE_CLEAR_COMMAND}" Style="{StaticResource Default}" ></Label>
                <Label Style="{StaticResource Small}" >
                   <Label.FormattedText>
                      <FormattedString>
                         <FormattedString.Spans>
                            <Span Text="{Binding CacheSizeInMegas}" />
                            <Span Text=" " />
-                           <Span Text="{Binding LOCAL_CACHE_UNITS}" />
+                           <Span Text="{controls:Translate Text=LOCAL_CACHE_UNITS}" />
                         </FormattedString.Spans>
                      </FormattedString>
                   </Label.FormattedText>
