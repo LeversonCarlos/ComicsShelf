@@ -4,10 +4,10 @@ using Xamarin.Forms.Xaml;
 namespace ComicsShelf.Screens.FolderDialog
 {
    [XamlCompilation(XamlCompilationOptions.Compile)]
-   public partial class FolderDialogPage : ContentPage
+   public partial class Page : ContentPage
    {
 
-      public FolderDialogPage()
+      public Page()
       {
          InitializeComponent();
       }

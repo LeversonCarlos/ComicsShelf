@@ -52,7 +52,7 @@ namespace ComicsShelf.Screens.FolderDialog
 
       public async Task<SelectorItemVM> OpenPage()
       {
-         var view = new FolderDialogPage { BindingContext = this };
+         var view = new FolderDialog.Page { BindingContext = this };
          await Helpers.Modal.Push(view);
          return await this.tcs.Task;
       }
