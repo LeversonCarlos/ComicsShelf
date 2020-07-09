@@ -2,21 +2,39 @@
 <ContentPage 
    xmlns="http://xamarin.com/schemas/2014/forms"
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   mc:Ignorable="d"
    x:Class="ComicsShelf.Screens.Settings.SettingsPage"
-   Title="{Binding Title}" IconImageSource="settings">
+   Title="{Binding Title}" >
+
    <ContentPage.Resources>
-      <ResourceDictionary Source="SettingsStyles.xaml" />
+
+      <Style TargetType="StackLayout" x:Key="Settings_Main_Stack">
+         <Setter Property="Padding" Value="10" />
+      </Style>
+
+      <Style TargetType="StackLayout" x:Key="Settings_Group_Stack">
+         <Setter Property="Margin" Value="0,10" />
+      </Style>
+
+      <Style TargetType="FlexLayout" x:Key="Settings_Item_Flex">
+         <Setter Property="Padding" Value="10,5" />
+         <Setter Property="AlignItems" Value="Center" />
+         <Setter Property="MinimumHeightRequest" Value="60" />
+      </Style>
+
+      <Style TargetType="ProgressBar" x:Key="Settings_Library_Progress" BasedOn="{StaticResource ProgressBar}">
+         <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
+         <Setter Property="Opacity" Value="0.3" />
+      </Style>
+
    </ContentPage.Resources>
+
    <ContentPage.Content>
-      <StackLayout Style="{StaticResource Main}">
+      <StackLayout Style="{StaticResource Settings_Main_Stack}">
 
          <StackLayout BindableLayout.ItemsSource="{Binding LibraryTypes}" >
             <BindableLayout.ItemTemplate>
                <DataTemplate>
-                  <StackLayout Style="{StaticResource LibraryTypeStack}" >
+                  <StackLayout Style="{StaticResource Settings_Group_Stack}" >
 
                      <Label Text="{Binding Title}" Style="{StaticResource Large}" />
 
@@ -24,7 +42,7 @@
                         <BindableLayout.ItemTemplate>
                            <DataTemplate>
 
-                              <FlexLayout Style="{StaticResource LibraryFlex}" >
+                              <FlexLayout Style="{StaticResource Settings_Item_Flex}" >
                                  <StackLayout FlexLayout.Grow="1" Spacing="0">
                                     <Label Text="{Binding Library.Description}" Style="{StaticResource Default}" ></Label>
                                     <Label Text="{Binding Library.Path}" Style="{StaticResource Small}" ></Label>
@@ -38,7 +56,7 @@
                         </BindableLayout.ItemTemplate>
                      </StackLayout>
 
-                     <FlexLayout Style="{StaticResource LibraryFlex}">
+                     <FlexLayout Style="{StaticResource Settings_Item_Flex}">
                         <FlexLayout.GestureRecognizers>
                            <TapGestureRecognizer Command="{Binding AddCommand}" />
                         </FlexLayout.GestureRecognizers>
@@ -52,11 +70,11 @@
             </BindableLayout.ItemTemplate>
          </StackLayout>
 
-         <StackLayout Style="{StaticResource LibraryTypeStack}">
+         <StackLayout Style="{StaticResource Settings_Group_Stack}">
 
             <Label Text="{Binding LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
 
-            <FlexLayout Style="{StaticResource LibraryFlex}" >
+            <FlexLayout Style="{StaticResource Settings_Item_Flex}" >
                <FlexLayout.GestureRecognizers>
                   <TapGestureRecognizer Command="{Binding ClearCacheCommand}" />
                </FlexLayout.GestureRecognizers>
@@ -84,4 +102,5 @@
 
       </StackLayout>
    </ContentPage.Content>
+
 </ContentPage>
