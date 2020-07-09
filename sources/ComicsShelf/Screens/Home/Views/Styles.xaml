@@ -22,20 +22,20 @@
       <Setter Property="Spacing" Value="0" />
    </Style>
 
-   <Style TargetType="StackLayout" x:Key="SectionTitle">
+   <Style TargetType="StackLayout" x:Key="SectionHeader">
       <Setter Property="Margin" Value="10,0" />
       <Setter Property="Orientation" Value="Horizontal" />
       <Setter Property="Spacing" Value="5" />
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="SectionTitleFolder">
+   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="SectionTitle">
       <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
       <Setter Property="VerticalOptions" Value="FillAndExpand" />
       <Setter Property="VerticalTextAlignment" Value="End" />
       <Setter Property="FontAttributes" Value="Bold" />
    </Style>
 
-   <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="SectionTitleLibrary">
+   <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="SectionSubtitle">
       <Setter Property="TextColor" Value="{StaticResource TitleColor}" />
       <Setter Property="VerticalOptions" Value="FillAndExpand" />
       <Setter Property="VerticalTextAlignment" Value="End" />

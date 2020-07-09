@@ -16,10 +16,12 @@
             <DataTemplate>
 
                <StackLayout Style="{StaticResource Section}">
-                  <StackLayout Style="{StaticResource SectionTitle}">
-                     <Label Text="{Binding Text}" Style="{StaticResource SectionTitleFolder}" />
-                     <Label Text="{Binding Library.Description}" Style="{StaticResource SectionTitleLibrary}" />
+
+                  <StackLayout Style="{StaticResource SectionHeader}">
+                     <Label Text="{Binding Text}" Style="{StaticResource SectionTitle}" />
+                     <Label Text="{Binding Library.Description}" Style="{StaticResource SectionSubtitle}" />
                   </StackLayout>
+                  
                   <CollectionView ItemsSource="{Binding Folders}" HeightRequest="{Binding SizeHeight}" Style="{StaticResource Folders}" >
                      <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -38,6 +40,7 @@
                         </DataTemplate>
                      </CollectionView.ItemTemplate>
                   </CollectionView>
+                  
                </StackLayout>
 
             </DataTemplate>
