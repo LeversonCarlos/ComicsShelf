@@ -13,9 +13,10 @@ namespace ComicsShelf.Controls
 
       public object ProvideValue(IServiceProvider serviceProvider)
       {
-         if (this.Text == null) return "";
-         var translatedText = Resources.Translations.ResourceManager.GetString(this.Text);
-         // if (translatedText == null) { translatedText = string.Format("[{0}]", this.Text); }
+         if (Text == null) return "";
+         var translatedText = Resources.Translations.ResourceManager.GetString(Text);
+         if (string.IsNullOrEmpty(translatedText))
+            translatedText = Text;
          return translatedText;
       }
 
