@@ -18,7 +18,7 @@ namespace ComicsShelfStore.Droid
                if (originalBitmap == null) { return false; }
 
                // DEFINE SIZE
-               double imageHeight = 450; double imageWidth = 150;
+               double imageHeight = 300; double imageWidth = 100;
                double scaleFactor = (double)imageHeight / (double)originalBitmap.Height;
                imageHeight = originalBitmap.Height * scaleFactor;
                imageWidth = originalBitmap.Width * scaleFactor;
