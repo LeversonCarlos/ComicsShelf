@@ -6,32 +6,32 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Screens.Settings
 {
-   public class LibrariesSetting : ObservableObject
+   public class SettingsLibraryTypeVM : ObservableObject
    {
 
       public enLibraryType LibraryType { get; }
       public string Title { get; }
 
-      public LibrariesSetting(enLibraryType libraryType)
+      public SettingsLibraryTypeVM(enLibraryType libraryType)
       {
          LibraryType = libraryType;
          Title = libraryType == enLibraryType.LocalDrive ? Resources.Translations.SETTINGS_LOCAL_DRIVE_TITLE : Resources.Translations.SETTINGS_ONE_DRIVE_TITLE;
          AddText = libraryType == enLibraryType.LocalDrive ? Resources.Translations.SETTINGS_LOCAL_DRIVE_ADD_COMMAND : Resources.Translations.SETTINGS_ONE_DRIVE_ADD_COMMAND;
          AddCommand = new Command(async () => await Add());
-         Libraries = new ObservableList<LibrarySetting>();
+         Libraries = new ObservableList<SettingsLibraryVM>();
          LoadLibraryList();
          Helpers.Notify.LibraryAdd(library => AddLibrary(library));
          Helpers.Notify.LibraryRemove(library => RemoveLibrary(library));
       }
 
-      public ObservableList<LibrarySetting> Libraries { get; }
+      public ObservableList<SettingsLibraryVM> Libraries { get; }
       void LoadLibraryList()
       {
          var libraryList = DependencyService
             .Get<IStoreService>()
             ?.GetLibraries()
             .Where(x => x.Type == LibraryType)
-            .Select(x => new LibrarySetting(x))
+            .Select(x => new SettingsLibraryVM(x))
             .ToArray();
          if (libraryList != null) Libraries.AddRange(libraryList);
       }
@@ -45,7 +45,7 @@ namespace ComicsShelf.Screens.Settings
       void AddLibrary(LibraryVM library)
       {
          if (library.Type != LibraryType) { return; }
-         Libraries.Add(new LibrarySetting(library));
+         Libraries.Add(new SettingsLibraryVM(library));
       }
 
       void RemoveLibrary(LibraryVM library)
