@@ -38,6 +38,9 @@
        <AutoGen>True</AutoGen>
        <DependentUpon>Translations.resx</DependentUpon>
      </Compile>
+     <Compile Update="Screens\Home\Views\Styles.xaml.cs">
+       <DependentUpon>Styles.xaml</DependentUpon>
+     </Compile>
    </ItemGroup>
 
    <ItemGroup>
@@ -83,7 +86,7 @@
      <EmbeddedResource Update="Screens\Home\Views\HomePage.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
-     <EmbeddedResource Update="Screens\Home\Views\HomeStyles.xaml">
+     <EmbeddedResource Update="Screens\Home\Views\Styles.xaml">
        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
      </EmbeddedResource>
      <EmbeddedResource Update="Screens\FolderDialog\FolderDialogPage.xaml">

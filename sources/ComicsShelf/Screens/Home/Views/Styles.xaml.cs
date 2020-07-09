@@ -2,9 +2,9 @@
 
 namespace ComicsShelf.Screens.Home
 {
-   public partial class HomeStyles : ResourceDictionary
+   public partial class Styles : ResourceDictionary
    {
-      public HomeStyles()
+      public Styles()
       {
          InitializeComponent();
       }
