@@ -26,24 +26,13 @@ namespace ComicsShelf.Screens.Settings
          try
          {
 
-            var libraryTypes = DependencyService.Get<IStoreService>()
-               ?.GetLibraries()
-               ?.GroupBy(lib => lib.Type)
-               ?.Select(grp => new
-               {
-                  LibraryType = grp.Key,
-                  LibraryList = grp
-                     .ToArray()
-                     .Select(lib => new SettingsLibraryVM(lib))
-                     .ToArray()
-               })
-               ?.ToArray();
+            var libraryList = DependencyService.Get<IStoreService>()?.GetLibraries();
+            var libraryTypes = new enLibraryType[] { enLibraryType.LocalDrive, enLibraryType.OneDrive };
 
             foreach (var libraryType in libraryTypes)
             {
-               var typeVM = new SettingsLibraryTypeVM(libraryType.LibraryType);
-               typeVM.Libraries.AddRange(libraryType.LibraryList);
-               typesList.Add(typeVM);
+               var libraryTypeItems = libraryList.Where(x => x.Type == libraryType).Select(lib => new SettingsLibraryVM(lib)).ToArray();
+               typesList.Add(new SettingsLibraryTypeVM(libraryType, libraryTypeItems));
             }
 
          }
@@ -51,38 +40,8 @@ namespace ComicsShelf.Screens.Settings
          return typesList;
       }
 
-      public override Task OnAppearing()
-      {
+      public override Task OnAppearing() =>
          LoadCacheSize();
-         return base.OnAppearing();
-      }
-
-      SettingsLibraryTypeVM GetLibraryType(LibraryVM library) =>
-         LibraryTypes
-            ?.Where(type => type.LibraryType == library.Type)
-            ?.FirstOrDefault();
-
-      SettingsLibraryVM GetLibrary(LibraryVM library) =>
-         GetLibraryType(library)
-            ?.Libraries
-            ?.Where(lib => lib.Library?.ID == library.ID)
-            ?.FirstOrDefault();
-
-      public void SetLibraryMessage(LibraryVM library, string message) =>
-         GetLibrary(library).Message = message;
-
-      public void SetLibraryProgress(LibraryVM library, double progress) =>
-         GetLibrary(library).Progress = progress;
-
-      public void AddLibrary(LibraryVM library) =>
-         GetLibraryType(library).Libraries.Add(new SettingsLibraryVM(library));
-
-      public void RemoveLibrary(LibraryVM library)
-      {
-         var libraryVM = GetLibrary(library);
-         if (libraryVM == null) return;
-         GetLibraryType(library).Libraries.Remove(libraryVM);
-      }
 
    }
 }
