@@ -22,20 +22,25 @@ namespace ComicsShelf.Helpers
 
       const string AppSleepKey = "app.sleep.key";
       public static void AppSleep() =>
-         Send($"{AppSleepKey}", DateTime.Now);
+         Send(AppSleepKey, DateTime.Now);
+
       public static void AppSleep(object subscriber, Action<DateTime> callback) =>
-         Subscribe(subscriber, $"{AppSleepKey}", callback);
+         Subscribe(subscriber, AppSleepKey, callback);
+
       public static void AppSleepUnsubscribe(object subscriber) =>
-         Unsubscribe<DateTime>(subscriber, $"{AppSleepKey}");
+         Unsubscribe<DateTime>(subscriber, AppSleepKey);
 
 
       const string LibraryAddKey = "store.library.add.key";
       public static void LibraryAdd(LibraryVM library) =>
          Send(LibraryAddKey, library);
+
       public static void LibraryAdd(object subscriber, Action<LibraryVM> callback) =>
          Subscribe(subscriber, LibraryAddKey, callback);
+
       public static void LibraryAddUnsubscribe(object subscriber) =>
          Unsubscribe<LibraryVM>(subscriber, LibraryAddKey);
+
 
       const string LibraryRemoveKey = "store.library.remove.key";
       public static void LibraryRemove(LibraryVM library) =>
