@@ -1,4 +1,5 @@
-﻿using ComicsShelf.Store;
+﻿using ComicsShelf.Screens.Splash;
+using ComicsShelf.Store;
 using ComicsShelf.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,7 +50,8 @@ namespace ComicsShelf.Screens.Reading
       public override async Task OnDisappearing()
       {
          Helpers.Notify.AppSleepUnsubscribe(this);
-         await Store.UpdateItemAsync(this.Item);
+         if (Item.IsDirty)
+            await Store.UpdateItemAsync(Item);
       }
 
    }

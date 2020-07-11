@@ -35,6 +35,7 @@ namespace ComicsShelf.Screens.Reading
             {
                Item.Readed = true;
                Item.ReadingPage = 0;
+               Splash.SplashExtentions.Instance?.NextEdition();
                Helpers.Modal.Pop();
             }
 
