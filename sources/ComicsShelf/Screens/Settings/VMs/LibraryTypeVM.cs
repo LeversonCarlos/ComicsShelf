@@ -21,7 +21,7 @@ namespace ComicsShelf.Screens.Settings
          AddText = libraryType == enLibraryType.LocalDrive ? Resources.Translations.SETTINGS_LOCAL_DRIVE_ADD_COMMAND : Resources.Translations.SETTINGS_ONE_DRIVE_ADD_COMMAND;
          AddCommand = new Command(async () => await Add());
          Helpers.Notify.LibraryAdd(this, library => AddLibrary(library));
-         Helpers.Notify.LibraryRemove(library => RemoveLibrary(library));
+         Helpers.Notify.LibraryRemove(this, library => RemoveLibrary(library));
       }
 
       public string AddText { get; }
@@ -52,7 +52,7 @@ namespace ComicsShelf.Screens.Settings
       public override void Dispose()
       {
          Helpers.Notify.LibraryAddUnsubscribe(this);
-         Helpers.Notify.LibraryRemoveUnsubscribe();
+         Helpers.Notify.LibraryRemoveUnsubscribe(this);
          base.Dispose();
       }
 

@@ -26,7 +26,7 @@ namespace ComicsShelf.Services.Hub
             Helpers.Cover.Init();
 
             Helpers.Notify.LibraryAdd(Application.Current, async library => await Engine.RefreshData.Service.Execute(library));
-            Helpers.Notify.LibraryRemove(async library => await Engine.AnalysisData.Service.Execute(null));
+            Helpers.Notify.LibraryRemove(Application.Current, async library => await Engine.AnalysisData.Service.Execute(null));
             Helpers.Notify.ItemsUpdate(itemsList => Engine.AnalysisData.Service.Execute(itemsList));
             Helpers.Notify.SectionsUpdate(async itemList => await Engine.CoverExtraction.Service.Execute());
 
