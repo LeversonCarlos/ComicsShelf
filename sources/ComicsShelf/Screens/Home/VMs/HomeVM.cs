@@ -13,7 +13,7 @@ namespace ComicsShelf.Screens.Home
          Title = Resources.Translations.HOME_MAIN_TITLE;
          Sections = new ObservableList<SectionVM>();
          Sections.CollectionChanged += (sender, e) => { HasSections = Sections?.Count > 0; };
-         Notify.SectionsUpdate(async sections => await ApplySections(sections));
+         Notify.SectionsUpdate(this, async sections => await ApplySections(sections));
          OpenCommand = new Command(async folder => await OpenAsync(folder));
       }
 
@@ -22,7 +22,7 @@ namespace ComicsShelf.Screens.Home
 
       public override void Dispose()
       {
-         Notify.SectionsUpdateUnsubscribe();
+         Notify.SectionsUpdateUnsubscribe(this);
          base.Dispose();
       }
 

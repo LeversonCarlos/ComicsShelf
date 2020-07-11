@@ -14,8 +14,8 @@ namespace ComicsShelf.Screens.Settings
       {
          Library = library;
          RemoveCommand = new Command(async () => await Remove());
-         Helpers.Notify.Message(library, message => Message = message);
-         Helpers.Notify.Progress(library, progress => Progress = progress);
+         Helpers.Notify.Message(this, library, message => Message = message);
+         Helpers.Notify.Progress(this, library, progress => Progress = progress);
       }
 
       string _Message;
@@ -63,8 +63,8 @@ namespace ComicsShelf.Screens.Settings
 
       public override void Dispose()
       {
-         Helpers.Notify.MessageUnsubscribe(Library);
-         Helpers.Notify.ProgressUnsubscribe(Library);
+         Helpers.Notify.MessageUnsubscribe(this, Library);
+         Helpers.Notify.ProgressUnsubscribe(this, Library);
       }
 
    }
