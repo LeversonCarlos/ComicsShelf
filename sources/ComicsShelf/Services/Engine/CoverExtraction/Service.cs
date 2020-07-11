@@ -92,7 +92,7 @@ namespace ComicsShelf.Engine.CoverExtraction
 
             // SLEEP NOTIFICATION
             var cancelExecution = false;
-            Notify.AppSleep(now => cancelExecution = true);
+            Notify.AppSleep(Application.Current, now => cancelExecution = true);
 
             // LOOP THROUGH ITEMS
             int itemIndex = 0;
@@ -122,7 +122,7 @@ namespace ComicsShelf.Engine.CoverExtraction
             return true;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
-         finally { Notify.AppSleepUnsubscribe(); }
+         finally { Notify.AppSleepUnsubscribe(Application.Current); }
       }
 
       static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);

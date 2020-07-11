@@ -36,6 +36,7 @@ namespace ComicsShelf.Screens.Reading
 
       public override Task OnAppearing()
       {
+         Helpers.Notify.AppSleep(this, async now => await Helpers.Modal.Pop());
          Task.Run(async () =>
          {
             await PagesList.ReplaceRangeAsync(PagesArray);
@@ -45,10 +46,10 @@ namespace ComicsShelf.Screens.Reading
          return base.OnAppearing();
       }
 
-      public override Task OnDisappearing()
+      public override async Task OnDisappearing()
       {
-         return Store.UpdateItemAsync(this.Item)
-            .ContinueWith(t => base.OnDisappearing());
+         Helpers.Notify.AppSleepUnsubscribe(this);
+         await Store.UpdateItemAsync(this.Item);
       }
 
    }

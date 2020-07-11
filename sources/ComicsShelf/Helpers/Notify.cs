@@ -7,8 +7,13 @@ namespace ComicsShelf.Helpers
    public class Notify
    {
 
-      private static void Send<T>(string key, T data) =>
+      internal static void Send<T>(string key, T data) =>
          MessagingCenter.Send<Application, T>(Application.Current, key, data);
+      internal static void Subscribe<T>(object subscriber, string key, Action<T> callback) =>
+         MessagingCenter.Subscribe<Application, T>(subscriber, key, (app, data) => callback(data), Application.Current);
+      internal static void Unsubscribe<T>(object subscriber, string key) =>
+         MessagingCenter.Unsubscribe<Application, T>(subscriber, key);
+
       private static void Subscribe<T>(string key, Action<T> callback) =>
          MessagingCenter.Subscribe<Application, T>(Application.Current, key, (app, data) => callback(data));
       private static void Unsubscribe(string key) =>
@@ -18,10 +23,10 @@ namespace ComicsShelf.Helpers
       const string AppSleepKey = "app.sleep.key";
       public static void AppSleep() =>
          Send($"{AppSleepKey}", DateTime.Now);
-      public static void AppSleep(Action<DateTime> callback) =>
-         Subscribe($"{AppSleepKey}", callback);
-      public static void AppSleepUnsubscribe() =>
-         Unsubscribe($"{AppSleepKey}");
+      public static void AppSleep(object subscriber, Action<DateTime> callback) =>
+         Subscribe(subscriber, $"{AppSleepKey}", callback);
+      public static void AppSleepUnsubscribe(object subscriber) =>
+         Unsubscribe<DateTime>(subscriber, $"{AppSleepKey}");
 
 
       const string LibraryAddKey = "store.library.add.key";
