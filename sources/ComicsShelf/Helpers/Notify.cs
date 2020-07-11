@@ -31,11 +31,11 @@ namespace ComicsShelf.Helpers
 
       const string LibraryAddKey = "store.library.add.key";
       public static void LibraryAdd(LibraryVM library) =>
-         Device.BeginInvokeOnMainThread(() => Send(LibraryAddKey, library));
-      public static void LibraryAdd(System.Action<LibraryVM> callback) =>
-         Subscribe(LibraryAddKey, callback);
-      public static void LibraryAddUnsubscribe() =>
-         Unsubscribe($"{LibraryAddKey}");
+         Send(LibraryAddKey, library);
+      public static void LibraryAdd(object subscriber, Action<LibraryVM> callback) =>
+         Subscribe(subscriber, LibraryAddKey, callback);
+      public static void LibraryAddUnsubscribe(object subscriber) =>
+         Unsubscribe<LibraryVM>(subscriber, LibraryAddKey);
 
       const string LibraryRemoveKey = "store.library.remove.key";
       public static void LibraryRemove(LibraryVM library) =>
