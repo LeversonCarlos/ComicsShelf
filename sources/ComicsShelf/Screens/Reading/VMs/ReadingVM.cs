@@ -37,6 +37,7 @@ namespace ComicsShelf.Screens.Reading
 
       public override Task OnAppearing()
       {
+         Helpers.Notify.ReadingStart();
          Helpers.Notify.AppSleep(this, async now => await Helpers.Modal.Pop());
          Task.Run(async () =>
          {

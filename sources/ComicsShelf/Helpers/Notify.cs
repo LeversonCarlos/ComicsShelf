@@ -79,5 +79,14 @@ namespace ComicsShelf.Helpers
          Unsubscribe<LibraryVM>(subscriber, $"{ProgressKey}.{library.ID}");
 
 
+      const string ReadingStartKey = "reading.start.key";
+      public static void ReadingStart() =>
+         Send(ReadingStartKey, DateTime.Now);
+      public static void ReadingStart(object subscriber, Action<DateTime> callback) =>
+         Subscribe(subscriber, ReadingStartKey, callback);
+      public static void ReadingStartUnsubscribe(object subscriber) =>
+         Unsubscribe<DateTime>(subscriber, ReadingStartKey);
+
+
    }
 }
