@@ -7,17 +7,13 @@ namespace ComicsShelf.Helpers
    public class Notify
    {
 
+
       internal static void Send<T>(string key, T data) =>
          MessagingCenter.Send<Application, T>(Application.Current, key, data);
       internal static void Subscribe<T>(object subscriber, string key, Action<T> callback) =>
          MessagingCenter.Subscribe<Application, T>(subscriber, key, (app, data) => callback(data), Application.Current);
       internal static void Unsubscribe<T>(object subscriber, string key) =>
          MessagingCenter.Unsubscribe<Application, T>(subscriber, key);
-
-      private static void Subscribe<T>(string key, Action<T> callback) =>
-         MessagingCenter.Subscribe<Application, T>(Application.Current, key, (app, data) => callback(data));
-      private static void Unsubscribe(string key) =>
-         MessagingCenter.Unsubscribe<Application>(Application.Current, key);
 
 
       const string AppSleepKey = "app.sleep.key";
@@ -78,18 +74,24 @@ namespace ComicsShelf.Helpers
       const string MessageKey = "store.message.key";
       public static void Message(LibraryVM library, string message) =>
          Send($"{MessageKey}.{library.ID}", message);
-      public static void Message(LibraryVM library, System.Action<string> callback) =>
-         Subscribe($"{MessageKey}.{library.ID}", callback);
-      public static void MessageUnsubscribe(LibraryVM library) =>
-         Unsubscribe($"{MessageKey}.{library.ID}");
+
+      public static void Message(object subscriber, LibraryVM library, Action<string> callback) =>
+         Subscribe(subscriber, $"{MessageKey}.{library.ID}", callback);
+
+      public static void MessageUnsubscribe(object subscriber, LibraryVM library) =>
+         Unsubscribe<LibraryVM>(subscriber, $"{MessageKey}.{library.ID}");
+
 
       const string ProgressKey = "store.progress.key";
       public static void Progress(LibraryVM library, double progress) =>
          Send($"{ProgressKey}.{library.ID}", progress);
-      public static void Progress(LibraryVM library, System.Action<double> callback) =>
-         Subscribe($"{ProgressKey}.{library.ID}", callback);
-      public static void ProgressUnsubscribe(LibraryVM library) =>
-         Unsubscribe($"{ProgressKey}.{library.ID}");
+
+      public static void Progress(object subscriber, LibraryVM library, Action<double> callback) =>
+         Subscribe(subscriber, $"{ProgressKey}.{library.ID}", callback);
+
+      public static void ProgressUnsubscribe(object subscriber, LibraryVM library) =>
+         Unsubscribe<LibraryVM>(subscriber, $"{ProgressKey}.{library.ID}");
+
 
    }
 }
