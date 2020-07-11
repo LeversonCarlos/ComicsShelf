@@ -14,10 +14,20 @@ namespace ComicsShelf.Engine.CoverExtraction
 
       public static Task Execute() => Task.Factory.StartNew(() => ExecuteAsync(), TaskCreationOptions.LongRunning);
 
+      static bool cancelExecution;
+      static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+
       private static async Task ExecuteAsync()
       {
          try
          {
+
+            // CANCEL NOTIFICATIONS
+            cancelExecution = false;
+            Notify.AppSleep(Application.Current, now => cancelExecution = true);
+            Notify.ReadingStart(Application.Current, now => cancelExecution = true);
+
+            // VALIDATE
             var store = DependencyService.Get<IStoreService>();
             if (!System.IO.Directory.Exists(Helpers.Paths.CoversCache))
                System.IO.Directory.CreateDirectory(Helpers.Paths.CoversCache);
@@ -74,11 +84,13 @@ namespace ComicsShelf.Engine.CoverExtraction
                if (!await ExtractCovers(library, remainingItems)) { return; }
             }
 
-            //store.SetSections(sections);
-            //Notifyers.Notify.SectionsUpdate(sections);
-
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         finally
+         {
+            Notify.AppSleepUnsubscribe(Application.Current);
+            Notify.ReadingStartUnsubscribe(Application.Current);
+         }
       }
 
       private static async Task<bool> ExtractCovers(LibraryVM library, ItemVM[] itemList)
@@ -87,12 +99,8 @@ namespace ComicsShelf.Engine.CoverExtraction
          {
 
             // NOTIFY START MESSAGE
-            Helpers.Notify.Message(library, "Start.Covers.Extraction");
+            Notify.Message(library, "Start.Covers.Extraction");
             var drive = Drive.BaseDrive.GetDrive(library.Type);
-
-            // SLEEP NOTIFICATION
-            var cancelExecution = false;
-            Notify.AppSleep(Application.Current, now => cancelExecution = true);
 
             // LOOP THROUGH ITEMS
             int itemIndex = 0;
@@ -116,16 +124,13 @@ namespace ComicsShelf.Engine.CoverExtraction
             }
 
             // NOTIFY FINISH MESSAGE
-            Helpers.Notify.Progress(library, 1);
-            Helpers.Notify.Message(library, "");
+            Notify.Progress(library, 1);
+            Notify.Message(library, "");
 
-            return true;
+            return !cancelExecution;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
-         finally { Notify.AppSleepUnsubscribe(Application.Current); }
       }
-
-      static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
    }
 }
