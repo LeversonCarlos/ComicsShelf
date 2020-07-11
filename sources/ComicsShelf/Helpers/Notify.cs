@@ -55,9 +55,14 @@ namespace ComicsShelf.Helpers
 
       const string ItemsUpdateKey = "store.items.update.key";
       public static void ItemsUpdate(ItemVM[] itemList) =>
-         Send($"{ItemsUpdateKey}", itemList);
-      public static void ItemsUpdate(System.Action<ItemVM[]> callback) =>
-         Subscribe($"{ItemsUpdateKey}", callback);
+         Send(ItemsUpdateKey, itemList);
+
+      public static void ItemsUpdate(object subscriber, Action<ItemVM[]> callback) =>
+         Subscribe(subscriber, ItemsUpdateKey, callback);
+
+      public static void ItemsUpdateUnsubscribe(object subscriber) =>
+         Unsubscribe<ItemVM[]>(subscriber, ItemsUpdateKey);
+
 
       const string SectionsUpdateKey = "store.sections.update.key";
       public static void SectionsUpdate(SectionVM[] sectionsList) =>
