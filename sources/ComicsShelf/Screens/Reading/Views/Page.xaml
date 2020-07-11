@@ -20,19 +20,22 @@
             <CarouselView.ItemTemplate>
                <DataTemplate>
 
-                  <ScrollView Orientation="Both" Scrolled="ScrollView_Scrolled" >
+                  <reading:ReadingScroll 
+                        Orientation="Both" Scrolled="ScrollView_Scrolled" 
+                        ImageSize="{Binding PageSize}" 
+                        ReadingPage="{Binding BindingContext.ReadingPage, Source={x:Reference readingPage}}" >
                      <reading:ReadingImage 
                         ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding PageSize}" 
                         ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference readingPage}}"
                         />
-                  </ScrollView>
+                  </reading:ReadingScroll>
 
                </DataTemplate>
             </CarouselView.ItemTemplate>
          </CarouselView>
 
          <reading:ReadingStats 
-               WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}"   
+               WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}" 
                BackgroundColor="{StaticResource OverlayBackgroundColor}" 
                AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" Spacing="0" >
             <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
