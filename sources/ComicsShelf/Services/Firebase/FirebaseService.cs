@@ -1,5 +1,7 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -15,10 +17,9 @@ namespace ComicsShelf.Firebase
          DependencyService.Get<FirebaseService>().BaseAddress = new Uri(databaseUrl);
       }
 
-      public static Task<HttpResponseMessage> UpdateAsync(ItemVM item) =>
-         DependencyService.Get<FirebaseService>()._UpdateAsync(item);
-
-      async Task<HttpResponseMessage> _UpdateAsync(ItemVM item)
+      public static Task<HttpResponseMessage> SetAsync(ItemVM item) =>
+         DependencyService.Get<FirebaseService>()._SetAsync(item);
+      async Task<HttpResponseMessage> _SetAsync(ItemVM item)
       {
          try
          {
@@ -33,6 +34,53 @@ namespace ComicsShelf.Firebase
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); return null; }
       }
+
+      public static Task<ItemVM> GetAsync(ItemVM item) =>
+         DependencyService.Get<FirebaseService>()._GetAsync(item);
+      async Task<ItemVM> _GetAsync(ItemVM item)
+      {
+         try
+         {
+            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
+
+            var responseMessage = await GetAsync(requestUrl);
+            responseMessage.EnsureSuccessStatusCode();
+
+            var jsonContent = await responseMessage.Content.ReadAsStringAsync();
+            var firebaseItem = await Helpers.Json.Deserialize<FirebaseItemVM>(jsonContent);
+            if (firebaseItem == null || firebaseItem.ID != item.ID)
+               throw new Exception("Invalid item received from firebase cloud");
+
+            item.SetData(firebaseItem.ToLibraryItem());
+            return item;
+         }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); return item; }
+      }
+
+      public static Task<ItemVM[]> GetAsync(LibraryVM library) =>
+         DependencyService.Get<FirebaseService>()._GetAsync(library);
+      async Task<ItemVM[]> _GetAsync(LibraryVM library)
+      {
+         try
+         {
+            var requestUrl = $"libraries/{library.EscapedID}/items.json";
+
+            var responseMessage = await GetAsync(requestUrl);
+            responseMessage.EnsureSuccessStatusCode();
+
+            var jsonContent = await responseMessage.Content.ReadAsStringAsync();
+            var firebaseItems = await Helpers.Json.Deserialize<Dictionary<string, FirebaseItemVM>>(jsonContent);
+            if (firebaseItems == null)
+               throw new Exception("Invalid item list received from firebase cloud");
+
+            var litemList = firebaseItems
+               .Select(x => x.Value.ToLibraryItem())
+               .ToArray();
+            return litemList;
+         }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); return null; }
+      }
+
 
    }
 }

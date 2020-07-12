@@ -34,5 +34,18 @@ namespace ComicsShelf.Firebase
             ReadingPercent = itemVM.ReadingPercent
          };
 
+      public static ItemVM ToLibraryItem(this FirebaseItemVM itemVM) =>
+         new ItemVM
+         {
+            ID = itemVM.ID,
+            SizeInBytes = itemVM.SizeInBytes,
+            ReleaseDate = itemVM.ReleaseDate,
+            Rating = itemVM.Rating,
+            Readed = itemVM.Readed,
+            ReadingDate = itemVM.ReadingDate,
+            ReadingPage = itemVM.ReadingPage,
+            ReadingPercent = itemVM.ReadingPercent
+         };
+
    }
 }
