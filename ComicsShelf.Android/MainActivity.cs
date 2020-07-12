@@ -23,8 +23,9 @@ namespace ComicsShelf.Droid
             Resources.GetString(Resource.String.onedrive_applicationID),
             $"{Resources.GetString(Resource.String.onedrive_redirectUri)}://auth",
             Resources.GetString(Resource.String.onedrive_scopeList).Split(","));
-         Helpers.Insights.Init(Resources.GetString(Resource.String.appCenter_androidSecret));
          Xamarin.Forms.Forms.Init(this, savedInstanceState);
+         Helpers.Insights.Init(Resources.GetString(Resource.String.appCenter_androidSecret));
+         Hasher.HasherService.Init(Resources.GetString(Resource.String.hasher_secret));
          LoadApplication(new App());
       }
 
