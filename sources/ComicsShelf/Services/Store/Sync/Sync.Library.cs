@@ -28,16 +28,8 @@ namespace ComicsShelf.Store
          try
          {
 
-            // HASHED ID
-            if (library.KeyValues == null)
-               library.KeyValues = new Dictionary<string, string>();
-            if (!library.KeyValues.ContainsKey("HashedID"))
-               library.KeyValues.Add("HashedID", library.GetHashedID());
-
-            // SERIALIZE DATA
-            var libraryJson = await Helpers.Json.Serialize(library);
-
             // STORE ON DEVICE PREFERENCES
+            var libraryJson = await Helpers.Json.Serialize(library);
             Xamarin.Essentials.Preferences.Set(library_sync(library.ID), libraryJson);
 
             return true;
