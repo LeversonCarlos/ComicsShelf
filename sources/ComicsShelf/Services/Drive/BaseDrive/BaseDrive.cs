@@ -15,7 +15,7 @@ namespace ComicsShelf.Drive
 
       public ICloudDriveService CloudService { get { return ImplementationProvider.Get<T>(); } }
 
-      public virtual string EscapeFileID(string fileID) => throw new NotImplementedException();
+      public virtual string EscapeFileID(string fileID) => Hasher.HasherService.GetHashedString(fileID);
 
       protected Interfaces.IFileSystem FileSystem => DependencyService.Get<Interfaces.IFileSystem>();
 
