@@ -43,8 +43,24 @@ namespace ComicsShelf.Hasher
             for (int i = 0; i < computedBytes.Length; i++) hashedBytes[i] = computedBytes[i];
             for (int i = 0; i < saltBytes.Length; i++) hashedBytes[computedBytes.Length + i] = saltBytes[i];
 
-            //RESULT
+            // CONVERT TO BASE 64
             var hashedString = Convert.ToBase64String(hashedBytes);
+
+            // REMOVE SOME INVALID CHARAECTERS
+            hashedString = hashedString
+               .Replace("#", "")
+               .Replace(".", "")
+               .Replace("[", "")
+               .Replace("]", "")
+               .Replace("(", "")
+               .Replace(")", "")
+               .Replace(" ", "")
+               .Replace("/", "_")
+               .Replace("=", "_")
+               .Replace("___", "_")
+               .Replace("__", "_");
+
+            // RESULT
             return hashedString;
 
          }
