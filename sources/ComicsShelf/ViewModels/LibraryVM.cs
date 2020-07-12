@@ -18,7 +18,18 @@ namespace ComicsShelf.ViewModels
    public static class LibraryVMExtention
    {
 
-      public static string GetHashedID(this LibraryVM libraryVM) => Hasher.HasherService.GetHashedString(libraryVM.ID);
+      public static string GetHashedID(this LibraryVM library)
+      {
+         var key = "HashedID";
+
+         if (library.KeyValues == null)
+            library.KeyValues = new Dictionary<string, string>();
+
+         if (!library.KeyValues.ContainsKey(key))
+            library.KeyValues.Add(key, Hasher.HasherService.GetHashedString(library.ID));
+
+         return library.KeyValues[key];
+      }
 
    }
 
