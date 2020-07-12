@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Store
@@ -26,8 +27,19 @@ namespace ComicsShelf.Store
       {
          try
          {
+
+            // HASHED ID
+            if (library.KeyValues == null)
+               library.KeyValues = new Dictionary<string, string>();
+            if (!library.KeyValues.ContainsKey("HashedID"))
+               library.KeyValues.Add("HashedID", library.GetHashedID());
+
+            // SERIALIZE DATA
             var libraryJson = await Helpers.Json.Serialize(library);
+
+            // STORE ON DEVICE PREFERENCES
             Xamarin.Essentials.Preferences.Set(library_sync(library.ID), libraryJson);
+
             return true;
          }
          catch (Exception ex) { Helpers.Message.Show(ex); return false; }
