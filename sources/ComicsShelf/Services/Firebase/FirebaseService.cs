@@ -15,16 +15,16 @@ namespace ComicsShelf.Firebase
          DependencyService.Get<FirebaseService>().BaseAddress = new Uri(databaseUrl);
       }
 
-      public static Task<HttpResponseMessage> UpdateAsync(LibraryVM library, ItemVM item) =>
-         DependencyService.Get<FirebaseService>()._UpdateAsync(library, item);
+      public static Task<HttpResponseMessage> UpdateAsync(ItemVM item) =>
+         DependencyService.Get<FirebaseService>()._UpdateAsync(item);
 
-      async Task<HttpResponseMessage> _UpdateAsync(LibraryVM library, ItemVM item)
+      async Task<HttpResponseMessage> _UpdateAsync(ItemVM item)
       {
          try
          {
-            var requestUrl = $"libraries/{library.EscapedID}/items/{item.EscapedID}.json";
+            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
 
-            var jsonParameter = await Helpers.Json.Serialize(item);
+            var jsonParameter = await Helpers.Json.Serialize(item.ToFirebaseItem());
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
 
             var responseMessage = await PutAsync(requestUrl, httpParameter);
