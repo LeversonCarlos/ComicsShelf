@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector;
@@ -62,41 +63,12 @@ namespace ComicsShelf.Drive
                if (!string.IsNullOrEmpty(item.FolderText))
                { item.ShortText = item.ShortText.Replace(item.FolderText, ""); }
 
+               if (item.KeyValues == null)
+                  item.KeyValues = new Dictionary<string, string>();
+               item.KeyValues.Add(nameof(ItemVM.EscapedLibraryID), library.EscapedID);
+
             }
 
-            /*
-            var itemList = fileList?
-               .Select(file => new
-               {
-                  file,
-                  folderText = file.Path.Replace("/ /", "/")
-               })
-               .Select(x => new
-               {
-                  x.file.ID,
-                  fileName = x.file.Name,
-                  fileText = System.IO.Path.GetFileNameWithoutExtension(x.file.Name).Trim(),
-                  folderPath = x.file.Path,
-                  folderText = System.IO.Path.GetFileNameWithoutExtension((string.IsNullOrEmpty(x.folderText) || string.IsNullOrEmpty(rootPath) ? x.folderText : x.folderText.Replace(rootPath, ""))),
-                  ReleaseDate = (!x.file.CreatedDateTime.HasValue ? DateTime.MinValue : x.file.CreatedDateTime.Value.ToLocalTime()),
-                  x.file.KeyValues
-               })
-               .Select(file => new ItemVM
-               {
-                  ID = file.ID, 
-                  LibraryID = library.ID,
-                  FullText = file.fileText,
-                  ShortText = (string.IsNullOrEmpty(file.fileText) || string.IsNullOrEmpty(file.folderText) ? file.fileText : file.fileText.Replace(file.folderText, "")),
-                  FolderText = file.folderText,
-                  FileName = file.fileName,
-                  FolderPath = file.folderPath,
-                  ReleaseDate = file.ReleaseDate,
-                  KeyValues = file.KeyValues,
-                  EscapedID = this.EscapeFileID(file.ID),
-                  Available = true
-               })
-               .ToList();
-            */
 
             return itemList.ToArray();
          }

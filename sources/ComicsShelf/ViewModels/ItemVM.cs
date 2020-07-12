@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace ComicsShelf.ViewModels
 {
@@ -14,8 +15,11 @@ namespace ComicsShelf.ViewModels
       }
 
       public string ID { get; set; }
-      public string LibraryID { get; set; }
       public string EscapedID { get; set; }
+
+      public string LibraryID { get; set; }
+      internal string EscapedLibraryID() => 
+         KeyValues?.ContainsKey(nameof(EscapedLibraryID)) ?? false ? KeyValues[nameof(EscapedLibraryID)] : string.Empty;
 
       public string FullText { get; set; }
       public string ShortText { get; set; }
