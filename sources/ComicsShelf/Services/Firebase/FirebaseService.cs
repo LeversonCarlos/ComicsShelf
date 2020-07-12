@@ -22,7 +22,7 @@ namespace ComicsShelf.Firebase
       {
          try
          {
-            var requestUrl = $"libraries/{library.GetHashedID()}/items/{item.GetHashedID()}.json";
+            var requestUrl = $"libraries/{library.EscapedID}/items/{item.EscapedID}.json";
 
             var jsonParameter = await Helpers.Json.Serialize(item);
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
