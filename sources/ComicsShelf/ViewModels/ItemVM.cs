@@ -96,6 +96,8 @@ namespace ComicsShelf.ViewModels
 
       public static string GetCachePath(this ItemVM itemVM) => $"{Helpers.Paths.FilesCache}/{itemVM.EscapedID}";
 
+      public static string GetHashedID(this ItemVM itemVM) => Hasher.HasherService.GetHashedString(itemVM.ID);
+
    }
 
 }

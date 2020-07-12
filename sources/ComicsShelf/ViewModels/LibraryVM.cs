@@ -15,4 +15,11 @@ namespace ComicsShelf.ViewModels
       public Dictionary<string, string> KeyValues { get; set; }
    }
 
+   public static class LibraryVMExtention
+   {
+
+      public static string GetHashedID(this LibraryVM libraryVM) => Hasher.HasherService.GetHashedString(libraryVM.ID);
+
+   }
+
 }
