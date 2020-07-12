@@ -20,6 +20,7 @@ namespace ComicsShelf.Drive
             var library = new LibraryVM
             {
                ID = driveItem.ID,
+               EscapedID = this.EscapeFileID(driveItem.ID),
                Description = driveItem.Name,
                Path = driveItem.Path,
                KeyValues = driveItem.KeyValues,
