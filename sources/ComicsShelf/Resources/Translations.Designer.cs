@@ -124,6 +124,15 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This directory is already defined as a library.
+        /// </summary>
+        public static string ENGINE_FOLDER_ALREADY_DEFINED_WARNING {
+            get {
+                return ResourceManager.GetString("ENGINE_FOLDER_ALREADY_DEFINED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found {0} files through the drive engine.
         /// </summary>
         public static string ENGINE_FOUND_N_FILES_MESSAGE {

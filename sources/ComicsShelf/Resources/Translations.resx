@@ -138,6 +138,9 @@
   <data name="ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE" xml:space="preserve">
     <value>Connecting to the drive service to refresh the library files</value>
   </data>
+  <data name="ENGINE_FOLDER_ALREADY_DEFINED_WARNING" xml:space="preserve">
+    <value>This directory is already defined as a library</value>
+  </data>
   <data name="ENGINE_FOUND_N_FILES_MESSAGE" xml:space="preserve">
     <value>Found {0} files through the drive engine</value>
   </data>
