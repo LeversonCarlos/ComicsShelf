@@ -8,9 +8,6 @@ namespace ComicsShelf.Firebase
    {
       public string ID { get; set; }
 
-      public long? SizeInBytes { get; set; }
-      public DateTime ReleaseDate { get; set; }
-
       public short? Rating { get; set; }
       public bool Readed { get; set; }
       public DateTime? ReadingDate { get; set; }
@@ -25,8 +22,6 @@ namespace ComicsShelf.Firebase
          new FirebaseItemVM
          {
             ID = itemVM.ID,
-            SizeInBytes = itemVM.SizeInBytes,
-            ReleaseDate = itemVM.ReleaseDate,
             Rating = itemVM.Rating,
             Readed = itemVM.Readed,
             ReadingDate = itemVM.ReadingDate,
@@ -38,8 +33,6 @@ namespace ComicsShelf.Firebase
          new ItemVM
          {
             ID = itemVM.ID,
-            SizeInBytes = itemVM.SizeInBytes,
-            ReleaseDate = itemVM.ReleaseDate,
             Rating = itemVM.Rating,
             Readed = itemVM.Readed,
             ReadingDate = itemVM.ReadingDate,

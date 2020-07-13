@@ -16,10 +16,7 @@ namespace ComicsShelf.ViewModels
 
       public string ID { get; set; }
       public string EscapedID { get; set; }
-
       public string LibraryID { get; set; }
-      internal string EscapedLibraryID() => 
-         KeyValues?.ContainsKey(nameof(EscapedLibraryID)) ?? false ? KeyValues[nameof(EscapedLibraryID)] : string.Empty;
 
       public string FullText { get; set; }
       public string ShortText { get; set; }
@@ -89,6 +86,8 @@ namespace ComicsShelf.ViewModels
 
       public static void SetData(this ItemVM itemVM, ItemVM data)
       {
+         itemVM.SizeInBytes = data.SizeInBytes;
+         itemVM.ReleaseDate = data.ReleaseDate;
          itemVM.Rating = data.Rating;
          itemVM.Readed = data.Readed;
          itemVM.ReadingDate = data.ReadingDate;
