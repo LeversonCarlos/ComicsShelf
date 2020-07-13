@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace ComicsShelf.ViewModels
 {
@@ -14,8 +15,8 @@ namespace ComicsShelf.ViewModels
       }
 
       public string ID { get; set; }
-      public string LibraryID { get; set; }
       public string EscapedID { get; set; }
+      public string LibraryID { get; set; }
 
       public string FullText { get; set; }
       public string ShortText { get; set; }
@@ -85,6 +86,8 @@ namespace ComicsShelf.ViewModels
 
       public static void SetData(this ItemVM itemVM, ItemVM data)
       {
+         itemVM.SizeInBytes = data.SizeInBytes;
+         itemVM.ReleaseDate = data.ReleaseDate;
          itemVM.Rating = data.Rating;
          itemVM.Readed = data.Readed;
          itemVM.ReadingDate = data.ReadingDate;

@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ComicsShelf.Store
@@ -26,8 +27,11 @@ namespace ComicsShelf.Store
       {
          try
          {
+
+            // STORE ON DEVICE PREFERENCES
             var libraryJson = await Helpers.Json.Serialize(library);
             Xamarin.Essentials.Preferences.Set(library_sync(library.ID), libraryJson);
+
             return true;
          }
          catch (Exception ex) { Helpers.Message.Show(ex); return false; }

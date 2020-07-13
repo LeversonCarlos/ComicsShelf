@@ -59,11 +59,8 @@ namespace ComicsShelf.Engine.RefreshData
             if (inactiveItems.Count == 0 && newItems.Count == 0)
             { Helpers.Notify.Message(library, ""); }
 
-            // ANALYSE LEGACY SETTINGS
-            await LegacySettings.Service.Execute(library);
-
-            // NOTIFY THAT LIBRARY FILES WAS UPDATED 
-            // Notify.Result(library, store.GetLibraryItems(library));
+            // RETRIEVE LIBRARY DATA
+            Helpers.Notify.LibraryData(library);
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }

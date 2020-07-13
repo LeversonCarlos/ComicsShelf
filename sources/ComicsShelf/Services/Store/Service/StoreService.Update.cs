@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicsShelf.Store
 {
@@ -22,6 +23,7 @@ namespace ComicsShelf.Store
             var libraryID = itemList.Select(x => x.LibraryID).FirstOrDefault();
             var library = this.GetLibrary(libraryID);
             string[] itemIDs = null;
+            var firebaseService = DependencyService.Get<Firebase.FirebaseService>();
 
             // CHECK FOR CHANGED ITEMS
             itemIDs = itemList.Select(x => x.ID).ToArray();
@@ -38,6 +40,8 @@ namespace ComicsShelf.Store
                   this.ItemList[libraryID][updateItem.ID].SetData(updateItem);
                   changedItemIDs.Add(updateItem.ID);
                }
+               if (forceUpdate)
+                  Task.Run(() => firebaseService.SetItemAsync(library, updateItem));
             }
 
             // CHECK FOR NEW ITEMS
@@ -47,7 +51,14 @@ namespace ComicsShelf.Store
                .ToArray();
             foreach (var newItem in newItems)
             {
+
+               // STORE ON DEVICE PREFERENCES
                if (!await Sync.SetItem(newItem)) { return false; }
+
+               // STORE ON FIREBASE CLOUD
+               Task.Run(() => firebaseService.AddItemAsync(library, newItem));
+
+               // STORE ON MEMORY VARIABLE
                this.ItemList[libraryID].Add(newItem.ID, newItem);
                changedItemIDs.Add(newItem.ID);
             }

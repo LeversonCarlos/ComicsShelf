@@ -12,8 +12,13 @@ namespace ComicsShelf.Screens.Splash
       }
 
 
-      void CommandHandler() =>
-         Rating = SelectedRating;
+      void CommandHandler()
+      {
+         if (Rating == SelectedRating)
+            Rating = null;
+         else
+            Rating = SelectedRating;
+      }
 
 
       public static readonly BindableProperty RatingProperty =

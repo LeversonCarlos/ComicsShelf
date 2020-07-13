@@ -9,6 +9,7 @@ namespace ComicsShelf.ViewModels
    {
       public LibraryVM() { KeyValues = new Dictionary<string, string>(); }
       public string ID { get; set; }
+      public string EscapedID { get; set; }
       public string Description { get; set; }
       public string Path { get; set; }
       public enLibraryType Type { get; set; }

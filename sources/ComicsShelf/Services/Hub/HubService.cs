@@ -30,6 +30,15 @@ namespace ComicsShelf.Services.Hub
             Helpers.Notify.ItemsUpdate(Application.Current, async itemsList => await Engine.AnalysisData.Service.Execute(itemsList));
             Helpers.Notify.SectionsUpdate(Application.Current, async itemList => await Engine.CoverExtraction.Service.Execute());
 
+            Helpers.Notify.LibraryData(Application.Current, library =>
+            {
+               Task.Run(async () =>
+               {
+                  await Engine.LegacySettings.Service.Execute(library);
+                  await Engine.FirebaseSettings.Service.Execute(library);
+               });
+            });
+
             Routing.RegisterRoute(SplashExtentions.GetRoute(), SplashExtentions.GetPageType());
             Routing.RegisterRoute(ReadingExtentions.GetRoute(), ReadingExtentions.GetPageType());
 
