@@ -12,13 +12,17 @@ namespace ComicsShelf.Firebase
    public class FirebaseService : HttpClient
    {
 
-      public static void Init(string databaseUrl)
+      public static void Init(string databaseUrl, string environment)
       {
          DependencyService.Register<FirebaseService>();
          DependencyService.Get<FirebaseService>()._DatabaseUrl = databaseUrl;
+         DependencyService.Get<FirebaseService>()._Environment = environment;
       }
 
+      string _Environment;
       string _DatabaseUrl;
+      string _BaseUrl(LibraryVM library) =>
+         $"{_Environment}/libraries/{library.EscapedID}";
 
       bool _HasConnection
       {
@@ -47,7 +51,7 @@ namespace ComicsShelf.Firebase
             if (!_HasConnection)
                throw new Exception("There are no active internet connection");
 
-            var requestUrl = $"libraries/{library.EscapedID}/items.json";
+            var requestUrl = $"{_BaseUrl(library)}/items.json";
             var responseMessage = await GetAsync(requestUrl);
             responseMessage.EnsureSuccessStatusCode();
 
@@ -71,7 +75,7 @@ namespace ComicsShelf.Firebase
             if (!_HasConnection)
                throw new Exception("There are no active internet connection");
 
-            var requestUrl = $"libraries/{library.EscapedID}/items/{item.EscapedID}.json";
+            var requestUrl = $"{_BaseUrl(library)}/items/{item.EscapedID}.json";
             var dataParameter = new { ID = item.ID };
             var jsonParameter = await Helpers.Json.Serialize(dataParameter);
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
@@ -91,7 +95,7 @@ namespace ComicsShelf.Firebase
             if (!_HasConnection)
                throw new Exception("There are no active internet connection");
 
-            var requestUrl = $"libraries/{library.EscapedID}/items/{item.EscapedID}.json";
+            var requestUrl = $"{_BaseUrl(library)}/items/{item.EscapedID}.json";
             var jsonParameter = await Helpers.Json.Serialize(item.ToFirebaseItem());
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
 
