@@ -37,11 +37,17 @@ namespace ComicsShelf.Engine.FirebaseSettings
                var libraryItem = libraryItems.Where(x => x.ID == firebaseItem.ID).FirstOrDefault();
                if (libraryItem == null) continue;
 
-               libraryItem.Rating = (short)(firebaseItem.Rating > 3 ? 1 : -1);
-               libraryItem.Readed = firebaseItem.Readed;
-               libraryItem.ReadingDate = firebaseItem.ReadingDate;
-               libraryItem.ReadingPage = firebaseItem.ReadingPage;
-               libraryItem.ReadingPercent = firebaseItem.ReadingPercent;
+               if (firebaseItem.Rating.HasValue)
+                  libraryItem.Rating = firebaseItem.Rating;
+               if (firebaseItem.Readed.HasValue)
+                  libraryItem.Readed = firebaseItem.Readed.Value;
+               if (firebaseItem.ReadingDate.HasValue)
+                  libraryItem.ReadingDate = firebaseItem.ReadingDate;
+               if (firebaseItem.ReadingPage.HasValue)
+               {
+                  libraryItem.ReadingPage = firebaseItem.ReadingPage;
+                  libraryItem.ReadingPercent = firebaseItem.ReadingPercent;
+               }
                if (libraryItem.IsDirty)
                   changedIDs.Add(libraryItem.ID);
             }

@@ -40,7 +40,7 @@ namespace ComicsShelf.Firebase
          return SendAsync(request);
       }
 
-      public async Task<ItemVM[]> GetItemsAsync(LibraryVM library)
+      public async Task<FirebaseItemVM[]> GetItemsAsync(LibraryVM library)
       {
          try
          {
@@ -57,7 +57,7 @@ namespace ComicsShelf.Firebase
                throw new Exception("Invalid item list received from firebase cloud");
 
             var litemList = firebaseItems
-               .Select(x => x.Value.ToLibraryItem())
+               .Select(x => x.Value)
                .ToArray();
             return litemList;
          }
