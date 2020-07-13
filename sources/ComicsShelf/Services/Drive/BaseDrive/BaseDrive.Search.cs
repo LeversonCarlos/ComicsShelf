@@ -1,6 +1,5 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CloudDrive.Connector;
@@ -63,12 +62,7 @@ namespace ComicsShelf.Drive
                if (!string.IsNullOrEmpty(item.FolderText))
                { item.ShortText = item.ShortText.Replace(item.FolderText, ""); }
 
-               if (item.KeyValues == null)
-                  item.KeyValues = new Dictionary<string, string>();
-               item.KeyValues.Add(nameof(ItemVM.EscapedLibraryID), library.EscapedID);
-
             }
-
 
             return itemList.ToArray();
          }
