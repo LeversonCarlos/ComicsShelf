@@ -53,4 +53,12 @@
       <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
    </Style>
 
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="EmptyTitle">
+      <Setter Property="HorizontalTextAlignment" Value="Center" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="EmptyMessage">
+      <Setter Property="HorizontalTextAlignment" Value="Center" />
+   </Style>
+
 </ResourceDictionary>
