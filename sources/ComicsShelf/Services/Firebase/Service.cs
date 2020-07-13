@@ -64,14 +64,14 @@ namespace ComicsShelf.Firebase
          catch (Exception ex) { Helpers.Insights.TrackException(ex); return null; }
       }
 
-      public async Task<bool> AddItemAsync(ItemVM item)
+      public async Task<bool> AddItemAsync(LibraryVM library, ItemVM item)
       {
          try
          {
             if (!_HasConnection)
                throw new Exception("There are no active internet connection");
 
-            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
+            var requestUrl = $"libraries/{library.EscapedID}/items/{item.EscapedID}.json";
             var dataParameter = new { ID = item.ID };
             var jsonParameter = await Helpers.Json.Serialize(dataParameter);
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
@@ -84,14 +84,14 @@ namespace ComicsShelf.Firebase
          catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
       }
 
-      public async Task<bool> SetItemAsync(ItemVM item)
+      public async Task<bool> SetItemAsync(LibraryVM library, ItemVM item)
       {
          try
          {
             if (!_HasConnection)
                throw new Exception("There are no active internet connection");
 
-            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
+            var requestUrl = $"libraries/{library.EscapedID}/items/{item.EscapedID}.json";
             var jsonParameter = await Helpers.Json.Serialize(item.ToFirebaseItem());
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
 
