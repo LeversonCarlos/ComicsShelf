@@ -62,8 +62,8 @@ namespace ComicsShelf.Engine.RefreshData
             // ANALYSE LEGACY SETTINGS
             await LegacySettings.Service.Execute(library);
 
-            // NOTIFY THAT LIBRARY FILES WAS UPDATED 
-            // Notify.Result(library, store.GetLibraryItems(library));
+            // ANALYSE FIREBASE SETTINGS
+            await FirebaseSettings.Service.Execute(library);
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
