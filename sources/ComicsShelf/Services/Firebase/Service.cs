@@ -10,11 +10,25 @@ namespace ComicsShelf.Firebase
 {
    public class FirebaseService : HttpClient
    {
+      string _DatabaseUrl;
 
       public static void Init(string databaseUrl)
       {
          DependencyService.Register<FirebaseService>();
-         DependencyService.Get<FirebaseService>().BaseAddress = new Uri(databaseUrl);
+         DependencyService.Get<FirebaseService>()._DatabaseUrl = databaseUrl;
+         // DependencyService.Get<FirebaseService>().BaseAddress = new Uri(databaseUrl);
+      }
+
+      bool _HasConnection
+      {
+         get
+         {
+            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.Internet)
+               return false;
+            if (BaseAddress == null)
+               BaseAddress = new Uri(_DatabaseUrl);
+            return true;
+         }
       }
 
       public static Task<HttpResponseMessage> SetAsync(ItemVM item) =>
@@ -23,8 +37,10 @@ namespace ComicsShelf.Firebase
       {
          try
          {
-            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
+            if (!_HasConnection)
+               throw new Exception("There are no active internet connection");
 
+            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
             var jsonParameter = await Helpers.Json.Serialize(item.ToFirebaseItem());
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
 
@@ -41,8 +57,10 @@ namespace ComicsShelf.Firebase
       {
          try
          {
-            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
+            if (!_HasConnection)
+               throw new Exception("There are no active internet connection");
 
+            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
             var responseMessage = await GetAsync(requestUrl);
             responseMessage.EnsureSuccessStatusCode();
 
@@ -63,8 +81,10 @@ namespace ComicsShelf.Firebase
       {
          try
          {
-            var requestUrl = $"libraries/{library.EscapedID}/items.json";
+            if (!_HasConnection)
+               throw new Exception("There are no active internet connection");
 
+            var requestUrl = $"libraries/{library.EscapedID}/items.json";
             var responseMessage = await GetAsync(requestUrl);
             responseMessage.EnsureSuccessStatusCode();
 
