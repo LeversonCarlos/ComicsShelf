@@ -12,9 +12,10 @@ namespace ComicsShelf.Store
       {
          try
          {
+
+            // LOAD ITEM FROM DEVICE PREFERENCES
             var libraryItemJson = Xamarin.Essentials.Preferences.Get(item_sync(itemID), "");
             if (string.IsNullOrEmpty(libraryItemJson)) { return null; }
-
             var libraryItem = await Helpers.Json.Deserialize<ItemVM>(libraryItemJson);
 
             return libraryItem;
@@ -30,9 +31,6 @@ namespace ComicsShelf.Store
             // STORE ON DEVICE PREFERENCES
             var libraryItemJson = await Helpers.Json.Serialize(libraryItem);
             Xamarin.Essentials.Preferences.Set(item_sync(libraryItem.ID), libraryItemJson);
-
-            // STORE ON FIREBASE CLOUD
-            await Firebase.FirebaseService.UpdateAsync(libraryItem);
 
             return true;
          }
