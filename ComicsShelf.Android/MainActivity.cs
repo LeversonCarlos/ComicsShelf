@@ -26,6 +26,8 @@ namespace ComicsShelf.Droid
          Xamarin.Forms.Forms.Init(this, savedInstanceState);
          Helpers.Insights.Init(Resources.GetString(Resource.String.appCenter_androidSecret));
          Hasher.HasherService.Init(Resources.GetString(Resource.String.hasher_secret));
+         Firebase.FirebaseService.Init(Resources.GetString(Resource.String.firebase_databaseUrl),
+            Resources.GetString(Resource.String.firebase_environment));
          LoadApplication(new App());
       }
 
