@@ -1,6 +1,7 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -31,7 +32,15 @@ namespace ComicsShelf.Firebase
          }
       }
 
-      public async Task<ItemVM[]> GetAsync(LibraryVM library)
+      [DebuggerStepThrough]
+      public Task<HttpResponseMessage> PatchAsync(string requestUri, HttpContent requestContent)
+      {
+         var request = new HttpRequestMessage(new HttpMethod("PATCH"), requestUri);
+         request.Content = requestContent;
+         return SendAsync(request);
+      }
+
+      public async Task<ItemVM[]> GetItemsAsync(LibraryVM library)
       {
          try
          {
@@ -55,9 +64,27 @@ namespace ComicsShelf.Firebase
          catch (Exception ex) { Helpers.Insights.TrackException(ex); return null; }
       }
 
-      public static Task<HttpResponseMessage> SetAsync(ItemVM item) =>
-         DependencyService.Get<FirebaseService>()._SetAsync(item);
-      async Task<HttpResponseMessage> _SetAsync(ItemVM item)
+      public async Task<bool> AddItemAsync(ItemVM item)
+      {
+         try
+         {
+            if (!_HasConnection)
+               throw new Exception("There are no active internet connection");
+
+            var requestUrl = $"libraries/{item.EscapedLibraryID()}/items/{item.EscapedID}.json";
+            var dataParameter = new { ID = item.ID };
+            var jsonParameter = await Helpers.Json.Serialize(dataParameter);
+            var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
+
+            var responseMessage = await PatchAsync(requestUrl, httpParameter);
+            responseMessage.EnsureSuccessStatusCode();
+
+            return true;
+         }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
+      }
+
+      public async Task<bool> SetItemAsync(ItemVM item)
       {
          try
          {
@@ -68,11 +95,12 @@ namespace ComicsShelf.Firebase
             var jsonParameter = await Helpers.Json.Serialize(item.ToFirebaseItem());
             var httpParameter = new StringContent(jsonParameter, System.Text.Encoding.UTF8, "application/json");
 
-            var responseMessage = await PutAsync(requestUrl, httpParameter);
+            var responseMessage = await PatchAsync(requestUrl, httpParameter);
+            responseMessage.EnsureSuccessStatusCode();
 
-            return responseMessage;
+            return true;
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); return null; }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
       }
 
    }
