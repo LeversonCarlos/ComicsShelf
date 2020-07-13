@@ -43,6 +43,15 @@ namespace ComicsShelf.Helpers
          Unsubscribe<LibraryVM>(subscriber, LibraryRemoveKey);
 
 
+      const string LibraryDataKey = "store.library.data.key";
+      public static void LibraryData(LibraryVM library) =>
+         Send(LibraryDataKey, library);
+      public static void LibraryData(object subscriber, Action<LibraryVM> callback) =>
+         Subscribe(subscriber, LibraryDataKey, callback);
+      public static void LibraryDataUnsubscribe(object subscriber) =>
+         Unsubscribe<LibraryVM>(subscriber, LibraryDataKey);
+
+
       const string ItemsUpdateKey = "store.items.update.key";
       public static void ItemsUpdate(ItemVM[] itemList) =>
          Send(ItemsUpdateKey, itemList);
