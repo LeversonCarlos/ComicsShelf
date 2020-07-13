@@ -29,6 +29,7 @@
       <Setter Property="VerticalOptions" Value="FillAndExpand" />
       <Setter Property="VerticalTextAlignment" Value="End" />
       <Setter Property="FontAttributes" Value="Bold" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
    </Style>
 
    <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="SectionSubtitle">
