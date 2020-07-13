@@ -97,7 +97,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a directory for your comics library.
+        ///   Looks up a localized string similar to Select a directory for your library.
         /// </summary>
         public static string DRIVE_FOLDER_DIALOG_TITLE {
             get {

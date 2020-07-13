@@ -130,7 +130,7 @@
     <value>Selected Path</value>
   </data>
   <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
-    <value>Select a directory for your comics library</value>
+    <value>Select a directory for your library</value>
   </data>
   <data name="ENGINE_ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
     <value>Added {0} new files to the library</value>
