@@ -41,7 +41,7 @@ namespace ComicsShelf.Store
                   changedItemIDs.Add(updateItem.ID);
                }
                if (forceUpdate)
-                  await firebaseService.SetItemAsync(library, updateItem);
+                  Task.Run(() => firebaseService.SetItemAsync(library, updateItem));
             }
 
             // CHECK FOR NEW ITEMS
@@ -56,7 +56,7 @@ namespace ComicsShelf.Store
                if (!await Sync.SetItem(newItem)) { return false; }
 
                // STORE ON FIREBASE CLOUD
-               await firebaseService.AddItemAsync(library, newItem);
+               Task.Run(() => firebaseService.AddItemAsync(library, newItem));
 
                // STORE ON MEMORY VARIABLE
                this.ItemList[libraryID].Add(newItem.ID, newItem);
