@@ -11,30 +11,27 @@ namespace ComicsShelf.Droid.CustomRenderers
    public class ReadingPageRenderer : PageRenderer
    {
 
-      // readonly Context _Context;
-      // Window _Window => ((Activity)_Context).Window;
       readonly int _Visibility;
 
       public ReadingPageRenderer(Context context) : base(context)
       {
          try
          {
-            // _Context = context;
             var _Window = ((Activity)context).Window;
             _Visibility = (int)_Window.DecorView.SystemUiVisibility;
 
             /*
-                        var newVisibility = (int)_Window.DecorView.SystemUiVisibility;
-                        newVisibility |= (int)SystemUiFlags.LowProfile;
-                        newVisibility |= (int)SystemUiFlags.Fullscreen;
-                        newVisibility |= (int)SystemUiFlags.HideNavigation;
-                        newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
-                        _Window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
+            var newVisibility = (int)_Window.DecorView.SystemUiVisibility;
+            newVisibility |= (int)SystemUiFlags.Fullscreen;
+            newVisibility |= (int)SystemUiFlags.HideNavigation;
+            newVisibility |= (int)SystemUiFlags.LowProfile;
+            newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
+            _Window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
             */
 
             _Window.AddFlags(WindowManagerFlags.Fullscreen);
-            _Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
-            _Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+            // _Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
+            // _Window.AddFlags(WindowManagerFlags.TranslucentStatus);
          }
          catch (Exception ex) { ComicsShelf.Helpers.Insights.TrackException(ex); }
       }
@@ -46,9 +43,9 @@ namespace ComicsShelf.Droid.CustomRenderers
             var _Window = ((Activity)Context).Window;
 
             // _Window.ClearFlags(WindowManagerFlags.KeepScreenOn);
-            _Window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
-            _Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
             _Window.ClearFlags(WindowManagerFlags.Fullscreen);
+            // _Window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
+            // _Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
 
             // _Window.DecorView.SystemUiVisibility = (StatusBarVisibility)_Visibility;
 

@@ -7,19 +7,19 @@
    x:Class="ComicsShelf.Screens.Home.Styles">
 
    <Style TargetType="CollectionView" x:Key="Sections">
-      <Setter Property="Margin" Value="0,5" />
+      <Setter Property="Margin" Value="0" />
       <Setter Property="ItemsLayout" Value="VerticalList" />
       <Setter Property="SelectionMode" Value="None" />
       <Setter Property="ItemSizingStrategy" Value="MeasureAllItems" />
    </Style>
 
    <Style TargetType="StackLayout" x:Key="Section">
-      <Setter Property="Margin" Value="0" />
+      <Setter Property="Margin" Value="0,5" />
       <Setter Property="Spacing" Value="0" />
    </Style>
 
    <Style TargetType="StackLayout" x:Key="SectionHeader">
-      <Setter Property="Margin" Value="10,0" />
+      <Setter Property="Margin" Value="5,0" />
       <Setter Property="Orientation" Value="Horizontal" />
       <Setter Property="Spacing" Value="5" />
    </Style>
@@ -29,6 +29,7 @@
       <Setter Property="VerticalOptions" Value="FillAndExpand" />
       <Setter Property="VerticalTextAlignment" Value="End" />
       <Setter Property="FontAttributes" Value="Bold" />
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
    </Style>
 
    <Style TargetType="Label" BasedOn="{StaticResource Micro}" x:Key="SectionSubtitle">
@@ -51,6 +52,14 @@
    <Style TargetType="controls:CoverImage">
       <Setter Property="HeightRequest" Value="{Static helpers:Cover.DefaultHeight}" />
       <Setter Property="WidthRequest" Value="{Static helpers:Cover.DefaultWidth}" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="EmptyTitle">
+      <Setter Property="HorizontalTextAlignment" Value="Center" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="EmptyMessage">
+      <Setter Property="HorizontalTextAlignment" Value="Center" />
    </Style>
 
 </ResourceDictionary>

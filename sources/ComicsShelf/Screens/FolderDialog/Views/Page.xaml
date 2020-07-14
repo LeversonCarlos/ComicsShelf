@@ -28,8 +28,8 @@
                   <DataTemplate>
                      <StackLayout >
                         <FlexLayout HeightRequest="50" AlignItems="Center" JustifyContent="Start">
-                           <Image Source="folder" Margin="0,0,10,0" />
-                           <Label Text="{Binding Name}" Style="{StaticResource Default}" />
+                           <Image Source="folder" Margin="0,0,10,0" FlexLayout.Shrink="0" />
+                           <Label Text="{Binding Name}" Style="{StaticResource ListItem}" />
                            <FlexLayout.GestureRecognizers>
                               <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectCommand, Source={x:Reference folderDialog}}" CommandParameter="{Binding .}" />
                            </FlexLayout.GestureRecognizers>

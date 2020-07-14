@@ -97,7 +97,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a directory for your comics library.
+        ///   Looks up a localized string similar to Select a directory for your library.
         /// </summary>
         public static string DRIVE_FOLDER_DIALOG_TITLE {
             get {
@@ -205,7 +205,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click to clear your local cache.
+        ///   Looks up a localized string similar to Release space on your device.
         /// </summary>
         public static string SETTINGS_LOCAL_CACHE_CLEAR_COMMAND {
             get {
@@ -241,7 +241,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click to add a new Local Drive library.
+        ///   Looks up a localized string similar to Click to add a new library.
         /// </summary>
         public static string SETTINGS_LOCAL_DRIVE_ADD_COMMAND {
             get {
@@ -268,7 +268,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click to add a new One Drive library.
+        ///   Looks up a localized string similar to Click to add a new library.
         /// </summary>
         public static string SETTINGS_ONE_DRIVE_ADD_COMMAND {
             get {

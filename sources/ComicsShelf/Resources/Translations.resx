@@ -130,7 +130,7 @@
     <value>Selected Path</value>
   </data>
   <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
-    <value>Select a directory for your comics library</value>
+    <value>Select a directory for your library</value>
   </data>
   <data name="ENGINE_ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
     <value>Added {0} new files to the library</value>
@@ -166,7 +166,7 @@
     <value>Do you really want to remove the {0} library</value>
   </data>
   <data name="SETTINGS_LOCAL_CACHE_CLEAR_COMMAND" xml:space="preserve">
-    <value>Click to clear your local cache</value>
+    <value>Release space on your device</value>
   </data>
   <data name="SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION" xml:space="preserve">
     <value>Do you want to clear your local cache ?</value>
@@ -178,7 +178,7 @@
     <value>megas</value>
   </data>
   <data name="SETTINGS_LOCAL_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Click to add a new Local Drive library</value>
+    <value>Click to add a new library</value>
   </data>
   <data name="SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
     <value>LOCAL DRIVE LIBRARIES</value>
@@ -187,7 +187,7 @@
     <value>Settings</value>
   </data>
   <data name="SETTINGS_ONE_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Click to add a new One Drive library</value>
+    <value>Click to add a new library</value>
   </data>
   <data name="SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
     <value>ONE DRIVE LIBRARIES</value>
