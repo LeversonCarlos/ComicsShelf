@@ -95,6 +95,7 @@ namespace ComicsShelf.Engine.CoverExtraction
 
       private static async Task<bool> ExtractCovers(LibraryVM library, ItemVM[] itemList)
       {
+         var start = DateTime.Now;
          try
          {
 
@@ -110,15 +111,13 @@ namespace ComicsShelf.Engine.CoverExtraction
                Notify.Message(library, item.FullText);
                Notify.Progress(library, progress);
 
-               var start = DateTime.Now;
                try
                {
                   await semaphore.WaitAsync();
-                  start = DateTime.Now;
                   if (!await drive.ExtractCover(library, item)) { throw new Exception($"Stop extracting covers at the item [{item.FullText}]"); }
                }
                catch (Exception exI) { Insights.TrackException(exI); break; }
-               finally { semaphore.Release(); Insights.TrackMetric($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds); }
+               finally { semaphore.Release(); }
 
                if (cancelExecution) { break; }
             }
@@ -130,6 +129,7 @@ namespace ComicsShelf.Engine.CoverExtraction
             return !cancelExecution;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
+         finally { Insights.TrackMetric($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds / (itemList?.Length > 0 ? itemList.Length : 1)); }
       }
 
    }
