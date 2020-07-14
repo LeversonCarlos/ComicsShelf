@@ -125,9 +125,9 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.910310" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
-    <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.19-alpha" />
-    <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.19-alpha" />
-    <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.19-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.21-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.21-alpha" />
+    <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.21-alpha" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

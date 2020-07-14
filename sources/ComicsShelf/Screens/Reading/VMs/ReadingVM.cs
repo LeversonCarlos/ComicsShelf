@@ -17,8 +17,10 @@ namespace ComicsShelf.Screens.Reading
          Item = item;
          PagesList = new ObservableList<PageVM>();
          PagesArray = pagesList.Union(new PageVM[] { new PageVM { } }).ToArray();
+         BackCommand = new Command(param => Helpers.Modal.Pop());
       }
 
+      public Command BackCommand { get; }
       readonly PageVM[] PagesArray;
       public ItemVM Item { get; }
       public ObservableList<PageVM> PagesList { get; }

@@ -75,9 +75,21 @@ namespace ComicsShelf.Engine.AnalysisData
             foreach (var sectionItem in sectionsList)
             {
 
-               // PREPARE A SECTION
-               var sectionText = System.IO.Path.GetFileNameWithoutExtension(sectionItem.Path);
-               var section = new SectionVM(sectionText, library);
+               // SECTION TITLE
+               var sectionTitle = sectionItem.Path;
+               if (sectionTitle.StartsWith(library.Path))
+                  sectionTitle = sectionTitle.Substring(library.Path.Length);
+               while (sectionTitle.StartsWith("/"))
+                  sectionTitle = sectionTitle.Substring(1);
+               var sectionSubtitle = library.Description;
+               if (string.IsNullOrEmpty(sectionTitle))
+               {
+                  sectionTitle = sectionSubtitle;
+                  sectionSubtitle = "";
+               }
+
+               // CREATE NEW SECTION
+               var section = new SectionVM(sectionTitle, sectionSubtitle, library);
 
                // GROUP ITEMS BY FOLDER AND LOOP IT
                var foldersList = sectionItem.Items
@@ -127,7 +139,7 @@ namespace ComicsShelf.Engine.AnalysisData
                .ToArray();
             if (sectionItems?.Length == 0) { return null; }
 
-            var section = new SectionVM(Resources.Translations.HOME_RECENTLY_ADDED_SECTION_TITLE, null);
+            var section = new SectionVM(Resources.Translations.HOME_RECENTLY_ADDED_SECTION_TITLE, "", null);
 
             foreach (var item in sectionItems)
                section.Folders.Add(new FolderVM(item.FullText) { FirstItem = item });
@@ -196,7 +208,7 @@ namespace ComicsShelf.Engine.AnalysisData
             if (sectionItems?.Length == 0) { return null; }
 
             var sectionFactor = Device.Idiom == TargetIdiom.Phone ? 1.6 : 1.8;
-            var section = new SectionVM(Resources.Translations.HOME_ON_GOING_READING_SECTION_TITLE, null);
+            var section = new SectionVM(Resources.Translations.HOME_ON_GOING_READING_SECTION_TITLE, "", null);
             section.SizeFactor = sectionFactor;
 
             foreach (var item in sectionItems)
