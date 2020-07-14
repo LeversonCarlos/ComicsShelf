@@ -37,8 +37,7 @@
          <reading:ReadingStats 
                WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}" 
                BackgroundColor="{StaticResource OverlayBackgroundColor}" 
-               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" Spacing="0" >
-            <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
+               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,0" Spacing="0" >
             <StackLayout Orientation="Horizontal" Padding="10">
                <Label Text="{Binding Item.FullText}" Style="{StaticResource StatText}" HorizontalOptions="StartAndExpand" />
                <Label Style="{StaticResource StatText}" >
@@ -53,6 +52,7 @@
                   </Label.FormattedText>
                </Label>
             </StackLayout>
+            <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
          </reading:ReadingStats>
 
       </AbsoluteLayout>
