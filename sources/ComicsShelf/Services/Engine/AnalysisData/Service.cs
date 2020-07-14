@@ -75,9 +75,16 @@ namespace ComicsShelf.Engine.AnalysisData
             foreach (var sectionItem in sectionsList)
             {
 
-               // PREPARE A SECTION
+               // SECTION TITLE
                var sectionTitle = System.IO.Path.GetFileNameWithoutExtension(sectionItem.Path);
                var sectionSubtitle = library.Description;
+               if (string.IsNullOrEmpty(sectionTitle))
+               {
+                  sectionTitle = sectionSubtitle;
+                  sectionSubtitle = "";
+               }
+
+               // CREATE NEW SECTION
                var section = new SectionVM(sectionTitle, sectionSubtitle, library);
 
                // GROUP ITEMS BY FOLDER AND LOOP IT
