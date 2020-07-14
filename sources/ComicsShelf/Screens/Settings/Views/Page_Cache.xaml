@@ -13,7 +13,7 @@
 
       <StackLayout Style="{StaticResource Section}">
 
-         <Label Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_TITLE}" Style="{StaticResource Large}" />
+         <Label Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_TITLE}" Style="{StaticResource SectionTitle}" />
 
          <FlexLayout Style="{StaticResource SectionItem}" >
             <FlexLayout.GestureRecognizers>

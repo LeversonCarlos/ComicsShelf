@@ -96,6 +96,7 @@ namespace ComicsShelf.Engine.CoverExtraction
       private static async Task<bool> ExtractCovers(LibraryVM library, ItemVM[] itemList)
       {
          var start = DateTime.Now;
+         int itemIndex = 0;
          try
          {
 
@@ -104,7 +105,6 @@ namespace ComicsShelf.Engine.CoverExtraction
             var drive = Drive.BaseDrive.GetDrive(library.Type);
 
             // LOOP THROUGH ITEMS
-            int itemIndex = 0;
             foreach (var item in itemList)
             {
                var progress = (double)++itemIndex / (double)itemList.Length;
@@ -129,7 +129,7 @@ namespace ComicsShelf.Engine.CoverExtraction
             return !cancelExecution;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
-         finally { Insights.TrackMetric($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds / (itemList?.Length > 0 ? itemList.Length : 1)); }
+         finally { Insights.TrackMetric($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds / (itemIndex > 0 ? itemIndex : 1)); }
       }
 
    }
