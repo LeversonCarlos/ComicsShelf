@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
+using System.Threading;
 using Xamarin.Forms;
 
 namespace ComicsShelf.Helpers
@@ -8,8 +9,18 @@ namespace ComicsShelf.Helpers
    {
 
 
-      internal static void Send<T>(string key, T data) =>
-         MessagingCenter.Send<Application, T>(Application.Current, key, data);
+      static SemaphoreSlim sendSemaphore = new SemaphoreSlim(1, 1);
+      internal static async void Send<T>(string key, T data)
+      {
+         try
+         {
+            await sendSemaphore.WaitAsync();
+            MessagingCenter.Send<Application, T>(Application.Current, key, data);
+         }
+         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
+         finally { sendSemaphore.Release(); }
+      }
+
       internal static void Subscribe<T>(object subscriber, string key, Action<T> callback) =>
          MessagingCenter.Subscribe<Application, T>(subscriber, key, (app, data) => callback(data), Application.Current);
       internal static void Unsubscribe<T>(object subscriber, string key) =>
