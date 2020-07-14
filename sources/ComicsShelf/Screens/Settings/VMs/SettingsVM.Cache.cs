@@ -44,6 +44,9 @@ namespace ComicsShelf.Screens.Settings
             if (!await Helpers.Message.Confirm(Resources.Translations.SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION)) { return; }
             IsBusy = true;
 
+            if (!System.IO.Directory.Exists(Helpers.Paths.FilesCache))
+               return;
+
             var filesList = System.IO.Directory.GetFiles(Helpers.Paths.FilesCache, "*.*", System.IO.SearchOption.AllDirectories);
 
             foreach (var file in filesList)
