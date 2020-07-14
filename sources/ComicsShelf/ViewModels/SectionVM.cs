@@ -8,6 +8,7 @@ namespace ComicsShelf.ViewModels
       public SectionVM(string title, LibraryVM library)
       {
          Title = title;
+         Subtitle = Library?.Description;
          Library = library;
          SizeFactor = 1;
          Folders = new List<FolderVM>();
@@ -15,6 +16,7 @@ namespace ComicsShelf.ViewModels
 
       public LibraryVM Library { get; private set; }
       public string Title { get; private set; }
+      public string Subtitle { get; private set; }
 
       public double SizeFactor { get; set; }
       public double SizeHeight => Helpers.Cover.DefaultHeight * SizeFactor;
