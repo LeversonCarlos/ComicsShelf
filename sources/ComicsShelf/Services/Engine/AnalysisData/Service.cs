@@ -77,6 +77,10 @@ namespace ComicsShelf.Engine.AnalysisData
 
                // SECTION TITLE
                var sectionTitle = sectionItem.Path;
+               if (library.Path.Length > 1)
+                  sectionTitle = sectionTitle.Replace(library.Path, "");
+               if (sectionTitle.StartsWith("/"))
+                  sectionTitle = sectionTitle.Substring(1);
                var sectionSubtitle = library.Description;
                if (string.IsNullOrEmpty(sectionTitle))
                {
