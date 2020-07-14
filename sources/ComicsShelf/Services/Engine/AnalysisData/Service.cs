@@ -76,7 +76,7 @@ namespace ComicsShelf.Engine.AnalysisData
             {
 
                // SECTION TITLE
-               var sectionTitle = System.IO.Path.GetFileNameWithoutExtension(sectionItem.Path);
+               var sectionTitle = sectionItem.Path;
                var sectionSubtitle = library.Description;
                if (string.IsNullOrEmpty(sectionTitle))
                {
