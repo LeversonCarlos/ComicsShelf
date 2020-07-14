@@ -5,10 +5,10 @@ namespace ComicsShelf.ViewModels
    public class SectionVM
    {
 
-      public SectionVM(string title, LibraryVM library)
+      public SectionVM(string title, string subtitle, LibraryVM library)
       {
          Title = title;
-         Subtitle = Library?.Description;
+         Subtitle = subtitle;
          Library = library;
          SizeFactor = 1;
          Folders = new List<FolderVM>();
