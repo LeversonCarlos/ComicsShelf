@@ -68,6 +68,7 @@ namespace ComicsShelf.Firebase
          catch (Exception ex) { Helpers.Insights.TrackException(ex); return null; }
       }
 
+      public void AddItemOnThread(LibraryVM library, ItemVM item) => Task.Run(() => AddItemAsync(library, item));
       public async Task<bool> AddItemAsync(LibraryVM library, ItemVM item)
       {
          try
@@ -88,6 +89,7 @@ namespace ComicsShelf.Firebase
          catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
       }
 
+      public void SetItemOnThread(LibraryVM library, ItemVM item) => Task.Run(() => SetItemAsync(library, item));
       public async Task<bool> SetItemAsync(LibraryVM library, ItemVM item)
       {
          try
