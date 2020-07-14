@@ -14,9 +14,13 @@
 
    <Style TargetType="FlexLayout" x:Key="SectionItem">
       
-      <Setter Property="Padding" Value="10,0" />
+      <Setter Property="Padding" Value="5,0" />
       <Setter Property="AlignItems" Value="Center" />
       <Setter Property="HeightRequest" Value="60" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="SectionTitle">
+      <Setter Property="FontSize" Value="Small" />
    </Style>
 
    <Style TargetType="ProgressBar" x:Key="UpdateProgress" BasedOn="{StaticResource ProgressBar}">
