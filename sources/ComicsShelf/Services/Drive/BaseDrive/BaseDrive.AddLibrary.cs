@@ -27,6 +27,11 @@ namespace ComicsShelf.Drive
                Type = this.LibraryType
             };
 
+            if (library.Path == "/")
+               library.Path = "";
+            if (library.Path.StartsWith("/"))
+               library.Path = library.Path.Substring(1);
+
             return library;
          }
          catch (Exception ex) { Helpers.Message.Show(ex); return null; }
