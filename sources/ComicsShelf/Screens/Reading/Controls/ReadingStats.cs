@@ -11,7 +11,10 @@ namespace ComicsShelf.Screens.Reading
          var eventTrigger = new EventTrigger { Event = "OnReadingPageChanged" };
          eventTrigger.Actions.Add(new Controls.Animations.FadeAnimation());
          this.Triggers.Add(eventTrigger);
+         ShowCommand = new Command(() => OnReadingPageChanged?.Invoke(this, EventArgs.Empty));
       }
+
+      public Command ShowCommand { get; set; }
 
       public event EventHandler OnReadingPageChanged;
 

@@ -13,6 +13,7 @@
 
    <ContentPage.Content>
       <AbsoluteLayout>
+
          <CarouselView 
                ItemsSource="{Binding PagesList}" Position="{Binding ReadingPage}" 
                IsScrollAnimated="{Binding IsBusy, Converter={StaticResource notConverter}}" IsSwipeEnabled="{Binding IsSwipeEnabled}" 
@@ -26,15 +27,18 @@
                         ReadingPage="{Binding BindingContext.ReadingPage, Source={x:Reference readingPage}}" >
                      <reading:ReadingImage 
                         ImagePath="{Binding Path}" ImageLoaded="{Binding IsVisible}" ImageSize="{Binding PageSize}" 
-                        ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference readingPage}}"
-                        />
+                        ScreenSize="{Binding BindingContext.ScreenSize, Source={x:Reference readingPage}}" >
+                        <reading:ReadingImage.GestureRecognizers>
+                           <TapGestureRecognizer  Command="{Binding ShowCommand, Source={Reference readingStats}}" />
+                        </reading:ReadingImage.GestureRecognizers>
+                     </reading:ReadingImage>
                   </reading:ReadingScroll>
 
                </DataTemplate>
             </CarouselView.ItemTemplate>
          </CarouselView>
 
-         <reading:ReadingStats 
+         <reading:ReadingStats x:Name="readingStats"
                WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}" 
                BackgroundColor="{StaticResource OverlayBackgroundColor}" 
                AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,0" Spacing="0" >
