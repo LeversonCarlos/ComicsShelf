@@ -42,8 +42,8 @@ namespace ComicsShelf.Engine.CoverExtraction
          {
 
             // CANCEL NOTIFICATIONS
-            Notify.AppSleep(Application.Current, now => _CancelExecution = true);
-            Notify.ReadingStart(Application.Current, now => _CancelExecution = true);
+            Notify.AppSleep(this, now => _CancelExecution = true);
+            Notify.ReadingStart(this, now => _CancelExecution = true);
             token.Register(() => _CancelExecution = true);
 
             // VALIDATE
@@ -107,8 +107,8 @@ namespace ComicsShelf.Engine.CoverExtraction
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
          finally
          {
-            Notify.AppSleepUnsubscribe(Application.Current);
-            Notify.ReadingStartUnsubscribe(Application.Current);
+            Notify.AppSleepUnsubscribe(this);
+            Notify.ReadingStartUnsubscribe(this);
          }
       }
 
