@@ -34,7 +34,7 @@
       <Tab Title="{controls:Translate Text=HOME_MAIN_TITLE}" Icon="home">
          <ShellContent ContentTemplate="{DataTemplate home:Page}" />
       </Tab>
-      <Tab Title="Search" Icon="search">
+      <Tab Title="Search" Icon="search" IsEnabled="False">
          <ShellContent ContentTemplate="{DataTemplate ContentPage}" />
       </Tab>
       <Tab Title="{controls:Translate Text=SETTINGS_MAIN_TITLE}" Icon="settings">
