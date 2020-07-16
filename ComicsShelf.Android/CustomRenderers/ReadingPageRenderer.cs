@@ -20,16 +20,14 @@ namespace ComicsShelf.Droid.CustomRenderers
             var _Window = ((Activity)context).Window;
             _Visibility = (int)_Window.DecorView.SystemUiVisibility;
 
-            /*
-            var newVisibility = (int)_Window.DecorView.SystemUiVisibility;
-            newVisibility |= (int)SystemUiFlags.Fullscreen;
-            newVisibility |= (int)SystemUiFlags.HideNavigation;
-            newVisibility |= (int)SystemUiFlags.LowProfile;
-            newVisibility |= (int)SystemUiFlags.ImmersiveSticky;
-            _Window.DecorView.SystemUiVisibility = (StatusBarVisibility)newVisibility;
-            */
+            int uiOptions = (int)_Window.DecorView.SystemUiVisibility;
+            uiOptions |= (int)SystemUiFlags.LowProfile;
+            uiOptions |= (int)SystemUiFlags.Fullscreen;
+            uiOptions |= (int)SystemUiFlags.HideNavigation;
+            uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
+            _Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
 
-            _Window.AddFlags(WindowManagerFlags.Fullscreen);
+            // _Window.AddFlags(WindowManagerFlags.Fullscreen);
             // _Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
             // _Window.AddFlags(WindowManagerFlags.TranslucentStatus);
          }
@@ -43,12 +41,11 @@ namespace ComicsShelf.Droid.CustomRenderers
             var _Window = ((Activity)Context).Window;
 
             // _Window.ClearFlags(WindowManagerFlags.KeepScreenOn);
-            _Window.ClearFlags(WindowManagerFlags.Fullscreen);
+            // _Window.ClearFlags(WindowManagerFlags.Fullscreen);
             // _Window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
             // _Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
 
-            // _Window.DecorView.SystemUiVisibility = (StatusBarVisibility)_Visibility;
-
+            _Window.DecorView.SystemUiVisibility = (StatusBarVisibility)_Visibility;
          }
          catch (Exception ex) { ComicsShelf.Helpers.Insights.TrackException(ex); }
          base.Dispose(disposing);
