@@ -9,7 +9,7 @@ namespace ComicsShelf.Screens.Settings
 
       public SettingsVM()
       {
-         Title = Resources.Translations.SETTINGS_MAIN_TITLE;
+         Title = Resources.Translations.SCREEN_SETTINGS_MAIN_TITLE;
          LibraryTypes = GetLibraryTypes();
          ClearCacheCommand = new Command(async () => await ClearCache());
       }

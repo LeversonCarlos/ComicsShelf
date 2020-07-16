@@ -88,7 +88,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected Path.
+        ///   Looks up a localized string similar to Selected Directory.
         /// </summary>
         public static string DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL {
             get {
@@ -106,209 +106,209 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added {0} new files to the library.
+        ///   Looks up a localized string similar to Continue Reading.
         /// </summary>
-        public static string ENGINE_ADDED_N_NEW_FILES_MESSAGE {
+        public static string ENGINE_ANALYSIS_ON_GOING_READING_SECTION {
             get {
-                return ResourceManager.GetString("ENGINE_ADDED_N_NEW_FILES_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connecting to the drive service to refresh the library files.
-        /// </summary>
-        public static string ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE {
-            get {
-                return ResourceManager.GetString("ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This directory is already defined as a library.
-        /// </summary>
-        public static string ENGINE_FOLDER_ALREADY_DEFINED_WARNING {
-            get {
-                return ResourceManager.GetString("ENGINE_FOLDER_ALREADY_DEFINED_WARNING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Found {0} files through the drive engine.
-        /// </summary>
-        public static string ENGINE_FOUND_N_FILES_MESSAGE {
-            get {
-                return ResourceManager.GetString("ENGINE_FOUND_N_FILES_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removed {0} files from the library that are no longer availabled.
-        /// </summary>
-        public static string ENGINE_REMOVED_N_FILES_MESSAGE {
-            get {
-                return ResourceManager.GetString("ENGINE_REMOVED_N_FILES_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home.
-        /// </summary>
-        public static string HOME_MAIN_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_MAIN_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add some libraries through the settings tab below.
-        /// </summary>
-        public static string HOME_NO_LIBRARY_WARNING_MESSAGE {
-            get {
-                return ResourceManager.GetString("HOME_NO_LIBRARY_WARNING_MESSAGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You don&apos;t have any library defined yet.
-        /// </summary>
-        public static string HOME_NO_LIBRARY_WARNING_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_NO_LIBRARY_WARNING_TITLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to On Going Reading.
-        /// </summary>
-        public static string HOME_ON_GOING_READING_SECTION_TITLE {
-            get {
-                return ResourceManager.GetString("HOME_ON_GOING_READING_SECTION_TITLE", resourceCulture);
+                return ResourceManager.GetString("ENGINE_ANALYSIS_ON_GOING_READING_SECTION", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Recently Added.
         /// </summary>
-        public static string HOME_RECENTLY_ADDED_SECTION_TITLE {
+        public static string ENGINE_ANALYSIS_RECENTLY_ADDED_SECTION {
             get {
-                return ResourceManager.GetString("HOME_RECENTLY_ADDED_SECTION_TITLE", resourceCulture);
+                return ResourceManager.GetString("ENGINE_ANALYSIS_RECENTLY_ADDED_SECTION", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you really want to remove the {0} library.
+        ///   Looks up a localized string similar to Added {0} new files to the library.
         /// </summary>
-        public static string SETTINGS_DRIVE_REMOVE_CONFIRMATION_MESSAGE {
+        public static string ENGINE_REFRESH_ADDED_N_NEW_FILES_MESSAGE {
             get {
-                return ResourceManager.GetString("SETTINGS_DRIVE_REMOVE_CONFIRMATION_MESSAGE", resourceCulture);
+                return ResourceManager.GetString("ENGINE_REFRESH_ADDED_N_NEW_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting to the service to refresh the library files.
+        /// </summary>
+        public static string ENGINE_REFRESH_CONNECTING_DRIVE_SERVICE_MESSAGE {
+            get {
+                return ResourceManager.GetString("ENGINE_REFRESH_CONNECTING_DRIVE_SERVICE_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found {0} files on the library.
+        /// </summary>
+        public static string ENGINE_REFRESH_FOUND_N_FILES_MESSAGE {
+            get {
+                return ResourceManager.GetString("ENGINE_REFRESH_FOUND_N_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed {0} files from the library that are no longer available.
+        /// </summary>
+        public static string ENGINE_REFRESH_REMOVED_N_FILES_MESSAGE {
+            get {
+                return ResourceManager.GetString("ENGINE_REFRESH_REMOVED_N_FILES_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This directory is already defined as a library.
+        /// </summary>
+        public static string ENGINE_STORE_FOLDER_ALREADY_DEFINED_WARNING {
+            get {
+                return ResourceManager.GetString("ENGINE_STORE_FOLDER_ALREADY_DEFINED_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
+        public static string SCREEN_HOME_MAIN_TITLE {
+            get {
+                return ResourceManager.GetString("SCREEN_HOME_MAIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add libraries through the settings tab below.
+        /// </summary>
+        public static string SCREEN_HOME_NO_LIBRARY_WARNING_MESSAGE {
+            get {
+                return ResourceManager.GetString("SCREEN_HOME_NO_LIBRARY_WARNING_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have any library yet.
+        /// </summary>
+        public static string SCREEN_HOME_NO_LIBRARY_WARNING_TITLE {
+            get {
+                return ResourceManager.GetString("SCREEN_HOME_NO_LIBRARY_WARNING_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Release space on your device.
         /// </summary>
-        public static string SETTINGS_LOCAL_CACHE_CLEAR_COMMAND {
+        public static string SCREEN_SETTINGS_CACHE_CLEAR_COMMAND {
             get {
-                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_CLEAR_COMMAND", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_CACHE_CLEAR_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Do you want to clear your local cache ?.
         /// </summary>
-        public static string SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION {
+        public static string SCREEN_SETTINGS_CACHE_CLEAR_CONFIRMATION_MESSAGE {
             get {
-                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_CACHE_CLEAR_CONFIRMATION_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to LOCAL CACHE.
         /// </summary>
-        public static string SETTINGS_LOCAL_CACHE_TITLE {
+        public static string SCREEN_SETTINGS_CACHE_TITLE {
             get {
-                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_TITLE", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_CACHE_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to megas.
         /// </summary>
-        public static string SETTINGS_LOCAL_CACHE_UNITS {
+        public static string SCREEN_SETTINGS_CACHE_UNITS {
             get {
-                return ResourceManager.GetString("SETTINGS_LOCAL_CACHE_UNITS", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_CACHE_UNITS", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click to add a new library.
+        ///   Looks up a localized string similar to Do you want to remove the library {0} from the app ?.
         /// </summary>
-        public static string SETTINGS_LOCAL_DRIVE_ADD_COMMAND {
+        public static string SCREEN_SETTINGS_LIBRARY_REMOVE_CONFIRMATION_MESSAGE {
             get {
-                return ResourceManager.GetString("SETTINGS_LOCAL_DRIVE_ADD_COMMAND", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_LIBRARY_REMOVE_CONFIRMATION_MESSAGE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LOCAL DRIVE LIBRARIES.
+        ///   Looks up a localized string similar to Add a new library.
         /// </summary>
-        public static string SETTINGS_LOCAL_DRIVE_TITLE {
+        public static string SCREEN_SETTINGS_LOCAL_DRIVE_ADD_COMMAND {
             get {
-                return ResourceManager.GetString("SETTINGS_LOCAL_DRIVE_TITLE", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_LOCAL_DRIVE_ADD_COMMAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DEVICE LIBRARIES.
+        /// </summary>
+        public static string SCREEN_SETTINGS_LOCAL_DRIVE_TITLE {
+            get {
+                return ResourceManager.GetString("SCREEN_SETTINGS_LOCAL_DRIVE_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string SETTINGS_MAIN_TITLE {
+        public static string SCREEN_SETTINGS_MAIN_TITLE {
             get {
-                return ResourceManager.GetString("SETTINGS_MAIN_TITLE", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_MAIN_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click to add a new library.
+        ///   Looks up a localized string similar to Add a new library.
         /// </summary>
-        public static string SETTINGS_ONE_DRIVE_ADD_COMMAND {
+        public static string SCREEN_SETTINGS_ONE_DRIVE_ADD_COMMAND {
             get {
-                return ResourceManager.GetString("SETTINGS_ONE_DRIVE_ADD_COMMAND", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_ONE_DRIVE_ADD_COMMAND", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ONE DRIVE LIBRARIES.
+        ///   Looks up a localized string similar to ONEDRIVE LIBRARIES.
         /// </summary>
-        public static string SETTINGS_ONE_DRIVE_TITLE {
+        public static string SCREEN_SETTINGS_ONE_DRIVE_TITLE {
             get {
-                return ResourceManager.GetString("SETTINGS_ONE_DRIVE_TITLE", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SETTINGS_ONE_DRIVE_TITLE", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Already Readed.
         /// </summary>
-        public static string SPLASH_DETAILS_READED_LABEL {
+        public static string SCREEN_SPLASH_DETAILS_READED_LABEL {
             get {
-                return ResourceManager.GetString("SPLASH_DETAILS_READED_LABEL", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SPLASH_DETAILS_READED_LABEL", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Previously Read.
         /// </summary>
-        public static string SPLASH_DETAILS_READING_LABEL {
+        public static string SCREEN_SPLASH_DETAILS_READING_LABEL {
             get {
-                return ResourceManager.GetString("SPLASH_DETAILS_READING_LABEL", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SPLASH_DETAILS_READING_LABEL", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other Editions From this Collection.
+        ///   Looks up a localized string similar to Other editions from this collection.
         /// </summary>
-        public static string SPLASH_EDITIONS_TITLE {
+        public static string SCREEN_SPLASH_EDITIONS_TITLE {
             get {
-                return ResourceManager.GetString("SPLASH_EDITIONS_TITLE", resourceCulture);
+                return ResourceManager.GetString("SCREEN_SPLASH_EDITIONS_TITLE", resourceCulture);
             }
         }
     }

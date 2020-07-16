@@ -118,87 +118,87 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="COMMON_CANCEL_COMMAND" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="COMMON_CONFIRM_COMMAND" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Confirmar</value>
   </data>
   <data name="COMMON_OK_COMMAND" xml:space="preserve">
-    <value>OK</value>
+    <value>Okay</value>
   </data>
   <data name="DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL" xml:space="preserve">
-    <value>Selected Directory</value>
+    <value>Carpeta seleccionada</value>
   </data>
   <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
-    <value>Select a directory for your library</value>
+    <value>Seleccione una carpeta para su biblioteca</value>
   </data>
   <data name="ENGINE_ANALYSIS_ON_GOING_READING_SECTION" xml:space="preserve">
-    <value>Continue Reading</value>
+    <value>Sigue Leyendo</value>
   </data>
   <data name="ENGINE_ANALYSIS_RECENTLY_ADDED_SECTION" xml:space="preserve">
-    <value>Recently Added</value>
+    <value>Recientemente Añadido</value>
   </data>
   <data name="ENGINE_REFRESH_ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
-    <value>Added {0} new files to the library</value>
+    <value>Se agregaron {0} archivos nuevos a la biblioteca</value>
   </data>
   <data name="ENGINE_REFRESH_CONNECTING_DRIVE_SERVICE_MESSAGE" xml:space="preserve">
-    <value>Connecting to the service to refresh the library files</value>
+    <value>Conectarse al servicio para actualizar los archivos de la biblioteca</value>
   </data>
   <data name="ENGINE_REFRESH_FOUND_N_FILES_MESSAGE" xml:space="preserve">
-    <value>Found {0} files on the library</value>
+    <value>Se encontraron {0} archivos en la biblioteca</value>
   </data>
   <data name="ENGINE_REFRESH_REMOVED_N_FILES_MESSAGE" xml:space="preserve">
-    <value>Removed {0} files from the library that are no longer available</value>
+    <value>Se eliminaron {0} archivos de la biblioteca que ya no están disponibles</value>
   </data>
   <data name="ENGINE_STORE_FOLDER_ALREADY_DEFINED_WARNING" xml:space="preserve">
-    <value>This directory is already defined as a library</value>
+    <value>Esta carpeta ya está definida como una biblioteca</value>
   </data>
   <data name="SCREEN_HOME_MAIN_TITLE" xml:space="preserve">
-    <value>Library</value>
+    <value>Biblioteca</value>
   </data>
   <data name="SCREEN_HOME_NO_LIBRARY_WARNING_MESSAGE" xml:space="preserve">
-    <value>Add libraries through the settings tab below</value>
+    <value>Agregue bibliotecas a través de la pestaña de configuración a continuación</value>
   </data>
   <data name="SCREEN_HOME_NO_LIBRARY_WARNING_TITLE" xml:space="preserve">
-    <value>You don't have any library yet</value>
+    <value>Aún no tienes ninguna biblioteca</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_CLEAR_COMMAND" xml:space="preserve">
-    <value>Release space on your device</value>
+    <value>Libere espacio en su dispositivo</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_CLEAR_CONFIRMATION_MESSAGE" xml:space="preserve">
-    <value>Do you want to clear your local cache ?</value>
+    <value>¿Quieres borrar tu caché local?</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_TITLE" xml:space="preserve">
-    <value>LOCAL CACHE</value>
+    <value>CACHÉ LOCAL</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_UNITS" xml:space="preserve">
     <value>megas</value>
   </data>
   <data name="SCREEN_SETTINGS_LIBRARY_REMOVE_CONFIRMATION_MESSAGE" xml:space="preserve">
-    <value>Do you want to remove the library {0} from the app ?</value>
+    <value>¿Desea eliminar la biblioteca {0} de la aplicación?</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Add a new library</value>
+    <value>Agregar una nueva biblioteca</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
-    <value>DEVICE LIBRARIES</value>
+    <value>BIBLIOTECAS DE DISPOSITIVOS</value>
   </data>
   <data name="SCREEN_SETTINGS_MAIN_TITLE" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configuraciones</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Add a new library</value>
+    <value>Agregar una nueva biblioteca</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
-    <value>ONEDRIVE LIBRARIES</value>
+    <value>BIBLIOTECAS DE ONEDRIVE</value>
   </data>
   <data name="SCREEN_SPLASH_DETAILS_READED_LABEL" xml:space="preserve">
-    <value>Already Readed</value>
+    <value>Ya leído</value>
   </data>
   <data name="SCREEN_SPLASH_DETAILS_READING_LABEL" xml:space="preserve">
-    <value>Previously Read</value>
+    <value>Leer previamente</value>
   </data>
   <data name="SCREEN_SPLASH_EDITIONS_TITLE" xml:space="preserve">
-    <value>Other editions from this collection</value>
+    <value>Otras ediciones de esta colección</value>
   </data>
 </root>

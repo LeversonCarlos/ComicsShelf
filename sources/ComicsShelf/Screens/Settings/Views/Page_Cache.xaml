@@ -13,7 +13,7 @@
 
       <StackLayout Style="{StaticResource Section}">
 
-         <Label Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_TITLE}" Style="{StaticResource SectionTitle}" />
+         <Label Text="{controls:Translate Text=SCREEN_SETTINGS_CACHE_TITLE}" Style="{StaticResource SectionTitle}" />
 
          <FlexLayout Style="{StaticResource SectionItem}" >
             <FlexLayout.GestureRecognizers>
@@ -21,14 +21,14 @@
             </FlexLayout.GestureRecognizers>
 
             <StackLayout FlexLayout.Grow="1" Spacing="0">
-               <Label Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_CLEAR_COMMAND}" Style="{StaticResource Default}" ></Label>
+               <Label Text="{controls:Translate Text=SCREEN_SETTINGS_CACHE_CLEAR_COMMAND}" Style="{StaticResource Default}" ></Label>
                <Label Style="{StaticResource Small}" >
                   <Label.FormattedText>
                      <FormattedString>
                         <FormattedString.Spans>
                            <Span Text="{Binding CacheSizeInMegas}" />
                            <Span Text=" " />
-                           <Span Text="{controls:Translate Text=SETTINGS_LOCAL_CACHE_UNITS}" />
+                           <Span Text="{controls:Translate Text=SCREEN_SETTINGS_CACHE_UNITS}" />
                         </FormattedString.Spans>
                      </FormattedString>
                   </Label.FormattedText>

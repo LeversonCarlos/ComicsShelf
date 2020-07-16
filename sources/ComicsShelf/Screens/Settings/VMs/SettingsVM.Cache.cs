@@ -41,7 +41,7 @@ namespace ComicsShelf.Screens.Settings
       {
          try
          {
-            if (!await Helpers.Message.Confirm(Resources.Translations.SETTINGS_LOCAL_CACHE_CLEAR_CONFIRMATION)) { return; }
+            if (!await Helpers.Message.Confirm(Resources.Translations.SCREEN_SETTINGS_CACHE_CLEAR_CONFIRMATION_MESSAGE)) { return; }
             IsBusy = true;
 
             if (!System.IO.Directory.Exists(Helpers.Paths.FilesCache))
