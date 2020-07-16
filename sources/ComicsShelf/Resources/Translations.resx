@@ -148,7 +148,7 @@
     <value>Found {0} files on the library</value>
   </data>
   <data name="ENGINE_REFRESH_REMOVED_N_FILES_MESSAGE" xml:space="preserve">
-    <value>Removed {0} files from the library that are no longer availabled</value>
+    <value>Removed {0} files from the library that are no longer available</value>
   </data>
   <data name="ENGINE_STORE_FOLDER_ALREADY_DEFINED_WARNING" xml:space="preserve">
     <value>This directory is already defined as a library</value>

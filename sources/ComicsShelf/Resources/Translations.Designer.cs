@@ -151,7 +151,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed {0} files from the library that are no longer availabled.
+        ///   Looks up a localized string similar to Removed {0} files from the library that are no longer available.
         /// </summary>
         public static string ENGINE_REFRESH_REMOVED_N_FILES_MESSAGE {
             get {
