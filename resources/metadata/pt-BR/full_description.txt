@@ -12,4 +12,19 @@ Em seguida, irá extrair as capas e exibi-las como uma prateleira.
 Você clica naquela que deseja ler e começa a virar as páginas.
 O aplicativo aprenderá com seus hábitos de leitura e sugerirá outros quadrinhos da sua biblioteca para você.
 
+Para uma melhor experiência no layout da estante, sugerimos a seguinte formatação das suas pastas de quadrinhos:
+Pasta principal da sua biblioteca
+├── Quadrinhos dos anos quarenta (algum tipo de descrição da seção)
+│   ├── Kid Eternity [1946]
+│   │   ├── Kid Eternity [1946] #01
+│   │   └── Kid Eternity [1946] #02
+│   └── Spirit [1944] 
+│       ├── Spirit [1944] #01 
+│       ├── Spirit [1944] #02
+│       └── Spirit [1944] #03
+└── Quadrinhos dos anos sessenta
+   └── The Peacemaker [1967]
+       ├── The Peacemaker [1967] #01
+       └── The Peacemaker [1967] #02
+
 Boa leitura.

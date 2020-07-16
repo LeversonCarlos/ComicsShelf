@@ -12,4 +12,19 @@ Luego retire las cubiertas y muéstrela como un estante para los ojos.
 Haga clic en el que desea leer y comience a pasar las páginas.
 La aplicación aprenderá de sus hábitos de lectura y le sugerirá otros cómics de su biblioteca.
 
+Para una mejor experiencia en el diseño del estante, le sugerimos el siguiente formato de sus carpetas de historietas:
+La carpeta principal de tu biblioteca
+├── Cómics de los años cuarenta (algún tipo de descripción de sección)
+│   ├── Kid Eternity [1946]
+│   │   ├── Kid Eternity [1946] #01
+│   │   └── Kid Eternity [1946] #02
+│   └── Spirit [1944] 
+│       ├── Spirit [1944] #01 
+│       ├── Spirit [1944] #02
+│       └── Spirit [1944] #03
+└── Comics de los años sesenta
+   └── The Peacemaker [1967]
+       ├── The Peacemaker [1967] #01
+       └── The Peacemaker [1967] #02
+
 Feliz lectura.
