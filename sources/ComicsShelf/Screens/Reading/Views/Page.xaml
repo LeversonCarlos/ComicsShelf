@@ -41,7 +41,8 @@
          <reading:ReadingStats x:Name="readingStats"
                WidthRequest="{Binding ScreenSize.Width}" ReadingPage="{Binding ReadingPage}" 
                BackgroundColor="{StaticResource OverlayBackgroundColor}" 
-               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,0" Spacing="0" >
+               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0,1" Spacing="0" >
+            <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
             <FlexLayout Direction="Row" Padding="10" AlignItems="Center" >
                <ImageButton Source="arrow_back" Command="{Binding BackCommand}" FlexLayout.Shrink="0" WidthRequest="24" Margin="0,0,10,0" />
                <Label Text="{Binding Item.FullText}" Style="{StaticResource StatText}" FlexLayout.Grow="1" LineBreakMode="MiddleTruncation" />
@@ -57,7 +58,6 @@
                   </Label.FormattedText>
                </Label>
             </FlexLayout>
-            <ProgressBar Progress="{Binding Item.ReadingPercent}" Style="{StaticResource StatProgress}" />
          </reading:ReadingStats>
 
       </AbsoluteLayout>
