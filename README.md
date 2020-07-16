@@ -54,11 +54,9 @@ Your library main folder
 
 ## Try it out
 
-I put a test version on play store that can be accessed from the link below. 
+We placed a test version that can be accessed through the link below. 
 
-```
-https://play.google.com/store/apps/details?id=com.friendship.ComicsShelf
-```
+[play.google.com/store/apps/details?id=com.friendship.ComicsShelf](https://play.google.com/store/apps/details?id=com.friendship.ComicsShelf)
 
 ## Built With
 
