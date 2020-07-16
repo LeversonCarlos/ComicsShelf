@@ -106,7 +106,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On Going Reading.
+        ///   Looks up a localized string similar to Continue Reading.
         /// </summary>
         public static string ENGINE_ANALYSIS_ON_GOING_READING_SECTION {
             get {
@@ -277,7 +277,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ONE DRIVE LIBRARIES.
+        ///   Looks up a localized string similar to ONEDRIVE LIBRARIES.
         /// </summary>
         public static string SCREEN_SETTINGS_ONE_DRIVE_TITLE {
             get {
@@ -304,7 +304,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other editions from this Collection.
+        ///   Looks up a localized string similar to Other editions from this collection.
         /// </summary>
         public static string SCREEN_SPLASH_EDITIONS_TITLE {
             get {

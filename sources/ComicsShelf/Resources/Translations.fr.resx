@@ -133,10 +133,10 @@
     <value>Sélectionnez un répertoire pour votre bibliothèque</value>
   </data>
   <data name="ENGINE_ANALYSIS_ON_GOING_READING_SECTION" xml:space="preserve">
-    <value>Continue de lire</value>
+    <value>Continuer la Lecture</value>
   </data>
   <data name="ENGINE_ANALYSIS_RECENTLY_ADDED_SECTION" xml:space="preserve">
-    <value>Récemment ajouté</value>
+    <value>Récemment Ajouté</value>
   </data>
   <data name="ENGINE_REFRESH_ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
     <value>Ajout de {0} nouveaux fichiers à la bibliothèque</value>
@@ -190,7 +190,7 @@
     <value>Ajouter une nouvelle bibliothèque</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
-    <value>BIBLIOTHÈQUES ONE DRIVE</value>
+    <value>BIBLIOTHÈQUES ONEDRIVE</value>
   </data>
   <data name="SCREEN_SPLASH_DETAILS_READED_LABEL" xml:space="preserve">
     <value>Déjà lu</value>

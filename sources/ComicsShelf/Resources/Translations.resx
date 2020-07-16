@@ -133,7 +133,7 @@
     <value>Select a directory for your library</value>
   </data>
   <data name="ENGINE_ANALYSIS_ON_GOING_READING_SECTION" xml:space="preserve">
-    <value>On Going Reading</value>
+    <value>Continue Reading</value>
   </data>
   <data name="ENGINE_ANALYSIS_RECENTLY_ADDED_SECTION" xml:space="preserve">
     <value>Recently Added</value>
@@ -190,7 +190,7 @@
     <value>Add a new library</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
-    <value>ONE DRIVE LIBRARIES</value>
+    <value>ONEDRIVE LIBRARIES</value>
   </data>
   <data name="SCREEN_SPLASH_DETAILS_READED_LABEL" xml:space="preserve">
     <value>Already Readed</value>
@@ -199,6 +199,6 @@
     <value>Previously Read</value>
   </data>
   <data name="SCREEN_SPLASH_EDITIONS_TITLE" xml:space="preserve">
-    <value>Other editions from this Collection</value>
+    <value>Other editions from this collection</value>
   </data>
 </root>
