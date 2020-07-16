@@ -123,14 +123,12 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
-    <None Include="Resources\values\secrets.xml" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
     <AndroidResource Include="Resources\values\secrets.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
-    <None Include="Resources\values\secrets_development.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj">
