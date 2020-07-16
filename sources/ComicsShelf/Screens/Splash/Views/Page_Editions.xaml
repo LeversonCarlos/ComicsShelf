@@ -32,7 +32,7 @@
 
          <StackLayout Spacing="3" Margin="0,0,0,10">
 
-            <Label Text="{controls:Translate Text=SPLASH_EDITIONS_TITLE}" Style="{StaticResource Large}" />
+            <Label Text="{controls:Translate Text=SCREEN_SPLASH_EDITIONS_TITLE}" Style="{StaticResource Large}" />
 
             <CollectionView ItemsSource="{Binding EditionsList}" Style="{StaticResource EditionsCollection}" HeightRequest="{Binding EditionsHeight}" Margin="5">
                <CollectionView.ItemsLayout>

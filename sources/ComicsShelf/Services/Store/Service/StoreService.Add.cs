@@ -22,7 +22,7 @@ namespace ComicsShelf.Store
 
             // VALIDATE
             if (this.ItemList.ContainsKey(library.ID))
-            { Helpers.Message.Show(Resources.Translations.ENGINE_FOLDER_ALREADY_DEFINED_WARNING); return false; }
+            { Helpers.Message.Show(Resources.Translations.ENGINE_STORE_FOLDER_ALREADY_DEFINED_WARNING); return false; }
 
             // SAVE LIBRARY DATA
             if (!await Sync.SetLibrary(library)) { return false; }

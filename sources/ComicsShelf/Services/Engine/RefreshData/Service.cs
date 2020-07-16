@@ -18,13 +18,13 @@ namespace ComicsShelf.Engine.RefreshData
          {
 
             // NOTIFY START MESSAGE
-            Helpers.Notify.Message(library, Resources.Translations.ENGINE_CONNECTING_DRIVE_SERVICE_MESSAGE);
+            Helpers.Notify.Message(library, Resources.Translations.ENGINE_REFRESH_CONNECTING_DRIVE_SERVICE_MESSAGE);
 
             // SEARCH FILES THROUGH THE LIBRARY's ENGINE
             var searchItems = await Drive.BaseDrive
                .GetDrive(library.Type)
                .SearchItems(library);
-            Helpers.Notify.Message(library, string.Format(Resources.Translations.ENGINE_FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
+            Helpers.Notify.Message(library, string.Format(Resources.Translations.ENGINE_REFRESH_FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
 
             // LOAD CURRENT LIBRARY FILES
             var store = DependencyService.Get<Store.IStoreService>();
@@ -37,7 +37,7 @@ namespace ComicsShelf.Engine.RefreshData
             inactiveItems.ForEach(file => file.Available = false);
             await store.UpdateItemAsync(inactiveItems.ToArray());
             if (inactiveItems.Count > 0)
-            { Helpers.Notify.Message(library, string.Format(Resources.Translations.ENGINE_REMOVED_N_FILES_MESSAGE, inactiveItems.Count)); }
+            { Helpers.Notify.Message(library, string.Format(Resources.Translations.ENGINE_REFRESH_REMOVED_N_FILES_MESSAGE, inactiveItems.Count)); }
 
             // UPDATE CHANGED FILES ON THE LIBRARY
             var changedItems = searchItems
@@ -53,7 +53,7 @@ namespace ComicsShelf.Engine.RefreshData
                .ToList();
             await store.UpdateItemAsync(newItems.ToArray());
             if (newItems.Count > 0)
-            { Helpers.Notify.Message(library, string.Format(Resources.Translations.ENGINE_ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
+            { Helpers.Notify.Message(library, string.Format(Resources.Translations.ENGINE_REFRESH_ADDED_N_NEW_FILES_MESSAGE, newItems.Count)); }
 
             // NOTIFY EMPTY MESSAGE
             if (inactiveItems.Count == 0 && newItems.Count == 0)

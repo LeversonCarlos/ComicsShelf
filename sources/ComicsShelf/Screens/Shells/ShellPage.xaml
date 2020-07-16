@@ -32,13 +32,13 @@
 
    <!-- Your Pages -->
    <TabBar>
-      <Tab Title="{controls:Translate Text=HOME_MAIN_TITLE}" Icon="home">
+      <Tab Title="{controls:Translate Text=SCREEN_HOME_MAIN_TITLE}" Icon="home">
          <ShellContent ContentTemplate="{DataTemplate home:Page}" />
       </Tab>
       <Tab Title="Search" Icon="search" >
          <ShellContent ContentTemplate="{DataTemplate search:Page}" />
       </Tab>
-      <Tab Title="{controls:Translate Text=SETTINGS_MAIN_TITLE}" Icon="settings">
+      <Tab Title="{controls:Translate Text=SCREEN_SETTINGS_MAIN_TITLE}" Icon="settings">
          <ShellContent ContentTemplate="{DataTemplate settings:Page}" />
       </Tab>
    </TabBar>

@@ -10,7 +10,7 @@ namespace ComicsShelf.Screens.Home
 
       public HomeVM()
       {
-         Title = Resources.Translations.HOME_MAIN_TITLE;
+         Title = Resources.Translations.SCREEN_HOME_MAIN_TITLE;
          Sections = new ObservableList<SectionVM>();
          Sections.CollectionChanged += (sender, e) => { HasSections = Sections?.Count > 0; };
          Notify.SectionsUpdate(this, async sections => await ApplySections(sections));
