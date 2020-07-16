@@ -1,3 +1,3 @@
-Refonte complète de l'application à partir de zéro en utilisant de nouvelles bibliothèques et de nouveaux composants.
+Refactorisation complète des applications à l'aide de nouveaux packages et composants
 
 Veuillez supprimer toute bibliothèque actuelle que vous avez déjà d'une ancienne version (peut-être vider le cache de l'application) et l'ajouter à nouveau car nous avons dû changer la façon dont les choses sont stockées

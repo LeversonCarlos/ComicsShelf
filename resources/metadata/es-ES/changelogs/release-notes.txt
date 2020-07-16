@@ -1,3 +1,3 @@
-Refactorización completa de la aplicación desde cero utilizando nuevas bibliotecas y componentes.
+Refactorización completa de aplicaciones utilizando nuevos paquetes y componentes
 
 Por favor, elimine cualquier biblioteca actual que ya tenga de una versión anterior (tal vez borre el caché de la aplicación) y agréguela nuevamente ya que tuvimos que cambiar la forma en que se almacenan las cosas

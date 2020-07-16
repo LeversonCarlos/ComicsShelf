@@ -1,6 +1,6 @@
 # Comics Shelf
 
-Mobile viewer for comic book [cbz] files, done as a learning path to Xamarin framework
+Mobile viewer for comic book **cbz** files, done as a learning path to **Xamarin framework**.
 
 ## A litle history first
 

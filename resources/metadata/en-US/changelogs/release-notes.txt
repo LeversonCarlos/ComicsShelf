@@ -1,3 +1,3 @@
-Complete refactor of the app from the scratch using new libraries and components.
+Complete application refactoring using new packages and components
 
-Please, remove any current library you already have from older version (maybe clear the app cache) and add it again as we had to change the way things are stored
+Please, remove any current library you already have from older version (maybe clearing the application cache will help) and add it again as we had to change the way things are stored
