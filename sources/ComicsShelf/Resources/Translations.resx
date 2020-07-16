@@ -169,7 +169,7 @@
     <value>Do you want to clear your local cache ?</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_TITLE" xml:space="preserve">
-    <value>CACHE</value>
+    <value>LOCAL CACHE</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_UNITS" xml:space="preserve">
     <value>megas</value>
@@ -181,7 +181,7 @@
     <value>Add a new library</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
-    <value>LOCAL DRIVE LIBRARIES</value>
+    <value>DEVICE LIBRARIES</value>
   </data>
   <data name="SCREEN_SETTINGS_MAIN_TITLE" xml:space="preserve">
     <value>Settings</value>

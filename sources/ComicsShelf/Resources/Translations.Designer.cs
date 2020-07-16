@@ -214,7 +214,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CACHE.
+        ///   Looks up a localized string similar to LOCAL CACHE.
         /// </summary>
         public static string SCREEN_SETTINGS_CACHE_TITLE {
             get {
@@ -250,7 +250,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LOCAL DRIVE LIBRARIES.
+        ///   Looks up a localized string similar to DEVICE LIBRARIES.
         /// </summary>
         public static string SCREEN_SETTINGS_LOCAL_DRIVE_TITLE {
             get {

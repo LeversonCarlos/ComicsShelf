@@ -169,7 +169,7 @@
     <value>Deseja apagar seu cache local ?</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_TITLE" xml:space="preserve">
-    <value>CACHE</value>
+    <value>CACHE LOCAL</value>
   </data>
   <data name="SCREEN_SETTINGS_CACHE_UNITS" xml:space="preserve">
     <value>megas</value>
@@ -181,7 +181,7 @@
     <value>Adicionar uma nova biblioteca</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
-    <value>LOCAL DRIVE</value>
+    <value>BIBLIOTECAS NO DISPOSITIVO</value>
   </data>
   <data name="SCREEN_SETTINGS_MAIN_TITLE" xml:space="preserve">
     <value>Configurações</value>
@@ -190,7 +190,7 @@
     <value>Adicionar uma nova biblioteca</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
-    <value>ONE DRIVE</value>
+    <value>BIBLIOTECAS NO ONE DRIVE</value>
   </data>
   <data name="SCREEN_SPLASH_DETAILS_READED_LABEL" xml:space="preserve">
     <value>Já Lido</value>
