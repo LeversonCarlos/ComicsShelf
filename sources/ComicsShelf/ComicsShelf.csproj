@@ -1,0 +1,173 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <Product>Comics Shelf</Product>
+      <Company>Friendship Solutions</Company>
+      <Copyright>Copyright © Friendship Solutions 2020</Copyright>
+      <AssemblyVersion>1.1.0.0</AssemblyVersion>
+      <Version>1.1.000</Version>
+      <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+   </PropertyGroup>
+
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DebugType>portable</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+   </PropertyGroup>
+
+   <ItemGroup>
+     <EmbeddedResource Include="Resources\DefaultCover.png" />
+   </ItemGroup>
+
+   <ItemGroup>
+      <PackageReference Include="Xamarin.Forms" Version="4.6.0.967" />
+      <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
+      <PackageReference Include="System.Text.Json" Version="4.7.2" />
+      <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.2" />
+      <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.2.2" />
+      <PackageReference Include="AppCenter.Analytics.Metrics" Version="1.1.0" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.OneDrive" Version="1.0.21-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.LocalDrive" Version="1.0.21-alpha" />
+      <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.21-alpha" />
+      <PackageReference Include="HttpZipStream" Version="0.4.3" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <Compile Update="Resources\Translations.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Translations.resx</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\FolderDialog\Views\Page.xaml.cs">
+       <DependentUpon>Page.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\FolderDialog\Views\Styles.xaml.cs">
+       <DependentUpon>Styles.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Home\Views\Page_Sections.xaml.cs">
+       <DependentUpon>Page_Sections.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Home\Views\Page_Empty.xaml.cs">
+       <DependentUpon>Page_Empty.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Home\Views\Page.xaml.cs">
+       <DependentUpon>Page.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Home\Views\Styles.xaml.cs">
+       <DependentUpon>Styles.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Reading\Views\Page.xaml.cs">
+       <DependentUpon>Page.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Reading\Views\Styles.xaml.cs">
+       <DependentUpon>Styles.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Settings\Views\Page.xaml.cs">
+       <DependentUpon>Page.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Settings\Views\Page_Cache.xaml.cs">
+       <DependentUpon>Page_Cache.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Settings\Views\Page_Libraries.xaml.cs">
+       <DependentUpon>Page_Libraries.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Splash\Views\Page.xaml.cs">
+       <DependentUpon>Page.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Splash\Views\Page_Cover.xaml.cs">
+       <DependentUpon>Page_Cover.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Splash\Views\Page_Details.xaml.cs">
+       <DependentUpon>Page_Details.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Splash\Views\Page_Editions.xaml.cs">
+       <DependentUpon>Page_Editions.xaml</DependentUpon>
+     </Compile>
+     <Compile Update="Screens\Splash\Views\Styles.xaml.cs">
+       <DependentUpon>Styles.xaml</DependentUpon>
+     </Compile>
+   </ItemGroup>
+
+   <ItemGroup>
+    <EmbeddedResource Update="App.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Home\Views\Page_Empty.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Home\Views\Page_Sections.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Search\Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Settings\Views\Page_Cache.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Settings\Views\Page_Libraries.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Settings\Views\Styles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Shells\ShellPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Settings\Views\Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Reading\Views\Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Reading\Views\Styles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\Views\Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\Views\Page_Background.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\Views\Page_Cover.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\Views\Page_Details.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\Views\Page_Editions.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Screens\Splash\Views\Styles.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+     <EmbeddedResource Update="Screens\Home\Views\Page.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\Home\Views\Styles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\FolderDialog\Views\Page.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Screens\FolderDialog\Views\Styles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Resources\Translations.resx">
+       <Generator>PublicResXFileCodeGenerator</Generator>
+       <LastGenOutput>Translations.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Controls\Styles\BaseStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Controls\Styles\CoverStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Controls\Styles\LabelStyles.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Controls\Styles\LightTheme.xaml">
+       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+     </EmbeddedResource>
+   </ItemGroup>
+
+</Project>

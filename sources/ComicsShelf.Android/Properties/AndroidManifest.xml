@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="101000" android:versionName="1.1.000" package="com.friendship.ComicsShelf" android:installLocation="auto">
+   <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+   <application android:label="Comics Shelf" android:icon="@mipmap/icon">
+      <activity android:name="microsoft.identity.client.BrowserTabActivity">
+         <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="@string/onedrive_redirectUri" android:host="auth" />
+         </intent-filter>
+      </activity>
+   </application>   
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

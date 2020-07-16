@@ -1,6 +1,6 @@
 # Comics Shelf
 
-Mobile viewer for comic book [cbz] files, done as a learning path to Xamarin framework
+Mobile viewer for comic book **cbz** files, done as a learning path to **Xamarin framework**.
 
 ## A litle history first
 
@@ -25,23 +25,38 @@ Happy reading.
 ## Some screenshots
 
 <p align="center">
-  <img src="./resources/metadata/en-US/images/phoneScreenshots/2.png" 
+  <img src="./resources/metadata/en-US/images/phoneScreenshots/A.png" 
      title="Comics Shelf on Phone" width="108" height="192" />
-  <img src="./resources/metadata/en-US/images/phoneScreenshots/1.png" 
+  <img src="./resources/metadata/en-US/images/phoneScreenshots/B.png" 
      title="Opened Comic on Phone" width="108" height="192" />  
-  <img src="./resources/metadata/en-US/images/phoneScreenshots/3.png" 
+  <img src="./resources/metadata/en-US/images/phoneScreenshots/D.png" 
      title="Multiple Libraries" width="108" height="192" />  
-  <img src="./resources/metadata/en-US/images/tenInchScreenshots/2.png" 
+  <img src="./resources/metadata/en-US/images/sevenInchScreenshots/A.png" 
      title="Opened Comic on Tablet" width="314" height="192" />    
 </p>
 
+### For a better experience in the shelf layout, we suggest the following formatting of your comic folders: 
+```
+Your library main folder
+├── Comics from the forties (some kind of section description)
+│   ├── Kid Eternity [1946]
+│   │   ├── Kid Eternity [1946] #01
+│   │   └── Kid Eternity [1946] #02
+│   └── Spirit [1944] 
+│       ├── Spirit [1944] #01 
+│       ├── Spirit [1944] #02
+│       └── Spirit [1944] #03
+└── Comics from the sixties
+   └── The Peacemaker [1967]
+       ├── The Peacemaker [1967] #01
+       └── The Peacemaker [1967] #02
+```
+
 ## Try it out
 
-I put a test version on play store that can be accessed from the link below. 
+We placed a test version that can be accessed through the link below. 
 
-```
-https://play.google.com/store/apps/details?id=com.friendship.ComicsShelf
-```
+[play.google.com/store/apps/details?id=com.friendship.ComicsShelf](https://play.google.com/store/apps/details?id=com.friendship.ComicsShelf)
 
 ## Built With
 
@@ -49,7 +64,6 @@ https://play.google.com/store/apps/details?id=com.friendship.ComicsShelf
 * [Xamarin Essentials](https://docs.microsoft.com/en-us/xamarin/essentials/)
 * [OneDrive Connector](https://github.com/LeversonCarlos/Xamarin.OneDrive.Connector)
 * [Http Zip Stream](https://github.com/LeversonCarlos/HttpZipStream)
-* [CarouselView](https://github.com/alexrainman/CarouselView)
 
 ## Authors
 

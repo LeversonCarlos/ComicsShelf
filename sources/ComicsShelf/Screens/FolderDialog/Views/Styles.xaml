@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Screens.FolderDialog.Styles">
+
+   <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="DetailsLabel">
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="DetailsValue">
+      <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+      <Setter Property="FontAttributes" Value="Bold" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Default}" x:Key="ListItem">
+      <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+   </Style>
+
+   <Style TargetType="Button" x:Key="BaseButton">
+      <Setter Property="Padding" Value="10,5" />
+      <Setter Property="BackgroundColor" Value="Transparent" />
+   </Style>
+
+   <Style TargetType="Button" BasedOn="{StaticResource BaseButton}" x:Key="ConfirmButton">
+      <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+      <Setter Property="FontAttributes" Value="Bold"/>
+   </Style>
+
+</ResourceDictionary>

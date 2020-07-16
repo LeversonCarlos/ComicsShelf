@@ -1,3 +1,3 @@
-Solução alternativa para identificar cartões de armazenamento externos não emulados
-Pesquisa de arquivos do OneDrive em uma pasta por vez, porque a pesquisa interna nem sempre encontra todos os arquivos
-Melhoria geral no uso da memória, tempo de carregamento e pequenas correções
+Refatoração completa do aplicativo usando novos pacotes e componentes
+
+Remova qualquer biblioteca atual que você já tenha da versão mais antiga (talvez limpar o cache do aplicativo ajude) e adicione-a novamente, pois tivemos que mudar a maneira como as coisas são armazenadas

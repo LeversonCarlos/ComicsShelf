@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+   xmlns="http://xamarin.com/schemas/2014/forms"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   xmlns:helpers="clr-namespace:ComicsShelf.Helpers"
+   xmlns:controls="clr-namespace:ComicsShelf.Controls"
+   x:Class="ComicsShelf.Screens.Home.Page_Empty" >
+
+   <ContentView.Resources>
+      <ResourceDictionary Source="Styles.xaml" />
+      <Style TargetType="Label">
+         <Setter Property="HorizontalOptions" Value="Center" />
+         <Setter Property="HorizontalTextAlignment" Value="Center" />
+      </Style>
+   </ContentView.Resources>
+
+   <ContentView.Content>
+
+      <AbsoluteLayout             
+            VerticalOptions="FillAndExpand">
+         <controls:CoverImage 
+               ImageSource="{Static helpers:Cover.DefaultCover}" 
+               AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.25" />
+         <StackLayout 
+               AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.75">
+            <Label Text="{controls:Translate Text=SCREEN_HOME_NO_LIBRARY_WARNING_TITLE}" Style="{StaticResource EmptyTitle}" />
+            <Label Text="{controls:Translate Text=SCREEN_HOME_NO_LIBRARY_WARNING_MESSAGE}" Style="{StaticResource EmptyMessage}"  />
+         </StackLayout>
+      </AbsoluteLayout>
+
+   </ContentView.Content>
+</ContentView>

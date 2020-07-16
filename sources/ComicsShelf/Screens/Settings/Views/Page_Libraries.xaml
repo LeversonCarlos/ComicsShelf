@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Screens.Settings.Page_Libraries">
+
+   <ContentView.Resources>
+      <ResourceDictionary Source="Styles.xaml" />
+   </ContentView.Resources>
+
+   <ContentView.Content>
+      <StackLayout BindableLayout.ItemsSource="{Binding LibraryTypes}" >
+         <BindableLayout.ItemTemplate>
+            <DataTemplate>
+               <StackLayout Style="{StaticResource Section}" >
+
+                  <Label Text="{Binding Title}" Style="{StaticResource SectionTitle}" />
+
+                  <StackLayout BindableLayout.ItemsSource="{Binding Libraries}">
+                     <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+
+                           <FlexLayout Style="{StaticResource SectionItem}" >
+                              <StackLayout FlexLayout.Grow="1" Spacing="0">
+                                 <Label Text="{Binding Library.Description}" Style="{StaticResource Default}" />
+                                 <Label Text="{Binding Library.Path}" Style="{StaticResource Small}" />
+                                 <Label Text="{Binding Message}" IsVisible="{Binding HasMessage}" Style="{StaticResource Micro}" />
+                                 <ProgressBar Progress="{Binding Progress}" IsVisible="{Binding HasProgress}" Style="{StaticResource UpdateProgress}" />
+                              </StackLayout>
+                              <ImageButton Command="{Binding RemoveCommand}" Source="delete" />
+                           </FlexLayout>
+
+                        </DataTemplate>
+                     </BindableLayout.ItemTemplate>
+                  </StackLayout>
+
+                  <FlexLayout Style="{StaticResource SectionItem}">
+                     <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddCommand}" />
+                     </FlexLayout.GestureRecognizers>
+                     <Label Text="{Binding AddText}" Style="{StaticResource Default}" />
+                  </FlexLayout>
+
+                  <BoxView Style="{StaticResource Separator}" />
+
+               </StackLayout>
+            </DataTemplate>
+         </BindableLayout.ItemTemplate>
+      </StackLayout>
+   </ContentView.Content>
+
+</ContentView>

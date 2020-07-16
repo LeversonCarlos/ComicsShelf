@@ -12,4 +12,19 @@ Extrayez ensuite les couvercles et affichez-les comme une étagère pour les yeu
 Vous cliquez sur celui que vous voulez lire et commencez à feuilleter les pages.
 L'application apprendra de vos habitudes de lecture et vous suggérera d'autres bandes dessinées de votre bibliothèque.
 
+Pour une meilleure expérience dans la disposition des étagères, nous vous suggérons la mise en forme suivante de vos dossiers de bandes dessinées:
+Dossier principal de votre bibliothèque
+├── Bandes dessinées des années 40 (une sorte de description de section)
+│   ├── Kid Eternity [1946]
+│   │   ├── Kid Eternity [1946] #01
+│   │   └── Kid Eternity [1946] #02
+│   └── Spirit [1944] 
+│       ├── Spirit [1944] #01 
+│       ├── Spirit [1944] #02
+│       └── Spirit [1944] #03
+└── Bandes dessinées des années 60
+   └── The Peacemaker [1967]
+       ├── The Peacemaker [1967] #01
+       └── The Peacemaker [1967] #02
+
 Bonne lecture.

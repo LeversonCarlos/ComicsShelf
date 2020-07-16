@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="COMMON_CANCEL_COMMAND" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="COMMON_CONFIRM_COMMAND" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="COMMON_OK_COMMAND" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="DRIVE_FOLDER_DIALOG_SELECTED_PATH_LABEL" xml:space="preserve">
+    <value>Carpeta seleccionada</value>
+  </data>
+  <data name="DRIVE_FOLDER_DIALOG_TITLE" xml:space="preserve">
+    <value>Seleccione una carpeta para su biblioteca</value>
+  </data>
+  <data name="ENGINE_ANALYSIS_ON_GOING_READING_SECTION" xml:space="preserve">
+    <value>Sigue Leyendo</value>
+  </data>
+  <data name="ENGINE_ANALYSIS_RECENTLY_ADDED_SECTION" xml:space="preserve">
+    <value>Recientemente Añadido</value>
+  </data>
+  <data name="ENGINE_REFRESH_ADDED_N_NEW_FILES_MESSAGE" xml:space="preserve">
+    <value>Se agregaron {0} archivos nuevos a la biblioteca</value>
+  </data>
+  <data name="ENGINE_REFRESH_CONNECTING_DRIVE_SERVICE_MESSAGE" xml:space="preserve">
+    <value>Conectarse al servicio para actualizar los archivos de la biblioteca</value>
+  </data>
+  <data name="ENGINE_REFRESH_FOUND_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Se encontraron {0} archivos en la biblioteca</value>
+  </data>
+  <data name="ENGINE_REFRESH_REMOVED_N_FILES_MESSAGE" xml:space="preserve">
+    <value>Se eliminaron {0} archivos de la biblioteca que ya no están disponibles</value>
+  </data>
+  <data name="ENGINE_STORE_FOLDER_ALREADY_DEFINED_WARNING" xml:space="preserve">
+    <value>Esta carpeta ya está definida como una biblioteca</value>
+  </data>
+  <data name="SCREEN_HOME_MAIN_TITLE" xml:space="preserve">
+    <value>Biblioteca</value>
+  </data>
+  <data name="SCREEN_HOME_NO_LIBRARY_WARNING_MESSAGE" xml:space="preserve">
+    <value>Agregue bibliotecas a través de la pestaña de configuración a continuación</value>
+  </data>
+  <data name="SCREEN_HOME_NO_LIBRARY_WARNING_TITLE" xml:space="preserve">
+    <value>Aún no tienes ninguna biblioteca</value>
+  </data>
+  <data name="SCREEN_SETTINGS_CACHE_CLEAR_COMMAND" xml:space="preserve">
+    <value>Libere espacio en su dispositivo</value>
+  </data>
+  <data name="SCREEN_SETTINGS_CACHE_CLEAR_CONFIRMATION_MESSAGE" xml:space="preserve">
+    <value>¿Quieres borrar tu caché local?</value>
+  </data>
+  <data name="SCREEN_SETTINGS_CACHE_TITLE" xml:space="preserve">
+    <value>CACHÉ LOCAL</value>
+  </data>
+  <data name="SCREEN_SETTINGS_CACHE_UNITS" xml:space="preserve">
+    <value>megas</value>
+  </data>
+  <data name="SCREEN_SETTINGS_LIBRARY_REMOVE_CONFIRMATION_MESSAGE" xml:space="preserve">
+    <value>¿Desea eliminar la biblioteca {0} de la aplicación?</value>
+  </data>
+  <data name="SCREEN_SETTINGS_LOCAL_DRIVE_ADD_COMMAND" xml:space="preserve">
+    <value>Agregar una nueva biblioteca</value>
+  </data>
+  <data name="SCREEN_SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
+    <value>BIBLIOTECAS DE DISPOSITIVOS</value>
+  </data>
+  <data name="SCREEN_SETTINGS_MAIN_TITLE" xml:space="preserve">
+    <value>Configuraciones</value>
+  </data>
+  <data name="SCREEN_SETTINGS_ONE_DRIVE_ADD_COMMAND" xml:space="preserve">
+    <value>Agregar una nueva biblioteca</value>
+  </data>
+  <data name="SCREEN_SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
+    <value>BIBLIOTECAS DE ONEDRIVE</value>
+  </data>
+  <data name="SCREEN_SPLASH_DETAILS_READED_LABEL" xml:space="preserve">
+    <value>Ya leído</value>
+  </data>
+  <data name="SCREEN_SPLASH_DETAILS_READING_LABEL" xml:space="preserve">
+    <value>Leer previamente</value>
+  </data>
+  <data name="SCREEN_SPLASH_EDITIONS_TITLE" xml:space="preserve">
+    <value>Otras ediciones de esta colección</value>
+  </data>
+</root>

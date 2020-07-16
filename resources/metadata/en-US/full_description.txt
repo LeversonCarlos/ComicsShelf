@@ -12,4 +12,19 @@ Then extract covers and display it as a eye candy shelf.
 You click the one you want to read, and start fliping the pages.
 The app will learn from your reading habits and suggest other comics from your library for you.
 
+For a better experience in the shelf layout, we suggest the following formatting of your comic folders: 
+Your library main folder
+├── Comics from the forties (some kind of section description)
+│   ├── Kid Eternity [1946]
+│   │   ├── Kid Eternity [1946] #01
+│   │   └── Kid Eternity [1946] #02
+│   └── Spirit [1944] 
+│       ├── Spirit [1944] #01 
+│       ├── Spirit [1944] #02
+│       └── Spirit [1944] #03
+└── Comics from the sixties
+   └── The Peacemaker [1967]
+       ├── The Peacemaker [1967] #01
+       └── The Peacemaker [1967] #02
+
 Happy reading.

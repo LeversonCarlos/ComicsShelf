@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary 
+   xmlns="http://xamarin.com/schemas/2014/forms" 
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   x:Class="ComicsShelf.Screens.Settings.Styles">
+
+   <Style TargetType="StackLayout" x:Key="Main">
+      <Setter Property="Padding" Value="10" />
+   </Style>
+
+   <Style TargetType="StackLayout" x:Key="Section">
+      <Setter Property="Margin" Value="0,10" />
+   </Style>
+
+   <Style TargetType="FlexLayout" x:Key="SectionItem">
+      
+      <Setter Property="Padding" Value="5,0" />
+      <Setter Property="AlignItems" Value="Center" />
+      <Setter Property="HeightRequest" Value="60" />
+   </Style>
+
+   <Style TargetType="Label" BasedOn="{StaticResource Large}" x:Key="SectionTitle">
+      <Setter Property="FontSize" Value="Small" />
+   </Style>
+
+   <Style TargetType="ProgressBar" x:Key="UpdateProgress" BasedOn="{StaticResource ProgressBar}">
+      <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
+      <Setter Property="Opacity" Value="0.3" />
+   </Style>
+
+</ResourceDictionary>
