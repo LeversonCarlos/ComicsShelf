@@ -18,6 +18,6 @@
    <Color x:Key="TabBarUnselectedColor">#B0BEC5</Color>
 
    <Color x:Key="OverlayForegroundColor">#FAFAFA</Color>
-   <Color x:Key="OverlayBackgroundColor">#536DFE</Color>
+   <Color x:Key="OverlayBackgroundColor">#546E7A</Color>
 
 </ResourceDictionary>

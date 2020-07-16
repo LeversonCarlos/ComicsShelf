@@ -4,6 +4,7 @@
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
    xmlns:styles="clr-namespace:ComicsShelf.Controls.Styles"
    xmlns:home="clr-namespace:ComicsShelf.Screens.Home"
+   xmlns:search="clr-namespace:ComicsShelf.Screens.Search"
    xmlns:settings="clr-namespace:ComicsShelf.Screens.Settings"   
    xmlns:controls="clr-namespace:ComicsShelf.Controls"
    Shell.NavBarIsVisible="False" 
@@ -34,8 +35,8 @@
       <Tab Title="{controls:Translate Text=HOME_MAIN_TITLE}" Icon="home">
          <ShellContent ContentTemplate="{DataTemplate home:Page}" />
       </Tab>
-      <Tab Title="Search" Icon="search">
-         <ShellContent ContentTemplate="{DataTemplate ContentPage}" />
+      <Tab Title="Search" Icon="search" >
+         <ShellContent ContentTemplate="{DataTemplate search:Page}" />
       </Tab>
       <Tab Title="{controls:Translate Text=SETTINGS_MAIN_TITLE}" Icon="settings">
          <ShellContent ContentTemplate="{DataTemplate settings:Page}" />

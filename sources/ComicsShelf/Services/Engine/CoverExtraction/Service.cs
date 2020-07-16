@@ -9,23 +9,42 @@ using Xamarin.Forms;
 
 namespace ComicsShelf.Engine.CoverExtraction
 {
-   public class Service
+   public class Service : IDisposable
    {
 
-      public static Task Execute() => Task.Factory.StartNew(() => ExecuteAsync(), TaskCreationOptions.LongRunning);
+      public static Task Execute()
+      {
 
-      static bool cancelExecution;
-      static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+         if (_CancellationTokenSource != null)
+            _CancellationTokenSource?.Cancel();
+         while (_CancellationTokenSource != null) { }
 
-      private static async Task ExecuteAsync()
+         _CancellationTokenSource = new CancellationTokenSource();
+         var token = _CancellationTokenSource.Token;
+         var taskFactory = new TaskFactory(token);
+
+         var task = taskFactory.StartNew(async () =>
+         {
+            using (var service = new Service())
+               await service.ExecuteAsync(token);
+         }, TaskCreationOptions.LongRunning);
+
+         return task;
+      }
+
+      static CancellationTokenSource _CancellationTokenSource = null;
+      bool _CancelExecution = false;
+      SemaphoreSlim _Semaphore = new SemaphoreSlim(1, 1);
+
+      async Task ExecuteAsync(CancellationToken token)
       {
          try
          {
 
             // CANCEL NOTIFICATIONS
-            cancelExecution = false;
-            Notify.AppSleep(Application.Current, now => cancelExecution = true);
-            Notify.ReadingStart(Application.Current, now => cancelExecution = true);
+            Notify.AppSleep(this, now => _CancelExecution = true);
+            Notify.ReadingStart(this, now => _CancelExecution = true);
+            token.Register(() => _CancelExecution = true);
 
             // VALIDATE
             var store = DependencyService.Get<IStoreService>();
@@ -88,20 +107,17 @@ namespace ComicsShelf.Engine.CoverExtraction
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
          finally
          {
-            Notify.AppSleepUnsubscribe(Application.Current);
-            Notify.ReadingStartUnsubscribe(Application.Current);
+            Notify.AppSleepUnsubscribe(this);
+            Notify.ReadingStartUnsubscribe(this);
          }
       }
 
-      private static async Task<bool> ExtractCovers(LibraryVM library, ItemVM[] itemList)
+      async Task<bool> ExtractCovers(LibraryVM library, ItemVM[] itemList)
       {
          var start = DateTime.Now;
          int itemIndex = 0;
          try
          {
-
-            // NOTIFY START MESSAGE
-            Notify.Message(library, "Start.Covers.Extraction");
             var drive = Drive.BaseDrive.GetDrive(library.Type);
 
             // LOOP THROUGH ITEMS
@@ -113,23 +129,29 @@ namespace ComicsShelf.Engine.CoverExtraction
 
                try
                {
-                  await semaphore.WaitAsync();
+                  await _Semaphore.WaitAsync();
                   if (!await drive.ExtractCover(library, item)) { throw new Exception($"Stop extracting covers at the item [{item.FullText}]"); }
                }
                catch (Exception exI) { Insights.TrackException(exI); break; }
-               finally { semaphore.Release(); }
+               finally { _Semaphore.Release(); }
 
-               if (cancelExecution) { break; }
+               if (_CancelExecution) { break; }
             }
 
             // NOTIFY FINISH MESSAGE
             Notify.Progress(library, 1);
             Notify.Message(library, "");
 
-            return !cancelExecution;
+            return !_CancelExecution;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
          finally { Insights.TrackMetric($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds / (itemIndex > 0 ? itemIndex : 1)); }
+      }
+
+      public void Dispose()
+      {
+         _CancellationTokenSource.Dispose();
+         _CancellationTokenSource = null;
       }
 
    }
