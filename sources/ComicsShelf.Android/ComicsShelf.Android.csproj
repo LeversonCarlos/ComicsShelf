@@ -118,14 +118,20 @@
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <AndroidResource Include="Resources\values\secrets_development.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
     <AndroidResource Include="Resources\values\secrets.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\sources\ComicsShelf\ComicsShelf.csproj">
+    <ProjectReference Include="..\ComicsShelf\ComicsShelf.csproj">
       <Project>{e3290400-ab04-47d4-8887-9f045adb60b0}</Project>
       <Name>ComicsShelf</Name>
     </ProjectReference>

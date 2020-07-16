@@ -20,7 +20,6 @@ namespace ComicsShelf.iOS
       {
          global::Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          global::Xamarin.Forms.Forms.Init();
-         CarouselView.FormsPlugin.iOS.CarouselViewRenderer.Init();
          LoadApplication(new App());
 
          return base.FinishedLaunching(app, options);
