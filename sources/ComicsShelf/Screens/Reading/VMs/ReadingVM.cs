@@ -43,7 +43,7 @@ namespace ComicsShelf.Screens.Reading
       {
          try
          {
-            _Log = new Helpers.InsightsLogger("Reading Screen");
+            _Log = new Helpers.InsightsLogger($"{Store?.GetLibrary(Item?.LibraryID)?.Type} Reading Screen");
             Helpers.Notify.ReadingStart();
             Helpers.Notify.AppSleep(this, async now => await Helpers.Modal.Pop());
             Task.Run(async () =>

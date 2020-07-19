@@ -27,7 +27,7 @@ namespace ComicsShelf.Screens.Splash
       {
          try
          {
-            _Log = new InsightsLogger("Splash Screen");
+            _Log = new InsightsLogger($"{Store?.GetLibrary(SelectedItem?.LibraryID)?.Type} Splash Screen");
             Task.Run(async () =>
             {
                await EditionsList.ReplaceRangeAsync(EditionsArray);
