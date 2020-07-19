@@ -62,7 +62,7 @@ namespace ComicsShelf.Engine.LegacySettings
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
-         finally { Helpers.Insights.TrackMetric($"Legacy Settings", DateTime.Now.Subtract(start).TotalSeconds); }
+         finally { Helpers.Insights.TrackDuration($"Legacy Settings", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
    }

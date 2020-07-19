@@ -154,7 +154,7 @@ namespace ComicsShelf.Engine.CoverExtraction
             return !_CancelExecution;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
-         finally { Insights.TrackMetric($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds / (itemIndex > 0 ? itemIndex : 1)); }
+         finally { Insights.TrackDuration($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds / (itemIndex > 0 ? itemIndex : 1)); }
       }
 
       public void Dispose()

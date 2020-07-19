@@ -1,5 +1,6 @@
 ﻿using ComicsShelf.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,6 +15,7 @@ namespace ComicsShelf.Engine.RefreshData
       private static async Task ExecuteAsync(LibraryVM library)
       {
          var start = DateTime.Now;
+         var metricParams = new List<string>();
          try
          {
 
@@ -24,7 +26,9 @@ namespace ComicsShelf.Engine.RefreshData
             var searchItems = await Drive.BaseDrive
                .GetDrive(library.Type)
                .SearchItems(library);
+            Helpers.Insights.TrackEvent($"{library.Type} Engine");
             Helpers.Notify.Message(library, string.Format(Resources.Translations.ENGINE_REFRESH_FOUND_N_FILES_MESSAGE, (searchItems?.Length ?? 0).ToString()));
+            metricParams.Add($"Items:{(searchItems?.Length ?? 0)}");
 
             // LOAD CURRENT LIBRARY FILES
             var store = DependencyService.Get<Store.IStoreService>();
@@ -64,7 +68,7 @@ namespace ComicsShelf.Engine.RefreshData
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); Helpers.Notify.Message(library, $"Error while refreshing data: {ex.Message}"); }
-         finally { Helpers.Insights.TrackMetric($"Data Refreshing", DateTime.Now.Subtract(start).TotalSeconds); }
+         finally { Helpers.Insights.TrackDuration($"{library.Type} Refreshing", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
    }

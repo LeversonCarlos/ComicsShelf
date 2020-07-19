@@ -57,7 +57,7 @@ namespace ComicsShelf.Engine.FirebaseSettings
 
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); }
-         finally { Helpers.Insights.TrackMetric($"Firebase Settings", DateTime.Now.Subtract(start).TotalSeconds); }
+         finally { Helpers.Insights.TrackDuration($"Firebase Settings", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
    }
