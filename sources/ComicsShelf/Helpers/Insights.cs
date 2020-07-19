@@ -35,11 +35,13 @@ namespace ComicsShelf.Helpers
          Analytics.TrackEvent(text, properties);
 
 
-      public static void TrackMetric(string text, double secondsDuration)
+      public static void TrackDuration(string text, double secondsDuration) =>
+         TrackMetric(text, "Seconds", $"{(int)Math.Round(secondsDuration, 0)}");
+
+      public static void TrackMetric(string text, string key, string value)
       {
-         var properties = new Dictionary<string, string> { { "Seconds", $"{(int)Math.Round(secondsDuration, 0)}" } };
+         var properties = new Dictionary<string, string> { { key, value } };
          properties.AddMetrics();
-         Analytics.TrackEvent(text, properties);
          AnalyticsMetrics.TrackTimedEvent(text, properties);
       }
 

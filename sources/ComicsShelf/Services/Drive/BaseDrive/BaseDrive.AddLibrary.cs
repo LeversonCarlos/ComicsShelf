@@ -12,7 +12,7 @@ namespace ComicsShelf.Drive
          try
          {
 
-            if (!await this.CloudService.ConnectAsync()) { return null; }
+            if (!await _ConnectAsync()) { return null; }
 
             var driveItem = await FolderSelector.Selector.GetFolder(this.CloudService);
             if (driveItem == null) { return null; }
@@ -30,6 +30,18 @@ namespace ComicsShelf.Drive
             return library;
          }
          catch (Exception ex) { Helpers.Message.Show(ex); return null; }
+      }
+
+      async Task<bool> _ConnectAsync()
+      {
+         try
+         { return await CloudService.ConnectAsync(); }
+         catch (Exception ex)
+         {
+            if (!ex.Message.StartsWith("User canceled authentication"))
+               Helpers.Insights.TrackException(ex);
+            return false;
+         }
       }
 
    }

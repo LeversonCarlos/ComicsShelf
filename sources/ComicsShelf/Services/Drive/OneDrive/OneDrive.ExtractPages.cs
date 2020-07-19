@@ -59,7 +59,7 @@ namespace ComicsShelf.Drive
             return true;
          }
          catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
-         finally { Helpers.Insights.TrackMetric("Pages Extraction", DateTime.Now.Subtract(start).TotalSeconds); }
+         finally { Helpers.Insights.TrackDuration("Pages Extraction", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
       private async Task ExtractPage(HttpZipStream zipStream, HttpZipEntry entry, string cachePath, short pageIndex)

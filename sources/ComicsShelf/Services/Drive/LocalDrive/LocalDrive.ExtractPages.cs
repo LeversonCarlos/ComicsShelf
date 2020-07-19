@@ -63,7 +63,7 @@ namespace ComicsShelf.Drive
                }
             }
             catch (Exception exI) { Helpers.Insights.TrackException(exI); return false; }
-            finally { Helpers.Insights.TrackMetric("Pages Extraction", DateTime.Now.Subtract(start).TotalSeconds); }
+            finally { Helpers.Insights.TrackDuration("Pages Extraction", DateTime.Now.Subtract(start).TotalSeconds); }
 
             return true;
          }

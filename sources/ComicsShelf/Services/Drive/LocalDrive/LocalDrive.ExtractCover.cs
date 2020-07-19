@@ -41,7 +41,8 @@ namespace ComicsShelf.Drive
                      // RETRIEVE IMAGE CONTENT
                      using (var coverStream = coverEntry.Open())
                      {
-                        if (!await this.FileSystem.SaveThumbnail(coverStream, coverPath)) { return false; }
+                        if (!await this.FileSystem.SaveThumbnail(coverStream, coverPath))
+                           return false;
                      }
 
                      // RELEASE DATE
@@ -57,7 +58,7 @@ namespace ComicsShelf.Drive
             libraryItem.CoverPath = coverPath;
             return true;
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.Insights.TrackException(new Exception($"Stop extracting covers at the item [{libraryItem.FullText}]", ex)); return false; }
       }
 
    }

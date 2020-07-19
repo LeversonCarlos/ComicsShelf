@@ -60,6 +60,7 @@
 
    <Style TargetType="Label" BasedOn="{StaticResource Small}" x:Key="EmptyMessage">
       <Setter Property="HorizontalTextAlignment" Value="Center" />
+      <Setter Property="LineBreakMode" Value="WordWrap" />
    </Style>
 
 </ResourceDictionary>

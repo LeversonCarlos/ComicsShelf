@@ -15,49 +15,50 @@ namespace ComicsShelf.Engine.AnalysisData
 
       private static async Task ExecuteAsync(ItemVM[] itemsList)
       {
-         var start = DateTime.Now;
-         try
+         using (var log = new Helpers.InsightsLogger("Data Analysing"))
          {
-            var store = DependencyService.Get<IStoreService>();
-            var sections = new List<SectionVM>();
-
-            // RETRIEVE ALL LIBRARY ITEMS
-            var libraries = store.GetLibraries();
-            var allItems = new List<ItemVM>();
-
-            // LOOP THROUGH LIBRARIES
-            foreach (var library in libraries)
+            try
             {
+               var store = DependencyService.Get<IStoreService>();
+               var sections = new List<SectionVM>();
 
-               // LOCATE LIBRARY ITEMS
-               var libraryItems = store
-                  .GetLibraryItems(library)
-                  .ToList();
-               allItems.AddRange(libraryItems);
+               // RETRIEVE ALL LIBRARY ITEMS
+               var libraries = store.GetLibraries();
+               var allItems = new List<ItemVM>();
 
-               // SECTIONS FOR THE LIBRARY
-               sections.AddRange(ExecuteAsync_GetLibrarySections(library, libraryItems));
+               // LOOP THROUGH LIBRARIES
+               foreach (var library in libraries)
+               {
 
+                  // LOCATE LIBRARY ITEMS
+                  var libraryItems = store
+                     .GetLibraryItems(library)
+                     .ToList();
+                  allItems.AddRange(libraryItems);
+
+                  // SECTIONS FOR THE LIBRARY
+                  sections.AddRange(ExecuteAsync_GetLibrarySections(library, libraryItems));
+
+               }
+
+               // SECTION FOR THE RECENTELY ADDED ITEMS
+               var recentlyAdded = ExecuteAsync_GetRecentlyAddedSection(allItems);
+               if (recentlyAdded != null)
+                  sections.Insert(0, recentlyAdded);
+
+               //SECTION FOR THE ONGOING READING ITEMS
+               var onGoingReading = ExecuteAsync_GetOnGoingReadingSection(allItems);
+               if (onGoingReading != null)
+                  sections.Insert(0, onGoingReading);
+
+               var sectionsArray = sections.ToArray();
+               store.SetSections(sectionsArray);
+               Helpers.Notify.SectionsUpdate(sectionsArray);
+
+               await Task.CompletedTask;
             }
-
-            // SECTION FOR THE RECENTELY ADDED ITEMS
-            var recentlyAdded = ExecuteAsync_GetRecentlyAddedSection(allItems);
-            if (recentlyAdded != null)
-               sections.Insert(0, recentlyAdded);
-
-            //SECTION FOR THE ONGOING READING ITEMS
-            var onGoingReading = ExecuteAsync_GetOnGoingReadingSection(allItems);
-            if (onGoingReading != null)
-               sections.Insert(0, onGoingReading);
-
-            var sectionsArray = sections.ToArray();
-            store.SetSections(sectionsArray);
-            Helpers.Notify.SectionsUpdate(sectionsArray);
-
-            await Task.CompletedTask;
+            catch (Exception ex) { log.Add(ex); Helpers.Insights.TrackException(ex); }
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); }
-         finally { Helpers.Insights.TrackMetric($"Analysing Data", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
       private static List<SectionVM> ExecuteAsync_GetLibrarySections(LibraryVM library, List<ItemVM> libraryItems)

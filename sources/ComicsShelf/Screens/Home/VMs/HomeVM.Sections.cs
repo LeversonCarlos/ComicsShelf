@@ -20,7 +20,7 @@ namespace ComicsShelf.Screens.Home
          if (sections == null) return;
          var start = DateTime.Now;
          await Sections.ReplaceRangeAsync(sections);
-         Insights.TrackMetric("Sections Updating", DateTime.Now.Subtract(start).TotalSeconds);
+         Insights.TrackDuration("Sections Updating", DateTime.Now.Subtract(start).TotalSeconds);
       }
 
       bool _HasSections;

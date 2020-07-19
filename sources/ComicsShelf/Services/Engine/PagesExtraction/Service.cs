@@ -30,7 +30,7 @@ namespace ComicsShelf.Engine.PagesExtraction
             return pagesExtraction;
          }
          catch (Exception ex) { Insights.TrackException(ex); return false; }
-         finally { Insights.TrackMetric($"Pages Extraction", DateTime.Now.Subtract(start).TotalSeconds); }
+         finally { Insights.TrackDuration($"Pages Extraction", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
       public static async Task<PageVM[]> GetPagesAsync(ItemVM libraryItem)

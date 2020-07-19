@@ -178,7 +178,7 @@
     <value>Do you want to remove the library {0} from the app ?</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Add a new library</value>
+    <value>Add a new device library</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
     <value>DEVICE LIBRARIES</value>
@@ -187,7 +187,7 @@
     <value>Settings</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Add a new library</value>
+    <value>Add a new onedrive library</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
     <value>ONEDRIVE LIBRARIES</value>
