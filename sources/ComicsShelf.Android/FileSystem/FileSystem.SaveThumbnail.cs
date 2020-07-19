@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ComicsShelfStore.Droid
@@ -7,10 +8,12 @@ namespace ComicsShelfStore.Droid
    partial class FileSystem
    {
 
+      static SemaphoreSlim _SaveThumbnailSemaphore = new SemaphoreSlim(1, 1);
       public async Task<bool> SaveThumbnail(Stream imageStream, string imagePath)
       {
          try
          {
+            await _SaveThumbnailSemaphore.WaitAsync();
 
             // LOAD IMAGE
             using (var originalBitmap = await Android.Graphics.BitmapFactory.DecodeStreamAsync(imageStream))
@@ -41,6 +44,7 @@ namespace ComicsShelfStore.Droid
             }
          }
          catch (Exception) { throw; }
+         finally { _SaveThumbnailSemaphore.Release(); }
       }
 
    }
