@@ -69,7 +69,7 @@ namespace ComicsShelf.Drive
             libraryItem.CoverPath = coverPath;
             return true;
          }
-         catch (Exception ex) { Helpers.Insights.TrackException(ex); return false; }
+         catch (Exception ex) { Helpers.Insights.TrackException(new Exception($"Stop extracting covers at the item [{libraryItem.FullText}]", ex)); return false; }
       }
 
    }

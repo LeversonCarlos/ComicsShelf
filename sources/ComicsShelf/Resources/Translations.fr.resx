@@ -178,7 +178,7 @@
     <value>Voulez-vous supprimer la bibliothèque {0} de l'application?</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Ajouter une nouvelle bibliothèque</value>
+    <value>Ajouter une nouvelle bibliothèque d'appareils</value>
   </data>
   <data name="SCREEN_SETTINGS_LOCAL_DRIVE_TITLE" xml:space="preserve">
     <value>BIBLIOTHÈQUES DE DISPOSITIFS</value>
@@ -187,7 +187,7 @@
     <value>Paramètres</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_ADD_COMMAND" xml:space="preserve">
-    <value>Ajouter une nouvelle bibliothèque</value>
+    <value>Ajouter une nouvelle bibliothèque onedrive</value>
   </data>
   <data name="SCREEN_SETTINGS_ONE_DRIVE_TITLE" xml:space="preserve">
     <value>BIBLIOTHÈQUES ONEDRIVE</value>

@@ -1,9 +1,7 @@
-﻿using ComicsShelf.Services.Hub;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace ComicsShelf.Store
@@ -15,44 +13,45 @@ namespace ComicsShelf.Store
 
       public async Task<bool> InitializeAsync()
       {
-         var start = DateTime.Now;
-         try
+         using (var log = new Helpers.InsightsLogger("Store Initializing"))
          {
-
-            var libraryIDs = await Sync.GetLibraries();
-
-            var dataTasks = libraryIDs
-               .GroupBy(x => x)
-               .Select(x => x.Key)
-               .Select(libraryID => Sync.GetLibrary(libraryID))
-               .ToArray();
-            this.LibraryList = (await Task.WhenAll(dataTasks))
-               .Where(x => x != null)
-               .ToArray();
-
-            foreach (var library in this.LibraryList)
+            try
             {
 
-               var itemIDs = await Sync.GetItems(library.ID);
+               var libraryIDs = await Sync.GetLibraries();
 
-               var itemTasks = itemIDs
-                  .Select(itemID => Sync.GetItem(itemID))
+               var dataTasks = libraryIDs
+                  .GroupBy(x => x)
+                  .Select(x => x.Key)
+                  .Select(libraryID => Sync.GetLibrary(libraryID))
                   .ToArray();
-               var itemList = (await Task.WhenAll(itemTasks))
+               this.LibraryList = (await Task.WhenAll(dataTasks))
                   .Where(x => x != null)
                   .ToArray();
-               itemList.ForEach(item => item.CoverPath = Helpers.Cover.DefaultCover);
 
-               this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
+               foreach (var library in this.LibraryList)
+               {
 
-               Helpers.Notify.LibraryAdd(library);
-               Helpers.Notify.ItemsUpdate(itemList);
+                  var itemIDs = await Sync.GetItems(library.ID);
+
+                  var itemTasks = itemIDs
+                     .Select(itemID => Sync.GetItem(itemID))
+                     .ToArray();
+                  var itemList = (await Task.WhenAll(itemTasks))
+                     .Where(x => x != null)
+                     .ToArray();
+                  itemList.ForEach(item => item.CoverPath = Helpers.Cover.DefaultCover);
+
+                  this.ItemList.Add(library.ID, new SortedList<string, ViewModels.ItemVM>(itemList.ToDictionary(k => k.ID, v => v)));
+
+                  Helpers.Notify.LibraryAdd(library);
+                  Helpers.Notify.ItemsUpdate(itemList);
+               }
+
+               return true;
             }
-
-            return true;
+            catch (Exception ex) { log.Add(ex); Helpers.Message.Show(ex); return false; }
          }
-         catch (Exception ex) { Helpers.Message.Show(ex); return false; }
-         finally { Helpers.Insights.TrackMetric($"Store Initializing", DateTime.Now.Subtract(start).TotalSeconds); }
       }
 
    }
