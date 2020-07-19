@@ -33,8 +33,8 @@ namespace ComicsShelf.Engine.CoverExtraction
       }
 
       static CancellationTokenSource _CancellationTokenSource = null;
+      static SemaphoreSlim _Semaphore = new SemaphoreSlim(1, 1);
       bool _CancelExecution = false;
-      SemaphoreSlim _Semaphore = new SemaphoreSlim(1, 1);
 
       async Task ExecuteAsync(CancellationToken token)
       {
@@ -68,7 +68,10 @@ namespace ComicsShelf.Engine.CoverExtraction
                {
                   LibraryID = grp.Key,
                   Library = libraries.FirstOrDefault(x => x.ID == grp.Key),
-                  Items = grp.ToArray()
+                  Items = grp
+                     .OrderBy(item => item.FolderPath)
+                     .ThenBy(item => item.FullText)
+                     .ToArray()
                })
                .ToArray();
             foreach (var libraryData in suggestionData)
@@ -87,7 +90,10 @@ namespace ComicsShelf.Engine.CoverExtraction
                {
                   LibraryID = grp.Key,
                   Library = libraries.FirstOrDefault(x => x.ID == grp.Key),
-                  Items = grp.ToArray()
+                  Items = grp
+                     .OrderBy(item => item.FolderPath)
+                     .ThenBy(item => item.FullText)
+                     .ToArray()
                })
                .ToArray();
             foreach (var libraryData in featuredData)
@@ -98,7 +104,9 @@ namespace ComicsShelf.Engine.CoverExtraction
             {
                var remainingItems = store
                   .GetLibraryItems(library)
-                  .Where(x => x.CoverPath == Helpers.Cover.DefaultCover)
+                  .Where(item => item.CoverPath == Helpers.Cover.DefaultCover)
+                  .OrderBy(item => item.FolderPath)
+                  .ThenBy(item => item.FullText)
                   .ToArray();
                if (!await ExtractCovers(library, remainingItems)) { return; }
             }
@@ -130,7 +138,8 @@ namespace ComicsShelf.Engine.CoverExtraction
                try
                {
                   await _Semaphore.WaitAsync();
-                  if (!await drive.ExtractCover(library, item)) { throw new Exception($"Stop extracting covers at the item [{item.FullText}]"); }
+                  if (!await drive.ExtractCover(library, item)) 
+                     break;
                }
                catch (Exception exI) { Insights.TrackException(exI); break; }
                finally { _Semaphore.Release(); }
