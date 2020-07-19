@@ -17,6 +17,13 @@ namespace ComicsShelf.Helpers
          _PropertyList = new List<string>();
       }
 
+      int _DurationFactor = 1;
+      public void SetDurationFactor(int value)
+      {
+         if (value < 1) value = 1;
+         _DurationFactor = value;
+      }
+
       public void Add(string value) =>
          _PropertyList.Add(value);
 
@@ -34,10 +41,9 @@ namespace ComicsShelf.Helpers
       {
          try
          {
-            var secondsDuration = (int)Math.Round(DateTime.Now.Subtract(_StartTime).TotalSeconds, 0);
-            _PropertyList.Add($"Seconds:{secondsDuration}");
+            var secondsDuration = (int)Math.Round(DateTime.Now.Subtract(_StartTime).TotalSeconds / (double)_DurationFactor, 0);
+            Add("Seconds", $"{secondsDuration}");
             Insights.TrackEvent(_Name, _PropertyList.ToArray());
-            Insights.TrackDuration(_Name, secondsDuration);
          }
          catch { }
       }
