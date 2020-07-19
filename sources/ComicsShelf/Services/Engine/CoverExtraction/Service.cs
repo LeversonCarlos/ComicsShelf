@@ -122,39 +122,41 @@ namespace ComicsShelf.Engine.CoverExtraction
 
       async Task<bool> ExtractCovers(LibraryVM library, ItemVM[] itemList)
       {
-         var start = DateTime.Now;
-         int itemIndex = 0;
-         try
+         using (var log = new Helpers.InsightsLogger($"{library.Type} Cover Extracting"))
          {
-            var drive = Drive.BaseDrive.GetDrive(library.Type);
-
-            // LOOP THROUGH ITEMS
-            foreach (var item in itemList)
+            int itemIndex = 0;
+            try
             {
-               var progress = (double)++itemIndex / (double)itemList.Length;
-               Notify.Message(library, item.FullText);
-               Notify.Progress(library, progress);
+               var drive = Drive.BaseDrive.GetDrive(library.Type);
 
-               try
+               // LOOP THROUGH ITEMS
+               foreach (var item in itemList)
                {
-                  await _Semaphore.WaitAsync();
-                  if (!await drive.ExtractCover(library, item)) 
-                     break;
+                  var progress = (double)++itemIndex / (double)itemList.Length;
+                  Notify.Message(library, item.FullText);
+                  Notify.Progress(library, progress);
+
+                  try
+                  {
+                     await _Semaphore.WaitAsync();
+                     if (!await drive.ExtractCover(library, item))
+                        break;
+                  }
+                  catch (Exception exI) { Insights.TrackException(exI); break; }
+                  finally { _Semaphore.Release(); }
+
+                  if (_CancelExecution) { break; }
                }
-               catch (Exception exI) { Insights.TrackException(exI); break; }
-               finally { _Semaphore.Release(); }
 
-               if (_CancelExecution) { break; }
+               // NOTIFY FINISH MESSAGE
+               Notify.Progress(library, 1);
+               Notify.Message(library, "");
+
+               return !_CancelExecution;
             }
-
-            // NOTIFY FINISH MESSAGE
-            Notify.Progress(library, 1);
-            Notify.Message(library, "");
-
-            return !_CancelExecution;
+            catch (Exception ex) { log.Add(ex); Insights.TrackException(ex); return false; }
+            finally { log.SetDurationFactor(itemIndex); }
          }
-         catch (Exception ex) { Insights.TrackException(ex); return false; }
-         finally { Insights.TrackDuration($"Cover Extracting", DateTime.Now.Subtract(start).TotalSeconds / (itemIndex > 0 ? itemIndex : 1)); }
       }
 
       public void Dispose()
