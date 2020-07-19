@@ -241,7 +241,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new library.
+        ///   Looks up a localized string similar to Add a new device library.
         /// </summary>
         public static string SCREEN_SETTINGS_LOCAL_DRIVE_ADD_COMMAND {
             get {
@@ -268,7 +268,7 @@ namespace ComicsShelf.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new library.
+        ///   Looks up a localized string similar to Add a new onedrive library.
         /// </summary>
         public static string SCREEN_SETTINGS_ONE_DRIVE_ADD_COMMAND {
             get {
