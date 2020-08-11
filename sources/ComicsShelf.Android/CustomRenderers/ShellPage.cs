@@ -20,7 +20,7 @@ namespace ComicsShelf.Droid.CustomRenderers
             statusBarColor = statusBarColor.AddLuminosity(-0.1);
 
             // _Window.SetStatusBarColor(statusBarColor.ToAndroid());
-            _Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+            // _Window.AddFlags(WindowManagerFlags.TranslucentStatus);
 
             // _Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
             _Window.SetNavigationBarColor(statusBarColor.ToAndroid());
@@ -35,7 +35,7 @@ namespace ComicsShelf.Droid.CustomRenderers
          {
             var _Window = ((Activity)AndroidContext).Window;
 
-            _Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            // _Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
 
             // _Window.ClearFlags(WindowManagerFlags.TranslucentNavigation);
 
