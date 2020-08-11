@@ -81,7 +81,7 @@
     <PackageReference Include="Xamarin.CloudDrive.Connector.Common" Version="1.0.48-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomRenderers\ReadingPageRenderer.cs" />
+    <Compile Include="CustomRenderers\ReadingPage.cs" />
     <Compile Include="FileSystem\FileSystem.cs" />
     <Compile Include="FileSystem\FileSystem.GetPageSize.cs" />
     <Compile Include="FileSystem\FileSystem.SaveThumbnail.cs" />
