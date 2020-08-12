@@ -18,16 +18,18 @@ namespace ComicsShelf.Droid
 
          Xamarin.Forms.Forms.SetFlags("Visual_Experimental", "CollectionView_Experimental", "FastRenderers_Experimental");
          Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+         Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
          Xamarin.CloudDrive.Connector.LocalDriveService.Init(this, savedInstanceState);
          Xamarin.CloudDrive.Connector.OneDriveService.Init(this,
             Resources.GetString(Resource.String.onedrive_applicationID),
             $"{Resources.GetString(Resource.String.onedrive_redirectUri)}://auth",
             Resources.GetString(Resource.String.onedrive_scopeList).Split(","));
-         Xamarin.Forms.Forms.Init(this, savedInstanceState);
          Helpers.Insights.Init(Resources.GetString(Resource.String.appCenter_androidSecret));
          Hasher.HasherService.Init(Resources.GetString(Resource.String.hasher_secret));
          Firebase.FirebaseService.Init(Resources.GetString(Resource.String.firebase_databaseUrl),
             Resources.GetString(Resource.String.firebase_environment));
+
          LoadApplication(new App());
       }
 
