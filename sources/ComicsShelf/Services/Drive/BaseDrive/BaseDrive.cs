@@ -6,14 +6,14 @@ using Xamarin.Forms;
 namespace ComicsShelf.Drive
 {
 
-   public abstract partial class BaseDrive<T> : BaseDrive, IDrive where T : ICloudDriveService
+   public abstract partial class BaseDrive<T> : BaseDrive, IDrive where T : class, ICloudDriveService
    {
 
       public virtual enLibraryType LibraryType => throw new NotImplementedException();
 
       protected string[] ImageExtentions => new string[] { ".jpg", ".jpeg", ".png" };
 
-      public ICloudDriveService CloudService { get { return ImplementationProvider.Get<T>(); } }
+      public ICloudDriveService CloudService { get { return DependencyService.Get<T>(); } }
 
       public virtual string EscapeFileID(string fileID) => Hasher.HasherService.GetHashedString(fileID);
 

@@ -17,8 +17,8 @@ namespace ComicsShelf.Controls.Animations
       {
          ViewExtensions.CancelAnimations(sender);
          sender.Opacity = 1;
-         await Task.Delay(3000);
-         await sender.FadeTo(0, 2000, Easing.CubicIn);
+         await Task.Delay(1000);
+         await sender.FadeTo(0, 1000, Easing.CubicIn);
       }
 
    }

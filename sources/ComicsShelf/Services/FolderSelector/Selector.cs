@@ -64,7 +64,7 @@ namespace ComicsShelf.FolderSelector
       {
          try
          {
-            var driveList = await driveService.GetDrivers();
+            var driveList = await driveService.GetDrives();
             var resultList = driveList
                .Select(x => new SelectorItemVM
                {
